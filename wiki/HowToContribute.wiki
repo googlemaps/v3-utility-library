@@ -9,7 +9,7 @@ To join the project, follow these steps:
   #2 Email [mailto:api.pamelafox@google.com Pamela] with links to code you've developed, and a brief paragraph about why you'd like to contribute to the library.
   #3 Wait for Pamela to respond that she's added you to the project (or to indicate she's missing something).
   #4 If you haven't used SVN or a versioning system in the past, read up on SVN (check SVNQuickTips page here).
-  #4 Join the mailing list
+  #4 Join the [http://groups.google.com/group/google-maps-utility-library-v3 mailing list]
   #5 Add information about yourself to the DeveloperBios page.
   #5 Start contributing!
 
@@ -31,7 +31,7 @@ We want to guarantee we have the right to use the code you contribute, and that 
   * Do an SVN add on the whole /libraryname/ folder. Set all the mime-types properly with propset (See SVNQuickTips).
   * Do an SVN commit. Wait to hear feedback from the developers in the project.
 
-If at any point you have questions, email them to the mailing list.
+If at any point you have questions, email them to the [http://groups.google.com/group/google-maps-utility-library-v3 mailing list].
 
 
 === How do I submit a patch or new feature? ===
@@ -42,7 +42,7 @@ If at any point you have questions, email them to the mailing list.
   * Mark issue as fixed, if there's a relevant issue.
   * Do an SVN commit. Wait to hear feedback from the developers in the project.
 
-If at any point you have questions, email them to the mailing list.
+If at any point you have questions, email them to the [http://groups.google.com/group/google-maps-utility-library-v3 mailing list].
 
 === How do I release a new library or new version of a library? ===
 
