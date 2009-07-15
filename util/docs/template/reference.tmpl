@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset={+IO.encoding+}">
+    <title>{+ data.library.name + " v" + data.library.version + " Reference" +}</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>{+data.library.name+}</h1>
+    <p>{+resolveLinks(data.library.desc)+}</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    <for each="thisObject" in="data.objects">
+      <h2><a name="{+thisObject.anchor+}"></a>{+thisObject.type+} {+thisObject.name+}</h2>
+      <p>{+resolveLinks(thisObject.desc)+}</p>
+      <for each="thisProperty" in="thisObject.properties">
+        <h3>{+thisProperty.type+}</h3>
+        <table summary="{+ thisObject.type + ' ' + thisObject.name + ' - ' + thisProperty.type +}" width="90%">
+          {! var evenOrOdd = 0; var columns = []; !}
+          <tbody>
+            <tr>
+              <th>{+thisProperty.type+}</th>
+              <if test="thisProperty.columns && thisProperty.columns.length">
+                <for each="columnName" in="thisProperty.columns">
+                  <th>{! output += columnName.replace(/\s+/g, "&nbsp;"); columns.push(columnName) !}</th>
+                </for>
+              </if>
+              <th>Description</th>
+            </tr>
+            <for each="thisInstance" in="thisProperty.instances">
+              <tr class="{+ (++evenOrOdd % 2 ? 'odd' : 'even') +}">
+                <td><code>{+thisInstance[thisProperty.type]+}</code></td>
+                <if test="columns.length">
+                  <for each="instanceLabel" in="columns">
+                    <td><code>{+thisInstance[instanceLabel]+}</code></td>
+                  </for>
+                </if>
+                <td>{+resolveLinks(thisInstance.desc)+}</td>
+              </tr>
+            </for>
+          </tbody>
+        </table>
+      </for>
+    </for>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>
