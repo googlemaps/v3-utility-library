@@ -1,0 +1,13 @@
+#summary A page for developers on this project to describe themselves. Should include what projects they've worked on or are working on in this project.
+
+----
+
+*Pamela Fox*
+  * Employed by Google as Maps API Developer Programs Engineer
+  * Created: [http://gmaps-utility-library.googlecode.com/svn/trunk/extmaptypecontrol/ ExtMapTypeControl], [http://gmaps-utility-library.googlecode.com/svn/trunk/mapiconmaker/ MapIconMaker]
+  * Worked on: [http://gmaps-utility-library.googlecode.com/svn/trunk/markermanager/ MarkerManager], [http://gmaps-utility-library.googlecode.com/svn/trunk/dragzoom/ DragZoomControl], [http://gmaps-utility-library.googlecode.com/svn/trunk/labeledmarker/ LabeledMarker]
+  * Personal website: [http://imagine-it.org]
+
+----
+
+ Join us!
