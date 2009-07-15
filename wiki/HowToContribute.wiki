@@ -1,6 +1,6 @@
 #summary How to add a library or a patch to a library.
 
-=== How do I contribute? ===
+=== How do I join the project? ===
 
 We welcome developers with previous experience programming with the Maps API to join the project, and we especially love for developers who have already written API extensions to open-source them in our project.
 
