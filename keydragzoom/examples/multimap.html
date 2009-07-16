@@ -1,0 +1,77 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>Drag Zoom MultiMap</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../src/keydragzoom' + (document.location.search.indexOf('packed') > -1 ? '_packed' : '') + '.js"><' + '/script>');
+        </script>
+        <script type="text/javascript">
+            var map1;
+            var map2;
+            function createMap(mapDiv) {
+               var myOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(35.227, -80.84),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              }
+              var map = new google.maps.Map(document.getElementById(mapDiv), myOptions);
+              
+              
+              map.enableKeyDragZoom({
+                key: "shift",
+                boxStyle: {
+                  border: "2px dashed black",
+                  backgroundColor: "red",
+                  opacity: 0.5
+                },
+                paneStyle: {
+                  backgroundColor: "gray",
+                  opacity: 0.2
+                }
+              });
+              return map;
+            }
+            
+            function init() {
+              map1 = createMap('map1');
+              map2 = createMap('map2');
+              
+            }
+        </script>
+        <style>
+            #map1 {
+                position:absolute;
+                left :0px;
+                top: 0px;
+                width: 400px;
+                height: 500px;
+                border: 1px solid black
+            }
+            #map2 {
+                position:absolute;
+                left : 450px;
+                top: 0px;
+                width: 400px;
+                height: 500px;
+                border: 1px solid black
+            }
+            
+        </style>
+    </head>
+    <body onload="init()">
+        <a href='?packed'>Packed </a>
+        | <a href='?'> Unpacked</a>
+        Version of the script.
+        <br/>
+        Hold your shift key while drag a box. 
+        <div style="position:relative">
+        <div id="map1" >
+        </div>
+        <div id="map2">
+        </div>
+        </div>
+    </body>
+</html>
