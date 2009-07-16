@@ -8,5 +8,5 @@ Below is a list of the libraries being worked on in this project, with links to 
 
 This class allows user drag a hot key(e.g. shift) while drag a box on the map to zoom in.
 
-Browse [http://google-maps-utility-library-v3/svn/tags/keydragzoom/ Released Versions] or
-[http://google-maps-utility-library-v3/svn/trunk/keydragzoom/ Development Version].
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Version].
