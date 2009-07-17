@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(function () {
+(function() {
   /*jslint browser:true */
   /*global google */
   /**
@@ -27,7 +27,7 @@
    * @param {Object} e  Mouse event
    * @return {Object} left & top position
    */
-  var getMousePosition = function (e) {
+  var getMousePosition = function(e) {
     var posX = 0, posY = 0;
     e = e || window.event;
     if (typeof e.pageX !== "undefined") {
@@ -50,7 +50,7 @@
    * @param {Object} h  HTML element
    * @return {Object} left & top position
    */
-  var getElementPosition = function (h) {
+  var getElementPosition = function(h) {
     var posX = h.offsetLeft;
     var posY = h.offsetTop;
     var parent = h.offsetParent;
@@ -76,25 +76,36 @@
       top: posY
     };
   };
-  
+  //http://www.switchonthecode.com/tutorials/javascript-tutorial-the-scroll-wheel
+  function cancelEvent(e) {
+    e = e ? e : window.event;
+    if (e.stopPropagation) 
+      e.stopPropagation();
+    if (e.preventDefault) 
+      e.preventDefault();
+    e.cancelBubble = true;
+    e.cancel = true;
+    e.returnValue = false;
+    return false;
+  }
   
   /**@private
    * In V3 it is quite hard to gain access to Projection and Panes.
    * This is a helper class
    * @param {google.maps.Map} map
-   */ 
+   */
   function ProjectionHelperOverlay(map) {
     google.maps.OverlayView.call(this);
     this.set_map(map);
   }
   ProjectionHelperOverlay.prototype = new google.maps.OverlayView();
-  ProjectionHelperOverlay.prototype.draw = function () {
+  ProjectionHelperOverlay.prototype.draw = function() {
     if (!this.ready) {
       this.ready = true;
       google.maps.event.trigger(this, 'load');
     }
   };
-   /**
+  /**
    * @name WheelZoom
    * @private
    * @class This class enables Wheel Zoom for V3
@@ -105,7 +116,7 @@
     // must save mousePosition because the value maybe wrong if event is wheel.
     this.mousePos_ = null;
     var me = this;
-    google.maps.event.addListener(this.prjov_, 'load', function () {
+    google.maps.event.addListener(this.prjov_, 'load', function() {
       me.init_(map);
     });
   }
@@ -113,27 +124,27 @@
    * Init the tool.
    * @param {google.maps.Map} map
    */
-  WheelZoom.prototype.init_ = function (map) {
+  WheelZoom.prototype.init_ = function(map) {
     this.map_ = map;
     var me = this;
-    this.mouseWheelListener_ = google.maps.event.addDomListener(map.getDiv(), 'mousewheel', function (e) {
+    this.mouseWheelListener_ = google.maps.event.addDomListener(map.getDiv(), 'mousewheel', function(e) {
       me.onMouseWheel_(e);
     });
-    this.mouseWheelListener2_ = google.maps.event.addDomListener(map.getDiv(), 'DOMMouseScroll', function (e) {
+    this.mouseWheelListener2_ = google.maps.event.addDomListener(map.getDiv(), 'DOMMouseScroll', function(e) {
       me.onMouseWheel_(e);
     });
-    this.mouseMoveListener_ = google.maps.event.addDomListener(map.getDiv(), 'mousemove', function (e) {
+    this.mouseMoveListener_ = google.maps.event.addDomListener(map.getDiv(), 'mousemove', function(e) {
       me.onMouseMove_(e);
     });
   };
- 
+  
   /**
    * Get the <code>google.maps.Point</code> of the mouse position relative to container.
    * @param {Object} e
    * @return {google.maps.Point} point
    * @private
    */
-  WheelZoom.prototype.getMousePoint_ = function (e) {
+  WheelZoom.prototype.getMousePoint_ = function(e) {
     //NL: 2009-07-17: mouse position incorrect if e is a wheel event in FF
     var mousePosn = this.mousePos_;
     if (!mousePosn) {
@@ -143,11 +154,11 @@
     return new google.maps.Point(mousePosn.left - mapPosn.left, mousePosn.top - mapPosn.top);
   };
   
-  WheelZoom.prototype.onMouseMove_ = function (e) {
+  WheelZoom.prototype.onMouseMove_ = function(e) {
     this.mousePos_ = getMousePosition(e);
   };
   
-  WheelZoom.prototype.onMouseWheel_ = function (e) {
+  WheelZoom.prototype.onMouseWheel_ = function(e) {
     if (this.map_) {
       e = e ? e : window.event;
       var wheelData = e.detail ? -e.detail : e.wheelDelta;
@@ -176,6 +187,7 @@
       }
       this.map_.set_center(latlng);
       this.map_.set_zoom(z);
+      cancelEvent(e);
     }
   };
   /**
@@ -185,9 +197,9 @@
    * class.
    */
   /**
-   * Enable wheel zoom. 
+   * Enable wheel zoom.
    */
-  google.maps.Map.prototype.enableScrollWheelZoom = function () {
+  google.maps.Map.prototype.enableScrollWheelZoom = function() {
     if (!this.wheelZoom_) {
       this.wheelZoom_ = new WheelZoom(this);
     }
@@ -195,7 +207,7 @@
   /**
    * Disable wheel zoom.
    */
-  google.maps.Map.prototype.disableScrollWheelZoom = function () {
+  google.maps.Map.prototype.disableScrollWheelZoom = function() {
     var d = this.wheelZoom_;
     if (d) {
       this.wheelZoom_ = null;
@@ -208,7 +220,7 @@
    * Returns true if the Wheel zoom feature has been enabled.
    * @return {Boolean}
    */
-  google.maps.Map.prototype.scrollWheelZoomEnabled = function () {
+  google.maps.Map.prototype.scrollWheelZoomEnabled = function() {
     return !this.wheelZoom_;
   };
 })();
