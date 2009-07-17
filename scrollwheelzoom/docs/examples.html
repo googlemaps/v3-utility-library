@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Examples</title>
+    <link rel="stylesheet nofollow" type="text/css" href="http://code.google.com/css/codesite.css"/>
+    <link rel="stylesheet nofollow" type="text/css" href="http://gmaps-utility-library.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"/>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+<div>
+<a name="Top"></a>  
+<h1><a></a><span lang="en-us">Scroll Wheel Zoom</span> Examples</h1>
+</div>
+<p><a href="reference.html">API Reference</a></p>
+<div>
+<h2><a name="HowTo"></a>Include Scripts</h2>
+<p>
+    This library enables scroll wheel zoom before it is in core API as a temp 
+    solution. It works with
+    <a href="http://code.google.com/apis/maps/documentation/v3/">Google Maps API V3</a>. </p>
+    <p>
+The first step is to include <code>scrollwheelzoom.js</code> or 
+    <code>scrollwheelzoom_packed.js</code> 
+in your document header, after GMaps API is load. You can use the online version if you do not want to download the script.</p>
+    <pre class="prettyprint">
+      &lt;script src=&quot;/path/to/scrollwheelzoom_packed.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    </pre>
+</div>
+
+<div><h2><span lang="en-us">Enable Scroll Wheel Zoom</span></h2> 
+<p><span lang="en-us">You can simply call <code>google.maps.Map.enableScrollZoom()</code> to enable it.</span></p>
+
+<pre class="prettyprint">
+        function init(){
+         var myOptions = { 
+            zoom: 13, 
+            center: new google.maps.LatLng(49.2903, -123.1294), 
+            mapTypeId: google.maps.MapTypeId.ROADMAP 
+           };
+           map = new google.maps.Map(document.getElementById(&quot;map&quot;), myOptions); 
+          //...
+       <span lang="en-us">   map.enableScrollWheelZoom();</span>  
+        }
+    </pre>
+
+<p>
+<a target="_blank" href="../examples/scrollwheelzoom.html">View example </a>
+</p>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3946449-5");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
