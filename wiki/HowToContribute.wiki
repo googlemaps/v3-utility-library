@@ -46,4 +46,4 @@ If at any point you have questions, email them to the [http://groups.google.com/
 
 === How do I release a new library or new version of a library? ===
 
-  * To be filled in.
+  * Follow instructions in ReleaseProcess.
