@@ -1,0 +1,42 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>Scroll Wheel Zoom for V3</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../src/scrollwheelzoom' + (document.location.search.indexOf('packed') > -1 ? '_packed' : '') + '.js"><' + '/script>');
+        </script>
+        <script type="text/javascript">
+            var map;
+            function init() {
+              var myOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(35.227, -80.84),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              }
+              map = new google.maps.Map(document.getElementById("map"), myOptions);
+              map.enableScrollWheelZoom();
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <p>
+            <a href='?packed'>Packed </a>
+            | <a href='?'>Unpacked</a>
+            Version of the script.
+        </p>
+        <p>
+            Scroll Wheel Zoom for Google Maps API V3: 
+            <button onclick="map.enableScrollWheelZoom();">
+                EnableScrollWheelZoom
+            </button>
+            <button onclick="map.disableScrollWheelZoom();">
+                DisableScrollWheelZoom
+            </button>
+        </p>
+        <div id="map" style="width:800px;height:600px">
+        </div>
+    </body>
+</html>
