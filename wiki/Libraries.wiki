@@ -10,3 +10,10 @@ This class allows user drag a hot key(e.g. shift) while drag a box on the map to
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Version].
+
+== !ScrollWheelZoom ==
+
+This class allows user use scroll wheel zoom.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/scrollwheelzoom/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/scrollwheelzoom/ Development Version].
