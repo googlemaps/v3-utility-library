@@ -201,28 +201,31 @@
   /**
    * Enable wheel zoom.
    */
-  google.maps.Map.prototype.enableScrollWheelZoom = function () {
-    if (!this.wheelZoom_) {
-      this.wheelZoom_ = new WheelZoom(this);
-    }
-  };
-  /**
-   * Disable wheel zoom.
-   */
-  google.maps.Map.prototype.disableScrollWheelZoom = function () {
-    var d = this.wheelZoom_;
-    if (d) {
-      this.wheelZoom_ = null;
-      google.maps.event.removeListener(d.mouseWheelListener_);
-      google.maps.event.removeListener(d.mouseWheelListener2_);
-      google.maps.event.removeListener(d.mouseMoveListener_);
-    }
-  };
-  /**
-   * Returns true if the Wheel zoom feature has been enabled.
-   * @return {Boolean}
-   */
-  google.maps.Map.prototype.scrollWheelZoomEnabled = function () {
-    return !this.wheelZoom_;
-  };
+  if (!google.maps.Map.prototype.enableScrollWheelZoom) {
+    google.maps.Map.prototype.enableScrollWheelZoom = function () {
+      if (!this.wheelZoom_) {
+        this.wheelZoom_ = new WheelZoom(this);
+      }
+    };
+    /**
+     * Disable wheel zoom.
+     */
+    google.maps.Map.prototype.disableScrollWheelZoom = function () {
+      var d = this.wheelZoom_;
+      if (d) {
+        this.wheelZoom_ = null;
+        google.maps.event.removeListener(d.mouseWheelListener_);
+        google.maps.event.removeListener(d.mouseWheelListener2_);
+        google.maps.event.removeListener(d.mouseMoveListener_);
+      }
+    };
+    /**
+     * Returns true if the Wheel zoom feature has been enabled.
+     * @return {Boolean}
+     */
+    google.maps.Map.prototype.scrollWheelZoomEnabled = function () {
+      return !this.wheelZoom_;
+    };
+  }
+  
 })();
