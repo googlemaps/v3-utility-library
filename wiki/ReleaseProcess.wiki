@@ -28,7 +28,7 @@ https://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/1.0
 
 == After committing ==
   * Email the mailing list about the new version.
-  * Add the library to the front page of the release project and the Libraries wiki of the dev project.
+  * Add the library to the the Libraries wiki.
   * Go to Administer->Issues and add a label for your class (e.g. Class-KeyDragZoom).
   * Add examples to the Google Maps API demo gallery. (Ask Pamela)
   * Publish a blog post announcing the new library. See BlogPostGuidelines.
