@@ -171,24 +171,7 @@
       div.style.filter = "alpha(opacity=" + (div.style.opacity * 100) + ")";
     }
   };
-  
-  /**@private
-   * In V3 it is quite hard to gain access to Projection and Panes.
-   * This is a helper class
-   * @param {google.maps.Map} map
-   */ 
-  function ProjectionHelperOverlay(map) {
-    google.maps.OverlayView.call(this);
-    this.set_map(map);
-  }
-  ProjectionHelperOverlay.prototype = new google.maps.OverlayView();
-  ProjectionHelperOverlay.prototype.draw = function () {
-    if (!this.ready) {
-      this.ready = true;
-      google.maps.event.trigger(this, 'ready');
-    }
-  };
-  
+    
   /**
    * @name KeyDragZoomOptions
    * @class This class represents the optional parameter passed into <code>google.maps.Map.enableDragBoxZoom</code>.
@@ -209,12 +192,17 @@
    * @param {KeyDragZoomOptions} opt_zoomOpts
    */
   function DragZoom(map, opt_zoomOpts) {
-    this.prjov_ = new ProjectionHelperOverlay(map);
+    var ov = new google.maps.OverlayView();
     var me = this;
-   
-    google.maps.event.addListener(this.prjov_, 'ready', function () {
+    ov.onAdd = function () {
       me.init_(map, opt_zoomOpts);
-    });
+    };
+    ov.draw = function () {
+    };
+    ov.onRemove = function () {
+    };
+    ov.setMap(map);
+    this.prjov_ = ov;
   }
   /**
    * Init the tool. 
@@ -414,7 +402,7 @@
       this.mapPosn_ = getElementPosition(this.map_.getDiv());
       this.dragging_ = true;
       this.startPt_ = this.endPt_ = this.getMousePoint_(e);
-      var prj = this.prjov_.get_projection();
+      var prj = this.prjov_.getProjection();
       var latlng = prj.fromDivPixelToLatLng(this.startPt_);
       /**
        * This event is fired when the drag operation begins. 
@@ -475,11 +463,11 @@
       var top = Math.min(this.startPt_.y, this.endPt_.y);
       var width = Math.abs(this.startPt_.x - this.endPt_.x);
       var height = Math.abs(this.startPt_.y - this.endPt_.y);
-      var prj = this.prjov_.get_projection();
+      var prj = this.prjov_.getProjection();
       // 2009-05-29: since V3 does not have fromContainerPixel, 
       //needs find offset here
       var containerPos = getElementPosition(this.map_.getDiv());
-      var mapPanePos = getElementPosition(this.prjov_.get_panes().mapPane);
+      var mapPanePos = getElementPosition(this.prjov_.getPanes().mapPane);
       left = left + (containerPos.left - mapPanePos.left);
       top = top + (containerPos.top - mapPanePos.top);
       var sw = prj.fromDivPixelToLatLng(new google.maps.Point(left, top + height));
