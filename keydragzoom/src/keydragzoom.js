@@ -11,6 +11,7 @@
  *  Note that if the map's container has a border around it, the border widths must be specified
  *  in pixel units (or as thin, medium, or thick). This is required because of an MSIE limitation.
  *  <p>NL: 2009-05-28: initial port to core API V3.
+ *  NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).  
  */
 /*!
  *
@@ -118,6 +119,7 @@
    * @return {Object} left & top position
    */
   var getElementPosition = function (h) {
+    var id = h.id;
     var posX = h.offsetLeft;
     var posY = h.offsetTop;
     var parent = h.offsetParent;
@@ -134,8 +136,24 @@
         posX -= parent.scrollLeft;
         posY -= parent.scrollTop;
       }
-      posX += parent.offsetLeft;
-      posY += parent.offsetTop;
+      //http://notebook.kulchenko.com/maps/gridmove
+      // http://groups.google.com/group/google-maps-js-api-v3/browse_thread/thread/4cb86c0c1037a5e5
+      var m = parent;
+      // this is a "normal" way to get offset information
+      var moffx = m.offsetLeft;
+      var moffy = m.offsetTop;
+      // this covers those cases where transform is used
+      if (!moffx && !moffy && window.getComputedStyle) {
+        var matrix = document.defaultView.getComputedStyle(m, null).MozTransform ||
+        document.defaultView.getComputedStyle(m, null).WebkitTransform;
+        if (matrix) {
+          var parms = matrix.split(",");
+          moffx += parseInt(parms[4], 10) || 0;
+          moffy += parseInt(parms[5], 10) || 0;
+        }
+      }
+      posX += moffx;
+      posY += moffy;
       parent = parent.offsetParent;
     }
     return {
@@ -447,7 +465,7 @@
        * @param {google.maps.Point} northeastPixel
        * @event
        */
-      google.maps.event.trigger(this, 'drag', new google.maps.Point(left, top + height), new google.maps.Point(left + width, top)); 
+      google.maps.event.trigger(this, 'drag', this.startPt_, this.endPt_);// new google.maps.Point(left, top + height), new google.maps.Point(left + width, top)); 
     } else if (!this.mouseDown_) {
       this.setPaneVisibility_();
     }
@@ -467,7 +485,12 @@
       // 2009-05-29: since V3 does not have fromContainerPixel, 
       //needs find offset here
       var containerPos = getElementPosition(this.map_.getDiv());
-      var mapPanePos = getElementPosition(this.prjov_.getPanes().mapPane);
+      var mp = this.prjov_.getPanes().mapPane;
+      setVals(mp.style, {
+        border: 'thick solid #0000FF'
+      });
+
+      var mapPanePos = getElementPosition(mp);
       left = left + (containerPos.left - mapPanePos.left);
       top = top + (containerPos.top - mapPanePos.top);
       var sw = prj.fromDivPixelToLatLng(new google.maps.Point(left, top + height));
