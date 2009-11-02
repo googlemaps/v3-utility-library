@@ -28,7 +28,7 @@
                 log('DragZoom Started: ' + latlng);
               });
               google.maps.event.addListener(dz, 'drag', function(start, end) {
-              //  log('DragZoom Dragging...' + start + end);
+                log('DragZoom Dragging...' + start + end);
               });
               google.maps.event.addListener(dz, 'dragend', function(bnds) {
                 log('DragZoom DragEnd :' + bnds);
