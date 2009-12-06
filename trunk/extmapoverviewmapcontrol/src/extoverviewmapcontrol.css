@@ -1,0 +1,31 @@
+#overview_map_border {
+  width: 113px;
+  height: 113px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  border-top: 1px solid #979797;
+  border-left: 1px solid #979797;
+  background-color: #E8ECF8;
+  padding: 0;
+  padding-top: 7px;
+  padding-left: 7px;
+  z-index: 1;
+}
+#overview_map {
+  width: 112px;
+  height: 112px;
+  border: 0;
+  border-top: 1px solid #979797;
+  border-left: 1px solid #979797;
+  overflow: hidden;
+}
+#overlayMap {
+  height: 224px;
+  top: -56px;
+  border: 0;
+}
+#overview_map_border + div + div {
+  right: 121px !important;
+}
