@@ -216,7 +216,7 @@ window.onload = function () {
   });
 
   google.maps.event.addListener(map, 'zoom_changed', function () {
-    var newZoom = Math.max(map.get_zoom() - 4, 0);
+    var newZoom = Math.max(map.getZoom() - 4, 0);
     if (overlayMap.getZoom() !== newZoom) {
       overlayMap.setZoom(newZoom);
     }
