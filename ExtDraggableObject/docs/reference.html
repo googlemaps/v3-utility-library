@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ExtDraggableObject v1.0 Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>ExtDraggableObject</h1>
+    <p>
+      This library is used to make DOM objects draggable. For examples of how to use this library see <a href="examples.html">the examples page</a>.
+    </p>
+      <h2><a name="ExtDraggableObject"></a>class ExtDraggableObject</h2>
+      <p>This class makes a DOM object draggable.</p>
+        <h3>Constructor</h3>
+        <table summary="class ExtDraggableObject - Constructors" width="90%">
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>ExtDraggableObject(src:Node, opt_drag:<a href="#ExtDraggableObjectOptions">ExtDraggableObjectOptions</a>)</code></td>
+              <td>Sets up event handlers so that the source object can be dragged. For a complete reference on the available options see <a href="#ExtDraggableObjectOptions">ExtDraggableObjectOptions</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Methods</h3>
+        <table summary="class ExtDraggableObject - Methods" width="90%">
+          <tbody>
+            <tr>
+              <th>Method</th>
+              <th>Return Value</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>moveTo(point:point)</code></td>
+              <td><code>None</code></td>
+              <td>Moves the draggable object to a given absolute position. The position is relative to the parent node. Note that <code>point</code> can be any object with an x and y property. <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#Point">google.maps.Point</a> works for this but you can also simply pass an object literal with an x and y property.</td>
+            </tr>
+            <tr class="even">
+              <td><code>moveBy(size:size)</code></td>
+              <td><code>None</code></td>
+              <td>Moves the draggable object by the specified offset. Note that <code>size</code> can be any object with a width and height property. <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#Size">google.maps.Size</a> works for this but you can also simply pass an object literal with a width and height property.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>setDraggableCursor(cursor:String)</code></td>
+              <td><code>None</code></td>
+              <td>Sets the cursor to use when the mouse is over the draggable object.</td>
+            </tr>
+            <tr class="even">
+              <td><code>setDraggingCursor(cursor:String)</code></td>
+              <td><code>None</code></td>
+              <td>Sets the cursor to use when the draggable object is being dragged.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>left()</code></td>
+              <td><code>Number</code></td>
+              <td>Returns the current left position of the draggable object.</td>
+            </tr>
+            <tr class="even">
+              <td><code>top()</code></td>
+              <td><code>Number</code></td>
+              <td>Returns the current top position of the draggable object.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>valueX()</code></td>
+              <td><code>Number</code></td>
+              <td>Returns the current number of times the draggable object has moved the amount specified by <code>intervalX</code>. If <code>intervalX</code> was not given in the constructor than <code>valueX</code> acts as if <code>intervalX</code> is set to 1.</td>
+            </tr>
+            <tr class="even">
+              <td><code>valueY()</code></td>
+              <td><code>Number</code></td>
+              <td>Returns the current number of times the draggable object has moved the amount specified by <code>intervalY</code>. If <code>intervalY</code> was not given in the constructor than <code>valueY</code> acts as if <code>intervalY</code> is set to 1.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>setValueX(value:Number)</code></td>
+              <td><code>None</code></td>
+              <td>Moves the draggable object by an amount equal to <code>value</code> multiplied by <code>intervalX</code>. If <code>intervalX</code> was not given in the constructor than <code>setValueX</code> acts as if <code>intervalX</code> is set to 1.</td>
+            </tr>
+            <tr class="even">
+              <td><code>setValueY(value:Number)</code></td>
+              <td><code>None</code></td>
+              <td>Moves the draggable object by an amount equal to <code>value</code> multiplied by <code>intervalY</code>. If <code>intervalY</code> was not given in the constructor than <code>setValueY</code> acts as if <code>intervalY</code> is set to 1.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>preventDefaultMovement()</code></td>
+              <td><code>None</code></td>
+              <td>Prevents the events setup by <a href="#ExtDraggableObject">ExtDraggableObject</a> from moving the draggable object by default. Note that mouse movement is still tracked and the position the object should be at is still calculated like normal, only the object isn't physically moved. Also, methods that allow the user to manually move the object still work.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Events</h3>
+        <table summary="class ExtDraggableObject - Events" width="90%">
+          <tbody>
+            <tr>
+              <th>Event</th>
+              <th>Arguments</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>dragstart</code></td>
+              <td><code><a href="#DragObjectEvent">DragObjectEvent</a></code></td>
+              <td>This event is fired when the mouse is first down and no dragging has taken place yet.</td>
+            </tr>
+            <tr class="even">
+              <td><code>drag</code></td>
+              <td><code><a href="#DragObjectEvent">DragObjectEvent</a></code></td>
+              <td>This event is fired repeatedly as the mouse is moved by the user while dragstart has been triggered.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>dragend</code></td>
+              <td><code><a href="#DragObjectEvent">DragObjectEvent</a></code></td>
+              <td>This event is fired when the user releases the mouse after dragstart has been triggered.</td>
+            </tr>
+            <tr class="even">
+              <td><code>mousedown</code></td>
+              <td><code>DOM Event</code></td>
+              <td>This event is fired when the user clicks and holds the mouse button down over the draggable object.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>mouseup</code></td>
+              <td><code>DOM Event</code></td>
+              <td>This event is fired when the user releases the mouse button after mousedown has been triggered.</td>
+            </tr>
+          </tbody>
+        </table>
+
+      <h2><a name="ExtDraggableObjectOptions"></a>class ExtDraggableObjectOptions</h2>
+      <p>This class represents optional arguments to the <a href="#ExtDraggableObject">ExtDraggableObject</a> constructor. It has no constructor but is instantiated as an object literal.</p>
+        <h3>Properties</h3>
+        <table summary="class ExtDraggableObjectOptions - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>left</code></td>
+              <td><code>Number</code></td>
+              <td>The left starting position of the object.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>top</code></td>
+              <td><code>Number</code></td>
+              <td>The top starting position of the object.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>container</code></td>
+              <td><code>Node</code></td>
+              <td>A DOM element that will act as the bounding box for the draggable object.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>draggableCursor</code></td>
+              <td><code>String</code></td>
+              <td>The cursor to show on mouseover.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>draggingCursor</code></td>
+              <td><code>String</code></td>
+              <td>The cursor to show while dragging.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>intervalX</code></td>
+              <td><code>Number</code></td>
+              <td>The number of pixels the draggable object will move along the X-axis while dragging.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>intervalY</code></td>
+              <td><code>Number</code></td>
+              <td>The number of pixels the draggable object will move along the Y-axis while dragging.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>toleranceX</code></td>
+              <td><code>Number</code></td>
+              <td>The number of pixels the mouse can move away from the object along the X-axis before the object is snapped back to the position it was at dragstart.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>toleranceY</code></td>
+              <td><code>Number</code></td>
+              <td>The number of pixels the mouse can move away from the object along the Y-axis before the object is snapped back to the position it was at dragstart.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>restrictX</code></td>
+              <td><code>Number</code></td>
+              <td>Prevents the draggable object from moving along the X-axis if set to <code>true</code>.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>restrictY</code></td>
+              <td><code>Number</code></td>
+              <td>Prevents the draggable object from moving along the Y-axis if set to <code>true</code>.</td> 
+            </tr>
+          </tbody> 
+        </table>
+
+      <h2><a name="DragObjectEvent"></a>class DragObjectEvent</h2>
+      <p>This class represents arguments returned by <a href="#ExtDraggableObject">ExtDraggableObject</a> events. It has no constructor or interfaces and is simply returned by events as an object literal.</p>
+        <h3>Properties</h3>
+        <table summary="class DragObjectEvent - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>mouseX</code></td>
+              <td><code>Number</code></td>
+              <td>The X-axis position of the mouse on the page.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>mouseY</code></td>
+              <td><code>Number</code></td>
+              <td>The Y-axis position of the mouse on the page.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>startLeft</code></td>
+              <td><code>Number</code></td>
+              <td>The left position the draggable object was at on dragstart.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>startTop</code></td>
+              <td><code>Number</code></td>
+              <td>The top position the draggable object was at on dragstart.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>event</code></td>
+              <td><code>DOM Event</code></td>
+              <td>The DOM Event object associated with the underlying mouse event.</td> 
+            </tr>
+          </tbody> 
+        </table>
+  </body> 
+</html> 

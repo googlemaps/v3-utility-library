@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../src/ExtDraggableObject.js"></script>
+<script>
+  function init() {
+    var draggableObj = new ExtDraggableObject(document.getElementById("draggableElement"));
+    var map = new google.maps.Map(document.getElementById("map_canvas"), {zoom:8, center:new google.maps.LatLng(37.313477473067, -121.880502070713), mapTypeId:google.maps.MapTypeId.ROADMAP, disableDefaultUI:true});
+  }
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="init()">
+<div id="map_canvas" style="position:absolute;top:0px;left:0px;width:100%;height:100%;"></div>
+<div id="draggableElement" style="position:absolute;width:100px;height:25px;background:#BBBBBB;border:1px solid black;top:0px;left:0px;visibility:visible">Drag Me!</div>
+</body>
+</html>
