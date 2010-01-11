@@ -270,13 +270,28 @@ function ExtDraggableObject(src, opt_drag) {
     return Math.round(top_ / i);
   };
 
+  /**
+   * Sets the left position of the draggable object based on
+   *     intervalX. 
+   * @param {Number} value The location to move to.
+   */
   me.setValueX = function(value) {
     moveTo_(value * opt_drag_.intervalX, top_, false);
   };
+
+  /**
+   * Sets the top position of the draggable object based on
+   *     intervalY. 
+   * @param {Number} value The location to move to.
+   */
   me.setValueY = function(value) {
     moveTo_(left_, value * opt_drag_.intervalY, false);
   };
 
+  /**
+   * Prevents the default movement behavior of the object.
+   *     The object can still be moved by other methods.
+   */
   me.preventDefaultMovement = function(prevent) {
     preventDefault_ = prevent;
   };
