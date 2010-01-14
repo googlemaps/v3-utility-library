@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="../src/infobox.js"></script>
+<script type="text/javascript">
+
+	function initialize() {
+	
+		var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
+
+		var myMapOptions = {
+			 zoom: 15
+			,center: secheltLoc
+			,mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myMapOptions);
+
+		
+		var labelText = "City Hall";
+
+		var myOptions = {
+			 content: labelText
+			,boxStyle: {
+			   border: "1px solid black"
+			  ,textAlign: "center"
+			  ,fontSize: "8pt"
+			  ,width: "50px"
+			 }
+			,disableAutoPan: true
+			,pixelOffset: new google.maps.Size(-25, 0)			
+			,position: secheltLoc
+			,closeBoxURL: ""
+			,isHidden: false
+			,pane: "mapPane"
+		};
+
+		var ibLabel = new InfoBox(myOptions);		
+		ibLabel.open(map);
+	}
+</script>
+
+</head>
+<body onload="initialize()">
+	<div id="map_canvas" style="width:100%; height:50%"></div>
+	<p>
+	This example shows how to use an InfoBox as a map label. Like all true map labels, the InfoBox is attached to the "mapPane" so that it appears below markers and information windows. In this case, the InfoBox label is the word <i>City Hall</i> inside a rectangle. The 50px wide label is centered below the label's position by specifying a pixelOffset of (-25, 0).
+</body>
+
+</html>

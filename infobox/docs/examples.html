@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>InfoBox Documentation: Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+<h1>InfoBox Examples</h1>
+
+<p><a href="reference.html">API Reference</a></p>
+
+<p>
+Note: Be sure to include <tt>infobox.js</tt> or <tt>infobox_packed.js</tt> in your HTML document.
+<pre class="prettyprint">
+	&lt;script src=&quot;/path/to/infobox.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</pre>
+</p>
+
+<p>The example below shows the typical use of an InfoBox &mdash; as an enhanced version of an
+<tt>InfoWindow</tt>. The background of the InfoBox is set to an 8-pixel high, mostly-transparent GIF
+that has an upward pointing arrow 140 pixels to the right (half-way along the width of the InfoBox).
+The content for the InfoBox has margin-top set to 8px so that this background image is visible; the 
+rest of the InfoBox appears yellow because that's the background color of the content. The
+<tt>pixelOffset</tt> is set to (-140, 0) so that the InfoBox is centered appropriately.</p>
+<pre class="prettyprint">
+	var marker = new google.maps.Marker({
+	 map: theMap,
+	 position: new google.maps.LatLng(49.47216, -123.76307),
+	 visible: true
+	});
+		
+	var boxText = "&lt;div style='border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;'&gt;";
+	boxText += "City Hall, Sechelt&lt;br&gt;British Columbia&lt;br&gt;Canada";
+	boxText += "&lt;/div&gt;";
+		
+	var myOptions = {
+		 content: boxText
+		,disableAutoPan: false
+		,maxWidth: 0
+		,pixelOffset: new google.maps.Size(-140, 0)			
+		,zIndex: null
+		,boxStyle: { 
+		   background: "url('http://www.garylittle.ca/map/artwork/tipbox.gif') no-repeat"
+		  ,opacity: 0.75
+		  ,width: "280px"
+		 }
+		,closeBoxMargin: "10px 2px 2px 2px"
+		,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+		,infoBoxClearance: new google.maps.Size(1, 1)
+		,isHidden: false
+		,pane: "floatPane"
+	};
+
+	var ib = new InfoBox(myOptions);		
+	ib.open(theMap, marker);
+</pre>
+<p><a href="../examples/infobox-basic.html">View example (infobox-basic.html)</a>. </p>
+
+
+<h2>Using InfoBox to Create a Map Label</h2>
+<p>
+This example shows how to use an InfoBox as a map label. One important step is to set the <tt>pane</tt> property to
+<b>"mapPane"</b> so that the InfoBox appears below everything else on the map. It's also necessary
+to set <tt>closeBoxURL</tt> to <b>""</b> so that the label will not have a close box and to set
+<tt>disableAutoPane</tt> to <b><tt>true</tt></b> so that the map does not pan when the label is
+added.
+</p>
+<pre class="prettyprint">
+	var labelText = "City Hall";
+
+	var myOptions = {
+		 content: labelText
+		,boxStyle: {
+		   border: "1px solid black"
+		  ,textAlign: "center"
+		  ,fontSize: "8pt"
+		  ,width: "50px"
+		 }
+		,disableAutoPan: true
+		,pixelOffset: new google.maps.Size(-25, 0)			
+		,position: new google.maps.LatLng(49.47216, -123.76307)
+		,closeBoxURL: ""
+		,isHidden: false
+		,pane: "mapPane"
+	};
+
+	var ibLabel = new InfoBox(myOptions);		
+	ibLabel.open(map);
+</pre>
+<p><a href="../examples/infobox-label.html">View example (infobox-label.html)</a>. </p>
+
+
+</body>
+</html>
