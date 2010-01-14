@@ -1,0 +1,59 @@
+<html>
+<head>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="../src/infobox.js"></script>
+<script type="text/javascript">
+
+	function initialize() {
+	
+		var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
+
+		var myMapOptions = {
+			 zoom: 15
+			,center: secheltLoc
+			,mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var theMap = new google.maps.Map(document.getElementById("map_canvas"), myMapOptions);
+
+		
+		var marker = new google.maps.Marker({
+		  map: theMap
+		 ,position: new google.maps.LatLng(49.47216, -123.76307)
+		 ,visible: true
+		});
+		
+		var boxText = "<div style='border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;'>";
+		boxText += "City Hall, Sechelt<br>British Columbia<br>Canada";
+		boxText += "</div>";
+		
+		var myOptions = {
+			 content: boxText
+			,disableAutoPan: false
+			,maxWidth: 0
+			,pixelOffset: new google.maps.Size(-140, 0)			
+			,zIndex: null
+			,boxStyle: { 
+			  background: "url('http://www.garylittle.ca/map/artwork/tipbox.gif') no-repeat"
+			  ,opacity: 0.75
+			  ,width: "280px"
+			 }
+			,closeBoxMargin: "10px 2px 2px 2px"
+			,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+			,infoBoxClearance: new google.maps.Size(1, 1)
+			,isHidden: false
+			,pane: "floatPane"
+		};
+
+		var ib = new InfoBox(myOptions);		
+		ib.open(theMap, marker);
+	}
+</script>
+
+</head>
+<body onload="initialize()">
+	<div id="map_canvas" style="width:100%; height:50%"></div>
+	<p>
+	This example shows the "traditional" use of an InfoBox as a replacement for an InfoWindow.
+</body>
+
+</html>
