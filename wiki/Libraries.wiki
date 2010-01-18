@@ -10,3 +10,11 @@ This class allows user drag a hot key(e.g. shift) while drag a box on the map to
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Version].
+
+
+== !InfoBox ==
+
+This class behaves like a google.maps.InfoWindow, but it supports several additional properties for advanced styling. An InfoBox can also be used as a map label.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Version].
