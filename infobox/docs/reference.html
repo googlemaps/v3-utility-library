@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>InfoBox v1.0 [January 11, 2010] Reference</title>
+    <title>InfoBox v1.0 [January 17, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -163,8 +163,9 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
                   
                 
                 <td>Sets the options for the InfoBox. Note that changes to the <tt>maxWidth</tt>,
- <tt>closeBoxMargin</tt>, and <tt>closeBoxURL</tt> properties have no affect
- until the current InfoBox is <tt>close</tt>d and a new one is <tt>open</tt>ed.</td>
+ <tt>closeBoxMargin</tt>, <tt>closeBoxURL</tt>, and <tt>enableEventPropagation</tt>
+ properties have no affect until the current InfoBox is <tt>close</tt>d and a new one
+ is <tt>open</tt>ed.</td>
               </tr>
             
               <tr class="odd">
@@ -340,6 +341,21 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
               </tr>
             
               <tr class="even">
+                <td><code>enableEventPropagation</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Propagate mousedown, click, dblclick,
+ and contextmenu events in the InfoBox (default is <tt>false</tt> to mimic the behavior
+ of a <tt>google.maps.InfoWindow</tt>). Set this property to <tt>true</tt> if the InfoBox
+ is being used as a map label. iPhone note: This property setting has no effect. Events are
+ always propagated for an InfoBox in the "mapPane" pane and they are <i>not</i> propagated
+ for an InfoBox in the "floatPane" pane.</td>
+              </tr>
+            
+              <tr class="odd">
                 <td><code>infoBoxClearance</code></td>
                 
                   
@@ -350,7 +366,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
  map edge after an auto-pan.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>isHidden</code></td>
                 
                   
@@ -360,7 +376,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
                 <td>Hide the InfoBox on <tt>open</tt> (default is <tt>false</tt>).</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>maxWidth</code></td>
                 
                   
@@ -370,7 +386,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
                 <td>The maximum width (in pixels) of the InfoBox. Set to 0 if no maximum.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>pane</code></td>
                 
                   
@@ -382,7 +398,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
  Valid pane names are the property names for the <tt>google.maps.MapPanes</tt> object.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>pixelOffset</code></td>
                 
                   
@@ -393,7 +409,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
  to the map pixel corresponding to <tt>position</tt>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>position</code></td>
                 
                   
@@ -403,7 +419,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
                 <td>The geographic location at which to display the InfoBox.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>zIndex</code></td>
                 
                   

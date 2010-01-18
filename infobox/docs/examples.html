@@ -52,6 +52,7 @@ rest of the InfoBox appears yellow because that's the background color of the co
 		,infoBoxClearance: new google.maps.Size(1, 1)
 		,isHidden: false
 		,pane: "floatPane"
+		,enableEventPropagation: false
 	};
 
 	var ib = new InfoBox(myOptions);		
@@ -64,9 +65,10 @@ rest of the InfoBox appears yellow because that's the background color of the co
 <p>
 This example shows how to use an InfoBox as a map label. One important step is to set the <tt>pane</tt> property to
 <b>"mapPane"</b> so that the InfoBox appears below everything else on the map. It's also necessary
-to set <tt>closeBoxURL</tt> to <b>""</b> so that the label will not have a close box and to set
+to set <tt>closeBoxURL</tt> to <b>""</b> so that the label will not have a close box, to set
 <tt>disableAutoPane</tt> to <b><tt>true</tt></b> so that the map does not pan when the label is
-added.
+added, and to set <tt>enableEventPropagation</tt> to <tt>true</tt> so that events will be passed
+on to the map for handling.
 </p>
 <pre class="prettyprint">
 	var labelText = "City Hall";
@@ -85,6 +87,7 @@ added.
 		,closeBoxURL: ""
 		,isHidden: false
 		,pane: "mapPane"
+		,enableEventPropagation: true
 	};
 
 	var ibLabel = new InfoBox(myOptions);		

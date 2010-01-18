@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.0 [January 11, 2010]
+ * @version 1.0 [January 17, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
@@ -61,6 +61,12 @@
  * @property {string} pane The pane where the InfoBox is to appear (default is "floatPane").
  *  Set the pane to "mapPane" if the InfoBox is being used as a map label.
  *  Valid pane names are the property names for the <tt>google.maps.MapPanes</tt> object.
+ * @property {boolean} enableEventPropagation Propagate mousedown, click, dblclick,
+ *  and contextmenu events in the InfoBox (default is <tt>false</tt> to mimic the behavior
+ *  of a <tt>google.maps.InfoWindow</tt>). Set this property to <tt>true</tt> if the InfoBox
+ *  is being used as a map label. iPhone note: This property setting has no effect. Events are
+ *  always propagated for an InfoBox in the "mapPane" pane and they are <i>not</i> propagated
+ *  for an InfoBox in the "floatPane" pane.
  */
 
 /**
@@ -95,9 +101,14 @@ function InfoBox(opt_opts) {
   this.infoBoxClearance_ = opt_opts.infoBoxClearance || new google.maps.Size(1, 1);
   this.isHidden_ = opt_opts.isHidden || false;
   this.pane_ = opt_opts.pane || "floatPane";
+  this.enableEventPropagation_ = opt_opts.enableEventPropagation || false;
 
   this.div_ = null;
   this.closeListener_ = null;
+  this.eventListener1_ = null;
+  this.eventListener2_ = null;
+  this.eventListener3_ = null;
+  this.contextListener_ = null;
   this.fixedWidthSet_ = null;
 }
 
@@ -112,6 +123,41 @@ InfoBox.prototype = new google.maps.OverlayView();
 InfoBox.prototype.createInfoBoxDiv_ = function () {
 
   var bw;
+  var me = this;
+
+  // This handler prevents an event in the InfoBox from being passed on to the map.
+  //
+  var cancelHandler = function (e) {
+    e.cancelBubble = true;
+
+    if (e.stopPropagation) {
+
+      e.stopPropagation();
+    }
+  };
+
+  // This handler ignores the current event in the InfoBox and conditionally prevents
+  // the event from being passed on to the map. It is used for the contextmenu event.
+  //
+  var ignoreHandler = function (e) {
+
+    e.returnValue = false;
+
+    if (e.preventDefault) {
+
+      e.preventDefault();
+    }
+
+    if (!me.enableEventPropagation_) {
+
+      e.cancelBubble = true;
+
+      if (e.stopPropagation) {
+
+        e.stopPropagation();
+      }
+    }
+  };
 
   if (!this.div_) {
 
@@ -157,6 +203,17 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
     }
 
     this.panBox_(this.disableAutoPan_);
+
+    if (!this.enableEventPropagation_) {
+
+      // Cancel event propagation.
+      //
+      this.eventListener1_ = google.maps.event.addDomListener(this.div_, "mousedown", cancelHandler);
+      this.eventListener2_ = google.maps.event.addDomListener(this.div_, "click", cancelHandler);
+      this.eventListener3_ = google.maps.event.addDomListener(this.div_, "dblclick", cancelHandler);
+    }
+
+    this.contextListener_ = google.maps.event.addDomListener(this.div_, "contextmenu", ignoreHandler);
 
     /**
      * This event is fired when the DIV containing the InfoBox's content is attached to the DOM.
@@ -387,8 +444,9 @@ InfoBox.prototype.draw = function () {
 
 /**
  * Sets the options for the InfoBox. Note that changes to the <tt>maxWidth</tt>,
- *  <tt>closeBoxMargin</tt>, and <tt>closeBoxURL</tt> properties have no affect
- *  until the current InfoBox is <tt>close</tt>d and a new one is <tt>open</tt>ed.
+ *  <tt>closeBoxMargin</tt>, <tt>closeBoxURL</tt>, and <tt>enableEventPropagation</tt>
+ *  properties have no affect until the current InfoBox is <tt>close</tt>d and a new one
+ *  is <tt>open</tt>ed.
  * @param {InfoBoxOptions} opt_opts
  */
 InfoBox.prototype.setOptions = function (opt_opts) {
@@ -437,6 +495,11 @@ InfoBox.prototype.setOptions = function (opt_opts) {
   if (typeof opt_opts.isHidden !== "undefined") {
 
     this.isHidden_ = opt_opts.isHidden;
+  }
+
+  if (typeof opt_opts.enableEventPropagation !== "undefined") {
+
+    this.enableEventPropagation_ = opt_opts.enableEventPropagation;
   }
 
   if (this.div_) {
@@ -609,6 +672,22 @@ InfoBox.prototype.close = function () {
 
     google.maps.event.removeListener(this.closeListener_);
     this.closeListener_ = null;
+  }
+
+  if (this.eventListener1_) {
+
+    google.maps.event.removeListener(this.eventListener1_);
+    google.maps.event.removeListener(this.eventListener2_);
+    google.maps.event.removeListener(this.eventListener3_);
+    this.eventListener1_ = null;
+    this.eventListener2_ = null;
+    this.eventListener3_ = null;
+  }
+
+  if (this.contextListener_) {
+
+    google.maps.event.removeListener(this.contextListener_);
+    this.contextListener_ = null;
   }
 
   this.setMap(null);
