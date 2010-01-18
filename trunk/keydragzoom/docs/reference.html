@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Key Drag Zoom for V3 v1.0 Reference</title>
+    <title>KeyDragZoom for V3 v1.0 Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
   <body>
-    <h1>Key Drag Zoom for V3</h1>
+    <h1>KeyDragZoom for V3</h1>
     <p>
-This library adds a drag zoom capability to a Google map. When drag zoom is enabled, holding down a user-defined hot key <code>(shift | ctrl | alt)</code> while dragging a box around an area of interest will zoom the map to that area when the hot key is released.  Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code> <p> Note that if the map's container has a border around it, the border widths must be specified in pixel units (or as thin, medium, or thick). This is required because of an MSIE limitation. <p>NL: 2009-05-28: initial port to core API V3. NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).</p>
+This library adds a drag zoom capability to a Google map. When drag zoom is enabled, holding down a user-defined hot key <code>(shift | ctrl | alt)</code> while dragging a box around an area of interest will zoom the map to that area when the hot key is released.  Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code> <p> Note that if the map's container has a border around it, the border widths must be specified in px units (or as thin, medium, or thick). This is required because of an MSIE limitation. <p>NL: 2009-05-28: initial port to core API V3. NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).</p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
     
       <h2><a name="DragZoom"></a>class DragZoom</h2>
@@ -46,17 +46,17 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
                     <td><code>None</code></td>
                   
                 
-                <td>This event is fired while the user release the key</td>
+                <td>This event is fired when the user releases the hot key.</td>
               </tr>
             
               <tr class="odd">
                 <td><code>drag</code></td>
                 
                   
-                    <td><code><span class="type">southwestPixel:google.maps.Point</span>, <span class="type">northeastPixel:google.maps.Point</span></code></td>
+                    <td><code><span class="type">southwestPixel:Point</span>, <span class="type">northeastPixel:Point</span></code></td>
                   
                 
-                <td>This event is repeatedly fired while the user drags the box. The southwest and northeastpoint are passed as parameters of type <code>google.maps.Point</code> (for performance reasons),relative to the map container. Note: the event listener is responsible for converting Pixel to LatLng, if necessary.</td>
+                <td>This event is repeatedly fired while the user drags the zoom box. The southwest and northeastpoint are passed as parameters of type <code>google.maps.Point</code> (for performance reasons),relative to the map container. Note: the event listener is responsible for converting Pixel to LatLng, if necessary.</td>
               </tr>
             
               <tr class="even">
@@ -84,7 +84,7 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
       
     
       <h2><a name="google.maps.Map"></a>class Map</h2>
-      <p>These are new methods added to the Google Maps API's<a href  = 'http://code.google.com/apis/maps/documentation/v3/reference.html#Map'>Map</a>class.</p>
+      <p>These are new methods added to the Google Maps API's<a href='http://code.google.com/apis/maps/documentation/v3/reference.html#Map'>Map</a>class.</p>
       
         <h3>Methods</h3>
         <table summary="class Map - Methods" width="90%">
@@ -111,7 +111,7 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
               </tr>
             
               <tr class="even">
-                <td><code>enableKeyDragZoom(<span class="type">opt_zoomOpts:KeyDragZoomOptions</span>)</code></td>
+                <td><code>enableKeyDragZoom(<span class="type">opt_zoomOpts?:KeyDragZoomOptions</span>)</code></td>
                 
                   
                     <td><code>None</code></td>
@@ -134,10 +134,10 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
                 <td><code>keyDragZoomEnabled()</code></td>
                 
                   
-                    <td><code>Boolean</code></td>
+                    <td><code>boolean</code></td>
                   
                 
-                <td>Returns true if the drag zoom feature has been enabled.</td>
+                <td>Returns <tt>true</tt> if the drag zoom feature has been enabled.</td>
               </tr>
             
           </tbody>
@@ -145,7 +145,7 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
       
     
       <h2><a name="KeyDragZoomOptions"></a>class KeyDragZoomOptions</h2>
-      <p>This class represents the optional parameter passed into <code>google.maps.Map.enableDragBoxZoom</code>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      <p>This class represents the optional parameter passed into <code>google.maps.Map.enableKeyDragZoom</code>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
       
         <h3>Properties</h3>
         <table summary="class KeyDragZoomOptions - Properties" width="90%">
@@ -168,17 +168,17 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
                     <td><code>Object</code></td>
                   
                 
-                <td>the css style of the zoom box.The default is <code>{border: 'thin solid #FF0000'}</code>.Border widths must be specified in pixel units (or as thin, medium, or thick).</td>
+                <td>The CSS style of the zoom box.The default is <code>{border: 'thin solid #FF0000'}</code>.Border widths must be specified in px units (or as thin, medium, or thick) because of an MSIE limitation.</td>
               </tr>
             
               <tr class="even">
                 <td><code>key</code></td>
                 
                   
-                    <td><code>String</code></td>
+                    <td><code>string</code></td>
                   
                 
-                <td>the hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.The default is <code>shift</code>.</td>
+                <td>The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.The default is <code>shift</code>.</td>
               </tr>
             
               <tr class="odd">
@@ -188,7 +188,7 @@ This library adds a drag zoom capability to a Google map. When drag zoom is ena
                     <td><code>Object</code></td>
                   
                 
-                <td>the css style of the pane which overlays the map when a drag zoom is activated.The default is <code>{backgroundColor: 'white', opacity: 0.0, cursor: 'crosshair'}</code>.</td>
+                <td>The CSS style of the pane which overlays the map when a drag zoom is activated.The default is <code>{backgroundColor: 'white', opacity: 0.0, cursor: 'crosshair'}</code>.</td>
               </tr>
             
           </tbody>

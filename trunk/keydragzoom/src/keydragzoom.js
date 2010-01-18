@@ -1,5 +1,5 @@
 /**
- * @name Key Drag Zoom for V3
+ * @name KeyDragZoom for V3
  * @version 1.0
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a Google map.
@@ -9,7 +9,7 @@
  *  Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code>
  *  <p>
  *  Note that if the map's container has a border around it, the border widths must be specified
- *  in pixel units (or as thin, medium, or thick). This is required because of an MSIE limitation.
+ *  in px units (or as thin, medium, or thick). This is required because of an MSIE limitation.
  *  <p>NL: 2009-05-28: initial port to core API V3.
  *  NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).  
  */
@@ -34,7 +34,7 @@
    * Converts 'thin', 'medium', and 'thick' to pixel widths
    * in an MSIE environment. Not called for other browsers
    * because getComputedStyle() returns pixel widths automatically.
-   * @param {String} widthValue
+   * @param {string} widthValue
    */ 
   var toPixels = function (widthValue) {
     var px;
@@ -192,13 +192,13 @@
     
   /**
    * @name KeyDragZoomOptions
-   * @class This class represents the optional parameter passed into <code>google.maps.Map.enableDragBoxZoom</code>.
-   * @property {String} [key] the hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.
+   * @class This class represents the optional parameter passed into <code>google.maps.Map.enableKeyDragZoom</code>.
+   * @property {string} [key] The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.
    * The default is <code>shift</code>.
-   * @property {Object} [boxStyle] the css style of the zoom box.
+   * @property {Object} [boxStyle] The CSS style of the zoom box.
    * The default is <code>{border: 'thin solid #FF0000'}</code>.
-   * Border widths must be specified in pixel units (or as thin, medium, or thick).
-   * @property {Object} [paneStyle] the css style of the pane which overlays the map when a drag zoom is activated.
+   * Border widths must be specified in px units (or as thin, medium, or thick) because of an MSIE limitation.
+   * @property {Object} [paneStyle] The CSS style of the pane which overlays the map when a drag zoom is activated.
    * The default is <code>{backgroundColor: 'white', opacity: 0.0, cursor: 'crosshair'}</code>.
    */
   /**
@@ -207,7 +207,7 @@
    * This object is created when <code>google.maps.Map.enableKeyDragZoom</code> is called; it cannot be created directly.
    * Use <code>google.maps.Map.getDragZoomObject</code> to gain access to this object in order to attach event listeners.
    * @param {google.maps.Map} map
-   * @param {KeyDragZoomOptions} opt_zoomOpts
+   * @param {KeyDragZoomOptions} [opt_zoomOpts]
    */
   function DragZoom(map, opt_zoomOpts) {
     var ov = new google.maps.OverlayView();
@@ -308,7 +308,7 @@
   /**
    * Returns true if the hot key is being pressed when an event occurs.
    * @param {Event} e
-   * @return {Boolean}
+   * @return {boolean}
    */
   DragZoom.prototype.isHotKeyDown_ = function (e) {
     var isHot;
@@ -456,13 +456,13 @@
       this.boxDiv_.style.height = height + 'px';
       this.boxDiv_.style.display = 'block';
       /**
-       * This event is repeatedly fired while the user drags the box. The southwest and northeast
+       * This event is repeatedly fired while the user drags the zoom box. The southwest and northeast
        * point are passed as parameters of type <code>google.maps.Point</code> (for performance reasons),
        * relative to the map container. Note: the event listener is responsible 
        * for converting Pixel to LatLng, if necessary.
        * @name DragZoom#drag 
-       * @param {google.maps.Point} southwestPixel
-       * @param {google.maps.Point} northeastPixel
+       * @param {Point} southwestPixel
+       * @param {Point} northeastPixel
        * @event
        */
       google.maps.event.trigger(this, 'drag', this.startPt_, this.endPt_);// new google.maps.Point(left, top + height), new google.maps.Point(left + width, top)); 
@@ -521,7 +521,7 @@
       this.boxDiv_.style.display = 'none';
       this.paneDiv_.style.display = "none";
       /**
-       * This event is fired while the user release the key
+       * This event is fired when the user releases the hot key.
        * @name DragZoom#deactivate 
        * @event
        */
@@ -535,13 +535,13 @@
   /**
    * @name google.maps.Map
    * @class These are new methods added to the Google Maps API's
-   * <a href  = 'http://code.google.com/apis/maps/documentation/v3/reference.html#Map'>Map</a>
+   * <a href='http://code.google.com/apis/maps/documentation/v3/reference.html#Map'>Map</a>
    * class.
    */
   /**
    * Enable drag zoom. The user can zoom to an area of interest by holding down the hot key
    * <code>(shift | ctrl | alt )</code> while dragging a box around the area. 
-   * @param {KeyDragZoomOptions} opt_zoomOpts
+   * @param {KeyDragZoomOptions} [opt_zoomOpts]
    */
   
   google.maps.Map.prototype.enableKeyDragZoom = function (opt_zoomOpts) {
@@ -565,8 +565,8 @@
     }
   };
   /**
-   * Returns true if the drag zoom feature has been enabled.
-   * @return {Boolean}
+   * Returns <tt>true</tt> if the drag zoom feature has been enabled.
+   * @return {boolean}
    */
   google.maps.Map.prototype.keyDragZoomEnabled = function () {
     return this.dragZoom_ !== null;
