@@ -14,6 +14,8 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoo
 
 == !InfoBox ==
 
+[http://www.garylittle.ca/map/artwork/infobox.png]
+
 This class behaves like a {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ Released Versions] or
