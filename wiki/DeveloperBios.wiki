@@ -10,6 +10,8 @@
 
 *Gary Little*
 
+[http://www.garylittle.ca/about-gary-little.html http://www.garylittle.ca/artwork/gary-75x100.jpg]
+
   * Works as a REALTOR at Royal !LePage Sunshine Coast in Sechelt, BC, Canada
   * Formerly worked at Apple Inc. and Sun Microsystems, Inc. in Silicon Valley
   * Created the [http://map.garylittle.ca/ Sunshine Coast Interactive Real Estate Map] (uses Google Maps API v2)
