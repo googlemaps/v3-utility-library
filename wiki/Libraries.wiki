@@ -1,20 +1,20 @@
 #summary List of libraries here and quick links to them
 
-Below is a list of the libraries being worked on in this project, with links to their final released versions and their in-development version. 
+Below is a list of the libraries being worked on in this project, with links to their final released versions and their in-development versions. 
 
 
 
 == !KeyDragZoom ==
 
-This class allows user drag a hot key(e.g. shift) while drag a box on the map to zoom in.
+This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Version].
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Versions].
 
 
 == !InfoBox ==
 
-This class behaves like a google.maps.InfoWindow, but it supports several additional properties for advanced styling. An InfoBox can also be used as a map label.
+This class behaves like a {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ Released Versions] or
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Version].
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Versions].
