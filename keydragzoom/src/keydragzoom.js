@@ -12,6 +12,7 @@
  *  in px units (or as thin, medium, or thick). This is required because of an MSIE limitation.
  *  <p>NL: 2009-05-28: initial port to core API V3.
  *  NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).  
+ *  NL: 2010-02-02: added a fix for IE flickering on divs onmousemove, caused by scroll value when get mouse position.  
  */
 /*!
  *
@@ -90,6 +91,16 @@
     return bw;
   };
 
+  // Page scroll value for mouse position
+  var scroll = {
+    x: 0,
+    y: 0
+  };
+  var getScrollValue = function (e) {
+    scroll.x = (typeof document.documentElement.scrollLeft !== "undefined" ? document.documentElement.scrollLeft : document.body.scrollLeft);
+    scroll.y = (typeof document.documentElement.scrollTop !== "undefined" ? document.documentElement.scrollTop : document.body.scrollTop);
+  };
+  getScrollValue();
   /**
    * Get the position of the mouse relative to the document.
    * @param {Object} e  Mouse event
@@ -102,16 +113,15 @@
       posX = e.pageX;
       posY = e.pageY;
     } else if (typeof e.clientX !== "undefined") {
-      posX = e.clientX +
-      (typeof document.documentElement.scrollLeft !== "undefined" ? document.documentElement.scrollLeft : document.body.scrollLeft);
-      posY = e.clientY +
-      (typeof document.documentElement.scrollTop !== "undefined" ? document.documentElement.scrollTop : document.body.scrollTop);
+      posX = e.clientX + scroll.x;
+      posY = e.clientY + scroll.y;
     }
     return {
       left: posX,
       top: posY
     };
   };
+
 
   /**
    * Get the position of an HTML element relative to the document.
@@ -293,7 +303,8 @@
     this.mouseUpListener_ = google.maps.event.addDomListener(document, 'mouseup', function (e) {
       me.onMouseUp_(e); 
     });
-  
+    this.scrollListener_ = google.maps.event.addDomListener(window, 'scroll', getScrollValue); 
+ 
     this.hotKeyDown_ = false;
     this.dragging_ = false;
     this.startPt_ = null;
@@ -559,6 +570,8 @@
       google.maps.event.removeListener(d.mouseUpListener_);
       google.maps.event.removeListener(d.keyUpListener_);
       google.maps.event.removeListener(d.keyDownListener_);
+      google.maps.event.removeListener(d.scrollListener_);
+      
       this.getDiv().removeChild(d.boxDiv_);
       this.getDiv().removeChild(d.paneDiv_);
       this.dragZoom_ = null;
