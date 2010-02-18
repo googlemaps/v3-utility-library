@@ -24,7 +24,7 @@ We want to guarantee we have the right to use the code you contribute, and that 
   * Decide on the name for your library, as this will determine the folder and file names. If you're not sure, email the mailing list with some ideas. 
   * Do an authenticated checkout of the whole project.
   * Create the following folders: /libraryname/, /libraryname/docs/, /libraryname/src/, /libraryname/examples/
-  * Put the javascript in the /src/ folder. Make sure it follows our coding style (See JSCodingConventions). Generate the packed version of the javascript (See UsingUtilities).
+  * Put the javascript in the /src/ folder. Make sure it follows our coding style (See [JSCodingConventions]). Generate the packed version of the javascript (See UsingUtilities).
   * Put examples in the /examples/ folder. There should be one basic example, and any other examples to show other or advanced usage of the library. Copy the API key from other libraries.
   * Following the template of other libraries, create an examples.html file in the /docs/ folder. That file is the developer's guide for the library, and should step the user through both simple and advanced integration, referencing the examples along the way.
   * Generate reference.html (See UsingUtilities).
