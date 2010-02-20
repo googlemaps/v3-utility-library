@@ -21,4 +21,13 @@
   * Personal website: [http://www.garylittle.ca/ www.garylittle.ca]
 ----
 
+----
+
+*Björn Brala*
+
+  * Employed by [http://www.swis.nl/ SWIS B.V.] as lead developer of [http://www.geostart.nl/ GeoStart].
+  * Created: [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/progressbarcontrol/ Progressbar Control] and part of [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/snaptoroute/ Snap to Route]
+  * Worked on: [http://gmaps-utility-library.googlecode.com/svn/trunk/extlargemapcontrol/1.0/ ExtLargeMapControl]
+
+
  Join us!
