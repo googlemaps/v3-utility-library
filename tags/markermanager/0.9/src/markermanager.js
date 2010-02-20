@@ -2,7 +2,7 @@
  * @name MarkerManager v3
  * @version 0.9
  * @copyright (c) 2007 Google Inc.
- * @author Doug Ricket, BjÃ¶rn Brala (port to v3), others,
+ * @author Doug Ricket, Björn Brala (port to v3), others,
  *
  * @fileoverview Marker manager is an interface between the map and the user,
  * designed to manage adding and removing many points when the viewport changes.
@@ -95,7 +95,7 @@ MarkerManager.prototype.initialize = function (map, opt_opts) {
   // Find max zoom level
   var mapMaxZoom = 1;
   for (var sType in mapTypes ) {
-    if (typeof(map.mapTypes.get(sType)) === 'object' && typeof(map.mapTypes.get(sType).maxZoom) === 'number') {
+    if (typeof map.mapTypes.get(sType) === 'object' && typeof map.mapTypes.get(sType).maxZoom === 'number') {
       var mapTypeMaxZoom = map.mapTypes.get(sType).maxZoom;
       if (mapTypeMaxZoom > mapMaxZoom) {
         mapMaxZoom = mapTypeMaxZoom;
@@ -242,7 +242,7 @@ MarkerManager.prototype.addMarkerBatch_ = function (marker, minZoom, maxZoom) {
   // user explicitly requested it when creating marker manager.
   if (this.trackMarkers_) {
     google.maps.event.addListener(marker, 'changed', function (a, b, c) {
-      me.onMarkerMoved_(a,b,c);
+      me.onMarkerMoved_(a, b, c);
     });
   }
 
@@ -428,7 +428,7 @@ MarkerManager.prototype.getMarkerCount = function (zoom) {
  * @param {Number} zoom - the zoom level 
  * @return {GMarker} marker - the marker found at lat and lng 
  */ 
-MarkerManager.prototype.getMarker = function(lat, lng, zoom) { 
+MarkerManager.prototype.getMarker = function (lat, lng, zoom) {
   var me = this; 
   var mPoint = new google.maps.LatLng(lat, lng); 
   var gridPoint = me.getTilePoint_(mPoint, zoom, new google.maps.Size(0, 0, 0, 0));
@@ -436,10 +436,10 @@ MarkerManager.prototype.getMarker = function(lat, lng, zoom) {
   var marker = new google.maps.Marker({position: mPoint}); 
     
   var cellArray = me.getGridCellNoCreate_(gridPoint.x, gridPoint.y, zoom); 
-  if (cellArray != undefined) {
+  if (cellArray !== undefined) {
     for (var i = 0; i < cellArray.length; i++) 
     { 
-      if (lat == cellArray[i].getLatLng().lat() && lng == cellArray[i].getLatLng().lng()) {
+      if (lat === cellArray[i].getLatLng().lat() && lng === cellArray[i].getLatLng().lng()) {
         marker = cellArray[i]; 
       } 
     } 
@@ -490,7 +490,7 @@ function GridBounds(bounds) {
  * @return {Boolean} This Bounds equals the given GridBounds.
  */
 GridBounds.prototype.equals = function (gridBounds) {
-  if (this.maxX == gridBounds.maxX && this.maxY == gridBounds.maxY && this.minX == gridBounds.minX && this.minY == gridBounds.minY) {
+  if (this.maxX === gridBounds.maxX && this.maxY === gridBounds.maxY && this.minX === gridBounds.minX && this.minY === gridBounds.minY) {
     return true;
   } else {
     return false;
@@ -548,8 +548,6 @@ MarkerManager.prototype.getGridCellCreate_ = function (x, y, z) {
 MarkerManager.prototype.getGridCellNoCreate_ = function (x, y, z) {
   var grid = this.grid_[z];
   
-  //if (grid == undefined){return undefined;}
-  
   if (x < 0) {
     x += this.gridWidth_[z];
   }
@@ -576,7 +574,7 @@ MarkerManager.prototype.getGridBounds_ = function (bounds, zoom, swPadding, nePa
   var tr = bounds.getNorthEast();
   var sw = this.getTilePoint_(bl, zoom, swPadding);
 
-    var ne = this.getTilePoint_(tr, zoom, nePadding);
+  var ne = this.getTilePoint_(tr, zoom, nePadding);
   var gw = this.gridWidth_[zoom];
 
   // Crossing the prime meridian requires correction of bounds.
