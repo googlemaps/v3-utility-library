@@ -19,15 +19,13 @@
   * Created the [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ InfoBox] class for Google Maps API v3
   * Worked on the [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ KeyDragZoom] class for Google Maps API v2/v3
   * Personal website: [http://www.garylittle.ca/ www.garylittle.ca]
-----
-
-----
 
 *Björn Brala*
 
-  * Employed by [http://www.swis.nl/ SWIS B.V.] as lead developer of [http://www.geostart.nl/ GeoStart].
+  * Employed by [http://www.swis.nl/ SWIS B.V.] as lead developer of [http://www.geostart.nl/ GeoStart]. Proctor for [http://code.google.com/qualify/details/index.html Google Maps JS API Developer Qualification].
   * Created: [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/progressbarcontrol/ Progressbar Control] and part of [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/snaptoroute/ Snap to Route]
   * Worked on: [http://gmaps-utility-library.googlecode.com/svn/trunk/extlargemapcontrol/1.0/ ExtLargeMapControl]
 
+----
 
  Join us!
