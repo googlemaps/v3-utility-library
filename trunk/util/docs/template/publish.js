@@ -108,9 +108,9 @@ function publish(symbolSet) {
       for (var k = 0; k < constructorSymbol.params.length; k++) {
         var constructorParameter = constructorSymbol.params[k];
         var argumentString = '<span class="type">';
-        argumentString += constructorParameter.name;
+        argumentString += htmlEscape(constructorParameter.name);
         argumentString += constructorParameter.isOptional ? "?" : "";
-        argumentString += ':' + constructorParameter.type;
+        argumentString += ':' + htmlEscape(constructorParameter.type);
         argumentString += '</span>';
         constructorArguments.push(argumentString);
       }
@@ -173,9 +173,9 @@ function publish(symbolSet) {
         for (var m = 0; m < methodSymbol.params.length; m++) {
           var methodParameter = methodSymbol.params[m]
           var argumentString = '<span class="type">';
-          argumentString += methodParameter.name;
+          argumentString += htmlEscape(methodParameter.name);
           argumentString += methodParameter.isOptional ? "?" : "";
-          argumentString += ":" + methodParameter.type;
+          argumentString += ":" + htmlEscape(methodParameter.type);
           argumentString += '</span>';
           methodArguments.push(argumentString);
         }
@@ -201,8 +201,8 @@ function publish(symbolSet) {
         for (var m = 0; m < thisEvent.params.length; m++) {
           var thisArgument = thisEvent.params[m];
           var argumentString = '<span class="type">'
-          argumentString += thisArgument.name;
-          argumentString += ':' + thisArgument.type + '</span>';
+          argumentString += htmlEscape(thisArgument.name);
+          argumentString += ':' + htmlEscape(thisArgument.type) + '</span>';
           eventArguments.push(argumentString);
         }
         var instance = {
@@ -245,4 +245,8 @@ function resolveLinks (str, from) {
     }
   );
   return str;
+}
+
+function htmlEscape(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');
 }
