@@ -7,8 +7,8 @@ All Javascript files must follow these coding conventions before they can be com
 
 = Language Rules =
   
-  * Variable declarations must start with 'var.'
-  * All JS expressions must end with a semi-colon.
+  * Variable declarations must start with `var`
+  * All JS expressions must end with a semi-colon
   * Method definitions should look like:
 {{{
 Foo.prototype.bar = function() {
@@ -24,15 +24,36 @@ Foo.prototype.bar = function() {
   * Private variables or functions should end in underscores (`func_`).
   * Optional arguments should start with `opt_`.
 
+== Strings ==
+  * Use single quotes, not double, e.g. `'i am a string'`
+  * Use `Array.join` when concatenating large strings.  For example:
+{{{
+var myLongString = [
+  '<div>',
+  'This is my <b>long string</b> containing HTML markup!',
+  '</div>'
+].join('');
+}}}
+
 == Formatting ==
   * No tabs anywhere - 2 spaces indent for each level of scope.
   * Wrapped lines should be indented 4 spaces.
   * Object initialization looks like:
 {{{
-  Obj = {
-    key: "value",
-    key2: "value2"
-  };
+Obj = {
+  key: "value",
+  key2: "value2"
+};
+}}}
+  * Inlined anonymous function look like:
+{{{
+document.getElementById('button').onclick = function() {
+  // Code here
+};
+
+GEvent.addDomListener(buttonNode, 'click', function() {
+  // Code here
+});
 }}}
   
 == Comments ==
