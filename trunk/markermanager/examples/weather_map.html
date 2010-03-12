@@ -12,20 +12,19 @@
     <script type="text/javascript">
     //<![CDATA[
 
-    var IMAGES = [ "sun", "rain", "snow", "storm" ];
+    var IMAGES = [ 'sun', 'rain', 'snow', 'storm' ];
     var ICONS = [];
     var map = null;
     var mgr = null;
 
     
     function setupMap() {
-        
       var myOptions = {
         zoom: 4,
         center: new google.maps.LatLng(48.25, 11.00),
         mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      map = new google.maps.Map(document.getElementById("map"), myOptions);
+      };
+      map = new google.maps.Map(document.getElementById('map'), myOptions);
 
       var listener = google.maps.event.addListener(map, 'bounds_changed', function(){
           setupWeatherMarkers();
@@ -36,13 +35,13 @@
     function getWeatherIcon() {
       var i = Math.floor(IMAGES.length*Math.random());
       if (!ICONS[i]) {          
-        var iconImage = new google.maps.MarkerImage("images/" + IMAGES[i] + ".png",
+        var iconImage = new google.maps.MarkerImage('images/' + IMAGES[i] + '.png',
             new google.maps.Size(32, 32),
             new google.maps.Point(0,0),
             new google.maps.Point(0, 32)
         );
         
-        var iconShadow = new google.maps.MarkerImage("images/" + IMAGES[i] + ".png",
+        var iconShadow = new google.maps.MarkerImage('images/' + IMAGES[i] + '.png',
             new google.maps.Size(32, 59),
             new google.maps.Point(0,0),
             new google.maps.Point(0, 32)
@@ -53,16 +52,20 @@
             type: 'poly'
         };
 
-        ICONS[i] = {icon : iconImage, shadow: iconShadow, shape : iconShape }
+        ICONS[i] = { 
+          icon : iconImage,
+          shadow: iconShadow,
+          shape : iconShape
+        };
         
       }
       return ICONS[i];
     }
 
     function getRandomPoint() {
-      var lat = 48.25 + (Math.random() - 0.5)*14.5;
-      var lng = 11.00 + (Math.random() - 0.5)*36.0;
-      return new google.maps.LatLng(Math.round(lat*10)/10, Math.round(lng*10)/10);
+      var lat = 48.25 + (Math.random() - 0.5) * 14.5;
+      var lng = 11.00 + (Math.random() - 0.5) * 36.0;
+      return new google.maps.LatLng(Math.round(lat * 10) / 10, Math.round(lng * 10) / 10);
     }
 
     function getWeatherMarkers(n) {
@@ -77,8 +80,7 @@
             shape: tmpIcon.shape,
             title: 'Weather marker'
             })
-        );
-        
+        );        
       }
       return batch;
     }
@@ -91,10 +93,8 @@
           mgr.addMarkers(getWeatherMarkers(200), 6);
           mgr.addMarkers(getWeatherMarkers(1000), 8);
           
-          mgr.refresh();
-          
-      });
-      
+          mgr.refresh();          
+      });      
     }
     //]]>
     </script>

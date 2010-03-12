@@ -20,14 +20,13 @@
             var icons = {};
             var allmarkers = [];
             
-            function load() {
-                
+            function load() {                
               var myOptions = {
                 zoom: 3,
                 center: new google.maps.LatLng(50.62504, -100.10742),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
               }
-              map = new google.maps.Map(document.getElementById("map"), myOptions);
+              map = new google.maps.Map(document.getElementById('map'), myOptions);
           
               mgr = new MarkerManager(map);
               
@@ -36,8 +35,7 @@
                 google.maps.event.addListener(map, 'zoom_changed', function() {
                   updateStatus(mgr.getMarkerCount(map.getZoom()));
                 });
-              });
-                
+              });                
             }
             
             function getIcon(images) {
@@ -45,42 +43,27 @@
               if (images) {
                 if (icons[images[0]]) {
                   icon = icons[images[0]];
-                } else {
+                } else {                    
+                    var iconImage = new google.maps.MarkerImage('images/' + images[0] + '.png',
+                      new google.maps.Size(iconData[images[0]].width, iconData[images[0]].height),
+                      new google.maps.Point(0,0),
+                      new google.maps.Point(0, 32));
                     
-                    var iconImage = new google.maps.MarkerImage("images/" + images[0] + ".png",
-                        new google.maps.Size(iconData[images[0]].width, iconData[images[0]].height),
-                        new google.maps.Point(0,0),
-                        new google.maps.Point(0, 32)
-                    );
-                    
-                    var iconShadow = new google.maps.MarkerImage("images/" + images[1] + ".png",
-                        new google.maps.Size(iconData[images[1]].width, iconData[images[1]].height),
-                        new google.maps.Point(0,0),
-                        new google.maps.Point(0, 32)
-                    );
+                    var iconShadow = new google.maps.MarkerImage('images/' + images[1] + '.png',
+                      new google.maps.Size(iconData[images[1]].width, iconData[images[1]].height),
+                      new google.maps.Point(0,0),
+                      new google.maps.Point(0, 32));
                     
                     var iconShape = {
-                        coord: [1, 1, 1, 32, 32, 32, 32, 1],
-                        type: 'poly'
+                      coord: [1, 1, 1, 32, 32, 32, 32, 1],
+                      type: 'poly'
                     };
 
-                    icons[images[0]] = {icon : iconImage, shadow: iconShadow, shape : iconShape }
-                    
-                                                                  /*
-                    
-                  icon = new GIcon();
-                  icon.image = "images/" +
-                  images[0] +
-                  ".png";
-                  var size = iconData[images[0]];
-                  icon.iconSize = new GSize(size.width, size.height);
-                  icon.iconAnchor = new GPoint(size.width >> 1, size.height >> 1);
-                  icon.shadow = "images/" +
-                  images[1] +
-                  ".png";
-                  size = iconData[images[1]];
-                  icon.shadowSize = new GSize(size.width, size.height);
-                  icons[images[0]] = icon; */
+                    icons[images[0]] = {
+                      icon : iconImage,
+                      shadow: iconShadow,
+                      shape : iconShape
+                    };
                 }
               }
               return icon;
@@ -117,20 +100,15 @@
               var markerOptions = {
                 position: posn,
                 title: title
-              }
+              };
               if(icon !== false){
-                markerOptions.shadow = icon.shadow,
-                markerOptions.icon   = icon.icon,
-                markerOptions.shape  = icon.shape
-              } 
+                markerOptions.shadow = icon.shadow;
+                markerOptions.icon   = icon.icon;
+                markerOptions.shape  = icon.shape;
+              }
                 
               var marker = new google.maps.Marker(markerOptions);
-                       /*
-              var marker = new GMarker(posn, {
-                title: title,
-                icon: icon,
-                draggable: true
-              });        */
+
               google.maps.event.addListener(marker, 'dblclick', function() {
                 mgr.removeMarker(marker)
                 updateStatus(mgr.getMarkerCount(map.getZoom()));
@@ -178,9 +156,7 @@
         <input type="button" onclick="hideMarkers()" value="hide all markers" />
         <input type="button" onclick="mgr.toggle()" value="toggle markers" />
         <br/>
-        <div id="map" style="width: 600px; height: 400px;">
-        </div>
-        <div id="status">
-        </div>
+        <div id="map" style="width: 600px; height: 400px;"></div>
+        <div id="status"></div>
     </body>
 </html>
