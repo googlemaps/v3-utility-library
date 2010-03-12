@@ -12,9 +12,13 @@
 
 <p>To use a marker manager, create a <code>MarkerManager</code> object. In the simplest case, just pass a map to it.</p>
 <pre class="prettyprint">
-var map = new GMap2(document.getElementById("map"));
-map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-var mgr = new MarkerManager(map);
+var myOptions = {
+  zoom: 4,
+  center: new google.maps.LatLng(48.25, 11.00),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+map = new google.maps.Map(document.getElementById('map'), myOptions);
+mgr = new MarkerManager(map);
 </pre>
 
 <p>You may also specify a number of options to fine-tune the marker manager's performance. These options are passed via a <code>MarkerManagerOptions</code> object, which contains the following fields:</p>
@@ -29,8 +33,6 @@ var mgr = new MarkerManager(map);
 The <code>MarkerManagerOptions</code> object is an object literal, so you simply declare the object without a constructor:
 </p>
 <pre class="prettyprint">
-var map = new GMap2(document.getElementById("map"));
-map.setCenter(new GLatLng(37.4419, -122.1419), 13);
 var mgrOptions = { borderPadding: 50, maxZoom: 15, trackMarkers: true };
 var mgr = new MarkerManager(map, mgrOptions);
 </pre>
@@ -45,28 +47,45 @@ var mgr = new MarkerManager(map, mgrOptions);
 
 <pre class="prettyprint">
 function setupMap() {
-  if (GBrowserIsCompatible()) {
-    map = new GMap2(document.getElementById("map"));
-    map.addControl(new GLargeMapControl());
-    map.setCenter(new GLatLng(41, -98), 4);
-    window.setTimeout(setupWeatherMarkers, 0);
-  }
-}
+  var myOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(48.25, 11.00),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById('map'), myOptions);
 
+  var listener = google.maps.event.addListener(map, 'bounds_changed', function(){
+      setupWeatherMarkers();
+      google.maps.event.removeListener(listener);
+  });
+}
 function getWeatherMarkers(n) {
   var batch = [];
-  for (var i = 0; i &lt; n; ++i) {
-    batch.push(new GMarker(getRandomPoint(), { icon: getWeatherIcon() }));
+  for (var i = 0; i < n; ++i) {
+    var tmpIcon = getWeatherIcon();
+
+    batch.push(new google.maps.Marker({
+        position: getRandomPoint(),
+        shadow: tmpIcon.shadow,
+        icon: tmpIcon.icon,
+        shape: tmpIcon.shape,
+        title: 'Weather marker'
+        })
+    );
   }
   return batch;
 }
 
 function setupWeatherMarkers() {
   mgr = new MarkerManager(map);
-  mgr.addMarkers(getWeatherMarkers(20), 3);
-  mgr.addMarkers(getWeatherMarkers(200), 6);
-  mgr.addMarkers(getWeatherMarkers(1000), 8);
-  mgr.refresh();
+
+  google.maps.event.addListener(mgr, 'loaded', function(){
+      mgr.addMarkers(getWeatherMarkers(20), 3);
+      mgr.addMarkers(getWeatherMarkers(200), 6);
+      mgr.addMarkers(getWeatherMarkers(1000), 8);
+
+      mgr.refresh();
+  });
 }
 </pre>
 
@@ -91,21 +110,30 @@ var officeLayer = [
 function setupOfficeMarkers() {
   allmarkers.length = 0;
   for (var i in officeLayer) {
-    var layer = officeLayer[i];
-    var markers = [];
-    for (var j in layer["places"]) {
-      var place = layer["places"][j];
-      var icon = getIcon(place["icon"]);
-      var title = place["name"];
-      var posn = new GLatLng(place["posn"][0], place["posn"][1]);
-      var marker = createMarker(posn,title,icon); 
-      markers.push(marker);
-      allmarkers.push(marker);
+    if (officeLayer.hasOwnProperty(i)) {
+      var layer = officeLayer[i];
+
+      var markers = [];
+      for (var j in layer["places"]) {
+        if (layer["places"].hasOwnProperty(j)) {
+          var place = layer["places"][j];
+          var icon = getIcon(place["icon"]);
+
+          var title = place["name"];
+          var posn = new google.maps.LatLng(place["posn"][0], place["posn"][1]);
+          var marker = createMarker(posn, title, getIcon(place["icon"]));
+          markers.push(marker);
+          allmarkers.push(marker);
+        }
+      }
+      mgr.addMarkers(markers, layer["zoom"][0], layer["zoom"][1]);
     }
-    mgr.addMarkers(markers, layer["zoom"][0], layer["zoom"][1]);
+
   }
   mgr.refresh();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
 }
+
 </pre>
 
 <p>The marker manager now has functions to let you delete individual markers or all the markers in the manager, using <code>deleteMarker</code> and <code>clearMarkers</code> respectively.
@@ -115,26 +143,52 @@ You can clear all the markers by clicking the clear button, and reload them agai
 
 <pre class="prettyprint">
 function createMarker(posn, title, icon) {
-  var marker = new GMarker(posn, {title: title, icon: icon, draggable:true });
-  GEvent.addListener(marker, 'dblclick', function() { mgr.removeMarker(marker) } ); 
+  var markerOptions = {
+    position: posn,
+    title: title
+  };
+  if(icon !== false){
+    markerOptions.shadow = icon.shadow;
+    markerOptions.icon   = icon.icon;
+    markerOptions.shape  = icon.shape;
+  }
+
+  var marker = new google.maps.Marker(markerOptions);
+
+  google.maps.event.addListener(marker, 'dblclick', function() {
+    mgr.removeMarker(marker)
+    updateStatus(mgr.getMarkerCount(map.getZoom()));
+  });
   return marker;
+}
+
+function showMarkers() {
+  mgr.show();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+function hideMarkers() {
+  mgr.hide();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
 }
 
 function deleteMarker() {
   var markerNum = parseInt(document.getElementById("markerNum").value);
   mgr.removeMarker(allmarkers[markerNum]);
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
 }
-   
+
 function clearMarkers() {
   mgr.clearMarkers();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
 }
-   
+
 function reloadMarkers() {
   setupOfficeMarkers();
 }
 </pre>
 
-<p><a href="../examples/google_northamerica_offices.html">View example (google_northamerica_offices.html)</a>
+<p><a href="../examples/google_northamerica_offices.html">View example (google_northamerica_offices.html)</a></p>
 
 
 </body>
