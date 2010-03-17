@@ -20,3 +20,11 @@ This class behaves like a {{{google.maps.InfoWindow}}}, but it supports several 
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Versions].
+
+
+== !MarkerClusterer ==
+
+The library creates and manages per-zoom-level clusters for large amounts of markers.  This is a V3 implementation of the V2 !MarkerClusterer.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/ Development Versions].
