@@ -1,8 +1,8 @@
 /**
  * @name MarkerManager v3
- * @version 0.9
+ * @version 1.0
  * @copyright (c) 2007 Google Inc.
- * @author Doug Ricket, Bj�rn Brala (port to v3), others,
+ * @author Doug Ricket, Bjorn Brala (port to v3), others,
  *
  * @fileoverview Marker manager is an interface between the map and the user,
  * designed to manage adding and removing many points when the viewport changes.
