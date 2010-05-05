@@ -26,6 +26,11 @@
   * Created: [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/progressbarcontrol/ Progressbar Control] and part of [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/snaptoroute/ Snap to Route]
   * Worked on: [http://gmaps-utility-library.googlecode.com/svn/trunk/extlargemapcontrol/1.0/ ExtLargeMapControl]
 
+*Thor Mitchell*
+
+  * Employed by Google as Maps API Product Manager
+  * Created: [http://gmaps-utility-library-dev.googlecode.com/svn/trunk/routeboxer/ RouteBoxer]
+
 ----
 
  Join us!
