@@ -36,3 +36,11 @@ This class is designed to manage adding and removing many points when the viewpo
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markermanager/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/ Development Versions].
+
+== !RouteBoxer ==
+
+This class creates a set of LatLngBounds that are guaranteed to enclose every point within a given distance of a Polyline. It is intended to support adding Search along a route to an application backed by a spatial database that supports bounds queries (such as the Google Maps Data API).
+
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/routeboxer/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/ Development Versions].
