@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>RouteBoxer Documentation: Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="http://gmaps-utility-library.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"></link>
+    <link rel="stylesheet" type="text/css" href="examples.css"></link>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+    <script type="text/javascript">
+    var current = 1;
+    function slide(n) {
+      document.getElementById("slide-" + current).style.display = "none";
+      document.getElementById("tab-" + current).style.backgroundColor = "#e0e0e0";
+      document.getElementById("tab-" + current).style.zIndex = 100 - (10 * current);
+      document.getElementById("slide-" + n).style.display = "block";
+      document.getElementById("tab-" + n).style.backgroundColor = "#ffffff";
+      document.getElementById("tab-" + n).style.zIndex = 100;
+      current = n;
+    }
+    </script>
+  </head>
+  <body onload="prettyPrint()">
+<h1>RouteBoxer</h1>
+
+<p>The RouteBoxer generates a set of <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#LatLngBounds"><code>LatLngBounds</code></a> objects
+that are guaranteed to cover every point within a specified distance of a path, such as that generated for a route by the
+<a href="http://code.google.com/apis/maps/documentation/v3/reference.html#DirectionsService"><code>DirectionsService</code></a> class.
+The primary use case for this class is to support implementing Search along a route against a Spatial db that supports bounding box queries.</p>
+
+<p>Note that it is not the intention of the class to limit the bounding boxes to <b>only</b> those regions within the specified distance of the route, which
+is not impossible given that routes are not rectangular. Consequently searches performed using these bounding boxes may return results up to ~3x the
+given distance from the route (twice the distance across the diagonal of a square with sides of the given distance).</p>
+
+<h2>How to use the class</h2>
+
+<p>To use the RouteBoxer class, first load the RouteBoxer.js file into your page:</p>
+
+<pre class="prettyprint">&lt;script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js"&gt;&lt;/script&gt;</pre>
+
+<p>Then create a <a href="reference.html"><code>RouteBoxer</code></a> object, and pass an array of
+<a href="http://code.google.com/apis/maps/documentation/v3/reference.html#LatLng"><code>google.maps.LatLng</a></code> objects and a distance to the <code>RouteBoxer.box()</code> method.
+If implementing search along a route the <code>overview_polyline</code> property of a
+<a href="http://code.google.com/apis/maps/documentation/v3/reference.html#DirectionsRoute"><code>google.maps.DirectionsRoute</code></a>
+object contains a suitable array of <code>LatLng</code> objects:</p>
+
+<pre class="prettyprint">var directionService = new google.maps.DirectionsService();
+var rboxer = new RouteBoxer();
+var distance = 20; // km
+
+directionService.route(request, function(result, status) {
+  if (status == google.maps.DirectionsStatus.OK) {
+  
+    // Box the overview path of the first route
+    var path = result.routes[0].overview_path;
+    var boxes = routeBoxer.box(path, distance);
+    
+    for (var i = 0; i < boxes.length; i++) {
+      var bounds = box[i];
+      // Perform search over this bounds 
+    }
+  }
+});
+
+</pre>
+
+<p>To visualise the boxes generated for a given route see the <a href="../examples/routeboxer-v3.html">example</a>.</p>
+
+<h2>How the RouteBoxer class works</h2>
+
+<p>The RouteBoxer class generates the boxes for a route in a number of steps.</p>
+
+<div id="slidedeck">
+  <div id="slidetabs">
+    <div class="slidetab" id="tab-1" style="z-index: 100; left: 0px" onclick="slide(1)">Step 1</div>
+    <div class="slidetab" id="tab-2" style="z-index: 80; left: 60px" onclick="slide(2)">Step 2</div>
+    <div class="slidetab" id="tab-3" style="z-index: 70; left: 120px" onclick="slide(3)">Step 3</div>
+    <div class="slidetab" id="tab-4" style="z-index: 60; left: 180px" onclick="slide(4)">Step 4</div>
+    <div class="slidetab" id="tab-5" style="z-index: 50; left: 240px" onclick="slide(5)">Step 5</div>
+    <div class="slidetab" id="tab-6" style="z-index: 40; left: 300px" onclick="slide(6)">Step 6</div>
+    <div class="slidetab" id="tab-7" style="z-index: 30; left: 360px" onclick="slide(7)">Step 7</div>
+    <div class="slidetab" id="tab-8" style="z-index: 20; left: 420px" onclick="slide(8)">Step 8</div>
+    <div class="slidetab" id="tab-9" style="z-index: 10; left: 480px" onclick="slide(9)">Step 9</div>
+    <div class="slidetab" id="tab-10" style="z-index: 0; left: 540px" onclick="slide(10)">Step 10</div>
+  </div>
+  <div class="slide" id="slide-1">
+    <div class="slidetext">
+      A grid is overlaid on the route with square cells spaced at the specified distance. The grid is centered on the bounding box of the route polyline,
+      and extends one cell further out in each direction than is necessary to cover the entire route.
+    </div>
+    <img class="slideimg" src="1-grid.png" />
+  </div>
+  <div class="slide" id="slide-2">
+    <div class="slidetext">
+      Every cell in the grid that the route intersects with is identified. To do this the vertices on the route polyline are traversed, and the cell containing each vertex
+      is marked. If a cell that is marked does not share an edge with the cell for the previous vertex, the intermediate cells are also marked.
+    </div>
+    <img class="slideimg" src="2-intersects.png" />
+  </div>
+  <div class="slide" id="slide-3">
+    <div class="slidetext">
+      When a cell is marked, each of the 8 cells surrounding it are also marked.
+    </div>
+    <img class="slideimg" src="3-markedgrid.png" />
+  </div>
+  <div class="slide" id="slide-4">
+    <div class="slidetext">
+      When all of the route vertices have been traversed, any point within the specified distance of the route is guaranteed to be in one of the marked cells of the grid.
+    </div>
+    <img class="slideimg" src="4-markedcells.png" />
+  </div>
+  <div class="slide" id="slide-5">
+    <div class="slidetext">
+      The marked cells are then merged into a set of non overlapping rectangular boxes. Two different approaches are taken to this. The first approach merges cells that
+  adjoin horizontally into a set of wide boxes, each one cell tall.
+    </div>
+    <img class="slideimg" src="5-horizontalstrips.png" />
+  </div>
+  <div class="slide" id="slide-6">
+    <div class="slidetext">
+      Each box is then compared to the boxes on the row below, and if there is a box of the same width and horizontal position they are merged.
+    </div>
+    <img class="slideimg" src="6-horizontalmerged.png" />
+  </div>
+  <div class="slide" id="slide-7">
+    <div class="slidetext">
+      The second approach follows the same technique, but first merges cells vertically into a set of tall boxes, each one cell wide.
+    </div>
+    <img class="slideimg" src="7-verticalstrips.png" />
+  </div>
+  <div class="slide" id="slide-8">
+    <div class="slidetext">
+      Each of these boxes are then compared with the boxes in the column to the left, and if there is a box with the same height and vertical position they are merged.
+    </div>
+    <img class="slideimg" src="8-verticalmerged.png" />
+  </div>
+  <div class="slide" id="slide-9">
+    <div class="slidetext">
+      When the two approaches are complete the number of boxes that resulted from each approach are compared.
+    </div>
+    <img class="slideimg" src="9-horizontalnumbered.png" />
+  </div>
+  <div class="slide" id="slide-10">
+    <div class="slidetext">
+      The set of boxes that is smallest in number are returned to the application.
+    </div>
+    <img class="slideimg" src="10-verticalnumbered.png" />
+  </div>
+</div>
+</body>
+</html>
