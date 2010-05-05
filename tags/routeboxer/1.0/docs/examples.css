@@ -1,0 +1,62 @@
+.slidetab {
+  position: absolute;
+  border-top: 1px solid #000088;
+  border-left: 1px solid #000088;
+  border-right: 1px solid #000088;
+  width: 80px;
+  background-color: #e0e0e0;
+  text-align: right;
+  padding-right: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  margin-bottom: 0px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#slidetabs {
+  position: relative;
+  height: 20px;
+  margin-bottom: 0px;
+}
+
+#slidedeck {
+  clear: both;
+  position: relative;
+  margin: 20px;
+}
+
+.slide {
+  position: absolute;
+  display: none;
+  width: 680px;
+  top: 20px;
+  border: 1px solid #000088;
+  height: 560px;
+  z-index: 90;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+}
+
+#slide-1 {
+  display: block;
+}
+
+#tab-1 {
+  background-color: #ffffff;
+}
+
+.slidetext {
+  position: absolute;
+  height: 60px;
+  width: 660px;
+  margin: 10px;
+}
+
+.slideimg {
+  position: absolute;
+  top: 70px;
+  margin-left: 20px;
+  width: 640px;
+  height: 480px;
+}
