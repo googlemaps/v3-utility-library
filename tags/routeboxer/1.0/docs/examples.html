@@ -29,7 +29,7 @@ that are guaranteed to cover every point within a specified distance of a path, 
 The primary use case for this class is to support implementing Search along a route against a Spatial db that supports bounding box queries.</p>
 
 <p>Note that it is not the intention of the class to limit the bounding boxes to <b>only</b> those regions within the specified distance of the route, which
-is not impossible given that routes are not rectangular. Consequently searches performed using these bounding boxes may return results up to ~3x the
+is not possible given that routes are not rectangular. Consequently searches performed using these bounding boxes may return results up to ~3x the
 given distance from the route (twice the distance across the diagonal of a square with sides of the given distance).</p>
 
 <h2>How to use the class</h2>
