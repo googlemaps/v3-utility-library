@@ -220,7 +220,7 @@ RouteBoxer.prototype.getCellCoords_ = function (latlng) {
 /**
  * Find the cell a path vertex is in based on the known location of a nearby
  *  vertex. This saves searching the whole grid when working through vertices
- *  on the polyline by are likely to be in close proximity to each other.
+ *  on the polyline that are likely to be in close proximity to each other.
  *
  * @param {LatLng[]} latlng The latlng of the vertex to locate in the grid
  * @param {LatLng[]} hintlatlng The latlng of the vertex with a known location
@@ -510,7 +510,7 @@ RouteBoxer.prototype.getCellBounds_ = function (cell) {
     new google.maps.LatLng(this.latGrid_[cell[1] + 1], this.lngGrid_[cell[0] + 1]));
 };
 
-/* Based the on the Latitude/longitude spherical geodesy formulae & scripts
+/* Based on the Latitude/longitude spherical geodesy formulae & scripts
    at http://www.movable-type.co.uk/scripts/latlong.html
    (c) Chris Veness 2002-2010
 */ 
