@@ -23,11 +23,11 @@
 
 /**
  * Sets up a DOM element to be draggable. The options available
- *     within {@link opt_drag} are: top, left, container,
+ *     within {@link ExtDraggableObjectOptions} are: top, left, container,
  *     draggingCursor, draggableCursor, intervalX, intervalY,
  *     toleranceX, toleranceY, restrictX, and restrictY.
  * @param {HTMLElement} src The element to make draggable
- * @param {opt_drag} [opts]
+ * @param {ExtDraggableObjectOptions} [opts] options
  * @constructor
  */
 function ExtDraggableObject(src, opt_drag) {
@@ -296,3 +296,20 @@ function ExtDraggableObject(src, opt_drag) {
     preventDefault_ = prevent;
   };
 }
+  /**
+   * @name ExtDraggableObjectOptions
+   * @class This class represents the optional parameter passed into constructor of 
+   * <code>ExtDraggableObject</code>. 
+   * @property {Number} [top] Top pixel
+   * @property {Number} [left] Left pixel
+   * @property {HTMLElement} [container] HTMLElement as container.
+   * @property {String} [draggingCursor] Dragging Cursor
+   * @property {String} [draggableCursor] Draggable Cursor
+   * @property {Number} [intervalX] Interval in X direction 
+   * @property {Number} [intervalY] Interval in Y direction
+   * @property {Number} [toleranceX] Tolerance X in pixel
+   * @property {Number} [toleranceY] Tolerance Y in pixel
+   * @property {Boolean} [restrictX] Whether to restrict move in X direction
+   * @property {Boolean} [restrictY] Whether to restrict move in Y direction
+   */
+ 
