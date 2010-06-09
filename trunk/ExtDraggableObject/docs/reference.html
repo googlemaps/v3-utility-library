@@ -26,9 +26,140 @@ This sets up a given DOM element to be draggable    around the page.</p>
             </tr>
             
               <tr class="odd">
-                <td><code>ExtDraggableObject(<span class="type">src:HTMLElement</span>, <span class="type">opts?:opt_drag</span>)</code></td>
+                <td><code>ExtDraggableObject(<span class="type">src:HTMLElement</span>, <span class="type">opts?:ExtDraggableObjectOptions</span>)</code></td>
                 
-                <td>Sets up a DOM element to be draggable. The options available    within <code>opt_drag</code> are: top, left, container,    draggingCursor, draggableCursor, intervalX, intervalY,    toleranceX, toleranceY, restrictX, and restrictY.</td>
+                <td>Sets up a DOM element to be draggable. The options available    within <code><a href="reference.html#ExtDraggableObjectOptions">ExtDraggableObjectOptions</a></code> are: top, left, container,    draggingCursor, draggableCursor, intervalX, intervalY,    toleranceX, toleranceY, restrictX, and restrictY.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="ExtDraggableObjectOptions"></a>class ExtDraggableObjectOptions</h2>
+      <p>This class represents the optional parameter passed into constructor of <code>ExtDraggableObject</code>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class ExtDraggableObjectOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>container</code></td>
+                
+                  
+                    <td><code>HTMLElement</code></td>
+                  
+                
+                <td>HTMLElement as container.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>draggableCursor</code></td>
+                
+                  
+                    <td><code>String</code></td>
+                  
+                
+                <td>Draggable Cursor</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>draggingCursor</code></td>
+                
+                  
+                    <td><code>String</code></td>
+                  
+                
+                <td>Dragging Cursor</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>intervalX</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Interval in X direction</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>intervalY</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Interval in Y direction</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>left</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Left pixel</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>restrictX</code></td>
+                
+                  
+                    <td><code>Boolean</code></td>
+                  
+                
+                <td>Whether to restrict move in X direction</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>restrictY</code></td>
+                
+                  
+                    <td><code>Boolean</code></td>
+                  
+                
+                <td>Whether to restrict move in Y direction</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>toleranceX</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Tolerance X in pixel</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>toleranceY</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Tolerance Y in pixel</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>top</code></td>
+                
+                  
+                    <td><code>Number</code></td>
+                  
+                
+                <td>Top pixel</td>
               </tr>
             
           </tbody>
