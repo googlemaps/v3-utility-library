@@ -10,13 +10,13 @@
  *  Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code>
  *  <p>
  *  NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2,
- *  it causes a context menu to appear when running on the Macintosh. 
+ *  it causes a context menu to appear when running on the Macintosh.
  *  <p>
  *  Note that if the map's container has a border around it, the border widths must be specified
  *  in pixel units (or as thin, medium, or thick). This is required because of an MSIE limitation.
  *   <p>NL: 2009-05-28: initial port to core API V3.
- *  <br>NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).  
- *  <br>NL: 2010-02-02: added a fix for IE flickering on divs onmousemove, caused by scroll value when get mouse position.  
+ *  <br>NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove).
+ *  <br>NL: 2010-02-02: added a fix for IE flickering on divs onmousemove, caused by scroll value when get mouse position.
  *  <br>GL: 2010-06-15: added a visual control option.
  */
 /*!
@@ -270,7 +270,7 @@
     this.prjov_ = ov;
   }
   /**
-   * Initialize the tool. 
+   * Initialize the tool.
    * @param {Map} map The map to which the DragZoom object is to be attached.
    * @param {KeyDragZoomOptions} [opt_zoomOpts] The optional parameters.
    */
@@ -366,7 +366,7 @@
     this.mouseUpListener_ = google.maps.event.addDomListener(document, "mouseup", function (e) {
       me.onMouseUp_(e);
     });
-    this.scrollListener_ = google.maps.event.addDomListener(window, "scroll", getScrollValue); 
+    this.scrollListener_ = google.maps.event.addDomListener(window, "scroll", getScrollValue);
 
     this.hotKeyDown_ = false;
     this.mouseDown_ = false;
@@ -384,6 +384,7 @@
         this.buttonImg_.index = this.visualPositionIndex_;
       }
       this.map_.controls[this.visualPosition_].push(this.buttonImg_);
+      this.controlIndex_ = this.map_.controls[this.visualPosition_].length - 1;
     }
   };
   /**
@@ -568,7 +569,7 @@
        * This event is fired when the drag operation begins.
        * The parameter passed is the geographic position of the starting point.
        * @name DragZoom#dragstart
-       * @param {LatLng} latlng The geographic position of the starting point. 
+       * @param {LatLng} latlng The geographic position of the starting point.
        * @event
        */
       google.maps.event.trigger(this, "dragstart", latlng);
@@ -622,7 +623,7 @@
       /**
        * This event is fired repeatedly while the user drags a box across the area of interest.
        * The southwest and northeast point are passed as parameters of type <code>google.maps.Point</code>
-       * (for performance reasons), relative to the map container. Note: the event listener is 
+       * (for performance reasons), relative to the map container. Note: the event listener is
        * responsible for converting pixel position to geographic coordinates, if necessary, using
        * <code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.
        * @name DragZoom#drag
@@ -641,6 +642,7 @@
    * @param {Event} e The mouse event.
    */
   DragZoom.prototype.onMouseUp_ = function (e) {
+    var z;
     var me = this;
     this.mouseDown_ = false;
     if (this.dragging_) {
@@ -660,7 +662,13 @@
       var sw = prj.fromContainerPixelToLatLng(new google.maps.Point(left, top + height));
       var ne = prj.fromContainerPixelToLatLng(new google.maps.Point(left + width, top));
       var bnds = new google.maps.LatLngBounds(sw, ne);
+
+      // Sometimes fitBounds causes a zoom OUT, so restore original zoom level if this happens.
+      z = this.map_.getZoom();
       this.map_.fitBounds(bnds);
+      if (this.map_.getZoom() < z) {
+        this.map_.setZoom(z);
+      }
 
       // Redraw box after zoom:
       var swPt = prj.fromLatLngToContainerPixel(sw);
@@ -759,8 +767,10 @@
         this.getDiv().removeChild(d.veilDiv_[i]);
       }
       if (d.visualEnabled_) {
-        d.map_.removeControl(d);
+        // Remove the custom control:
+        this.controls[d.visualPosition_].removeAt(d.controlIndex_);
       }
+      d.prjov_.setMap(null);
       this.dragZoom_ = null;
     }
   };
