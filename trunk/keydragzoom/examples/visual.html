@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Drag Zoom Events</title>
+        <title>Drag Zoom with Visual Control</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         </script>
         <script type="text/javascript">
@@ -12,41 +12,26 @@
         var map;
         function init() {
           var myOptions = {
-            zoom: 12,
-            center: new google.maps.LatLng(49.49088, -123.75446),
+            zoom: 13,
+            center: new google.maps.LatLng(49.2903, -123.1294),
             mapTypeId: google.maps.MapTypeId.ROADMAP
           }
           map = new google.maps.Map(document.getElementById("map"), myOptions);
- 
+
           map.enableKeyDragZoom({
             visualEnabled: true,
+            visualPosition: google.maps.ControlPosition.LEFT,
+            visualPositionMargin: new google.maps.Size(35, 0),
             visualImages: {
               off: "dragzoom-off.png",
               on: "dragzoom-on.png",
               hot: "dragzoom-hot.png"
+            },
+            visualTips: {
+             off: "Turn on",
+             on: "Turn off"
             }
-          });
-
-          var dz = map.getDragZoomObject();
-          google.maps.event.addListener(dz, 'activate', function () {
-            log('KeyDragZoom Activated');
-          });
-          google.maps.event.addListener(dz, 'deactivate', function () {
-            log('KeyDragZoom Deactivated');
-          });
-          google.maps.event.addListener(dz, 'dragstart', function (latlng) {
-            log('KeyDragZoom Started: ' + latlng);
-          });
-          google.maps.event.addListener(dz, 'drag', function (startPt, endPt) {
-            log('KeyDragZoom Dragging: ' + startPt + endPt);
-          });
-          google.maps.event.addListener(dz, 'dragend', function (bnds) {
-            log('KeyDragZoom Ended: ' + bnds);
-          });
-        }
-        
-        function log(msg) {
-          document.getElementById('msg').innerHTML += "<br />" + msg;
+         });
         }
         </script>
 
@@ -64,8 +49,7 @@ height: 400px;
        <br />
        Hold down the <span style="color: red; font-weight: bold;" >Shift</span> key while dragging a box or use the visual control below the zoom control to turn drag zoom on and off.
 
-       <div id="map"></div>
-       <div id="msg"></div>
+       <div id="map" style="border: 2px solid black;"></div>
 
     </body>
 </html>
