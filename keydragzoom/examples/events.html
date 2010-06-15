@@ -19,12 +19,7 @@
           map = new google.maps.Map(document.getElementById("map"), myOptions);
  
           map.enableKeyDragZoom({
-            visualEnabled: true,
-            visualImages: {
-              off: "dragzoom-off.png",
-              on: "dragzoom-on.png",
-              hot: "dragzoom-hot.png"
-            }
+            visualEnabled: true
           });
 
           var dz = map.getDragZoomObject();
