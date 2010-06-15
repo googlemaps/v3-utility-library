@@ -73,18 +73,6 @@
             backgroundColor: "red",
             opacity: 0.35,
             cursor: "crosshair"
-          },
-          visualEnabled: true,
-          visualPosition: google.maps.ControlPosition.LEFT,
-          visualPositionMargin: new google.maps.Size(35, 0),
-          visualImages: {
-            off: "dragzoom-off.png",
-            on: "dragzoom-on.png",
-            hot: "dragzoom-hot.png"
-          },
-          visualTips: {
-            off: "Turn on",
-            on: "Turn off"
           }
         });
 </pre>
@@ -120,7 +108,7 @@
 
 <div>
 <h2><span lang="en-us">Visual Drag Zoom Control</span></h2>
-<p>You can also use a visual control to turn KeyDragZoom on and off. Simply set the <code>visualEnabled</code> parameter to <code>true</code>, indicate the position of the control with <code>visualPosition</code>, and use <code>visualImages</code> to provide the URLs for the pictures to show when the control is in the off, on, and hot states. (The control is hot when the mouse moves over it.) You can also use the <code>visualPositionMargin</code> property to adjust the position of the control so that it lines up well with other controls. Use the <code>visualTips</code> property to set the values of the help tips to be displayed when the control is on and off.</p>
+<p>You can also use a visual control to turn KeyDragZoom on and off. Set the <code>visualEnabled</code> parameter to <code>true</code>, indicate the position of the control with <code>visualPosition</code> and <code>visualPositionMargin</code>, and use <code>visualSprite</code> to specify the URL for the sprite containing the images of the control in the on, hot, and off states. (The control is hot when the mouse moves over it.) <code>visualSize</code> holds the size of the images in the sprite. Use the <code>visualTips</code> property to set the values of the help tips to be displayed when the control is on and off.</p>
 
 <pre class="prettyprint">
         var myOptions = {
@@ -134,11 +122,8 @@
           visualEnabled: true,
           visualPosition: google.maps.ControlPosition.LEFT,
           visualPositionMargin: new google.maps.Size(35, 0),
-          visualImages: {
-            off: "dragzoom-off.png",
-            on: "dragzoom-on.png",
-            hot: "dragzoom-hot.png"
-          },
+          visualSprite: "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png",
+          visualSize: new google.maps.Size(20, 20),
           visualTips: {
             off: "Turn on",
             on: "Turn off"
@@ -195,13 +180,13 @@
           log('KeyDragZoom Deactivated');
         });
         google.maps.event.addListener(dz, 'dragstart', function (latlng) {
-          log('KeyDragZoom Started: ') + latlng;
+          log('KeyDragZoom Started: ' + latlng);
         });
         google.maps.event.addListener(dz, 'drag', function (startPt, endPt) {
-          log('KeyDragZoom Dragging: ') + startPt + endPt;
+          log('KeyDragZoom Dragging: ' + startPt + endPt);
         });
         google.maps.event.addListener(dz, 'dragend', function (bnds) {
-          log('KeyDragZoom Ended: ') + bnds;
+          log('KeyDragZoom Ended: ' + bnds);
         });
 </pre>
 

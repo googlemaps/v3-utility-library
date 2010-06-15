@@ -202,16 +202,6 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
               </tr>
             
               <tr class="odd">
-                <td><code>visualImages</code></td>
-                
-                  
-                    <td><code>Object</code></td>
-                  
-                
-                <td>An object literal defining the images to be shown when the visual control is on, off, or hot (i.e., when the mouse is over the control). The three properties of the object literal are <code>on</code>, <code>off</code>, and <code>hot</code> and each contains the URL of the image to use. If a visual control is being used, only the <code>off</code> image is required.</td>
-              </tr>
-            
-              <tr class="even">
                 <td><code>visualPosition</code></td>
                 
                   
@@ -221,7 +211,7 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                 <td>The position of the visual control. The default position is on the left side of the map below other controls in the top left &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>visualPositionIndex</code></td>
                 
                   
@@ -231,7 +221,7 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                 <td>The index of the visual control. The index is for controlling the placement of the control relative to other controls at the position given by <code>visualPosition</code>; controls with a lower index are placed first. Use a negative value to place the control <i>before</i> any default controls. No index is generally required; the default is <code>null</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>visualPositionMargin</code></td>
                 
                   
@@ -241,7 +231,27 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                 <td>The width and height values provided by this property are the offsets (in pixels) from the location at which the control would normally be drawn to the desired drawing location. The default is (35,0).</td>
               </tr>
             
+              <tr class="even">
+                <td><code>visualSize</code></td>
+                
+                  
+                    <td><code>Size</code></td>
+                  
+                
+                <td>The width and height values provided by this property are  the size (in pixels) of each of the images within <code>visualSprite</code>.  The default is (20,20).</td>
+              </tr>
+            
               <tr class="odd">
+                <td><code>visualSprite</code></td>
+                
+                  
+                    <td><code>String</code></td>
+                  
+                
+                <td>The URL of the sprite image used for showing the visual control in the on, off, and hot (i.e., when the mouse is over the control) states. The three images within the sprite must be the same size and arranged in on-hot-off order in a single row with no spaces between images. The default is <code>http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png</code>.</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>visualTips</code></td>
                 
                   
