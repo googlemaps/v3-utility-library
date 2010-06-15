@@ -228,7 +228,7 @@
    * @property {ControlPosition} [visualPosition] The position of the visual control.
    *  The default position is on the left side of the map below other controls in the top left
    *  &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT</code>.
-   * @property {Size} [visualPositionMargin] The width and height values provided by this
+   * @property {Size} [visualPositionOffset] The width and height values provided by this
    *  property are the offsets (in pixels) from the location at which the control would normally
    *  be drawn to the desired drawing location. The default is (35,0).
    * @property {number} [visualPositionIndex] The index of the visual control.
@@ -325,7 +325,7 @@
 
     this.visualEnabled_ = opt_zoomOpts.visualEnabled || false;
     this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT;
-    this.visualPositionMargin_ = opt_zoomOpts.visualPositionMargin || new google.maps.Size(35, 0);
+    this.visualPositionOffset_ = opt_zoomOpts.visualPositionOffset || new google.maps.Size(35, 0);
     this.visualPositionIndex_ = opt_zoomOpts.visualPositionIndex || null;
     this.visualSprite_ = opt_zoomOpts.visualSprite || "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
     this.visualSize_ = opt_zoomOpts.visualSize || new google.maps.Size(20, 20);
@@ -380,7 +380,7 @@
     this.mapPosn_ = null;
 
     if (this.visualEnabled_) {
-      this.initControl_(this.map_, this.visualPositionMargin_);
+      this.initControl_(this.map_, this.visualPositionOffset_);
       if (this.visualPositionIndex_ !== null) {
         this.buttonImg_.index = this.visualPositionIndex_;
       }
@@ -393,7 +393,7 @@
    * @param {Map} map The map to which the control is to be added.
    * @return {Node} The DOM element containing the visual control.
    */
-  DragZoom.prototype.initControl_ = function (map, margin) {
+  DragZoom.prototype.initControl_ = function (map, offset) {
     var me = this;
     this.buttonImg_ = document.createElement("div");
     this.buttonImg_.style.height = this.visualSize_.height + "px";
@@ -431,8 +431,8 @@
     setVals(this.buttonImg_.style, {
       zIndex: 10002,
       cursor: "pointer",
-      marginTop: margin.height + "px",
-      marginLeft: margin.width + "px"
+      marginTop: offset.height + "px",
+      marginLeft: offset.width + "px"
     });
     map.getDiv().appendChild(this.buttonImg_);
     return;

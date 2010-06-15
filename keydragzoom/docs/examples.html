@@ -108,7 +108,7 @@
 
 <div>
 <h2><span lang="en-us">Visual Drag Zoom Control</span></h2>
-<p>You can also use a visual control to turn KeyDragZoom on and off. Set the <code>visualEnabled</code> parameter to <code>true</code>, indicate the position of the control with <code>visualPosition</code> and <code>visualPositionMargin</code>, and use <code>visualSprite</code> to specify the URL for the sprite containing the images of the control in the on, hot, and off states. (The control is hot when the mouse moves over it.) <code>visualSize</code> holds the size of the images in the sprite. Use the <code>visualTips</code> property to set the values of the help tips to be displayed when the control is on and off.</p>
+<p>You can also use a visual control to turn KeyDragZoom on and off. Set the <code>visualEnabled</code> parameter to <code>true</code>, indicate the position of the control with <code>visualPosition</code> and <code>visualPositionOffset</code>, and use <code>visualSprite</code> to specify the URL for the sprite containing the images of the control in the on, hot, and off states. (The control is hot when the mouse moves over it.) <code>visualSize</code> holds the size of the images in the sprite. Use the <code>visualTips</code> property to set the values of the help tips to be displayed when the control is on and off.</p>
 
 <pre class="prettyprint">
         var myOptions = {
@@ -121,7 +121,8 @@
         map.enableKeyDragZoom({
           visualEnabled: true,
           visualPosition: google.maps.ControlPosition.LEFT,
-          visualPositionMargin: new google.maps.Size(35, 0),
+          visualPositionOffset: new google.maps.Size(35, 0),
+          visualPositionIndex: null,
           visualSprite: "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png",
           visualSize: new google.maps.Size(20, 20),
           visualTips: {
