@@ -53,10 +53,10 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                 <td><code>drag</code></td>
                 
                   
-                    <td><code><span class="type">southwestPixel:Point</span>, <span class="type">northeastPixel:Point</span></code></td>
+                    <td><code><span class="type">southwestPixel:Point</span>, <span class="type">northeastPixel:Point</span>, <span class="type">prj:MapCanvasProjection</span></code></td>
                   
                 
-                <td>This event is fired repeatedly while the user drags a box across the area of interest.The southwest and northeast point are passed as parameters of type <code>google.maps.Point</code>(for performance reasons), relative to the map container. Note: the event listener isresponsible for converting pixel position to geographic coordinates, if necessary, using<code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.</td>
+                <td>This event is fired repeatedly while the user drags a box across the area of interest.The southwest and northeast point are passed as parameters of type <code>google.maps.Point</code>(for performance reasons), relative to the map container. Also passed is the projection objectso that the event listener, if necessary, can convert the pixel positions to geographiccoordinates using <code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.</td>
               </tr>
             
               <tr class="even">

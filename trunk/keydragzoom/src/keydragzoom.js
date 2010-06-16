@@ -257,11 +257,11 @@
    * This object is created when <code>google.maps.Map.enableKeyDragZoom</code> is called; it cannot be created directly.
    * Use <code>google.maps.Map.getDragZoomObject</code> to gain access to this object in order to attach event listeners.
    * @param {Map} map The map to which the DragZoom object is to be attached.
-   * @param {KeyDragZoomOptions} opt_zoomOpts The optional parameters.
+   * @param {KeyDragZoomOptions} [opt_zoomOpts] The optional parameters.
    */
   function DragZoom(map, opt_zoomOpts) {
-    var ov = new google.maps.OverlayView();
     var me = this;
+    var ov = new google.maps.OverlayView();
     ov.onAdd = function () {
       me.init_(map, opt_zoomOpts);
     };
@@ -382,9 +382,9 @@
     if (this.visualEnabled_) {
       this.initControl_(this.map_, this.visualPositionOffset_);
       if (this.visualPositionIndex_ !== null) {
-        this.buttonImg_.index = this.visualPositionIndex_;
+        this.buttonDiv_.index = this.visualPositionIndex_;
       }
-      this.map_.controls[this.visualPosition_].push(this.buttonImg_);
+      this.map_.controls[this.visualPosition_].push(this.buttonDiv_);
       this.controlIndex_ = this.map_.controls[this.visualPosition_].length - 1;
     }
   };
@@ -395,46 +395,46 @@
    */
   DragZoom.prototype.initControl_ = function (map, offset) {
     var me = this;
-    this.buttonImg_ = document.createElement("div");
-    this.buttonImg_.style.height = this.visualSize_.height + "px";
-    this.buttonImg_.style.width = this.visualSize_.width + "px";
-    this.buttonImg_.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -40px 0";
-    this.buttonImg_.title = this.visualTips_.off;
-    this.buttonImg_.onclick = function (e) {
+    this.buttonDiv_ = document.createElement("div");
+    this.buttonDiv_.style.height = this.visualSize_.height + "px";
+    this.buttonDiv_.style.width = this.visualSize_.width + "px";
+    this.buttonDiv_.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -40px 0";
+    this.buttonDiv_.title = this.visualTips_.off;
+    this.buttonDiv_.onclick = function (e) {
       me.hotKeyDown_ = !me.hotKeyDown_;
       if (me.hotKeyDown_) {
-        me.buttonImg_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
-        me.buttonImg_.title = me.visualTips_.on;
+        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
+        me.buttonDiv_.title = me.visualTips_.on;
         google.maps.event.trigger(me, "activate");
       } else {
-        me.buttonImg_.style.backgroundPosition = -(me.visualSize_.height * 2) + "px 0";
-        me.buttonImg_.title = me.visualTips_.off;
+        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 2) + "px 0";
+        me.buttonDiv_.title = me.visualTips_.off;
         google.maps.event.trigger(me, "deactivate");
       }
       me.onMouseMove_(e); // Updates the veil
     };
-    this.buttonImg_.onmouseover = function () {
-      me.buttonImg_.style.backgroundPosition = -(me.visualSize_.height * 1) + "px 0";
+    this.buttonDiv_.onmouseover = function () {
+      me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 1) + "px 0";
     };
-    this.buttonImg_.onmouseout = function () {
+    this.buttonDiv_.onmouseout = function () {
       if (me.hotKeyDown_) {
-        me.buttonImg_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
-        me.buttonImg_.title = me.visualTips_.on;
+        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
+        me.buttonDiv_.title = me.visualTips_.on;
       } else {
-        me.buttonImg_.style.backgroundPosition = -(me.visualSize_.height * 2) + "px 0";
-        me.buttonImg_.title = me.visualTips_.off;
+        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 2) + "px 0";
+        me.buttonDiv_.title = me.visualTips_.off;
       }
     };
-    this.buttonImg_.ondragstart = function () {
+    this.buttonDiv_.ondragstart = function () {
       return false;
     };
-    setVals(this.buttonImg_.style, {
+    setVals(this.buttonDiv_.style, {
       zIndex: 10002,
       cursor: "pointer",
       marginTop: offset.height + "px",
       marginLeft: offset.width + "px"
     });
-    map.getDiv().appendChild(this.buttonImg_);
+    map.getDiv().appendChild(this.buttonDiv_);
     return;
   };
   /**
@@ -534,7 +534,7 @@
       google.maps.event.trigger(this, "activate");
     }
     if (this.visualEnabled_ && this.isHotKeyDown_(e)) {
-      this.buttonImg_.style.display = "none";
+      this.buttonDiv_.style.display = "none";
     }
   };
   /**
@@ -566,7 +566,7 @@
       var prj = this.prjov_.getProjection();
       var latlng = prj.fromContainerPixelToLatLng(this.startPt_);
       if (this.visualEnabled_) {
-        this.buttonImg_.style.display = "none";
+        this.buttonDiv_.style.display = "none";
       }
       /**
        * This event is fired when the drag operation begins.
@@ -626,15 +626,16 @@
       /**
        * This event is fired repeatedly while the user drags a box across the area of interest.
        * The southwest and northeast point are passed as parameters of type <code>google.maps.Point</code>
-       * (for performance reasons), relative to the map container. Note: the event listener is
-       * responsible for converting pixel position to geographic coordinates, if necessary, using
-       * <code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.
+       * (for performance reasons), relative to the map container. Also passed is the projection object
+       * so that the event listener, if necessary, can convert the pixel positions to geographic
+       * coordinates using <code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.
        * @name DragZoom#drag
        * @param {Point} southwestPixel The southwest point of the selection area.
        * @param {Point} northeastPixel The northeast point of the selection area.
+       * @param {MapCanvasProjection} prj The projection object.
        * @event
        */
-      google.maps.event.trigger(this, "drag", new google.maps.Point(left, top + height), new google.maps.Point(left + width, top));
+      google.maps.event.trigger(this, "drag", new google.maps.Point(left, top + height), new google.maps.Point(left + width, top), this.prjov_.getProjection());
     } else if (!this.mouseDown_) {
       this.mapPosn_ = getElementPosition(this.map_.getDiv());
       this.setVeilVisibility_();
@@ -724,9 +725,9 @@
         this.veilDiv_[i].style.display = "none";
       }
       if (this.visualEnabled_) {
-        this.buttonImg_.style.backgroundPosition = -(this.visualSize_.height * 2) + "px 0";
-        this.buttonImg_.title = this.visualTips_.off;
-        this.buttonImg_.style.display = "";
+        this.buttonDiv_.style.backgroundPosition = -(this.visualSize_.height * 2) + "px 0";
+        this.buttonDiv_.title = this.visualTips_.off;
+        this.buttonDiv_.style.display = "";
       }
       /**
        * This event is fired when the hot key is released.
