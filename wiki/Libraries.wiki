@@ -6,7 +6,7 @@ Below is a list of the libraries being worked on in this project, with links to 
 
 == !KeyDragZoom ==
 
-This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area.
+This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. A new version is in the works to add an optional visual control for turning zoom mode on and off.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Versions].
@@ -14,7 +14,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoo
 
 == !InfoBox ==
 
-[http://www.garylittle.ca/map/artwork/infobox.png]
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
 
 This class behaves like a {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
