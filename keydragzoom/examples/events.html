@@ -32,7 +32,7 @@
           google.maps.event.addListener(dz, 'dragstart', function (latlng) {
             log('KeyDragZoom Started: ' + latlng);
           });
-          google.maps.event.addListener(dz, 'drag', function (startPt, endPt) {
+          google.maps.event.addListener(dz, 'drag', function (startPt, endPt, prj) {
             log('KeyDragZoom Dragging: ' + startPt + endPt);
           });
           google.maps.event.addListener(dz, 'dragend', function (bnds) {
