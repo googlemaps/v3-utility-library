@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/> 
+    <title>ExtDraggableObject Examples</title> 
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"/> 
+    <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"/> 
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script> 
+  </head> 
+  <body onload="prettyPrint()"> 
+<div> 
+<a name="Top"></a>  
+<h1><a></a><span lang="en-us">ExtDraggableObject</span> Examples</h1> 
+</div> 
+<p>This library sets up DOM elements to be draggable. Below are examples of how to use this library. For more details see the <a href="reference.html">reference</a>.</p>
+<div> 
+<h2><a name="simple"></a>Simple Example</h2> 
+<p> 
+  The simplest way to create a draggable element is to create an <code><span lang="en-us">ExtDraggableObject</span></code> and pass a DOM object as a parameter.
+</p>
+<pre class="prettyprint"> 
+  var draggableObj = new ExtDraggableObject(document.getElementById("draggableElement"));
+</pre>
+<p>
+<a target="_blank" href="../examples/simple.html">View example </a>
+</p>
+</div>
+<h2><a name="zoomSlider"></a>Zoom Slider</h2> 
+<p> 
+  This advanced example makes use of <code><span lang="en-us">ExtDraggableObjectOption</span></code> and events to create a custom zoom control in place of the default.<br />
+  <br />
+  <code><span lang="en-us">ExtDraggableObjectOption</span></code>s aren't created directly but are instead passed as an object literal as the second parameter in the <code><span lang="en-us">ExtDraggableObject</span></code> constructor:
+</p>
+<pre class="prettyprint"> 
+  var zoomSlider = new ExtDraggableObject(document.getElementById("zoom"), {restrictX:true, intervalY:8, toleranceX:50, toleranceY:25, container:document.getElementById("zoomSlider")});
+</pre>
+<p>
+  <code><span lang="en-us">restrictX</span></code> will prevent the slider from moving left and right, perfect for a zoom control.<br />
+  <br />
+  <code><span lang="en-us">intervalY</span></code> will cause the object to only move the given number of pixels at a time along the y axis. In this case 8 is chosen so that the slider will snap to the dots on the zoom control.<br />
+  <br />
+  <code><span lang="en-us">toleranceX</span></code> and <code><span lang="en-us">toleranceY</span></code> will snap the slider back to its starting position if the mouse moves the given number of pixels away from the slider. This is largely to emulate the normal behavior of scroll bars but it may have more applications as well.<br />
+  <br />
+  Finally, <code><span lang="en-us">container</span></code> acts mostly as it did in the v2 <code><span lang="en-us">DraggableObject</span></code>. The object can't be dragged beyond the boundaries of the containing object. This isn't a perfect implementation (and neither was the v2 version). It's recommended that the container object be the parent object as well to get the best behavior.<br />
+  <br />
+  <br />
+  There are a number of events exposed by <code><span lang="en-us">ExtDraggableObject</span></code> which can be seen in the reference. In our example we'll make use of <code><span lang="en-us">dragend</span></code>. This isn't the greatest example of a working control as the max zoom level is hardcoded in, but it does show the use of events:
+</p>
+<pre class="prettyprint"> 
+    var dragEndEvent = google.maps.event.addListener(zoomSlider, "dragend", function() {
+      var val = 19 - zoomSlider.valueY();
+      if (map.getZoom() !== val) {
+        map.setZoom(val);
+      }
+    });
+</pre>
+<p>
+  <code><span lang="en-us">valueX</span></code> and <code><span lang="en-us">valueY</span></code> will return a position of the object based on the interval. This is simply the current position divided by the respective interval value. Likewise <code><span lang="en-us">setValueX</span></code> and <code><span lang="en-us">setValueY</span></code> will move the object based on the interval. Basically, value = position / interval.<br />
+<br />
+Putting it all together:
+</p>
+<pre class="prettyprint"> 
+  function init() {
+    var zoomSlider = new ExtDraggableObject(document.getElementById("zoom"), {restrictX:true, intervalY:8, toleranceX:50, toleranceY:25, container:document.getElementById("zoomSlider")});
+
+    var dragEndEvent = google.maps.event.addListener(zoomSlider, "dragend", function() {
+      var val = 19 - zoomSlider.valueY();
+      if (map.getZoom() !== val) {
+        map.setZoom(val);
+      }
+    });
+    var latlng = new google.maps.LatLng(37.313477473067, -121.880502070713);
+    var map = new google.maps.Map(document.getElementById("map_canvas"), {zoom:8, center:latlng, mapTypeId:google.maps.MapTypeId.ROADMAP, disableDefaultUI:true});
+    zoomSlider.setValueY(11);
+
+    var centerChanged = google.maps.event.addListener(map, "center_changed", function() {
+      mapZoom.setCenter(map.getCenter());
+    });
+    var zoomChanged = google.maps.event.addListener(map, "zoom_changed", function() {
+      zoomSlider.setValueY(19 - map.getZoom());
+    });
+
+    var zoomIn = google.maps.event.addDomListener(document.getElementById("zoomIn"), "click", function() {
+      map.setZoom(map.getZoom() + 1);
+    });
+    var zoomOut = google.maps.event.addDomListener(document.getElementById("zoomOut"), "click", function() {
+      map.setZoom(map.getZoom() - 1);
+    });
+  }
+</pre>
+<p>
+<a target="_blank" href="../examples/zoom_slider.html">View example </a>
+</p>
+</div>
+</body> 
+</html> 
