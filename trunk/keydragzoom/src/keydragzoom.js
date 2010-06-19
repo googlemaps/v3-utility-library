@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 1.1
+ * @version 2.0
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -218,7 +218,7 @@
    *  <code>alt</code> hot key refers to the Option key on a Macintosh.
    * @property {Object} [boxStyle] An object literal defining the css styles of the zoom box.
    *  The default is <code>{border: "4px solid #736AFF"}</code>.
-   * Border widths must be specified in pixel units (or as thin, medium, or thick).
+   *  Border widths must be specified in pixel units (or as thin, medium, or thick).
    * @property {Object} [veilStyle] An object literal defining the css styles of the veil pane
    *  which covers the map when a drag zoom is activated. The previous name for this property was
    *  <code>paneStyle</code> but the use of this name is now deprecated.
@@ -242,8 +242,8 @@
    *  with no spaces between images.
    *  The default is <code>http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png</code>.
    * @property {Size} [visualSize] The width and height values provided by this property are
-   *   the size (in pixels) of each of the images within <code>visualSprite</code>.
-   *   The default is (20,20).
+   *  the size (in pixels) of each of the images within <code>visualSprite</code>.
+   *  The default is (20,20).
    * @property {Object} [visualTips] An object literal defining the help tips that appear when
    *  the mouse moves over the visual control. The <code>off</code> property is the tip to be shown
    *  when the control is off and the <code>on</code> property is the tip to be shown when the
@@ -349,25 +349,27 @@
     this.map_.getDiv().appendChild(this.boxDiv_);
     this.boxBorderWidths_ = getBorderWidths(this.boxDiv_);
 
-    this.keyDownListener_ = google.maps.event.addDomListener(document, "keydown", function (e) {
-      me.onKeyDown_(e);
-    });
-    this.keyUpListener_ = google.maps.event.addDomListener(document, "keyup", function (e) {
-      me.onKeyUp_(e);
-    });
-    this.mouseDownListener_ = google.maps.event.addDomListener(this.veilDiv_[0], "mousedown", function (e) {
-      me.onMouseDown_(e);
-    });
-    this.mouseDownListenerDocument_ = google.maps.event.addDomListener(document, "mousedown", function (e) {
-      me.onMouseDownDocument_(e);
-    });
-    this.mouseMoveListener_ = google.maps.event.addDomListener(document, "mousemove", function (e) {
-      me.onMouseMove_(e);
-    });
-    this.mouseUpListener_ = google.maps.event.addDomListener(document, "mouseup", function (e) {
-      me.onMouseUp_(e);
-    });
-    this.scrollListener_ = google.maps.event.addDomListener(window, "scroll", getScrollValue);
+    this.listeners_ = [
+      google.maps.event.addDomListener(document, "keydown", function (e) {
+        me.onKeyDown_(e);
+      }),
+      google.maps.event.addDomListener(document, "keyup", function (e) {
+        me.onKeyUp_(e);
+      }),
+      google.maps.event.addDomListener(this.veilDiv_[0], "mousedown", function (e) {
+        me.onMouseDown_(e);
+      }),
+      google.maps.event.addDomListener(document, "mousedown", function (e) {
+        me.onMouseDownDocument_(e);
+      }),
+      google.maps.event.addDomListener(document, "mousemove", function (e) {
+        me.onMouseMove_(e);
+      }),
+      google.maps.event.addDomListener(document, "mouseup", function (e) {
+        me.onMouseUp_(e);
+      }),
+      google.maps.event.addDomListener(window, "scroll", getScrollValue)
+    ];
 
     this.hotKeyDown_ = false;
     this.mouseDown_ = false;
@@ -759,13 +761,9 @@
     var i;
     var d = this.dragZoom_;
     if (d) {
-      google.maps.event.removeListener(d.mouseDownListener_);
-      google.maps.event.removeListener(d.mouseDownListenerDocument_);
-      google.maps.event.removeListener(d.mouseMoveListener_);
-      google.maps.event.removeListener(d.mouseUpListener_);
-      google.maps.event.removeListener(d.keyUpListener_);
-      google.maps.event.removeListener(d.keyDownListener_);
-      google.maps.event.removeListener(d.scrollListener_);
+      for (i = 0; i < this.listeners_.length; ++i) {
+        google.maps.event.removeListener(d.listeners_[i]);
+      }
       this.getDiv().removeChild(d.boxDiv_);
       for (i = 0; i < d.veilDiv_.length; i++) {
         this.getDiv().removeChild(d.veilDiv_[i]);
