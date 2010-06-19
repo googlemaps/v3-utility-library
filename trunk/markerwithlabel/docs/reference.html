@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MarkerWithLabel for V3 v1.0 [June 19, 2010] Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>MarkerWithLabel for V3</h1>
+    <p>
+MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Marker</code> class.
+ <p>
+ MarkerWithLabel allows you to define markers with associated labels. As you would expect,
+ if the marker is draggable, so too will be the label. In addition, a marker with a label
+ responds to all mouse events in the same manner as a regular marker. It also fires mouse
+ events and "property changed" events just as a regular marker would.</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="MarkerWithLabel"></a>class MarkerWithLabel</h2>
+      <p></p>
+      
+        <h3>Constructor</h3>
+        <table summary="class MarkerWithLabel - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>MarkerWithLabel(<span class="type">opt_options?:MarkerWithLabelOptions</span>)</code></td>
+                
+                <td>This constructor is used to create a marker with an associated label.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="MarkerWithLabelOptions"></a>class MarkerWithLabelOptions</h2>
+      <p>This class represents the optional parameter passed into <code>MarkerWithLabel</code>.
+ The properties available are the same as for <code>google.maps.Marker</code> with the addition
+ of the properties below. To change any of these new properties after the labeled marker has
+ been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
+ <p>
+ When any of these properties changes, a property changed event is fired. The names of these
+ events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
+ For example, if the text of the label changes, a <code>labeltext_changed</code> event is fired.
+ <p>  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class MarkerWithLabelOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>labelClass</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The name of the CSS class defining the styles for the label.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>labelStyle</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal whose properties define specific CSS
+ style values to be applied to the label. Style values defined here override those that may
+ be defined in the <code>labelClass</code> style sheet.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>labelText</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The text of the label. It can include HTML code.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>labelVisible</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether the label is to be visible.
+ The default is <code>true</code>. Note that even when <code>labelVisible</code> is
+ <code>true</code>, the label will <i>not</i> be visible if the marker itself is not visible
+ (i.e., if the marker's <code>visible</code> property is <code>false</code>).</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>labelZIndex</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The zIndex value for the label. Setting this value to be
+ higher or lower than zIndex for the marker controls whether the label appears on top of
+ or underneath the marker, respectively.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>

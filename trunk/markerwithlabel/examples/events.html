@@ -1,0 +1,68 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+ <title>MarkerWithLabel Mouse Events</title>
+ <style type="text/css">
+   .labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     width: 40px;     
+     border: 2px solid black;
+     white-space: nowrap;
+   }
+ </style>
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+ <script type="text/javascript" src="../src/markerwithlabel.js"></script>
+ <script type="text/javascript">
+   function initMap() {
+     var latLng = new google.maps.LatLng(49.49088, -123.75446);
+     var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
+
+     var map = new google.maps.Map(document.getElementById('map_canvas'), {
+       zoom: 12,
+       center: latLng,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     });
+
+     var marker = new MarkerWithLabel({
+       position: homeLatLng,
+       draggable: true,
+       map: map,
+       labelText: "$425K",
+       labelClass: "labels", // the CSS class for the label
+       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelVisible: true
+     });
+
+     var iw = new google.maps.InfoWindow({
+       content: "Home For Sale"
+     });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     
+     google.maps.event.addListener(marker, "click", function (e) { log("Click"); });
+     google.maps.event.addListener(marker, "dblclick", function (e) { log("Double Click"); });
+     google.maps.event.addListener(marker, "mouseover", function (e) { log("Mouse Over"); });
+     google.maps.event.addListener(marker, "mouseout", function (e) { log("Mouse Out"); });
+     google.maps.event.addListener(marker, "mouseup", function (e) { log("Mouse Up"); });
+     google.maps.event.addListener(marker, "mousedown", function (e) { log("Mouse Down"); });
+     google.maps.event.addListener(marker, "dragstart", function (mEvent) { log("Drag Start: " + mEvent.latLng.toString()); });
+     google.maps.event.addListener(marker, "drag", function (mEvent) { log("Drag: " + mEvent.latLng.toString()); });
+     google.maps.event.addListener(marker, "dragend", function (mEvent) { log("Drag End: " + mEvent.latLng.toString()); });
+   };
+   
+   function log(h) {
+     document.getElementById("log").innerHTML += h + "<br />";
+   };
+ </script>
+</head>
+<body onload="initMap()">
+<p>Try interacting with the marker (mouseover, mouseout, click, double-click, mouse down, mouse up, drag) to see a log of events that are fired.</p>
+ <div id="map_canvas" style="height: 60%; width: 100%"></div>
+ <div id="log"></div>
+</body>
+</html>
