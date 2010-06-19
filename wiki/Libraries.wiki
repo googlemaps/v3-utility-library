@@ -16,7 +16,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoo
 
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
 
-This class behaves like a {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
+This class behaves like {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Versions].
@@ -52,3 +52,12 @@ This class sets up a DOM object to be draggable around the screen, similar to th
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggableobject/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/ExtDraggableObject/ Development Versions].
+
+
+== !MarkerWithLabel ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/examples/markerwithlabel-screen.png]
+
+This class behaves like {{{google.maps.Marker}}}, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
