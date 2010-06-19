@@ -44,3 +44,11 @@ This class creates a set of LatLngBounds that are guaranteed to enclose every po
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/routeboxer/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/ Development Versions].
+
+== !ExtDraggableObject ==
+
+This class sets up a DOM object to be draggable around the screen, similar to the V2 GDraggableObject. Has several extensions, such as the ability to restrict the object to vertical or horizontal only movement, move the object by a certain increment, or return the object to its original position before dragging started.
+
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggableobject/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/ExtDraggableObject/ Development Versions].
