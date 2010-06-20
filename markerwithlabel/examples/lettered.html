@@ -37,9 +37,6 @@
        labelStyle: {top: "-30px", left: "-3px"},
        labelZIndex: 2
      });
-
-     google.maps.event.addListener(marker, "drag", function (mEvent) { log("Drag: " + mEvent.latLng.toString()); });
-
    };
    function log(h) {
      document.getElementById("log").innerHTML += h + "<br />";
