@@ -74,7 +74,7 @@ MarkerLabel_.prototype.onAdd = function () {
   var cLngOffset;
   var cIgnoreClick;
 
-  this.getPanes().overlayMouseTarget.appendChild(this.containerDiv_);
+  this.getPanes().overlayImage.appendChild(this.containerDiv_);
 
   this.listeners_ = [
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
