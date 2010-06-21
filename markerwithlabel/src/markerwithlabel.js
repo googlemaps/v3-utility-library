@@ -87,7 +87,6 @@ MarkerLabel_.prototype.onAdd = function () {
 // Marker.getContainerDiv() and Marker.getEventContainerDiv() don't exist!!
 //  this.marker_.getContainerDiv().appendChild(this.labelContainerDiv_);
 //  this.marker_.getEventContainerDiv().appendChild(this.eventContainerDiv_);
-
   this.getPanes().overlayImage.appendChild(this.labelContainerDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventContainerDiv_);
 
@@ -172,7 +171,7 @@ MarkerLabel_.prototype.onAdd = function () {
       me.labelContainerDiv_.parentNode.removeChild(me.labelContainerDiv_);
       me.eventContainerDiv_.parentNode.removeChild(me.eventContainerDiv_);
       me.getPanes().overlayImage.appendChild(me.labelContainerDiv_);
-      me.getPanes().overlayImage.appendChild(me.eventContainerDiv_);
+      me.getPanes().overlayMouseTarget.appendChild(me.eventContainerDiv_);
     }),
     google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
       me.labelDiv_.innerHTML = me.marker_.get("labelText");
@@ -250,6 +249,7 @@ MarkerLabel_.prototype.onAdd = function () {
 MarkerLabel_.prototype.onRemove = function () {
   var i;
   this.labelContainerDiv_.parentNode.removeChild(this.labelContainerDiv_);
+  this.eventContainerDiv_.parentNode.removeChild(this.eventContainerDiv_);
 
   // Remove event listeners:
   for (i = 0; i < this.listeners_.length; i++) {
