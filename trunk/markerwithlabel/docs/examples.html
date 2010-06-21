@@ -32,10 +32,11 @@
      width: 40px;     
      border: 2px solid black;
      white-space: nowrap;
+     overflow: hidden;
    }
  &lt;/style&gt;
 
-     var latLng = new google.maps.LatLng(49.49088, -123.75446);
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
      var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
 
      var map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -75,10 +76,11 @@
      text-align: center;
      width: 10px;     
      white-space: nowrap;
+     overflow: hidden;
    }
  &lt;/style&gt;
 
-     var latLng = new google.maps.LatLng(49.49088, -123.75446);
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
      var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
 
      var map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -97,6 +99,11 @@
        labelStyle: {top: "-30px", left: "-3px"},
        labelZIndex: 2
      });
+
+     var iw = new google.maps.InfoWindow({
+       content: "Home For Sale"
+     });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
 </pre>
 <p><a href="../examples/lettered.html">View example (lettered.html)</a>. </p>
 </div>
@@ -114,10 +121,11 @@
      text-align: center;
      width: 10px;     
      white-space: nowrap;
+     overflow: hidden;
    }
  &lt;/style&gt;
 
-     var latLng = new google.maps.LatLng(49.49088, -123.75446);
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
      var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
 
      var map = new google.maps.Map(document.getElementById('map_canvas'), {

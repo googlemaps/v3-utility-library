@@ -14,13 +14,14 @@
      width: 40px;     
      border: 2px solid black;
      white-space: nowrap;
+     overflow: hidden;
    }
  </style>
  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
  <script type="text/javascript" src="../src/markerwithlabel.js"></script>
  <script type="text/javascript">
    function initMap() {
-     var latLng = new google.maps.LatLng(49.49088, -123.75446);
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
      var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
 
      var map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -35,7 +36,7 @@
        map: map,
        labelText: "$425K",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelStyle: {top: "0px", left: "-21px"},
        labelVisible: true
      });
 

@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.0 [June 19, 2010]
+ * @version 1.0 [June 21, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Marker</code> class.
@@ -42,14 +42,22 @@ function MarkerLabel_(marker) {
   this.marker_ = marker;
 
   this.labelDiv_ = document.createElement("div");
+  this.labelContainerDiv_ = document.createElement("div");
+  this.labelContainerDiv_.appendChild(this.labelDiv_);
+  this.labelContainerDiv_.style.cssText = "position: absolute; overflow: visible; width: 0px; height: 0px;";
+
+  // Set up the DIV for handling mouse events in the label. This DIV forms a transparent veil
+  // in the "overlayMouseTarget" pane, a veil that covers the label. This is done so that
+  // events can be captured even if the label is in the shadow of a google.maps.InfoWindow.
+  // Code is included here to ensure the veil is always exactly the same size as the label.
+  this.eventDiv_ = document.createElement("div");
   // Prevent selection of the text in the label:
-  this.labelDiv_.onselectstart = function () {
+  this.eventDiv_.onselectstart = function () {
     return false;
   };
-
-  this.containerDiv_ = document.createElement("div");
-  this.containerDiv_.appendChild(this.labelDiv_);
-  this.containerDiv_.style.cssText = "position: absolute; display: none;";
+  this.eventContainerDiv_ = document.createElement("div");
+  this.eventContainerDiv_.appendChild(this.eventDiv_);
+  this.eventContainerDiv_.style.cssText = "position: absolute; overflow: visible; width: 0px; height: 0px;";
 
   this.setMap(this.marker_.getMap());
   google.maps.event.addListener(this.marker_, "map_changed", function () {
@@ -73,14 +81,23 @@ MarkerLabel_.prototype.onAdd = function () {
   var cLatOffset;
   var cLngOffset;
   var cIgnoreClick;
+  
+// NEED TO APPEND TO MARKER CONTAINER TO KEEP IN SAME STACKING CONTEXT
+// NEED TO APPEND TO MARKER MOUSE TARGET CONTAINER TO KEEP IN SAME STACKING CONTEXT
+// Marker.getContainerDiv() and Marker.getEventContainerDiv() don't exist!!
+//  this.marker_.getContainerDiv().appendChild(this.labelContainerDiv_);
+//  this.marker_.getEventContainerDiv().appendChild(this.eventContainerDiv_);
 
-  this.getPanes().overlayImage.appendChild(this.containerDiv_);
+  this.getPanes().overlayImage.appendChild(this.labelContainerDiv_);
+  this.getPanes().overlayMouseTarget.appendChild(this.eventContainerDiv_);
 
   this.listeners_ = [
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
       if (cDraggingInProgress) {
         mEvent.latLng = cLastPosition;
         cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
+        // This is where the marker should be returned to the "overlayImage" map pane.
+        // Not done here because there is no method in google.maps.Marker to do this.
         google.maps.event.trigger(me.marker_, "dragend", mEvent);
       }
       google.maps.event.trigger(me.marker_, "mouseup", mEvent);
@@ -99,27 +116,30 @@ MarkerLabel_.prototype.onAdd = function () {
           // Calculate offsets from the click point to the marker position:
           cLatOffset = mEvent.latLng.lat() - me.marker_.getPosition().lat();
           cLngOffset = mEvent.latLng.lng() - me.marker_.getPosition().lng();
+          // This is where the marker should be moved to the "overlayMouseTarget" pane so that
+          // it passes over top of other markers while it is dragged.
+          // Not done here because there is no method in google.maps.Marker to do this.
           cDraggingInProgress = true;
           google.maps.event.trigger(me.marker_, "dragstart", mEvent);
         }
       }
     }),
-    google.maps.event.addDomListener(this.containerDiv_, "mouseover", function (e) {
-      me.containerDiv_.style.cursor = "pointer";
+    google.maps.event.addDomListener(this.eventDiv_, "mouseover", function (e) {
+      me.eventDiv_.style.cursor = "pointer";
       google.maps.event.trigger(me.marker_, "mouseover", e);
     }),
-    google.maps.event.addDomListener(this.containerDiv_, "mouseout", function (e) {
-      me.containerDiv_.style.cursor = me.marker_.getCursor();
+    google.maps.event.addDomListener(this.eventDiv_, "mouseout", function (e) {
+      me.eventDiv_.style.cursor = me.marker_.getCursor();
       google.maps.event.trigger(me.marker_, "mouseout", e);
     }),
-    google.maps.event.addDomListener(this.containerDiv_, "click", function (e) {
+    google.maps.event.addDomListener(this.eventDiv_, "click", function (e) {
       if (cIgnoreClick) { // Ignore the click reported when a label drag ends
         cIgnoreClick = false;
       } else {
         google.maps.event.trigger(me.marker_, "click", e);
       }
     }),
-    google.maps.event.addDomListener(this.containerDiv_, "dblclick", function (e) {
+    google.maps.event.addDomListener(this.eventDiv_, "dblclick", function (e) {
       google.maps.event.trigger(me.marker_, "dblclick", e);
       // Prevent map zoom when double-clicking on a label:
       e.cancelBubble = true;
@@ -127,7 +147,7 @@ MarkerLabel_.prototype.onAdd = function () {
         e.stopPropagation();
       }
     }),
-    google.maps.event.addDomListener(this.containerDiv_, "mousedown", function (e) {
+    google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
       cMouseIsDown = true;
       cDraggingInProgress = false;
       cLatOffset = 0;
@@ -139,22 +159,42 @@ MarkerLabel_.prototype.onAdd = function () {
         e.stopPropagation();
       }
     }),
+    google.maps.event.addListener(this.marker_, "dragstart", function () {
+      // Move label to the "overlayMouseTarget" pane during the drag
+      // (this ensures the label will not disappear behind the marker):
+      me.labelContainerDiv_.parentNode.removeChild(me.labelContainerDiv_);
+      me.eventContainerDiv_.parentNode.removeChild(me.eventContainerDiv_);
+      me.getPanes().overlayMouseTarget.appendChild(me.labelContainerDiv_);
+      me.getPanes().overlayMouseTarget.appendChild(me.eventContainerDiv_);
+    }),
+    google.maps.event.addListener(this.marker_, "dragend", function () {
+      // Return label to the "overlayImage" pane:
+      me.labelContainerDiv_.parentNode.removeChild(me.labelContainerDiv_);
+      me.eventContainerDiv_.parentNode.removeChild(me.eventContainerDiv_);
+      me.getPanes().overlayImage.appendChild(me.labelContainerDiv_);
+      me.getPanes().overlayImage.appendChild(me.eventContainerDiv_);
+    }),
     google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
       me.labelDiv_.innerHTML = me.marker_.get("labelText");
+      me.eventDiv_.innerHTML = me.labelDiv_.innerHTML;
     }),
     google.maps.event.addListener(this.marker_, "labelclass_changed", function () {
       me.labelDiv_.className = me.marker_.get("labelClass");
+      me.eventDiv_.className = me.labelDiv_.className;
+      me.eventDiv_.style.background = "transparent";
     }),
     google.maps.event.addListener(this.marker_, "labelstyle_changed", function () {
       var i, labelStyle;
 
       // Apply default style values to the label:
       me.labelDiv_.className = me.marker_.get("labelClass");
+      me.eventDiv_.className = me.labelDiv_.className;
       // Apply style values defined in the labelStyle parameter:
       labelStyle = me.marker_.get("labelStyle");
       for (i in labelStyle) {
         if (labelStyle.hasOwnProperty(i)) {
           me.labelDiv_.style[i] = labelStyle[i];
+          me.eventDiv_.style[i] = labelStyle[i];
         }
       }
       // Make sure the opacity setting causes the desired effect on MSIE:
@@ -163,31 +203,41 @@ MarkerLabel_.prototype.onAdd = function () {
       }
       // Apply mandatory style value:
       me.labelDiv_.style.position = "relative";
+      me.eventDiv_.style.position = me.labelDiv_.style.position;
+
+      me.eventDiv_.style.color = "transparent";
+      me.eventDiv_.style.backgroundColor = "transparent";
+      me.eventDiv_.style.borderColor = "transparent";
     }),
     google.maps.event.addListener(this.marker_, "labelzindex_changed", function () {
-      me.containerDiv_.style.zIndex = me.marker_.get("labelZIndex");
+      me.labelContainerDiv_.style.zIndex = me.marker_.get("labelZIndex");
+      me.eventContainerDiv_.style.zIndex = me.labelContainerDiv_.style.zIndex;
     }),
     google.maps.event.addListener(this.marker_, "labelvisible_changed", function () {
       if (me.marker_.get("labelVisible")) {
-        me.containerDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
+        me.labelContainerDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
       } else {
-        me.containerDiv_.style.display = "none";
+        me.labelContainerDiv_.style.display = "none";
       }
+      me.eventContainerDiv_.style.display = me.labelContainerDiv_.style.display;
     }),
     google.maps.event.addListener(this.marker_, "position_changed", function () {
       var position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
-      me.containerDiv_.style.left = position.x + "px";
-      me.containerDiv_.style.top = position.y + "px";
+      me.labelContainerDiv_.style.left = position.x + "px";
+      me.labelContainerDiv_.style.top = position.y + "px";
+      me.eventContainerDiv_.style.left = me.labelContainerDiv_.style.left;
+      me.eventContainerDiv_.style.top = me.labelContainerDiv_.style.top;
     }),
     google.maps.event.addListener(this.marker_, "visible_changed", function () {
       if (me.marker_.get("labelVisible")) {
-        me.containerDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
+        me.labelContainerDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
       } else {
-        me.containerDiv_.style.display = "none";
+        me.labelContainerDiv_.style.display = "none";
       }
+      me.eventContainerDiv_.style.display = me.labelContainerDiv_.style.display;
     }),
     google.maps.event.addListener(this.marker_, "title_changed", function () {
-      me.containerDiv_.title = me.marker_.getTitle();
+      me.eventContainerDiv_.title = me.marker_.getTitle();
     })
   ];
 };
@@ -199,7 +249,7 @@ MarkerLabel_.prototype.onAdd = function () {
  */
 MarkerLabel_.prototype.onRemove = function () {
   var i;
-  this.containerDiv_.parentNode.removeChild(this.containerDiv_);
+  this.labelContainerDiv_.parentNode.removeChild(this.labelContainerDiv_);
 
   // Remove event listeners:
   for (i = 0; i < this.listeners_.length; i++) {
@@ -216,26 +266,32 @@ MarkerLabel_.prototype.draw = function () {
   
   // Position the container:
   var position = this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());
-  this.containerDiv_.style.left = position.x + "px";
-  this.containerDiv_.style.top = position.y + "px";
+  this.labelContainerDiv_.style.left = position.x + "px";
+  this.labelContainerDiv_.style.top = position.y + "px";
+  this.eventContainerDiv_.style.left = this.labelContainerDiv_.style.left;
+  this.eventContainerDiv_.style.top = this.labelContainerDiv_.style.top;
 
-  this.containerDiv_.style.zIndex = this.marker_.get("labelZIndex");
+  this.labelContainerDiv_.style.zIndex = this.marker_.get("labelZIndex");
+  this.eventContainerDiv_.style.zIndex = this.labelContainerDiv_.style.zIndex;
 
   if (this.marker_.get("labelVisible")) {
-    this.containerDiv_.style.display = this.marker_.getVisible() ? "block" : "none";
+    this.labelContainerDiv_.style.display = this.marker_.getVisible() ? "block" : "none";
   } else {
-    this.containerDiv_.style.display = "none";
+    this.labelContainerDiv_.style.display = "none";
   }
+  this.eventContainerDiv_.style.display = this.labelContainerDiv_.style.display;
 
-  this.containerDiv_.title = this.marker_.getTitle() || "";
+  this.eventContainerDiv_.title = this.marker_.getTitle() || "";
 
   // Apply default style values to the label:
   this.labelDiv_.className = this.marker_.get("labelClass");
+  this.eventDiv_.className = this.labelDiv_.className;
   // Apply style values defined in the labelStyle parameter:
   labelStyle = this.marker_.get("labelStyle");
   for (i in labelStyle) {
     if (labelStyle.hasOwnProperty(i)) {
       this.labelDiv_.style[i] = labelStyle[i];
+      this.eventDiv_.style[i] = labelStyle[i];
     }
   }
   // Make sure the opacity setting causes the desired effect on MSIE:
@@ -244,8 +300,14 @@ MarkerLabel_.prototype.draw = function () {
   }
   // Apply mandatory style value:
   this.labelDiv_.style.position = "relative";
+  this.eventDiv_.style.position = this.labelDiv_.style.position;
 
   this.labelDiv_.innerHTML = this.marker_.get("labelText");
+  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+
+  this.eventDiv_.style.color = "transparent";
+  this.eventDiv_.style.backgroundColor = "transparent";
+  this.eventDiv_.style.borderColor = "transparent";
 };
 
 /**
