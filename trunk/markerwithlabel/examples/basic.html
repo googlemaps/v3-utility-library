@@ -40,6 +40,16 @@
        labelVisible: true
      });
 
+     var marker2 = new MarkerWithLabel({
+       position: homeLatLng,
+       draggable: true,
+       map: map,
+       labelText: "$425K",
+       labelClass: "labels", // the CSS class for the label
+       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelVisible: true
+     });
+
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
