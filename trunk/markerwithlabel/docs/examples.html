@@ -32,7 +32,6 @@
      width: 40px;     
      border: 2px solid black;
      white-space: nowrap;
-     overflow: hidden;
    }
  &lt;/style&gt;
 
@@ -51,7 +50,7 @@
        map: map,
        labelText: "$425K",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
        labelVisible: true
      });
 
@@ -65,7 +64,7 @@
 
 <div>
 <h2><span lang="en-us">Creating a Lettered Marker</span></h2>
-<p>This example shows how to place a single character over the center of Google's default marker. Note the use of the <code>zIndex</code> and <code>labelZIndex</code> properties to ensure the label appears on top of the marker (rather than underneath it).</p>
+<p>This example shows how to place a single character over the center of Google's default marker. Note the use of the <code>labelInForeground</code> property to ensure the label appears in the foreground (rather than in the background behind the marker).</p>
 <pre class="prettyprint">
  &lt;style type="text/css"&gt;
    .labels {
@@ -76,7 +75,6 @@
      text-align: center;
      width: 10px;     
      white-space: nowrap;
-     overflow: hidden;
    }
  &lt;/style&gt;
 
@@ -93,11 +91,10 @@
        position: homeLatLng,
        map: map,
        draggable: false,
-       zIndex: 1,
        labelText: "A",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "-30px", left: "-3px"},
-       labelZIndex: 2
+       labelStyle: {marginTop: "-30px", marginLeft: "-3px"},
+       labelInForeground: true
      });
 
      var iw = new google.maps.InfoWindow({
@@ -121,7 +118,6 @@
      text-align: center;
      width: 10px;     
      white-space: nowrap;
-     overflow: hidden;
    }
  &lt;/style&gt;
 
@@ -140,7 +136,7 @@
        map: map,
        labelText: "$425K",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
        labelVisible: true
      });
 
