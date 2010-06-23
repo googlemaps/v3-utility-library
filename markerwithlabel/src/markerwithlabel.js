@@ -31,8 +31,8 @@
 /*global document,google */
 
 /**
- * This constructor creates a label associated with a marker. It is for the
- *  private use of the MarkerWithLabel class.
+ * This constructor creates a label and associates it with a marker.
+ * It is for the private use of the MarkerWithLabel class.
  * @constructor
  * @param {Marker} marker The marker with which the label is to be associated.
  * @private
@@ -62,11 +62,11 @@ function MarkerLabel_(marker) {
   });
 }
 
-// MarkerLabel_ inherits from <code>OverlayView</code>:
+// MarkerLabel_ inherits from OverlayView:
 MarkerLabel_.prototype = new google.maps.OverlayView();
 
 /**
- * Adds the DIV representing the label to the DOM. It is called
+ * Adds the DIV representing the label to the DOM. This method is called
  * automatically when the marker's <code>setMap</code> method is called.
  * @private
  */
@@ -183,7 +183,8 @@ MarkerLabel_.prototype.onAdd = function () {
 
 /**
  * Removes the DIV for the label from the DOM. It also removes all event handlers.
- * This method is called automatically when <code>setMap(null)</code> is called.
+ * This method is called automatically when the marker's <code>setMap(null)</code>
+ * method is called.
  * @private
  */
 MarkerLabel_.prototype.onRemove = function () {
@@ -217,8 +218,8 @@ MarkerLabel_.prototype.setLabelText = function () {
 };
 
 /**
- * Sets the content of the tool tip for the label. It is always set
- * to be the same as for the label itself.
+ * Sets the content of the tool tip for the label. It is
+ * always set to be the same as for the marker itself.
  * @private
  */
 MarkerLabel_.prototype.setTitle = function () {
@@ -226,8 +227,8 @@ MarkerLabel_.prototype.setTitle = function () {
 };
 
 /**
- * Sets the style of the label by setting the style sheet and applying other
- * specific styles requested.
+ * Sets the style of the label by setting the style sheet and applying
+ * other specific styles requested.
  * @private
  */
 MarkerLabel_.prototype.setStyles = function () {
@@ -253,7 +254,7 @@ MarkerLabel_.prototype.setStyles = function () {
 
 /**
  * Sets the mandatory styles to the DIV representing the label as well as to the
- * corresponding event DIV. This includes setting the DIV position and zIndex.
+ * associated event DIV. This includes setting the DIV position, zIndex, and visibility.
  * @private
  */
 MarkerLabel_.prototype.setMandatoryStyles = function () {
@@ -344,7 +345,7 @@ MarkerLabel_.prototype.setVisible = function () {
  *  <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
  *  these styles are used internally only.
  * @property {number} [labelInForeground] A flag indicating whether a label that overlaps its
- *  corresponding marker should appear in the foreground (i.e., in a plane above the marker).
+ *  associated marker should appear in the foreground (i.e., in a plane above the marker).
  *  The default is <code>true</code>.
  * @property {boolean} [labelVisible] A flag indicating whether the label is to be visible.
  *  The default is <code>true</code>. Note that even when <code>labelVisible</code> is
@@ -366,9 +367,12 @@ function MarkerWithLabel(opt_options) {
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }
-
-  this.setValues(opt_options);
-  this.theLabel_ = new MarkerLabel_(this);
+  // Call the parent constructor. It calls Marker.setValues to initialize, so all
+  // the new parameters are conveniently saved and can be accessed with get/set.
+  // Marker.set triggers a property changed event ("propertyname_changed") that
+  // the marker label listens for in order to react to state changes.
+  google.maps.Marker.apply(this, arguments);
+  this.label_ = new MarkerLabel_(this); // Bind the label to the marker
 }
 
 // MarkerWithLabel inherits from <code>Marker</code>:
