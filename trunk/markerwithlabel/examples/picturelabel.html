@@ -2,17 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
- <title>MarkerWithLabel Example</title>
+ <title>Picture Label for Marker</title>
  <style type="text/css">
    .labels {
-     color: red;
-     background-color: white;
+     color: white;
+     background-color: red;
      font-family: "Lucida Grande", "Arial", sans-serif;
      font-size: 10px;
-     font-weight: bold;
      text-align: center;
-     width: 40px;     
-     border: 2px solid black;
+     width: 100px;     
      white-space: nowrap;
    }
  </style>
@@ -31,40 +29,27 @@
 
      var marker = new MarkerWithLabel({
        position: homeLatLng,
-       draggable: true,
        map: map,
-       labelText: "$425K",
-       labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
-       labelVisible: true
-     });
-
-     var marker2 = new MarkerWithLabel({
-       position: new google.maps.LatLng(49.475, -123.84),
        draggable: true,
-       map: map,
-       labelText: "$395K",
+       labelText: "<img src='home.jpg'>",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
-       labelVisible: true
+       labelStyle: {marginTop: "0px", marginLeft: "-50px", opacity: 0.5},
+       labelInForeground: true
      });
 
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     var iw2 = new google.maps.InfoWindow({
-       content: "Another Home For Sale"
-     });
      google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
-     google.maps.event.addListener(marker2, "click", function (e) { iw2.open(map, marker2); });
+   };
+   function log(h) {
+     document.getElementById("log").innerHTML += h + "<br />";
    };
  </script>
 </head>
 <body onload="initMap()">
-<p>A basic example of a markers with labels. Note that an information window appears whether you
-click the marker portion or the label portion. The two markers are both draggable so you can easily
-verify that markers and labels overlap as expected.</p>
- <div id="map_canvas" style="height: 60%; width: 100%"></div>
+<p>This is an example of how to use a picture as a marker label. Since the picture label is quite large, the opacity of the label is set to 0.50 to make it possible to see what's on the map behind the picture.</p>
+ <div id="map_canvas" style="height: 90%; width: 100%"></div>
  <div id="log"></div>
 </body>
 </html>
