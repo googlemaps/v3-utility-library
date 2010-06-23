@@ -77,7 +77,6 @@ MarkerLabel_.prototype.onAdd = function () {
   var cLastPosition;
   var cLatOffset;
   var cLngOffset;
-  var cZAdjust;
   var cSavedMarkerZ;
   var cIgnoreClick;
   
@@ -85,6 +84,11 @@ MarkerLabel_.prototype.onAdd = function () {
   // an attempt was made to change them:
   var cApplyMandatoryStyles = function () {
     var position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
+
+    // Make sure the opacity setting causes the desired effect on MSIE:
+    if (typeof me.labelDiv_.style.opacity !== "undefined") {
+      me.labelDiv_.style.filter = "alpha(opacity=" + (me.labelDiv_.style.opacity * 100) + ")";
+    }
 
     me.labelDiv_.style.position = "absolute";
     me.labelDiv_.style.overflow = "hidden";
@@ -95,8 +99,8 @@ MarkerLabel_.prototype.onAdd = function () {
     me.eventDiv_.style.overflow = me.labelDiv_.style.overflow;
     me.eventDiv_.style.left = me.labelDiv_.style.left;
     me.eventDiv_.style.top = me.labelDiv_.style.top;
-    me.eventDiv_.style.opacity = 0.01; // Don't use 0; not clickable on MSIE
-    me.labelDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
+    me.eventDiv_.style.opacity = 0.01; // Don't use 0; DIV won't be clickable on MSIE
+    me.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
   };
 
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
@@ -196,10 +200,6 @@ MarkerLabel_.prototype.onAdd = function () {
           me.labelDiv_.style[i] = labelStyle[i];
           me.eventDiv_.style[i] = labelStyle[i];
         }
-      }
-      // Make sure the opacity setting causes the desired effect on MSIE:
-      if (typeof me.labelDiv_.style.opacity !== "undefined") {
-        me.labelDiv_.style.filter = "alpha(opacity=" + (me.labelDiv_.style.opacity * 100) + ")";
       }
       cApplyMandatoryStyles();
     }),
@@ -314,10 +314,7 @@ MarkerLabel_.prototype.draw = function () {
   this.eventDiv_.style.left = this.labelDiv_.style.left;
   this.eventDiv_.style.top = this.labelDiv_.style.top;
   this.eventDiv_.style.opacity = 0.01; // Don't use 0; not clickable on MSIE
-  this.labelDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
-
-  this.labelDiv_.innerHTML = this.marker_.get("labelText");
-  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+  this.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
 
   zAdjust = (this.marker_.get("labelInForeground") ? 1 : 0);
   if (typeof this.marker_.getZIndex() === "undefined") {
@@ -328,6 +325,9 @@ MarkerLabel_.prototype.draw = function () {
     this.labelDiv_.style.zIndex = this.marker_.getZIndex() + zAdjust;
     this.eventDiv_.style.zIndex = this.labelDiv_.style.zIndex;
   }
+
+  this.labelDiv_.innerHTML = this.marker_.get("labelText");
+  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
 };
 
 /**
