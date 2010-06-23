@@ -14,7 +14,6 @@
      width: 40px;     
      border: 2px solid black;
      white-space: nowrap;
-     overflow: hidden;
    }
  </style>
  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -32,34 +31,39 @@
 
      var marker = new MarkerWithLabel({
        position: homeLatLng,
-       draggable: false,
-       map: map,
-       labelText: "$425K",
-       labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
-       labelVisible: true
-     });
-
-     var marker2 = new MarkerWithLabel({
-       position: homeLatLng,
        draggable: true,
        map: map,
        labelText: "$425K",
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {top: "0px", left: "-21px", opacity: 0.75},
+       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
+       labelVisible: true
+     });
+
+     var marker2 = new MarkerWithLabel({
+       position: new google.maps.LatLng(49.475, -123.84),
+       draggable: true,
+       map: map,
+       labelText: "$395K",
+       labelClass: "labels", // the CSS class for the label
+       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
        labelVisible: true
      });
 
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
+     var iw2 = new google.maps.InfoWindow({
+       content: "Another Home For Sale"
+     });
      google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker2, "click", function (e) { iw2.open(map, marker2); });
    };
  </script>
 </head>
 <body onload="initMap()">
-<p>A basic example of a marker with a label. Note that the information window appears whether you
-click the marker portion or the label portion.</p>
+<p>A basic example of a markers with labels. Note that an information window appears whether you
+click the marker portion or the label portion. The two markers are both draggable so you easily
+verify that markers and labels overlap as expected.</p>
  <div id="map_canvas" style="height: 60%; width: 100%"></div>
  <div id="log"></div>
 </body>

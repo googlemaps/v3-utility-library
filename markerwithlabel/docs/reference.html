@@ -2,14 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerWithLabel for V3 v1.0 [June 21, 2010] Reference</title>
+    <title>MarkerWithLabel for V3 v1.0 [June 22, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
   <body>
     <h1>MarkerWithLabel for V3</h1>
     <p>
-MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Marker</code> class.
+MarkerWithLabel extends the Google Maps JavaScript API V3
+ <code>google.maps.Marker</code> class.
  <p>
  MarkerWithLabel allows you to define markers with associated labels. As you would expect,
  if the marker is draggable, so too will be the label. In addition, a marker with a label
@@ -72,10 +73,24 @@ MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Mark
                     <td><code>string</code></td>
                   
                 
-                <td>The name of the CSS class defining the styles for the label.</td>
+                <td>The name of the CSS class defining the styles for the label.
+ Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
+ and <code>left</code> are ignored; these styles are used internally only.</td>
               </tr>
             
               <tr class="even">
+                <td><code>labelInForeground</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>A flag indicating whether a label that overlaps its
+ corresponding marker should appear in the foreground (i.e., in a plane above the marker).
+ The default is <code>true</code>.</td>
+              </tr>
+            
+              <tr class="odd">
                 <td><code>labelStyle</code></td>
                 
                   
@@ -84,10 +99,12 @@ MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Mark
                 
                 <td>An object literal whose properties define specific CSS
  style values to be applied to the label. Style values defined here override those that may
- be defined in the <code>labelClass</code> style sheet.</td>
+ be defined in the <code>labelClass</code> style sheet.
+ Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
+ and <code>left</code> are ignored; these styles are used internally only.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>labelText</code></td>
                 
                   
@@ -97,7 +114,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Mark
                 <td>The text of the label. It can include HTML code.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>labelVisible</code></td>
                 
                   
@@ -108,18 +125,6 @@ MarkerWithLabel extends the Google Maps JavaScript API V3 <code>google.maps.Mark
  The default is <code>true</code>. Note that even when <code>labelVisible</code> is
  <code>true</code>, the label will <i>not</i> be visible if the marker itself is not visible
  (i.e., if the marker's <code>visible</code> property is <code>false</code>).</td>
-              </tr>
-            
-              <tr class="odd">
-                <td><code>labelZIndex</code></td>
-                
-                  
-                    <td><code>number</code></td>
-                  
-                
-                <td>The zIndex value for the label. Setting this value to be
- higher or lower than zIndex for the marker controls whether the label appears on top of
- or underneath the marker, respectively.</td>
               </tr>
             
           </tbody>
