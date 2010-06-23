@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.0 [June 22, 2010]
+ * @version 1.0 [June 23, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -46,15 +46,15 @@ function MarkerLabel_(marker) {
   this.labelDiv_.style.cssText = "position: absolute; overflow: hidden;";
 
   // Set up the DIV for handling mouse events in the label. This DIV forms a transparent veil
-  // in the "overlayMouseTarget" pane, a veil that covers the label. This is done so that
+  // in the "overlayMouseTarget" pane, a veil that covers just the label. This is done so that
   // events can be captured even if the label is in the shadow of a google.maps.InfoWindow.
   // Code is included here to ensure the veil is always exactly the same size as the label.
   this.eventDiv_ = document.createElement("div");
-  // Prevent selection of the text in the label:
+  // Prevent selection of the text in the DIV:
   this.eventDiv_.onselectstart = function () {
     return false;
   };
-  this.eventDiv_.style.cssText = "position: absolute; overflow: hidden;";
+  this.eventDiv_.style.cssText = this.labelDiv_.style.cssText;
 
   this.setMap(this.marker_.getMap());
   google.maps.event.addListener(this.marker_, "map_changed", function () {
@@ -74,42 +74,18 @@ MarkerLabel_.prototype.onAdd = function () {
   var me = this;
   var cMouseIsDown = false;
   var cDraggingInProgress = false;
-  var cLastPosition;
-  var cLatOffset;
-  var cLngOffset;
-  var cSavedMarkerZ;
+  var cSavedPosition;
+  var cSavedZIndex;
+  var cLatOffset, cLngOffset;
   var cIgnoreClick;
   
-  // Applies mandatory style values to the label and event DIVs in case
-  // an attempt was made to change them:
-  var cApplyMandatoryStyles = function () {
-    var position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
-
-    // Make sure the opacity setting causes the desired effect on MSIE:
-    if (typeof me.labelDiv_.style.opacity !== "undefined") {
-      me.labelDiv_.style.filter = "alpha(opacity=" + (me.labelDiv_.style.opacity * 100) + ")";
-    }
-
-    me.labelDiv_.style.position = "absolute";
-    me.labelDiv_.style.overflow = "hidden";
-    me.labelDiv_.style.left = position.x + "px";
-    me.labelDiv_.style.top = position.y + "px";
-
-    me.eventDiv_.style.position = me.labelDiv_.style.position;
-    me.eventDiv_.style.overflow = me.labelDiv_.style.overflow;
-    me.eventDiv_.style.left = me.labelDiv_.style.left;
-    me.eventDiv_.style.top = me.labelDiv_.style.top;
-    me.eventDiv_.style.opacity = 0.01; // Don't use 0; DIV won't be clickable on MSIE
-    me.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
-  };
-
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_);
 
   this.listeners_ = [
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
       if (cDraggingInProgress) {
-        mEvent.latLng = cLastPosition;
+        mEvent.latLng = cSavedPosition;
         cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
         google.maps.event.trigger(me.marker_, "dragend", mEvent);
       }
@@ -120,7 +96,7 @@ MarkerLabel_.prototype.onAdd = function () {
       if (cMouseIsDown && me.marker_.getDraggable()) {
         // Change the reported location from the mouse position to the marker position:
         mEvent.latLng = new google.maps.LatLng(mEvent.latLng.lat() - cLatOffset, mEvent.latLng.lng() - cLngOffset);
-        cLastPosition = mEvent.latLng;
+        cSavedPosition = mEvent.latLng;
         if (cDraggingInProgress) {
           google.maps.event.trigger(me.marker_, "drag", mEvent);
         } else {
@@ -168,90 +144,46 @@ MarkerLabel_.prototype.onAdd = function () {
     }),
     google.maps.event.addListener(this.marker_, "dragstart", function (mEvent) {
       cDraggingInProgress = true;
-      cSavedMarkerZ = me.marker_.getZIndex();
+      cSavedZIndex = me.marker_.getZIndex();
     }),
     google.maps.event.addListener(this.marker_, "drag", function (mEvent) {
       me.marker_.setPosition(mEvent.latLng);
-      me.marker_.setZIndex(1000000);
+      me.marker_.setZIndex(1000000); // Moves the marker to the foreground during a drag
     }),
     google.maps.event.addListener(this.marker_, "dragend", function (mEvent) {
       cDraggingInProgress = false;
-      me.marker_.setZIndex(cSavedMarkerZ);
-    }),
-    google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
-      me.labelDiv_.innerHTML = me.marker_.get("labelText");
-      me.eventDiv_.innerHTML = me.labelDiv_.innerHTML;
-    }),
-    google.maps.event.addListener(this.marker_, "labelclass_changed", function () {
-      me.labelDiv_.className = me.marker_.get("labelClass");
-      me.eventDiv_.className = me.labelDiv_.className;
-      cApplyMandatoryStyles();
-    }),
-    google.maps.event.addListener(this.marker_, "labelstyle_changed", function () {
-      var i, labelStyle;
-
-      // Apply default style values to the label:
-      me.labelDiv_.className = me.marker_.get("labelClass");
-      me.eventDiv_.className = me.labelDiv_.className;
-      // Apply style values defined in the labelStyle parameter:
-      labelStyle = me.marker_.get("labelStyle");
-      for (i in labelStyle) {
-        if (labelStyle.hasOwnProperty(i)) {
-          me.labelDiv_.style[i] = labelStyle[i];
-          me.eventDiv_.style[i] = labelStyle[i];
-        }
-      }
-      cApplyMandatoryStyles();
-    }),
-    google.maps.event.addListener(this.marker_, "zindex_changed", function () {
-      var zAdjust = (me.marker_.get("labelInForeground") ? 1 : 0);
-      if (typeof me.marker_.getZIndex() === "undefined") {
-        // Set up default stacking order: labels to the south are in front of labels to the north:
-        me.labelDiv_.style.zIndex = parseInt(me.labelDiv_.style.top, 10) + zAdjust;
-        me.eventDiv_.style.zIndex = me.labelDiv_.style.zIndex;
-      } else {
-        me.labelDiv_.style.zIndex = me.marker_.getZIndex() + zAdjust;
-        me.eventDiv_.style.zIndex = me.labelDiv_.style.zIndex;
-      }
-    }),
-    google.maps.event.addListener(this.marker_, "labelvisible_changed", function () {
-      if (me.marker_.get("labelVisible")) {
-        me.labelDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
-      } else {
-        me.labelDiv_.style.display = "none";
-      }
-      me.eventDiv_.style.display = me.labelDiv_.style.display;
+      me.marker_.setZIndex(cSavedZIndex);
     }),
     google.maps.event.addListener(this.marker_, "position_changed", function () {
-      var position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
-      me.labelDiv_.style.left = position.x + "px";
-      me.labelDiv_.style.top = position.y + "px";
-      me.eventDiv_.style.left = me.labelDiv_.style.left;
-      me.eventDiv_.style.top = me.labelDiv_.style.top;
-      var zAdjust = (me.marker_.get("labelInForeground") ? 1 : 0);
-      if (typeof me.marker_.getZIndex() === "undefined") {
-        // Apply default stacking order: labels to the south are in front of labels to the north:
-        me.labelDiv_.style.zIndex = parseInt(me.labelDiv_.style.top, 10) + zAdjust;
-        me.eventDiv_.style.zIndex = me.labelDiv_.style.zIndex;
-      }
+      me.setPosition();
+    }),
+    google.maps.event.addListener(this.marker_, "zindex_changed", function () {
+      me.setZIndex();
     }),
     google.maps.event.addListener(this.marker_, "visible_changed", function () {
-      if (me.marker_.get("labelVisible")) {
-        me.labelDiv_.style.display = me.marker_.getVisible() ? "block" : "none";
-      } else {
-        me.labelDiv_.style.display = "none";
-      }
-      me.eventDiv_.style.display = me.labelDiv_.style.display;
+      me.setVisible();
+    }),
+    google.maps.event.addListener(this.marker_, "labelvisible_changed", function () {
+      me.setVisible();
     }),
     google.maps.event.addListener(this.marker_, "title_changed", function () {
-      me.eventDiv_.title = me.marker_.getTitle();
+      me.setTitle();
+    }),
+    google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
+      me.setLabelText();
+    }),
+    google.maps.event.addListener(this.marker_, "labelclass_changed", function () {
+      me.setStyles();
+    }),
+    google.maps.event.addListener(this.marker_, "labelstyle_changed", function () {
+      me.setStyles();
     })
   ];
 };
 
 /**
  * Removes the DIV for the label from the DOM. It also removes all event handlers.
- * This method is called when <code>setMap(null)</code> is called.
+ * This method is called automatically when <code>setMap(null)</code> is called.
  * @private
  */
 MarkerLabel_.prototype.onRemove = function () {
@@ -266,31 +198,48 @@ MarkerLabel_.prototype.onRemove = function () {
 };
 
 /**
- * Draws the label with the specified style and at the specified location.
+ * Draws the label on the map.
  * @private
  */
 MarkerLabel_.prototype.draw = function () {
-  var i, labelStyle, zAdjust;
-  
-  // Position the container:
-  var position = this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());
-  this.labelDiv_.style.left = position.x + "px";
-  this.labelDiv_.style.top = position.y + "px";
-  this.eventDiv_.style.left = this.labelDiv_.style.left;
-  this.eventDiv_.style.top = this.labelDiv_.style.top;
+  this.setLabelText();
+  this.setTitle();
+  this.setStyles();
+};
 
-  if (this.marker_.get("labelVisible")) {
-    this.labelDiv_.style.display = this.marker_.getVisible() ? "block" : "none";
-  } else {
-    this.labelDiv_.style.display = "none";
-  }
-  this.eventDiv_.style.display = this.labelDiv_.style.display;
+/**
+ * Sets the content of the label.
+ * @private
+ */
+MarkerLabel_.prototype.setLabelText = function () {
+  this.labelDiv_.innerHTML = this.marker_.get("labelText");
+  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+};
 
+/**
+ * Sets the content of the tool tip for the label. It is always set
+ * to be the same as for the label itself.
+ * @private
+ */
+MarkerLabel_.prototype.setTitle = function () {
   this.eventDiv_.title = this.marker_.getTitle() || "";
+};
 
-  // Apply default style values to the label:
+/**
+ * Sets the style of the label by setting the style sheet and applying other
+ * specific styles requested.
+ * @private
+ */
+MarkerLabel_.prototype.setStyles = function () {
+  var i, labelStyle;
+
+  // Apply style values from the style sheet defined in the labelClass parameter:
   this.labelDiv_.className = this.marker_.get("labelClass");
   this.eventDiv_.className = this.labelDiv_.className;
+
+  // Clear existing inline style values:
+  this.labelDiv_.style.cssText = "";
+  this.eventDiv_.style.cssText = "";
   // Apply style values defined in the labelStyle parameter:
   labelStyle = this.marker_.get("labelStyle");
   for (i in labelStyle) {
@@ -299,35 +248,75 @@ MarkerLabel_.prototype.draw = function () {
       this.eventDiv_.style[i] = labelStyle[i];
     }
   }
+  this.setMandatoryStyles();
+};
+
+/**
+ * Sets the mandatory styles to the DIV representing the label as well as to the
+ * corresponding event DIV. This includes setting the DIV position and zIndex.
+ * @private
+ */
+MarkerLabel_.prototype.setMandatoryStyles = function () {
+  this.labelDiv_.style.position = "absolute";
+  this.labelDiv_.style.overflow = "hidden";
   // Make sure the opacity setting causes the desired effect on MSIE:
   if (typeof this.labelDiv_.style.opacity !== "undefined") {
     this.labelDiv_.style.filter = "alpha(opacity=" + (this.labelDiv_.style.opacity * 100) + ")";
   }
-  // Apply mandatory style values:
-  this.labelDiv_.style.position = "absolute";
-  this.labelDiv_.style.overflow = "hidden";
-  this.labelDiv_.style.left = position.x + "px";
-  this.labelDiv_.style.top = position.y + "px";
 
   this.eventDiv_.style.position = this.labelDiv_.style.position;
   this.eventDiv_.style.overflow = this.labelDiv_.style.overflow;
+  this.eventDiv_.style.opacity = 0.01; // Don't use 0; DIV won't be clickable on MSIE
+  this.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
+  
+  this.setPosition(); // This also updates zIndex, if necessary.
+  this.setVisible();
+};
+
+/**
+ * Sets the position of the label. The zIndex is also updated, if necessary.
+ * @private
+ */
+MarkerLabel_.prototype.setPosition = function () {
+  var position = this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());
+  
+  this.labelDiv_.style.left = position.x + "px";
+  this.labelDiv_.style.top = position.y + "px";
   this.eventDiv_.style.left = this.labelDiv_.style.left;
   this.eventDiv_.style.top = this.labelDiv_.style.top;
-  this.eventDiv_.style.opacity = 0.01; // Don't use 0; not clickable on MSIE
-  this.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
 
-  zAdjust = (this.marker_.get("labelInForeground") ? 1 : 0);
+  this.setZIndex();
+};
+
+/**
+ * Sets the zIndex of the label. If the marker's zIndex property has not been defined, the zIndex
+ * of the label is set to the vertical coordinate of the label. This is in keeping with the default
+ * stacking order for Google Maps: markers to the south are in front of markers to the north.
+ * @private
+ */
+MarkerLabel_.prototype.setZIndex = function () {
+  var zAdjust = (this.marker_.get("labelInForeground") ? 1 : -1);
   if (typeof this.marker_.getZIndex() === "undefined") {
-    // Apply default stacking order: labels to the south are in front of labels to the north:
     this.labelDiv_.style.zIndex = parseInt(this.labelDiv_.style.top, 10) + zAdjust;
     this.eventDiv_.style.zIndex = this.labelDiv_.style.zIndex;
   } else {
     this.labelDiv_.style.zIndex = this.marker_.getZIndex() + zAdjust;
     this.eventDiv_.style.zIndex = this.labelDiv_.style.zIndex;
   }
+};
 
-  this.labelDiv_.innerHTML = this.marker_.get("labelText");
-  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+/**
+ * Sets the visibility of the label. The label is visible only if the marker itself is
+ * visible (i.e., its visible property is true) and the labelVisible property is true.
+ * @private
+ */
+MarkerLabel_.prototype.setVisible = function () {
+  if (this.marker_.get("labelVisible")) {
+    this.labelDiv_.style.display = this.marker_.getVisible() ? "block" : "none";
+  } else {
+    this.labelDiv_.style.display = "none";
+  }
+  this.eventDiv_.style.display = this.labelDiv_.style.display;
 };
 
 /**
@@ -341,15 +330,19 @@ MarkerLabel_.prototype.draw = function () {
  *  events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
  *  For example, if the text of the label changes, a <code>labeltext_changed</code> event is fired.
  *  <p>
- * @property {string} [labelText] The text of the label. It can include HTML code.
+ * @property {string} [labelText] The content of the label (plain text or HTML).
  * @property {string} [labelClass] The name of the CSS class defining the styles for the label.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- *  and <code>left</code> are ignored; these styles are used internally only.
+ *  <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
+ *  these styles are used internally only.
  * @property {Object} [labelStyle] An object literal whose properties define specific CSS
  *  style values to be applied to the label. Style values defined here override those that may
- *  be defined in the <code>labelClass</code> style sheet.
+ *  be defined in the <code>labelClass</code> style sheet. If this property is changed after the
+ *  label has been created, all previously set styles (except those defined in the style sheet)
+ *  are removed from the label before the new style values are applied.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- *  and <code>left</code> are ignored; these styles are used internally only.
+ *  <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
+ *  these styles are used internally only.
  * @property {number} [labelInForeground] A flag indicating whether a label that overlaps its
  *  corresponding marker should appear in the foreground (i.e., in a plane above the marker).
  *  The default is <code>true</code>.

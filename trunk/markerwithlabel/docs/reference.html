@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerWithLabel for V3 v1.0 [June 22, 2010] Reference</title>
+    <title>MarkerWithLabel for V3 v1.0 [June 23, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -75,7 +75,8 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                 
                 <td>The name of the CSS class defining the styles for the label.
  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- and <code>left</code> are ignored; these styles are used internally only.</td>
+ <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
+ these styles are used internally only.</td>
               </tr>
             
               <tr class="even">
@@ -99,9 +100,12 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                 
                 <td>An object literal whose properties define specific CSS
  style values to be applied to the label. Style values defined here override those that may
- be defined in the <code>labelClass</code> style sheet.
+ be defined in the <code>labelClass</code> style sheet. If this property is changed after the
+ label has been created, all previously set styles (except those defined in the style sheet)
+ are removed from the label before the new style values are applied.
  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- and <code>left</code> are ignored; these styles are used internally only.</td>
+ <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
+ these styles are used internally only.</td>
               </tr>
             
               <tr class="even">
@@ -111,7 +115,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                     <td><code>string</code></td>
                   
                 
-                <td>The text of the label. It can include HTML code.</td>
+                <td>The content of the label (plain text or HTML).</td>
               </tr>
             
               <tr class="odd">
