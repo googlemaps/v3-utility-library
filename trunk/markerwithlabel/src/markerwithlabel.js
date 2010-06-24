@@ -50,10 +50,6 @@ function MarkerLabel_(marker) {
   // events can be captured even if the label is in the shadow of a google.maps.InfoWindow.
   // Code is included here to ensure the veil is always exactly the same size as the label.
   this.eventDiv_ = document.createElement("div");
-  // Prevent selection of the text in the DIV:
-  this.eventDiv_.onselectstart = function () {
-    return false;
-  };
   this.eventDiv_.style.cssText = this.labelDiv_.style.cssText;
 
   this.setMap(this.marker_.getMap());
@@ -78,6 +74,18 @@ MarkerLabel_.prototype.onAdd = function () {
   var cSavedZIndex;
   var cLatOffset, cLngOffset;
   var cIgnoreClick;
+  
+  // Stops all processing of the event.
+  //
+  var cAbortEvent = function (e) {
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.cancelBubble = true;
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+  };
   
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_);
@@ -123,24 +131,16 @@ MarkerLabel_.prototype.onAdd = function () {
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "dblclick", function (e) {
+      cAbortEvent(e); // Prevent map zoom when double-clicking on a label
       google.maps.event.trigger(me.marker_, "dblclick", e);
-      // Prevent map zoom when double-clicking on a label:
-      e.cancelBubble = true;
-      if (e.stopPropagation) {
-        e.stopPropagation();
-      }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
       cMouseIsDown = true;
       cDraggingInProgress = false;
       cLatOffset = 0;
       cLngOffset = 0;
+      cAbortEvent(e); // Prevent map pan when starting a drag on a label
       google.maps.event.trigger(me.marker_, "mousedown", e);
-      // Prevent map pan when starting a drag on a label:
-      e.cancelBubble = true;
-      if (e.stopPropagation) {
-        e.stopPropagation();
-      }
     }),
     google.maps.event.addListener(this.marker_, "dragstart", function (mEvent) {
       cDraggingInProgress = true;
@@ -369,8 +369,8 @@ function MarkerWithLabel(opt_options) {
   }
   // Call the parent constructor. It calls Marker.setValues to initialize, so all
   // the new parameters are conveniently saved and can be accessed with get/set.
-  // Marker.set triggers a property changed event ("propertyname_changed") that
-  // the marker label listens for in order to react to state changes.
+  // Marker.set triggers a property changed event (called "propertyname_changed")
+  // that the marker label listens for in order to react to state changes.
   google.maps.Marker.apply(this, arguments);
   this.label_ = new MarkerLabel_(this); // Bind the label to the marker
 }
