@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>StyledMarker v1.0 Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>StyledMarker</h1>
+    <p>
+      This library is used to make Markers whose appearance can be customized by setting properties. For examples of how to use this library see <a href="examples.html">the examples page</a>.
+    </p>
+      <h2><a name="StyledMarker"></a>class StyledMarker</h2>
+      <p>This class is a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code> with an additional option to set a <code>StyleIcon</code>.</p>
+        <h3>Constructor</h3>
+        <table summary="class StyledMarker - Constructors" width="90%">
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>StyledMarker(StyledMarkerOptions:<a href="#StyledMarkerOptions">StyledMarkerOptions</a>)</code></td>
+              <td>Creates a StyledMarker that can be added to the map. This is a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code> and has all the properties and methods of a normal <code>Marker</code>. For a complete reference on the available options see <a href="#StyledMarkerOptions">StyledMarkerOptions</a></td>
+            </tr>
+          </tbody>
+        </table>
+		
+        <h3>Properties</h3>
+        <table summary="class StyledMarker - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>styleIcon</code></td>
+              <td><code><a href="#StyledIcon">StyledIcon</a></code></td>
+              <td>The <code><a href="#StyledIcon">StyledIcon</a></code> associated with this <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code>.</td> 
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledMarkerOptions"></a>class StyledMarkerOptions</h2>
+      <p>This class represents optional arguments to the <a href="#StyledMarker">StyledMarker</a> constructor. It has no constructor but is instantiated as an object literal. It is an extension of <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions">MarkerOptions</a></code> and has all the same properties with the addition of the below.</p>
+		
+        <h3>Properties</h3>
+        <table summary="class StyledMarkerOptions - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>styleIcon</code></td>
+              <td><code><a href="#StyledIcon">StyledIcon</a></code></td>
+              <td>The <code><a href="#StyledIcon">StyledIcon</a></code> to associate with this <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code>.</td> 
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledIcon"></a>class StyledIcon</h2>
+	  <p>This class is applied to a <code><a href="#StyledMarker">StyledMarker</a></code> to set up its appearance. Any change to the <code>StyledIcon's</code> properties will affect all <code>StyledMarkers</code> its been applied to.</p>
+        <h3>Constructor</h3>
+        <table summary="class StyledIcon - Constructors" width="90%">
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>StyledIcon(StyledIconType:<a href="#StyledIconType">StyledIconType</a>,<br/>StyledIconOptions:<a href="#StyledIconOptions">StyledIconOptions</a>,<br/>StyleClass:<a href="#StyledIcon">StyledIcon</a>)</code></td>
+              <td>Creates a <code><a href="#StyledIcon">StyledIcon</a></code> that can be applied to a <code><a href="#StyledMarker">StyledMarker</a></code> or to another <code>StyledIcon</code> as a <code>StyleClass</code>. A <code>StyledIcon</code> applied as a <code>StyleClass</code> will automatically update, when its properties are changed, all <code>StyledIcons</code> that set it as their <code>StyleClass</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Methods</h3>
+        <table summary="class StyledIcon - Methods" width="90%">
+          <tbody>
+            <tr>
+              <th>Method</th>
+              <th>Return Value</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>setValue(name:String,value:Object)</code></td>
+              <td><code>None</code></td>
+              <td>Sets a given style property to the given value. Any Markers using this <code>StyledIcon</code> will be automatically updated.</td>
+            </tr>
+            <tr class="even">
+              <td><code>getValue(name:String)</code></td>
+              <td><code>Object</code></td>
+              <td>Returns a given style property</td>
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledIconOptions"></a>class StyledIconOptions</h2>
+      <p>This class represents optional arguments to the <code><a href="#StyledIcon">StyledIcon</a></code> constructor. It has no constructor but is instantiated as an object literal. Its properties are variable and depend on what <code><a href="#StyledIconType">StyledIconType</a></code> is passed to the <code>StyledIcon</code> constructor.</p>
+
+      <h2><a name="StyledIconType"></a>class StyledIconType</h2>
+      <p>This class holds functions for building the information needed to style markers and is used by <code><a href="#StyledIcon">StyledIcon</a></code>. It has no constructor but is instantiated as an object literal. The properties set in the <code>default</code> property are the properties used in <code><a href="#StyledIconOptions">StyledIconOptions</a></code>.</p>
+
+        <h3>Properties</h3>
+        <table summary="class StyledMarkerOptions - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>defaults</code></td>
+              <td><code><a href="#StyledIconOptions">StyledIconOptions</a></code></td>
+              <td>The properties and their defaults used by this <code>StyledIconType</code>.</td> 
+            </tr>
+          </tbody>
+        </table>
+		
+        <h3>Methods</h3>
+        <table summary="class StyledIcon - Methods" width="90%">
+          <tbody>
+            <tr>
+              <th>Method</th>
+              <th>Return Value</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>getURL(icon:<a href="#StyledIcon">StyledIcon</a>)</code></td>
+              <td><code>String</code></td>
+              <td>Returns the URL to an image to be used by the <code><a href="#StyledMarker">StyledMarker</a></code> icon. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+            </tr>
+            <tr class="even">
+              <td><code>getShadowURL(icon:<a href="#StyledIcon">StyledIcon</a>)</code></td>
+              <td><code>String</code></td>
+              <td>Returns the URL to an image to be used by the <code><a href="#StyledMarker">StyledMarker</a></code> shadow. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>getAnchor(icon:<a href="#StyledIcon">StyledIcon</a>,width:Number,height:Number)</code></td>
+              <td><code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code></td>
+              <td>Returns a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code> that indicates the point on the image where the <code><a href="#StyledMarker">StyledMarker</a></code> is placed on the <code>Map</code>. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+            </tr>
+            <tr class="even">
+              <td><code>getShadowAnchor(icon:<a href="#StyledIcon">StyledIcon</a>,width:Number,height:Number)</code></td>
+              <td><code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code></td>
+              <td>Returns a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code> that indicates the point on the shadow image where the <code><a href="#StyledMarker">StyledMarker</a></code> is placed on the <code>Map</code>. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+            </tr>
+            <tr class="odd">
+              <td><code>getShape(icon:<a href="#StyledIcon">StyledIcon</a>,width:Number,height:Number)</code></td>
+              <td><code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerShape">MarkerShape</a></code></td>
+              <td>Returns a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerShape">MarkerShape</a></code> that indicates where the <code><a href="#StyledMarker">StyledMarker</a></code> is clickable. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledIconType"></a>class StyledIconTypes</h2>
+      <p>This is an enum of <code><a href="#StyledIconType">StyledIconType</a></code> that can be passed to a <code><a href="#StyledIcon">StyledIcon</a></code> constructor.</p>
+        <h3>Properties</h3>
+        <table summary="class StyledMarkerOptions - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>defaults</code></td>
+              <td><code><a href="#MARKER">MARKER</a></code></td>
+              <td>Resembles a default <code>Marker</code>. Can alter color or have an optional letter placed in it or a star.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>defaults</code></td>
+              <td><code><a href="#BUBBLE">MARKER</a></code></td>
+              <td>Resembles a small <code>InfoWindow</code>. Can alter color or have a string of text placed in it.</td> 
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledIconTypesMARKER"></a>StyledIconTypes.MARKER</h2>
+      <p>Properties for <code>StyledIconTypes.MARKER</code>. Pass any of these to <code><a href="#StyledIconOptions">StyledIconOptions</a></code> when using this type.</p>
+
+        <h3>Properties</h3>
+        <table summary="class StyledIconTypesMARKER - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>text</code></td>
+              <td><code>String<code></td>
+              <td>A letter that will appear within the <code>Marker</code>.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>color</code></td>
+              <td><code>String<code></td>
+              <td>The color of the <code>Marker</code>.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>fore</code></td>
+              <td><code>String<code></td>
+              <td>The color of any text appearing within the <code>Marker</code>.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>starcolor</code></td>
+              <td><code>String<code></td>
+              <td>The color of the star on the <code>Marker</code>. If this is null or omitted then no star will appear.</td> 
+            </tr>
+          </tbody>
+        </table>
+		
+      <h2><a name="StyledIconTypesBUBBLE"></a>StyledIconTypes.BUBBLE</h2>
+      <p>Properties for <code>StyledIconTypes.BUBBLE</code>. Pass any of these to <code><a href="#StyledIconOptions">StyledIconOptions</a></code> when using this type.</p>
+
+        <h3>Properties</h3>
+        <table summary="class StyledIconTypesBUBBLE - Properties" width="90%">
+          <tbody>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>text</code></td>
+              <td><code>String<code></td>
+              <td>A string of text that will appear within the <code>Marker</code>.</td> 
+            </tr>
+            <tr class="even">
+              <td><code>color</code></td>
+              <td><code>String<code></td>
+              <td>The color of the <code>Marker</code>.</td> 
+            </tr>
+            <tr class="odd">
+              <td><code>fore</code></td>
+              <td><code>String<code></td>
+              <td>The color of any text appearing within the <code>Marker</code>.</td> 
+            </tr>
+          </tbody>
+        </table>
+  </body> 
+</html> 
