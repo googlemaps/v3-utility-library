@@ -32,9 +32,9 @@ rest of the InfoBox appears yellow because that's the background color of the co
 	 visible: true
 	});
 		
-	var boxText = "&lt;div style='border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;'&gt;";
-	boxText += "City Hall, Sechelt&lt;br&gt;British Columbia&lt;br&gt;Canada";
-	boxText += "&lt;/div&gt;";
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+        boxText.innerHTML = "City Hall, Sechelt&lt;br&gt;British Columbia&lt;br&gt;Canada";
 		
 	var myOptions = {
 		 content: boxText
