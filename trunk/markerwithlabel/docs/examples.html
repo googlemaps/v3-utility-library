@@ -46,11 +46,12 @@
 
      var marker = new MarkerWithLabel({
        position: homeLatLng,
-       draggable: false,
+       draggable: true,
        map: map,
        labelText: "$425K",
+       labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
+       labelStyle: {opacity: 0.75},
        labelVisible: true
      });
 
@@ -90,10 +91,10 @@
      var marker = new MarkerWithLabel({
        position: homeLatLng,
        map: map,
-       draggable: false,
+       draggable: true,
        labelText: "A",
+       labelAnchor: new google.maps.Point(3, 30),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "-30px", marginLeft: "-3px"},
        labelInForeground: true
      });
 
@@ -135,8 +136,8 @@
        draggable: true,
        map: map,
        labelText: "$425K",
+       labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "0px", marginLeft: "-21px", opacity: 0.75},
        labelVisible: true
      });
 
@@ -188,8 +189,9 @@
        map: map,
        draggable: true,
        labelText: "&lt;img src='home.jpg'&gt;",
+       labelAnchor: new google.maps.Point(50, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {marginTop: "0px", marginLeft: "-50px", opacity: 0.5},
+       labelStyle: {opacity: 0.50},
        labelInForeground: true
      });
 
