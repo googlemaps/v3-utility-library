@@ -169,7 +169,7 @@ MarkerLabel_.prototype.onAdd = function () {
     google.maps.event.addListener(this.marker_, "title_changed", function () {
       me.setTitle();
     }),
-    google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
+    google.maps.event.addListener(this.marker_, "labelcontent_changed", function () {
       me.setContent();
     }),
     google.maps.event.addListener(this.marker_, "labelanchor_changed", function () {
@@ -212,12 +212,20 @@ MarkerLabel_.prototype.draw = function () {
 };
 
 /**
- * Sets the content of the label.
+ * Sets the content of the label. The content can be simple text
+ * or an HTML node.
  * @private
  */
 MarkerLabel_.prototype.setContent = function () {
-  this.labelDiv_.innerHTML = this.marker_.get("labelText");
-  this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+  var content = this.marker_.get("labelContent");
+  if (typeof content.nodeType === "undefined") {
+    this.labelDiv_.innerHTML = content;
+    this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+  } else {
+    this.labelDiv_.appendChild(content);
+    content = content.cloneNode(true);
+    this.eventDiv_.appendChild(content);
+  }
 };
 
 /**
@@ -345,13 +353,14 @@ MarkerLabel_.prototype.setVisible = function () {
  *  <p>
  *  When any of these properties changes, a property changed event is fired. The names of these
  *  events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
- *  For example, if the text of the label changes, a <code>labeltext_changed</code> event is fired.
+ *  For example, if the content of the label changes, a <code>labelcontent_changed</code> event
+ *  is fired.
  *  <p>
- * @property {string} [labelText] The content of the label (plain text or HTML).
+ * @property {string|Node} [labelContent] The content of the label (plain text or an HTML DOM node).
  * @property {Point} [labelAnchor] By default, a label is drawn with its anchor point at (0,0) so
  *  that its top left corner is positioned at the anchor point of the associated marker. Use this
- *  parameter to change the anchor point of the label. For example, to center a 50px-wide label
- *  beneath a marker, specify a <code>labelAnchor</code> of <code>new google.maps.Point(25, 0)</code>.
+ *  property to change the anchor point of the label. For example, to center a 50px-wide label
+ *  beneath a marker, specify a <code>labelAnchor</code> of <code>google.maps.Point(25, 0)</code>.
  *  (Note: x-values increase to the east and y-values increase to the south.)
  * @property {string} [labelClass] The name of the CSS class defining the styles for the label.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
@@ -379,7 +388,7 @@ MarkerLabel_.prototype.setVisible = function () {
  * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
  */
 function MarkerWithLabel(opt_options) {
-  opt_options.labelText = opt_options.labelText || "";
+  opt_options.labelContent = opt_options.labelContent || "";
   opt_options.labelAnchor = opt_options.labelAnchor || new google.maps.Point(0, 0);
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
   opt_options.labelStyle = opt_options.labelStyle || {};

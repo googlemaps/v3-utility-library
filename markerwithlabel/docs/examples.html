@@ -19,7 +19,7 @@
 
 <div>
 <h2><span lang="en-us">Creating a Basic Marker</span></h2>
-<p>The example below shows how to use MarkerWithLabel to create a marker that has a label centered beneath it in a small box. The label can be styled most easily by defining a CSS class with the desired properties for the label DIV. In this example the class is called "labels" and this name is passed in the <code>labelClass</code> parameter to MarkerWithLabel. Additional styling information can be passed in the <code>labelStyle</code> parameter. The text of the label is passed in <code>labelText</code>. Other parameters that can be passed to MarkerWithLabel are identical to those that can be passed to <code>google.maps.Marker</code>.</p>
+<p>The example below shows how to use MarkerWithLabel to create a marker that has a label centered beneath it in a small box. The label can be styled most easily by defining a CSS class with the desired properties for the label DIV. In this example the class is called "labels" and this name is passed in the <code>labelClass</code> parameter to MarkerWithLabel. Additional styling information can be passed in the <code>labelStyle</code> parameter. The text of the label is passed in <code>labelContent</code>. Other parameters that can be passed to MarkerWithLabel are identical to those that can be passed to <code>google.maps.Marker</code>.</p>
 <pre class="prettyprint">
  &lt;style type="text/css"&gt;
    .labels {
@@ -48,7 +48,7 @@
        position: homeLatLng,
        draggable: true,
        map: map,
-       labelText: "$425K",
+       labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
        labelStyle: {opacity: 0.75},
@@ -92,7 +92,7 @@
        position: homeLatLng,
        map: map,
        draggable: true,
-       labelText: "A",
+       labelContent: "A",
        labelAnchor: new google.maps.Point(3, 30),
        labelClass: "labels", // the CSS class for the label
        labelInForeground: true
@@ -135,7 +135,7 @@
        position: homeLatLng,
        draggable: true,
        map: map,
-       labelText: "$425K",
+       labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
        labelVisible: true
@@ -161,7 +161,7 @@
 
 <div>
 <h2><span lang="en-us">Pictures as Labels</span></h2>
-<p>This example illustrates that <code>labelText</code> can also be set to any arbitrary HTML markup. In this case, it is a simple &lt;img&gt; tag defining a picture. The picture label has an opacity of 0.50 to make it possible to see what's behind it on the map.</p>
+<p>This example illustrates that <code>labelContent</code> can also be set to any arbitrary HTML DOM node. In this case, it is a simple img element holding a picture. The picture label has an opacity of 0.50 to make it possible to see what's behind it on the map.</p>
 <pre class="prettyprint">
  &lt;style type="text/css"&gt;
    .labels {
@@ -184,11 +184,14 @@
        mapTypeId: google.maps.MapTypeId.ROADMAP
      });
 
+     var pictureLabel = document.createElement("img");
+     pictureLabel.src = "home.jpg";
+
      var marker = new MarkerWithLabel({
        position: homeLatLng,
        map: map,
        draggable: true,
-       labelText: "&lt;img src='home.jpg'&gt;",
+       labelContent: pictureLabel,
        labelAnchor: new google.maps.Point(50, 0),
        labelClass: "labels", // the CSS class for the label
        labelStyle: {opacity: 0.50},

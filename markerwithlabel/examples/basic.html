@@ -33,7 +33,7 @@
        position: homeLatLng,
        draggable: true,
        map: map,
-       labelText: "$425K",
+       labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
        labelStyle: {opacity: 0.75},
@@ -44,7 +44,7 @@
        position: new google.maps.LatLng(49.475, -123.84),
        draggable: true,
        map: map,
-       labelText: "$395K",
+       labelContent: "$395K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
        labelStyle: {opacity: 0.75},
@@ -63,9 +63,9 @@
  </script>
 </head>
 <body onload="initMap()">
-<p>A basic example of a markers with labels. Note that an information window appears whether you
-click the marker portion or the label portion. The two markers are both draggable so you can easily
-verify that markers and labels overlap as expected.</p>
+<p>A basic example of markers with labels. Note that an information window appears whether you
+click the marker portion or the label portion of the MarkerWithLabel. The two markers shown here
+are both draggable so you can easily verify that markers and labels overlap as expected.</p>
  <div id="map_canvas" style="height: 60%; width: 100%"></div>
  <div id="log"></div>
 </body>
