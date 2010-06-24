@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.0 [June 23, 2010]
+ * @version 1.0 [June 24, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -170,7 +170,10 @@ MarkerLabel_.prototype.onAdd = function () {
       me.setTitle();
     }),
     google.maps.event.addListener(this.marker_, "labeltext_changed", function () {
-      me.setLabelText();
+      me.setContent();
+    }),
+    google.maps.event.addListener(this.marker_, "labelanchor_changed", function () {
+      me.setAnchor();
     }),
     google.maps.event.addListener(this.marker_, "labelclass_changed", function () {
       me.setStyles();
@@ -203,7 +206,7 @@ MarkerLabel_.prototype.onRemove = function () {
  * @private
  */
 MarkerLabel_.prototype.draw = function () {
-  this.setLabelText();
+  this.setContent();
   this.setTitle();
   this.setStyles();
 };
@@ -212,7 +215,7 @@ MarkerLabel_.prototype.draw = function () {
  * Sets the content of the label.
  * @private
  */
-MarkerLabel_.prototype.setLabelText = function () {
+MarkerLabel_.prototype.setContent = function () {
   this.labelDiv_.innerHTML = this.marker_.get("labelText");
   this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
 };
@@ -270,8 +273,21 @@ MarkerLabel_.prototype.setMandatoryStyles = function () {
   this.eventDiv_.style.opacity = 0.01; // Don't use 0; DIV won't be clickable on MSIE
   this.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
   
+  this.setAnchor();
   this.setPosition(); // This also updates zIndex, if necessary.
   this.setVisible();
+};
+
+/**
+ * Sets the anchor point of the label.
+ * @private
+ */
+MarkerLabel_.prototype.setAnchor = function () {
+  var anchor = this.marker_.get("labelAnchor");
+  this.labelDiv_.style.marginLeft = -anchor.x;
+  this.labelDiv_.style.marginTop = -anchor.y;
+  this.eventDiv_.style.marginLeft = -anchor.x;
+  this.eventDiv_.style.marginTop = -anchor.y;
 };
 
 /**
@@ -332,18 +348,23 @@ MarkerLabel_.prototype.setVisible = function () {
  *  For example, if the text of the label changes, a <code>labeltext_changed</code> event is fired.
  *  <p>
  * @property {string} [labelText] The content of the label (plain text or HTML).
+ * @property {Point} [labelAnchor] By default, a label is drawn with its anchor point at (0,0) so
+ *  that its top left corner is positioned at the anchor point of the associated marker. Use this
+ *  parameter to change the anchor point of the label. For example, to center a 50px-wide label
+ *  beneath a marker, specify a <code>labelAnchor</code> of <code>new google.maps.Point(25, 0)</code>.
+ *  (Note: x-values increase to the east and y-values increase to the south.)
  * @property {string} [labelClass] The name of the CSS class defining the styles for the label.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- *  <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
- *  these styles are used internally only.
+ *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
+ *  <code>marginTop</code> are ignored; these styles are used internally only.
  * @property {Object} [labelStyle] An object literal whose properties define specific CSS
  *  style values to be applied to the label. Style values defined here override those that may
  *  be defined in the <code>labelClass</code> style sheet. If this property is changed after the
  *  label has been created, all previously set styles (except those defined in the style sheet)
  *  are removed from the label before the new style values are applied.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
- *  <code>left</code>, <code>zIndex</code>, and <code>display</code> are ignored;
- *  these styles are used internally only.
+ *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
+ *  <code>marginTop</code> are ignored; these styles are used internally only.
  * @property {number} [labelInForeground] A flag indicating whether a label that overlaps its
  *  associated marker should appear in the foreground (i.e., in a plane above the marker).
  *  The default is <code>true</code>.
@@ -359,6 +380,7 @@ MarkerLabel_.prototype.setVisible = function () {
  */
 function MarkerWithLabel(opt_options) {
   opt_options.labelText = opt_options.labelText || "";
+  opt_options.labelAnchor = opt_options.labelAnchor || new google.maps.Point(0, 0);
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
   opt_options.labelStyle = opt_options.labelStyle || {};
   if (typeof opt_options.labelInForeground === "undefined") {
