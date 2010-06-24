@@ -26,12 +26,15 @@
        center: latLng,
        mapTypeId: google.maps.MapTypeId.ROADMAP
      });
+     
+     var pictureLabel = document.createElement("img");
+     pictureLabel.src = "home.jpg";
 
      var marker = new MarkerWithLabel({
        position: homeLatLng,
        map: map,
        draggable: true,
-       labelText: "<img src='home.jpg'>",
+       labelContent: pictureLabel,
        labelAnchor: new google.maps.Point(50, 0),
        labelClass: "labels", // the CSS class for the label
        labelStyle: {opacity: 0.50},
@@ -49,7 +52,7 @@
  </script>
 </head>
 <body onload="initMap()">
-<p>This is an example of how to use a picture as a marker label. Since the picture label is quite large, the opacity of the label is set to 0.50 to make it possible to see what's on the map behind the picture.</p>
+<p>This is an example of how to use a picture as a marker label. Since the picture label is quite large, the opacity of the label is set to 0.50 to make it possible to get a rough idea of what's on the map behind the picture.</p>
  <div id="map_canvas" style="height: 90%; width: 100%"></div>
  <div id="log"></div>
 </body>
