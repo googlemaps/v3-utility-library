@@ -284,10 +284,10 @@ MarkerLabel_.prototype.setMandatoryStyles = function () {
  */
 MarkerLabel_.prototype.setAnchor = function () {
   var anchor = this.marker_.get("labelAnchor");
-  this.labelDiv_.style.marginLeft = -anchor.x;
-  this.labelDiv_.style.marginTop = -anchor.y;
-  this.eventDiv_.style.marginLeft = -anchor.x;
-  this.eventDiv_.style.marginTop = -anchor.y;
+  this.labelDiv_.style.marginLeft = -anchor.x + "px";
+  this.labelDiv_.style.marginTop = -anchor.y + "px";
+  this.eventDiv_.style.marginLeft = -anchor.x + "px";
+  this.eventDiv_.style.marginTop = -anchor.y + "px";
 };
 
 /**
