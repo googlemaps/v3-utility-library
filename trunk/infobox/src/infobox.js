@@ -1,9 +1,9 @@
 /**
  * @name InfoBox
- * @version 1.0.1 [January 19, 2010]
+ * @version 1.0.1 [June 24, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
- * @fileoverview InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
+ * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  *  <p>
  *  An InfoBox behaves like a <tt>google.maps.InfoWindow</tt>, but it supports several
  *  additional properties for advanced styling. An InfoBox can also be used as a map label.
@@ -40,7 +40,7 @@
 /**
  * @name InfoBoxOptions
  * @class This class represents the optional parameter passed to the {@link InfoBox} constructor.
- * @property {string|Node} content The content to display in the InfoBox (plain text or HTML).
+ * @property {string|Node} content The content of the InfoBox (plain text or an HTML DOM node).
  * @property {boolean} disableAutoPan Disable auto-pan on <tt>open</tt> (default is <tt>false</tt>).
  * @property {number} maxWidth The maximum width (in pixels) of the InfoBox. Set to 0 if no maximum.
  * @property {Size} pixelOffset The offset (in pixels) from the top left corner of the InfoBox
@@ -169,7 +169,12 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
       this.div_.style.zIndex = this.zIndex_;
     }
 
-    this.div_.innerHTML = this.getCloseBoxImg_() + this.content_;
+    if (typeof this.content_ === "undefined") {
+      this.div_.innerHTML = this.getCloseBoxImg_() + this.content_;
+    } else {
+      this.div_.innerHTML = this.getCloseBoxImg_();
+      this.div_.appendChild(this.content_);
+    }
 
     // Add the InfoBox DIV to the DOM
     this.getPanes()[this.pane_].appendChild(this.div_);
@@ -505,11 +510,10 @@ InfoBox.prototype.setOptions = function (opt_opts) {
 
 /**
  * Sets the content of the InfoBox.
- *  The content can be plain text or HTML.
- * @param {string} content
+ *  The content can be plain text or an HTML DOM node.
+ * @param {string|Node} content
  */
 InfoBox.prototype.setContent = function (content) {
-
   this.content_ = content;
 
   if (this.div_) {
@@ -527,7 +531,12 @@ InfoBox.prototype.setContent = function (content) {
       this.div_.style.width = "";
     }
 
-    this.div_.innerHTML = this.getCloseBoxImg_() + content;
+    if (typeof content.nodeType === "undefined") {
+      this.div_.innerHTML = this.getCloseBoxImg_() + content;
+    } else {
+      this.div_.innerHTML = this.getCloseBoxImg_();
+      this.div_.appendChild(content);
+    }
 
     // Perverse code required to make things work with MSIE.
     // (Ensures the close box does, in fact, float to the right.)

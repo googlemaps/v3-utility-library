@@ -22,9 +22,9 @@
 		 ,visible: true
 		});
 		
-		var boxText = "<div style='border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;'>";
-		boxText += "City Hall, Sechelt<br>British Columbia<br>Canada";
-		boxText += "</div>";
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+        boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
 		
 		var myOptions = {
 			 content: boxText

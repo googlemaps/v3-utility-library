@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>InfoBox v1.0.1 [January 19, 2010] Reference</title>
+    <title>InfoBox v1.0.1 [June 24, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
   <body>
     <h1>InfoBox</h1>
     <p>
-InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
+InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  <p>
  An InfoBox behaves like a <tt>google.maps.InfoWindow</tt>, but it supports several
  additional properties for advanced styling. An InfoBox can also be used as a map label.
@@ -145,14 +145,14 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
               </tr>
             
               <tr class="odd">
-                <td><code>setContent(<span class="type">content:string</span>)</code></td>
+                <td><code>setContent(<span class="type">content:string|Node</span>)</code></td>
                 
                   
                     <td><code>None</code></td>
                   
                 
                 <td>Sets the content of the InfoBox.
- The content can be plain text or HTML.</td>
+ The content can be plain text or an HTML DOM node.</td>
               </tr>
             
               <tr class="even">
@@ -327,7 +327,7 @@ InfoBox extends the Google Maps API v3 <tt>OverlayView</tt> class.
                     <td><code>string|Node</code></td>
                   
                 
-                <td>The content to display in the InfoBox (plain text or HTML).</td>
+                <td>The content of the InfoBox (plain text or an HTML DOM node).</td>
               </tr>
             
               <tr class="odd">
