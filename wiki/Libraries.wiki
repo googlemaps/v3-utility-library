@@ -60,4 +60,6 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggab
 
 This class behaves like {{{google.maps.Marker}}}, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
 
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/ Released Versions]
+or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
