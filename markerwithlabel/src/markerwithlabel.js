@@ -320,7 +320,7 @@ MarkerLabel_.prototype.setPosition = function () {
  * @private
  */
 MarkerLabel_.prototype.setZIndex = function () {
-  var zAdjust = (this.marker_.get("labelInForeground") ? 1 : -1);
+  var zAdjust = (this.marker_.get("labelInBackground") ? -1 : +1);
   if (typeof this.marker_.getZIndex() === "undefined") {
     this.labelDiv_.style.zIndex = parseInt(this.labelDiv_.style.top, 10) + zAdjust;
     this.eventDiv_.style.zIndex = this.labelDiv_.style.zIndex;
@@ -346,10 +346,10 @@ MarkerLabel_.prototype.setVisible = function () {
 
 /**
  * @name MarkerWithLabelOptions
- * @class This class represents the optional parameter passed into <code>MarkerWithLabel</code>.
+ * @class This class represents the optional parameter passed to the {@link MarkerWithLabel} constructor.
  *  The properties available are the same as for <code>google.maps.Marker</code> with the addition
- *  of the properties below. To change any of these new properties after the labeled marker has
- *  been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
+ *  of the properties listed below. To change any of these additional properties after the labeled
+ *  marker has been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
  *  <p>
  *  When any of these properties changes, a property changed event is fired. The names of these
  *  events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
@@ -361,11 +361,11 @@ MarkerLabel_.prototype.setVisible = function () {
  *  that its top left corner is positioned at the anchor point of the associated marker. Use this
  *  property to change the anchor point of the label. For example, to center a 50px-wide label
  *  beneath a marker, specify a <code>labelAnchor</code> of <code>google.maps.Point(25, 0)</code>.
- *  (Note: x-values increase to the east and y-values increase to the south.)
+ *  (Note: x-values increase to the right and y-values increase to the bottom.)
  * @property {string} [labelClass] The name of the CSS class defining the styles for the label.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
- *  <code>marginTop</code> are ignored; these styles are used internally only.
+ *  <code>marginTop</code> are ignored; these styles are for internal use only.
  * @property {Object} [labelStyle] An object literal whose properties define specific CSS
  *  style values to be applied to the label. Style values defined here override those that may
  *  be defined in the <code>labelClass</code> style sheet. If this property is changed after the
@@ -373,17 +373,17 @@ MarkerLabel_.prototype.setVisible = function () {
  *  are removed from the label before the new style values are applied.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
- *  <code>marginTop</code> are ignored; these styles are used internally only.
- * @property {number} [labelInForeground] A flag indicating whether a label that overlaps its
- *  associated marker should appear in the foreground (i.e., in a plane above the marker).
- *  The default is <code>true</code>.
+ *  <code>marginTop</code> are ignored; these styles are for internal use only.
+ * @property {boolean} [labelInBackground] A flag indicating whether a label that overlaps its
+ *  associated marker should appear in the background (i.e., in a plane below the marker).
+ *  The default is <code>false</code>, which causes the label to appear in the foreground.
  * @property {boolean} [labelVisible] A flag indicating whether the label is to be visible.
- *  The default is <code>true</code>. Note that even when <code>labelVisible</code> is
- *  <code>true</code>, the label will <i>not</i> be visible if the marker itself is not visible
- *  (i.e., if the marker's <code>visible</code> property is <code>false</code>).
+ *  The default is <code>true</code>. Note that even if <code>labelVisible</code> is
+ *  <code>true</code>, the label will <i>not</i> be visible unless the associated marker is also
+ *  visible (i.e., unless the marker's <code>visible</code> property is <code>true</code>).
  */
 /**
- * This constructor is used to create a marker with an associated label.
+ * Creates a MarkerWithLabel with the options specified in {@link MarkerWithLabelOptions}.
  * @constructor
  * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
  */
@@ -393,9 +393,7 @@ function MarkerWithLabel(opt_options) {
   opt_options.labelAnchor = opt_options.labelAnchor || new google.maps.Point(0, 0);
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
   opt_options.labelStyle = opt_options.labelStyle || {};
-  if (typeof opt_options.labelInForeground === "undefined") {
-    opt_options.labelInForeground = true;
-  }
+  opt_options.labelInBackground = opt_options.labelInBackground || false;
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }

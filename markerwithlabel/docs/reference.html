@@ -34,7 +34,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
               <tr class="odd">
                 <td><code>MarkerWithLabel(<span class="type">opt_options?:MarkerWithLabelOptions</span>)</code></td>
                 
-                <td>This constructor is used to create a marker with an associated label.</td>
+                <td>Creates a MarkerWithLabel with the options specified in <code><a href="reference.html#MarkerWithLabelOptions">MarkerWithLabelOptions</a></code>.</td>
               </tr>
             
           </tbody>
@@ -42,10 +42,10 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
       
     
       <h2><a name="MarkerWithLabelOptions"></a>class MarkerWithLabelOptions</h2>
-      <p>This class represents the optional parameter passed into <code>MarkerWithLabel</code>.
+      <p>This class represents the optional parameter passed to the <code><a href="reference.html#MarkerWithLabel">MarkerWithLabel</a></code> constructor.
  The properties available are the same as for <code>google.maps.Marker</code> with the addition
- of the properties below. To change any of these new properties after the labeled marker has
- been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
+ of the properties listed below. To change any of these additional properties after the labeled
+ marker has been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
  <p>
  When any of these properties changes, a property changed event is fired. The names of these
  events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
@@ -78,7 +78,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
  that its top left corner is positioned at the anchor point of the associated marker. Use this
  property to change the anchor point of the label. For example, to center a 50px-wide label
  beneath a marker, specify a <code>labelAnchor</code> of <code>google.maps.Point(25, 0)</code>.
- (Note: x-values increase to the east and y-values increase to the south.)</td>
+ (Note: x-values increase to the right and y-values increase to the bottom.)</td>
               </tr>
             
               <tr class="even">
@@ -91,7 +91,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                 <td>The name of the CSS class defining the styles for the label.
  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
- <code>marginTop</code> are ignored; these styles are used internally only.</td>
+ <code>marginTop</code> are ignored; these styles are for internal use only.</td>
               </tr>
             
               <tr class="odd">
@@ -105,15 +105,15 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
               </tr>
             
               <tr class="even">
-                <td><code>labelInForeground</code></td>
+                <td><code>labelInBackground</code></td>
                 
                   
-                    <td><code>number</code></td>
+                    <td><code>boolean</code></td>
                   
                 
                 <td>A flag indicating whether a label that overlaps its
- associated marker should appear in the foreground (i.e., in a plane above the marker).
- The default is <code>true</code>.</td>
+ associated marker should appear in the background (i.e., in a plane below the marker).
+ The default is <code>false</code>, which causes the label to appear in the foreground.</td>
               </tr>
             
               <tr class="odd">
@@ -130,7 +130,7 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
  are removed from the label before the new style values are applied.
  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
- <code>marginTop</code> are ignored; these styles are used internally only.</td>
+ <code>marginTop</code> are ignored; these styles are for internal use only.</td>
               </tr>
             
               <tr class="even">
@@ -141,9 +141,9 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                   
                 
                 <td>A flag indicating whether the label is to be visible.
- The default is <code>true</code>. Note that even when <code>labelVisible</code> is
- <code>true</code>, the label will <i>not</i> be visible if the marker itself is not visible
- (i.e., if the marker's <code>visible</code> property is <code>false</code>).</td>
+ The default is <code>true</code>. Note that even if <code>labelVisible</code> is
+ <code>true</code>, the label will <i>not</i> be visible unless the associated marker is also
+ visible (i.e., unless the marker's <code>visible</code> property is <code>true</code>).</td>
               </tr>
             
           </tbody>
