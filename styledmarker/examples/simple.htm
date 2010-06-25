@@ -1,0 +1,30 @@
+<html> 
+<head> 
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+<title>Google Maps JavaScript API v3 Example: Overlay Simple</title> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="../src/StyledMarker.js"></script>
+<script type="text/javascript"> 
+  function initialize() {
+    var myLatLng = new google.maps.LatLng(37.313477473067, -121.880502070713);
+    var myOptions = {
+      zoom: 11,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    };
+ 
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+		
+	var styleMaker3 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"ff0000",text:"I'm a marker!"}),position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map,draggable:true});
+	var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"00ff00",text:"A"}),position:myLatLng,map:map,draggable:true});
+	var styleMaker2 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"0000ff"}),position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map,draggable:true});
+  }
+</script> 
+</head> 
+<body style="margin:0px; padding:0px;" onload="initialize()"> 
+  <input type="button" id="testid">
+  <div id="map_canvas" style="width: 100%; height: 100%;"></div> 
+</body> 
+</html> 
