@@ -75,7 +75,7 @@ MarkerLabel_.prototype.onAdd = function () {
   var cLatOffset, cLngOffset;
   var cIgnoreClick;
   
-  // Stops all processing of the event.
+  // Stops all processing of an event.
   //
   var cAbortEvent = function (e) {
     if (e.preventDefault) {
@@ -212,8 +212,8 @@ MarkerLabel_.prototype.draw = function () {
 };
 
 /**
- * Sets the content of the label. The content can be simple text
- * or an HTML node.
+ * Sets the content of the label.
+ * The content can be plain text or an HTML DOM node.
  * @private
  */
 MarkerLabel_.prototype.setContent = function () {
@@ -388,6 +388,7 @@ MarkerLabel_.prototype.setVisible = function () {
  * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
  */
 function MarkerWithLabel(opt_options) {
+  opt_options = opt_options || {};
   opt_options.labelContent = opt_options.labelContent || "";
   opt_options.labelAnchor = opt_options.labelAnchor || new google.maps.Point(0, 0);
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
@@ -403,7 +404,7 @@ function MarkerWithLabel(opt_options) {
   // Marker.set triggers a property changed event (called "propertyname_changed")
   // that the marker label listens for in order to react to state changes.
   google.maps.Marker.apply(this, arguments);
-  this.label_ = new MarkerLabel_(this); // Bind the label to the marker
+  var label = new MarkerLabel_(this); // Bind the label to the marker
 }
 
 // MarkerWithLabel inherits from <code>Marker</code>:
