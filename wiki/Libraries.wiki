@@ -6,7 +6,7 @@ Below is a list of the libraries being worked on in this project, with links to 
 
 == !KeyDragZoom ==
 
-This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. A new version is in the works to add an optional visual control for turning zoom mode on and off.
+This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Versions].
