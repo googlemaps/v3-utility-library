@@ -51,8 +51,7 @@
        labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {opacity: 0.75},
-       labelVisible: true
+       labelStyle: {opacity: 0.75}
      });
 
      var iw = new google.maps.InfoWindow({
@@ -65,7 +64,7 @@
 
 <div>
 <h2><span lang="en-us">Creating a Lettered Marker</span></h2>
-<p>This example shows how to place a single character over the center of Google's default marker. Note the use of the <code>labelInForeground</code> property to ensure the label appears in the foreground (rather than in the background behind the marker).</p>
+<p>This example shows how to place a single character over the center of Google's default marker. Note the use of the <code>labelInBackground</code> property to ensure the label appears in the foreground (rather than in the background behind the marker).</p>
 <pre class="prettyprint">
  &lt;style type="text/css"&gt;
    .labels {
@@ -95,7 +94,7 @@
        labelContent: "A",
        labelAnchor: new google.maps.Point(3, 30),
        labelClass: "labels", // the CSS class for the label
-       labelInForeground: true
+       labelInBackground: false
      });
 
      var iw = new google.maps.InfoWindow({
@@ -137,8 +136,7 @@
        map: map,
        labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
-       labelClass: "labels", // the CSS class for the label
-       labelVisible: true
+       labelClass: "labels" // the CSS class for the label
      });
 
      var iw = new google.maps.InfoWindow({
@@ -194,8 +192,7 @@
        labelContent: pictureLabel,
        labelAnchor: new google.maps.Point(50, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {opacity: 0.50},
-       labelInForeground: true
+       labelStyle: {opacity: 0.50}
      });
 
      var iw = new google.maps.InfoWindow({
