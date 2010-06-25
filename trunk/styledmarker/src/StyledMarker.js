@@ -44,7 +44,7 @@ var StyledMarker, StyledIcon;
         me.setIcon(ci.i_);
         me.setShape(ci.s_);
       }
-	  if (ci.sw_) {
+    if (ci.sw_) {
         me.setShadow(ci.sw_);
       }
     }
@@ -88,42 +88,45 @@ var StyledMarker, StyledIcon;
       image_.src = (shadow)?StyledIconType.getShadowURL(me):StyledIconType.getURL(me);
     }
 
-	/**
+    /**
+    * set:
     * This function sets a given style property to the given value.
     * @param {String} name The name of the property to set.
     * @param {Object} value The value to set the property to.
-    */
-    me.setValue = function(name,value) {
-      me.set(name,value);
-      opts[name] = value;
-      gs_();
-      gs_(true);
-      ge_.trigger(me,'changed',name);
-    };
-	/**
+    * get:
     * This function gets a given style property.
     * @param {String} name The name of the property to get.
     * @return {Object}
     */
-    me.getValue = function(name) {
-      return me.get(name);
-    };
-    me.guv_ = function() {
-      return opts;
-    };
-    for (k in StyledIconType.defaults) {
-      me.set(k, StyledIconType.defaults[k]);
-    }
-    me.setValues(opts);
-    gs_();
-    gs_(true);
-    if (c) {
-      ge_.addListener(c,'changed',function(k) {
-        me.setValue(k,c.getValue(k));
+  
+  
+    if (StyledIconType !== StyledIconTypes.CLASS) {
+      for (k in StyledIconType.defaults) {
+        me.set(k, StyledIconType.defaults[k]);
+      }
+      ge_.addListener(me,'changed',function(k) {
+        gs_();
+        gs_(true);
       });
-      v = c.guv_();
+    } else {
+      ge_.addListener(me,'changed',function(k) {
+        StyledIconOptions[k] = me.get(k);
+      });
+  }
+  me.gv_ = function() {
+    return StyledIconOptions;
+  };
+    me.changed = function(k) {
+    ge_.trigger(me,'changed',k);
+  };
+    me.setValues(StyledIconOptions);
+    if (StyleClass) {
+      ge_.addListener(StyleClass,'changed',function(k) {
+        me.set(k,StyleClass.get(k));
+      });
+    v = StyleClass.gv_();
       for (k in v) {
-        me.setValue(k,v[k]);
+    me.set(k,v[k]);
       }
     }
   };
@@ -160,6 +163,8 @@ var StyledMarker, StyledIcon;
   * @return {google.maps.MarkerShape}
   */
   
+  StyledIconTypes.CLASS = {};
+  
   StyledIconTypes.MARKER = {
     defaults: {
       text:'',
@@ -168,28 +173,28 @@ var StyledMarker, StyledIcon;
       starcolor:null
     },
     getURL: function(props){
-      var _url,starcolor_=props.getValue('starcolor'),
-        text_=props.getValue('text'),
-        color_=props.getValue('color'),
-        fore_=props.getValue('fore');
+      var _url,starcolor_=props.get('starcolor'),
+        text_=props.get('text'),
+        color_=props.get('color').replace(/#/,''),
+        fore_=props.get('fore').replace(/#/,'');
       if (starcolor_) {
         _url = bu_ + 'd_map_xpin_letter&chld=pin_star|';
       } else {
         _url = bu_ + 'd_map_pin_letter&chld=';
       }
       if (text_) {
-        text_ = text_.substr(0,1);
+        text_ = text_.substr(0,2);
       }
       _url+=text_+'|';
       _url+=color_+'|';
       _url+=fore_;
       if (starcolor_) {
-        _url+='|'+starcolor_;
+        _url+='|'+starcolor_.replace(/#/,'');
       }
       return _url;
     },
     getShadowURL: function(props){
-      if (props.getValue('starcolor')) {
+      if (props.get('starcolor')) {
         return bu_ + 'd_map_xpin_shadow&chld=pin_star';
       } else {
         return bu_ + 'd_map_pin_shadow';
@@ -230,13 +235,13 @@ var StyledMarker, StyledIcon;
     },
     getURL: function(props){
       var _url = bu_ + 'd_bubble_text_small&chld=bb|';
-      _url+=props.getValue('text')+'|';
-      _url+=props.getValue('color')+'|';
-      _url+=props.getValue('fore');
+      _url+=props.get('text')+'|';
+      _url+=props.get('color').replace(/#/,'')+'|';
+      _url+=props.get('fore').replace(/#/,'');
       return _url;
     },
     getShadowURL: function(props){
-      return bu_ + 'd_bubble_text_small_shadow&chld=bb|' + props.getValue('text');
+      return bu_ + 'd_bubble_text_small_shadow&chld=bb|' + props.get('text');
     },
     getAnchor: function(props,width,height){
       return new google.maps.Point(0,42);
