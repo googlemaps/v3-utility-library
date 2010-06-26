@@ -9,7 +9,7 @@
   <body>
     <h1>StyledMarker</h1>
     <p>
-      This library is used to make Markers whose appearance can be customized by setting properties. For examples of how to use this library see <a href="examples.html">the examples page</a>.
+      This library is used to make <code>Markers</code> whose appearance can be customized by setting properties. For examples of how to use this library see <a href="examples.html">the examples page</a>.
     </p>
       <h2><a name="StyledMarker"></a>class StyledMarker</h2>
       <p>This class extends <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code>.<br/><br/>This class is a <code>Marker</code> with an additional option to set a <code>StyleIcon</code>.</p>
@@ -22,7 +22,7 @@
             </tr>
             <tr class="odd">
               <td><code>StyledMarker(StyledMarkerOptions:<a href="#StyledMarkerOptions">StyledMarkerOptions</a>)</code></td>
-              <td>Creates a StyledMarker that can be added to the map. This is a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code> and has all the properties and methods of a normal <code>Marker</code>. For a complete reference on the available options see <a href="#StyledMarkerOptions">StyledMarkerOptions</a></td>
+              <td>Creates a <code>StyledMarker</code> that can be added to the map. This is a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a></code> and has all the properties and methods of a normal <code>Marker</code>. For a complete reference on the available options see <a href="#StyledMarkerOptions">StyledMarkerOptions</a></td>
             </tr>
           </tbody>
         </table>
@@ -63,7 +63,7 @@
         </table>
 		
       <h2><a name="StyledIcon"></a>class StyledIcon</h2>
-	  <p>This class extends <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#MVCObject">MVCObject</a></code>.<br/><br/>This class is applied to a <code><a href="#StyledMarker">StyledMarker</a></code> to set up its appearance. Any change to the <code>StyledIcon's</code> properties will affect all <code>StyledMarkers</code> its been applied to.</p>
+	  <p>This class extends <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#MVCObject">MVCObject</a></code>.<br/><br/>This class is applied to a <code><a href="#StyledMarker">StyledMarker</a></code> to set up its appearance. Any change to the <code>StyledIcon's</code> properties will affect all <code>StyledMarkers</code> it's been applied to.</p>
         <h3>Constructor</h3>
         <table summary="class StyledIcon - Constructors" width="90%">
           <tbody>
@@ -120,12 +120,12 @@
             <tr class="odd">
               <td><code>defaults</code></td>
               <td><code><a href="#MARKER">MARKER</a></code></td>
-              <td>Resembles a default <code>Marker</code>. Can alter color or have an optional letter placed in it or a star.</td> 
+              <td>Resembles a default <code>Marker</code>. Can alter color, have an optional character or two placed within it, or a have a star on its corner.</td> 
             </tr>
             <tr class="even">
               <td><code>defaults</code></td>
               <td><code><a href="#BUBBLE">MARKER</a></code></td>
-              <td>Resembles a small <code>InfoWindow</code>. Can alter color or have a string of text placed in it.</td> 
+              <td>Resembles a small <code>InfoWindow</code> with a single line of text. Can alter color or have a string of text placed in it.</td> 
             </tr>
           </tbody>
         </table>
@@ -147,7 +147,7 @@
             <tr class="odd">
               <td><code>text</code></td>
               <td><code>String<code></td>
-              <td>A letter that will appear within the <code>Marker</code>.</td> 
+              <td>Text that will appear within the <code>Marker</code>. Limited to 2 characters.</td> 
             </tr>
             <tr class="even">
               <td><code>color</code></td>
@@ -241,7 +241,7 @@
             <tr class="even">
               <td><code>getShadowAnchor(icon:<a href="#StyledIcon">StyledIcon</a>,width:Number,height:Number)</code></td>
               <td><code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code></td>
-              <td>Returns a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code> that indicates the point on the shadow image where the <code><a href="#StyledMarker">StyledMarker</a></code> is placed on the <code>Map</code>. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
+              <td>Returns a <code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Point">Point</a></code> that indicates the point on the shadow image where the <code><a href="#StyledMarker">StyledMarker's</a></code> shadow is placed on the <code>Map</code>. <code><a href="#StyledIcon">StyledIcon</a></code> will call this when necessary.</td>
             </tr>
             <tr class="odd">
               <td><code>getShape(icon:<a href="#StyledIcon">StyledIcon</a>,width:Number,height:Number)</code></td>
