@@ -24,7 +24,7 @@
 </p>
 <pre class="prettyprint">     var styleMaker2 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"ff0000",text:"I'm a marker!"}),position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map});</pre>
 <p>
-  Each <code><span lang="en-us">StyledIconType</span></code> has a different set of properties that can define its looked. These properties are found in the <a href="reference.html">reference</a> and can be passed to the <code><span lang="en-us">StyledIconOptions</span></code> in the <code><span lang="en-us">StyledIcon</span></code> constructor. Set these properties to change the <code><span lang="en-us">Marker</span></code> color, text, and any other properties defined for that type.
+  Each <code><span lang="en-us">StyledIconType</span></code> has a different set of properties that can define its look. These properties are found in the <a href="reference.html">reference</a> and can be passed to the <code><span lang="en-us">StyledIconOptions</span></code> in the <code><span lang="en-us">StyledIcon</span></code> constructor. Set these properties to change the <code><span lang="en-us">Marker</span></code> color, text, and any other properties defined for that type.
 </p>
 <pre class="prettyprint">     var styleMaker3 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"0000ff"}),position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map});</pre>
 <p>
@@ -66,8 +66,8 @@
   A <code><span lang="en-us">StyledIcon</span></code> can be passed as a class to <code><span lang="en-us">StyledIconOptions</span></code> to set global properties on multiple <code><span lang="en-us">StyledIcons</span></code>. When creating a class use <code><span lang="en-us">StyledIconType.CLASS</span></code>.
 </p>
 <pre class="prettyprint">    var styleIconClass = new StyledIcon(StyledIconTypes.CLASS,{color:"#ff0000"});
-    var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:text:"A"});,position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map});
-    var styleMaker2 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:text:"B"});,position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map});</pre>
+    var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:text:"A"},styleIconClass);,position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map});
+    var styleMaker2 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:text:"B"},styleIconClass);,position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map});</pre>
 <p>
   This can be useful, for instance, when you want to change the color of multiple <code><span lang="en-us">StyledMarkers</span></code> that have different text.
 </p>
