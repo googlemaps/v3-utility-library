@@ -40,15 +40,13 @@ var StyledMarker, StyledIcon;
     var me=this,ci = me.styleIcon = StyledMarkerOptions.styleIcon;
     StyledMarkerOptions=StyledMarkerOptions||{};
     function setIcon() {
-      if (ci.i_) {
-        me.setIcon(ci.i_);
+      if (ci.i_&&ci.sw_&&ci.s_) {
         me.setShape(ci.s_);
-      }
-    if (ci.sw_) {
         me.setShadow(ci.sw_);
+        me.setIcon(ci.i_);
       }
     }
-    StyledMarkerOptions.icon = 'nothing';
+    StyledMarkerOptions.icon = ci.getType().getURL(ci);
     me.setOptions(StyledMarkerOptions);
     
     setIcon();
@@ -66,26 +64,38 @@ var StyledMarker, StyledIcon;
   * @param {StyledIcon} StyleClass A class to apply extended style information.
   */
   StyledIcon = function(StyledIconType,StyledIconOptions,StyleClass) {
-    var k,v,me=this;
+    var k,v,e,me=this;
     me.i_ = null;
     me.sw_ = null;
     me.s_ = null;
     
-    function gs_(shadow) {
-      var image_;
+    function gs_() {
+      var image_, simage_, done_ = 0;
       image_ = document.createElement('img');
+      simage_ = document.createElement('img');
+      ge_.addDomListenerOnce(simage_, 'load', function() {
+        var w = simage_.width, h = simage_.height;
+        me.sw_ = new gmi_(StyledIconType.getShadowURL(me),null,null,StyledIconType.getShadowAnchor(me,w,h));
+        done_++;
+        if (done_ === 2) {
+          ge_.trigger(me,'iconready');
+        }
+      });
       ge_.addDomListenerOnce(image_, 'load', function() {
         var w = image_.width, h = image_.height;
-        if (shadow) {
-          me.sw_ = new gmi_(StyledIconType.getShadowURL(me),null,null,StyledIconType.getShadowAnchor(me,w,h));
-        } else {
-          me.i_ = new gmi_(StyledIconType.getURL(me),null,null,StyledIconType.getAnchor(me,w,h));
-          me.s_ = StyledIconType.getShape(me,w,h);
-        }
+        me.i_ = new gmi_(StyledIconType.getURL(me),null,null,StyledIconType.getAnchor(me,w,h));
+        me.s_ = StyledIconType.getShape(me,w,h);
         image_ = null;
-        ge_.trigger(me,'iconready');
+        done_++;
+        if (done_ === 2) {
+          ge_.trigger(me,'iconready');
+        }
       });
-      image_.src = (shadow)?StyledIconType.getShadowURL(me):StyledIconType.getURL(me);
+      image_.src = StyledIconType.getURL(me);
+      simage_.src = StyledIconType.getShadowURL(me);
+      if (!e) e = ge_.addListener(me,'changed',function(k) {
+        gs_();
+      });
     }
 
     /**
@@ -104,30 +114,36 @@ var StyledMarker, StyledIcon;
       for (k in StyledIconType.defaults) {
         me.set(k, StyledIconType.defaults[k]);
       }
-      ge_.addListener(me,'changed',function(k) {
-        gs_();
-        gs_(true);
-      });
     } else {
       ge_.addListener(me,'changed',function(k) {
         StyledIconOptions[k] = me.get(k);
       });
-  }
-  me.gv_ = function() {
-    return StyledIconOptions;
-  };
+    }
+    me.gv_ = function() {
+      return StyledIconOptions;
+    };
+    /**
+    * This function returns the StyledIconType associated with this StyledIcon.
+    * @return {StyledIconType}
+    */
+    me.getType = function() {
+      return StyledIconType;
+    };
     me.changed = function(k) {
-    ge_.trigger(me,'changed',k);
-  };
+      ge_.trigger(me,'changed',k);
+    };
     me.setValues(StyledIconOptions);
     if (StyleClass) {
       ge_.addListener(StyleClass,'changed',function(k) {
         me.set(k,StyleClass.get(k));
       });
-    v = StyleClass.gv_();
+      v = StyleClass.gv_();
       for (k in v) {
-    me.set(k,v[k]);
+        me.set(k,v[k]);
       }
+    }
+    if (StyledIconType !== StyledIconTypes.CLASS) {
+      gs_();
     }
   };
   StyledIcon.prototype = new gm_.MVCObject();
