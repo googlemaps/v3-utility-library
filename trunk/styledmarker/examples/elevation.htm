@@ -1,0 +1,63 @@
+<html> 
+<head> 
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+<title>StyledMarker Example: Elevation Marker</title> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="../src/StyledMarker.js"></script>
+<script type="text/javascript"> 
+  var styleIcon;
+
+  function initialize() {
+    var myLatLng = new google.maps.LatLng(37.313477473067, -121.880502070713);
+    var myOptions = {
+      zoom: 11,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    };
+ 
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+    styleIcon = new StyledIcon(StyledIconTypes.BUBBLE,{color:"#cccccc",text:"Drag Me!"});
+    var styleMaker1 = new StyledMarker({styleIcon:styleIcon,position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map,draggable:true});
+
+    google.maps.event.addDomListener(styleMaker1,"dragend",getElevation);
+  }
+  
+  function getElevation(event) {
+    var elevator = new google.maps.ElevationService();
+    var locations = [];
+  
+    // Retrieve the clicked location and push it on the array
+    var clickedLocation = event.latLng;
+    locations.push(clickedLocation);
+  
+    // Create a LocationElevationRequest object using the array's one value
+    var positionalRequest = {
+      'locations': locations
+    }
+  
+    // Initiate the location request
+    if (elevator) {
+      elevator.getElevationForLocations(positionalRequest, function(results, status) {
+        if (status == google.maps.ElevationStatus.OK) {
+  
+          // Retrieve the first result
+          if (results[0]) {
+            styleIcon.set("text","Elevation: " + results[0].elevation + "m");
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Elevation service failed due to: " + status);
+        }
+      });
+    }
+  }
+</script> 
+</head> 
+<body style="margin:0px; padding:0px;" onload="initialize()">
+  <div id="map_canvas" style="width: 100%; height: 100%;"></div> 
+</body> 
+</html> 

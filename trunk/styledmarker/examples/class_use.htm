@@ -1,0 +1,40 @@
+<html> 
+<head> 
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+<title>StyledMarker Example: Class Use</title> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="../src/StyledMarker.js"></script>
+<script type="text/javascript"> 
+  function initialize() {
+    var myLatLng = new google.maps.LatLng(37.313477473067, -121.880502070713);
+    var myOptions = {
+      zoom: 11,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    };
+ 
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+    var styleIconClass = new StyledIcon(StyledIconTypes.CLASS,{color:"#ff0000"});
+    var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{text:"A"},styleIconClass),position:new google.maps.LatLng(37.383477473067, -121.880502070713),map:map});
+    var styleMaker2 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{text:"B"},styleIconClass),position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map});
+
+    google.maps.event.addDomListener(document.getElementById("changeRed"),"click",function() {
+      styleIconClass.set("color","#ff0000");
+    });
+    google.maps.event.addDomListener(document.getElementById("changeGreen"),"click",function() {
+      styleIconClass.set("color","#00ff00");
+    });
+    google.maps.event.addDomListener(document.getElementById("changeBlue"),"click",function() {
+      styleIconClass.set("color","#0000ff");
+    });
+  }
+</script> 
+</head> 
+<body style="margin:0px; padding:0px;" onload="initialize()">
+  <input type="button" id="changeRed" value="Red" /><input type="button" id="changeGreen" value="Green" /><input type="button" id="changeBlue" value="Blue" />
+  <div id="map_canvas" style="width: 100%; height: 100%;"></div> 
+</body> 
+</html> 
