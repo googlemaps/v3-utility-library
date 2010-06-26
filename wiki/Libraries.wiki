@@ -63,3 +63,11 @@ This class behaves like {{{google.maps.Marker}}}, but it supports the associatio
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/ Released Versions]
 or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
+
+== !StyledMarker ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/examples/styledMarker.png]
+
+This class is a Marker that can be styled by changing its color, changing its shape, or adding text labels. Makes use of MVCObject to make changing styles for multiple markers easy.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/ Development Versions].
