@@ -26,8 +26,11 @@ var StyledIconTypes = {};
 var StyledMarker, StyledIcon;
  
 (function() {
-  var bu_ = 'http://chart.apis.google.com/chart?chst=',gm_ = google.maps, gp_ = gm_.Point;
-  var ge_ = gm_.event, gmi_ = gm_.MarkerImage;
+  var bu_ = 'http://chart.apis.google.com/chart?chst=';
+  var gm_ = google.maps;
+  var gp_ = gm_.Point;
+  var ge_ = gm_.event;
+  var gmi_ = gm_.MarkerImage;
   
 
   /**
@@ -37,22 +40,12 @@ var StyledMarker, StyledIcon;
   * @param {StyledMarkerOptions} StyledMarkerOptions The options for the Marker
   */
   StyledMarker = function(StyledMarkerOptions) {
-    var me=this,ci = me.styleIcon = StyledMarkerOptions.styleIcon;
-    StyledMarkerOptions=StyledMarkerOptions||{};
-    function setIcon() {
-      if (ci.i_&&ci.sw_&&ci.s_) {
-        me.setShape(ci.s_);
-        me.setShadow(ci.sw_);
-        me.setIcon(ci.i_);
-      }
-    }
-    StyledMarkerOptions.icon = ci.getType().getURL(ci);
+    var me=this;
+    var ci = me.styleIcon = StyledMarkerOptions.styleIcon;
+    me.bindTo('icon',ci);
+    me.bindTo('shadow',ci);
+    me.bindTo('shape',ci);
     me.setOptions(StyledMarkerOptions);
-    
-    setIcon();
-    ge_.addListener(ci,'iconready',function() {
-      setIcon();
-    });
   };
   StyledMarker.prototype = new gm_.Marker();
   
@@ -64,38 +57,29 @@ var StyledMarker, StyledIcon;
   * @param {StyledIcon} StyleClass A class to apply extended style information.
   */
   StyledIcon = function(StyledIconType,StyledIconOptions,StyleClass) {
-    var k,v,e,me=this;
-    me.i_ = null;
-    me.sw_ = null;
-    me.s_ = null;
-    
+    var k;
+    var me=this;
+    var i_ = 'icon';
+    var sw_ = 'shadow';
+    var s_ = 'shape';
+    var a_ = [];
+
     function gs_() {
-      var image_, simage_, done_ = 0;
-      image_ = document.createElement('img');
-      simage_ = document.createElement('img');
+      var image_ = document.createElement('img');
+      var simage_ = document.createElement('img');
       ge_.addDomListenerOnce(simage_, 'load', function() {
         var w = simage_.width, h = simage_.height;
-        me.sw_ = new gmi_(StyledIconType.getShadowURL(me),null,null,StyledIconType.getShadowAnchor(me,w,h));
-        done_++;
-        if (done_ === 2) {
-          ge_.trigger(me,'iconready');
-        }
+        me.set(sw_,new gmi_(StyledIconType.getShadowURL(me),null,null,StyledIconType.getShadowAnchor(me,w,h)));
+        simage = null;
       });
       ge_.addDomListenerOnce(image_, 'load', function() {
         var w = image_.width, h = image_.height;
-        me.i_ = new gmi_(StyledIconType.getURL(me),null,null,StyledIconType.getAnchor(me,w,h));
-        me.s_ = StyledIconType.getShape(me,w,h);
+        me.set(i_,new gmi_(StyledIconType.getURL(me),null,null,StyledIconType.getAnchor(me,w,h)));
+        me.set(s_,StyledIconType.getShape(me,w,h));
         image_ = null;
-        done_++;
-        if (done_ === 2) {
-          ge_.trigger(me,'iconready');
-        }
       });
       image_.src = StyledIconType.getURL(me);
       simage_.src = StyledIconType.getShadowURL(me);
-      if (!e) e = ge_.addListener(me,'changed',function(k) {
-        gs_();
-      });
     }
 
     /**
@@ -108,42 +92,36 @@ var StyledMarker, StyledIcon;
     * @param {String} name The name of the property to get.
     * @return {Object}
     */
-  
-  
+    me.as_ = function(v) {
+      a_.push(v);
+      for(k in StyledIconOptions) {
+        v.set(k, StyledIconOptions[k]);
+      }
+    }
+
     if (StyledIconType !== StyledIconTypes.CLASS) {
       for (k in StyledIconType.defaults) {
         me.set(k, StyledIconType.defaults[k]);
       }
-    } else {
-      ge_.addListener(me,'changed',function(k) {
-        StyledIconOptions[k] = me.get(k);
-      });
-    }
-    me.gv_ = function() {
-      return StyledIconOptions;
-    };
-    /**
-    * This function returns the StyledIconType associated with this StyledIcon.
-    * @return {StyledIconType}
-    */
-    me.getType = function() {
-      return StyledIconType;
-    };
-    me.changed = function(k) {
-      ge_.trigger(me,'changed',k);
-    };
-    me.setValues(StyledIconOptions);
-    if (StyleClass) {
-      ge_.addListener(StyleClass,'changed',function(k) {
-        me.set(k,StyleClass.get(k));
-      });
-      v = StyleClass.gv_();
-      for (k in v) {
-        me.set(k,v[k]);
-      }
-    }
-    if (StyledIconType !== StyledIconTypes.CLASS) {
+      me.setValues(StyledIconOptions);
+      me.set(i_,StyledIconType.getURL(me));
+      me.set(sw_,StyledIconType.getShadowURL(me));
+      if (StyleClass) StyleClass.as_(me);
       gs_();
+      me.changed = function(k) {
+        if (k!==i_&&k!==s_&&k!==sw_) {
+          gs_();
+        }
+      };
+    } else {
+      me.setValues(StyledIconOptions);
+      me.changed = function(v) {
+        StyledIconOptions[v] = me.get(v);
+        for (k = 0; k < a_.length; k++) {
+          a_[k].set(v,me.get(v));
+        }
+      };
+      if (StyleClass) StyleClass.as_(me);
     }
   };
   StyledIcon.prototype = new gm_.MVCObject();
@@ -189,10 +167,11 @@ var StyledMarker, StyledIcon;
       starcolor:null
     },
     getURL: function(props){
-      var _url,starcolor_=props.get('starcolor'),
-        text_=props.get('text'),
-        color_=props.get('color').replace(/#/,''),
-        fore_=props.get('fore').replace(/#/,'');
+      var _url;
+      var starcolor_=props.get('starcolor');
+      var text_=props.get('text');
+      var color_=props.get('color').replace(/#/,'');
+      var fore_=props.get('fore').replace(/#/,'');
       if (starcolor_) {
         _url = bu_ + 'd_map_xpin_letter&chld=pin_star|';
       } else {
