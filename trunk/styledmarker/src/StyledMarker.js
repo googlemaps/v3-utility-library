@@ -39,24 +39,24 @@ var StyledMarker, StyledIcon;
   * @extends google.maps.Marker
   * @param {StyledMarkerOptions} StyledMarkerOptions The options for the Marker
   */
-  StyledMarker = function(StyledMarkerOptions) {
+  StyledMarker = function(styledMarkerOptions) {
     var me=this;
-    var ci = me.styleIcon = StyledMarkerOptions.styleIcon;
+    var ci = me.styleIcon = styledMarkerOptions.styleIcon;
     me.bindTo('icon',ci);
     me.bindTo('shadow',ci);
     me.bindTo('shape',ci);
-    me.setOptions(StyledMarkerOptions);
+    me.setOptions(styledMarkerOptions);
   };
   StyledMarker.prototype = new gm_.Marker();
   
   /**
   * This class stores style information that can be applied to StyledMarkers.
   * @extends google.maps.MVCObject
-  * @param {StyledIconType} StyledIconType The type of style this icon is.
-  * @param {StyledIconOptions} StyledIconOptions The options for this StyledIcon.
-  * @param {StyledIcon} StyleClass A class to apply extended style information.
+  * @param {StyledIconType} styledIconType The type of style this icon is.
+  * @param {StyledIconOptions} styledIconOptions The options for this StyledIcon.
+  * @param {StyledIcon} styleClass A class to apply extended style information.
   */
-  StyledIcon = function(StyledIconType,StyledIconOptions,StyleClass) {
+  StyledIcon = function(styledIconType,styledIconOptions,styleClass) {
     var k;
     var me=this;
     var i_ = 'icon';
@@ -69,17 +69,17 @@ var StyledMarker, StyledIcon;
       var simage_ = document.createElement('img');
       ge_.addDomListenerOnce(simage_, 'load', function() {
         var w = simage_.width, h = simage_.height;
-        me.set(sw_,new gmi_(StyledIconType.getShadowURL(me),null,null,StyledIconType.getShadowAnchor(me,w,h)));
+        me.set(sw_,new gmi_(styledIconType.getShadowURL(me),null,null,styledIconType.getShadowAnchor(me,w,h)));
         simage = null;
       });
       ge_.addDomListenerOnce(image_, 'load', function() {
         var w = image_.width, h = image_.height;
-        me.set(i_,new gmi_(StyledIconType.getURL(me),null,null,StyledIconType.getAnchor(me,w,h)));
-        me.set(s_,StyledIconType.getShape(me,w,h));
+        me.set(i_,new gmi_(styledIconType.getURL(me),null,null,styledIconType.getAnchor(me,w,h)));
+        me.set(s_,styledIconType.getShape(me,w,h));
         image_ = null;
       });
-      image_.src = StyledIconType.getURL(me);
-      simage_.src = StyledIconType.getShadowURL(me);
+      image_.src = styledIconType.getURL(me);
+      simage_.src = styledIconType.getShadowURL(me);
     }
 
     /**
@@ -94,19 +94,19 @@ var StyledMarker, StyledIcon;
     */
     me.as_ = function(v) {
       a_.push(v);
-      for(k in StyledIconOptions) {
-        v.set(k, StyledIconOptions[k]);
+      for(k in styledIconOptions) {
+        v.set(k, styledIconOptions[k]);
       }
     }
 
-    if (StyledIconType !== StyledIconTypes.CLASS) {
-      for (k in StyledIconType.defaults) {
-        me.set(k, StyledIconType.defaults[k]);
+    if (styledIconType !== StyledIconTypes.CLASS) {
+      for (k in styledIconType.defaults) {
+        me.set(k, styledIconType.defaults[k]);
       }
-      me.setValues(StyledIconOptions);
-      me.set(i_,StyledIconType.getURL(me));
-      me.set(sw_,StyledIconType.getShadowURL(me));
-      if (StyleClass) StyleClass.as_(me);
+      me.setValues(styledIconOptions);
+      me.set(i_,styledIconType.getURL(me));
+      me.set(sw_,styledIconType.getShadowURL(me));
+      if (styleClass) styleClass.as_(me);
       gs_();
       me.changed = function(k) {
         if (k!==i_&&k!==s_&&k!==sw_) {
@@ -114,14 +114,14 @@ var StyledMarker, StyledIcon;
         }
       };
     } else {
-      me.setValues(StyledIconOptions);
+      me.setValues(styledIconOptions);
       me.changed = function(v) {
-        StyledIconOptions[v] = me.get(v);
+        styledIconOptions[v] = me.get(v);
         for (k = 0; k < a_.length; k++) {
           a_[k].set(v,me.get(v));
         }
       };
-      if (StyleClass) StyleClass.as_(me);
+      if (styleClass) styleClass.as_(me);
     }
   };
   StyledIcon.prototype = new gm_.MVCObject();
@@ -216,7 +216,7 @@ var StyledMarker, StyledIcon;
         (9 / 16) * width, (5 / 8) * height
       ];
       for (var i = 0; i < _iconmap.coord.length; i++) {
-        _iconmap.coord[i] = parseInt(_iconmap.coord[i]);
+        _iconmap.coord[i] = Math.round(_iconmap.coord[i]);
       }
       _iconmap.type = 'poly';
       return _iconmap;
@@ -257,9 +257,6 @@ var StyledMarker, StyledIcon;
         width - 4,26,
         21,26
       ];
-      for (var i = 0; i < _iconmap.coord.length; i++) {
-        _iconmap.coord[i] = parseInt(_iconmap.coord[i]);
-      }
       _iconmap.type = 'poly';
       return _iconmap;
     }
