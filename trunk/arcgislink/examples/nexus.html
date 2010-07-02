@@ -1,0 +1,40 @@
+<html>
+    <style>
+        .v {
+            position: absolute;
+            top: 102px;
+            left: 42px;
+            width: 214px;
+            height: 342px;
+            border: none
+        }
+        
+        .h {
+            position: absolute;
+            top: 66px;
+            left: 80px;
+            width: 356px;
+            height: 200px;
+            border: none
+        }
+    </style>
+    <body style="margin:10 10 10 10">
+        <script type="text/javascript">
+            //copied from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
+            function getURLParam(name){
+                var regexS = "[\\?&]" + name + "=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(window.location.href);
+                return (results === null ? "" : decodeURIComponent(results[1]));
+            }
+            
+            var u = getURLParam('u');
+            var o = getURLParam('o') || 'v';
+            document.write("<img id='n' src='nexus_" + o + ".jpg'/>");
+            document.write("<iframe id='f' src='" + u + "' class='" + o + "'></iframe>");
+            document.write("<div><a href='nexus.html?o=v&u=" + u + "'>vertical</a> | ");
+            document.write("<a href='nexus.html?o=h&u=" + u + "'>horizontal</a> </div>");
+        </script>
+        <div>note: actual nexus one resolution is actuall higher.</div>
+    </body>
+</html>
