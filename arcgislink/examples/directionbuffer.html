@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Buffer</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../src/arcgislink' + (document.location.search.indexOf('packed') > -1 ? '_packed' : document.location.search.indexOf('compiled') > -1 ? '_compiled' : document.location.search.indexOf('compressed') > -1 ? '_compressed' : '') + '.js"><' + '/script>');
+        </script>
+        <script type="text/javascript">
+            var directionDisplay;
+            var directionsService = new google.maps.DirectionsService();
+            var map, poly, svc;
+            var buffers = [];
+            
+            function init() {
+              directionsDisplay = new google.maps.DirectionsRenderer();
+              var myOptions = {
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: new google.maps.LatLng(35.23,-80.84)//38.899583425982705, -95.3342056274414)
+              }
+              map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+              svc = new gmaps.ags.GeometryService('http://sampleserver3.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer');
+              gmaps.ags.Config.proxyUrl = '/proxy/proxy.ashx';
+            
+              directionsDisplay.setMap(map);
+              calcRoute();
+            }
+            
+            function calcRoute() {
+              var start = 'Redlands, CA';
+              var end = 'Riverside, CA';
+              var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+              };
+              directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                  directionsDisplay.setDirections(response);
+                  poly = new google.maps.Polyline({
+                    path: response.routes[0].overview_path
+                  });
+                  poly.setMap(map);
+                  try{
+                    doBuffer();
+                  }catch (e){
+                    alert(e);
+                  }
+                  
+                }
+              });
+            }
+            
+            function doBuffer() {
+              for (var i = 0; i < buffers.length; i++) {
+                buffers[i].setMap(null);
+              }
+              buffers.length = 0;
+              var params = {
+                geometries: [poly],
+                bufferSpatialReference: gmaps.ags.SpatialReference.WEB_MERCATOR,
+                distances: [500,1000],
+                unit: gmaps.ags.SRUnit.METER,
+                unionResults: true
+              };
+              svc.buffer(params, function(results, err) {
+                if (!err) {
+                  var g;
+                  for (var i = 0, I = results.geometries.length; i < I; i++) {
+                    for (var j = 0, J = results.geometries[i].length; j < J; j++) {
+                      g = results.geometries[i][j];
+                      g.setMap(map);
+                      buffers.push(g);
+                    }
+                  }
+                } else {
+                  alert(err.message + err.details.join(','));
+                }
+              });
+              
+            }
+        </script>
+    </head>
+    <body style="margin:0px; padding:0px;" onload="init()">
+        <div id="map_canvas" style="width:100%; height:100%">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <!-- meta name="viewport" content="initial-scale=1.0, user-scalable=no" / -->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Layer Visibility</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript">
+            document.write('<script type="text/javascript" src="../src/arcgislink' + (document.location.search.indexOf('compiled') > -1 ? '_compiled' : '') + '.js"><' + '/script>');
+        </script>
+        <script type="text/javascript">
+            var dynamap;
+            var map;
+            
+            function init() {
+              var myOptions = {
+                zoom: 4,
+                center: new google.maps.LatLng(40, -95),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                streetViewControl: true
+              };
+              map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+              var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer';
+              dynamap = new gmaps.ags.MapOverlay(url, {opacity: 0.5});
+              
+              google.maps.event.addListenerOnce(dynamap.mapService, 'load', function() {
+                dynamap.setMap(map);
+                var service = dynamap.mapService;
+                
+                var toc = '';
+                for (var i = 0; i < service.layers.length; i++) {
+                  toc += '<input type="checkbox" id="layer' + service.layers[i].id + '"';
+                  if (service.layers[i].visible) 
+                    toc += ' checked="checked"';
+                  toc += ' onclick="setVis()">' + service.layers[i].name + '<br/>';
+                }
+                document.getElementById('toc').innerHTML = toc;
+                
+              });
+              
+              
+            }
+            
+            function setVis() {
+              var service = dynamap.mapService;
+              for (var i = 0; i < service.layers.length; i++) {
+                var el = document.getElementById('layer' + service.layers[i].id);
+                service.layers[i].visible = (el.checked === true);
+              }
+              dynamap.refresh();
+            }
+        </script>
+    </head>
+    <body style="margin:0px; padding:0px;" onload="init()">
+        <table>
+            <tr>
+                <td valign="top">
+                    <div id="toc" style="width:130px;">
+                    </div>
+                </td>
+                <td>
+                    <div id="map_canvas" style="width:800px; height:400px; border:1px solid #000;">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

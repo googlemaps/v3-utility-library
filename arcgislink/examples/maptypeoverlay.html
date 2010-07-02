@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Map Type Overlay</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript">
+         document.write('<script type="text/javascript" src="../src/arcgislink'+(document.location.search.indexOf('packed')>-1?'_packed':document.location.search.indexOf('compiled')>-1?'_compiled':document.location.search.indexOf('compressed')>-1?'_compressed':'')+'.js"><'+'/script>');
+        </script>
+        <script type="text/javascript">
+            
+        function init() {
+          var myOptions = {
+            zoom: 17,
+            center: new google.maps.LatLng(45.5, -122.7),
+            mapTypeId: google.maps.MapTypeId.HYBRID,
+            streetViewControl:true //my favorite feature in V3!
+          }
+          var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+          var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+          var agsType = new  gmaps.ags.MapType(url,{name:'ArcGIS', opacity:0.5});//
+          map.overlayMapTypes.insertAt(0, agsType);
+        }
+        </script>
+    </head>
+   <body style="margin:0px; padding:0px;" onload="init()">
+        <div id="map_canvas" style="width:100%; height:100%">
+        </div>
+    </body>
+</html>
