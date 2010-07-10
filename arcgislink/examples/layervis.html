@@ -22,10 +22,10 @@
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
               var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer';
               dynamap = new gmaps.ags.MapOverlay(url, {opacity: 0.5});
-              
-              google.maps.event.addListenerOnce(dynamap.mapService, 'load', function() {
+
+              google.maps.event.addListenerOnce(dynamap.getMapService(), 'load', function() {
                 dynamap.setMap(map);
-                var service = dynamap.mapService;
+                var service = dynamap.getMapService();
                 
                 var toc = '';
                 for (var i = 0; i < service.layers.length; i++) {
@@ -42,7 +42,7 @@
             }
             
             function setVis() {
-              var service = dynamap.mapService;
+                var service = dynamap.getMapService();
               for (var i = 0; i < service.layers.length; i++) {
                 var el = document.getElementById('layer' + service.layers[i].id);
                 service.layers[i].visible = (el.checked === true);

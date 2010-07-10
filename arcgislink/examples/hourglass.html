@@ -22,11 +22,23 @@
               
               google.maps.event.addListener(dynamap, 'drawstart', function(){
                 document.getElementById('drawing').style.visibility = 'visible';
+               
               });
               google.maps.event.addListener(dynamap, 'drawend', function(){
                 document.getElementById('drawing').style.visibility = 'hidden';
-              });
+               });
               dynamap.setMap(map);
+              // the following use cursor to indicate busy
+              google.maps.event.addListener(gmaps.ags.Util, 'jsonpstart', function() {
+                map.setOptions({
+                  draggableCursor: 'wait'
+                });
+              });
+              google.maps.event.addListener(gmaps.ags.Util, 'jsonpend', function() {
+                map.setOptions({
+                  draggableCursor: 'url(http://maps.gstatic.com/intl/en_us/mapfiles/openhand_8_8.cur),default'//inherit'
+                });
+              });
             }
         </script>
   </head>

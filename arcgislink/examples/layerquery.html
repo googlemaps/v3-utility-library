@@ -24,7 +24,7 @@
             
             };
             var style = {
-              fillColor: '#888888',
+              fillColor: '#333388',
               fillOpacity: 0.35,
               strokeColor: '#FFFFFF',
               strokeWeight: 1,
@@ -44,9 +44,7 @@
                 returnGeometry: true,
                 where: "STATE_NAME = 'Wyoming'",
                 outFields: ["NAME", "POP2000", "POP2007", "POP00_SQMI", "POP07_SQMI"],
-                overlayOptions: {
-                  polygon: style
-                }
+                overlayOptions: style
               };
               layer.query(params, processResultSet);
             }

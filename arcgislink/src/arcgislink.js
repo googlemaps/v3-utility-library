@@ -25,25 +25,18 @@
  *    Google Maps API V3</a> and provide some additional support for map tiles created 
  *    with different spatial reference and tiling scheme.</p>
  *    </p>.
- *    <table style = 'border:0px'>
+ *    <table>
  *    <tr>
- *    <td colspan=2 style='border:0px;'>Google Maps API V3 related classes</td>
- *    <td colspan=2 style='border:0px;'>REST API related classes</td>
- *    </tr>
- *    <tr>
- *    <td style = 'border:0px;width:200px'>
+ *    <td style = 'width:200px'>
  *    {@link TileLayer}<br/>
  *    {@link TileLayerOptions}<br/>
  *    {@link MapType}<br/>
  *    {@link MapTypeOptions}<br/>
  *    {@link MapOverlay}<br/>
  *    {@link MapOverlayOptions}<br/>
- *    </td>
- *    <td style = 'border:0px;width:200px'>
  *    {@link Projection}<br/>
- *    {@link Util} <br/> 
  *    </td>
- *    <td style = 'border:0px;width:200px'>
+ *    <td style = 'width:200px'>
  *    {@link Catalog}<br/>
  *    {@link MapService}<br/></b>
  *    {@link Layer}<br/>
@@ -51,8 +44,9 @@
  *    {@link GeometryService}<br/>
  *    {@link GPService}<br/>
  *    {@link GPTask}<br/>
+ *    {@link RouteTask}<br/>
  *     <br/></td>
- *     <td style = 'border:0px;width:200px'>
+ *     <td style = 'width:200px'>
  *    {@link SpatialReference}<br/>
  *    {@link Geographic}<br/>
  *    {@link LambertConformalConic}<br/>
@@ -60,13 +54,16 @@
  *    {@link SphereMercator}<br/>
  *    {@link SpatialRelationship}<br/>
  *     </td>
+ *     <td style = 'width:200px'>
+ *    {@link Util} <br/> 
+ *    {@link Config} <br/> 
+ *     </td>
  *    </tr></table>
  *    <p> There are many objects used in the REST API that do not require 
  *    a constructor and can be
- *    used just as object literal in the operation:<br/> 
- *    (note the name of the type does not matter for object literals)</p>
- *    <table style = 'border:0px'><tr>
- *    <td style = 'border:0px;width:200px'>
+ *    used just as object literal in the operation:</p>
+ *    <table><tr>
+ *    <td style = 'width:200px'>
  *    {@link Field}<br/>
  *    {@link TileInfo}<br/>
  *    {@link LOD}<br/>
@@ -76,7 +73,7 @@
  *    {@link IdentifyResults}<br/>
  *    {@link IdentifyResult}<br/>
  *     <br/></td>
- *     <td style = 'border:0px;width:200px'>
+ *     <td style = 'width:200px'>
  *    {@link QueryOptions}<br/>
  *    {@link ResultSet}<br/>
  *    {@link FindOptions}<br/>
@@ -84,64 +81,56 @@
  *    {@link FindResult}<br/>
  *    {@link Feature}<br/>
  *     </td>
- *     <td style = 'border:0px;width:200px'>
+ *     <td style = 'width:200px'>
  *    {@link GeocodeOptions}<br/>
  *    {@link GeocodeResults}<br/>
  *    {@link GeocodeResult}<br/>
  *    {@link ReverseGeocodeOptions}<br/>
  *    {@link ReverseGeocodeResult}<br/>
+ *    {@link BufferOptions}<br/>
+ *    {@link BufferResults}<br/> 
+ *    {@link ProjectOptions}<br/>
+ *    {@link ProjectResults}<br/> 
+ *    </td>
+ *     <td style = 'width:200px'>
+ *    {@link RouteOptions}<br/>
+ *    {@link RouteResults}<br/>  
  *    </td>
  *    </tr></table>
  */
 (function () {
-
-  /*jslint browser:true, evil: true */
+  
+  /*jslint evil: true, sub: true */ 
   /*global escape ActiveXObject */
   
-
-  //======= utility/helper functions ==========//
-  /**
-   * create a namespace by name such as a.b.c
-   * @param {String} ns
-   */
-  var namespace = function (ns) {
-    var i, c, n;
-    var names = ns.split('.');
-    n = window;
-    for (i = 0, c = names.length; i < c; i ++) {
-      n[names[i]] = n[names[i]] || {};
-      n = n[names[i]];
-    }
-    return n;
+  /** @const */
+  var STR = {
+    json: 'json',
+    callback: 'callback',
+    load: 'load'
   };
-
+  var RAD_DEG  =  Math.PI / 180;
+  var jsonpID_ = 0;
+  // cross domain function list.
+  window['ags_jsonp'] = window['ags_jsonp'] || {};
+  var xdc = window['ags_jsonp'];
   var W = window;
-  var G = namespace('google.maps');
-    /**
+  var G = google.maps;
+  var WGS84, NAD83, WEB_MERCATOR, WEB_MERCATOR_AUX;
+  /**
    * @name Config
    * @class This is an object literal that sets common configuration values used across the lib.
    * @property {String} [proxyUrl] The URL to the web proxy page used in case the length of the URL request to an ArcGIS Server REST resource exceeds 2000 characters.
-   * @property {Boolean} [alwaysUseProxy] The URL to the web proxy page used in case the length of the URL request to an ArcGIS Server REST resource exceeds 2000 characters.
+   * @property {Boolean} [alwaysUseProxy] whether to always use proxy page when send request to server.
    */
   var Config = {
     proxyUrl: null,
     alwaysUseProxy: false 
   };
-  var WGS84, NAD83, WEB_MERCATOR, WEB_MERCATOR_AUX;
-  /*
+  /**
    * an internal collection of Spatial Refeneces supported in the application.
-   * The key of the collection is the wkid, and value is an instance of
+   * The key of the collection is the wkid/wkt, and value is an instance of
    * {@link SpatialReference}.
-   * The {@link TileLayer}'s Spatial Refeneces <b>must be already added to collection
-   * before it's constructor can be called</b>.
-   * The following SpatialReference are added by default:
-   * <code>
-   * <br/> 4326: WGS84 SGeographic Coordinate System;
-   * <br/> 102113: Web-Mercator used by Google Maps, Virtual Earth etc.
-   * <br/> 102100: Web-Mercator with datum transformation.
-   * </code>
-   * <br/> The application can add a supported spatial references using static method
-   * <code>SpatialReference.register(wkid,sr);</code>
    */
   var spatialReferences = {};
  /**
@@ -150,31 +139,31 @@
    * @param {String} start
    * @param {String} end
    */
-  var extractString = function (full, start, end) {
+  function extractString(full, start, end) {
     var i = (start === '') ? 0 : full.indexOf(start);
     var e = end === '' ? full.length : full.indexOf(end, i + start.length);
     return full.substring(i + start.length, e);
-  };
+  }
 
   /**
    * Check if the object is String
    * @param {Object} o
    */
-  var isString = function (o) {
-    return typeof o === 'string';
-  };
+  function isString(o) {
+    return o && typeof o === 'string';
+  }
   
   /**
    * Check if the object is array
    * @param {Object} o
    */
-  var isArray = function (o) {
+  function isArray(o) {
     return o && o.splice;
-  };
+  }
   
-  var isNumber = function (o) {
+  function isNumber(o) {
     return typeof o === 'number';
-  };
+  }
  
    /**
    * Add the property of the source object to destination object 
@@ -184,7 +173,7 @@
    * @param {Boolean} force
    * @return {Object}
    */
-  var augmentObject = function (src, dest, force) {
+  function augmentObject(src, dest, force) {
     if (src && dest) {
       var p;
       for (p in src) {
@@ -194,84 +183,34 @@
       }
     }
     return dest;
-  };
-
-  /**
-   * Find out the index of obj in array
-   * @param {Array} arr
-   * @param {Object} obj
-   * @param {Boolean} ignoreCase
-   */
-  var indexOfObj = function (arr, obj, ignoreCase) {
-    if (arr && obj) {
-      if (arr.indexOf && !ignoreCase) {
-        return arr.indexOf(obj);
-      } else {
-        for (var i = 0, c = arr.length; i < c; i++) {
-          if (arr[i] === obj || (ignoreCase === true && arr[i].toString().toLowerCase() === obj.toString().toLowerCase())) {
-            return i;
-          }
-        }
-      }
-    }
-    return -1;
-  };
-  
-  var mergeArray = function (arr, sub) {
-    for (var i = 0, c = sub.length; i < c; i++) {
-      arr.push(sub[i]);
-    }
-    return arr;
-  };
+  }
   
   /**
-   * Remove element from array
-   * @param {Array} arr
-   * @param {Object} elm
-   */
-  var removeFromArray = function (arr, elm) {
-    var i = indexOfObj(arr, elm);
-    if (i !== -1) {
-      arr.splice(i, 1);
-    }
-  };
-  /**
-   * Get the attribute value, case insensitive
-   * @param {Object} attrs object with name-value pair
-   * @param {String} name attribue name
-   * @return {Object}
-   */
-  var getAttrValue = function (attrs, name) {
-    if (typeof attrs[name] !== 'undefined') {
-      return attrs[name];
-    }
-    for (var x in attrs) {
-      if (attrs.hasOwnProperty(x)) {
-        if (name.toLowerCase() === x.toString().toLowerCase()) {
-          return attrs[x];
-        }
-      }
-    }
-    return null;
-  };
-  
-  /*
    * Wrapper around google.maps.event.trigger
    * @param {Object} src
    * @param {String} evtName
    * @param {Object} args
    */
-  var triggerEvent = function (src, evtName, args) {
-    if (G.event) {
+  function triggerEvent(src, evtName, args) {
       G.event.trigger.apply(this, arguments);
     }
-  };
+  
+  /**
+   * handle JSON error
+   * @param {Object} errback
+   * @param {Object} json
+   */
+  function handleErr(errback, json) {
+    if (errback && json && json.error) {
+      errback(json.error);
+    }
+  }
   /**
    * get REST format for 2 time
    * @param {Date} time
    * @param {Date} endTime
    */
-  var getTimeString = function (time, endTime) {
+  function formatTimeString(time, endTime) {
     var ret = '';
     if (time) {
       ret +=  (time.getTime() - time.getTimezoneOffset() * 60000);
@@ -280,13 +219,14 @@
       ret += ', ' + (endTime.getTime() - endTime.getTimezoneOffset() * 60000);
     } 
     return ret;
-  };
+  }
   /**
    * Set opacity of a node.
    * @param {Node} node
    * @param {Number} 0-1
    */
-  var setOpacity = function (node, op) {
+  function setNodeOpacity(node, op) {
+   // closure compiler removed?
     op = Math.min(Math.max(op, 0), 1);
     if (node) {
       var st = node.style;
@@ -300,9 +240,12 @@
         st.filter = "alpha(opacity:" + Math.floor(op * 100) + ")";
       }
     }
-  };
-  
-  var getLayerDefsString = function (defs) {
+  }
+  /**
+   * get the layerdef text string from an object literal
+   * @param {Object} defs
+   */
+  function getLayerDefsString(defs) {
     var strDefs = '';
     for (var x in defs) {
       if (defs.hasOwnProperty(x)) {
@@ -313,8 +256,9 @@
       }
     }
     return strDefs;
-  }; 
-  var getXmlHttp = function () {
+  }
+  
+  function getXmlHttp() {
     if (typeof XMLHttpRequest === "undefined") {
       try {
         return new ActiveXObject("Msxml2.XMLHTTP.6.0");
@@ -332,9 +276,10 @@
     } else {
       return new XMLHttpRequest();
     }
-  };
+  }
   /**
    * @name GeometryType
+   * @enum
    * @class List of Geometry type supported by ArcGIS server.
    * @property {String} [POINT] esriGeometryPoint 
    * @property {String} [MULTIPOINT] esriGeometryMultipoint
@@ -349,7 +294,7 @@
     POLYGON: 'esriGeometryPolygon',
     ENVELOPE: 'esriGeometryEnvelope'
   };
-  var getGeometryType = function (obj) {
+  function getGeometryType(obj) {
     var o = obj;
     if (isArray(obj) && obj.length > 0) {
       o = obj[0];
@@ -366,22 +311,23 @@
       return GeometryType.POLYGON;
     } else if (o instanceof G.LatLngBounds) {
       return GeometryType.ENVELOPE;
-    } else if (o.x !== undefined && o.y !== undefined) {
+    } else if (o['x'] !== undefined && o['y'] !== undefined) {
       return GeometryType.POINT;
-    } else if (o.points) {
+    } else if (o['points']) {
       return GeometryType.MULTIPOINT;
-    } else if (o.paths) {
+    } else if (o['paths']) {
       return GeometryType.POLYLINE;
     } else if (o.rings) {
       return GeometryType.POLYGON;
     }
     return null;
-  };
+  }
   /**
    * Is the object an Google Overlay?
    * @param {Object} obj
+   * @return {Boolean}
    */
-  var isOverlay = function (obj) {
+  function isOverlay(obj) {
     var o = obj;
     if (isArray(obj) && obj.length > 0) {
       o = obj[0];
@@ -395,37 +341,36 @@
       return true;
     } 
     return false;
-  };
+  }
   
-  var getSRParam = function (sr) {
+  function formatSRParam(sr) {
     if (!sr) {
       return null;
     }
     // for 9.3 compatibility, return wkid if possible.
-    return isNumber(sr)? sr : sr.wkid? sr.wkid : sr.toJSON();
-  };
-  
+    return isNumber(sr) ? sr : sr['wkid'] ? sr['wkid'] : sr.toJSON();
+  }
   
   /**
-   * Convert overlays (Marker, Polyline, Polygons) to JSON string in AGS format.
-   * @param {OverlayView|OverlayView[]} geom 
-   */
-  var fromOverlaysToJSON = function (geom) {
-    /**
-    * @param {MVCArray.&lt;LatLng>} pts
+   * @param {MVCArrayOfLatLng} pts
     */
-    function fromLatLngsToJSON(pts, close) {
-      var arr = [];
-      var latlng;
-      for (var i = 0, c = pts.getLength(); i < c; i++) {
-        latlng = pts.getAt(i);
-        arr.push('[' + latlng.lng() + ',' + latlng.lat() + ']');
-      }
-      if (close && arr.length > 0) {
-        arr.push('[' + pts.getAt(0).lng() + ',' + pts.getAt(0).lat() + ']');
-      }
-      return arr.join(',');
+  function fromLatLngsToJSON(pts, close) {
+    var arr = [];
+    var latlng;
+    for (var i = 0, c = pts.getLength(); i < c; i++) {
+      latlng = pts.getAt(i);
+      arr.push('[' + latlng.lng() + ',' + latlng.lat() + ']');
     }
+    if (close && arr.length > 0) {
+      arr.push('[' + pts.getAt(0).lng() + ',' + pts.getAt(0).lat() + ']');
+    }
+    return arr.join(',');
+  }
+  /**
+   * Convert overlays (Marker, Polyline, Polygons) to JSON string in AGS format.
+   * @param {(OverlayView|Array.OverlayView)} geom 
+   */
+  function fromOverlaysToJSON(geom) {
     var gtype = getGeometryType(geom);
     var g, gs, i, pts;
     var json = '{';
@@ -476,58 +421,57 @@
     json += ', spatialReference:{wkid:4326}';
     json += '}';
     return json;
-  };
+  }
   
   /**
    * From ESRI geometry format to JSON String, primarily used in Geometry service
    * @param {Object} geom
    */
-  var fromGeometryToJSON = function (geom) {
-      function fromPointsToJSON(pts) {
-        var arr = [];
-        for (var i = 0, c = pts.length; i < c; i++) {
-          arr.push('[' + pts[i][0] + ',' + pts[i][1] + ']');
-        }
-        return '[' + arr.join(',') + ']';
+  function fromGeometryToJSON(geom) {
+    function fromPointsToJSON(pts) {
+      var arr = [];
+      for (var i = 0, c = pts.length; i < c; i++) {
+        arr.push('[' + pts[i][0] + ',' + pts[i][1] + ']');
       }
-      function fromLinesToJSON(lines) {
-        var arr = [];
-        for (var i = 0, c = lines.length; i < c; i++) {
-          arr.push(fromPointsToJSON(lines[i]));
-        }
-        return '[' + arr.join(',') + ']';
+      return '[' + arr.join(',') + ']';
+    }
+    function fromLinesToJSON(lines) {
+      var arr = [];
+      for (var i = 0, c = lines.length; i < c; i++) {
+        arr.push(fromPointsToJSON(lines[i]));
       }
-      
-      var json = '{';
-      if (geom.x) {
-        json += 'x:' + geom.x + ',y:' + geom.y;
-      } else if (geom.xmin) {
-        json += 'xmin:' + geom.xmin + ',ymin:' + geom.ymin + ',xmax:' + geom.xmax + ',ymax:' + geom.ymax;
-      } else if (geom.points) {
-        json += 'points:' + fromPointsToJSON(geom.points);
-      } else if (geom.paths) {
-        json += 'paths:' + fromLinesToJSON(geom.paths);
-      } else if (geom.rings) {
-        json += 'rings:' + fromLinesToJSON(geom.rings);
-      }
-      json += '}';
-      return json;
-    };
+      return '[' + arr.join(',') + ']';
+    }
+    
+    var json = '{';
+    if (geom.x) {
+      json += 'x:' + geom.x + ',y:' + geom.y;
+    } else if (geom.xmin) {
+      json += 'xmin:' + geom.xmin + ',ymin:' + geom.ymin + ',xmax:' + geom.xmax + ',ymax:' + geom.ymax;
+    } else if (geom.points) {
+      json += 'points:' + fromPointsToJSON(geom.points);
+    } else if (geom.paths) {
+      json += 'paths:' + fromLinesToJSON(geom.paths);
+    } else if (geom.rings) {
+      json += 'rings:' + fromLinesToJSON(geom.rings);
+    }
+    json += '}';
+    return json;
+  }
 
   /**
    * Helper method to convert an Envelope object to <code>google.maps.LatLngBounds</code> 
    * @private 
-   * @param {Envelope} extent
+   * @param {Object} extent
    * @return {google.maps.LatLngBounds} gLatLngBounds
    */
-  var fromEnvelopeToLatLngBounds  =  function (extent) {
-    var sr  =  spatialReferences[extent.spatialReference.wkid || extent.spatialReference.wkt];
+  function fromEnvelopeToLatLngBounds(extent) {
+    var sr  =  spatialReferences[extent['spatialReference']['wkid'] || extent['spatialReference']['wkt']];
     sr  =  sr || WGS84;
-    var sw  =  sr.reverse([extent.xmin, extent.ymin]);
-    var ne  =  sr.reverse([extent.xmax, extent.ymax]);
+    var sw  =  sr.reverse([extent['xmin'], extent['ymin']]);
+    var ne  =  sr.reverse([extent['xmax'], extent['ymax']]);
     return new G.LatLngBounds(new G.LatLng(sw[1], sw[0]), new G.LatLng(ne[1], ne[0]));
-  };
-  
+  }
   
   /**
    * Convert a ArcGIS Geometry JSON object to core Google Maps API 
@@ -536,10 +480,9 @@
    * may (Polygon) or may not (Polyline) support multi-parts, so the result is an array for consistency.
    * @param {Object} json geometry
    * @param {OverlayOptions} opts see {@link OverlayOptions}
-   * @param {String} opt_displayName
-   * @return {OverlayView[]} 
+   * @return {Array.OverlayView} 
    */
-  var fromJSONToOverlays = function (geom, opts) {
+  function fromJSONToOverlays(geom, opts) {
     var ovs = null;
     var sr = null;
     var ov;
@@ -549,7 +492,7 @@
     if (geom) {
       ovs = [];
       if (geom.x) {
-        ov = new G.Marker(augmentObject(opts.markerOptions || opts , {
+        ov = new G.Marker(augmentObject(opts.markerOptions || opts, {
           position: new G.LatLng(geom.y, geom.x)
         }));
         ovs.push(ov);
@@ -595,12 +538,24 @@
     }
     
     return ovs;
-  };
+  }
+  
+  function parseFeatures(features, ovOpts) {
+    if (features) {
+      var i, I, f;
+      for (i = 0, I = features.length; i < I; i++) {
+        f = features[i];
+        if (f.geometry) {
+          f.geometry = fromJSONToOverlays(f.geometry, ovOpts);
+        }
+      }
+    }
+  }
   /**
    * get string as rest parameter
    * @param {Object} o
    */
-  var formatRequestString = function (o) {
+  function formatRequestString(o) {
     var ret;
     if (typeof o === 'object') {
       if (isArray(o)) {
@@ -627,23 +582,18 @@
       }
     }
     return o.toString();
-  };
-  var log = function (msg) {
+  }
+  
+  function log(msg) {
     if (window.console) {
-      console.log(msg);
+      window.console.log(msg);
     } else {
       var l = document.getElementById('_ags_log');
       if (l) {
         l.innerHTML = l.innerHTML + msg + '<br/>';
       }
     }
-  };
-  
- 
- /** Radius Per Degree
- * @private
- */
-  var RAD_DEG  =  Math.PI / 180;
+  }
  
   /**
    * A set of utilities ((<code>gmaps.gis.Util</code>) 
@@ -652,14 +602,6 @@
    * @namespace
    */
   var Util = {};
-  var jsonpID_ = 0;
-  // cross domain function list. this namespace is what gmap is using
-  window.ags_jsonp = window.ags_jsonp || {};
-  var xdc = window.ags_jsonp;
-  var C = {
-    json: 'json',
-    callback: 'callback'
-  };
   
   /**
    * Make Cross Domain Calls. This function returns the
@@ -720,7 +662,7 @@
     } else {
       // check if same host
       var loc = window.location;
-      var dom = loc.protocol + '//' + loc.hostname + (!loc.port || loc.port === 80) ? '' : ':' + loc.port + '/';
+      var dom = loc.protocol + '//' + loc.hostname + (!loc.port || loc.port === 80 ? '' : ':' + loc.port + '/');
       var useProxy = true;
       if (url.toLowerCase().indexOf(dom.toLowerCase()) !== -1) {
         useProxy = false;
@@ -755,6 +697,35 @@
     return sid;
   };
 
+  /**
+   * Add a list of overlays to map
+   * @param {google.maps.Map} map
+   * @param {Array.<OverlayView>} overlays
+   */
+  Util.addToMap = function (map, overlays) {
+    if (isArray(overlays)) {
+      var ov;
+      for (var i = 0, I = overlays.length; i < I; i++) {
+        ov = overlays[i];
+        if (isArray(ov)) {
+          Util.addToMap(map, ov);
+        } else if (isOverlay(ov)) {
+          ov.setMap(map);  
+        }
+      }
+    }
+  };
+  /**
+   * Add a list of overlays to map
+   * @param {Array.<OverlayView>} overlays
+   * @param {Boolean} clearArray
+   */
+  Util.removeFromMap = function (overlays, clearArray) {
+    Util.addToMap(null, overlays);
+    if (clearArray) {
+      overlays.length = 0;
+    }
+  };
   
   /**
    * Create A Generic Spatial Reference Object
@@ -997,6 +968,7 @@
  *  </code>
  * @param {Object} params 
  * @name TransverseMercator
+ * @constructor
  * @class This class (<code>gmaps.ags.TransverseMercator</code>) represents a Spatial Reference System based on 
  * <a target  = wiki href  = 'http://en.wikipedia.org/wiki/Transverse_Mercator_projection'>Transverse Mercator Projection</a>
  * @extends SpatialReference
@@ -1096,6 +1068,7 @@
  * </code>
  * @name SphereMercator
  * @class This class (<code>gmaps.ags.SphereMercator</code>) is the Projection Default Google Maps uses. It is a special form of Mercator.
+ * @constructor
  * @param {Object} params 
  * @extends SpatialReference
  */
@@ -1151,6 +1124,7 @@
    * evenly as if earth is flat. Approximate for small regions without implementing
    * a real projection.
    * @name FlatSpatialReference
+   * @constructor
    * @param {Object} params
    * @extends SpatialReference
    */
@@ -1296,48 +1270,51 @@
     }
     if (wktOrSR instanceof SpatialReference) {
       spatialReferences['' + wkidt] = wktOrSR;
-      return wktOrSR;
-    }
-    var wkt = wktOrSR || wkidt; // only one param is passed in.
-    var params = {
-      wkt: wkidt
-    };
-    if (wkidt === parseInt(wkidt, 10)) {
-      params = {
-        wkid: wkidt
+      sr = wktOrSR;
+      
+    } else {
+      var wkt = wktOrSR || wkidt; // only one param is passed in.
+      var params = {
+        wkt: wkidt
       };
+      if (wkidt === parseInt(wkidt, 10)) {
+        params = {
+          wkid: wkidt
+        };
+      }
+      var prj = extractString(wkt, "PROJECTION[\"", "\"]");
+      var spheroid = extractString(wkt, "SPHEROID[", "]").split(",");
+      if (prj !== "") {
+        params.unit = parseFloat(extractString(extractString(wkt, "PROJECTION", ""), "UNIT[", "]").split(",")[1]);
+        params.semi_major = parseFloat(spheroid[1]);
+        params.inverse_flattening = parseFloat(spheroid[2]);
+        params.latitude_of_origin = parseFloat(extractString(wkt, "\"Latitude_Of_Origin\",", "]"));
+        params.central_meridian = parseFloat(extractString(wkt, "\"Central_Meridian\",", "]"));
+        params.false_easting = parseFloat(extractString(wkt, "\"False_Easting\",", "]"));
+        params.false_northing = parseFloat(extractString(wkt, "\"False_Northing\",", "]"));
+      }
+      switch (prj) {
+      case "":
+        sr = new SpatialReference(params);
+        break;
+      case "Lambert_Conformal_Conic":
+        params.standard_parallel_1 = parseFloat(extractString(wkt, "\"Standard_Parallel_1\",", "]"));
+        params.standard_parallel_2 = parseFloat(extractString(wkt, "\"Standard_Parallel_2\",", "]"));
+        sr = new LambertConformalConic(params);
+        break;
+      case "Transverse_Mercator":
+        params.scale_factor = parseFloat(extractString(wkt, "\"Scale_Factor\",", "]"));
+        sr = new TransverseMercator(params);
+        break;
+        // more implementations here.
+      default:
+        throw new Error(prj + "  not supported");
+      }
+      if (sr) {
+        spatialReferences['' + wkidt] = sr;
+      }
     }
-    var prj = extractString(wkt, "PROJECTION[\"", "\"]");
-    var spheroid = extractString(wkt, "SPHEROID[", "]").split(",");
-    if (prj !== "") {
-      params.unit = parseFloat(extractString(extractString(wkt, "PROJECTION", ""), "UNIT[", "]").split(",")[1]);
-      params.semi_major = parseFloat(spheroid[1]);
-      params.inverse_flattening = parseFloat(spheroid[2]);
-      params.latitude_of_origin = parseFloat(extractString(wkt, "\"Latitude_Of_Origin\",", "]"));
-      params.central_meridian = parseFloat(extractString(wkt, "\"Central_Meridian\",", "]"));
-      params.false_easting = parseFloat(extractString(wkt, "\"False_Easting\",", "]"));
-      params.false_northing = parseFloat(extractString(wkt, "\"False_Northing\",", "]"));
-    }
-    switch (prj) {
-    case "":
-      sr = new SpatialReference(params);
-      break;
-    case "Lambert_Conformal_Conic":
-      params.standard_parallel_1 = parseFloat(extractString(wkt, "\"Standard_Parallel_1\",", "]"));
-      params.standard_parallel_2 = parseFloat(extractString(wkt, "\"Standard_Parallel_2\",", "]"));
-      sr = new LambertConformalConic(params);
-      break;
-    case "Transverse_Mercator":
-      params.scale_factor = parseFloat(extractString(wkt, "\"Scale_Factor\",", "]"));
-      sr = new TransverseMercator(params);
-      break;
-      // more implementations here.
-    default:
-      throw new Error(prj + "  not supported");
-    }
-    if (sr) {
-      spatialReferences['' + wkidt] = sr;
-    }
+    
     return sr;
   };
   
@@ -1364,6 +1341,7 @@
   /**
    * Create a ArcGIS service catalog instance using it's url:<code> http://&lt;host>/&lt;instance>/rest/services</code>
    * @name Catalog
+   * @constructor
    * @class  The catalog resource is the root node and initial entry point into an ArcGIS Server host.
    * This resource represents a catalog of folders and services published on the host.
    *  @param {String} url
@@ -1375,15 +1353,15 @@
     this.url = url;
     var me = this;
     Util.getJSON(url, {
-      f: C.json
-    }, 'callback', function (json) {
+      f: STR.json
+    }, STR.callback, function (json) {
       augmentObject(json, me);
       /**
        * This event is fired when the catalog info is loaded.
        * @name Catalog#load
        * @event
        */
-      triggerEvent(me, 'load');
+      triggerEvent(me, STR.load);
     });
   }
   /**
@@ -1398,11 +1376,12 @@
    * @property {Int} [length] length.
    */
   /**
-   * Create a ArcGIS map Layer using it's url ( 	http://[mapservice-url]/[layerId])
+   * Create a ArcGIS map Layer using it's url (http://[mapservice-url]/[layerId])
    * @name Layer
    * @class This class (<code>gmaps.ags.Layer</code>) The layer / table(v10+)
    *  resource represents a single layer / table in a map of a map service 
    *  published by ArcGIS Server.
+   * @constructor
    * @param {String} url
    * @property {Number} [id] layer ID
    * @property {String} [name] layer Name
@@ -1449,18 +1428,6 @@
     });
   };
 
-  /**
-   * Returns all field names
-   * @return {String[]}
-  Layer.prototype.getFieldNames = function () {
-    var ret = [];
-    if (this.hasLoaded()) {
-      for (var i = 0; i < this.fields.length; i++) {
-        ret.push(this.fields[i].name);
-      }
-    }
-    return ret;
-  }; */
   
   /**
    * Whether the layer is viewable at given scale
@@ -1477,9 +1444,9 @@
     }
     return true;
   };
- // * @property {String} [geometryType]  esriGeometryPoint | esriGeometryMultipoint | esriGeometryPolygon | esriGeometryPolyline
   /**
    * @name SpatialRelationship
+   * @enum
    * @class This is actually a list of constants that represent spatial 
    * relationship types. 
    * @property {String} [INTERSECTS] esriSpatialRelIntersects 
@@ -1543,8 +1510,9 @@
    * <br/>For more info see <a href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/query.html'>Query Operation</a>.
    * @param {QueryOptions} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  Layer.prototype.query = function (p, callback) {
+  Layer.prototype.query = function (p, callback, errback) {
     if (!p) {
       return;
     }
@@ -1566,22 +1534,16 @@
       params.objectIds = p.objectIds.join(',');
     }
     if (p.time) {
-      params.time = getTimeString(p.time, p.endTime);
+      params.time = formatTimeString(p.time, p.endTime);
     }
     params.outSR = 4326;
     params.returnGeometry = p.returnGeometry === false ? false : true;
     params.returnIdsOnly = p.returnIdsOnly === true ? true : false;
+    delete params.overlayOptions;
     Util.getJSON(this.url + '/query', params, 'callback', function (json) {
-      var i, f;
-      if (json.features) {
-        for (i = 0; i < json.features.length; i++) {
-          f = json.features[i];
-          if (f.geometry) {
-            f.geometry = fromJSONToOverlays(f.geometry, p.overlayOptions);
-          }
-        }
-      }
+      parseFeatures(json.features, p.overlayOptions);
       callback(json, json.error);
+      handleErr(errback, json);
     });
   };
   /**
@@ -1625,8 +1587,9 @@
    * For related tables, the featureset does not include geometries. 
    * @param {QueryRelatedRecordsParameters} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  Layer.prototype.queryRelatedRecords = function (qparams, callback) {
+  Layer.prototype.queryRelatedRecords = function (qparams, callback, errback) {
     if (!qparams) {
       return;
     } 
@@ -1636,7 +1599,10 @@
       params.outFields = params.outFields.join(',');
     }
     params.returnGeometry = params.returnGeometry === false ? false : true;
-    Util.getJSON(this.url + '/query', params, 'callback', callback);
+    Util.getJSON(this.url + '/query', params, STR.callback, function (json) {
+      handleErr(errback, json);
+      callback(json);
+    });
   };
   /**
    * Creates a MapService objects that can be used by UI components.
@@ -1647,6 +1613,7 @@
    * @name MapService
    * @class This class (<code>gmaps.ags.MapService</code>) is the core class for all map service operations.
    * It represents an ArcGIS Server map service that offer access to map and layer content
+   * @constructor
    * @param {String} url
    * @property {String} [url] map service URL
    * @property {Boolean} [loaded] if map service meta data is loaded. 
@@ -1674,7 +1641,7 @@
     var me = this;
     Util.getJSON(url, {
       'f': 'json'
-    }, C.callback, function (json) {
+    }, STR.callback, function (json) {
       me.init_(json);
     });
    
@@ -1696,9 +1663,7 @@
     }
     if (json.tables !== undefined) {
       // v10.0 +
-      Util.getJSON(this.url + '/layers', {
-        f: C.json
-      }, C.callback, function (json2) {
+      Util.getJSON(this.url + '/layers', {}, STR.callback, function (json2) {
         me.initLayers_(json2);
       });
     } else {
@@ -1897,14 +1862,15 @@
    * an instance of {@link MapImage}.
    * @param {ExportMapOptions} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  MapService.prototype.exportMap = function (eparams, callback) {
-    if (!eparams || !eparams.bounds) {
+  MapService.prototype.exportMap = function (p, callback, errback) {
+    if (!p || !p.bounds) {
       return;
     }
     // note: dynamic map may overlay on top of maptypes with different projection
-    var params = {f: 'json'};// augmentObject(eparams, );
-    var bnds = eparams.bounds;
+    var params = {};// augmentObject(p, );
+    var bnds = p.bounds;
     params.bbox = '' + bnds.getSouthWest().lng() + ',' + '' + bnds.getSouthWest().lat() + ',' +
     bnds.getNorthEast().lng() +
     ',' +
@@ -1912,19 +1878,19 @@
     bnds.getNorthEast().lat();
     //delete params.bounds;
     
-    params.size = '' + eparams.width + ',' + eparams.height;
-    params.dpi = eparams.dpi;
+    params.size = '' + p.width + ',' + p.height;
+    params.dpi = p.dpi;
     
-    if (eparams.imageSR) {
-      if (eparams.imageSR.wkid) {
-        params.imageSR = eparams.imageSR.wkid;
+    if (p.imageSR) {
+      if (p.imageSR.wkid) {
+        params.imageSR = p.imageSR.wkid;
       } else {
-        params.imageSR = '{wkt:' + eparams.imageSR.wkt + '}';
+        params.imageSR = '{wkt:' + p.imageSR.wkt + '}';
       }
     }
     params.bboxSR = '4326';
-    params.format = eparams.format;
-    var defs = eparams.layerDefinitions;
+    params.format = p.format;
+    var defs = p.layerDefinitions;
     // there is a slightly difference between {} and undefined
     // if do not want use def at all, pass in {}, if want to use 
     // in service, do not pass in anything.
@@ -1933,8 +1899,8 @@
     } 
     // for 9.3 compatibility:
     params.layerDefs = getLayerDefsString(defs);
-    var vlayers = eparams.layerIds;
-    var layerOpt = eparams.layerOption || 'show';   
+    var vlayers = p.layerIds;
+    var layerOpt = p.layerOption || 'show';   
     if (vlayers === undefined) {
       vlayers = this.getVisibleLayerIds();
     }
@@ -1947,12 +1913,12 @@
       });
       return;
     }
-    params.transparent = (eparams.transparent === false ? false : true);
-    if (eparams.time) {
-      params.time = getTimeString(eparams.time, eparams.endTime);
+    params.transparent = (p.transparent === false ? false : true);
+    if (p.time) {
+      params.time = formatTimeString(p.time, p.endTime);
     }
     //TODO: finish once v10 released
-    params.layerTimeOptions = eparams.layerTimeOptions;
+    params.layerTimeOptions = p.layerTimeOptions;
     
     Util.getJSON(this.url + '/export', params, 'callback', function (json) {
       json.bounds = fromEnvelopeToLatLngBounds(json.extent);
@@ -2023,38 +1989,38 @@
    * href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/identify.html'>Identify Operation</a>.
    * @param {IdentifyOptions} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  MapService.prototype.identify = function (iparams, callback) {
-    if (!iparams) {
+  MapService.prototype.identify = function (p, callback, errback) {
+    if (!p) {
       return;
     }
-    var params = {};//augmentObject(iparams, );
-    params.geometry = fromOverlaysToJSON(iparams.geometry);
-    params.geometryType = getGeometryType(iparams.geometry);
-    params.mapExtent = fromOverlaysToJSON(iparams.bounds);
-    params.tolerance = iparams.tolerance || 2;
+    var params = {};//augmentObject(p, );
+    params.geometry = fromOverlaysToJSON(p.geometry);
+    params.geometryType = getGeometryType(p.geometry);
+    params.mapExtent = fromOverlaysToJSON(p.bounds);
+    params.tolerance = p.tolerance || 2;
     params.sr = 4326;
-    params.imageDisplay = '' + iparams.width + ',' + iparams.height + ',' + (iparams.dpi || 96);
-    params.layers = (iparams.layerOption || 'all');
-    if (iparams.layerIds) {
-      params.layers += ':' + iparams.layerIds.join(',');
+    params.imageDisplay = '' + p.width + ',' + p.height + ',' + (p.dpi || 96);
+    params.layers = (p.layerOption || 'all');
+    if (p.layerIds) {
+      params.layers += ':' + p.layerIds.join(',');
     }
-    if (iparams.layerDefs) {
-      params.layerDefs = getLayerDefsString(iparams.layerDefs);//TODO
+    if (p.layerDefs) {
+      params.layerDefs = getLayerDefsString(p.layerDefs);//TODO
     }
-    params.maxAllowableOffset = iparams.maxAllowableOffset;
-    params.returnGeometry = (iparams.returnGeometry === false ? false : true);
+    params.maxAllowableOffset = p.maxAllowableOffset;
+    params.returnGeometry = (p.returnGeometry === false ? false : true);
     
     Util.getJSON(this.url + '/identify', params, 'callback', function (json) {
       // process results;
       var rets = null;
       var i, js, f, g;
-      
       if (json.results) {
         rets = [];
         for (i = 0; i < json.results.length; i++) {
           js = json.results[i];
-          g = fromJSONToOverlays(js.geometry, iparams.overlayOptions);
+          g = fromJSONToOverlays(js.geometry, p.overlayOptions);
           rets.push({
             feature: {
               geometry: g,
@@ -2069,7 +2035,8 @@
       }
       callback({
         results: rets
-      }, json.error);
+      });
+      handleErr(errback, json);
     });
   };
   /**
@@ -2118,8 +2085,9 @@
    * href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/find.html'>Find Operation</a>.
    * @param {FindOptions} opts
    * @param {Function} callback
+   * @param {Function} errback
    */
-  MapService.prototype.find = function (opts, callback) {
+  MapService.prototype.find = function (opts, callback, errback) {
     if (!opts) {
       return;
     }
@@ -2139,7 +2107,7 @@
     }
     params.sr = 4326;
     params.returnGeometry = (opts.returnGeometry === false ? false : true);
-    Util.getJSON(this.url + '/find', params, 'callback', function (json) {
+    Util.getJSON(this.url + '/find', params, STR.callback, function (json) {
       var rets = null;
       var i, js, f, g;
       if (json.results) {
@@ -2162,7 +2130,8 @@
       }
       callback({
         results: rets
-      }, json.error);
+      });
+      handleErr(errback, json);
     });
   };
   
@@ -2174,11 +2143,12 @@
    * @param {Number|String} layerNameOrId
    * @param {QueryOptions} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  MapService.prototype.queryLayer = function (layerNameOrId, params, callback) {
+  MapService.prototype.queryLayer = function (layerNameOrId, params, callback, errback) {
     var layer = this.getLayer(layerNameOrId);
     if (layer) {
-      layer.query(params, callback);
+      layer.query(params, callback, errback);
     }
   };
   
@@ -2189,6 +2159,7 @@
  * @name GeocodeService
  * @class This class (<code>gmaps.ags.GeocodeService</code>) represent an ArcGIS <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geocodeserver.html">GeocodeServer</a>
  *  service.
+ * @constructor
  * @param {String} url
  * @property {String} [serviceDescription] serviceDescription
  * @property {Field[]} [addressFields] input fields. 
@@ -2204,9 +2175,7 @@
     this.url = url;
     this.loaded = false;
     var me = this;
-    Util.getJSON(url, {
-      f: 'json'
-    }, 'callback', function (json) {
+    Util.getJSON(url, {}, STR.callback, function (json) {
       me.init_(json);
     });
   }
@@ -2270,8 +2239,9 @@
  *  {@link GeocodeResults} will be passed into callback function.
  * @param {GeocodeOptions} params
  * @param {Function} callback
+ * @param {Function} errback
  */
-  GeocodeService.prototype.findAddressCandidates = function (gparams, callback) {
+  GeocodeService.prototype.findAddressCandidates = function (gparams, callback, errback) {
     var params = augmentObject(gparams, {});
     if (params.inputs) {
       augmentObject(params.inputs, params);
@@ -2282,7 +2252,7 @@
     }
     params.outSR = 4326;
     var me = this;
-    Util.getJSON(this.url + '/findAddressCandidates', params, 'callback', function (json) {
+    Util.getJSON(this.url + '/findAddressCandidates', params, STR.callback, function (json) {
       var ret = null; 
       if (json.candidates) {
         var res, loc;
@@ -2302,7 +2272,8 @@
       }
       callback({
         candidates: ret
-      }, json.error);
+      });
+      handleErr(errback, json);
     });
   };
   /**
@@ -2342,15 +2313,16 @@
  *  {@link ReverseGeocodeResult} will be passed into callback function.
  * @param {ReverseGeocodeOptions} params
  * @param {Function} callback
+ * @param {Function} errback
  */
-  GeocodeService.prototype.reverseGeocode = function (params, callback) {
+  GeocodeService.prototype.reverseGeocode = function (params, callback, errback) {
     if (!isString(params.location)) {
       params.location = fromOverlaysToJSON(params.location);
     }
     params.f = 'json';
     params.outSR = 4326;
     var me = this;
-    Util.getJSON(this.url + '/reverseGeocode', params, 'callback', function (json) {
+    Util.getJSON(this.url + '/reverseGeocode', params, STR.callback, function (json) {
       if (json.location) {
         var loc = json.location;
         if (!isNaN(loc.x) && !isNaN(loc.y)) {
@@ -2361,7 +2333,8 @@
           json.location = new G.LatLng(ll[1], ll[0]);
         }
       }
-      callback(json, json.error);
+      callback(json);
+      handleErr(errback, json);
     });
   };
  
@@ -2393,6 +2366,7 @@
    * <li><code>tileInfo</code> tiling information. An instance of {@link TileInfo}
    * </ul>Applications normally do not create instances of this class directly.
    * @name Projection
+   * @constructor
    * @class This class (<code>gmaps.ags.Projection</code>) implements a custom
    * <a href  = 'http://code.google.com/apis/maps/documentation/javascript/reference.html#Projection'>google.maps.Projection</a> 
    * from the core Google Maps API.
@@ -2401,28 +2375,28 @@
    *   map coordinates from/to pixel coordinates. 
    * @param {TileInfo} tileInfo
    */
-  function Projection(tileInfo) {//}, opt_fullExtent) {
+  function Projection(tileInfo) {
     if (!tileInfo) {
       throw new Error('map service is not tiled');
     }
-    this.tileInfo_ = tileInfo;
-    this.spatialReference = spatialReferences[tileInfo.spatialReference.wkid || tileInfo.spatialReference.wkt];
-    if (!this.spatialReference) {
+    this.lods_ = tileInfo.lods;
+    this.spatialReference_ = spatialReferences[tileInfo.spatialReference.wkid || tileInfo.spatialReference.wkt];
+    if (!this.spatialReference_) {
       throw new Error('unsupported Spatial Reference');
     }
     // resolution (unit/pixel) at lod level 0. Due to changes from V2-V3, 
     // zoom is no longer defined in Projection. It is assumed that level's zoom factor is 2. 
-    this.resolution0_ = this.tileInfo_.lods[0].resolution;
+    this.resolution0_ = this.lods_[0].resolution;
     // zoom offset of this tileinfo's zoom 0 to Google's zoom0
     this.minZoom = Math.floor(Math.log(this.spatialReference.getCircumference() / this.resolution0_ / 256) / Math.LN2 + 0.5);
-    this.maxZoom = this.minZoom + this.tileInfo_.lods.length - 1;
-    this.tileSize = new G.Size(this.tileInfo_.cols, this.tileInfo_.rows);
+    this.maxZoom = this.minZoom + this.lods_.length - 1;
+    this.tileSize = new G.Size(tileInfo.cols, tileInfo.rows);
     // Find out how the map units scaled to 1 tile at zoom 0. 
     // from V2-V3, coords must scaled to 256 pixel under Mercator at zoom 0.
     // scale can be considered under this SR, what's the actual pixel number to 256 to cover whole earth?
     this.scale_ = Math.pow(2, this.minZoom) * this.resolution0_;
-    this.originX_ = this.tileInfo_.origin.x;
-    this.originY_ = this.tileInfo_.origin.y;
+    this.originX_ = tileInfo.origin.x;
+    this.originY_ = tileInfo.origin.y;
     // validation check
     var ratio;
     for (var i = 0; i < tileInfo.lods.length - 1; i++) {
@@ -2443,7 +2417,7 @@
     if (!latlng || isNaN(latlng.lat()) || isNaN(latlng.lng())) {
       return null;
     }
-    var coords  =  this.spatialReference.forward([latlng.lng(), latlng.lat()]);
+    var coords  =  this.spatialReference_.forward([latlng.lng(), latlng.lat()]);
     var point = opt_point || new G.Point(0, 0);
     point.x = (coords[0] - this.originX_) / this.scale_;
     point.y = (this.originY_ - coords[1]) / this.scale_; 
@@ -2462,7 +2436,7 @@
     }
     var x = pixel.x * this.scale_ + this.originX_;
     var y = this.originY_ - pixel.y * this.scale_;
-    var geo = this.spatialReference.reverse([x, y]);
+    var geo = this.spatialReference_.reverse([x, y]);
     return new G.LatLng(geo[1], geo[0]);
   };
   /**
@@ -2473,13 +2447,11 @@
   Projection.prototype.getScale  =  function (zoom) {
     var zoomIdx  =  zoom - this.minZoom;
     var res  = 0;
-    if (this.tileInfo_.lods[zoomIdx]) {
-      res  = this.tileInfo_.lods[zoomIdx].scale;
+    if (this.lods_[zoomIdx]) {
+      res  = this.lods_[zoomIdx].scale;
     } 
     return res;
   };
-  
-  
   
   /**
    * @name TileLayerOptions
@@ -2500,6 +2472,7 @@
    * <br/> <code> service</code> (required) is the underline {@link MapService}
    * <br/> <code>opt_layerOpts</code> (optional) is an instance of {@link TileLayerOptions}.
    * @name TileLayer
+   * @constructor
    * @class This class (<code>gmaps.ags.TileLayer</code>) provides access to a cached ArcGIS Server 
    * map service. There is no GTileLayer class in Google Maps API V3, but this class is kept to allow
    * finer control of zoom levels for each individual tile sets within a map type, such as zoom level range and opacity.
@@ -2514,23 +2487,23 @@
       delete opt_layerOpts.opacity;
     }
     augmentObject(opt_layerOpts, this);
-    this.mapService  =  (service instanceof MapService)?service:new MapService(service);
+    this.mapService_  =  (service instanceof MapService) ? service : new MapService(service);
     //In the format of mt[number].domain.com
     if (opt_layerOpts.hosts) {
-      var pro  =  extractString(this.mapService.url, '', '://');
-      var host  =  extractString(this.mapService.url, '://', '/');
-      var path  =  extractString(this.mapService.url, pro + '://' + host, '');
+      var pro  =  extractString(this.mapService_.url, '', '://');
+      var host  =  extractString(this.mapService_.url, '://', '/');
+      var path  =  extractString(this.mapService_.url, pro + '://' + host, '');
       this.urlTemplate_  =  pro + '://' + opt_layerOpts.hosts + path;
       this.numOfHosts_  =  parseInt(extractString(opt_layerOpts.hosts, '[', ']'), 10);
     }
-    this.name = this.name || this.mapService.name;
+    this.name = this.name || this.mapService_.name;
     this.maxZoom = this.maxZoom || 19;
     this.minZoom = this.minZoom || 0;
-    if (this.mapService.loaded) {
+    if (this.mapService_.loaded) {
       this.init_(opt_layerOpts);
     } else {
       var me  =  this;
-      G.event.addListenerOnce(this.mapService, 'load', function () {
+      G.event.addListenerOnce(this.mapService_, STR.load, function () {
         me.init_(opt_layerOpts);
       });
     }
@@ -2540,11 +2513,10 @@
   
   /**
    * Initialize the tile layer from a loaded map service
-   * @param {MapService} mapService
    * @param {Object} opt_layerOpts
    */
   TileLayer.prototype.init_  =  function (opt_layerOpts) {
-    this.projection  =  new Projection(this.mapService.tileInfo);//, this.mapService_.fullExtent);
+    this.projection  =  new Projection(this.mapService_.tileInfo);//, this.mapService_.fullExtent);
     this.minZoom = opt_layerOpts.minZoom || this.projection.minZoom;
     this.maxZoom = opt_layerOpts.maxZoom || this.projection.maxZoom;
   };
@@ -2558,10 +2530,10 @@
    * @return {String} url
    */
   TileLayer.prototype.getTileUrl  =  function (tile, zoom) {
-    var z  = zoom - (this.projection?this.projection.minZoom:this.minZoom);
+    var z  = zoom - (this.projection ? this.projection.minZoom : this.minZoom);
     var url = '';
     if (!isNaN(tile.x) && !isNaN(tile.y) && z >= 0 && tile.x >= 0 && tile.y >= 0) {
-      var u  =  this.mapService.url;
+      var u  =  this.mapService_.url;
       if (this.urlTemplate_) {
         u  =  this.urlTemplate_.replace('[' + this.numOfHosts_ + ']', '' + ((tile.y + tile.x) % this.numOfHosts_));
       }
@@ -2579,7 +2551,7 @@
     var tiles = this.tiles;
     for (var x in tiles) {
       if (tiles.hasOwnProperty(x)) {
-        setOpacity(tiles[x], op);
+        setNodeOpacity(tiles[x], op);
       }
     }
   };
@@ -2589,6 +2561,13 @@
    */
   TileLayer.prototype.getOpacity  =  function () {
     return this.opacity_;
+  };
+  /**
+   * get the underline Map Service
+   * @return {MapService}
+   */
+  TileLayer.prototype.getMapService  =  function () {
+    return this.mapService_;
   };
   /**
    * @name MapTypeOptions
@@ -2606,22 +2585,20 @@
    *   May not need if API provides access to map instance later.
    */
   /**
-   * Creates a MapType, with the following parameters:
-   * <li><code>tileLayers</code>: a array of {@link TileLayer}s, 
-   *  or a single URL as shortcut.
-   * <li><code>opt_typeOpts</code>: optional. An instance of {@link MapTypeOptions}
+   * Creates a MapType, with a array of TileLayers, or a single URL as shortcut.
    * @name MapType
+   * @constructor
    * @class This class (<code>gmaps.ags.MapType</code>) extends the Google Maps API's
    * <a href  = http://code.google.com/apis/maps/documentation/javascript/reference.html#MapType>GMapType</a>.
    * It holds a list of {@link TileLayer}s.
    * <p> Because all tileLayers are loaded asynchronously, and currently the
    * core API does not have method to refresh tiles on demand, if you do not load the default
    * Google maps, you should either 1) add to
-   * map after it "load" event is fired, or) trigger an map type change to force refresh.
+   * map after it STR.load event is fired, or) trigger an map type change to force refresh.
    * See <a href  = http://code.google.com/p/gmaps-api-issues/issues/detail?id  = 279&can  = 1&q  = refresh&colspec  = ID%20Type%20Status%20Introduced%20Fixed%20Summary%20Stars%20ApiType%20Internal>Issue 279</a>
    * </p>
    * <p> Note: all tiled layer in the same map type must use same spatial reference and tile scheme.</p>
-   * @param {String|TileLayer[]} tileLayers
+   * @param {(Array.<TileLayer>|String)} tileLayers
    * @param {MapTypeOptions} opt_typeOpts
    */
   function MapType(tileLayers, opt_typeOpts) {
@@ -2704,18 +2681,18 @@
           div.appendChild(img);
           t.tiles[tileId] = img;
           if (t.opacity_ !== undefined) {
-            setOpacity(img, t.opacity_);
+            setNodeOpacity(img, t.opacity_);
           } else if (this.opacity_ !== undefined) {
             // in FF it's OK to set parent div just once but IE does not like it.
-            setOpacity(img, this.opacity_);
+            setNodeOpacity(img, this.opacity_);
           }
         } else {
           // TODO: use a div to display NoData
         }
       }
     }
-    div.setAttribute('tid', tileId);
     this.tiles[tileId] = div;
+    div.setAttribute('tid', tileId);
     return div;
   };
   /**
@@ -2723,8 +2700,8 @@
    * @param {Node} node
    */
   MapType.prototype.releaseTile = function (node) {
-    var tileId = node.getAttribute('tid');
-    if (tileId) {
+    if (node.getAttribute('tid')) {
+      var tileId = node.getAttribute('tid');
       if (this.tiles[tileId]) {
         delete this.tiles[tileId];
       }
@@ -2744,7 +2721,7 @@
       if (tiles.hasOwnProperty(x)) {
         var nodes = tiles[x].childNodes;
         for (var i = 0; i < nodes.length; i++) {
-          setOpacity(nodes[i], op);
+          setNodeOpacity(nodes[i], op);
         }
       }
     }
@@ -2783,7 +2760,7 @@
    */
   function MapOverlay(service, opt_overlayOpts) {
     opt_overlayOpts  =  opt_overlayOpts || {};
-    this.mapService  = (service instanceof MapService)?service:new MapService(service);
+    this.mapService_  = (service instanceof MapService) ? service : new MapService(service);
     
     this.minZoom  = opt_overlayOpts.minZoom;
     this.maxZoom  = opt_overlayOpts.maxZoom;
@@ -2818,7 +2795,7 @@
     var panes = this.getPanes();
     panes.overlayLayer.appendChild(div);
     if (this.opacity_) {
-      setOpacity(div, this.opacity_);
+      setNodeOpacity(div, this.opacity_);
     }
     var me = this;
     this.boundsChangedListener_ = G.event.addListener(this.getMap(), 'bounds_changed', function () {
@@ -2864,7 +2841,14 @@
     var op = Math.min(Math.max(opacity, 0), 1);
     this.opacity_ = op;
     var img = this.div_;
-    setOpacity(img, op);
+    setNodeOpacity(img, op);
+  };
+  /**
+   * Gets Image Opacity. return <code>opacity</code> between 0-1.
+   * @return {MapService} MapService
+   */
+  MapOverlay.prototype.getMapService  =  function () {
+    return this.mapService_;
   };
   
   /**
@@ -2902,7 +2886,7 @@
     var me = this;
     this.drawing_ = true;
     this.div_.style.backgroundImage = '';
-    this.mapService.exportMap(params, function (json) {
+    this.mapService_.exportMap(params, function (json) {
       me.drawing_ = false;
       if (me.needsNewRefresh_ === true) {
         me.needsNewRefresh_ = false;
@@ -2993,6 +2977,7 @@
  * Creates an GeometryService class.
  * Params:<li><code>url</code>: URL of service, syntax:<code>	http://{catalog-url}/{serviceName}/GeometryServer</code>
  * @name GeometryService
+ * @constructor
  * @class This class (<code>gmaps.ags.GeometryService</code>) represent an ArcGIS 
  * <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geometryserver.html">Geometry</a>
  *  service.
@@ -3025,10 +3010,10 @@
     if (isOv) {
       params.inSR = WGS84.wkid;
     } else if (p.inSpatialReference) {
-      params.inSR = getSRParam(p.inSpatialReference);
+      params.inSR = formatSRParam(p.inSpatialReference);
     }
     if (p.outSpatialReference) {
-      params.outSR = getSRParam(p.outSpatialReference);
+      params.outSR = formatSRParam(p.outSpatialReference);
     }
     params.geometries = '{geometryType:"' + p.geometryType + '", geometries:[' + json.join(',') + ']}';
     return params;
@@ -3039,7 +3024,7 @@
    *  for a {@link GeometryService}.
    *   There is no constructor, use JavaScript object literal.
    * <br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/project.html'>Project Operation</a>.
-   * @property {OverlayView[]|Object[]} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
+   * @property {Array.<OverlayView>|Array.<Object>} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
    * @property {GeometryType} [geometryType] esriGeometryPoint | esriGeometryPolyline | esriGeometryPolygon | esriGeometryEnvelope
    * @property {SpatialReference} [inSpatialReference] The well-known ID of or the spatial reference of the input geometries
    * @property {SpatialReference} [outSpatialReference] The well-known ID of or the spatial reference of the out geometries
@@ -3050,15 +3035,16 @@
    *  for a {@link GeometryService}.
    *   There is no constructor, use JavaScript object literal.
    * <br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/project.html'>Project Operation</a>.
-   * @property {OverlayView[]|Object[]} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
+   * @property {Array.OverlayView|Array.Object} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
     */
   /**
    * This resource projects an array of input geometries from an input spatial reference
    * to an output spatial reference. Result of type {@link ProjectResults} is passed in callback function.
    * @param {ProjectOptions} params
    * @param {Function} callback
+   * @param {Function} errback
    */
-  GeometryService.prototype.project = function (p, callback) {
+  GeometryService.prototype.project = function (p, callback, errback) {
     var params = prepareGeometryParams(p);
     Util.getJSON(this.url + '/project', params, "callback", function (json) {
       var geom = [];
@@ -3068,7 +3054,8 @@
         }
         json.geometries = geom;
       }
-      callback(json, json.error);
+      callback(json);
+      handleErr(errback, json);
     });
   };
  
@@ -3079,7 +3066,7 @@
   * and <a href=http://resources.esri.com/help/9.3/ArcGISDesktop/ArcObjects/esriGeometry/esriSRUnit2Type.htm>esriSRUnit2Type</a>
   * @property {Number} [METER] 9001 International meter.
   * @property {Number} [FOOT] 9002 International meter.
-  * @property {Number} [SURVEY_FOOT] 9003 	US survey foot.
+  * @property {Number} [SURVEY_FOOT] 9003 US survey foot.
   * @property {Number} [SURVEY_MILE] 9035 US survey mile.
   * @property {Number} [KILLOMETER] 9036 killometer.
   * @property {Number} [RADIAN] 9101 radian.
@@ -3100,9 +3087,9 @@
    *  for a {@link GeometryService}.
    *   There is no constructor, use JavaScript object literal.
    * <br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/project.html'>Project Operation</a>.
-   * @property {OverlayView[]|Object[]} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon</code>, or ESRI Geometry format to project. 
+   * @property {Array.OverlayView|Array.Object} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon</code>, or ESRI Geometry format to project. 
    * @property {SpatialReference} [bufferSpatialReference] The well-known ID of or the spatial reference of the out geometries
-   * @property {Number[]} [distances] The distances the input geometries are buffered.
+   * @property {Array.Number} [distances] The distances the input geometries are buffered.
    * @property {Number} [unit] see <a href='http://resources.esri.com/help/9.3/ArcGISDesktop/ArcObjects/esriGeometry/esriSRUnitType.htm'>esriSRUnitType Constants </a> .
    * @property {Boolean} [unionResults] If true, all geometries buffered at a given distance are unioned into a single (possibly multipart) polygon, and the unioned geometry is placed in the output array.
    * @property {OverlayOptions} [overlayOptions] how to render result overlay
@@ -3113,18 +3100,19 @@
    *  for a {@link GeometryService}.
    *   There is no constructor, use JavaScript object literal.
    * <br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/project.html'>Project Operation</a>.
-   * @property {OverlayView[]|Object[]} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
+   * @property {Array.OverlayView|Array.Object} [geometries] Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project. 
    */
   /**
    * This resource projects an array of input geometries from an input spatial reference
    * to an output spatial reference. Result of type {@link BufferResults} is passed in callback function.
    * @param {BufferOptions} params
    * @param {Function} callback. 
+   * @param {Function} errback
    */
-  GeometryService.prototype.buffer = function (p, callback) {
+  GeometryService.prototype.buffer = function (p, callback, errback) {
     var params = prepareGeometryParams(p);
     if (p.bufferSpatialReference) {
-      params.bufferSR = getSRParam(p.bufferSpatialReference);
+      params.bufferSR = formatSRParam(p.bufferSpatialReference);
     }
     params.outSR = 4326;
     params.distances = p.distances.join(',');
@@ -3135,11 +3123,12 @@
       var geom = [];
       if (json.geometries) {
         for (var i = 0, c = json.geometries.length; i < c; i++) {
-          geom.push(fromJSONToOverlays(json.geometries[i], p.overlayOptions));
+          geom.push(fromJSONToOverlays(json.geometries[i], p['overlayOptions']));
         }
       }
       json.geometries = geom;
-      callback(json, json.error);
+      callback(json);
+      handleErr(errback, json);
     });
   };
   
@@ -3159,7 +3148,7 @@
     var me = this;
     Util.getJSON(url, {
       f: 'json'
-    }, 'callback', function (json) {
+    }, STR.callback, function (json) {
       augmentObject(json, me);
       me.loaded = true;
       /**
@@ -3167,7 +3156,7 @@
      * @name GPService#load
      * @event
      */
-      G.event.trigger(me, 'load');
+      G.event.trigger(me, STR.load);
     });
   }
   /**
@@ -3179,7 +3168,7 @@
    * @property {Object} [defaultValue]
    * @property {Object} [parameterType]
    * @property {String} [category]
-   * @property {Object[]} [choiceList]
+   * @property {Array.Object} [choiceList]
    */
   /**
    * @name GPTask
@@ -3203,7 +3192,7 @@
     var me = this;
     Util.getJSON(url, {
       f: 'json'
-    }, 'callback', function (json) {
+    }, STR.callback, function (json) {
       augmentObject(json, me);
       me.loaded = true;
       /**
@@ -3211,7 +3200,7 @@
      * @name GPService#load
      * @event
      */
-      G.event.trigger(me, 'load');
+      G.event.trigger(me, STR.load);
     });
   }
   
@@ -3224,23 +3213,24 @@
   /**
    * execute a GeoProcessing task
    * @param {GPOptions} p
-   * @param {Function} callback will pass {@link GPResults} and {@link Error}
+   * @param {Function} callback will pass {@link GPResults} 
+   * @param {Function} errback pass in {@link Error}
    */
-  GPTask.prototype.execute = function (p, callback) {
+  GPTask.prototype.execute = function (p, callback, errback) {
     var params = {};
     if (p.parameters) {
       augmentObject(p.parameters, params);
     }
     if (p.outSpatialReference) {
-      params['env:outSR'] = getSRParam(p.outSpatialReference);
+      params['env:outSR'] = formatSRParam(p.outSpatialReference);
     } else {
       params['env:outSR'] = 4326;
     }
     if (p.processSpatialReference) {
-      params['env:processSR'] = getSRParam(p.processSpatialReference);
+      params['env:processSR'] = formatSRParam(p.processSpatialReference);
     } 
     var me = this;
-    Util.getJSON(this.url + '/execute', params, 'callback', function (json) {
+    Util.getJSON(this.url + '/execute', params, STR.callback, function (json) {
       var ret = null; 
       if (json.results) {
         var res, loc, f;
@@ -3256,14 +3246,15 @@
           }
         }
       }
-      callback(json, json.error);
+      callback(json);
+      handleErr(errback, json);
     });
   };
   
   /**
    * @name GPResults
    * @property {String[]} messages
-   * @propery {GPResult[]} results
+   * @property {GPResult[]} results
    */
   /**
    * @name GPResult
@@ -3287,7 +3278,7 @@
     var me = this;
     Util.getJSON(url, {
       f: 'json'
-    }, 'callback', function (json) {
+    }, STR.callback, function (json) {
       augmentObject(json, me);
       me.loaded = true;
      /**
@@ -3295,10 +3286,97 @@
      * @name NetworkService#load
      * @event
      */
-      G.event.trigger(me, 'load');
+      G.event.trigger(me, STR.load);
     });
   }
-  
+  /**
+   * @name RouteOptions
+   * @class intance that specify how a route should be solved.
+   * @property {google.maps.LatLng[]|Marker[]} [stops]
+   * @property {google.maps.LatLng[]|Marker[]} [barriers]
+   * @property {Boolean} [returnDirections] If true, directions will be generated and returned with the analysis results. Default is true
+   * @property {Boolean} [returnRoutes] If true, routes will be returned with the analysis results. Default is true. 
+   * @property {Boolean} [findBestSequence] If true, the solver should resequence the route in the optimal order. The default is as defined in the network layer. 
+   * @property {Boolean} [preserveFirstStop] If true, the solver should resequence the route in the optimal order. The default is as defined in the network layer. 
+   * @property {Boolean} [preserveLastStop] If true, the solver should resequence the route in the optimal order. The default is as defined in the network layer. 
+   */
+  /**
+   * @name RouteResults
+   * @class intance that specify the results of the solve operation.
+   * @property {google.maps.LatLng[]} [stops]
+   */
+  /**
+   * Create a route task with the URL of the routing server resource.
+   * @name RouteTask 
+   * @class This class (<code>gmaps.ags.RouteTask</code>) represent a Network Layer resource deployed in a NetWorkService.
+   * It can solve a route based on stops, barrier
+   * @constructor
+   * @param {String} url
+   */
+  function RouteTask(url) {
+    this.url = url;
+  }
+  function fromLatLngsToFeatureSet(latlngs) {
+    var i, I, latlng;
+    var features = [];
+    for (i = 0, I = latlngs.length; i < I; i++) {
+      latlng = latlngs[i];
+      if (latlng instanceof G.Marker) {
+        latlng = latlng.getPosition();
+      }
+      features.push({
+        geometry: {
+          x: latlng.lng(),
+          y: latlng.lat(),
+          spatialReference: {
+            wkid: 4326
+          }
+        }
+      });
+    }
+    return {
+      type: '"features"',
+      features: features,
+      doNotLocateOnRestrictedElements: false
+    };
+  }
+  /**
+   * Solve a route based on inputs such as stops and barriers. Result of type {@link RouteResults} 
+   * is passed to Function callback, and error of type {@link Error} is passed to Function errback.
+   * @param {RouteOptions} opt_Route
+   * @param {Function} callback
+   * @param {Function} errback
+   */
+  RouteTask.prototype.solve = function (opts, callback, errback) {
+    if (!opts) {
+      return;
+    }
+    // handle many other fields
+    var params = augmentObject(opts, {});
+    //params['outSR'] = WGS84.wkid;
+    if (isArray(opts.stops)) {
+      params['stops'] = fromLatLngsToFeatureSet(opts.stops);
+    }
+    if (isArray(opts.barriers)) {
+      if (opts.barriers.length > 0) {
+        params['barriers'] = fromLatLngsToFeatureSet(opts.barriers);
+      } else {
+        delete params['barriers'];
+      }
+    }
+    params['returnRoutes'] = (opts.returnRoutes === false ? false : true);
+    params.returnDirections = (opts.returnDirections === true ? true : false);
+    params.returnBarriers = (opts.returnBarriers === true ? true : false);
+    params.returnStops = (opts.returnStops === true ? true : false);
+    
+    Util.getJSON(this.url + '/solve', params, 'callback', function (json) {
+      if (json.routes) {
+        parseFeatures(json.routes.features, opts.overlayOptions);
+      }
+      callback(json);
+      handleErr(errback, json);
+    });
+  };
   /**
    * @name OverlayOptions
    * @class Instance of this classes that specify how
@@ -3313,7 +3391,11 @@
    * @property {String|MarkerImage} {icon} Icon for the foreground
    * @property {String|MarkerImage} {shadow} Shadow image
    */
-  var arcgis = {
+  
+  // export symbols
+  // notes for closure compiler:
+  W['gmaps'] = W['gmaps'] || {};
+  W['gmaps']['ags'] = {
     'SpatialReference': SpatialReference,
     'Geographic': Geographic,
     'LambertConformalConic': LambertConformalConic,
@@ -3329,6 +3411,7 @@
     'GeometryService': GeometryService,
     'GPService': GPService,
     'GPTask': GPTask,
+    'RouteTask': RouteTask,
     'Util': Util,
     'Config': Config,
     'Projection': Projection,
@@ -3336,8 +3419,6 @@
     'MapOverlay': MapOverlay,
     'MapType': MapType
   };
-  var NS = namespace('gmaps');
-  NS.ags = arcgis;
 })();
  
 
