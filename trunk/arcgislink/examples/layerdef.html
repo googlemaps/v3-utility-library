@@ -24,8 +24,8 @@
           var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer';
           dynamap = new gmaps.ags.MapOverlay(url);
           // set definition after map service load event.
-          google.maps.event.addListenerOnce(dynamap.mapService, 'load', function(){
-            var service = dynamap.mapService;
+          google.maps.event.addListenerOnce(dynamap.getMapService(), 'load', function(){
+          var service = dynamap.getMapService();
             service.getLayer("Coarse Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
             service.getLayer("Detailed Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
             service.getLayer("states").definition = "STATE_NAME='Kansas'";

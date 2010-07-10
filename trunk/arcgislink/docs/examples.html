@@ -399,7 +399,7 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer';
     dynamap = new gmaps.ags.MapOverlay(url);
     // set definition after map service load event.
-    google.maps.event.addListenerOnce(dynamap.mapService, 'load', function(){
+    google.maps.event.addListenerOnce(dynamap.getMapService(), 'load', function(){
       var service = dynamap.mapService;
       service.getLayer("Coarse Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
       service.getLayer("Detailed Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
@@ -447,7 +447,7 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
    } 
     
    function setVis() {
-     var service = dynamap.mapService;
+     var service = dynamap.getMapService();
      for (var i = 0; i &lt; service.layers.length; i++) {
        var el = document.getElementById('layer' + service.layers[i].id);
        service.layers[i].visible = (el.checked === true);
@@ -878,7 +878,7 @@ The map click is also wired to identify operation with layer options (top most, 
       ov = new gmaps.ags.MapOverlay(url, {
         opacity: document.getElementById('op').value
       });
-      google.maps.event.addListener(ov.mapService, 'load', function() {
+      google.maps.event.addListener(ov.getMapService(), 'load', function() {
        ...
       });
     }

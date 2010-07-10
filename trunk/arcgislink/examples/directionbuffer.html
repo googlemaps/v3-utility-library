@@ -19,7 +19,7 @@
               var myOptions = {
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                center: new google.maps.LatLng(35.23,-80.84)//38.899583425982705, -95.3342056274414)
+                center: new google.maps.LatLng(35.23,-80.84)
               }
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
               svc = new gmaps.ags.GeometryService('http://sampleserver3.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer');
@@ -30,8 +30,8 @@
             }
             
             function calcRoute() {
-              var start = 'Redlands, CA';
-              var end = 'Riverside, CA';
+              var start = 'bank of america stadium, Charlotte, NC';
+              var end = 'time warner cable arena, Charlotte, NC';
               var request = {
                 origin: start,
                 destination: end,
@@ -62,7 +62,7 @@
               var params = {
                 geometries: [poly],
                 bufferSpatialReference: gmaps.ags.SpatialReference.WEB_MERCATOR,
-                distances: [500,1000],
+                distances: [200],
                 unit: gmaps.ags.SRUnit.METER,
                 unionResults: true
               };
