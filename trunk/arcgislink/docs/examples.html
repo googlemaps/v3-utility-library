@@ -19,13 +19,13 @@
 <h2><a name="TOC"></a>Table of Contents</h2>
     <p>This library allows the developers to use ESRI ArcGIS server v10 in Google Maps 
         JavaScript API v3. The library was ported from an
-        <a href="http://http://gmaps-utility-library-dev.googlecode.com/svn/trunk/arcgislink/docs/examples.html">
+        <a href="http://gmaps-utility-library-dev.googlecode.com/svn/trunk/arcgislink/docs/examples.html">
         earlier version</a> that developed against ArcGIS Server 9.3 and Google API v2.
     </p>
     <p>There are substaintial changes from Google API from v2 to v3, not all features in 
         v2 are ported to v3, including some related to projection support. Although this 
-        library still supports non-mercator projection, it is recommended that map 
-        caches built using Google/Bing scheme to get the more stable and reliable 
+        library still supports non-mercator projection, it is recommended that new map 
+        caches built using Google/Bing scheme in order to get more stable and reliable 
         behavior. </p>
 <table style='border:0px'>
 <tr>
@@ -53,7 +53,6 @@
    <li><a href="#HourGlass">Show &quot;Hourglass&quot; using events</a></li>
    <li><a href="#LayerQuery">Layer Query w/ Mouseover</a></li>
    <li><a href="#Find">Find</a></li>
-   <li><a href="#Overlay">Map Service Viewer</a></li>
    </ul>
    </td>
     <td>
@@ -63,6 +62,7 @@
        <li><a href="#Project">Project</a></li>
        <li><a href="#Buffer">Buffer</a></li>
        <li><a href="#CoverArea">Driving Time Coverage</a></li>
+       <li><a href="#Routing">Routing with Barriers</a></li>
    </ul>
    </td>
   </tr>
@@ -72,20 +72,21 @@
 <h2><a name="HowTo"></a>Include Scripts</h2>
 <p>
 The first step is to include <code>arcgislink.js</code>  
-    or <code>arcgislink_compressed.js</code> 
+    or <code>arcgislink_compiled.js</code> 
 in your document header, after the Google Maps API has loaded. You can use the 
 hosted release version if you do not want to download the script.</p>
 <pre class="prettyprint">
-&lt;script src=&quot;/path/to/argislink_compressed.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/argislink.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
 </pre>
 </div>
 <div>
 <h2><a name="Mercator"></a>Cached Map Service in Web Mercator</h2>
 <p> 
-    Cached map service may provide better response time because it's pre-rendered as tiles. If the 
+    Cached map service may provide better response time because it's pre-rendered as 
+    image tiles. If the 
     map service is tiled using the same tiling scheme as Google Maps (WebMercator in 
-    ArcGIS), it can be added as a map type directly. The following example 
-    constructs a new with only an ArcGIS map type and no Google map types.
+    ArcGIS), it can be added as a standalone map type directly. The following example 
+    constructs a new map with only an ArcGIS map type and no Google map types.
 </p>
 <pre class="prettyprint">
     var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
@@ -95,7 +96,7 @@ hosted release version if you do not want to download the script.</p>
  </pre>
 <p>
 <a href="../examples/mercator.html">View example </a> |
-<a href="../examples/mercator.html?packed">Packed </a> |
+<a href="../examples/mercator.html?compiled">Compiled </a> |
 <a href="../examples/nexus.html?u=mercator.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -103,25 +104,25 @@ hosted release version if you do not want to download the script.</p>
 
 <div>
 <h2><a name="Dyna"></a>Dynamic Map Service</h2>
-<p> ArcGIS Server provides map services to generate map images on the fly, 
+<p> ArcGIS Server provides map services to generate map images from spatial data on the fly, 
 also known as "dynamic map". Dynamic services are implemented as 
     <a href='reference.html#MapOverlay'>MapOverlay</a>,
  a subclass of <code>google.maps.OverlayView</code>, and can be
   added with <code>overlay.setMap(map)</code>. This class is similar 
-to the <code>google.maps.GoundOverlay</code> in the core API, as it essentially draws a 
+to the <code>google.maps.GroundOverlay</code> in the core API, as it essentially draws a 
 single image over the map. However, it refreshes the image as bounds changed. Any map service can be added as an MapOverlay, 
 regardless of whether it's tiled or not.
 
 
 <pre class="prettyprint">
     var url = &#39;http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer&#39;;
-    var dynamap = new gmaps.ags.MapOverlay(url);
-    dynamap.setMap(map);
+   var dynamap = new gmaps.ags.MapOverlay(url);
+   dynamap.setMap(map);
 </pre>
 
 <p>
 <a href="../examples/dynamap.html">View example </a> |
-<a href="../examples/dynamap.html?packed">Packed </a> |
+<a href="../examples/dynamap.html?compiled">Compiled </a> |
 <a href="../examples/nexus.html?u=dynamap.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -140,7 +141,7 @@ regardless of whether it's tiled or not.
 </pre>
 <p>
 <a href="../examples/combined.html">View example </a> |
-<a href="../examples/combined.html?packed">Packed </a> | 
+<a href="../examples/combined.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=combined.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -158,7 +159,7 @@ regardless of whether it's tiled or not.
 
 <p>
 <a href="../examples/maptypeoverlay.html">View example</a> |
-<a href="../examples/maptypeoverlay.html?packed">Packed</a> |
+<a href="../examples/maptypeoverlay.html?compiled">Compiled</a> |
 <a href="../examples/nexus.html?u=maptypeoverlay.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -220,7 +221,7 @@ adjacent zoom levels must be exactly 2</b>. Also, the tile layer must be constru
 
 <p>
 <a href="../examples/stateplane.html">View example </a> |
-<a href="../examples/stateplane.html?packed">Packed </a> | 
+<a href="../examples/stateplane.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=stateplane.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -267,7 +268,7 @@ online geo-spatial service provided by
 
 <p>
 <a href="../examples/arcgisonline.html">View example </a> |
-<a href="../examples/arcgisonline.html?packed">Packed </a> | 
+<a href="../examples/arcgisonline.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=arcgisonline.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -276,7 +277,7 @@ online geo-spatial service provided by
 <h2><a name="Opacity"></a>Map Opacity</h2>
 <p> In V3 the <code>google.maps.MapType.getTile</code> method offers greater flexibility to manipulate individual tiles, thus provides 
 the capability of setting opacity on the fly. Also, the one-many relationship between MapType and TileLayer from V2 is preserved for finer control of tile sets. For example, 
-Hybrid map type contains an image tile set and a label tile set. Opacity can be controled at tile layer level in addition to Map type level.
+Hybrid map type contains an image tile set and a label tile set. Opacity can be controled at tile layer level in addition to MapType level.
 The following example uses a 
     <a href="http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggableobject/1.0/">slider</a> 
     from the V3 util lib to change the opacity of the top map type overlay. It's possible to built animation using historic image tiles with this feature. 
@@ -300,7 +301,7 @@ The following example uses a
 
 <p>
 <a href="../examples/opacity.html">View example </a> |
-<a href="../examples/opacity.html?packed">Packed </a> | 
+<a href="../examples/opacity.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=opacity.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -328,7 +329,7 @@ mt3.google.com (4 hosts) </p>
 
 <p>
 <a href="../examples/hosts.html">View example </a> |
-<a href="../examples/hosts.html?packed">Packed </a> | 
+<a href="../examples/hosts.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -337,6 +338,8 @@ mt3.google.com (4 hosts) </p>
 <p> ArcGIS Map services support identify operation. The server will return feature behind map for any location. 
 Normally this is done via handling the 'click' event on map, then perform Identify 
     opertion on a MapService.
+    In the following example, identify results from different layers are grouped 
+    into different tabs.
 </p>
 <pre class="prettyprint">
     var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
@@ -381,7 +384,7 @@ Normally this is done via handling the 'click' event on map, then perform Identi
 
 <p>
 <a href="../examples/identify.html">View example </a> |
-<a href="../examples/identify.html?packed">Packed </a> | 
+<a href="../examples/identify.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=identify.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -400,7 +403,7 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
     dynamap = new gmaps.ags.MapOverlay(url);
     // set definition after map service load event.
     google.maps.event.addListenerOnce(dynamap.getMapService(), 'load', function(){
-      var service = dynamap.mapService;
+      var service = dynamap.getMapService();
       service.getLayer("Coarse Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
       service.getLayer("Detailed Counties").definition = "STATE_NAME='Kansas' and POP2007>25000";
       service.getLayer("states").definition = "STATE_NAME='Kansas'";
@@ -424,7 +427,7 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
 
 <p>
 <a href="../examples/layerdef.html">View example </a> |
-<a href="../examples/layerdef.html?packed">Packed </a> | 
+<a href="../examples/layerdef.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=layerdef.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -458,7 +461,7 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
 
 <p>
 <a href="../examples/layervis.html">View example </a> |
-<a href="../examples/layervis.html?packed">Packed </a> | 
+<a href="../examples/layervis.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -487,7 +490,7 @@ and "<code>***end</code>&quot; events.</p>
 
 <p>
 <a href="../examples/hourglass.html">View example </a> |
-<a href="../examples/hourglass.html?packed">Packed </a> | 
+<a href="../examples/hourglass.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=hourglass.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -548,7 +551,7 @@ make the application more interactive.
 
 <p>
 <a href="../examples/layerquery.html">View example </a> |
-<a href="../examples/layerquery.html?packed">Packed </a> | 
+<a href="../examples/layerquery.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -585,7 +588,7 @@ of the map layers inside the map service and return matching features.</p>
 
 <p>
 <a href="../examples/find.html">View example </a> |
-<a href="../examples/find.html?packed">Packed </a> | 
+<a href="../examples/find.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -636,7 +639,7 @@ an input form based on the meta data of the GeocodeService such as
 
 <p>
 <a href="../examples/geocode.html">View example </a> |
-<a href="../examples/geocode.html?packed">Packed </a> | 
+<a href="../examples/geocode.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -687,7 +690,7 @@ geocoder = new gmaps.ags.GeocodeService('http://sampleserver1.arcgisonline.com/A
 
 <p>
 <a href="../examples/reverse.html">View example </a> |
-<a href="../examples/reverse.html?packed">Packed </a> | 
+<a href="../examples/reverse.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -744,7 +747,7 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/project.html">View example </a> |
-<a href="../examples/project.html?packed">Packed </a> | 
+<a href="../examples/project.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=project.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -755,7 +758,7 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 <p>You can buffer a geometry
 <a href="reference.html#GeometryService">GeometryService</a>'s <code>buffer</code> method.
  In the following example, when user clicks on map to draw a polygon, 2 buffers are added. 
- When themarkers are dragged or deleted, the buffers are updated. </p> 
+ When the markers are dragged or deleted, the buffers are updated. </p> 
 <pre class="prettyprint">
   function doBuffer(){
     for (var i = 0; i< buffers.length; i++) {
@@ -788,7 +791,7 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/buffer.html">View example </a> |
-<a href="../examples/buffer.html?packed">Packed </a> | 
+<a href="../examples/buffer.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=buffer.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -799,8 +802,8 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 <a href="reference.html#GPTask">GPTask</a>'s <code>execute</code> method.
  In the following example, when user clicks on map, a GeoProcessing model will return polygons of areas covered by 1,2,3 minutes of driving time. </p> 
 <pre class="prettyprint">
-      var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons';
-    task = new gmaps.ags.GPTask(url);
+ var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons';
+   ask = new gmaps.ags.GPTask(url);
     
    ...
   
@@ -844,13 +847,53 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/coverarea.html">View example </a> |
-<a href="../examples/coverarea.html?packed">Packed </a> | 
+<a href="../examples/coverarea.html?compiled">Compiled </a> | 
 <a href="../examples/nexus.html?u=coverarea.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
-
 <div>
+<h2><a name="Routing"></a>Routing with Barriers</h2>
+<p>ArcGIS server can perform routing with complex parameters, for example, with barriers to avoid. The 
+<a href="reference.html#RouteTask">RouteTask</a>'s <code>solve</code> method can be used to calculate the routes.
+ In the following example, the user can click on map to add some stops and barriers, drag them to adjust location, and observe different results when barriers change. </p> 
+<pre class="prettyprint">
+             function route() {
+              gmaps.ags.Util.removeFromMap(routes);
+              routes = [];
+              task.solve({
+                stops: stops,
+                barriers: barriers,
+                findBestSequence: document.getElementById('optimize').checked,
+                overlayOptions: {
+                  strokeColor: '#0000BB',
+                  strokeWeight: 8,
+                  strokeOpacity: 0.5
+                }
+              }, processResults, handleErr);
+              
+            }
+            
+            function processResults(results) {
+              if (results.routes) {
+                var r = results.routes.features;
+                for (var i = 0, I = r.length; i < I; i++) {
+                  gmaps.ags.Util.addToMap(map, r[i].geometry);
+                  routes = routes.concat(r[i].geometry);
+                }
+              }
+              
+            }
+</pre>
+
+<p>
+<a href="../examples/routebarriers.html">View example </a> |
+<a href="../examples/routebarriers.html?compiled">Compiled </a> | 
+<a href="#Top">Back to top</a>
+</p>
+</div>
+
+<div style="display:none">
 <h2><a name="Overlay"></a>Map Service Viewer</h2>
 <p>The following example combines several tools together. It loads a map service, add it as an overlay. 
 There is a table of contents (TOC) that lists layers, and gray out them if not visible at current scale. 
@@ -899,7 +942,7 @@ The map click is also wired to identify operation with layer options (top most, 
 
 <p>
 <a href="../examples/simpleags.html">View example </a> |
-<a href="../examples/simpleags.html?packed">Packed </a> | 
+<a href="../examples/simpleags.html?compiled">Compiled </a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>

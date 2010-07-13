@@ -6,7 +6,7 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
         </script>
         <script type="text/javascript">
-            document.write('<script type="text/javascript" src="../src/arcgislink' + (document.location.search.indexOf('compiled') > -1 ? '_compiled' : '') + '.js"><' + '/script>');
+            document.write('<script type="text/javascript" src="../src/arcgislink'+(document.location.search.indexOf('packed')>-1?'_packed':document.location.search.indexOf('compiled')>-1?'_compiled':document.location.search.indexOf('advanced')>-1?'_advanced':'')+'.js"><'+'/script>');
         </script>
         <script type="text/javascript">
             var map = null;
