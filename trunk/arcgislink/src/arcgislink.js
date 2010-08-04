@@ -1901,11 +1901,13 @@
     if (vlayers.length > 0) {
       params.layers =  layerOpt + ':' + vlayers.join(',');
     } else {
-      // no layers visible, no need to go to server
-      callback({
-        href: null
-      });
-      return;
+       // no layers visible, no need to go to server, note if vlayers is null means not init yet in which case do not send layers 
+      if (this.loaded_ && callback) {
+        callback({
+          href: null
+        });
+        return;
+      }
     }
     params.transparent = (p.transparent === false ? false : true);
     if (p.time) {
