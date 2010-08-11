@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Rich Marker</title>
+
+    <style type="text/css">
+      #map, #map2 {
+        width: 600px;
+        height: 400px;
+        float: left;
+        margin: 0 5px;
+      }
+      .my-marker {
+        background: red;
+        border: 2px solid #fff;
+        padding: 3px;
+      }
+
+      .my-other-marker {
+        background: blue;
+        border: 2px solid #fff;
+        padding: 3px;
+      }
+
+      #log {
+        clear: both;
+      }
+
+      #content {
+        padding-left: 5px;
+      }
+
+      #marker-content {
+        width: 350px;
+        height: 150px;
+      }
+
+    </style>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+      var script = '<script type="text/javascript" src="../src/richmarker';
+      if (document.location.search.indexOf('compiled') !== -1) {
+        script += '-compiled';
+      }
+      script += '.js"><' + '/script>';
+      document.write(script);
+    </script>
+
+
+    <script type="text/javascript">
+      /**
+       * Called on the intiial page load.
+       */
+      var map, map2;
+      var marker, marker2;
+      function init() {
+        var mapCenter = new google.maps.LatLng(0, 0);
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 1,
+          center: mapCenter,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        map2 = new google.maps.Map(document.getElementById('map2'), {
+          zoom: 1,
+          center: mapCenter,
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        });
+
+        marker = new RichMarker({
+          position: mapCenter,
+          map: map,
+          draggable: true,
+          content: '<div class="my-marker"><div>This is a nice image</div>' +
+            '<div><img src="http://farm4.static.flickr.com/3212/3012579547_' +
+            '097e27ced9_m.jpg"/></div><div>You should drag it!</div></div>'
+          });
+
+        var div = document.createElement('DIV');
+        div.innerHTML = '<div class="my-other-marker">I am flat marker!</div>';
+
+        marker2 = new RichMarker({
+          map: map,
+          position: new google.maps.LatLng(30, 50),
+          draggable: true,
+          flat: true,
+          anchor: RichMarkerPosition.MIDDLE,
+          content: div
+        });
+
+        google.maps.event.addListener(marker, 'position_changed', function() {
+          log('Marker position: ' + marker.getPosition());
+        });
+
+        google.maps.event.addDomListener(document.getElementById('set-content'),
+          'click', function() {
+          setMarkerContent();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('toggle-map'),
+          'click', function() {
+          toggleMap();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('toggle-anchor'),
+          'click', function() {
+          toggleAnchor();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('toggle-flat'),
+          'click', function() {
+          toggleFlat();
+        });
+        google.maps.event.addDomListener(document.getElementById('toggle-visible'),
+          'click', function() {
+          toggleVisible();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('toggle-draggable'),
+          'click', function() {
+          marker.setDraggable(!marker.getDraggable());
+        });
+      }
+
+      function log(msg) {
+        var log = document.getElementById('log');
+        log.innerHTML = msg;
+      }
+
+      function setMarkerContent() {
+        var content = document.getElementById('marker-content').value;
+        marker.setContent(content);
+      }
+
+      function toggleMap() {
+        if (marker.getMap() == map) {
+          marker.setMap(map2);
+        } else {
+          marker.setMap(map);
+        }
+      }
+
+      function toggleFlat() {
+        marker.setFlat(!marker.getFlat());
+      }
+
+      function toggleVisible() {
+        marker.setVisible(!marker.getVisible());
+      }
+
+      function toggleAnchor() {
+        var anchor = marker.getAnchor();
+
+        if (anchor == 9) {
+          anchor = 1;
+        } else {
+          anchor++;
+        }
+
+        marker.setAnchor(anchor);
+      }
+
+      // Register an event listener to fire when the page finishes loading.
+      google.maps.event.addDomListener(window, 'load', init);
+    </script>
+  </head>
+  <body>
+    <h3>Rich Marker v3</h3>
+    <p><a href="?compiled">Compiled</a> or <a href="?">Standard</a> version of the script.</p>
+    <div id="map"></div>
+    <div id="map2"></div>
+    <div id="log"></div>
+    <div id="content">
+      <button id="toggle-draggable">Toggle Draggable</button>
+      <button id="toggle-map">Toggle Map</button>
+      <button id="toggle-anchor">Toggle Anchor</button>
+      <button id="toggle-flat">Toggle Flat</button>
+      <button id="toggle-visible">Toggle Visible</button>
+    </div>
+    <textarea id="marker-content">
+<div style="padding: 2px; background: #0f0">hello</div>
+    </textarea>
+    <button id="set-content">Set marker html</button>
+  </body>
+</html>
