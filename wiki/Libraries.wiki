@@ -71,3 +71,9 @@ or
 This class is a Marker that can be styled by changing its color, changing its shape, or adding text labels. Makes use of MVCObject to make changing styles for multiple markers easy.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/ Development Versions].
+
+== !RichMarker ==
+
+A RichMarker that allows any HTML/DOM to be added to a map and be draggable.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/ Development Versions].
