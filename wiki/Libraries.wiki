@@ -74,6 +74,6 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmar
 
 == !RichMarker ==
 
-A RichMarker that allows any HTML/DOM to be added to a map and be draggable.
+A !RichMarker that allows any HTML/DOM to be added to a map and be draggable.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/ Development Versions].
