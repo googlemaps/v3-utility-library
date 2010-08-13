@@ -593,14 +593,27 @@ RichMarker.prototype.addDragging_ = function(node) {
  */
 RichMarker.prototype.addDraggingListeners_ = function() {
   var that = this;
-  this.draggingListeners_ = [
-    google.maps.event.addDomListener(window, 'mousemove', function(e) {
-      that.drag(e);
-    }, true),
-    google.maps.event.addDomListener(window, 'mouseup', function() {
-      that.stopDrag();
-    }, true)
-  ];
+  if (this.markerWrapper_.setCapture) {
+    this.markerWrapper_.setCapture(true);
+    this.draggingListeners_ = [
+      google.maps.event.addDomListener(this.markerWrapper_, 'mousemove', function(e) {
+        that.drag(e);
+      }, true),
+      google.maps.event.addDomListener(this.markerWrapper_, 'mouseup', function() {
+        that.stopDrag();
+        that.markerWrapper_.releaseCapture();
+      }, true)
+    ];
+  } else {
+    this.draggingListeners_ = [
+      google.maps.event.addDomListener(window, 'mousemove', function(e) {
+        that.drag(e);
+      }, true),
+      google.maps.event.addDomListener(window, 'mouseup', function() {
+        that.stopDrag();
+      }, true)
+    ];
+  }
 };
 
 
