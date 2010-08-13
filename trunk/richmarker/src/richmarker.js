@@ -98,6 +98,29 @@ RichMarker.prototype.getFlat = function() {
 };
 RichMarker.prototype['getFlat'] = RichMarker.prototype.getFlat;
 
+
+/**
+ * Get the width of the marker.
+ *
+ * @return {Number} The width of the marker.
+ */
+RichMarker.prototype.getWidth = function() {
+  return /** @type {Number} */ (this.get('width'));
+};
+RichMarker.prototype['getWidth'] = RichMarker.prototype.getWidth;
+
+
+/**
+ * Get the height of the marker.
+ *
+ * @return {Number} The height of the marker.
+ */
+RichMarker.prototype.getHeight = function() {
+  return /** @type {Number} */ (this.get('height'));
+};
+RichMarker.prototype['getHeight'] = RichMarker.prototype.getHeight;
+
+
 /**
  * Sets the marker's box shadow.
  *
@@ -271,7 +294,7 @@ RichMarker.prototype['anchor_changed'] = RichMarker.prototype.anchor_changed;
 
 
 /**
-  * Converts a HTML string to a document fragment.
+ * Converts a HTML string to a document fragment.
  *
  * @param {string} htmlString The HTML string to convert.
  * @return {Node} A HTML document fragment.
@@ -711,9 +734,19 @@ RichMarker.prototype.draw = function() {
   var pos = projection.fromLatLngToDivPixel(latLng);
 
   var offset = this.getOffset_();
-
   this.markerWrapper_.style['top'] = (pos.y + offset.height) + 'px';
   this.markerWrapper_.style['left'] = (pos.x + offset.width) + 'px';
+
+  var height = this.markerContent_.offsetHeight;
+  var width = this.markerContent_.offsetWidth;
+
+  if (width != this.get('width')) {
+    this.set('width', width);
+  }
+
+  if (height != this.get('height')) {
+    this.set('height', height);
+  }
 };
 RichMarker.prototype['draw'] = RichMarker.prototype.draw;
 
