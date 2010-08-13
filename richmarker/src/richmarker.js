@@ -382,7 +382,9 @@ RichMarker.prototype.content_changed = function() {
       // desktop.
       google.maps.event.addDomListener(image, 'mousedown', function(e) {
         if (that.getDraggable()) {
-          e.preventDefault();
+          if (e.preventDefault) {
+            e.preventDefault();
+          }
           e.returnValue = false;
         }
       });
