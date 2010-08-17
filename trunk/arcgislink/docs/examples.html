@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>ArcGIS Server Link for Google Maps API: Examples</title><!-- nofollow -->
+    <title>ArcGIS Server Link for Google Maps API: Examples</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"/>
     <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"/>
     <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
@@ -29,16 +29,17 @@
         behavior. </p>
 <table style='border:0px'>
 <tr>
-<th>Map</th><th>Data/Query</th><th>Other Services</th>
+<th>Map</th><th>Data/Query</th><th>Other Services</th><th>Advanced</th>
 </tr>
   <tr>
     <td>
        
       <ul>
 <li><a href="#Mercator">Cached Map (Web Mercator</a>)</li>
-<li><a href="#Dyna">Dynamic Map Service</a></li>
+<li><a href="#Dyna">Non-Cached Service as Overlay</a></li>
 <li><a href="#Combined">Combining Cached and Dynamic</a></li>
 <li><a href="#MapTypeOverlay">Cached Map as Overlay</a></li>
+<li><a href="#DynaType">Non-Cached Service as MapType</a></li>
 <li><a href="#StatePlane">State Plane Coordinate System</a></li>
 <li><a href="#ArcGISOnline">ArcGISOnline Maps</a></li>
 <li><a href="#Opacity">Map Opacity</a></li>
@@ -65,6 +66,14 @@
        <li><a href="#Routing">Routing with Barriers</a></li>
    </ul>
    </td>
+   <td>
+    <ul>
+   <li><a href="#Generic">Generic</a></li>
+        <li><a href="#Compile">Compile </a></li>
+        </ul>
+       <p>
+           &nbsp;</p>
+   </td>
   </tr>
 </table>
 </div>
@@ -76,7 +85,7 @@ The first step is to include <code>arcgislink.js</code>
 in your document header, after the Google Maps API has loaded. You can use the 
 hosted release version if you do not want to download the script.</p>
 <pre class="prettyprint">
-&lt;script src=&quot;/path/to/argislink.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/argislink_compiled.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
 </pre>
 </div>
 <div>
@@ -96,8 +105,9 @@ hosted release version if you do not want to download the script.</p>
  </pre>
 <p>
 <a href="../examples/mercator.html">View example </a> |
-<a href="../examples/mercator.html?compiled">Compiled </a> |
-<a href="../examples/nexus.html?u=mercator.html">Phone Size </a> |
+<a href="../examples/mercator_lib_compiled.html">Compiled Lib</a> |
+<a href="../examples/mercator_all_compiled.html">Compiled All</a> |
+<a href="../examples/nexus.html?u=mercator_all_compiled.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -122,8 +132,9 @@ regardless of whether it's tiled or not.
 
 <p>
 <a href="../examples/dynamap.html">View example </a> |
-<a href="../examples/dynamap.html?compiled">Compiled </a> |
-<a href="../examples/nexus.html?u=dynamap.html">Phone Size </a> |
+<a href="../examples/dynamap_lib_compiled.html">Compiled Lib</a> |
+<a href="../examples/dynamap_all_compiled.html">Compiled All</a> |
+<a href="../examples/nexus.html?u=dynamap_all_compiled.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -141,7 +152,8 @@ regardless of whether it's tiled or not.
 </pre>
 <p>
 <a href="../examples/combined.html">View example </a> |
-<a href="../examples/combined.html?compiled">Compiled </a> | 
+<a href="../examples/combined_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/combined_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=combined.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -159,11 +171,36 @@ regardless of whether it's tiled or not.
 
 <p>
 <a href="../examples/maptypeoverlay.html">View example</a> |
-<a href="../examples/maptypeoverlay.html?compiled">Compiled</a> |
+<a href="../examples/maptypeoverlay_lib_compiled.html">Compiled Lib</a> |
+<a href="../examples/maptypeoverlay_all_compiled.html">Compiled All</a> |
 <a href="../examples/nexus.html?u=maptypeoverlay.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
 </div>
+<div>
+<h2><a name="DynaType"></a>Non-Cached Map as MapType</h2>
+<p> In certain cases it may be desirable to serve non-Cached map service as a tiled map type 
+(in V3 can be overlay or base type). The benefit is that it does not get full view port refresh for each bound change, although it may make more server requests to server because the map is broken into tiles. 
+
+    In the following example, the US census map service, which not cached, is 
+    constructed as map type. 
+
+<pre class="prettyprint">
+
+    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer';
+    var agsType = new  gmaps.ags.MapType(url,{name:'ArcGIS'});
+    map.overlayMapTypes.insertAt(0, agsType);
+</pre>
+
+<p>
+<a href="../examples/dynatype.html">View example</a> |
+<a href="../examples/dynatype_lib_compiled.html">Compiled Lib</a> |
+<a href="../examples/dynatype_all_compiled.html">Compiled All</a> |
+<a href="../examples/nexus.html?u=dynatype_all_compiled.html">Phone Size </a> |
+<a href="#Top">Back to top</a>
+</p>
+</div>
+
 <div>
 <h2><a name="StatePlane"></a>State Plane Coordinate System</h2>
 <p> Virtually all GIS data collected by State or Local Governments in 
@@ -221,7 +258,8 @@ adjacent zoom levels must be exactly 2</b>. Also, the tile layer must be constru
 
 <p>
 <a href="../examples/stateplane.html">View example </a> |
-<a href="../examples/stateplane.html?compiled">Compiled </a> | 
+<a href="../examples/stateplane_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/stateplane_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=stateplane.html">Phone Size </a> |
 <a href="#Top">Back to top</a>
 </p>
@@ -268,7 +306,8 @@ online geo-spatial service provided by
 
 <p>
 <a href="../examples/arcgisonline.html">View example </a> |
-<a href="../examples/arcgisonline.html?compiled">Compiled </a> | 
+<a href="../examples/arcgisonline_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/arcgisonline_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=arcgisonline.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -301,7 +340,7 @@ The following example uses a
 
 <p>
 <a href="../examples/opacity.html">View example </a> |
-<a href="../examples/opacity.html?compiled">Compiled </a> | 
+<a href="../examples/opacity.html?compiled">Compiled Lib</a> | 
 <a href="../examples/nexus.html?u=opacity.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -329,7 +368,8 @@ mt3.google.com (4 hosts) </p>
 
 <p>
 <a href="../examples/hosts.html">View example </a> |
-<a href="../examples/hosts.html?compiled">Compiled </a> | 
+<a href="../examples/hosts_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/hosts_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -384,7 +424,7 @@ Normally this is done via handling the 'click' event on map, then perform Identi
 
 <p>
 <a href="../examples/identify.html">View example </a> |
-<a href="../examples/identify.html?compiled">Compiled </a> | 
+<a href="../examples/identify_all_compiled.html">Compiled All</a> |
 <a href="../examples/nexus.html?u=identify.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -427,7 +467,8 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
 
 <p>
 <a href="../examples/layerdef.html">View example </a> |
-<a href="../examples/layerdef.html?compiled">Compiled </a> | 
+<a href="../examples/layerdef_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/layerdef_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=layerdef.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -461,7 +502,8 @@ SQL expression as  its <code>definition</code> property. If you want to dynamica
 
 <p>
 <a href="../examples/layervis.html">View example </a> |
-<a href="../examples/layervis.html?compiled">Compiled </a> | 
+<a href="../examples/layervis_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/layervis_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -490,7 +532,8 @@ and "<code>***end</code>&quot; events.</p>
 
 <p>
 <a href="../examples/hourglass.html">View example </a> |
-<a href="../examples/hourglass.html?compiled">Compiled </a> | 
+<a href="../examples/hourglass_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/hourglass_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=hourglass.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -551,7 +594,8 @@ make the application more interactive.
 
 <p>
 <a href="../examples/layerquery.html">View example </a> |
-<a href="../examples/layerquery.html?compiled">Compiled </a> | 
+<a href="../examples/layerquery_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/layerquery_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -588,7 +632,8 @@ of the map layers inside the map service and return matching features.</p>
 
 <p>
 <a href="../examples/find.html">View example </a> |
-<a href="../examples/find.html?compiled">Compiled </a> | 
+<a href="../examples/find_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/find_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -639,7 +684,8 @@ an input form based on the meta data of the GeocodeService such as
 
 <p>
 <a href="../examples/geocode.html">View example </a> |
-<a href="../examples/geocode.html?compiled">Compiled </a> | 
+<a href="../examples/geocode_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/geocode_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -690,7 +736,8 @@ geocoder = new gmaps.ags.GeocodeService('http://sampleserver1.arcgisonline.com/A
 
 <p>
 <a href="../examples/reverse.html">View example </a> |
-<a href="../examples/reverse.html?compiled">Compiled </a> | 
+<a href="../examples/reverse_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/reverse_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -747,7 +794,8 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/project.html">View example </a> |
-<a href="../examples/project.html?compiled">Compiled </a> | 
+<a href="../examples/project_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/project_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=project.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -791,7 +839,8 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/buffer.html">View example </a> |
-<a href="../examples/buffer.html?compiled">Compiled </a> | 
+<a href="../examples/buffer_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/buffer_all_compiled.html">Compiled All</a> | 
 <a href="../examples/nexus.html?u=buffer.html">Phone Size </a> | 
 <a href="#Top">Back to top</a>
 </p>
@@ -847,8 +896,8 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/coverarea.html">View example </a> |
-<a href="../examples/coverarea.html?compiled">Compiled </a> | 
-<a href="../examples/nexus.html?u=coverarea.html">Phone Size </a> | 
+<a href="../examples/coverarea_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/coverarea_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
@@ -888,13 +937,14 @@ Note the input result geometry may not be a Google API overlay such as Marker, P
 
 <p>
 <a href="../examples/routebarriers.html">View example </a> |
-<a href="../examples/routebarriers.html?compiled">Compiled </a> | 
+<a href="../examples/routebarriers_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/routebarriers_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
 
-<div style="display:none">
-<h2><a name="Overlay"></a>Map Service Viewer</h2>
+<div>
+<h2><a name="Generic"></a>Map Service Viewer</h2>
 <p>The following example combines several tools together. It loads a map service, add it as an overlay. 
 There is a table of contents (TOC) that lists layers, and gray out them if not visible at current scale. 
 The map click is also wired to identify operation with layer options (top most, all etc).
@@ -942,17 +992,77 @@ The map click is also wired to identify operation with layer options (top most, 
 
 <p>
 <a href="../examples/simpleags.html">View example </a> |
-<a href="../examples/simpleags.html?compiled">Compiled </a> | 
+<a href="../examples/simpleags_lib_compiled.html">Compiled Lib</a> | 
+<a href="../examples/simpleags_all_compiled.html">Compiled All</a> | 
 <a href="#Top">Back to top</a>
 </p>
 </div>
+<div>
+<h2><a name="Compile"></a>Compile with Advanced Optimization</h2>
+<p>Google released a JavaScript compiler named <a href="http://code.google.com/closure/compiler">Closure Compiler</a>. One of the most important feature is 
+    &quot;deadcode removal&quot; in advanced mode. It basically will not include or compress 
+    the code that it not been used in the application. This library is written in a 
+    syntax format that can take advantage of that feature. To use that feature, download compiler, then
+    include &quot;arcgislink_code.js&quot; and your application code as input, and 
+    &quot;arcgis_extern.js&quot; and a downloaded copy of <a href="http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js">Google Maps V3 extern</a> as external 
+    file (for JSON stuff).
+
+   </p> 
+<pre class="prettyprint">
+    
+    java -jar compiler.jar 
+         --externs arcgis_externs.js --externs google_maps_api_v3.js 
+         --output_wrapper &quot;(function(){%output%})()&quot; 
+         --compilation_level ADVANCED_OPTIMIZATIONS
+         --js arcgis_code.js --js myapp.js
+         --js_output_file myapp_compiled.js 
+</pre>
+    <p>After compilation, reference the compiled javascript <b>WITHOUT</b> the library because the used code in the lib is included in the compiled code. 
+        The following is a list of samples with fully compiled code:</p>
+ <p> <a href="../examples/mercator_all_compiled.html">Cached Map</a>
+ | <a href="../examples/dynamap_all_compiled.html">Overlay</a>
+ | <a href="../examples/combined_all_compiled.html">Combined</a>
+ | <a href="../examples/maptypeoverlay_all_compiled.html">Cached Overlay</a>
+ | <a href="../examples/dynatype_lib_compiled.html">Non-Cached MapType</a>
+ | <a href="../examples/stateplane_lib_compiled.html">State Plane</a>
+ | <a href="../examples/arcgisonline_all_compiled.html">ArcGISOnline</a>
+ | <a href="../examples/hosts_all_compiled.html">Rotating Hosts</a>
+ | <a href="../examples/identify_all_compiled.html">Identify</a>
+ | <a href="../examples/layerdef_all_compiled.html">Layer Def</a>
+ | <a href="../examples/layervis_all_compiled.html">Layer TOC</a>
+ | <a href="../examples/hourglass_all_compiled.html">Hourglass</a>
+ | <a href="../examples/layerquery_all_compiled.html">Layer Query</a>
+ | <a href="../examples/find_all_compiled.html">Find</a>
+ | <a href="../examples/geocode_all_compiled.html">Geocode</a>
+ | <a href="../examples/reverse_all_compiled.html">ReverseGeocode</a>
+ | <a href="../examples/project_all_compiled.html">Project</a>
+ | <a href="../examples/buffer_all_compiled.html">Buffer</a>
+ | <a href="../examples/coverarea_all_compiled.html">Driving Time</a>
+ | <a href="../examples/routebarriers_all_compiled.html">Routing</a>
+ | <a href="../examples/simpleags_all_compiled.html">Generic</a>
+ | <a href="#Top">Back to top</a>
+</p>
+</div>
+
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+
 <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-3946449-5");
-pageTracker._trackPageview();
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3946449-12']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
 </script>
 </body>
 </html>

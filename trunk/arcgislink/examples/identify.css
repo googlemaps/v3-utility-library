@@ -1,0 +1,28 @@
+.goog-tab-content {
+    height: 9em;
+    margin: 0;
+    border: 1px solid #6b90da;
+    border-top: 0;
+    padding: 4px 8px;
+    background: #fff;
+    overflow: auto;
+}
+
+.goog-tab-bar-clear {
+    height: 1px;
+    background: #6b90da;
+}
+
+td, th {
+    border: 1px solid #3366CC;
+}
+
+th {
+    background-color: #E5ECF9;
+}
+
+table {
+    border: 0px;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
