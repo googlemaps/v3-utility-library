@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Block me if you can!</title>
+        <style type="text/css">
+            /* http://www.alistapart.com/articles/conflictingabsolutepositions/ */
+            html {
+                overflow: hidden;
+            }
+            
+            body {
+                overflow: hidden;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
+            #top {
+                padding: 0;
+                margin: 0;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 30px;
+                overflow: hidden;
+            }
+            
+            #map_canvas {
+                padding: 0;
+                margin: 0;
+                position: absolute;
+                top: 32px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                overflow: auto;
+            }
+        </style>
+        <!--[if lt IE 7]>
+            <style type="text/css">
+            #map_canvas {
+            height:expression(document.body.clientHeight-32);
+            }
+            </style>
+        <![endif]-->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript" src="../src/arcgislink_compiled.js">
+        </script>
+        <script type="text/javascript" src="routebarriers.js">
+        </script>
+    </head>
+    <body>
+        <div id="top" style="text-align:center;">
+            <form id="frm" onsubmit="return false">
+                Add: <input type="radio" checked="checked" name="pointType" value="0">Stop<input type="radio" name="pointType" value="1">Barrier
+                <button onclick="route()">
+                    Route!
+                </button>
+                <input type="checkbox" id="optimize">Optimize
+                <button onclick="clearOverlays()">
+                    Clear
+                </button>
+                <button onclick="showHelp()">
+                    Help
+                </button>
+            </form>
+        </div>
+        <div id="map_canvas">
+        </div>
+    </body>
+</html>

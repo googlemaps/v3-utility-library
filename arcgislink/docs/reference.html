@@ -9,8 +9,78 @@
   <body>
     <h1>ArcGIS Server Link for Google Maps JavaScript API V3</h1>
     <p>
-<p><a href="examples.html">Examples</a>  </p>  <p>This library lets you add map resources accessible via    <a href = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/index.html'>    ESRI ArcGIS Server&#0153; REST API</a> into <a    href='http://code.google.com/apis/maps/documentation/javascript/'>   Google Maps API V3</a> and provide some additional support for map tiles created    with different spatial reference and tiling scheme.</p>   </p>.   <table>   <tr>   <td style = 'width:200px'>   <code><a href="reference.html#TileLayer">TileLayer</a></code><br/>   <code><a href="reference.html#TileLayerOptions">TileLayerOptions</a></code><br/>   <code><a href="reference.html#MapType">MapType</a></code><br/>   <code><a href="reference.html#MapTypeOptions">MapTypeOptions</a></code><br/>   <code><a href="reference.html#MapOverlay">MapOverlay</a></code><br/>   <code><a href="reference.html#MapOverlayOptions">MapOverlayOptions</a></code><br/>   <code><a href="reference.html#Projection">Projection</a></code><br/>   </td>   <td style = 'width:200px'>   <code><a href="reference.html#Catalog">Catalog</a></code><br/>   <code><a href="reference.html#MapService">MapService</a></code><br/></b>   <code><a href="reference.html#Layer">Layer</a></code><br/>   <code><a href="reference.html#GeocodeService">GeocodeService</a></code><br/>   <code><a href="reference.html#GeometryService">GeometryService</a></code><br/>   <code><a href="reference.html#GPService">GPService</a></code><br/>   <code><a href="reference.html#GPTask">GPTask</a></code><br/>   <code><a href="reference.html#RouteTask">RouteTask</a></code><br/>    <br/></td>    <td style = 'width:200px'>   <code><a href="reference.html#SpatialReference">SpatialReference</a></code><br/>   <code><a href="reference.html#Geographic">Geographic</a></code><br/>   <code><a href="reference.html#LambertConformalConic">LambertConformalConic</a></code><br/>   <code><a href="reference.html#TransverseMercator">TransverseMercator</a></code><br/>   <code><a href="reference.html#SphereMercator">SphereMercator</a></code><br/>   <code><a href="reference.html#SpatialRelationship">SpatialRelationship</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#Util">Util</a></code> <br/>    <code><a href="reference.html#Config">Config</a></code> <br/>    <code><a href="reference.html#Error">Error</a></code> <br/>     </td>   </tr></table>   <p> There are many objects used in the REST API that do not require    a constructor and can be   used just as object literal in the operation:</p>   <table><tr>   <td style = 'width:200px'>   <code><a href="reference.html#Field">Field</a></code><br/>   <code><a href="reference.html#TileInfo">TileInfo</a></code><br/>   <code><a href="reference.html#LOD">LOD</a></code><br/>   <code><a href="reference.html#ExportMapOptions">ExportMapOptions</a></code><br/>   <code><a href="reference.html#MapImage">MapImage</a></code><br/>   <code><a href="reference.html#IdentifyOptions">IdentifyOptions</a></code><br/>   <code><a href="reference.html#IdentifyResults">IdentifyResults</a></code><br/>   <code><a href="reference.html#IdentifyResult">IdentifyResult</a></code><br/>    <br/></td>    <td style = 'width:200px'>   <code><a href="reference.html#QueryOptions">QueryOptions</a></code><br/>   <code><a href="reference.html#ResultSet">ResultSet</a></code><br/>   <code><a href="reference.html#FindOptions">FindOptions</a></code><br/>   <code><a href="reference.html#FindResults">FindResults</a></code><br/>   <code><a href="reference.html#FindResult">FindResult</a></code><br/>   <code><a href="reference.html#Feature">Feature</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#GeocodeOptions">GeocodeOptions</a></code><br/>   <code><a href="reference.html#GeocodeResults">GeocodeResults</a></code><br/>   <code><a href="reference.html#GeocodeResult">GeocodeResult</a></code><br/>   <code><a href="reference.html#ReverseGeocodeOptions">ReverseGeocodeOptions</a></code><br/>   <code><a href="reference.html#ReverseGeocodeResult">ReverseGeocodeResult</a></code><br/>   <code><a href="reference.html#BufferOptions">BufferOptions</a></code><br/>   <code><a href="reference.html#BufferResults">BufferResults</a></code><br/>    <code><a href="reference.html#ProjectOptions">ProjectOptions</a></code><br/>   <code><a href="reference.html#ProjectResults">ProjectResults</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#RouteOptions">RouteOptions</a></code><br/>   <code><a href="reference.html#RouteResults">RouteResults</a></code><br/>     </td>   </tr></table></p>
+<p><a href="examples.html">Examples</a>  </p>  <p>This library lets you add map resources accessible via    <a href = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/index.html'>    ESRI ArcGIS Server&#0153; REST API</a> into <a    href='http://code.google.com/apis/maps/documentation/javascript/'>   Google Maps API V3</a> and provide some additional support for map tiles created    with different spatial reference and tiling scheme.</p>   </p>.   <table>   <tr>   <td style = 'width:200px'>   <code><a href="reference.html#TileLayer">TileLayer</a></code><br/>   <code><a href="reference.html#TileLayerOptions">TileLayerOptions</a></code><br/>   <code><a href="reference.html#MapType">MapType</a></code><br/>   <code><a href="reference.html#MapTypeOptions">MapTypeOptions</a></code><br/>   <code><a href="reference.html#MapOverlay">MapOverlay</a></code><br/>   <code><a href="reference.html#MapOverlayOptions">MapOverlayOptions</a></code><br/>   <code><a href="reference.html#Projection">Projection</a></code><br/>   </td>   <td style = 'width:200px'>   <code><a href="reference.html#Catalog">Catalog</a></code><br/>   <code><a href="reference.html#MapService">MapService</a></code><br/></b>   <code><a href="reference.html#Layer">Layer</a></code><br/>   <code><a href="reference.html#GeocodeService">GeocodeService</a></code><br/>   <code><a href="reference.html#GeometryService">GeometryService</a></code><br/>   <code><a href="reference.html#GPService">GPService</a></code><br/>   <code><a href="reference.html#GPTask">GPTask</a></code><br/>   <code><a href="reference.html#RouteTask">RouteTask</a></code><br/>    <br/></td>    <td style = 'width:200px'>   <code><a href="reference.html#SpatialReference">SpatialReference</a></code><br/>   <code><a href="reference.html#Geographic">Geographic</a></code><br/>   <code><a href="reference.html#LambertConformalConic">LambertConformalConic</a></code><br/>   <code><a href="reference.html#TransverseMercator">TransverseMercator</a></code><br/>   <code><a href="reference.html#SphereMercator">SphereMercator</a></code><br/>   <code><a href="reference.html#Albers">Albers</a></code><br/>   <code><a href="reference.html#SpatialRelationship">SpatialRelationship</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#Util">Util</a></code> <br/>    <code><a href="reference.html#Config">Config</a></code> <br/>    <code><a href="reference.html#Error">Error</a></code> <br/>     </td>   </tr></table>   <p> There are many objects used in the REST API that do not require    a constructor and can be   used just as object literal in the operation:</p>   <table><tr>   <td style = 'width:200px'>   <code><a href="reference.html#Field">Field</a></code><br/>   <code><a href="reference.html#TileInfo">TileInfo</a></code><br/>   <code><a href="reference.html#LOD">LOD</a></code><br/>   <code><a href="reference.html#ExportMapOptions">ExportMapOptions</a></code><br/>   <code><a href="reference.html#MapImage">MapImage</a></code><br/>   <code><a href="reference.html#IdentifyOptions">IdentifyOptions</a></code><br/>   <code><a href="reference.html#IdentifyResults">IdentifyResults</a></code><br/>   <code><a href="reference.html#IdentifyResult">IdentifyResult</a></code><br/>    <br/></td>    <td style = 'width:200px'>   <code><a href="reference.html#QueryOptions">QueryOptions</a></code><br/>   <code><a href="reference.html#ResultSet">ResultSet</a></code><br/>   <code><a href="reference.html#FindOptions">FindOptions</a></code><br/>   <code><a href="reference.html#FindResults">FindResults</a></code><br/>   <code><a href="reference.html#FindResult">FindResult</a></code><br/>   <code><a href="reference.html#Feature">Feature</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#GeocodeOptions">GeocodeOptions</a></code><br/>   <code><a href="reference.html#GeocodeResults">GeocodeResults</a></code><br/>   <code><a href="reference.html#GeocodeResult">GeocodeResult</a></code><br/>   <code><a href="reference.html#ReverseGeocodeOptions">ReverseGeocodeOptions</a></code><br/>   <code><a href="reference.html#ReverseGeocodeResult">ReverseGeocodeResult</a></code><br/>   <code><a href="reference.html#BufferOptions">BufferOptions</a></code><br/>   <code><a href="reference.html#BufferResults">BufferResults</a></code><br/>    <code><a href="reference.html#ProjectOptions">ProjectOptions</a></code><br/>   <code><a href="reference.html#ProjectResults">ProjectResults</a></code><br/>    </td>    <td style = 'width:200px'>   <code><a href="reference.html#RouteOptions">RouteOptions</a></code><br/>   <code><a href="reference.html#RouteResults">RouteResults</a></code><br/>     </td>   </tr></table></p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="Albers"></a>class Albers</h2>
+      <p>This class (<code>Albers</code>) represents a Spatial Reference System based on <a target=wiki href  = 'http://en.wikipedia.org/wiki/Albers_projection'>Albers Projection</a>.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
+      
+        <h3>Constructor</h3>
+        <table summary="class Albers - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>Albers(<span class="type">params:Object</span>)</code></td>
+                
+                <td>Create a Albers Equal-Area Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. <code> var albers  = new Albers({wkid:9999, semi_major: 6378206.4,inverse_flattening: 294.9786982,  standard_parallel_1: 29.5, standard_parallel_2: 45.5,  central_meridian: -96.0, latitude_of_origin: 23,'false_easting': 0,  'false_northing': 0, unit: 1 }); </code></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Methods</h3>
+        <table summary="class Albers - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>forward(<span class="type">lnglat:Array.number</span>)</code></td>
+                
+                  
+                    <td><code>Array.number</code></td>
+                  
+                
+                <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getCircum()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>See <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>inverse(<span class="type">coords:Array.number</span>)</code></td>
+                
+                  
+                    <td><code>Array.number</code></td>
+                  
+                
+                <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
     
       <h2><a name="BufferOptions"></a>class BufferOptions</h2>
       <p>This class represent the parameters needed in an buffer operation for a <code><a href="reference.html#GeometryService">GeometryService</a></code>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
@@ -43,7 +113,7 @@
                 <td><code>distances</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>The distances the input geometries are buffered.</td>
@@ -53,7 +123,7 @@
                 <td><code>geometries</code></td>
                 
                   
-                    <td><code>OverlayView[]|Object[]</code></td>
+                    <td><code>Array.OverlayView|Array.object</code></td>
                   
                 
                 <td>Array of <code>google.maps.LatLng</code>, <code>Polyline</code>, <code>Polygon</code>, or ESRI Geometry format to buffer.</td>
@@ -114,7 +184,7 @@
                 <td><code>geometries</code></td>
                 
                   
-                    <td><code>OverlayView[]|Object[]</code></td>
+                    <td><code>Array.OverlayView|Array.object</code></td>
                   
                 
                 <td>Array of <code>google.maps.LatLng, Polyline, Polygon</code>, or ESRI Geometry format to project.</td>
@@ -174,7 +244,7 @@
                 <td><code>folders</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>folders list</td>
@@ -184,7 +254,7 @@
                 <td><code>services</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>list of services. Each has <code>name, type</code> property.</td>
@@ -367,7 +437,7 @@
                 <td><code>layerIds</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>list of layer ids. If not specified along with layerOptions, show list of visible layers.</td>
@@ -486,10 +556,10 @@
                 <td><code>geometry</code></td>
                 
                   
-                    <td><code>Marker[]|Polyline[]|Polygon[]</code></td>
+                    <td><code>Array.OverlayView</code></td>
                   
                 
-                <td>geometry</td>
+                <td>geometries. Array of Marker, Polyline or Polygon.</td>
               </tr>
             
           </tbody>
@@ -598,7 +668,7 @@
                 <td><code>layerIds</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>The layer Ids to perform the find operation on. The layers to perform the find operation on.</td>
@@ -628,7 +698,7 @@
                 <td><code>searchFields</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>The names of the fields to search.    If this parameter is not specified, all fields are searched.</td>
@@ -760,7 +830,7 @@
                 <td><code>results</code></td>
                 
                   
-                    <td><code>FindResult[]</code></td>
+                    <td><code>Array.FindResult</code></td>
                   
                 
                 <td>The find results as an array of <code><a href="reference.html#FindResult">FindResult</a></code></td>
@@ -801,7 +871,7 @@
                 <td><code>outFields</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>The list of fields to be included in the returned resultset.</td>
@@ -903,7 +973,7 @@
                 <td><code>candidates</code></td>
                 
                   
-                    <td><code>GeocodeResult[]</code></td>
+                    <td><code>Array.GeocodeResult</code></td>
                   
                 
                 <td>The find address results as an array of <code><a href="reference.html#GeocodeResult">GeocodeResult</a></code></td>
@@ -914,7 +984,7 @@
       
     
       <h2><a name="GeocodeService"></a>class GeocodeService</h2>
-      <p>This class (<code>gmaps.ags.GeocodeService</code>) represent an ArcGIS <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geocodeserver.html">GeocodeServer</a> service.</p>
+      <p>This class (<code>GeocodeService</code>) represent an ArcGIS <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geocodeserver.html">GeocodeServer</a> service.</p>
       
         <h3>Constructor</h3>
         <table summary="class GeocodeService - Constructor" width="90%">
@@ -953,7 +1023,7 @@
                 <td><code>addressFields</code></td>
                 
                   
-                    <td><code>Field[]</code></td>
+                    <td><code>Array.Field</code></td>
                   
                 
                 <td>input fields.    Each entry is an object of type <code><a href="reference.html#Field">Field</a></code>, plus <code>required(true|false)</code></td>
@@ -963,7 +1033,7 @@
                 <td><code>candidateFields</code></td>
                 
                   
-                    <td><code>Field[]</code></td>
+                    <td><code>Array.Field</code></td>
                   
                 
                 <td>candidate Fields.    Each entry is an object of type <code><a href="reference.html#Field">Field</a></code></td>
@@ -973,7 +1043,7 @@
                 <td><code>intersectionCandidateFields</code></td>
                 
                   
-                    <td><code>Field[]</code></td>
+                    <td><code>Array.Field</code></td>
                   
                 
                 <td>intersectionCandidateFields   Each entry is an object of type <code><a href="reference.html#Field">Field</a></code></td>
@@ -1053,7 +1123,7 @@
                     <td><code>None</code></td>
                   
                 
-                <td>The reverseGeocode operation is The reverseGeocode operation is performed on a geocode service resource. The result of this operation is a reverse geocoded address resource. param is an instance of <code><a href="reference.html#ReverseGeocodeOptions">ReverseGeocodeOptions</a></code>. An instance of <code><a href="reference.html#ReverseGeocodeResult">ReverseGeocodeResult</a></code> will be passed into callback function.</td>
+                <td>The reverseGeocode operation is The reverseGeocode operation is performed on a geocode service resource. The result of this operation is a inverse geocoded address resource. param is an instance of <code><a href="reference.html#ReverseGeocodeOptions">ReverseGeocodeOptions</a></code>. An instance of <code><a href="reference.html#ReverseGeocodeResult">ReverseGeocodeResult</a></code> will be passed into callback function.</td>
               </tr>
             
           </tbody>
@@ -1088,7 +1158,7 @@
       
     
       <h2><a name="Geographic"></a>class Geographic</h2>
-      <p>This class (<code>gmaps.ags.Geographic</code>) will simply retuns same LatLng as Coordinates.   The <code>param</code> should have wkid property. Any Geographic Coordinate Systems (eg. WGS84(4326)) can   use this class As-Is.   <br/>Note:<b> This class does not support datum transformation</b>.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
+      <p>This class (<code>Geographic</code>) will simply retuns same LatLng as Coordinates.   The <code>param</code> should have wkid property. Any Geographic Coordinate Systems (eg. WGS84(4326)) can   use this class As-Is.   <br/>Note:<b> This class does not support datum transformation</b>.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
       
         <h3>Constructor</h3>
         <table summary="class Geographic - Constructor" width="90%">
@@ -1103,7 +1173,7 @@
               <tr class="odd">
                 <td><code>Geographic(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Creates a Geographic Coordinate System. e.g.:<br/><code> var g2 = new gmaps.ags.Geographic({"wkid":4326});</code></td>
+                <td>Creates a Geographic Coordinate System. e.g.:<br/><code> var g2 = new Geographic({wkid:4326});</code></td>
               </tr>
             
           </tbody>
@@ -1111,7 +1181,7 @@
       
     
       <h2><a name="GeometryService"></a>class GeometryService</h2>
-      <p>This class (<code>gmaps.ags.GeometryService</code>) represent an ArcGIS <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geometryserver.html">Geometry</a> service.</p>
+      <p>This class (<code>GeometryService</code>) represent an ArcGIS <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geometryserver.html">Geometry</a> service.</p>
       
         <h3>Constructor</h3>
         <table summary="class GeometryService - Constructor" width="90%">
@@ -1292,7 +1362,7 @@
                 <td><code>tasks</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td></td>
@@ -1420,7 +1490,7 @@
                 <td><code>parameters</code></td>
                 
                   
-                    <td><code>GPParameter[]</code></td>
+                    <td><code>Array.GPParameter</code></td>
                   
                 
                 <td>see <code><a href="reference.html#_global_#GPParameter">GPParameter</a></code></td>
@@ -1440,7 +1510,7 @@
                 <td><code>tasks</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td></td>
@@ -1538,7 +1608,7 @@
                 <td><code>layerIds</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>The layers to perform the identify operation on.</td>
@@ -1700,7 +1770,7 @@
                 <td><code>results</code></td>
                 
                   
-                    <td><code>IdentifyResult[]</code></td>
+                    <td><code>Array.IdentifyResult</code></td>
                   
                 
                 <td>The identify results as an array of <code><a href="reference.html#IdentifyResult">IdentifyResult</a></code></td>
@@ -1711,7 +1781,7 @@
       
     
       <h2><a name="LambertConformalConic"></a>class LambertConformalConic</h2>
-      <p>This class (<code>gmaps.ags.LambertConformalConic</code>) represents a Spatial Reference System based on <a target  = wiki href  = 'http://en.wikipedia.org/wiki/Lambert_conformal_conic_projection'>Lambert Conformal Conic Projection</a>.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
+      <p>This class (<code>LambertConformalConic</code>) represents a Spatial Reference System based on <a target  = wiki href  = 'http://en.wikipedia.org/wiki/Lambert_conformal_conic_projection'>Lambert Conformal Conic Projection</a>.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
       
         <h3>Constructor</h3>
         <table summary="class LambertConformalConic - Constructor" width="90%">
@@ -1726,7 +1796,7 @@
               <tr class="odd">
                 <td><code>LambertConformalConic(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Create a Lambert Conformal Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phiF, latitude of the false origin<br/>-central_meridian: lamdaF, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. North Carolina State Plane NAD83 Feet: <br/><code> var ncsp82  = new gmaps.ags.LambertConformalConic({wkid:2264, semi_major: 6378137.0,inverse_flattening: 298.257222101,  standard_parallel_1: 34.33333333333334, standard_parallel_2: 36.16666666666666,  central_meridian: -79.0, latitude_of_origin: 33.75,'false_easting': 2000000.002616666,  'false_northing': 0, unit: 0.3048006096012192 }); </code></td>
+                <td>Create a Lambert Conformal Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. North Carolina State Plane NAD83 Feet: <br/><code> var ncsp82  = new LambertConformalConic({wkid:2264, semi_major: 6378137.0,inverse_flattening: 298.257222101,  standard_parallel_1: 34.33333333333334, standard_parallel_2: 36.16666666666666,  central_meridian: -79.0, latitude_of_origin: 33.75,'false_easting': 2000000.002616666,  'false_northing': 0, unit: 0.3048006096012192 }); </code></td>
               </tr>
             
           </tbody>
@@ -1747,10 +1817,10 @@
             </tr>
             
               <tr class="odd">
-                <td><code>forward(<span class="type">lnglat:Number[]</span>)</code></td>
+                <td><code>forward(<span class="type">lnglat:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -1760,17 +1830,17 @@
                 <td><code>getCircum()</code></td>
                 
                   
-                    <td><code>Number</code></td>
+                    <td><code>number</code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
               </tr>
             
               <tr class="odd">
-                <td><code>reverse(<span class="type">coords:Number[]</span>)</code></td>
+                <td><code>inverse(<span class="type">coords:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -1781,7 +1851,7 @@
       
     
       <h2><a name="Layer"></a>class Layer</h2>
-      <p>This class (<code>gmaps.ags.Layer</code>) The layer / table(v10+) resource represents a single layer / table in a map of a map service  published by ArcGIS Server.</p>
+      <p>This class (<code>Layer</code>) The layer / table(v10+) resource represents a single layer / table in a map of a map service  published by ArcGIS Server.</p>
       
         <h3>Constructor</h3>
         <table summary="class Layer - Constructor" width="90%">
@@ -1870,7 +1940,7 @@
                 <td><code>fields</code></td>
                 
                   
-                    <td><code>Field[]</code></td>
+                    <td><code>Array.Field</code></td>
                   
                 
                 <td>fields, only available after load. See <code><a href="reference.html#Field">Field</a></code></td>
@@ -1950,7 +2020,7 @@
                 <td><code>relationships</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.String</code></td>
                   
                 
                 <td>relationships (id, name, relatedTableId)</td>
@@ -1960,10 +2030,10 @@
                 <td><code>subLayers</code></td>
                 
                   
-                    <td><code>Layer[]</code></td>
+                    <td><code>Array.Layer</code></td>
                   
                 
-                <td>sub Layers. <code><a href="reference.html#Layer">Layer</a></code>[].</td>
+                <td>sub Layers. <code><a href="reference.html#Layer">Layer</a></code>.</td>
               </tr>
             
               <tr class="even">
@@ -2000,7 +2070,7 @@
                 <td><code>types</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.String</code></td>
                   
                 
                 <td>subtypes: id, name, domains.</td>
@@ -2044,16 +2114,6 @@
               </tr>
             
               <tr class="even">
-                <td><code>loadInfo(<span class="type">opt_callback:Function</span>)</code></td>
-                
-                  
-                    <td><code>None</code></td>
-                  
-                
-                <td>Load extra information such as it's fields from layer resource.If opt_callback function will be called after it is loaded</td>
-              </tr>
-            
-              <tr class="odd">
                 <td><code>query(<span class="type">params:QueryOptions</span>, <span class="type">callback:Function</span>, <span class="type">errback:Function</span>)</code></td>
                 
                   
@@ -2063,7 +2123,7 @@
                 <td>The query operation is performed on a layer resource. The result of this operation is a resultset resource that will bepassed in the callback function. param is an instance of <code><a href="reference.html#QueryOptions">QueryOptions</a></code><br/>For more info see <a href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/query.html'>Query Operation</a>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>queryRelatedRecords(<span class="type">params:QueryRelatedRecordsParameters</span>, <span class="type">callback:Function</span>, <span class="type">errback:Function</span>)</code></td>
                 
                   
@@ -2071,6 +2131,33 @@
                   
                 
                 <td>The query related records operation is performed on a layer / table resource. The result of this operation are featuresets grouped by source layer / table object IDs. Each featureset contains Feature objects including the values for the fields requested by the user. For related layers, if you request geometry information, the geometry of each feature is also returned in the featureset. For related tables, the featureset does not include geometries.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Events</h3>
+        <table summary="class Layer - Events" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Events</th>
+              
+                
+                  <th>Arguments</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>load</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when layer's service info is loaded.</td>
               </tr>
             
           </tbody>
@@ -2149,7 +2236,7 @@
                 <td><code>bounds</code></td>
                 
                   
-                    <td><code>LatLngBounds</code></td>
+                    <td><code>google.maps.LatLngBounds</code></td>
                   
                 
                 <td>The bounding box of the exported image.</td>
@@ -2200,7 +2287,7 @@
       
     
       <h2><a name="MapOverlay"></a>class MapOverlay</h2>
-      <p>This class (<code>gmaps.ags.MapOverlay</code>) extends the Google Maps API's<a href  = http://code.google.com/apis/maps/documentation/reference.html#OverlayView>OverlayView</a>that draws map images from data source on the fly. It is also known as "<b>Dynamic Maps</b>".It can be added to the map via <code>GMap.addOverlay </code> method.The similar class in the core GMap API is <a href  = http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlay>google.maps.GroundOverlay</a>,however, the instance of this class always cover the viewport exactly, and will redraw itself as map moves.</p>
+      <p>This class (<code>MapOverlay</code>) extends the Google Maps API's<a href  = http://code.google.com/apis/maps/documentation/reference.html#OverlayView>OverlayView</a>that draws map images from data source on the fly. It is also known as "<b>Dynamic Maps</b>".It can be added to the map via <code>setMap(map) </code> method.The similar class in the core Map API is <a href  = http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlay>google.maps.GroundOverlay</a>,however, the instance of this class always cover the viewport exactly, and will redraw itself as map moves.</p>
       
         <h3>Constructor</h3>
         <table summary="class MapOverlay - Constructor" width="90%">
@@ -2242,7 +2329,7 @@
                     <td><code>None</code></td>
                   
                 
-                <td>The API invokes a separate draw() method on the overlay whenever it needs to draw the overlay on the map (including when first added).Implement this method to draw or update the overlay. This method is called after onAdd() and when the position from projection.fromLatLngToPixel() would return a new value for a given LatLng. This can happen on change of zoom, center, or map type. It is not necessarily called on drag or resize.See OverlayView.draw.</td>
+                <td>Called by API not by app code.See OverlayView.draw in core API docs.</td>
               </tr>
             
               <tr class="even">
@@ -2292,7 +2379,7 @@
                     <td><code>None</code></td>
                   
                 
-                <td>Handler when overlay is added. Interface method.This will be called after setMap(map) is called.</td>
+                <td>Called by API not by app code.Handler when overlay is added. Interface method.This will be called after setMap(map) is called.</td>
               </tr>
             
               <tr class="odd">
@@ -2302,7 +2389,7 @@
                     <td><code>None</code></td>
                   
                 
-                <td>remove overlay</td>
+                <td>Called by API not by app code.Handler when overlay is removed.</td>
               </tr>
             
               <tr class="even">
@@ -2427,8 +2514,39 @@
         </table>
       
     
+      <h2><a name="MapSerivceOptions"></a>class MapSerivceOptions</h2>
+      <p>provides options to construct a <code><a href="reference.html#MapService">MapService</a></code>  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class MapSerivceOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>deferLoad</code></td>
+                
+                  
+                    <td><code>Boolean</code></td>
+                  
+                
+                <td>whether to defer load meta data on construction.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
       <h2><a name="MapService"></a>class MapService</h2>
-      <p>This class (<code>gmaps.ags.MapService</code>) is the core class for all map service operations.It represents an ArcGIS Server map service that offer access to map and layer content</p>
+      <p>This class (<code>MapService</code>) is the core class for all map service operations.It represents an ArcGIS Server map service that offer access to map and layer content</p>
       
         <h3>Constructor</h3>
         <table summary="class MapService - Constructor" width="90%">
@@ -2443,7 +2561,7 @@
               <tr class="odd">
                 <td><code>MapService(<span class="type">url:String</span>)</code></td>
                 
-                <td>Creates a MapService objects that can be used by UI components.<ul><li> <code> url</code> (required) is the URL of the map servive, e.g. <code>http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer</code>.<ul/> Note the spatial reference of the map service must already existsin the <code>spatialReferences</code> if actual coordinates transformation is needed.</td>
+                <td>Creates a MapService objects that can be used by UI components.<ul><li> <code> url</code> (required) is the URL of the map servive, e.g. <code>http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer</code>.<ul/> Note the spatial reference of the map service must already existsin the <code>spatialReferences_</code> if actual coordinates transformation is needed.</td>
               </tr>
             
           </tbody>
@@ -2497,10 +2615,10 @@
                 <td><code>layers</code></td>
                 
                   
-                    <td><code>Layer[]</code></td>
+                    <td><code>Array.Layer</code></td>
                   
                 
-                <td>array of Layers.</td>
+                <td>array of <code><a href="reference.html#Layer">Layer</a></code>s.</td>
               </tr>
             
               <tr class="odd">
@@ -2540,7 +2658,7 @@
                     <td><code>SpatialReference</code></td>
                   
                 
-                <td>spatialReference</td>
+                <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
               </tr>
             
               <tr class="odd">
@@ -2557,10 +2675,10 @@
                 <td><code>tables</code></td>
                 
                   
-                    <td><code>Layer[]</code></td>
+                    <td><code>Array.Layer</code></td>
                   
                 
-                <td>array of Tables.</td>
+                <td>array of Tables of type <code><a href="reference.html#Layer">Layer</a></code>.</td>
               </tr>
             
               <tr class="odd">
@@ -2624,7 +2742,7 @@
                 <td><code>exportMap(<span class="type">params:ExportMapOptions</span>, <span class="type">callback:Function</span>, <span class="type">errback:Function</span>)</code></td>
                 
                   
-                    <td><code>None</code></td>
+                    <td><code>String|None</code></td>
                   
                 
                 <td>Export an image with given parameters.For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/export.html'>Export Operation</a>.<br/> The <code>params</code> is an instance of <code><a href="reference.html#ExportMapOptions">ExportMapOptions</a></code>.The following properties will be set automatically if not specified:...<br/> The <code>callback</code> is the callback function with argument ofan instance of <code><a href="reference.html#MapImage">MapImage</a></code>.</td>
@@ -2661,6 +2779,16 @@
               </tr>
             
               <tr class="odd">
+                <td><code>hasLoaded()</code></td>
+                
+                  
+                    <td><code>Boolean</code></td>
+                  
+                
+                <td>If the map service meta info is loaded</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>identify(<span class="type">params:IdentifyOptions</span>, <span class="type">callback:Function</span>, <span class="type">errback:Function</span>)</code></td>
                 
                   
@@ -2668,6 +2796,16 @@
                   
                 
                 <td>Identify features on a particular Geographic location, using <code><a href="reference.html#IdentifyOptions">IdentifyOptions</a></code> andprocess <code><a href="reference.html#IdentifyResults">IdentifyResults</a></code> using the <code>callback</code> function.For more info see <ahref  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/identify.html'>Identify Operation</a>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>loadServiceInfo()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Load serviceInfo</td>
               </tr>
             
               <tr class="even">
@@ -2701,7 +2839,7 @@
                 <td><code>load</code></td>
                 
                   
-                    <td><code><span class="type">service:MapService</span></code></td>
+                    <td><code>None</code></td>
                   
                 
                 <td>This event is fired when the service and it's service info is loaded.</td>
@@ -2712,7 +2850,7 @@
       
     
       <h2><a name="MapType"></a>class MapType</h2>
-      <p>This class (<code>gmaps.ags.MapType</code>) extends the Google Maps API's<a href  = http://code.google.com/apis/maps/documentation/javascript/reference.html#MapType>GMapType</a>.It holds a list of <code><a href="reference.html#TileLayer">TileLayer</a></code>s.<p> Because all tileLayers are loaded asynchronously, and currently thecore API does not have method to refresh tiles on demand, if you do not load the defaultGoogle maps, you should either 1) add tomap after it STR.load event is fired, or) trigger an map type change to force refresh.See <a href  = http://code.google.com/p/gmaps-api-issues/issues/detail?id  = 279&can  = 1&q  = refresh&colspec  = ID%20Type%20Status%20Introduced%20Fixed%20Summary%20Stars%20ApiType%20Internal>Issue 279</a></p><p> Note: all tiled layer in the same map type must use same spatial reference and tile scheme.</p></p>
+      <p>This class implements the Google Maps API's<a href  = http://code.google.com/apis/maps/documentation/javascript/reference.html#MapType>GMapType</a>.It holds a list of <code><a href="reference.html#TileLayer">TileLayer</a></code>s.<p> Note: all tiled layer in the same map type must use same spatial reference and tile scheme.</p></p>
       
         <h3>Constructor</h3>
         <table summary="class MapType - Constructor" width="90%">
@@ -2725,9 +2863,9 @@
             </tr>
             
               <tr class="odd">
-                <td><code>MapType(<span class="type">tileLayers:TileLayer[]|String</span>, <span class="type">opt_typeOpts:MapTypeOptions</span>)</code></td>
+                <td><code>MapType(<span class="type">tileLayers:Array.TileLayer|String</span>, <span class="type">opt_typeOpts:MapTypeOptions</span>)</code></td>
                 
-                <td>Creates a MapType, with a array of TileLayers, or a single URL as shortcut.</td>
+                <td>Creates a MapType, with a array of <code><a href="reference.html#TileLayer">TileLayer</a></code>s, or a single URL as shortcut.</td>
               </tr>
             
           </tbody>
@@ -2751,40 +2889,20 @@
                 <td><code>getOpacity()</code></td>
                 
                   
-                    <td><code>None</code></td>
+                    <td><code>Number</code></td>
                   
                 
-                <td></td>
+                <td>get opacity</td>
               </tr>
             
               <tr class="even">
-                <td><code>getTile(<span class="type">tileCoord:Point</span>, <span class="type">zoom:Number</span>, <span class="type">ownerDocument:</span>)</code></td>
-                
-                  
-                    <td><code>Node</code></td>
-                  
-                
-                <td>Get a tile for given tile coordinates Returns a tile for the given tile coordinate (x, y) and zoom level. This tile will be appended to the given ownerDocument.</td>
-              </tr>
-            
-              <tr class="odd">
                 <td><code>getTileLayers()</code></td>
                 
                   
-                    <td><code>TileLayer[]</code></td>
+                    <td><code>Array.TileLayer</code></td>
                   
                 
                 <td>get list of <code><a href="reference.html#TileLayer">TileLayer</a></code> in this map type</td>
-              </tr>
-            
-              <tr class="even">
-                <td><code>releaseTile(<span class="type">node:Node</span>)</code></td>
-                
-                  
-                    <td><code>None</code></td>
-                  
-                
-                <td>Release tile and cleanup</td>
               </tr>
             
               <tr class="odd">
@@ -2802,7 +2920,7 @@
       
     
       <h2><a name="MapTypeOptions"></a>class MapTypeOptions</h2>
-      <p>Instance of this class are used in the <code>opt_typeOpts</code> argument to the constructor of the <code><a href="reference.html#MapType">MapType</a></code> class. See  <a href=http://code.google.com/apis/maps/documentation/javascript/reference.html#MapType>google.maps.MapType</a>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      <p>Instance of this class are used in the <code>opt_typeOpts</code> argument to the constructor of the <code><a href="reference.html#MapType">MapType</a></code> class. See <a href=http://code.google.com/apis/maps/documentation/javascript/reference.html#MapType>google.maps.MapType</a>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
       
         <h3>Properties</h3>
         <table summary="class MapTypeOptions - Properties" width="90%">
@@ -2829,16 +2947,6 @@
               </tr>
             
               <tr class="even">
-                <td><code>map</code></td>
-                
-                  
-                    <td><code>google.maps.Map</code></td>
-                  
-                
-                <td>The map instance. Can be useful for copyright info.   May not need if API provides access to map instance later.</td>
-              </tr>
-            
-              <tr class="odd">
                 <td><code>maxZoom</code></td>
                 
                   
@@ -2848,7 +2956,7 @@
                 <td>The maximum zoom level for the map when displaying this MapType. Required for base MapTypes, ignored for overlay MapTypes.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>minZoom</code></td>
                 
                   
@@ -2858,7 +2966,7 @@
                 <td>The minimum zoom level for the map when displaying this MapType. Optional; defaults to 0.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>name</code></td>
                 
                   
@@ -2868,7 +2976,7 @@
                 <td>map type name</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>projection</code></td>
                 
                   
@@ -2878,16 +2986,6 @@
                 <td>an instance of <code><a href="reference.html#Projection">Projection</a></code>.</td>
               </tr>
             
-              <tr class="odd">
-                <td><code>radius</code></td>
-                
-                  
-                    <td><code>Number</code></td>
-                  
-                
-                <td>Radius of the planet for the map, in meters. Optional; defaults to Earth's equatorial radius of 6378137 meters.</td>
-              </tr>
-            
               <tr class="even">
                 <td><code>tileSize</code></td>
                 
@@ -2895,7 +2993,7 @@
                     <td><code>google.maps.Size</code></td>
                   
                 
-                <td>The dimensions of each tile. Required.</td>
+                <td>The dimensions of each tile.</td>
               </tr>
             
           </tbody>
@@ -2923,7 +3021,7 @@
                 <td><code>closestFacilityLayers</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td></td>
@@ -2933,7 +3031,7 @@
                 <td><code>routeLayers</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td></td>
@@ -2943,7 +3041,7 @@
                 <td><code>serviceAreaLayers</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td></td>
@@ -3122,7 +3220,7 @@
       
     
       <h2><a name="Projection"></a>class Projection</h2>
-      <p>This class (<code>gmaps.ags.Projection</code>) implements a custom<a href  = 'http://code.google.com/apis/maps/documentation/javascript/reference.html#Projection'>google.maps.Projection</a> from the core Google Maps API.  It carries a real <code><a href="reference.html#SpatialReference">SpatialReference</a></code> object to convert LatLng from/to  map coordinates, and tiling scheme informations to convert  map coordinates from/to pixel coordinates.</p>
+      <p>This class (<code>Projection</code>) implements a custom<a href  = 'http://code.google.com/apis/maps/documentation/javascript/reference.html#Projection'>google.maps.Projection</a>from the core Google Maps API.  It includes a real <code><a href="reference.html#SpatialReference">SpatialReference</a></code> object to convert LatLng from/to  map coordinates, and tiling scheme informations to convert  map coordinates from/to pixel coordinates.</p>
       
         <h3>Constructor</h3>
         <table summary="class Projection - Constructor" width="90%">
@@ -3212,7 +3310,7 @@
                 <td><code>geometries</code></td>
                 
                   
-                    <td><code>(OverlayView[]|Object[])</code></td>
+                    <td><code>(Array.OverlayView|Array.object)</code></td>
                   
                 
                 <td>Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project.</td>
@@ -3273,7 +3371,7 @@
                 <td><code>geometries</code></td>
                 
                   
-                    <td><code>OverlayView[]|Object[]</code></td>
+                    <td><code>Array.OverlayView|Array.object</code></td>
                   
                 
                 <td>Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project.</td>
@@ -3304,7 +3402,7 @@
                 <td><code>geometry</code></td>
                 
                   
-                    <td><code>OverlayView|OverlayView[]</code></td>
+                    <td><code>OverlayView|Array.OverlayView</code></td>
                   
                 
                 <td>The geometry to apply as the spatial filter.</td>
@@ -3324,7 +3422,7 @@
                 <td><code>objectIds</code></td>
                 
                   
-                    <td><code>Int[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>The object IDs of this layer / table to be queried</td>
@@ -3334,7 +3432,7 @@
                 <td><code>outFields</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>The list of fields to be included in the returned resultset.</td>
@@ -3445,7 +3543,7 @@
                 <td><code>objectIds</code></td>
                 
                   
-                    <td><code>Int[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>The object IDs of this layer / table to be queried</td>
@@ -3455,7 +3553,7 @@
                 <td><code>outFields</code></td>
                 
                   
-                    <td><code>String[]</code></td>
+                    <td><code>Array.string</code></td>
                   
                 
                 <td>The list of fields to be included in the returned resultset. This list is a comma delimited list of field names.</td>
@@ -3526,7 +3624,7 @@
                 <td><code>relatedRecords</code></td>
                 
                   
-                    <td><code>Feature[]</code></td>
+                    <td><code>Array.feature</code></td>
                   
                 
                 <td>list of <code><a href="reference.html#Feature">Feature</a></code>s.</td>
@@ -3577,7 +3675,7 @@
                 <td><code>relatedRecordGroups</code></td>
                 
                   
-                    <td><code>Object[]</code></td>
+                    <td><code>Array.object</code></td>
                   
                 
                 <td>list of related records</td>
@@ -3628,7 +3726,7 @@
                 <td><code>features</code></td>
                 
                   
-                    <td><code>Feature[]</code></td>
+                    <td><code>Array.feature</code></td>
                   
                 
                 <td>result as array of <code><a href="reference.html#Feature">Feature</a></code></td>
@@ -3668,7 +3766,7 @@
                 <td><code>objectIds</code></td>
                 
                   
-                    <td><code>int[]</code></td>
+                    <td><code>Array.int</code></td>
                   
                 
                 <td>objectIds when returnIdsOnly=true</td>
@@ -3679,7 +3777,7 @@
       
     
       <h2><a name="ReverseGeocodeOptions"></a>class ReverseGeocodeOptions</h2>
-      <p>This class represent the parameters needed in a reverseGeocode operation on a <code><a href="reference.html#GeocodeService">GeocodeService</a></code>.  There is no constructor, use JavaScript object literal.<br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/reverse.html'>Reverse Geocode Operation</a>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      <p>This class represent the parameters needed in a reverseGeocode operation on a <code><a href="reference.html#GeocodeService">GeocodeService</a></code>.  There is no constructor, use JavaScript object literal.<br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/inverse.html'>Reverse Geocode Operation</a>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
       
         <h3>Properties</h3>
         <table summary="class ReverseGeocodeOptions - Properties" width="90%">
@@ -3720,7 +3818,7 @@
       
     
       <h2><a name="ReverseGeocodeResult"></a>class ReverseGeocodeResult</h2>
-      <p>This class represent one entry in the results of a find address operation for a <code><a href="reference.html#GeocodeService">GeocodeService</a></code>.  There is no constructor, use JavaScript object literal.<br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/reverse.html'>Reverse Geocode Operation</a>.</p>
+      <p>This class represent one entry in the results of a find address operation for a <code><a href="reference.html#GeocodeService">GeocodeService</a></code>.  There is no constructor, use JavaScript object literal.<br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/inverse.html'>Reverse Geocode Operation</a>.</p>
       
         <h3>Properties</h3>
         <table summary="class ReverseGeocodeResult - Properties" width="90%">
@@ -3781,7 +3879,7 @@
                 <td><code>barriers</code></td>
                 
                   
-                    <td><code>google.maps.LatLng[]|Marker[]</code></td>
+                    <td><code>Array.google.maps.LatLng|Array.Marker</code></td>
                   
                 
                 <td>the locations the route must avoid</td>
@@ -3841,7 +3939,7 @@
                 <td><code>stops</code></td>
                 
                   
-                    <td><code>google.maps.LatLng[]|Marker[]</code></td>
+                    <td><code>Array.google.maps.LatLng|Array.Marker</code></td>
                   
                 
                 <td>the locations the route must pass</td>
@@ -3872,7 +3970,7 @@
                 <td><code>stops</code></td>
                 
                   
-                    <td><code>google.maps.LatLng[]</code></td>
+                    <td><code>Array.google.maps.LatLng</code></td>
                   
                 
                 <td></td>
@@ -3883,7 +3981,7 @@
       
     
       <h2><a name="RouteTask"></a>class RouteTask</h2>
-      <p>This class (<code>gmaps.ags.RouteTask</code>) represent a Network Layer resource deployed in a NetWorkService.It can solve a route based on stops, barrier</p>
+      <p>This class (<code>RouteTask</code>) represent a Network Layer resource deployed in a NetWorkService.It can solve a route based on stops, barrier</p>
       
         <h3>Constructor</h3>
         <table summary="class RouteTask - Constructor" width="90%">
@@ -3933,7 +4031,7 @@
       
     
       <h2><a name="SpatialReference"></a>class SpatialReference</h2>
-      <p>This  class (<code>gmaps.ags.SpatialReference</code>) is for coordinate systems that converts value between geographic and real-world coordinates. The following classes extend this class:   <code><a href="reference.html#Geographic">Geographic</a></code>, <code><a href="reference.html#SphereMercator">SphereMercator</a></code>, <code><a href="reference.html#LambertConformalConic">LambertConformalConic</a></code>, and <code><a href="reference.html#TransverseMercator">TransverseMercator</a></code>.</p>
+      <p>This  class (<code>SpatialReference</code>) is for coordinate systems that converts valuebetween geographic and real-world coordinates. The following classes extend this class:   <code><a href="reference.html#Geographic">Geographic</a></code>, <code><a href="reference.html#SphereMercator">SphereMercator</a></code>, <code><a href="reference.html#LambertConformalConic">LambertConformalConic</a></code>, and <code><a href="reference.html#TransverseMercator">TransverseMercator</a></code>.</p>
       
         <h3>Constructor</h3>
         <table summary="class SpatialReference - Constructor" width="90%">
@@ -4006,10 +4104,10 @@
             </tr>
             
               <tr class="odd">
-                <td><code>forward(<span class="type">lnglat:Number[]</span>)</code></td>
+                <td><code>forward(<span class="type">lnglat:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>Convert Lat Lng to real-world coordinates.Note both input and output are array of [x,y], although their values in different units.</td>
@@ -4019,17 +4117,17 @@
                 <td><code>getCircum()</code></td>
                 
                   
-                    <td><code>Number</code></td>
+                    <td><code>number</code></td>
                   
                 
                 <td>Get the map the periodicity in x-direction, in map units NOT pixels</td>
               </tr>
             
               <tr class="odd">
-                <td><code>reverse(<span class="type">coords:Number[]</span>)</code></td>
+                <td><code>inverse(<span class="type">coords:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>Convert real-world coordinates  to Lat Lng.Note both input and output are are array of [x,y], although their values are different.</td>
@@ -4043,16 +4141,6 @@
                   
                 
                 <td>To JSON String</td>
-              </tr>
-            
-              <tr class="odd">
-                <td><code>register(<span class="type">wkid/wkt:Number|String</span>, <span class="type">wktOrSR:Object</span>)</code></td>
-                
-                  
-                    <td><code>SpatialReference</code></td>
-                  
-                
-                <td><b> static</b> method. Call with Syntax <code>SpatialReference.register(..)</code>. Add A Spatial Reference to the internal collection of Spatial References.the <code>wktOrSR</code> parameter can be String format of "well-known text" of theSpatial Reference, or an instance of <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.<br/><li> If passes in String WKT format, to be consistent, it should use the same format as listedin <a  href  = 'http://edndoc.esri.com/arcims/9.2/elements/pcs.htm'>ESRI documentation</a>. For example, add NC State Plane NAD83 as String:<br/><code>SpatialReference.register(2264,'PROJCS["NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["False_Easting",2000000.002616666],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",-79.0],PARAMETER["Standard_Parallel_1",34.33333333333334],PARAMETER["Standard_Parallel_2",36.16666666666666],PARAMETER["Latitude_Of_Origin",33.75],UNIT["Foot_US",0.3048006096012192]]');<br/></code>Note: only <b>Lambert Conformal Conic</b> and <b>Transverse Mercator</b> Projectionbased Spatial References are supported if added via WKT String.<br/><li> If passes in an instance of <code><a href="reference.html#SpatialReference">SpatialReference</a></code>, it can be one of thebuilt in classes, or a class that extends SpatialReference. For example, add NC State Plane NAD83 as SR:<br/><code>SpatialReferences.register(2264: new LambertConformalConic({wkid: 2264,semi_major: 6378137.0,inverse_flattening: 298.257222101,standard_parallel_1: 34.33333333333334,standard_parallel_2: 36.16666666666666,central_meridian: -79.0,latitude_of_origin: 33.75,'false_easting': 2000000.002616666,'false_northing': 0,unit: 0.3048006096012192});<br/></code></td>
               </tr>
             
           </tbody>
@@ -4161,7 +4249,7 @@
       
     
       <h2><a name="SphereMercator"></a>class SphereMercator</h2>
-      <p>This class (<code>gmaps.ags.SphereMercator</code>) is the Projection Default Google Maps uses. It is a special form of Mercator.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
+      <p>This class (<code>SphereMercator</code>) is the Projection Default Google Maps uses. It is a special form of Mercator.  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
       
         <h3>Constructor</h3>
         <table summary="class SphereMercator - Constructor" width="90%">
@@ -4176,7 +4264,7 @@
               <tr class="odd">
                 <td><code>SphereMercator(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Creates a Spatial Reference based on Sphere Mercator Projection. The <code>params</code> passed in constructor should have the following properties:<code><br/>-wkid: wkid<br/>-semi_major:  ellipsoidal semi-major axis <br/>-unit: meters per unit<br/>-central_meridian: lamdaF, longitude of the false origin  (with respect to the prime meridian)</code><br/>e.g. The "Web Mercator" used in ArcGIS Server:<br/><code> var web_mercator  = new SphereMercator({wkid: 102113,  semi_major:6378137.0,  central_meridian:0, unit: 1 });</code></td>
+                <td>Creates a Spatial Reference based on Sphere Mercator Projection. The <code>params</code> passed in constructor should have the following properties:<code><br/>-wkid: wkid<br/>-semi_major:  ellipsoidal semi-major axis <br/>-unit: meters per unit<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)</code><br/>e.g. The "Web Mercator" used in ArcGIS Server:<br/><code> var web_mercator  = new SphereMercator({wkid: 102113,  semi_major:6378137.0,  central_meridian:0, unit: 1 });</code></td>
               </tr>
             
           </tbody>
@@ -4197,10 +4285,10 @@
             </tr>
             
               <tr class="odd">
-                <td><code>forward(<span class="type">lnglat:Number[]</span>)</code></td>
+                <td><code>forward(<span class="type">lnglat:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>See <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -4217,10 +4305,10 @@
               </tr>
             
               <tr class="odd">
-                <td><code>reverse(<span class="type">coords:Number[]</span>)</code></td>
+                <td><code>inverse(<span class="type">coords:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>See <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -4291,7 +4379,7 @@
                 <td><code>lods</code></td>
                 
                   
-                    <td><code>LOD[]</code></td>
+                    <td><code>Array.LOD</code></td>
                   
                 
                 <td>Array of Level of Details. See <code><a href="reference.html#LOD">LOD</a></code></td>
@@ -4332,7 +4420,7 @@
       
     
       <h2><a name="TileLayer"></a>class TileLayer</h2>
-      <p>This class (<code>gmaps.ags.TileLayer</code>) provides access to a cached ArcGIS Server map service. There is no GTileLayer class in Google Maps API V3, but this class is kept to allowfiner control of zoom levels for each individual tile sets within a map type, such as zoom level range and opacity.<br/> This class can be used in <code><a href="reference.html#MapType">MapType</a></code></p>
+      <p>This class (<code>TileLayer</code>) provides access to a cached ArcGIS Servermap service. There is no <code>GTileLayer</code> class in Google Maps API V3, this class is kept to allowfiner control of zoom levels for each individual tile sets within a map type, such as zoom level range and opacity.</p>
       
         <h3>Constructor</h3>
         <table summary="class TileLayer - Constructor" width="90%">
@@ -4374,7 +4462,7 @@
                     <td><code>MapService</code></td>
                   
                 
-                <td>get the underline Map Service</td>
+                <td>get the underline <code><a href="reference.html#MapService">MapService</a></code></td>
               </tr>
             
               <tr class="even">
@@ -4463,7 +4551,7 @@
       
     
       <h2><a name="TransverseMercator"></a>class TransverseMercator</h2>
-      <p>This class (<code>gmaps.ags.TransverseMercator</code>) represents a Spatial Reference System based on <a target  = wiki href  = 'http://en.wikipedia.org/wiki/Transverse_Mercator_projection'>Transverse Mercator Projection</a>  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
+      <p>This class (<code>TransverseMercator</code>) represents a Spatial Reference System based on <a target  = wiki href  = 'http://en.wikipedia.org/wiki/Transverse_Mercator_projection'>Transverse Mercator Projection</a>  This class extends <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.</p>
       
         <h3>Constructor</h3>
         <table summary="class TransverseMercator - Constructor" width="90%">
@@ -4478,7 +4566,7 @@
               <tr class="odd">
                 <td><code>TransverseMercator(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Create a Transverse Mercator Projection. The <code>params</code> passed in constructor should contain the following properties: <br/><code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meters<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-Scale Factor: scale factor at origin<br/>-latitude_of_origin: phiF, latitude of the false origin<br/>-central_meridian: lamdaF, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin <br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin </code><br/>e.g. Georgia West State Plane NAD83 Feet:  <br/><code> var gawsp83  = new gmaps.ags.TransverseMercator({wkid: 102667, semi_major:6378137.0, inverse_flattening:298.257222101,central_meridian:-84.16666666666667, latitude_of_origin: 30.0, scale_factor:0.9999,'false_easting':2296583.333333333, 'false_northing':0, unit: 0.3048006096012192}); </code></td>
+                <td>Create a Transverse Mercator Projection. The <code>params</code> passed in constructor should contain the following properties: <br/><code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meters<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-Scale Factor: scale factor at origin<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin <br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin </code><br/>e.g. Georgia West State Plane NAD83 Feet:  <br/><code> var gawsp83  = new TransverseMercator({wkid: 102667, semi_major:6378137.0, inverse_flattening:298.257222101,central_meridian:-84.16666666666667, latitude_of_origin: 30.0, scale_factor:0.9999, false_easting:2296583.333333333, false_northing:0, unit: 0.3048006096012192}); </code></td>
               </tr>
             
           </tbody>
@@ -4499,10 +4587,10 @@
             </tr>
             
               <tr class="odd">
-                <td><code>forward(<span class="type">lnglat:Number[]</span>)</code></td>
+                <td><code>forward(<span class="type">lnglat:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -4512,17 +4600,17 @@
                 <td><code>getCircum()</code></td>
                 
                   
-                    <td><code>Number</code></td>
+                    <td><code></code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
               </tr>
             
               <tr class="odd">
-                <td><code>reverse(<span class="type">coords:Number[]</span>)</code></td>
+                <td><code>inverse(<span class="type">coords:Array.number</span>)</code></td>
                 
                   
-                    <td><code>Number[]</code></td>
+                    <td><code>Array.number</code></td>
                   
                 
                 <td>see <code><a href="reference.html#SpatialReference">SpatialReference</a></code></td>
@@ -4534,7 +4622,7 @@
     
       <h2><a name="Util"></a>namespace Util</h2>
       <p>
-A set of utilities ((<code>gmaps.ags.Util</code>) for commonly used functions.</p>
+A set of utilities ((<code>Util</code>)for commonly used functions.</p>
       
         <h3>Static Methods</h3>
         <table summary="namespace Util - Static Methods" width="90%">
@@ -4551,7 +4639,7 @@ A set of utilities ((<code>gmaps.ags.Util</code>) for commonly used functions.<
             </tr>
             
               <tr class="odd">
-                <td><code>addToMap(<span class="type">map:google.maps.Map</span>, <span class="type">overlays:OverlayView[]</span>)</code></td>
+                <td><code>addToMap(<span class="type">map:google.maps.Map</span>, <span class="type">overlays:Array.OverlayView</span>)</code></td>
                 
                   
                     <td><code>None</code></td>
@@ -4571,7 +4659,17 @@ A set of utilities ((<code>gmaps.ags.Util</code>) for commonly used functions.<
               </tr>
             
               <tr class="odd">
-                <td><code>removeFromMap(<span class="type">overlays:OverlayView[]</span>, <span class="type">clearArray:Boolean</span>)</code></td>
+                <td><code>registerSR(<span class="type">wkid/wkt:Number|String</span>, <span class="type">wktOrSR:Object</span>)</code></td>
+                
+                  
+                    <td><code>SpatialReference</code></td>
+                  
+                
+                <td><b> static</b> method. Call with Syntax <code>SpatialReference.register(..)</code>. Add A Spatial Reference to the internal collection of Spatial References.the <code>wktOrSR</code> parameter can be String format of "well-known text" of theSpatial Reference, or an instance of <code><a href="reference.html#SpatialReference">SpatialReference</a></code>.<br/><li> If passes in String WKT format, to be consistent, it should use the same format as listedin <a  href  = 'http://edndoc.esri.com/arcims/9.2/elements/pcs.htm'>ESRI documentation</a>. For example, add NC State Plane NAD83 as String:<br/><code>SpatialReference.register(2264,'PROJCS["NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["False_Easting",2000000.002616666],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",-79.0],PARAMETER["Standard_Parallel_1",34.33333333333334],PARAMETER["Standard_Parallel_2",36.16666666666666],PARAMETER["Latitude_Of_Origin",33.75],UNIT["Foot_US",0.3048006096012192]]');<br/></code>Note: only <b>Lambert Conformal Conic</b> and <b>Transverse Mercator</b> Projectionbased Spatial References are supported if added via WKT String.<br/><li> If passes in an instance of <code><a href="reference.html#SpatialReference">SpatialReference</a></code>, it can be one of thebuilt in classes, or a class that extends SpatialReference. For example, add NC State Plane NAD83 as SR:<br/><code>SpatialReferences.register(2264: new LambertConformalConic({wkid: 2264,semi_major: 6378137.0,inverse_flattening: 298.257222101,standard_parallel_1: 34.33333333333334,standard_parallel_2: 36.16666666666666,central_meridian: -79.0,latitude_of_origin: 33.75,'false_easting': 2000000.002616666,'false_northing': 0,unit: 0.3048006096012192});<br/></code></td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>removeFromMap(<span class="type">overlays:Array.OverlayView</span>, <span class="type">clearArray:Boolean</span>)</code></td>
                 
                   
                     <td><code>None</code></td>
@@ -4601,7 +4699,7 @@ A set of utilities ((<code>gmaps.ags.Util</code>) for commonly used functions.<
                 <td><code>jsonpend</code></td>
                 
                   
-                    <td><code><span class="type">scriptID:String</span></code></td>
+                    <td><code>&lt;span class=&quot;type&quot;&gt;scriptID:String&lt;/span&gt;</code></td>
                   
                 
                 <td>This event is fired after a REST JSONP response was returned by server.</td>
@@ -4611,7 +4709,7 @@ A set of utilities ((<code>gmaps.ags.Util</code>) for commonly used functions.<
                 <td><code>jsonpstart</code></td>
                 
                   
-                    <td><code><span class="type">scriptID:String</span></code></td>
+                    <td><code>&lt;span class=&quot;type&quot;&gt;scriptID:String&lt;/span&gt;</code></td>
                   
                 
                 <td>This event is fired before a REST request sent to server.</td>

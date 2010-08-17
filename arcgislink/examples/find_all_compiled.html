@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <!--meta name="viewport" content="initial-scale=1.0, user-scalable=no" /-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Find Operation</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript" src="find_compiled.js">
+           
+        </script>
+    </head>
+    <body>
+        <div>
+            Search a State or City with name containing text:<input id='q' type='text' size='20' value='NC'/><input id='find' type='button' disabled="true" value='Find' onclick='find(document.getElementById("q").value)'/><input id='exact' type='checkbox'>Exact match
+            <div id='busy' style="color:red">
+                Running....
+            </div>
+        </div>
+        <div id="map_canvas" style="position:absolute;width:700px; height:600px; left:0px; top: 80px;border:1px solid #000;">
+        </div>
+        <div id="results" style="position:absolute; overflow:auto;left:720px; top:80px; width:300px; height:600px; border:1px solid #000;">
+        </div>
+    </body>
+</html>

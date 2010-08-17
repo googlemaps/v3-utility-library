@@ -5,46 +5,15 @@
         <title>State Plane Coordinate Systems</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
         </script>
-        <script type="text/javascript">
-         document.write('<script type="text/javascript" src="../src/arcgislink'+(document.location.search.indexOf('packed')>-1?'_packed':document.location.search.indexOf('compiled')>-1?'_compiled':document.location.search.indexOf('advanced')>-1?'_advanced':'')+'.js"><'+'/script>');
+        <script type="text/javascript" src="../src/arcgislink.js">
         </script>
-        <script type="text/javascript">
-         // register NC SP83
-        gmaps.ags.SpatialReference.register(2264, 'PROJCS["NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["False_Easting",2000000.002616666],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",-79.0],PARAMETER["Standard_Parallel_1",34.33333333333334],PARAMETER["Standard_Parallel_2",36.16666666666666],PARAMETER["Latitude_Of_Origin",33.75],UNIT["Foot_US",0.3048006096012192]]');   
-        function init() {
-          /* 
-           The following service is not supported due to scale ratio between zooms:      
-           var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/TaxParcel/ConsumerFocusedPublicAccessMap/MapServer';
-          */
-          var url = 'http://maps.ci.charlotte.nc.us/ArcGIS/rest/services/GET/BaseMap/MapServer';
-          var svc = new gmaps.ags.MapService(url);
-          google.maps.event.addListenerOnce(svc, 'load', function() {
-            try {
-              var tileLayer = new gmaps.ags.TileLayer(svc);
-              var agsType = new gmaps.ags.MapType([tileLayer], {
-                name: 'StatePlane'
-              });
-              var bnds = svc.getInitialBounds();
-              var myOptions = {
-                zoom: 12,
-                center: bnds.getCenter(),
-                mapTypeId: 'stateplane',
-                mapTypeControlOptions: {
-                  mapTypeIds: ['stateplane', google.maps.MapTypeId.ROADMAP]
-                }
-              }
-              var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-              map.mapTypes.set('stateplane', agsType);
-            } catch (e) {
-              alert(e);
-            }
-          });
-        }
+        <script type="text/javascript" src="stateplane.js">
         </script>
     </head>
-   <body style="margin:0px; padding:0px;" onload="init()">
+    <body style="margin:0px; padding:0px;">
         <div id="map_canvas" style="width:100%; height:100%">
-        </div>        <div id='_ags_log' cols='60' rows='8' style='overflow:auto;position:absolute;bottom:0px;height:80px;width:100%'></div>
-
+        </div>
+        <div id='_ags_log' cols='60' rows='8' style='overflow:auto;position:absolute;bottom:0px;height:80px;width:100%'>
+        </div>
     </body>
 </html>
