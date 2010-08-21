@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.0.2 [June 26, 2010]
+ * @version 1.0.3 [August 21, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -274,7 +274,15 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
 
   var me = this;
 
-  return function () {
+  return function (e) {
+
+	// 1.0.3 fix: Always prevent propagation of a close box click to the map:
+    e.cancelBubble = true;
+
+    if (e.stopPropagation) {
+
+      e.stopPropagation();
+    }
 
     me.close();
 
