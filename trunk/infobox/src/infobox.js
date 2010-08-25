@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.0.3 [August 21, 2010]
+ * @version 1.1 [August 25, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -48,8 +48,13 @@
  * @property {LatLng} position The geographic location at which to display the InfoBox.
  * @property {number} zIndex The CSS z-index style value for the InfoBox.
  *  Note: This value overrides a zIndex setting specified in the <tt>boxStyle</tt> property.
- * @property {Object} boxStyle An object literal with CSS style settings for the InfoBox container.
- *  Note: Border widths must be specified in px units because of an MSIE limitation.
+ * @property {string} boxClass The name of the CSS class defining the styles for the InfoBox container.
+ *  The default name is <code>infoBox</code>.
+ * @property {Object} [boxStyle] An object literal whose properties define specific CSS
+ *  style values to be applied to the InfoBox. Style values defined here override those that may
+ *  be defined in the <code>boxClass</code> style sheet. If this property is changed after the
+ *  InfoBox has been created, all previously set styles (except those defined in the style sheet)
+ *  are removed from the InfoBox before the new style values are applied.
  * @property {string} closeBoxMargin The CSS margin style value for the close box.
  *  The default is "2px" (a 2-pixel margin on all sides).
  * @property {string} closeBoxURL The URL of the image representing the close box.
@@ -92,6 +97,7 @@ function InfoBox(opt_opts) {
 
   // Additional options (unique to InfoBox):
   //
+  this.boxClass_ = opt_opts.boxClass || "infoBox";
   this.boxStyle_ = opt_opts.boxStyle || {};
   this.closeBoxMargin_ = opt_opts.closeBoxMargin || "2px";
   this.closeBoxURL_ = opt_opts.closeBoxURL || "http://www.google.com/intl/en_us/mapfiles/close.gif";
@@ -159,15 +165,6 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
     this.div_ = document.createElement("div");
 
     this.setBoxStyle_();
-
-    // Apply required styles:
-    //
-    this.div_.style.position = "absolute";
-    this.div_.style.visibility = 'hidden';
-    if (this.zIndex_ !== null) {
-
-      this.div_.style.zIndex = this.zIndex_;
-    }
 
     if (typeof this.content_.nodeType === "undefined") {
       this.div_.innerHTML = this.getCloseBoxImg_() + this.content_;
@@ -276,7 +273,7 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
 
   return function (e) {
 
-	// 1.0.3 fix: Always prevent propagation of a close box click to the map:
+    // 1.0.3 fix: Always prevent propagation of a close box click to the map:
     e.cancelBubble = true;
 
     if (e.stopPropagation) {
@@ -352,28 +349,47 @@ InfoBox.prototype.panBox_ = function (disablePan) {
 };
 
 /**
- * Sets the style of the InfoBox.
+ * Sets the style of the InfoBox by setting the style sheet and applying
+ * other specific styles requested.
  * @private
  */
 InfoBox.prototype.setBoxStyle_ = function () {
 
-  var i;
+  var i, boxStyle;
 
-  var boxStyle = this.boxStyle_;
+  if (this.div_) {
 
-  for (i in boxStyle) {
+    // Apply style values from the style sheet defined in the boxClass parameter:
+    this.div_.className = this.boxClass_;
 
-    if (boxStyle.hasOwnProperty(i)) {
+    // Clear existing inline style values:
+    this.div_.style.cssText = "";
 
-      this.div_.style[i] = boxStyle[i];
+    // Apply style values defined in the boxStyle parameter:
+    boxStyle = this.boxStyle_;
+    for (i in boxStyle) {
+
+      if (boxStyle.hasOwnProperty(i)) {
+
+        this.div_.style[i] = boxStyle[i];
+      }
     }
-  }
 
-  // Fix up opacity style for benefit of MSIE:
-  //
-  if (typeof this.div_.style.opacity !== "undefined") {
+    // Fix up opacity style for benefit of MSIE:
+    //
+    if (typeof this.div_.style.opacity !== "undefined") {
 
-    this.div_.style.filter = "alpha(opacity=" + (this.div_.style.opacity * 100) + ")";
+      this.div_.style.filter = "alpha(opacity=" + (this.div_.style.opacity * 100) + ")";
+    }
+
+    // Apply required styles:
+    //
+    this.div_.style.position = "absolute";
+    this.div_.style.visibility = 'hidden';
+    if (this.zIndex_ !== null) {
+
+      this.div_.style.zIndex = this.zIndex_;
+    }
   }
 };
 
@@ -458,8 +474,12 @@ InfoBox.prototype.draw = function () {
  * @param {InfoBoxOptions} opt_opts
  */
 InfoBox.prototype.setOptions = function (opt_opts) {
+  if (typeof opt_opts.boxClass !== "undefined") { // Must be first
 
-  if (typeof opt_opts.boxStyle !== "undefined") { // Must be first
+    this.boxClass_ = opt_opts.boxClass;
+    this.setBoxStyle_();
+  }
+  if (typeof opt_opts.boxStyle !== "undefined") { // Must be second
 
     this.boxStyle_ = opt_opts.boxStyle;
     this.setBoxStyle_();
@@ -504,7 +524,6 @@ InfoBox.prototype.setOptions = function (opt_opts) {
 
     this.isHidden_ = opt_opts.isHidden;
   }
-
   if (typeof opt_opts.enableEventPropagation !== "undefined") {
 
     this.enableEventPropagation_ = opt_opts.enableEventPropagation;
