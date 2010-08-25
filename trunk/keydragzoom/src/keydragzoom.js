@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0
+ * @version 2.0.1 [August 25, 2010]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -306,7 +306,6 @@
       setVals(this.veilDiv_[i].style, {
         position: "absolute",
         overflow: "hidden",
-        zIndex: 10001,
         display: "none"
       });
       // Workaround for Firefox Shift-Click problem:
@@ -359,6 +358,15 @@
       google.maps.event.addDomListener(this.veilDiv_[0], "mousedown", function (e) {
         me.onMouseDown_(e);
       }),
+      google.maps.event.addDomListener(this.veilDiv_[1], "mousedown", function (e) {
+        me.onMouseDown_(e);
+      }),
+      google.maps.event.addDomListener(this.veilDiv_[2], "mousedown", function (e) {
+        me.onMouseDown_(e);
+      }),
+      google.maps.event.addDomListener(this.veilDiv_[3], "mousedown", function (e) {
+        me.onMouseDown_(e);
+      }),
       google.maps.event.addDomListener(document, "mousedown", function (e) {
         me.onMouseDownDocument_(e);
       }),
@@ -382,7 +390,7 @@
     this.mapPosn_ = null;
 
     if (this.visualEnabled_) {
-      this.initControl_(this.map_, this.visualPositionOffset_);
+      this.buttonDiv_ = this.initControl_(this.visualPositionOffset_);
       if (this.visualPositionIndex_ !== null) {
         this.buttonDiv_.index = this.visualPositionIndex_;
       }
@@ -392,21 +400,24 @@
   };
   /**
    * Initializes the visual control and returns its DOM element.
-   * @param {Map} map The map to which the control is to be added.
+   * @param {Size} offset The offset of the control from its normal position.
    * @return {Node} The DOM element containing the visual control.
    */
-  DragZoom.prototype.initControl_ = function (map, offset) {
+  DragZoom.prototype.initControl_ = function (offset) {
+    var control;
     var me = this;
-    this.buttonDiv_ = document.createElement("div");
-    this.buttonDiv_.style.height = this.visualSize_.height + "px";
-    this.buttonDiv_.style.width = this.visualSize_.width + "px";
-    this.buttonDiv_.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -40px 0";
-    this.buttonDiv_.title = this.visualTips_.off;
-    this.buttonDiv_.onclick = function (e) {
+    
+    control = document.createElement("div");
+    control.style.height = this.visualSize_.height + "px";
+    control.style.width = this.visualSize_.width + "px";
+    control.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -40px 0";
+    control.title = this.visualTips_.off;
+    control.onclick = function (e) {
       me.hotKeyDown_ = !me.hotKeyDown_;
       if (me.hotKeyDown_) {
         me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
         me.buttonDiv_.title = me.visualTips_.on;
+        me.activatedByControl_ = true;
         google.maps.event.trigger(me, "activate");
       } else {
         me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 2) + "px 0";
@@ -415,10 +426,10 @@
       }
       me.onMouseMove_(e); // Updates the veil
     };
-    this.buttonDiv_.onmouseover = function () {
+    control.onmouseover = function () {
       me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 1) + "px 0";
     };
-    this.buttonDiv_.onmouseout = function () {
+    control.onmouseout = function () {
       if (me.hotKeyDown_) {
         me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.height * 0) + "px 0";
         me.buttonDiv_.title = me.visualTips_.on;
@@ -427,17 +438,15 @@
         me.buttonDiv_.title = me.visualTips_.off;
       }
     };
-    this.buttonDiv_.ondragstart = function () {
+    control.ondragstart = function () {
       return false;
     };
-    setVals(this.buttonDiv_.style, {
-      zIndex: 10002,
+    setVals(control.style, {
       cursor: "pointer",
       marginTop: offset.height + "px",
       marginLeft: offset.width + "px"
     });
-    map.getDiv().appendChild(this.buttonDiv_);
-    return;
+    return control;
   };
   /**
    * Returns <code>true</code> if the hot key is being pressed when an event occurs.
@@ -502,16 +511,46 @@
       var mapDiv = this.map_.getDiv();
       this.mapWidth_ = mapDiv.offsetWidth - (this.borderWidths_.left + this.borderWidths_.right);
       this.mapHeight_ = mapDiv.offsetHeight - (this.borderWidths_.top + this.borderWidths_.bottom);
-      this.veilDiv_[0].style.left = "0px";
-      this.veilDiv_[0].style.top = "0px";
-      this.veilDiv_[0].style.width = this.mapWidth_ + "px";
-      this.veilDiv_[0].style.height = this.mapHeight_ + "px";
-      for (i = 1; i < this.veilDiv_.length; i++) {
-        this.veilDiv_[i].style.width = "0px";
-        this.veilDiv_[i].style.height = "0px";
-      }
-      for (i = 0; i < this.veilDiv_.length; i++) {
-        this.veilDiv_[i].style.display = "block";
+      if (this.activatedByControl_) { // Veil covers entire map (except control)
+        var left = parseInt(this.buttonDiv_.style.left, 10) + this.visualPositionOffset_.width;
+        var top = parseInt(this.buttonDiv_.style.top, 10) + this.visualPositionOffset_.height;
+        var width = this.visualSize_.width;
+        var height = this.visualSize_.height;
+        // Left veil rectangle:
+        this.veilDiv_[0].style.top = "0px";
+        this.veilDiv_[0].style.left = "0px";
+        this.veilDiv_[0].style.width = left + "px";
+        this.veilDiv_[0].style.height = this.mapHeight_ + "px";
+        // Right veil rectangle:
+        this.veilDiv_[1].style.top = "0px";
+        this.veilDiv_[1].style.left = (left + width) + "px";
+        this.veilDiv_[1].style.width = (this.mapWidth_ - (left + width)) + "px";
+        this.veilDiv_[1].style.height = this.mapHeight_ + "px";
+        // Top veil rectangle:
+        this.veilDiv_[2].style.top = "0px";
+        this.veilDiv_[2].style.left = left + "px";
+        this.veilDiv_[2].style.width = width + "px";
+        this.veilDiv_[2].style.height = top + "px";
+        // Bottom veil rectangle:
+        this.veilDiv_[3].style.top = (top + height) + "px";
+        this.veilDiv_[3].style.left = left + "px";
+        this.veilDiv_[3].style.width = width + "px";
+        this.veilDiv_[3].style.height = (this.mapHeight_ - (top + height)) + "px";
+        for (i = 0; i < this.veilDiv_.length; i++) {
+          this.veilDiv_[i].style.display = "block";
+        }
+      } else {
+        this.veilDiv_[0].style.left = "0px";
+        this.veilDiv_[0].style.top = "0px";
+        this.veilDiv_[0].style.width = this.mapWidth_ + "px";
+        this.veilDiv_[0].style.height = this.mapHeight_ + "px";
+        for (i = 1; i < this.veilDiv_.length; i++) {
+          this.veilDiv_[i].style.width = "0px";
+          this.veilDiv_[i].style.height = "0px";
+        }
+        for (i = 0; i < this.veilDiv_.length; i++) {
+          this.veilDiv_[i].style.display = "block";
+        }
       }
     } else {
       for (i = 0; i < this.veilDiv_.length; i++) {
@@ -527,6 +566,7 @@
     if (this.map_ && !this.hotKeyDown_ && this.isHotKeyDown_(e)) {
       this.mapPosn_ = getElementPosition(this.map_.getDiv());
       this.hotKeyDown_ = true;
+      this.activatedByControl_ = false;
       this.setVeilVisibility_();
      /**
        * This event is fired when the hot key is pressed.
