@@ -701,7 +701,7 @@ RichMarker.prototype.onAdd = function() {
   }
 
   if (this.getZIndex()) {
-    this.markerWrapper_.style['zIndex'] = this.getZindex();
+    this.markerWrapper_.style['zIndex'] = this.getZIndex();
   }
 
   this.markerWrapper_.style['display'] = this.getVisible() ? '' : 'none';
