@@ -28,7 +28,7 @@
               <tr class="odd">
                 <td><code>Albers(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Create a Albers Equal-Area Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. <code> var albers  = new Albers({wkid:9999, semi_major: 6378206.4,inverse_flattening: 294.9786982,  standard_parallel_1: 29.5, standard_parallel_2: 45.5,  central_meridian: -96.0, latitude_of_origin: 23,'false_easting': 0,  'false_northing': 0, unit: 1 }); </code></td>
+                <td>Create a Albers Equal-Area Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. <code> var albers  = new Albers({wkid:9999, semi_major: 6378206.4,inverse_flattening: 294.9786982,  standard_parallel_1: 29.5, standard_parallel_2: 45.5,  central_meridian: -96.0, latitude_of_origin: 23,false_easting: 0,  'false_northing': 0, unit: 1 }); </code></td>
               </tr>
             
           </tbody>
@@ -332,6 +332,56 @@
         </table>
       
     
+      <h2><a name="CopyrightControl"></a>class CopyrightControl</h2>
+      <p>put a copyright notice at bottom rigth corner.</p>
+      
+        <h3>Constructor</h3>
+        <table summary="class CopyrightControl - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>CopyrightControl(<span class="type">map:google.maps.Map</span>)</code></td>
+                
+                <td>Creates a copyright control</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Methods</h3>
+        <table summary="class CopyrightControl - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>refresh()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>refresh copyright text</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
       <h2><a name="Error"></a>class Error</h2>
       <p>Error returned from Server.Syntax:<pre>{
    "error" : 
@@ -521,7 +571,6 @@
       <p>This class represent JSON feature object as returned by the REST API.  There is no constructor, use JavaScript object literal.<br/>For more info see <a  href  = 'http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/feature.html'>Feature Object</a>.Syntax:<pre>
 {
   "geometry" : &lt;overlays>,
-
   "attributes" : {
     "name1" : &lt;value1>,
     "name2" : &lt;value2>,
@@ -925,7 +974,7 @@
                     <td><code>Object</code></td>
                   
                 
-                <td>attributes as name-value JSON object. e.g. <code>{"StreetName" : "MASON", "StreetType" : "ST"}</code></td>
+                <td>attributes as name-value JSON object.</td>
               </tr>
             
               <tr class="odd">
@@ -999,7 +1048,7 @@
               <tr class="odd">
                 <td><code>GeocodeService(<span class="type">url:String</span>)</code></td>
                 
-                <td>Creates a GeocodeService class.Params:<li><code>url</code>: URL of service, syntax:<code>	http://{catalog-url}/{serviceName}/GeocodeServer</code></td>
+                <td>Creates a GeocodeService class.Params:<li><code>url</code>: URL of service, syntax:<code>	http://{catalogurl}/{serviceName}/GeocodeServer</code></td>
               </tr>
             
           </tbody>
@@ -1196,7 +1245,7 @@
               <tr class="odd">
                 <td><code>GeometryService(<span class="type">url:String</span>)</code></td>
                 
-                <td>Creates an GeometryService class.Params:<li><code>url</code>: URL of service, syntax:<code>	http://{catalog-url}/{serviceName}/GeometryServer</code></td>
+                <td>Creates an GeometryService class.Params:<li><code>url</code>: URL of service, syntax:<code>	http://{catalogurl}/{serviceName}/GeometryServer</code></td>
               </tr>
             
           </tbody>
@@ -1796,7 +1845,7 @@
               <tr class="odd">
                 <td><code>LambertConformalConic(<span class="type">params:Object</span>)</code></td>
                 
-                <td>Create a Lambert Conformal Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. North Carolina State Plane NAD83 Feet: <br/><code> var ncsp82  = new LambertConformalConic({wkid:2264, semi_major: 6378137.0,inverse_flattening: 298.257222101,  standard_parallel_1: 34.33333333333334, standard_parallel_2: 36.16666666666666,  central_meridian: -79.0, latitude_of_origin: 33.75,'false_easting': 2000000.002616666,  'false_northing': 0, unit: 0.3048006096012192 }); </code></td>
+                <td>Create a Lambert Conformal Conic Projection based Spatial Reference. The <code>params</code> passed in construction shouldinclude the following properties:<code><br/>-wkid: well-known id<br/>-semi_major:  ellipsoidal semi-major axis in meter<br/>-unit: meters per unit<br/>-inverse_flattening: inverse of flattening of the ellipsoid where 1/f  =  a/(a - b)<br/>-standard_parallel_1: phi1, latitude of the first standard parallel<br/>-standard_parallel_2: phi2, latitude of the second standard parallel<br/>-latitude_of_origin: phi0, latitude of the false origin<br/>-central_meridian: lamda0, longitude of the false origin  (with respect to the prime meridian)<br/>-false_easting: FE, false easting, the Eastings value assigned to the natural origin<br/>-false_northing: FN, false northing, the Northings value assigned to the natural origin</code><br/> e.g. North Carolina State Plane NAD83 Feet: <br/><code> var ncsp82  = new LambertConformalConic({wkid:2264, semi_major: 6378137.0,inverse_flattening: 298.257222101,  standard_parallel_1: 34.33333333333334, standard_parallel_2: 36.16666666666666,  central_meridian: -79.0, latitude_of_origin: 33.75,false_easting: 2000000.002616666,  'false_northing': 0, unit: 0.3048006096012192 }); </code></td>
               </tr>
             
           </tbody>
@@ -2532,13 +2581,13 @@
             </tr>
             
               <tr class="odd">
-                <td><code>deferLoad</code></td>
+                <td><code>delayLoad</code></td>
                 
                   
-                    <td><code>Boolean</code></td>
+                    <td><code>Number</code></td>
                   
                 
-                <td>whether to defer load meta data on construction.</td>
+                <td>number of seconds to delay loading meta data on construction.</td>
               </tr>
             
           </tbody>
@@ -3310,10 +3359,10 @@
                 <td><code>geometries</code></td>
                 
                   
-                    <td><code>(Array.OverlayView|Array.object)</code></td>
+                    <td><code>Array.OverlayView|Array.object</code></td>
                   
                 
-                <td>Array of <code>google.maps.LatLng, Polyline, Polygon<code>, or ESRI Geometry format to project.</td>
+                <td>Array of <code>google.maps.LatLng, Polyline, Polygon</code>, or ESRI Geometry format to project.</td>
               </tr>
             
               <tr class="even">
@@ -3841,7 +3890,7 @@
                     <td><code>Object</code></td>
                   
                 
-                <td>matched address, object literal with name-value address parts.  e.g.: <code>{  "Street" : "771 TUNNEL AVE",  "Zone" : "94005"  }</code></td>
+                <td>matched address, object literal with name-value address parts.</td>
               </tr>
             
               <tr class="even">

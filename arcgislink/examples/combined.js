@@ -16,6 +16,7 @@ function init() {
     name: 'ArcGIS'
   });
   map.mapTypes.set('arcgis', agsType);
+  var cpc = new gmaps.ags.CopyrightControl(map);
   var dynamap = new gmaps.ags.MapOverlay(dynaUrl);
   dynamap.setMap(map);
 }
