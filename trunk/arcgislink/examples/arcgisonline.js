@@ -8,7 +8,7 @@ function init() {
     'Terrain': ['World_Terrain_Base'],
     'Labeled Terrain': ['World_Terrain_Base', 'Reference/World_Reference_Overlay']
   };
-  var agsIds = [];
+  var agsIds = [google.maps.MapTypeId.ROADMAP];
   var agsTypes = [];
   for (var x in services) {
     if (services.hasOwnProperty(x)) {
@@ -17,23 +17,29 @@ function init() {
       for (var i = 0; i < urls.length; i++) {
         urls[i] = 'http://services.arcgisonline.com/ArcGIS/rest/services/' + urls[i] + '/MapServer';
       }
-      agsTypes.push(new gmaps.ags.MapType(urls, {
+      var opts = {
         name: x
-      }));
+      };
+      if (x.indexOf('Imagery') != -1) {
+        opts.negative = true;
+      }
+      agsTypes.push(new gmaps.ags.MapType(urls, opts));
     }
   }
   var myOptions = {
     zoom: 13,
-    center: new google.maps.LatLng(35.227, -80.84),//36.215471,-112.332458),
+    center: new google.maps.LatLng(35.227, -80.84),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControlOptions: {
       mapTypeIds: agsIds
     }
   }
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  for (var i = 0; i < agsIds.length; i++) {
-    map.mapTypes.set(agsIds[i], agsTypes[i]);
+  for (var i = 1; i < agsIds.length; i++) {
+    map.mapTypes.set(agsIds[i], agsTypes[i-1]);
   }
-  map.setMapTypeId('World Topo')
+  var cp = new gmaps.ags.CopyrightControl(map);
+  map.setMapTypeId('World Topo');
+  
 }
 window.onload = init;
