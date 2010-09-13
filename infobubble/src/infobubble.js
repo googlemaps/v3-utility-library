@@ -494,8 +494,10 @@ InfoBubble.prototype.shadowStyle_changed = function() {
       this.bubbleShadow_.style['webkitBoxShadow'] =
       this.bubbleShadow_.style['MozBoxShadow'] = shadow;
   this.bubbleShadow_.style['backgroundColor'] = backgroundColor;
-  this.bubbleShadow_.style['display'] = display;
-  this.draw();
+  if (this.isOpen_) {
+    this.bubbleShadow_.style['display'] = display;
+    this.draw();
+  }
 };
 InfoBubble.prototype['shadowStyle_changed'] =
     InfoBubble.prototype.shadowStyle_changed;
@@ -689,7 +691,7 @@ InfoBubble.prototype.updateArrowStyle_ = function() {
   var arrowSize = this.getArrowSize_();
   var arrowStyle = this.getArrowStyle_();
   var arrowOuterSizePx = this.px(arrowSize);
-  var arrowInnerSizePx = this.px(arrowSize - borderWidth);
+  var arrowInnerSizePx = this.px(Math.max(0, arrowSize - borderWidth));
 
   var outer = this.arrowOuter_;
   var inner = this.arrowInner_;
@@ -1246,7 +1248,8 @@ InfoBubble.prototype.setTabStyle_ = function(tab) {
     'borderRadiusTopRight': borderRadiusPx,
     'MozBorderRadiusTopright': borderRadiusPx,
     'webkitBorderTopRightRadius': borderRadiusPx,
-    'zIndex': index
+    'zIndex': index,
+    'display': 'inline'
   };
 
   for (var style in styles) {
@@ -1311,6 +1314,7 @@ InfoBubble.prototype.setTabActive_ = function(tab) {
 
   tab.style['zIndex'] = this.baseZIndex_;
   tab.style['borderBottomWidth'] = 0;
+  tab.style['marginBottomWidth'] = '-10px';
   tab.style['paddingBottom'] = this.px(padding + borderWidth);
 
   this.setContent(this.tabs_[tab.index].content);
