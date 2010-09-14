@@ -77,3 +77,9 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmar
 A !RichMarker that allows any HTML/DOM to be added to a map and be draggable.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/ Development Versions].
+
+== !InfoBubble ==
+
+A !InfoBubble is a customizable css3 infowindow.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/ Development Versions].
