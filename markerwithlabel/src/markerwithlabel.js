@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.0 [June 25, 2010]
+ * @version 1.0.1 [September 17, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -38,8 +38,6 @@
  * @private
  */
 function MarkerLabel_(marker) {
-  var me = this;
-
   this.marker_ = marker;
 
   this.labelDiv_ = document.createElement("div");
@@ -51,11 +49,6 @@ function MarkerLabel_(marker) {
   // Code is included here to ensure the veil is always exactly the same size as the label.
   this.eventDiv_ = document.createElement("div");
   this.eventDiv_.style.cssText = this.labelDiv_.style.cssText;
-
-  this.setMap(this.marker_.getMap());
-  google.maps.event.addListener(this.marker_, "map_changed", function () {
-    me.setMap(me.marker_.getMap());
-  });
 }
 
 // MarkerLabel_ inherits from OverlayView:
@@ -74,7 +67,7 @@ MarkerLabel_.prototype.onAdd = function () {
   var cSavedZIndex;
   var cLatOffset, cLngOffset;
   var cIgnoreClick;
-  
+
   // Stops all processing of an event.
   //
   var cAbortEvent = function (e) {
@@ -86,7 +79,7 @@ MarkerLabel_.prototype.onAdd = function () {
       e.stopPropagation();
     }
   };
-  
+
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_);
 
@@ -127,6 +120,7 @@ MarkerLabel_.prototype.onAdd = function () {
       if (cIgnoreClick) { // Ignore the click reported when a label drag ends
         cIgnoreClick = false;
       } else {
+        cAbortEvent(e); // Prevent click from being passed on to map
         google.maps.event.trigger(me.marker_, "click", e);
       }
     }),
@@ -397,13 +391,23 @@ function MarkerWithLabel(opt_options) {
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }
+
+  this.label = new MarkerLabel_(this); // Bind the label to the marker
+
   // Call the parent constructor. It calls Marker.setValues to initialize, so all
   // the new parameters are conveniently saved and can be accessed with get/set.
   // Marker.set triggers a property changed event (called "propertyname_changed")
   // that the marker label listens for in order to react to state changes.
   google.maps.Marker.apply(this, arguments);
-  var label = new MarkerLabel_(this); // Bind the label to the marker
 }
 
 // MarkerWithLabel inherits from <code>Marker</code>:
 MarkerWithLabel.prototype = new google.maps.Marker();
+
+MarkerWithLabel.prototype.setMap = function (theMap) {
+  // Call the inherited function...
+  google.maps.Marker.prototype.setMap.apply(this, arguments);
+
+  // ... then deal with the label:
+  this.label.setMap(theMap);
+};
