@@ -6,8 +6,8 @@ We welcome developers with previous experience programming with the Maps API to 
 
 To join the project, follow these steps:
   #1 Sign the [http://code.google.com/legal/individual-cla-v1.0.html Google CLA] -  scroll down for the easy to sign digital version, no faxing necessary.
-  #2 Email [mailto:api.pamelafox@google.com Pamela] with links to code you've developed, and a brief paragraph about why you'd like to contribute to the library.
-  #3 Wait for Pamela to respond that she's added you to the project (or to indicate she's missing something).
+  #2 Email the [mailto:maps-api-support@google.com Maps API team] with links to code you've developed, and a brief paragraph about why you'd like to contribute to the library.
+  #3 Wait for us to respond that you've been added to the project (or that we need more info).
   #4 If you haven't used SVN or a versioning system in the past, read up on SVN (check SVNQuickTips page here).
   #4 Join the [http://groups.google.com/group/google-maps-utility-library-v3 mailing list]
   #5 Add information about yourself to the DeveloperBios page.
