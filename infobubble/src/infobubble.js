@@ -34,6 +34,7 @@
  * @constructor
  */
 function InfoBubble(opt_options) {
+  this.extend(InfoBubble, google.maps.OverlayView);
   this.tabs_ = [];
   this.activeTab_ = null;
   this.baseZIndex_ = 100;
@@ -93,7 +94,6 @@ function InfoBubble(opt_options) {
 
   this.setValues(options);
 }
-InfoBubble.prototype = new google.maps.OverlayView();
 window['InfoBubble'] = InfoBubble;
 
 
@@ -178,6 +178,24 @@ InfoBubble.prototype.BACKGROUND_COLOR_ = '#fff';
 
 
 /**
+ * Extends a objects prototype by anothers.
+ *
+ * @param {Object} obj1 The object to be extended.
+ * @param {Object} obj2 The object to extend with.
+ * @return {Object} The new extended object.
+ * @ignore
+ */
+InfoBubble.prototype.extend = function(obj1, obj2) {
+  return (function(object) {
+    for (var property in object.prototype) {
+      this.prototype[property] = object.prototype[property];
+    }
+    return this;
+  }).apply(obj1, [obj2]);
+};
+
+
+/**
  * Builds the InfoBubble dom
  * @private
  */
@@ -202,6 +220,7 @@ InfoBubble.prototype.buildDom_ = function() {
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {
     that.close();
+    google.maps.event.trigger(that, 'closeclick');
   });
 
   // Content area
@@ -967,7 +986,7 @@ InfoBubble.prototype['close'] = InfoBubble.prototype.close;
  */
 InfoBubble.prototype.open = function(opt_map, opt_anchor) {
   if (opt_map) {
-    this.setMap(map);
+    this.setMap(opt_map);
   }
 
   if (opt_anchor) {
