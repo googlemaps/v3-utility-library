@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>KeyDragZoom Examples</title>
+    <link rel="stylesheet nofollow" type="text/css" href="http://code.google.com/css/codesite.css" />
+    <link rel="stylesheet nofollow" type="text/css" href="http://gmaps-utility-library.googlecode.com/svn/trunk/util/docs/template/local_extensions.css" />
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+<div>
+<a name="Top"></a>
+<h1><span lang="en-us">KeyDragZoom Examples</span></h1>
+</div>
+
+<div>
+<h2><span lang="en-us">KeyDragZoom Reference</span></h2>
+<p><a href="reference.html">Click here</a> to view the KeyDragZoom Reference.</p>
+</div>
+
+<a name="HowTo"></a>
+<div>
+<h2><span lang="en-us">Including Scripts</span></h2>
+<p>The first step is to include <code>keydragzoom.js</code> or <code>keydragzoom_packed.js</code> in your document header after the Google Maps JavaScript API V3 has been included. You can use the online version if you do not want to download the script.</p>
+
+<pre class="prettyprint">
+        &lt;script src=&quot;/path/to/keydragzoom_packed.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</pre>
+</div>
+
+<div>
+<h2><span lang="en-us">Enabling KeyDragZoom</span></h2>
+<p>You simply call <code>google.maps.Map.enableKeyDragZoom()</code> to enable KeyDragZoom.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 12,
+          center: new google.maps.LatLng(35.227, -80.84),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        map.enableKeyDragZoom();
+
+</pre>
+
+<p>
+<a href="../examples/dragzoom.html">View example</a> |
+<a href="../examples/dragzoom.html?packed">Packed</a> |
+</p>
+</div>
+
+<div>
+<h2><span lang="en-us">Styling the Zoom Box and the Veil</span></h2>
+<p>You can pass some css properties when you enable KeyDragZoom. Those associated with <code>boxStyle</code> are applied to the zoom box the user drags across the area of interest and those associated with <code>veilStyle</code> are applied to the veil that covers the map when the hot key is down. In the following example, the zoom box is transparent with a 4-pixel dashed black border and the veil is red with 35% opacity.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 13,
+          center: new google.maps.LatLng(49.2903, -123.1294),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        map.enableKeyDragZoom({
+          key: "shift", 
+          boxStyle: {
+            border: "4px dashed black",
+            backgroundColor: "transparent",
+            opacity: 1.0
+          },
+          veilStyle: {
+            backgroundColor: "red",
+            opacity: 0.35,
+            cursor: "crosshair"
+          }
+        });
+</pre>
+
+<p>
+<a href="../examples/stylebox.html">View example</a> |
+<a href="../examples/stylebox.html?packed">Packed</a> |
+</p>
+</div>
+
+<div>
+<h2><span lang="en-us">Using a Different Hot Key</span></h2>
+<p>If you do not want to use the Shift key as the hot key, you can pass one of the other two keys: Alt or Ctrl. In the following example, you can start a drag zoom operation by holding down the Alt key. Use of the Ctrl key with Google Maps JavaScript API V3 is not recommended because it causes a context menu to appear when running on the Macintosh.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 12,
+          center: new google.maps.LatLng(35.227, -80.84),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        map.enableKeyDragZoom({
+          key: 'alt'
+        });
+</pre>
+
+<p>
+<a href="../examples/altkey.html">View example</a> |
+<a href="../examples/altkey.html?packed">Packed</a> |
+</p>
+</div>
+
+<div>
+<h2><span lang="en-us">Visual Drag Zoom Control</span></h2>
+<p>You can also use a visual control to turn KeyDragZoom on and off. Set the <code>visualEnabled</code> parameter to <code>true</code>, indicate the position of the control with <code>visualPosition</code> and <code>visualPositionOffset</code>, and use <code>visualSprite</code> to specify the URL for the sprite containing the images of the control in the on, hot, and off states. (The control is hot when the mouse moves over it.) <code>visualSize</code> holds the size of the images in the sprite. Use the <code>visualTips</code> property to set the values of the help tips to be displayed when the control is on and off.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 13,
+          center: new google.maps.LatLng(49.2903, -123.1294),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        map.enableKeyDragZoom({
+          visualEnabled: true,
+          visualPosition: google.maps.ControlPosition.LEFT,
+          visualPositionOffset: new google.maps.Size(35, 0),
+          visualPositionIndex: null,
+          visualSprite: "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png",
+          visualSize: new google.maps.Size(20, 20),
+          visualTips: {
+            off: "Turn on",
+            on: "Turn off"
+          }
+        });
+</pre>
+
+<p>
+<a href="../examples/visual.html">View example</a> |
+<a href="../examples/visual.html?packed">Packed</a> |
+</p>
+</div>
+
+<div>
+<h2><span lang="en-us">Multiple Maps Supported</span></h2>
+<p>Each map on the same webpage can have its own independent KeyDragZoom tool.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 12,
+          center: new google.maps.LatLng(35.227, -80.84),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map1 = new google.maps.Map(document.getElementById("map1"), myOptions);
+        map1.enableKeyDragZoom();
+        var map2 = new google.maps.Map(document.getElementById("map2"), myOptions);
+        map2.enableKeyDragZoom();
+</pre>
+
+<p>
+<a href="../examples/multimap.html">View example</a> |
+<a href="../examples/multimap.html?packed">Packed</a> |
+</p>
+</div>
+
+<div>
+<h2><span lang="en-us">KeyDragZoom Events</span></h2>
+<p>Different events are triggered at key moments of a drag zoom operation.</p>
+
+<pre class="prettyprint">
+        var myOptions = {
+          zoom: 12,
+          center: new google.maps.LatLng(49.49088, -123.75446),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        map.enableKeyDragZoom();
+        var dz = map.getDragZoomObject();
+        google.maps.event.addListener(dz, 'activate', function () {
+          log('KeyDragZoom Activated');
+        });
+        google.maps.event.addListener(dz, 'deactivate', function () {
+          log('KeyDragZoom Deactivated');
+        });
+        google.maps.event.addListener(dz, 'dragstart', function (latlng) {
+          log('KeyDragZoom Started: ' + latlng);
+        });
+        google.maps.event.addListener(dz, 'drag', function (startPt, endPt) {
+          log('KeyDragZoom Dragging: ' + startPt + endPt);
+        });
+        google.maps.event.addListener(dz, 'dragend', function (bnds) {
+          log('KeyDragZoom Ended: ' + bnds);
+        });
+</pre>
+
+<p>
+<a href="../examples/events.html">View example</a> |
+<a href="../examples/events.html?packed">Packed</a> |
+</p>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3946449-5");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
