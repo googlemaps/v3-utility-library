@@ -188,7 +188,7 @@ RichMarker.prototype['getZIndex'] = RichMarker.prototype.getZIndex;
  */
 RichMarker.prototype.zIndex_changed = function() {
   if (this.getZIndex() && this.ready_) {
-    this.markerWrapper_.style.zIndex = this.getZindex();
+    this.markerWrapper_.style.zIndex = this.getZIndex();
   }
 };
 RichMarker.prototype['zIndex_changed'] = RichMarker.prototype.zIndex_changed;
@@ -713,6 +713,12 @@ RichMarker.prototype.onAdd = function() {
     var that = this;
     google.maps.event.addDomListener(this.markerContent_, 'click', function(e) {
       google.maps.event.trigger(that, 'click');
+    });
+    google.maps.event.addDomListener(this.markerContent_, 'mouseover', function(e) {
+      google.maps.event.trigger(that, 'mouseover');
+    });
+    google.maps.event.addDomListener(this.markerContent_, 'mouseout', function(e) {
+      google.maps.event.trigger(that, 'mouseout');
     });
   }
 
