@@ -54,10 +54,8 @@ function setupMap() {
   };
   map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-  var listener = google.maps.event.addListener(map, 'bounds_changed', function(){
-      setupWeatherMarkers();
-      google.maps.event.removeListener(listener);
-  });
+  setupWeatherMarkers();
+  
 }
 function getWeatherMarkers(n) {
   var batch = [];
