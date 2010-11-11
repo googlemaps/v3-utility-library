@@ -1,4 +1,5 @@
 var map, ov, iw, svc, marker;
+
 function init() {
   var myOptions = {
     zoom: 4,

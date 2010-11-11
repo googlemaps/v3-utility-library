@@ -3,7 +3,7 @@
 */
 var f, h = Math.PI / 180, j = 0;
 window.ags_jsonp = window.ags_jsonp || {};
-var k = google.maps, l, m, n, q = {L:null, K:false}, r = {}, s = {};
+var k = google.maps, l, m, o, q = {L:null, K:false}, r = {}, s = {};
 function t(a, b, c) {
   var d = b === "" ? 0 : a.indexOf(b);
   return a.substring(d + b.length, c === "" ? a.length : a.indexOf(c, d + b.length))
@@ -215,29 +215,29 @@ function I(a, b, c, d) {
   }else {
     c = window.location;
     c = c.protocol + "//" + c.hostname + (!c.port || c.port === 80 ? "" : ":" + c.port + "/");
-    var o = true;
+    var p = true;
     if(a.toLowerCase().indexOf(c.toLowerCase()) !== -1) {
-      o = false
+      p = false
     }
     if(q.K) {
-      o = true
+      p = true
     }
-    if(o && !q.L) {
+    if(p && !q.L) {
       throw new Error("No proxyUrl property in Config is defined");
     }
-    var p = x();
-    p.onreadystatechange = function() {
-      if(p.readyState === 4) {
-        if(p.status === 200) {
-          eval(p.responseText)
+    var n = x();
+    n.onreadystatechange = function() {
+      if(n.readyState === 4) {
+        if(n.status === 200) {
+          eval(n.responseText)
         }else {
-          throw new Error("Error code " + p.status);
+          throw new Error("Error code " + n.status);
         }
       }
     };
-    p.open("POST", o ? q.L + "?" + a : a, true);
-    p.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    p.send(b)
+    n.open("POST", p ? q.L + "?" + a : a, true);
+    n.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    n.send(b)
   }
   w(s, "jsonpstart", e);
   return e
@@ -475,8 +475,8 @@ f.m = function() {
 };
 l = new K({wkid:4326});
 m = new K({wkid:4269});
-n = new O({wkid:102113, n:6378137, l:0, unit:1});
-r = {"4326":l, "4269":m, "102113":n, "102100":new O({wkid:102100, n:6378137, l:0, unit:1})};
+o = new O({wkid:102113, n:6378137, l:0, unit:1});
+r = {"4326":l, "4269":m, "102113":o, "102100":new O({wkid:102100, n:6378137, l:0, unit:1})};
 s.U = function(a, b) {
   var c = r["" + a];
   if(c) {
@@ -552,25 +552,26 @@ function S(a, b, c, d) {
   b.outSR = 4326;
   I(a.url + "/findAddressCandidates", b, "", function(e) {
     if(e.candidates) {
-      for(var g, i, o = 0;o < e.candidates.length;o++) {
-        g = e.candidates[o];
+      for(var g, i, p = [], n = 0;n < e.candidates.length;n++) {
+        g = e.candidates[n];
         i = g.location;
         if(!isNaN(i.x) && !isNaN(i.y)) {
           i = [i.x, i.y];
           if(a.spatialReference) {
             i = a.spatialReference.q(i)
           }
-          g.location = new k.LatLng(i[1], i[0])
+          g.location = new k.LatLng(i[1], i[0]);
+          p[p.length] = g
         }
       }
     }
-    c(e);
+    c({candidates:p});
     d && e && e.error && d(e.error)
   })
 }
 function T(a) {
   this.P = a ? a.lods : null;
-  this.F = a ? r[a.spatialReference.wkid || a.spatialReference.wkt] : n;
+  this.F = a ? r[a.spatialReference.wkid || a.spatialReference.wkt] : o;
   if(!this.F) {
     throw new Error("unsupported Spatial Reference");
   }

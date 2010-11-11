@@ -98,7 +98,7 @@ hosted release version if you do not want to download the script.</p>
     constructs a new map with only an ArcGIS map type and no Google map types.
 </p>
 <pre class="prettyprint">
-    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+    var url = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
     var agsType = new  gmaps.ags.MapType(url,{name:'ArcGIS'});
     map.mapTypes.set('arcgis', agsType);
     map.setMapTypeId('arcgis');
@@ -164,7 +164,7 @@ regardless of whether it's tiled or not.
 <p> Cached Map Service can also be added as Overlay, 
     and displays on top of all base map types. It&#39;s similar to V2&#39;s <code>GTileLayerOverlay</code>.
 <pre class="prettyprint">
-    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+    var url = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
     var agsType = new  gmaps.ags.MapType(url,{name:'ArcGIS', opacity:0.5});
     map.overlayMapTypes.insertAt(0, agsType);
 </pre>
@@ -324,7 +324,7 @@ The following example uses a
 
 <pre class="prettyprint">
     var opacity = 0.5;
-    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+    var url = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
     var agsType = new gmaps.ags.MapType(url, {
       name: 'ArcGIS',
       opacity: opacity
@@ -382,7 +382,7 @@ Normally this is done via handling the 'click' event on map, then perform Identi
     into different tabs.
 </p>
 <pre class="prettyprint">
-    var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+    var url = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
     svc = new gmaps.ags.MapService(url);
     var agsType = new gmaps.ags.MapType([new gmaps.ags.TileLayer(svc)], {
             opacity: 0.5

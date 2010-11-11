@@ -64,7 +64,8 @@ var REST_JSON = {
     name: null,
     defaultVisibility: true,
     parentLayerId: -1,
-    subLayerIds: null
+    subLayerIds: null,
+    subLayers:[]
   }],
   tables: null,
   spatialReference: {
@@ -154,6 +155,7 @@ var REST_JSON = {
   
   
 };
+google.maps.Map.prototype.agsOverlays= {};
 
 
 

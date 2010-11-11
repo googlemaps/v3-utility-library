@@ -6,7 +6,7 @@ function init() {
     streetViewControl: true //my favorite feature in V3!
   }
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+  var url = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
   var agsType = new gmaps.ags.MapType(url, {
     name: 'ArcGIS',
     opacity: 0.5

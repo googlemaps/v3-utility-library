@@ -19,18 +19,19 @@ var ovOptions = {
 function init() {
   var myOptions = {
     'zoom': 17,
-    'center': new google.maps.LatLng(45.5, -122.7),
-    'mapTypeId': google.maps.MapTypeId.HYBRID,
+    'center': new google.maps.LatLng(42.579693,-83.28072),
+    'mapTypeId': google.maps.MapTypeId.ROADMAP,
     'draggableCursor': 'pointer', // every pixel is clickable.
     'streetViewControl': true //my favorite feature in V3!
   };
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  var url = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer';
+  var url = 'http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/BloomfieldHillsMichigan/Parcels/MapServer';
   svc = new gmaps.ags.MapService(url);
-  var agsType = new gmaps.ags.MapType([new gmaps.ags.TileLayer(svc)], {
-    'opacity': 0.5
+  var agsLayer = new gmaps.ags.MapOverlay(svc, {
+    'opacity': 0.2
   });
-  map.overlayMapTypes.insertAt(0, agsType);
+  agsLayer.setMap(map);
+  //map.overlayMapTypes.insertAt(0, agsType);
   google.maps.event.addListener(map, 'click', identify);
 }
         
@@ -41,7 +42,7 @@ function identify(evt) {
   svc.identify({
     'geometry': evt.latLng,
     'tolerance': 3,
-    'layerIds': [2, 3, 4],
+    'layerIds': [0,2],
     'layerOption': 'all',
     'bounds': map.getBounds(),
     'width': map.getDiv().offsetWidth,
@@ -67,7 +68,7 @@ function clearOverlays() {
 
 function addResultToMap(idresults, latlng) {
           res = idresults.results;
-          layers = { "2": [], "3": [], "4": [] };
+          layers = { "0": [], "2": []};
           for (var i = 0; i < res.length; i++) {
             var result = res[i];
             layers[result['layerId']].push(result);
@@ -80,58 +81,43 @@ function addResultToMap(idresults, latlng) {
             var count = results.length;
             var label = "", content = "";
             switch(layerId) {
-              case "2":
-                label = "Tax Lots";
+              case "0":
+                label = "Building";
                 content = "Total features returned: <b>" + count + "</b>";
                 if (count == 0) break;
-                content += "<table><th>TLID</th><th>Owner</th><th>Value</th>";
+                content += "<table><tr><th>ID</th><th>Address</th></tr>";
                 for (var j = 0; j < count; j++) {
                   var attributes = results[j].feature.attributes;
                   content += "<tr>";
-                  content += "<td><a href='javascript:void(0)' onclick='showFeature(" + layerId + "," + j + ")'>" + attributes["TLID"]  + "</a></td>";
-                  content += "<td>" + attributes["OWNER1"]  + "</td>";
-                  content += "<td>" + attributes["TOTALVAL"]  + "</td>";
+                  content += "<td><a href='javascript:void(0)' onclick='showFeature(" + layerId + "," + j + ")'>" + attributes["PARCELID"]  + "</a></td>";
+                  content += "<td>" + attributes["Full Site Address"]  + "</td>";
                   content += "</tr>";
                 }
                 content += "</table>";
                 break;
-              case "3":
-                label = "Buildings";
+              case "2":
+                label = "Parcel";
                 content = "Total features returned: <b>" + count + "</b>";
                 if (count === 0) {
                   break;
                 }
-                content += "<table><th>Building ID</th><th>Area</th>";
+                content += "<table border='1'><tr><th>ID</th><th>Year Built</th><th>School District</th><th>Description</th></tr>";
                 for (var j = 0; j < count; j++) {
                   var attributes = results[j].feature.attributes;
                   content += "<tr>";
-                  content += "<td><a href='javascript:void(0)' onclick='showFeature(" + layerId + "," + j + ")'>" + attributes["OBJECTID_1"]  + "</td>";
-                  content += "<td>" + attributes["Shape_Area"]  + "</td>";
+                  content += "<td><a href='javascript:void(0)' onclick='showFeature(" + layerId + "," + j + ")'>" + attributes["Parcel Identification Number"]  + "</td>";
+                   content+="<td>"+attributes['Residential Year Built']+"</td>";
+                   content+="<td>"+attributes['School District Description']+"</td>";
+                  content+="<td>"+attributes['Property Description']+"</td>";
                   content += "</tr>";
                 }
                 content += "</table>";
                 break;
-              case "4":
-                label = "Zoning";
-                content = "Total features returned: <b>" + count + "</b>";
-                if (count === 0) {
-                  break;
-                }
-                content += "<table><th>ID</th><th>Zone</th><th>Zone Class</th><th>General Class</th>";
-                for (j = 0; j < count; j++) {
-                  attributes = results[j].feature.attributes;
-                  content += "<tr>";
-                  content += "<td><a href='javascript:void(0)' onclick='showFeature(" + layerId + "," + j + ")'>" + attributes["OBJECTID"]  + "</td>";
-                  content += "<td>" + attributes["ZONE"]  + "</td>";
-                  content += "<td>" + attributes["ZONE_CLASS"]  + "</td>";
-                  content += "<td>" + attributes["ZONEGEN_CL"]  + "</td>";
-                  content += "</tr>";
-                }
-                content += "</table>";
-                break;
+              
             }
             tabs.push({label:label, content:content});
             var container = document.createElement('div');
+            container.style.width='450px';
             // =======START  TAB UI ================ 
             
             var tabBar = new goog.ui.TabBar();

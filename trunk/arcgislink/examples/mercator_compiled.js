@@ -949,7 +949,7 @@ $.prototype.releaseTile = $.prototype.releaseTile;
 new m.OverlayView;window.onload = function() {
   var a = {zoom:15, center:new google.maps.LatLng(45.5, -122.7), mapTypeId:"arcgis", mapTypeControlOptions:{mapTypeIds:["arcgis"]}, streetViewControl:true};
   a = new google.maps.Map(document.getElementById("map_canvas"), a);
-  var b = new $("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer", {name:"ArcGIS"});
+  var b = new $("http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer", {name:"ArcGIS"});
   a.mapTypes.set("arcgis", b);
   a.setMapTypeId("arcgis")
 };})()
