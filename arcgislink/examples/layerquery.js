@@ -31,7 +31,7 @@ function init() {
   var layer = new gmaps.ags.Layer(url + '/3');
   var params = {
     returnGeometry: true,
-    where: "STATE_NAME = 'Wyoming'",
+    where: "STATE_NAME <> 'Utah'",
     outFields: ["NAME", "POP2000", "POP2007", "POP00_SQMI", "POP07_SQMI"],
     overlayOptions: style
   };

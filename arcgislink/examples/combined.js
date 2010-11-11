@@ -10,7 +10,7 @@ function init() {
   }
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
   var baseUrl = 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services';
-  var wmUrl = baseUrl + '/Portland/ESRI_LandBase_WebMercator/MapServer';
+  var wmUrl = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
   var dynaUrl = baseUrl + '/Demographics/ESRI_Census_USA/MapServer';
   var agsType = new gmaps.ags.MapType(wmUrl, {
     name: 'ArcGIS'

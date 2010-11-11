@@ -3,7 +3,7 @@
 */
 var i, j = Math.PI / 180, l = 0;
 window.ags_jsonp = window.ags_jsonp || {};
-var n = google.maps, o, p, r, s = {T:null, R:false}, t = {}, u = {};
+var n = google.maps, o, p, r, s = {U:null, S:false}, t = {}, u = {};
 function v(a, b, c) {
   var d = b === "" ? 0 : a.indexOf(b);
   return a.substring(d + b.length, c === "" ? a.length : a.indexOf(c, d + b.length))
@@ -266,7 +266,7 @@ function K(a) {
     if(f) {
       d = 0;
       for(e = f.getLength();d < e;d++) {
-        da(c, f.getAt(d).S, a)
+        da(c, f.getAt(d).T, a)
       }
     }
     var k = a.overlayMapTypes;
@@ -296,7 +296,7 @@ function L(a, b, c, d) {
     d.apply(null, arguments);
     x(u, "jsonpend", e)
   };
-  if((b + a).length < 2E3 && !s.R) {
+  if((b + a).length < 2E3 && !s.S) {
     f = document.createElement("script");
     f.src = a + (a.indexOf("?") === -1 ? "?" : "&") + b;
     f.id = e;
@@ -308,10 +308,10 @@ function L(a, b, c, d) {
     if(a.toLowerCase().indexOf(c.toLowerCase()) !== -1) {
       g = false
     }
-    if(s.R) {
+    if(s.S) {
       g = true
     }
-    if(g && !s.T) {
+    if(g && !s.U) {
       throw new Error("No proxyUrl property in Config is defined");
     }
     var h = aa();
@@ -324,29 +324,29 @@ function L(a, b, c, d) {
         }
       }
     };
-    h.open("POST", g ? s.T + "?" + a : a, true);
+    h.open("POST", g ? s.U + "?" + a : a, true);
     h.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     h.send(b)
   }
   x(u, "jsonpstart", e);
   return e
 }
-u.fa = function(a, b, c, d) {
+u.ga = function(a, b, c, d) {
   L(a, b, c, d)
 };
-u.Q = function(a, b) {
+u.R = function(a, b) {
   if(b && b.splice) {
     for(var c, d = 0, e = b.length;d < e;d++) {
       if((c = b[d]) && c.splice) {
-        u.Q(a, c)
+        u.R(a, c)
       }else {
         G(c) && c.setMap(a)
       }
     }
   }
 };
-u.ja = function(a, b) {
-  u.Q(null, a);
+u.ka = function(a, b) {
+  u.R(null, a);
   if(b) {
     a.length = 0
   }
@@ -376,7 +376,7 @@ N.prototype = new M;
 function O(a) {
   a = a || {};
   M.call(this, a);
-  var b = a.I, c = a.N * j, d = a.O * j, e = a.J * j;
+  var b = a.I, c = a.O * j, d = a.P * j, e = a.J * j;
   this.a = a.p / a.unit;
   this.e = a.m * j;
   this.h = a.G;
@@ -410,7 +410,7 @@ i.q = function(a, b, c) {
   c = b * Math.sin(c);
   return Math.PI / 2 - 2 * Math.atan(a * Math.pow((1 - c) / (1 + c), b / 2))
 };
-i.M = function(a, b, c) {
+i.N = function(a, b, c) {
   var d = 0;
   c = c;
   for(var e = this.q(a, b, c);Math.abs(e - c) > 1.0E-9 && d < 10;) {
@@ -430,7 +430,7 @@ i.o = function(a) {
   var b = a[0] - this.h, c = a[1] - this.i;
   a = Math.atan(b / (this.g - c));
   b = Math.pow((this.b > 0 ? 1 : -1) * Math.sqrt(b * b + (this.g - c) * (this.g - c)) / (this.a * this.D), 1 / this.b);
-  return[(a / this.b + this.e) / j, this.M(b, this.d, Math.PI / 2 - 2 * Math.atan(b)) / j]
+  return[(a / this.b + this.e) / j, this.N(b, this.d, Math.PI / 2 - 2 * Math.atan(b)) / j]
 };
 i.n = function() {
   return Math.PI * 2 * this.a
@@ -440,7 +440,7 @@ function Q(a) {
   M.call(this, a);
   this.a = a.p / a.unit;
   var b = a.I;
-  this.v = a.ca;
+  this.v = a.da;
   var c = a.J * j;
   this.e = a.m * j;
   this.h = a.G;
@@ -450,7 +450,7 @@ function Q(a) {
   this.u = this.c * this.c;
   this.F = this.u * this.c;
   this.l = this.c / (1 - this.c);
-  this.P = this.j(c, this.a, this.c, this.u, this.F)
+  this.Q = this.j(c, this.a, this.c, this.u, this.F)
 }
 Q.prototype = new M;
 Q.prototype.j = function(a, b, c, d, e) {
@@ -462,12 +462,12 @@ Q.prototype.forward = function(a) {
   var d = Math.pow(Math.tan(b), 2), e = this.l * Math.pow(Math.cos(b), 2);
   c = (c - this.e) * Math.cos(b);
   var f = this.j(b, this.a, this.c, this.u, this.F);
-  return[this.h + this.v * a * (c + (1 - d + e) * Math.pow(c, 3) / 6 + (5 - 18 * d + d * d + 72 * e - 58 * this.l) * Math.pow(c, 5) / 120), this.i + this.v * (f - this.P) + a * Math.tan(b) * (c * c / 2 + (5 - d + 9 * e + 4 * e * e) * Math.pow(c, 4) / 120 + (61 - 58 * d + d * d + 600 * e - 330 * this.l) * Math.pow(c, 6) / 720)]
+  return[this.h + this.v * a * (c + (1 - d + e) * Math.pow(c, 3) / 6 + (5 - 18 * d + d * d + 72 * e - 58 * this.l) * Math.pow(c, 5) / 120), this.i + this.v * (f - this.Q) + a * Math.tan(b) * (c * c / 2 + (5 - d + 9 * e + 4 * e * e) * Math.pow(c, 4) / 120 + (61 - 58 * d + d * d + 600 * e - 330 * this.l) * Math.pow(c, 6) / 720)]
 };
 Q.prototype.o = function(a) {
   var b = a[0], c = a[1];
   a = (1 - Math.sqrt(1 - this.c)) / (1 + Math.sqrt(1 - this.c));
-  c = (this.P + (c - this.i) / this.v) / (this.a * (1 - this.c / 4 - 3 * this.u / 64 - 5 * this.F / 256));
+  c = (this.Q + (c - this.i) / this.v) / (this.a * (1 - this.c / 4 - 3 * this.u / 64 - 5 * this.F / 256));
   a = c + (3 * a / 2 - 27 * Math.pow(a, 3) / 32) * Math.sin(2 * c) + (21 * a * a / 16 - 55 * Math.pow(a, 4) / 32) * Math.sin(4 * c) + 151 * Math.pow(a, 3) / 6 * Math.sin(6 * c) + 1097 * Math.pow(a, 4) / 512 * Math.sin(8 * c);
   c = this.l * Math.pow(Math.cos(a), 2);
   var d = Math.pow(Math.tan(a), 2), e = this.a / Math.sqrt(1 - this.c * Math.pow(Math.sin(a), 2)), f = this.a * (1 - this.c) / Math.pow(1 - this.c * Math.pow(Math.sin(a), 2), 1.5);
@@ -498,7 +498,7 @@ R.prototype.n = function() {
 function S(a) {
   a = a || {};
   M.call(this, a);
-  var b = a.I, c = a.N * j, d = a.O * j, e = a.J * j;
+  var b = a.I, c = a.O * j, d = a.P * j, e = a.J * j;
   this.a = a.p / a.unit;
   this.e = a.m * j;
   this.h = a.G;
@@ -532,7 +532,7 @@ i.q = function(a, b, c) {
   var d = b * Math.sin(c);
   return c + (1 - d * d) * (1 - d * d) / (2 * Math.cos(c)) * (a / (1 - b * b) - Math.sin(c) / (1 - d * d) + Math.log((1 - d) / (1 + d)) / (2 * b))
 };
-i.M = function(a, b, c) {
+i.N = function(a, b, c) {
   var d = 0;
   c = c;
   for(var e = this.q(a, b, c);Math.abs(e - c) > 1.0E-8 && d < 10;) {
@@ -553,7 +553,7 @@ i.o = function(a) {
   a = a[1] - this.i;
   var c = Math.sqrt(b * b + (this.g - a) * (this.g - a)), d = this.b > 0 ? 1 : -1;
   c = (this.C - c * c * this.b * this.b / (this.a * this.a)) / this.b;
-  return[(Math.atan(d * b / (d * this.g - d * a)) / this.b + this.e) / j, this.M(c, this.d, Math.asin(c / 2)) / j]
+  return[(Math.atan(d * b / (d * this.g - d * a)) / this.b + this.e) / j, this.N(c, this.d, Math.asin(c / 2)) / j]
 };
 i.n = function() {
   return Math.PI * 2 * this.a
@@ -565,7 +565,7 @@ o = new N({wkid:4326});
 p = new N({wkid:4269});
 r = new R({wkid:102113, p:6378137, m:0, unit:1});
 t = {"4326":o, "4269":p, "102113":r, "102100":new R({wkid:102100, p:6378137, m:0, unit:1})};
-u.ia = function(a, b) {
+u.ja = function(a, b) {
   var c = t["" + a];
   if(c) {
     return c
@@ -593,17 +593,17 @@ u.ia = function(a, b) {
         c = new M(d);
         break;
       case "Lambert_Conformal_Conic":
-        d.N = parseFloat(v(c, '"Standard_Parallel_1",', "]"));
-        d.O = parseFloat(v(c, '"Standard_Parallel_2",', "]"));
+        d.O = parseFloat(v(c, '"Standard_Parallel_1",', "]"));
+        d.P = parseFloat(v(c, '"Standard_Parallel_2",', "]"));
         c = new O(d);
         break;
       case "Transverse_Mercator":
-        d.ca = parseFloat(v(c, '"Scale_Factor",', "]"));
+        d.da = parseFloat(v(c, '"Scale_Factor",', "]"));
         c = new Q(d);
         break;
       case "Albers":
-        d.N = parseFloat(v(c, '"Standard_Parallel_1",', "]"));
-        d.O = parseFloat(v(c, '"Standard_Parallel_2",', "]"));
+        d.O = parseFloat(v(c, '"Standard_Parallel_1",', "]"));
+        d.P = parseFloat(v(c, '"Standard_Parallel_2",', "]"));
         c = new S(d);
         break;
       default:
@@ -625,11 +625,11 @@ function V(a, b) {
   var c = a.split("/");
   this.name = c[c.length - 2].replace(/_/g, " ");
   b = b || {};
-  if(b.X) {
+  if(b.Y) {
     var d = this;
     window.setTimeout(function() {
       W(d)
-    }, b.X * 1E3)
+    }, b.Y * 1E3)
   }else {
     W(this)
   }
@@ -641,7 +641,7 @@ function W(a) {
 }
 function ea(a, b) {
   w(b, a);
-  a.spatialReference = b.spatialReference.wkt ? M.ha(b.spatialReference.wkt) : t[b.spatialReference.wkid];
+  a.spatialReference = b.spatialReference.wkt ? M.ia(b.spatialReference.wkt) : t[b.spatialReference.wkid];
   b.tables !== undefined ? L(a.url + "/layers", {}, "", function(c) {
     X(a, c)
   }) : X(a, b)
@@ -696,7 +696,7 @@ function X(a, b) {
           h = null
         }
         e.B.push(h);
-        h.ga = e
+        h.ha = e
       }
     }
   }
@@ -772,9 +772,9 @@ function ia(a, b, c, d) {
     }
     e.transparent = b.transparent === false ? false : true;
     if(b.time) {
-      e.time = y(b.time, b.da)
+      e.time = y(b.time, b.ea)
     }
-    e.Z = b.Z;
+    e.$ = b.$;
     if(e.f === "image") {
       return a.url + "/export?" + J(e)
     }else {
@@ -797,20 +797,20 @@ function ia(a, b, c, d) {
   }
 }
 function Y(a) {
-  this.$ = a ? a.lods : null;
+  this.aa = a ? a.lods : null;
   this.A = a ? t[a.spatialReference.wkid || a.spatialReference.wkt] : r;
   if(!this.A) {
     throw new Error("unsupported Spatial Reference");
   }
-  this.U = a ? a.lods[0].resolution : 156543.033928;
-  this.minZoom = Math.floor(Math.log(this.A.n() / this.U / 256) / Math.LN2 + 0.5);
-  this.maxZoom = a ? this.minZoom + this.$.length - 1 : 20;
+  this.V = a ? a.lods[0].resolution : 156543.033928;
+  this.minZoom = Math.floor(Math.log(this.A.n() / this.V / 256) / Math.LN2 + 0.5);
+  this.maxZoom = a ? this.minZoom + this.aa.length - 1 : 20;
   if(n.Size) {
-    this.ka = a ? new n.Size(a.cols, a.rows) : new n.Size(256, 256)
+    this.la = a ? new n.Size(a.cols, a.rows) : new n.Size(256, 256)
   }
-  this.V = Math.pow(2, this.minZoom) * this.U;
-  this.aa = a ? a.origin.x : -2.0037508342787E7;
-  this.ba = a ? a.origin.y : 2.0037508342787E7;
+  this.W = Math.pow(2, this.minZoom) * this.V;
+  this.ba = a ? a.origin.x : -2.0037508342787E7;
+  this.ca = a ? a.origin.y : 2.0037508342787E7;
   if(a) {
     for(var b, c = 0;c < a.lods.length - 1;c++) {
       b = a.lods[c].resolution / a.lods[c + 1].resolution;
@@ -825,22 +825,23 @@ Y.prototype.fromLatLngToPoint = function(a, b) {
     return null
   }
   var c = this.A.forward([a.lng(), a.lat()]), d = b || new n.Point(0, 0);
-  d.x = (c[0] - this.aa) / this.V;
-  d.y = (this.ba - c[1]) / this.V;
+  d.x = (c[0] - this.ba) / this.W;
+  d.y = (this.ca - c[1]) / this.W;
   return d
 };
 Y.prototype.fromLatLngToPoint = Y.prototype.fromLatLngToPoint;
 new Y;
 function Z(a, b) {
   b = b || {};
-  this.S = a instanceof V ? a : new V(a);
+  this.T = a instanceof V ? a : new V(a);
   this.minZoom = b.minZoom;
   this.maxZoom = b.maxZoom;
   this.z = b.opacity || 1;
-  this.Y = b.ea || {};
+  this.Z = b.fa || {};
   this.w = this.t = false;
   this.k = null;
-  b.map && this.setMap(b.map)
+  b.map && this.setMap(b.map);
+  this.L = null
 }
 Z.prototype = new n.OverlayView;
 Z.prototype.onAdd = function() {
@@ -850,18 +851,19 @@ Z.prototype.onAdd = function() {
   this.k = a;
   this.getPanes().overlayLayer.appendChild(a);
   this.z && z(a, this.z);
-  this.W = n.event.addListener(this.getMap(), "bounds_changed", ca(this.L, this));
+  this.X = n.event.addListener(this.getMap(), "bounds_changed", ca(this.M, this));
   a = this.getMap();
   a.s = a.s || new n.MVCArray;
   a.s.push(this);
-  K(a)
+  K(a);
+  this.L = a
 };
 Z.prototype.onAdd = Z.prototype.onAdd;
 Z.prototype.onRemove = function() {
-  n.event.removeListener(this.W);
+  n.event.removeListener(this.X);
   this.k.parentNode.removeChild(this.k);
   this.k = null;
-  var a = this.getMap(), b = a.s;
+  var a = this.L, b = a.s;
   if(b) {
     for(var c = 0, d = b.getLength();c < d;c++) {
       if(b.getAt(c) == this) {
@@ -870,22 +872,23 @@ Z.prototype.onRemove = function() {
       }
     }
   }
-  K(a)
+  K(a);
+  this.L = null
 };
 Z.prototype.onRemove = Z.prototype.onRemove;
 Z.prototype.draw = function() {
   if(!this.t || this.w === true) {
-    this.L()
+    this.M()
   }
 };
 Z.prototype.draw = Z.prototype.draw;
-Z.prototype.L = function() {
+Z.prototype.M = function() {
   if(this.t === true) {
     this.w = true
   }else {
     var a = this.getMap(), b = a ? a.getBounds() : null;
     if(b) {
-      var c = this.Y;
+      var c = this.Z;
       c.bounds = b;
       b = r;
       var d = a.getDiv();
@@ -899,11 +902,11 @@ Z.prototype.L = function() {
       var e = this;
       this.t = true;
       this.k.style.backgroundImage = "";
-      ia(this.S, c, function(f) {
+      ia(this.T, c, function(f) {
         e.t = false;
         if(e.w === true) {
           e.w = false;
-          e.L()
+          e.M()
         }else {
           if(f.href) {
             var k = e.getProjection(), g = f.bounds, h = k.fromLatLngToDivPixel(g.getSouthWest());

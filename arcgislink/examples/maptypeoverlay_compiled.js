@@ -949,6 +949,6 @@ $.prototype.releaseTile = $.prototype.releaseTile;
 new m.OverlayView;window.onload = function() {
   var a = {zoom:17, center:new google.maps.LatLng(45.5, -122.7), mapTypeId:google.maps.MapTypeId.HYBRID, streetViewControl:true};
   a = new google.maps.Map(document.getElementById("map_canvas"), a);
-  var b = new $("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer", {name:"ArcGIS", opacity:0.5});
+  var b = new $("http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer", {name:"ArcGIS", opacity:0.5});
   a.overlayMapTypes.insertAt(0, b)
 };})()
