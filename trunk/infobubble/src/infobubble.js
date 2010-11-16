@@ -1462,6 +1462,34 @@ InfoBubble.prototype.addTab = function(label, content) {
 };
 InfoBubble.prototype['addTab'] = InfoBubble.prototype.addTab;
 
+/**
+ * Update a tab at a speicifc index
+ *
+ * @param {number} index The index of the tab.
+ * @param {?string} opt_label The label to change to.
+ * @param {?string} opt_content The content to update to.
+ */
+InfoBubble.prototype.updateTab = function(index, opt_label, opt_content) {
+  if (!this.tabs_.length || index < 0 || index >= this.tabs_.length) {
+    return;
+  }
+
+  var tab = this.tabs_[index];
+  if (opt_label != undefined) {
+    tab.tab.innerHTML = tab.label = opt_label;
+  }
+
+  if (opt_content != undefined) {
+    tab.content = opt_content;
+  }
+
+  if (this.activeTab_ == tab.tab) {
+    this.setContent(tab.content);
+  }
+  this.redraw_();
+};
+InfoBubble.prototype['updateTab'] = InfoBubble.prototype.updateTab;
+
 
 /**
  * Remove a tab at a specific index
