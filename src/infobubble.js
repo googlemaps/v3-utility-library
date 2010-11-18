@@ -1758,3 +1758,5 @@ InfoBubble.prototype.positionCloseButton_ = function() {
   this.close_.style['right'] = this.px(right);
   this.close_.style['top'] = this.px(top);
 };
+
+google.maps.event.trigger(google.maps, 'infobubble_loaded');

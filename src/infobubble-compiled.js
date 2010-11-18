@@ -37,5 +37,5 @@ function F(a,c,d,f){var e=document.createElement("DIV");e.style.display="inline"
 delete e;return c}
 function t(a){var c=a.get("map");if(c){var d=w(a);v(a);u(a);var f=p(a),e=c.getDiv(),h=f*2;c=e.offsetWidth-h;e=e.offsetHeight-h-z(a);h=0;var i=a.get("minWidth")||0,j=a.get("minHeight")||0,o=a.get("maxWidth")||0,m=a.get("maxHeight")||0;o=Math.min(c,o);m=Math.min(e,m);var x=0;if(a.b.length)for(var q=0,n;n=a.b[q];q++){var r=F(a,n.f,o,m);n=F(a,n.content,o,m);if(i<r.width)i=r.width;x+=r.width;if(j<r.height)j=r.height;if(r.height>h)h=r.height;if(i<n.width)i=n.width;if(j<n.height)j=n.height}else{q=a.get("content");
 if(typeof q=="string")q=A(a,q);if(q){n=F(a,q,o,m);if(i<n.width)i=n.width;if(j<n.height)j=n.height}}if(o)i=Math.min(i,o);if(m)j=Math.min(j,m);i=Math.max(i,x);if(i==x)i+=2*d;f*=2;i=Math.max(i,f);if(i>c)i=c;if(j>e)j=e-h;if(a.i){a.t=h;a.i.style.width=l(a,x)}a.e.style.width=l(a,i);a.e.style.height=l(a,j)}u(a);c=v(a);f=d=2;if(a.b.length&&a.t)f+=a.t;f+=c;d+=c;if((c=a.e)&&c.clientHeight<c.scrollHeight)d+=15;a.l.style.right=l(a,d);a.l.style.top=l(a,f);a.draw()}
-function z(a){var c=0;if(a=a.get("anchor")){if(!c&&a.height)c=a.height;c||(c=34)}return c};
+function z(a){var c=0;if(a=a.get("anchor")){if(!c&&a.height)c=a.height;c||(c=34)}return c}google.maps.event.trigger(google.maps,"infobubble_loaded");
 })();
