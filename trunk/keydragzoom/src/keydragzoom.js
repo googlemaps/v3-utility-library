@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.2 [October 13, 2010]
+ * @version 2.0.3 [November 26, 2010]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -692,6 +692,10 @@
     var me = this;
     this.mouseDown_ = false;
     if (this.dragging_) {
+      if ((this.getMousePoint_(e).x === this.startPt_.x) && (this.getMousePoint_(e).y === this.startPt_.y)) {
+        this.onKeyUp_(e); // Cancel event
+        return;
+      }
       var left = Math.min(this.startPt_.x, this.endPt_.x);
       var top = Math.min(this.startPt_.y, this.endPt_.y);
       var width = Math.abs(this.startPt_.x - this.endPt_.x);
