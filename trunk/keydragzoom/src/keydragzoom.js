@@ -639,6 +639,9 @@
       var top = Math.min(this.startPt_.y, this.endPt_.y);
       var width = Math.abs(this.startPt_.x - this.endPt_.x);
       var height = Math.abs(this.startPt_.y - this.endPt_.y);
+      // For benefit of MSIE 7/8 ensure following values are not negative:
+      var boxWidth = Math.max(0, width - (this.boxBorderWidths_.left + this.boxBorderWidths_.right));
+      var boxHeight = Math.max(0, height - (this.boxBorderWidths_.top + this.boxBorderWidths_.bottom));
       // Left veil rectangle:
       this.veilDiv_[0].style.top = "0px";
       this.veilDiv_[0].style.left = "0px";
@@ -662,8 +665,8 @@
       // Selection rectangle:
       this.boxDiv_.style.top = top + "px";
       this.boxDiv_.style.left = left + "px";
-      this.boxDiv_.style.width = (width - (this.boxBorderWidths_.left + this.boxBorderWidths_.right)) + "px";
-      this.boxDiv_.style.height = (height - (this.boxBorderWidths_.top + this.boxBorderWidths_.bottom)) + "px";
+      this.boxDiv_.style.width = boxWidth + "px";
+      this.boxDiv_.style.height = boxHeight + "px";
       this.boxDiv_.style.display = "block";
       /**
        * This event is fired repeatedly while the user drags a box across the area of interest.
