@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.3 [November 26, 2010]
+ * @version 2.0.3 [November 27, 2010]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -225,9 +225,11 @@
    *  The default is <code>{backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}</code>.
    * @property {boolean} [visualEnabled] A flag indicating whether a visual control is to be used.
    *  The default is <code>false</code>.
+   * @property {string} [visualClass] The name of the CSS class defining the styles for the visual
+   *  control.
    * @property {ControlPosition} [visualPosition] The position of the visual control.
    *  The default position is on the left side of the map below other controls in the top left
-   *  &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT</code>.
+   *  &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT_TOP</code>.
    * @property {Size} [visualPositionOffset] The width and height values provided by this
    *  property are the offsets (in pixels) from the location at which the control would normally
    *  be drawn to the desired drawing location. The default is (35,0).
@@ -323,7 +325,8 @@
     }
 
     this.visualEnabled_ = opt_zoomOpts.visualEnabled || false;
-    this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT;
+    this.visualClass_ = opt_zoomOpts.visualClass || "";
+    this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT_TOP;
     this.visualPositionOffset_ = opt_zoomOpts.visualPositionOffset || new google.maps.Size(35, 0);
     this.visualPositionIndex_ = opt_zoomOpts.visualPositionIndex || null;
     this.visualSprite_ = opt_zoomOpts.visualSprite || "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
@@ -408,6 +411,7 @@
     var me = this;
     
     control = document.createElement("div");
+    control.className = this.visualClass_;
     control.style.height = this.visualSize_.height + "px";
     control.style.width = this.visualSize_.width + "px";
     control.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -" + (2 * this.visualSize_.width) + "px 0";
