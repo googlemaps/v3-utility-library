@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.3 [November 27, 2010]
+ * @version 2.0.3 [November 29, 2010]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -226,7 +226,9 @@
    * @property {boolean} [visualEnabled] A flag indicating whether a visual control is to be used.
    *  The default is <code>false</code>.
    * @property {string} [visualClass] The name of the CSS class defining the styles for the visual
-   *  control.
+   *  control. To prevent the visual control from being printed, set this property to the name of
+   *  a class, defined inside a <code>@media print</code> rule, which sets the CSS
+   *  <code>display</code> style to <code>none</code>.
    * @property {ControlPosition} [visualPosition] The position of the visual control.
    *  The default position is on the left side of the map below other controls in the top left
    *  &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT_TOP</code>.
