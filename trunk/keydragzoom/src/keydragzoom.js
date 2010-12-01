@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.3 [November 29, 2010]
+ * @version 2.0.3 [December 1, 2010]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -410,37 +410,45 @@
    */
   DragZoom.prototype.initControl_ = function (offset) {
     var control;
+    var image;
     var me = this;
     
     control = document.createElement("div");
     control.className = this.visualClass_;
+    control.style.position = "relative";
+    control.style.overflow = "hidden";
     control.style.height = this.visualSize_.height + "px";
     control.style.width = this.visualSize_.width + "px";
-    control.style.background = "transparent url(" + this.visualSprite_ + ") no-repeat -" + (2 * this.visualSize_.width) + "px 0";
     control.title = this.visualTips_.off;
+    image = document.createElement("img");
+    image.src = this.visualSprite_;
+    image.style.position = "absolute";
+    image.style.left = -(this.visualSize_.width * 2) + "px";
+    image.style.top = 0 + "px";
+    control.appendChild(image);
     control.onclick = function (e) {
       me.hotKeyDown_ = !me.hotKeyDown_;
       if (me.hotKeyDown_) {
-        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.width * 0) + "px 0";
+        me.buttonDiv_.firstChild.style.left = -(me.visualSize_.width * 0) + "px";
         me.buttonDiv_.title = me.visualTips_.on;
         me.activatedByControl_ = true;
         google.maps.event.trigger(me, "activate");
       } else {
-        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.width * 2) + "px 0";
+        me.buttonDiv_.firstChild.style.left = -(me.visualSize_.width * 2) + "px";
         me.buttonDiv_.title = me.visualTips_.off;
         google.maps.event.trigger(me, "deactivate");
       }
       me.onMouseMove_(e); // Updates the veil
     };
     control.onmouseover = function () {
-      me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.width * 1) + "px 0";
+      me.buttonDiv_.firstChild.style.left = -(me.visualSize_.width * 1) + "px";
     };
     control.onmouseout = function () {
       if (me.hotKeyDown_) {
-        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.width * 0) + "px 0";
+        me.buttonDiv_.firstChild.style.left = -(me.visualSize_.width * 0) + "px";
         me.buttonDiv_.title = me.visualTips_.on;
       } else {
-        me.buttonDiv_.style.backgroundPosition = -(me.visualSize_.width * 2) + "px 0";
+        me.buttonDiv_.firstChild.style.left = -(me.visualSize_.width * 2) + "px";
         me.buttonDiv_.title = me.visualTips_.off;
       }
     };
@@ -780,7 +788,7 @@
         this.veilDiv_[i].style.display = "none";
       }
       if (this.visualEnabled_) {
-        this.buttonDiv_.style.backgroundPosition = -(this.visualSize_.height * 2) + "px 0";
+        this.buttonDiv_.firstChild.style.left = -(this.visualSize_.width * 2) + "px";
         this.buttonDiv_.title = this.visualTips_.off;
         this.buttonDiv_.style.display = "";
       }
