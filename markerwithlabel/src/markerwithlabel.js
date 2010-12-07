@@ -36,7 +36,6 @@
  * It is for the private use of the MarkerWithLabel class.
  * @constructor
  * @param {Marker} marker The marker with which the label is to be associated.
- * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
  * @private
  */
 function MarkerLabel_(marker) {
@@ -149,24 +148,30 @@ MarkerLabel_.prototype.onAdd = function () {
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mouseover", function (e) {
-      me.eventDiv_.style.cursor = "pointer";
-      google.maps.event.trigger(me.marker_, "mouseover", e);
+      if (me.marker_.getDraggable() || me.marker_.getClickable()) {
+        me.eventDiv_.style.cursor = "pointer";
+        google.maps.event.trigger(me.marker_, "mouseover", e);
+      }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mouseout", function (e) {
       me.eventDiv_.style.cursor = me.marker_.getCursor();
       google.maps.event.trigger(me.marker_, "mouseout", e);
     }),
     google.maps.event.addDomListener(this.eventDiv_, "click", function (e) {
-      if (cIgnoreClick) { // Ignore the click reported when a label drag ends
-        cIgnoreClick = false;
-      } else {
-        cAbortEvent(e); // Prevent click from being passed on to map
-        google.maps.event.trigger(me.marker_, "click", e);
+      if (me.marker_.getDraggable() || me.marker_.getClickable()) {
+        if (cIgnoreClick) { // Ignore the click reported when a label drag ends
+          cIgnoreClick = false;
+        } else {
+          cAbortEvent(e); // Prevent click from being passed on to map
+          google.maps.event.trigger(me.marker_, "click", e);
+        }
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "dblclick", function (e) {
-      cAbortEvent(e); // Prevent map zoom when double-clicking on a label
-      google.maps.event.trigger(me.marker_, "dblclick", e);
+      if (me.marker_.getDraggable() || me.marker_.getClickable()) {
+        cAbortEvent(e); // Prevent map zoom when double-clicking on a label
+        google.maps.event.trigger(me.marker_, "dblclick", e);
+      }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
       cMouseIsDown = true;
