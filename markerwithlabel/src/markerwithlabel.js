@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.0.1 [September 17, 2010]
+ * @version 1.1 [December 7, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -9,7 +9,8 @@
  *  MarkerWithLabel allows you to define markers with associated labels. As you would expect,
  *  if the marker is draggable, so too will be the label. In addition, a marker with a label
  *  responds to all mouse events in the same manner as a regular marker. It also fires mouse
- *  events and "property changed" events just as a regular marker would.
+ *  events and "property changed" events just as a regular marker would. Version 1.1 adds
+ *  support for the raiseOnDrag feature introduced in API V3.3.
  */
 
 /*!
@@ -35,6 +36,7 @@
  * It is for the private use of the MarkerWithLabel class.
  * @constructor
  * @param {Marker} marker The marker with which the label is to be associated.
+ * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
  * @private
  */
 function MarkerLabel_(marker) {
@@ -49,6 +51,14 @@ function MarkerLabel_(marker) {
   // Code is included here to ensure the veil is always exactly the same size as the label.
   this.eventDiv_ = document.createElement("div");
   this.eventDiv_.style.cssText = this.labelDiv_.style.cssText;
+
+  // Set up the IMG for the "X" to be displayed when the marker is raised.
+  this.crossDiv_ = document.createElement("img");
+  this.crossDiv_.style.cssText = "position: absolute; z-index: 1000002; display: none;";
+  // Hopefully Google never changes the standard "X" attributes:
+  this.crossDiv_.style.marginLeft = "-8px";
+  this.crossDiv_.style.marginTop = "-9px";
+  this.crossDiv_.src = "http://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
 }
 
 // MarkerLabel_ inherits from OverlayView:
@@ -62,11 +72,13 @@ MarkerLabel_.prototype = new google.maps.OverlayView();
 MarkerLabel_.prototype.onAdd = function () {
   var me = this;
   var cMouseIsDown = false;
-  var cDraggingInProgress = false;
+  var cDraggingLabel = false;
   var cSavedPosition;
   var cSavedZIndex;
   var cLatOffset, cLngOffset;
   var cIgnoreClick;
+  var cRaiseEnabled;
+  var cRaiseOffset;
 
   // Stops all processing of an event.
   //
@@ -80,30 +92,58 @@ MarkerLabel_.prototype.onAdd = function () {
     }
   };
 
+  var cStopBounce = function () {
+    me.marker_.setAnimation(null);
+  };
+
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_);
+  this.getPanes().overlayImage.appendChild(this.crossDiv_);
 
   this.listeners_ = [
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
-      if (cDraggingInProgress) {
+      var position;
+      if (cDraggingLabel) {
         mEvent.latLng = cSavedPosition;
         cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
+        if (cRaiseEnabled) { // Lower the marker & label
+          position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
+          position.y += cRaiseOffset;
+          me.marker_.setPosition(me.getProjection().fromDivPixelToLatLng(position));
+          // This is not the same bouncing style as when the marker portion is dragged,
+          // but it will have to do:
+          try { // Will fail if running Google Maps API earlier than V3.3
+            me.marker_.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(cStopBounce, 1406);
+          } catch (e) {}
+          me.crossDiv_.style.display = "none";
+        }
         google.maps.event.trigger(me.marker_, "dragend", mEvent);
       }
       cMouseIsDown = false;
       google.maps.event.trigger(me.marker_, "mouseup", mEvent);
     }),
     google.maps.event.addListener(me.marker_.getMap(), "mousemove", function (mEvent) {
+      var position;
       if (cMouseIsDown && me.marker_.getDraggable()) {
         // Change the reported location from the mouse position to the marker position:
         mEvent.latLng = new google.maps.LatLng(mEvent.latLng.lat() - cLatOffset, mEvent.latLng.lng() - cLngOffset);
-        cSavedPosition = mEvent.latLng;
-        if (cDraggingInProgress) {
+        if (cDraggingLabel) {
+          cSavedPosition = mEvent.latLng;
+          position = me.getProjection().fromLatLngToDivPixel(mEvent.latLng);
+          if (cRaiseEnabled) {
+            me.crossDiv_.style.left = position.x + "px";
+            me.crossDiv_.style.top = position.y + "px";
+            position.y -= cRaiseOffset;
+          }
+          me.marker_.setPosition(me.getProjection().fromDivPixelToLatLng(position));
           google.maps.event.trigger(me.marker_, "drag", mEvent);
         } else {
           // Calculate offsets from the click point to the marker position:
           cLatOffset = mEvent.latLng.lat() - me.marker_.getPosition().lat();
           cLngOffset = mEvent.latLng.lng() - me.marker_.getPosition().lng();
+          cDraggingLabel = true;
+          me.crossDiv_.style.display = "";
           google.maps.event.trigger(me.marker_, "dragstart", mEvent);
         }
       }
@@ -130,23 +170,32 @@ MarkerLabel_.prototype.onAdd = function () {
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
       cMouseIsDown = true;
-      cDraggingInProgress = false;
+      cDraggingLabel = false;
       cLatOffset = 0;
       cLngOffset = 0;
       cAbortEvent(e); // Prevent map pan when starting a drag on a label
       google.maps.event.trigger(me.marker_, "mousedown", e);
     }),
     google.maps.event.addListener(this.marker_, "dragstart", function (mEvent) {
-      cDraggingInProgress = true;
+      cRaiseEnabled = this.get("raiseOnDrag");
+      cRaiseOffset = 20; // google.maps.Marker.RAISEOFFSET; not available
       cSavedZIndex = me.marker_.getZIndex();
     }),
     google.maps.event.addListener(this.marker_, "drag", function (mEvent) {
-      me.marker_.setPosition(mEvent.latLng);
+      if (!cDraggingLabel) {
+        this.setPosition(mEvent.latLng);
+        if (this.getDraggable() && cRaiseEnabled) {
+          me.setPosition(cRaiseOffset);
+        }
+      }
       me.marker_.setZIndex(1000000); // Moves the marker to the foreground during a drag
     }),
     google.maps.event.addListener(this.marker_, "dragend", function (mEvent) {
-      cDraggingInProgress = false;
-      me.marker_.setZIndex(cSavedZIndex);
+      if (this.getDraggable() && cRaiseEnabled && !cDraggingLabel) {
+        me.setPosition(0);
+      }
+      cDraggingLabel = false;
+      this.setZIndex(cSavedZIndex);
     }),
     google.maps.event.addListener(this.marker_, "position_changed", function () {
       me.setPosition();
@@ -188,6 +237,7 @@ MarkerLabel_.prototype.onRemove = function () {
   var i;
   this.labelDiv_.parentNode.removeChild(this.labelDiv_);
   this.eventDiv_.parentNode.removeChild(this.eventDiv_);
+  this.crossDiv_.parentNode.removeChild(this.crossDiv_);
 
   // Remove event listeners:
   for (i = 0; i < this.listeners_.length; i++) {
@@ -274,7 +324,7 @@ MarkerLabel_.prototype.setMandatoryStyles = function () {
   this.eventDiv_.style.overflow = this.labelDiv_.style.overflow;
   this.eventDiv_.style.opacity = 0.01; // Don't use 0; DIV won't be clickable on MSIE
   this.eventDiv_.style.filter = "alpha(opacity=1)"; // For MSIE
-  
+
   this.setAnchor();
   this.setPosition(); // This also updates zIndex, if necessary.
   this.setVisible();
@@ -296,11 +346,13 @@ MarkerLabel_.prototype.setAnchor = function () {
  * Sets the position of the label. The zIndex is also updated, if necessary.
  * @private
  */
-MarkerLabel_.prototype.setPosition = function () {
+MarkerLabel_.prototype.setPosition = function (yOffset) {
   var position = this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());
-  
+  if (typeof yOffset === "undefined") {
+    yOffset = 0;
+  }
   this.labelDiv_.style.left = position.x + "px";
-  this.labelDiv_.style.top = position.y + "px";
+  this.labelDiv_.style.top = (position.y - yOffset) + "px";
   this.eventDiv_.style.left = this.labelDiv_.style.left;
   this.eventDiv_.style.top = this.labelDiv_.style.top;
 
@@ -375,6 +427,10 @@ MarkerLabel_.prototype.setVisible = function () {
  *  The default is <code>true</code>. Note that even if <code>labelVisible</code> is
  *  <code>true</code>, the label will <i>not</i> be visible unless the associated marker is also
  *  visible (i.e., unless the marker's <code>visible</code> property is <code>true</code>).
+ * @property {boolean} [raiseOnDrag] A flag indicating whether the label and marker are to be
+ *  raised when the marker is dragged. The default is <code>true</code>. If a draggable marker is
+ *  being created and a version of Google Maps API earlier than V3.3 is being used, this property
+ *  must be set to <code>false</code>.
  */
 /**
  * Creates a MarkerWithLabel with the options specified in {@link MarkerWithLabelOptions}.
@@ -391,6 +447,9 @@ function MarkerWithLabel(opt_options) {
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }
+  if (typeof opt_options.raiseOnDrag === "undefined") {
+    opt_options.raiseOnDrag = true;
+  }
 
   this.label = new MarkerLabel_(this); // Bind the label to the marker
 
@@ -404,6 +463,11 @@ function MarkerWithLabel(opt_options) {
 // MarkerWithLabel inherits from <code>Marker</code>:
 MarkerWithLabel.prototype = new google.maps.Marker();
 
+/**
+ * Overrides the standard Marker setMap function.
+ * @param {Map} marker The map to which the marker is to be added.
+ * @private
+ */
 MarkerWithLabel.prototype.setMap = function (theMap) {
   // Call the inherited function...
   google.maps.Marker.prototype.setMap.apply(this, arguments);
