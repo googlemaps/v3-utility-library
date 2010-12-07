@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerWithLabel for V3 v1.0.1 [September 17, 2010] Reference</title>
+    <title>MarkerWithLabel for V3 v1.1 [December 7, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -15,7 +15,8 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
  MarkerWithLabel allows you to define markers with associated labels. As you would expect,
  if the marker is draggable, so too will be the label. In addition, a marker with a label
  responds to all mouse events in the same manner as a regular marker. It also fires mouse
- events and "property changed" events just as a regular marker would.</p>
+ events and "property changed" events just as a regular marker would. Version 1.1 adds
+ support for the raiseOnDrag feature introduced in API V3.3.</p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
     
       <h2><a name="MarkerWithLabel"></a>class MarkerWithLabel</h2>
@@ -35,33 +36,6 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
                 <td><code>MarkerWithLabel(<span class="type">opt_options?:MarkerWithLabelOptions</span>)</code></td>
                 
                 <td>Creates a MarkerWithLabel with the options specified in <code><a href="reference.html#MarkerWithLabelOptions">MarkerWithLabelOptions</a></code>.</td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
-        <h3>Methods</h3>
-        <table summary="class MarkerWithLabel - Methods" width="90%">
-          
-          <tbody>
-            <tr>
-              <th>Methods</th>
-              
-                
-                  <th>Return&nbsp;Value</th>
-                
-              
-              <th>Description</th>
-            </tr>
-            
-              <tr class="odd">
-                <td><code>setMap(<span class="type">theMap:</span>)</code></td>
-                
-                  
-                    <td><code>None</code></td>
-                  
-                
-                <td></td>
               </tr>
             
           </tbody>
@@ -171,6 +145,19 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
  The default is <code>true</code>. Note that even if <code>labelVisible</code> is
  <code>true</code>, the label will <i>not</i> be visible unless the associated marker is also
  visible (i.e., unless the marker's <code>visible</code> property is <code>true</code>).</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>raiseOnDrag</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether the label and marker are to be
+ raised when the marker is dragged. The default is <code>true</code>. If a draggable marker is
+ being created and a version of Google Maps API earlier than V3.3 is being used, this property
+ must be set to <code>false</code>.</td>
               </tr>
             
           </tbody>
