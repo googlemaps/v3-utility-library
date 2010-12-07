@@ -412,7 +412,7 @@ MarkerLabel_.prototype.setVisible = function () {
  *  that its top left corner is positioned at the anchor point of the associated marker. Use this
  *  property to change the anchor point of the label. For example, to center a 50px-wide label
  *  beneath a marker, specify a <code>labelAnchor</code> of <code>google.maps.Point(25, 0)</code>.
- *  (Note: x-values increase to the right and y-values increase to the bottom.)
+ *  (Note: x-values increase to the right and y-values increase to the top.)
  * @property {string} [labelClass] The name of the CSS class defining the styles for the label.
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
