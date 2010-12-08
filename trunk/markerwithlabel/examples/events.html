@@ -52,11 +52,11 @@
      google.maps.event.addListener(marker, "dragstart", function (mEvent) { log("Drag Start: " + mEvent.latLng.toString()); });
      google.maps.event.addListener(marker, "drag", function (mEvent) { log("Drag: " + mEvent.latLng.toString()); });
      google.maps.event.addListener(marker, "dragend", function (mEvent) { log("Drag End: " + mEvent.latLng.toString()); });
-   };
+   }
    
    function log(h) {
      document.getElementById("log").innerHTML += h + "<br />";
-   };
+   }
  </script>
 </head>
 <body onload="initMap()">
