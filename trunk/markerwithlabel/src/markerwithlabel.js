@@ -102,6 +102,11 @@ MarkerLabel_.prototype.onAdd = function () {
   this.listeners_ = [
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
       var position;
+      if (cMouseIsDown) {
+        cMouseIsDown = false;
+        me.eventDiv_.style.cursor = "pointer";
+        google.maps.event.trigger(me.marker_, "mouseup", mEvent);
+      }
       if (cDraggingLabel) {
         mEvent.latLng = cSavedPosition;
         cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
@@ -119,12 +124,10 @@ MarkerLabel_.prototype.onAdd = function () {
         }
         google.maps.event.trigger(me.marker_, "dragend", mEvent);
       }
-      cMouseIsDown = false;
-      google.maps.event.trigger(me.marker_, "mouseup", mEvent);
     }),
     google.maps.event.addListener(me.marker_.getMap(), "mousemove", function (mEvent) {
       var position;
-      if (cMouseIsDown && me.marker_.getDraggable()) {
+      if (cMouseIsDown) {
         // Change the reported location from the mouse position to the marker position:
         mEvent.latLng = new google.maps.LatLng(mEvent.latLng.lat() - cLatOffset, mEvent.latLng.lng() - cLngOffset);
         if (cDraggingLabel) {
@@ -136,20 +139,23 @@ MarkerLabel_.prototype.onAdd = function () {
             position.y -= cRaiseOffset;
           }
           me.marker_.setPosition(me.getProjection().fromDivPixelToLatLng(position));
+          if (cRaiseEnabled) { // Don't raise the veil; this hack needed to make MSIE act properly
+            me.eventDiv_.style.top = (position.y + cRaiseOffset) + "px";
+          }
           google.maps.event.trigger(me.marker_, "drag", mEvent);
         } else {
           // Calculate offsets from the click point to the marker position:
           cLatOffset = mEvent.latLng.lat() - me.marker_.getPosition().lat();
           cLngOffset = mEvent.latLng.lng() - me.marker_.getPosition().lng();
-          cDraggingLabel = true;
           me.crossDiv_.style.display = "";
+          cDraggingLabel = true;
           google.maps.event.trigger(me.marker_, "dragstart", mEvent);
         }
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mouseover", function (e) {
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
-        me.eventDiv_.style.cursor = "pointer";
+        this.style.cursor = "pointer";
         google.maps.event.trigger(me.marker_, "mouseover", e);
       }
     }),
@@ -174,11 +180,14 @@ MarkerLabel_.prototype.onAdd = function () {
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
-      cMouseIsDown = true;
       cDraggingLabel = false;
       cLatOffset = 0;
       cLngOffset = 0;
       cAbortEvent(e); // Prevent map pan when starting a drag on a label
+      if (me.marker_.getDraggable()) {
+        cMouseIsDown = true;
+        this.style.cursor = "url(http://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur)";
+      }
       google.maps.event.trigger(me.marker_, "mousedown", e);
     }),
     google.maps.event.addListener(this.marker_, "dragstart", function (mEvent) {
@@ -454,6 +463,12 @@ function MarkerWithLabel(opt_options) {
   }
   if (typeof opt_options.raiseOnDrag === "undefined") {
     opt_options.raiseOnDrag = true;
+  }
+  if (typeof opt_options.clickable === "undefined") {
+    opt_options.clickable = true;
+  }
+  if (typeof opt_options.draggable === "undefined") {
+    opt_options.draggable = false;
   }
 
   this.label = new MarkerLabel_(this); // Bind the label to the marker
