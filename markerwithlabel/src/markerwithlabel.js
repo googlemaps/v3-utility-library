@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1 [December 8, 2010]
+ * @version 1.1 [December 9, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -50,6 +50,9 @@ function MarkerLabel_(marker) {
   // Code is included here to ensure the veil is always exactly the same size as the label.
   this.eventDiv_ = document.createElement("div");
   this.eventDiv_.style.cssText = this.labelDiv_.style.cssText;
+
+  // This is needed for proper behavior on MSIE:
+  this.eventDiv_.setAttribute("onselectstart", "return false;");
 
   // Set up the IMG for the "X" to be displayed when the marker is raised.
   this.crossDiv_ = document.createElement("img");
@@ -160,35 +163,39 @@ MarkerLabel_.prototype.onAdd = function () {
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mouseout", function (e) {
-      me.eventDiv_.style.cursor = me.marker_.getCursor();
-      google.maps.event.trigger(me.marker_, "mouseout", e);
+      if (me.marker_.getDraggable() || me.marker_.getClickable()) {
+        me.eventDiv_.style.cursor = me.marker_.getCursor();
+        google.maps.event.trigger(me.marker_, "mouseout", e);
+      }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "click", function (e) {
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
         if (cIgnoreClick) { // Ignore the click reported when a label drag ends
           cIgnoreClick = false;
         } else {
-          cAbortEvent(e); // Prevent click from being passed on to map
           google.maps.event.trigger(me.marker_, "click", e);
+          cAbortEvent(e); // Prevent click from being passed on to map
         }
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "dblclick", function (e) {
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
-        cAbortEvent(e); // Prevent map zoom when double-clicking on a label
         google.maps.event.trigger(me.marker_, "dblclick", e);
+        cAbortEvent(e); // Prevent map zoom when double-clicking on a label
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
       cDraggingLabel = false;
       cLatOffset = 0;
       cLngOffset = 0;
-      cAbortEvent(e); // Prevent map pan when starting a drag on a label
       if (me.marker_.getDraggable()) {
         cMouseIsDown = true;
         this.style.cursor = "url(http://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur)";
       }
-      google.maps.event.trigger(me.marker_, "mousedown", e);
+      if (me.marker_.getDraggable() || me.marker_.getClickable()) {
+        google.maps.event.trigger(me.marker_, "mousedown", e);
+      }
+      cAbortEvent(e); // Prevent map pan when starting a drag on a label
     }),
     google.maps.event.addListener(this.marker_, "dragstart", function (mEvent) {
       cRaiseEnabled = this.get("raiseOnDrag");
@@ -280,6 +287,7 @@ MarkerLabel_.prototype.setContent = function () {
     this.labelDiv_.innerHTML = content;
     this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
   } else {
+    this.labelDiv_.innerHTML = ""; // Remove current content
     this.labelDiv_.appendChild(content);
     content = content.cloneNode(true);
     this.eventDiv_.appendChild(content);
