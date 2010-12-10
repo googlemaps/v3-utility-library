@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1 [December 9, 2010]
+ * @version 1.1 [December 10, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -53,6 +53,7 @@ function MarkerLabel_(marker) {
 
   // This is needed for proper behavior on MSIE:
   this.eventDiv_.setAttribute("onselectstart", "return false;");
+  this.eventDiv_.setAttribute("ondragstart", "return false;");
 
   // Set up the IMG for the "X" to be displayed when the marker is raised.
   this.crossDiv_ = document.createElement("img");

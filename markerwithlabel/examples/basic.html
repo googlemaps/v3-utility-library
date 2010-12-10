@@ -29,9 +29,10 @@
        mapTypeId: google.maps.MapTypeId.ROADMAP
      });
 
-     var marker = new MarkerWithLabel({
+     var marker1 = new MarkerWithLabel({
        position: homeLatLng,
        draggable: true,
+       raiseOnDrag: true,
        map: map,
        labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
@@ -42,21 +43,22 @@
      var marker2 = new MarkerWithLabel({
        position: new google.maps.LatLng(49.475, -123.84),
        draggable: true,
+       raiseOnDrag: true,
        map: map,
        labelContent: "$395K",
        labelAnchor: new google.maps.Point(22, 0),
        labelClass: "labels", // the CSS class for the label
-       labelStyle: {opacity: 0.75}
+       labelStyle: {opacity: 1.0}
      });
 
-     var iw = new google.maps.InfoWindow({
+     var iw1 = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
      var iw2 = new google.maps.InfoWindow({
        content: "Another Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
-     google.maps.event.addListener(marker2, "click", function (e) { iw2.open(map, marker2); });
+     google.maps.event.addListener(marker1, "click", function (e) { iw1.open(map, this); });
+     google.maps.event.addListener(marker2, "click", function (e) { iw2.open(map, this); });
    }
  </script>
 </head>
