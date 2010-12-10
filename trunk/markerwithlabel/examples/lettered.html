@@ -31,6 +31,7 @@
        position: homeLatLng,
        map: map,
        draggable: true,
+       raiseOnDrag: true,
        labelContent: "A",
        labelAnchor: new google.maps.Point(3, 30),
        labelClass: "labels", // the CSS class for the label
@@ -40,7 +41,7 @@
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
    }
    function log(h) {
      document.getElementById("log").innerHTML += h + "<br />";

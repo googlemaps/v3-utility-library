@@ -44,9 +44,10 @@
        mapTypeId: google.maps.MapTypeId.ROADMAP
      });
 
-     var marker = new MarkerWithLabel({
+     var marker1 = new MarkerWithLabel({
        position: homeLatLng,
        draggable: true,
+       raiseOnDrag: true,
        map: map,
        labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
@@ -54,10 +55,10 @@
        labelStyle: {opacity: 0.75}
      });
 
-     var iw = new google.maps.InfoWindow({
+     var iw1 = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker1, "click", function (e) { iw1.open(map, this); });
 </pre>
 <p><a href="../examples/basic.html">View example (basic.html)</a>. </p>
 </div>
@@ -91,6 +92,7 @@
        position: homeLatLng,
        map: map,
        draggable: true,
+       raiseOnDrag: true,
        labelContent: "A",
        labelAnchor: new google.maps.Point(3, 30),
        labelClass: "labels", // the CSS class for the label
@@ -100,7 +102,7 @@
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
 </pre>
 <p><a href="../examples/lettered.html">View example (lettered.html)</a>. </p>
 </div>
@@ -133,6 +135,7 @@
      var marker = new MarkerWithLabel({
        position: homeLatLng,
        draggable: true,
+       raiseOnDrag: true,
        map: map,
        labelContent: "$425K",
        labelAnchor: new google.maps.Point(22, 0),
@@ -142,7 +145,7 @@
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
      
      google.maps.event.addListener(marker, "click", function (e) { log("Click"); });
      google.maps.event.addListener(marker, "dblclick", function (e) { log("Double Click"); });
@@ -189,6 +192,7 @@
        position: homeLatLng,
        map: map,
        draggable: true,
+       raiseOnDrag: true,
        labelContent: pictureLabel,
        labelAnchor: new google.maps.Point(50, 0),
        labelClass: "labels", // the CSS class for the label
@@ -198,7 +202,7 @@
      var iw = new google.maps.InfoWindow({
        content: "Home For Sale"
      });
-     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, marker); });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
 </pre>
 <p><a href="../examples/picturelabel.html">View example (picturelabel.html)</a>. </p>
 </div>
