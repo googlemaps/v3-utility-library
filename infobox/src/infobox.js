@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.1 [December 8, 2010]
+ * @version 1.1.2 [December 14, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -114,6 +114,7 @@ function InfoBox(opt_opts) {
   this.eventListener1_ = null;
   this.eventListener2_ = null;
   this.eventListener3_ = null;
+  this.moveListener_ = null;
   this.contextListener_ = null;
   this.fixedWidthSet_ = null;
 }
@@ -675,15 +676,21 @@ InfoBox.prototype.hide = function () {
 /**
  * Adds the InfoBox to the specified map. If <tt>anchor</tt>
  *  (usually a <tt>google.maps.Marker</tt>) is specified, the position
- *  of the InfoBox is set to the position of the <tt>anchor</tt>.
+ *  of the InfoBox is set to the position of the <tt>anchor</tt>. If the
+ *  anchor is dragged to a new location, the InfoBox moves as well.
  * @param {Map} map
  * @param {MVCObject} [anchor]
  */
 InfoBox.prototype.open = function (map, anchor) {
 
+  var me = this;
+  
   if (anchor) {
 
     this.position_ = anchor.getPosition();
+    this.moveListener_ = google.maps.event.addListener(anchor, "position_changed", function () {
+      me.setPosition(this.getPosition());
+    });
   }
 
   this.setMap(map);
@@ -713,6 +720,12 @@ InfoBox.prototype.close = function () {
     this.eventListener1_ = null;
     this.eventListener2_ = null;
     this.eventListener3_ = null;
+  }
+  
+  if (this.moveListener_) {
+  
+    google.maps.event.removeListener(this.moveListener_);
+    this.moveListener_ = null;
   }
 
   if (this.contextListener_) {
