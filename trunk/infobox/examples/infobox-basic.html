@@ -5,7 +5,6 @@
 <script src="../src/infobox.js"></script>
 <script type="text/javascript">
 	function initialize() {
-try{	
 		var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
 
 		var myMapOptions = {
@@ -29,7 +28,7 @@ try{
 		
 		var myOptions = {
 			 content: boxText
-			,disableAutoPan: true
+			,disableAutoPan: false
 			,maxWidth: 0
 			,pixelOffset: new google.maps.Size(-140, 0)			
 			,zIndex: null
@@ -48,7 +47,6 @@ try{
 
 		var ib = new InfoBox(myOptions);		
 		ib.open(theMap, marker);
-}catch(e){alert(e.message);}
 	}
 </script>
 
