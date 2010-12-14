@@ -299,10 +299,20 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
  */
 InfoBox.prototype.panBox_ = function (disablePan) {
 
+  var map;
+  var bounds;
+
   if (!disablePan) {
 
-    var map = this.getMap();
-    var bounds = map.getBounds();
+    map = this.getMap();
+
+    if (!map.getBounds().contains(this.position_)) {
+    // Marker not in visible area of map, so set center
+    // of map to the marker position first.
+      map.setCenter(this.position_);
+    }
+
+    bounds = map.getBounds();
 
     // The degrees per pixel
     var mapDiv = map.getDiv();
@@ -684,7 +694,7 @@ InfoBox.prototype.hide = function () {
 InfoBox.prototype.open = function (map, anchor) {
 
   var me = this;
-  
+
   if (anchor) {
 
     this.position_ = anchor.getPosition();
@@ -721,9 +731,9 @@ InfoBox.prototype.close = function () {
     this.eventListener2_ = null;
     this.eventListener3_ = null;
   }
-  
+
   if (this.moveListener_) {
-  
+
     google.maps.event.removeListener(this.moveListener_);
     this.moveListener_ = null;
   }
