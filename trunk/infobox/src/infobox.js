@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.2 [December 14, 2010]
+ * @version 1.1.2 [December 15, 2010]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -301,6 +301,7 @@ InfoBox.prototype.panBox_ = function (disablePan) {
 
   var map;
   var bounds;
+  var xOffset = 0, yOffset = 0;
 
   if (!disablePan) {
 
@@ -314,47 +315,34 @@ InfoBox.prototype.panBox_ = function (disablePan) {
 
     bounds = map.getBounds();
 
-    // The degrees per pixel
     var mapDiv = map.getDiv();
     var mapWidth = mapDiv.offsetWidth;
     var mapHeight = mapDiv.offsetHeight;
-    var boundsSpan = bounds.toSpan();
-    var longSpan = boundsSpan.lng();
-    var latSpan = boundsSpan.lat();
-    var degPixelX = longSpan / mapWidth;
-    var degPixelY = latSpan / mapHeight;
-
-    // The bounds of the map
-    var mapWestLng = bounds.getSouthWest().lng();
-    var mapEastLng = bounds.getNorthEast().lng();
-    var mapNorthLat = bounds.getNorthEast().lat();
-    var mapSouthLat = bounds.getSouthWest().lat();
-
-    // The bounds of the box
-    var position = this.position_;
     var iwOffsetX = this.pixelOffset_.width;
     var iwOffsetY = this.pixelOffset_.height;
+    var iwWidth = this.div_.offsetWidth;
+    var iwHeight = this.div_.offsetHeight;
     var padX = this.infoBoxClearance_.width;
     var padY = this.infoBoxClearance_.height;
-    var iwWestLng = position.lng() + (iwOffsetX - padX) * degPixelX;
-    var iwEastLng = position.lng() + (iwOffsetX + this.div_.offsetWidth + padX) * degPixelX;
-    var iwNorthLat = position.lat() - (iwOffsetY - padY) * degPixelY;
-    var iwSouthLat = position.lat() - (iwOffsetY + this.div_.offsetHeight + padY) * degPixelY;
+    var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
 
-    // Calculate center shift
-    var shiftLng =
-      (iwWestLng < mapWestLng ? mapWestLng - iwWestLng : 0) +
-      (iwEastLng > mapEastLng ? mapEastLng - iwEastLng : 0);
-    var shiftLat =
-      (iwNorthLat > mapNorthLat ? mapNorthLat - iwNorthLat : 0) +
-      (iwSouthLat < mapSouthLat ? mapSouthLat - iwSouthLat : 0);
+    if (pixPosition.x < (-iwOffsetX + padX)) {
+      xOffset = pixPosition.x + iwOffsetX - padX;
+    } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
+      xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
+    }
+    if (pixPosition.y < (-iwOffsetY + padY)) {
+      yOffset = pixPosition.y + iwOffsetY - padY;
+    } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
+      yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+    }
 
-    if (!(shiftLat === 0 && shiftLng === 0)) {
+    if (!(xOffset === 0 && yOffset === 0)) {
 
-      // Move the map to the new shifted center.
+      // Move the map to the shifted center.
       //
       var c = map.getCenter();
-      map.setCenter(new google.maps.LatLng(c.lat() - shiftLat, c.lng() - shiftLng));
+      map.panBy(xOffset, yOffset);
     }
   }
 };
