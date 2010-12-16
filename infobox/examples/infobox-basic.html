@@ -2,7 +2,7 @@
 <html>
 <head>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="../src/infobox.js"></script>
+<script type="text/javascript" src="../src/infobox.js"></script>
 <script type="text/javascript">
 	function initialize() {
 		var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
@@ -14,23 +14,23 @@
 		};
 		var theMap = new google.maps.Map(document.getElementById("map_canvas"), myMapOptions);
 
-		
+
 		var marker = new google.maps.Marker({
-		  map: theMap
-		 ,draggable: true
-		 ,position: new google.maps.LatLng(49.47216, -123.76307)
-		 ,visible: true
+			map: theMap,
+			draggable: true,
+			position: new google.maps.LatLng(49.47216, -123.76307),
+			visible: true
 		});
-		
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-        boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
-		
+
+		var boxText = document.createElement("div");
+		boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+		boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
+
 		var myOptions = {
 			 content: boxText
 			,disableAutoPan: false
 			,maxWidth: 0
-			,pixelOffset: new google.maps.Size(-140, 0)			
+			,pixelOffset: new google.maps.Size(-140, 0)
 			,zIndex: null
 			,boxStyle: { 
 			  background: "url('tipbox.gif') no-repeat"
@@ -44,13 +44,17 @@
 			,pane: "floatPane"
 			,enableEventPropagation: false
 		};
-     google.maps.event.addListener(marker, "click", function (e) { ib.open(theMap, this); });
 
-		var ib = new InfoBox(myOptions);		
+		google.maps.event.addListener(marker, "click", function (e) {
+			ib.open(theMap, this);
+		});
+
+		var ib = new InfoBox(myOptions);
 		ib.open(theMap, marker);
 	}
 </script>
 
+<title>Creating and Using an InfoBox</title>
 </head>
 <body onload="initialize()">
 	<div id="map_canvas" style="width: 100%; height: 400px"></div>
