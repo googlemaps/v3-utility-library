@@ -28,6 +28,7 @@ rest of the InfoBox appears yellow because that's the background color of the co
 <pre class="prettyprint">
 	var marker = new google.maps.Marker({
 	 map: theMap,
+	 draggable: true,
 	 position: new google.maps.LatLng(49.47216, -123.76307),
 	 visible: true
 	});
@@ -40,10 +41,10 @@ rest of the InfoBox appears yellow because that's the background color of the co
 		 content: boxText
 		,disableAutoPan: false
 		,maxWidth: 0
-		,pixelOffset: new google.maps.Size(-140, 0)			
+		,pixelOffset: new google.maps.Size(-140, 0)
 		,zIndex: null
 		,boxStyle: { 
-		   background: "url('http://www.garylittle.ca/map/artwork/tipbox.gif') no-repeat"
+		  background: "url('tipbox.gif') no-repeat"
 		  ,opacity: 0.75
 		  ,width: "280px"
 		 }
@@ -55,7 +56,7 @@ rest of the InfoBox appears yellow because that's the background color of the co
 		,enableEventPropagation: false
 	};
 
-	var ib = new InfoBox(myOptions);		
+	var ib = new InfoBox(myOptions);
 	ib.open(theMap, marker);
 </pre>
 <p><a href="../examples/infobox-basic.html">View example (infobox-basic.html)</a>. </p>
@@ -82,7 +83,7 @@ on to the map for handling.
 		  ,width: "50px"
 		 }
 		,disableAutoPan: true
-		,pixelOffset: new google.maps.Size(-25, 0)			
+		,pixelOffset: new google.maps.Size(-25, 0)
 		,position: new google.maps.LatLng(49.47216, -123.76307)
 		,closeBoxURL: ""
 		,isHidden: false
@@ -90,7 +91,7 @@ on to the map for handling.
 		,enableEventPropagation: true
 	};
 
-	var ibLabel = new InfoBox(myOptions);		
+	var ibLabel = new InfoBox(myOptions);
 	ibLabel.open(map);
 </pre>
 <p><a href="../examples/infobox-label.html">View example (infobox-label.html)</a>. </p>

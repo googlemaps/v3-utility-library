@@ -2,21 +2,21 @@
 <html>
 <head>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="../src/infobox.js"></script>
+<script type="text/javascript" src="../src/infobox.js"></script>
 <script type="text/javascript">
 
 	function initialize() {
-	
+
 		var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
 
 		var myMapOptions = {
-			 zoom: 15
-			,center: secheltLoc
-			,mapTypeId: google.maps.MapTypeId.ROADMAP
+			zoom: 15,
+			center: secheltLoc,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map_canvas"), myMapOptions);
 
-		
+
 		var labelText = "City Hall";
 
 		var myOptions = {
@@ -28,7 +28,7 @@
 			  ,width: "50px"
 			 }
 			,disableAutoPan: true
-			,pixelOffset: new google.maps.Size(-25, 0)			
+			,pixelOffset: new google.maps.Size(-25, 0)
 			,position: secheltLoc
 			,closeBoxURL: ""
 			,isHidden: false
@@ -36,11 +36,12 @@
 			,enableEventPropagation: true
 		};
 
-		var ibLabel = new InfoBox(myOptions);		
+		var ibLabel = new InfoBox(myOptions);
 		ibLabel.open(map);
 	}
 </script>
 
+<title>Creating a Map Label with InfoBox</title>
 </head>
 <body onload="initialize()">
 	<div id="map_canvas" style="width: 100%; height: 400px"></div>
