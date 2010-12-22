@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerWithLabel for V3 v1.1 [December 11, 2010] Reference</title>
+    <title>MarkerWithLabel for V3 v1.1.1 [December 22, 2010] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -16,7 +16,11 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
  if the marker is draggable, so too will be the label. In addition, a marker with a label
  responds to all mouse events in the same manner as a regular marker. It also fires mouse
  events and "property changed" events just as a regular marker would. Version 1.1 adds
- support for the raiseOnDrag feature introduced in API V3.3.</p>
+ support for the raiseOnDrag feature introduced in API V3.3.
+ <p>
+ If you drag a marker by its label, you can cancel the drag and return the marker to its
+ original position by pressing the <code>Esc</code> key. This doesn't work if you drag the marker
+ itself because this feature is not (yet) supported in the <code>google.maps.Marker</code> class.</p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
     
       <h2><a name="MarkerWithLabel"></a>class MarkerWithLabel</h2>
