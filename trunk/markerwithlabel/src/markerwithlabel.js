@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1 [December 11, 2010]
+ * @version 1.1.1 [December 22, 2010]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -11,6 +11,10 @@
  *  responds to all mouse events in the same manner as a regular marker. It also fires mouse
  *  events and "property changed" events just as a regular marker would. Version 1.1 adds
  *  support for the raiseOnDrag feature introduced in API V3.3.
+ *  <p>
+ *  If you drag a marker by its label, you can cancel the drag and return the marker to its
+ *  original position by pressing the <code>Esc</code> key. This doesn't work if you drag the marker
+ *  itself because this feature is not (yet) supported in the <code>google.maps.Marker</code> class.
  */
 
 /*!
@@ -76,11 +80,12 @@ MarkerLabel_.prototype.onAdd = function () {
   var me = this;
   var cMouseIsDown = false;
   var cDraggingLabel = false;
-  var cSavedPosition;
   var cSavedZIndex;
   var cLatOffset, cLngOffset;
   var cIgnoreClick;
   var cRaiseEnabled;
+  var cStartPosition;
+  var cStartCenter;
   // Constants:
   var cRaiseOffset = 20;
   var cDraggingCursor = "url(http://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur)";
@@ -119,8 +124,6 @@ MarkerLabel_.prototype.onAdd = function () {
       }
     }),
     google.maps.event.addDomListener(this.eventDiv_, "mousedown", function (e) {
-      cLatOffset = 0;
-      cLngOffset = 0;
       cDraggingLabel = false;
       if (me.marker_.getDraggable()) {
         cMouseIsDown = true;
@@ -139,8 +142,6 @@ MarkerLabel_.prototype.onAdd = function () {
         google.maps.event.trigger(me.marker_, "mouseup", mEvent);
       }
       if (cDraggingLabel) {
-        mEvent.latLng = cSavedPosition;
-        cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
         if (cRaiseEnabled) { // Lower the marker & label
           position = me.getProjection().fromLatLngToDivPixel(me.marker_.getPosition());
           position.y += cRaiseOffset;
@@ -151,20 +152,21 @@ MarkerLabel_.prototype.onAdd = function () {
             me.marker_.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(cStopBounce, 1406);
           } catch (e) {}
-          me.crossDiv_.style.display = "none";
         }
+        me.crossDiv_.style.display = "none";
         me.marker_.setZIndex(cSavedZIndex);
+        cIgnoreClick = true; // Set flag to ignore the click event reported after a label drag
         cDraggingLabel = false;
+        mEvent.latLng = me.marker_.getPosition();
         google.maps.event.trigger(me.marker_, "dragend", mEvent);
       }
     }),
     google.maps.event.addListener(me.marker_.getMap(), "mousemove", function (mEvent) {
       var position;
       if (cMouseIsDown) {
-        // Change the reported location from the mouse position to the marker position:
-        mEvent.latLng = new google.maps.LatLng(mEvent.latLng.lat() - cLatOffset, mEvent.latLng.lng() - cLngOffset);
         if (cDraggingLabel) {
-          cSavedPosition = mEvent.latLng;
+          // Change the reported location from the mouse position to the marker position:
+          mEvent.latLng = new google.maps.LatLng(mEvent.latLng.lat() - cLatOffset, mEvent.latLng.lng() - cLngOffset);
           position = me.getProjection().fromLatLngToDivPixel(mEvent.latLng);
           if (cRaiseEnabled) {
             me.crossDiv_.style.left = position.x + "px";
@@ -182,10 +184,23 @@ MarkerLabel_.prototype.onAdd = function () {
           cLatOffset = mEvent.latLng.lat() - me.marker_.getPosition().lat();
           cLngOffset = mEvent.latLng.lng() - me.marker_.getPosition().lng();
           cSavedZIndex = me.marker_.getZIndex();
-          me.marker_.setZIndex(1000000); // Moves the marker & label to the foreground during a drag
+          cStartPosition = me.marker_.getPosition();
+          cStartCenter = me.marker_.getMap().getCenter();
           cRaiseEnabled = me.marker_.get("raiseOnDrag");
           cDraggingLabel = true;
+          me.marker_.setZIndex(1000000); // Moves the marker & label to the foreground during a drag
+          mEvent.latLng = me.marker_.getPosition();
           google.maps.event.trigger(me.marker_, "dragstart", mEvent);
+        }
+      }
+    }),
+    google.maps.event.addDomListener(document, "keydown", function (e) {
+      if (cDraggingLabel) {
+        if (e.keyCode === 27) { // Esc key
+          cRaiseEnabled = false;
+          me.marker_.setPosition(cStartPosition);
+          me.marker_.getMap().setCenter(cStartCenter);
+          google.maps.event.trigger(document, "mouseup", e);
         }
       }
     }),
