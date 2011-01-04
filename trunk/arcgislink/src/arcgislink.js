@@ -774,7 +774,8 @@ function getJSON_(url, params, callbackName, callbackFn) {
   var sid = 'ags_jsonp_' + (jsonpID_++) + '_' + Math.floor(Math.random() * 1000000);
   var script = null;
   params = params || {};
-  params[callbackName || 'callback'] = 'ags_jsonp.' + sid + ' && ags_jsonp.' + sid;
+ // AGS10.1 escapes && so had to take it off.
+  params[callbackName || 'callback'] = 'ags_jsonp.' + sid;
   var query = formatParams_(params);
   var head = document.getElementsByTagName("head")[0];
   if (!head) {
@@ -2057,11 +2058,22 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    */
   MapService.prototype.getInitialBounds = function () {
     if (this.initialExtent) {
-      return fromEnvelopeToLatLngBounds_(this.initialExtent);
+      this.initBounds_ = this.initBounds_ || fromEnvelopeToLatLngBounds_(this.initialExtent);
+      return this.initBounds_;
     }
     return null;
   };
-  
+  /**
+   * get full bounds of the map serivce
+   * @return {google.maps.LatLngBounds}
+   */
+  MapService.prototype.getFullBounds = function () {
+    if (this.fullExtent) {
+      this.fullBounds_ = this.fullBounds_ || fromEnvelopeToLatLngBounds_(this.fullExtent)
+      return this.fullBounds_;
+    }
+    return null;
+  };
 /**
  * @name ExportMapOptions
  * @class This class represent the parameters needed in an exportMap operation for a {@link MapService}.
@@ -2508,7 +2520,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     if (isArray_(params.outFields)) {
       params.outFields = params.outFields.join(',');
     }
-    params.outSR = 4326;
+    //params.outSR = 4326;
     var me = this;
     getJSON_(this.url + '/findAddressCandidates', params, '', function (json) {
       if (json.candidates) {
@@ -2519,9 +2531,14 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
           loc = res.location;
           if (!isNaN(loc.x) &&  !isNaN(loc.y)) {
             var ll = [loc.x, loc.y];
-            if (me.spatialReference) {
-              ll = me.spatialReference.inverse(ll);
-            }
+            // problem: AGS9.31 does not support outSR, so it wil be ignored.
+            // however 10.0 does not return wkid in the result.
+            // as compromise, use outSR in 10's request, not included in 9.3.
+            var sr = me.spatialReference; 
+            if (gparams.outSR){
+               sr = spatialReferences_[gparams.outSR];  
+            } 
+            if (sr) ll = sr.inverse(ll);
             res.location = new G.LatLng(ll[1], ll[0]);
             cands[cands.length] = res;
           }
@@ -3160,27 +3177,30 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
       if (this.urlTemplate_) {
         u = this.urlTemplate_.replace('[' + this.numOfHosts_ + ']', '' + ((tile.y + tile.x) % this.numOfHosts_));
       }
+      var prj = this.projection_ || (this.map_ ? this.map_.getProjection() : Projection.WEB_MECATOR);
+      if (!prj instanceof Projection) {
+        // if use Google's image 
+        prj = Projection.WEB_MECATOR;
+      }
+      var size = prj.tileSize_;
+      var numOfTiles = 1 << zoom;
+      var gworldsw = new G.Point(tile.x * size.width / numOfTiles, (tile.y + 1) * size.height / numOfTiles);
+      var gworldne = new G.Point((tile.x + 1) * size.width / numOfTiles, tile.y * size.height / numOfTiles);
+      var bnds = new G.LatLngBounds(prj.fromPointToLatLng(gworldsw), prj.fromPointToLatLng(gworldne));
+      var fullBounds = this.mapService_.getFullBounds();
       if (this.mapService_.singleFusedMapCache === false || zoom > this.dynaZoom) {
         // dynamic map service
-        var prj = this.projection_ || (this.map_ ? this.map_.getProjection() : Projection.WEB_MECATOR);
-        if (!prj instanceof Projection) {
-          // if use Google's image 
-          prj = Projection.WEB_MECATOR;
-        }
-        var size = prj.tileSize_;
-        var numOfTiles = 1 << zoom;
-        var gworldsw = new G.Point(tile.x * size.width / numOfTiles, (tile.y + 1) * size.height / numOfTiles);
-        var gworldne = new G.Point((tile.x + 1) * size.width / numOfTiles, tile.y * size.height / numOfTiles);
-        var bnds = new G.LatLngBounds(prj.fromPointToLatLng(gworldsw), prj.fromPointToLatLng(gworldne));
-      var params = {
+        var params = {
         'f': 'image'
-      };
+        };
         params.bounds = bnds;
         params.format = 'png32';
         params.width = size.width;
         params.height = size.height;
         params.imageSR = prj.spatialReference_;
         url = this.mapService_.exportMap(params);
+      } else if (fullBounds && !fullBounds.intersects(bnds)){
+        url = '';
       } else {
         url = u + '/tile/' + z + '/' + tile.y + '/' + tile.x;
       }

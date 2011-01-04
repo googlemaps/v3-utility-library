@@ -1,9 +1,9 @@
 (function(){/*
  http://google-maps-utility-library-v3.googlecode.com
 */
-var i, k = Math.PI / 180, aa = 0;
+var j, k = Math.PI / 180, aa = 0;
 window.ags_jsonp = window.ags_jsonp || {};
-var m = google.maps, n, ba, o, p = {ea:null, Z:false}, r = {}, t = {};
+var m = google.maps, n, ba, o, p = {ea:null, X:false}, r = {}, t = {};
 function u(a, b, c) {
   var d = b === "" ? 0 : a.indexOf(b);
   return a.substring(d + b.length, c === "" ? a.length : a.indexOf(c, d + b.length))
@@ -25,7 +25,7 @@ function w(a, b, c) {
 function x() {
   m.event.trigger.apply(this, arguments)
 }
-function da(a, b) {
+function ca(a, b) {
   var c = "";
   if(a) {
     c += a.getTime() - a.getTimezoneOffset() * 6E4
@@ -185,20 +185,20 @@ function D(a) {
   e += "}";
   return e
 }
-function ka(a) {
+function E(a) {
   var b = r[a.spatialReference.wkid || a.spatialReference.wkt];
   b = b || n;
   var c = b.s([a.xmin, a.ymin]);
   a = b.s([a.xmax, a.ymax]);
   return new m.LatLngBounds(new m.LatLng(c[1], c[0]), new m.LatLng(a[1], a[0]))
 }
-function E(a) {
+function F(a) {
   var b;
   if(typeof a === "object") {
     if(a && a.splice) {
       b = [];
       for(var c = 0, d = a.length;c < d;c++) {
-        b.push(E(a[c]))
+        b.push(F(a[c]))
       }
       return"[" + b.join(",") + "]"
     }else {
@@ -214,7 +214,7 @@ function E(a) {
               if(b.length > 0) {
                 b += ", "
               }
-              b += c + ":" + E(a[c])
+              b += c + ":" + F(a[c])
             }
           }
           return"{" + b + "}"
@@ -224,20 +224,20 @@ function E(a) {
   }
   return a.toString()
 }
-function la(a) {
+function ka(a) {
   var b = "";
   if(a) {
     a.f = a.f || "json";
     for(var c in a) {
       if(a.hasOwnProperty(c) && a[c] !== null && a[c] !== undefined) {
-        var d = E(a[c]);
+        var d = F(a[c]);
         b += c + "=" + (escape ? escape(d) : encodeURIComponent(d)) + "&"
       }
     }
   }
   return b
 }
-function ma(a, b) {
+function la(a, b) {
   for(var c = [], d = 2, e = arguments.length;d < e;d++) {
     c.push(arguments[d])
   }
@@ -245,7 +245,7 @@ function ma(a, b) {
     a.apply(b, c)
   }
 }
-function F(a, b, c) {
+function ma(a, b, c) {
   b.o ? a.push(b.copyrightText) : m.event.addListenerOnce(b, "load", function() {
     G(c)
   })
@@ -273,22 +273,22 @@ function G(a) {
         G(a)
       })
     }
-    var f = a.C;
+    var f = a.agsOverlays;
     c = [];
     if(f) {
       d = 0;
       for(e = f.getLength();d < e;d++) {
-        F(c, f.getAt(d).c, a)
+        ma(c, f.getAt(d).c, a)
       }
     }
-    var j = a.overlayMapTypes;
-    if(j) {
+    var i = a.overlayMapTypes;
+    if(i) {
       d = 0;
-      for(e = j.getLength();d < e;d++) {
-        f = j.getAt(d);
+      for(e = i.getLength();d < e;d++) {
+        f = i.getAt(d);
         if(f instanceof I) {
           for(var h = 0, g = f.q.length;h < g;h++) {
-            F(c, f.q[h].c, a)
+            ma(c, f.q[h].c, a)
           }
         }
       }
@@ -297,9 +297,9 @@ function G(a) {
     if(f instanceof I) {
       d = 0;
       for(e = f.q.length;d < e;d++) {
-        F(c, f.q[d].c, a)
+        ma(c, f.q[d].c, a)
       }
-      b.style.color = f.wa ? "#ffffff" : "#000000"
+      b.style.color = f.xa ? "#ffffff" : "#000000"
     }
     b.innerHTML = c.join("<br/>")
   }
@@ -307,24 +307,24 @@ function G(a) {
 function J(a, b, c, d) {
   var e = "ags_jsonp_" + aa++ + "_" + Math.floor(Math.random() * 1E6), f = null;
   b = b || {};
-  b[c || "callback"] = "ags_jsonp." + e + " && ags_jsonp." + e;
-  b = la(b);
-  var j = document.getElementsByTagName("head")[0];
-  if(!j) {
+  b[c || "callback"] = "ags_jsonp." + e;
+  b = ka(b);
+  var i = document.getElementsByTagName("head")[0];
+  if(!i) {
     throw new Error("document must have header tag");
   }
   window.ags_jsonp[e] = function() {
     window.ags_jsonp[e] && delete window.ags_jsonp[e];
-    f && j.removeChild(f);
+    f && i.removeChild(f);
     f = null;
     d.apply(null, arguments);
     x(t, "jsonpend", e)
   };
-  if((b + a).length < 2E3 && !p.Z) {
+  if((b + a).length < 2E3 && !p.X) {
     f = document.createElement("script");
     f.src = a + (a.indexOf("?") === -1 ? "?" : "&") + b;
     f.id = e;
-    j.appendChild(f)
+    i.appendChild(f)
   }else {
     c = window.location;
     c = c.protocol + "//" + c.hostname + (!c.port || c.port === 80 ? "" : ":" + c.port + "/");
@@ -332,7 +332,7 @@ function J(a, b, c, d) {
     if(a.toLowerCase().indexOf(c.toLowerCase()) !== -1) {
       h = false
     }
-    if(p.Z) {
+    if(p.X) {
       h = true
     }
     if(h && !p.ea) {
@@ -355,22 +355,22 @@ function J(a, b, c, d) {
   x(t, "jsonpstart", e);
   return e
 }
-t.va = function(a, b, c, d) {
+t.wa = function(a, b, c, d) {
   J(a, b, c, d)
 };
-t.Y = function(a, b) {
+t.W = function(a, b) {
   if(b && b.splice) {
     for(var c, d = 0, e = b.length;d < e;d++) {
       if((c = b[d]) && c.splice) {
-        t.Y(a, c)
+        t.W(a, c)
       }else {
         ia(c) && c.setMap(a)
       }
     }
   }
 };
-t.Aa = function(a, b) {
-  t.Y(null, a);
+t.za = function(a, b) {
+  t.W(null, a);
   if(b) {
     a.length = 0
   }
@@ -400,11 +400,11 @@ na.prototype = new K;
 function L(a) {
   a = a || {};
   K.call(this, a);
-  var b = a.S, c = a.V * k, d = a.W * k, e = a.T * k;
+  var b = a.Q, c = a.T * k, d = a.U * k, e = a.R * k;
   this.a = a.w / a.unit;
   this.h = a.t * k;
-  this.k = a.Q;
-  this.l = a.R;
+  this.k = a.O;
+  this.l = a.P;
   a = 1 / b;
   b = 2 * a - a * a;
   this.g = Math.sqrt(b);
@@ -414,8 +414,8 @@ function L(a) {
   c = M(this, c, this.g);
   d = M(this, d, this.g);
   this.b = Math.log(a / b) / Math.log(c / d);
-  this.O = a / (this.b * Math.pow(c, this.b));
-  this.i = this.B(this.a, this.O, e, this.b)
+  this.M = a / (this.b * Math.pow(c, this.b));
+  this.i = this.B(this.a, this.M, e, this.b)
 }
 L.prototype = new K;
 L.prototype.m = function(a, b) {
@@ -426,15 +426,15 @@ function M(a, b, c) {
   a = c * Math.sin(b);
   return Math.tan(Math.PI / 4 - b / 2) / Math.pow((1 - a) / (1 + a), c / 2)
 }
-i = L.prototype;
-i.B = function(a, b, c, d) {
+j = L.prototype;
+j.B = function(a, b, c, d) {
   return a * b * Math.pow(c, d)
 };
-i.A = function(a, b, c) {
+j.A = function(a, b, c) {
   c = b * Math.sin(c);
   return Math.PI / 2 - 2 * Math.atan(a * Math.pow((1 - c) / (1 + c), b / 2))
 };
-i.U = function(a, b, c) {
+j.S = function(a, b, c) {
   var d = 0;
   c = c;
   for(var e = this.A(a, b, c);Math.abs(e - c) > 1.0E-9 && d < 10;) {
@@ -444,37 +444,37 @@ i.U = function(a, b, c) {
   }
   return e
 };
-i.forward = function(a) {
+j.forward = function(a) {
   var b = a[0] * k;
-  a = this.B(this.a, this.O, M(this, a[1] * k, this.g), this.b);
+  a = this.B(this.a, this.M, M(this, a[1] * k, this.g), this.b);
   b = this.b * (b - this.h);
   return[this.k + a * Math.sin(b), this.l + this.i - a * Math.cos(b)]
 };
-i.s = function(a) {
+j.s = function(a) {
   var b = a[0] - this.k, c = a[1] - this.l;
   a = Math.atan(b / (this.i - c));
-  b = Math.pow((this.b > 0 ? 1 : -1) * Math.sqrt(b * b + (this.i - c) * (this.i - c)) / (this.a * this.O), 1 / this.b);
-  return[(a / this.b + this.h) / k, this.U(b, this.g, Math.PI / 2 - 2 * Math.atan(b)) / k]
+  b = Math.pow((this.b > 0 ? 1 : -1) * Math.sqrt(b * b + (this.i - c) * (this.i - c)) / (this.a * this.M), 1 / this.b);
+  return[(a / this.b + this.h) / k, this.S(b, this.g, Math.PI / 2 - 2 * Math.atan(b)) / k]
 };
-i.u = function() {
+j.u = function() {
   return Math.PI * 2 * this.a
 };
 function N(a) {
   a = a || {};
   K.call(this, a);
   this.a = a.w / a.unit;
-  var b = a.S;
-  this.H = a.sa;
-  var c = a.T * k;
+  var b = a.Q;
+  this.G = a.ta;
+  var c = a.R * k;
   this.h = a.t * k;
-  this.k = a.Q;
-  this.l = a.R;
+  this.k = a.O;
+  this.l = a.P;
   a = 1 / b;
   this.d = 2 * a - a * a;
-  this.F = this.d * this.d;
-  this.P = this.F * this.d;
+  this.D = this.d * this.d;
+  this.N = this.D * this.d;
   this.r = this.d / (1 - this.d);
-  this.X = this.m(c, this.a, this.d, this.F, this.P)
+  this.V = this.m(c, this.a, this.d, this.D, this.N)
 }
 N.prototype = new K;
 N.prototype.m = function(a, b, c, d, e) {
@@ -485,17 +485,17 @@ N.prototype.forward = function(a) {
   a = this.a / Math.sqrt(1 - this.d * Math.pow(Math.sin(b), 2));
   var d = Math.pow(Math.tan(b), 2), e = this.r * Math.pow(Math.cos(b), 2);
   c = (c - this.h) * Math.cos(b);
-  var f = this.m(b, this.a, this.d, this.F, this.P);
-  return[this.k + this.H * a * (c + (1 - d + e) * Math.pow(c, 3) / 6 + (5 - 18 * d + d * d + 72 * e - 58 * this.r) * Math.pow(c, 5) / 120), this.l + this.H * (f - this.X) + a * Math.tan(b) * (c * c / 2 + (5 - d + 9 * e + 4 * e * e) * Math.pow(c, 4) / 120 + (61 - 58 * d + d * d + 600 * e - 330 * this.r) * Math.pow(c, 6) / 720)]
+  var f = this.m(b, this.a, this.d, this.D, this.N);
+  return[this.k + this.G * a * (c + (1 - d + e) * Math.pow(c, 3) / 6 + (5 - 18 * d + d * d + 72 * e - 58 * this.r) * Math.pow(c, 5) / 120), this.l + this.G * (f - this.V) + a * Math.tan(b) * (c * c / 2 + (5 - d + 9 * e + 4 * e * e) * Math.pow(c, 4) / 120 + (61 - 58 * d + d * d + 600 * e - 330 * this.r) * Math.pow(c, 6) / 720)]
 };
 N.prototype.s = function(a) {
   var b = a[0], c = a[1];
   a = (1 - Math.sqrt(1 - this.d)) / (1 + Math.sqrt(1 - this.d));
-  c = (this.X + (c - this.l) / this.H) / (this.a * (1 - this.d / 4 - 3 * this.F / 64 - 5 * this.P / 256));
+  c = (this.V + (c - this.l) / this.G) / (this.a * (1 - this.d / 4 - 3 * this.D / 64 - 5 * this.N / 256));
   a = c + (3 * a / 2 - 27 * Math.pow(a, 3) / 32) * Math.sin(2 * c) + (21 * a * a / 16 - 55 * Math.pow(a, 4) / 32) * Math.sin(4 * c) + 151 * Math.pow(a, 3) / 6 * Math.sin(6 * c) + 1097 * Math.pow(a, 4) / 512 * Math.sin(8 * c);
   c = this.r * Math.pow(Math.cos(a), 2);
   var d = Math.pow(Math.tan(a), 2), e = this.a / Math.sqrt(1 - this.d * Math.pow(Math.sin(a), 2)), f = this.a * (1 - this.d) / Math.pow(1 - this.d * Math.pow(Math.sin(a), 2), 1.5);
-  b = (b - this.k) / (e * this.H);
+  b = (b - this.k) / (e * this.G);
   e = a - e * Math.tan(a) / f * (b * b / 2 - (5 + 3 * d + 10 * c - 4 * c * c - 9 * this.r) * Math.pow(b, 4) / 24 + (61 + 90 * d + 28 * c + 45 * d * d - 252 * this.r - 3 * c * c) * Math.pow(b, 6) / 720);
   return[(this.h + (b - (1 + 2 * d + c) * Math.pow(b, 3) / 6 + (5 - 2 * c + 28 * d - 3 * c * c + 8 * this.r + 24 * d * d) * Math.pow(b, 5) / 120) / Math.cos(a)) / k, e / k]
 };
@@ -522,11 +522,11 @@ O.prototype.u = function() {
 function S(a) {
   a = a || {};
   K.call(this, a);
-  var b = a.S, c = a.V * k, d = a.W * k, e = a.T * k;
+  var b = a.Q, c = a.T * k, d = a.U * k, e = a.R * k;
   this.a = a.w / a.unit;
   this.h = a.t * k;
-  this.k = a.Q;
-  this.l = a.R;
+  this.k = a.O;
+  this.l = a.P;
   a = 1 / b;
   b = 2 * a - a * a;
   this.g = Math.sqrt(b);
@@ -536,8 +536,8 @@ function S(a) {
   d = T(this, d, this.g);
   e = T(this, e, this.g);
   this.b = (a * a - b * b) / (d - c);
-  this.N = a * a + this.b * c;
-  this.i = this.B(this.a, this.N, this.b, e)
+  this.L = a * a + this.b * c;
+  this.i = this.B(this.a, this.L, this.b, e)
 }
 S.prototype = new K;
 S.prototype.m = function(a, b) {
@@ -548,15 +548,15 @@ function T(a, b, c) {
   a = c * Math.sin(b);
   return(1 - c * c) * (Math.sin(b) / (1 - a * a) - 1 / (2 * c) * Math.log((1 - a) / (1 + a)))
 }
-i = S.prototype;
-i.B = function(a, b, c, d) {
+j = S.prototype;
+j.B = function(a, b, c, d) {
   return a * Math.sqrt(b - c * d) / c
 };
-i.A = function(a, b, c) {
+j.A = function(a, b, c) {
   var d = b * Math.sin(c);
   return c + (1 - d * d) * (1 - d * d) / (2 * Math.cos(c)) * (a / (1 - b * b) - Math.sin(c) / (1 - d * d) + Math.log((1 - d) / (1 + d)) / (2 * b))
 };
-i.U = function(a, b, c) {
+j.S = function(a, b, c) {
   var d = 0;
   c = c;
   for(var e = this.A(a, b, c);Math.abs(e - c) > 1.0E-8 && d < 10;) {
@@ -566,30 +566,30 @@ i.U = function(a, b, c) {
   }
   return e
 };
-i.forward = function(a) {
+j.forward = function(a) {
   var b = a[0] * k;
-  a = this.B(this.a, this.N, this.b, T(this, a[1] * k, this.g));
+  a = this.B(this.a, this.L, this.b, T(this, a[1] * k, this.g));
   b = this.b * (b - this.h);
   return[this.k + a * Math.sin(b), this.l + this.i - a * Math.cos(b)]
 };
-i.s = function(a) {
+j.s = function(a) {
   var b = a[0] - this.k;
   a = a[1] - this.l;
   var c = Math.sqrt(b * b + (this.i - a) * (this.i - a)), d = this.b > 0 ? 1 : -1;
-  c = (this.N - c * c * this.b * this.b / (this.a * this.a)) / this.b;
-  return[(Math.atan(d * b / (d * this.i - d * a)) / this.b + this.h) / k, this.U(c, this.g, Math.asin(c / 2)) / k]
+  c = (this.L - c * c * this.b * this.b / (this.a * this.a)) / this.b;
+  return[(Math.atan(d * b / (d * this.i - d * a)) / this.b + this.h) / k, this.S(c, this.g, Math.asin(c / 2)) / k]
 };
-i.u = function() {
+j.u = function() {
   return Math.PI * 2 * this.a
 };
-i.u = function() {
+j.u = function() {
   return Math.PI * 2 * this.a
 };
 n = new na({wkid:4326});
 ba = new na({wkid:4269});
 o = new O({wkid:102113, w:6378137, t:0, unit:1});
 r = {"4326":n, "4269":ba, "102113":o, "102100":new O({wkid:102100, w:6378137, t:0, unit:1})};
-t.za = function(a, b) {
+t.sa = function(a, b) {
   var c = r["" + a];
   if(c) {
     return c
@@ -606,28 +606,28 @@ t.za = function(a, b) {
     if(e !== "") {
       d.unit = parseFloat(u(u(c, "PROJECTION", ""), "UNIT[", "]").split(",")[1]);
       d.w = parseFloat(f[1]);
-      d.S = parseFloat(f[2]);
-      d.T = parseFloat(u(c, '"Latitude_Of_Origin",', "]"));
+      d.Q = parseFloat(f[2]);
+      d.R = parseFloat(u(c, '"Latitude_Of_Origin",', "]"));
       d.t = parseFloat(u(c, '"Central_Meridian",', "]"));
-      d.Q = parseFloat(u(c, '"False_Easting",', "]"));
-      d.R = parseFloat(u(c, '"False_Northing",', "]"))
+      d.O = parseFloat(u(c, '"False_Easting",', "]"));
+      d.P = parseFloat(u(c, '"False_Northing",', "]"))
     }
     switch(e) {
       case "":
         c = new K(d);
         break;
       case "Lambert_Conformal_Conic":
-        d.V = parseFloat(u(c, '"Standard_Parallel_1",', "]"));
-        d.W = parseFloat(u(c, '"Standard_Parallel_2",', "]"));
+        d.T = parseFloat(u(c, '"Standard_Parallel_1",', "]"));
+        d.U = parseFloat(u(c, '"Standard_Parallel_2",', "]"));
         c = new L(d);
         break;
       case "Transverse_Mercator":
-        d.sa = parseFloat(u(c, '"Scale_Factor",', "]"));
+        d.ta = parseFloat(u(c, '"Scale_Factor",', "]"));
         c = new N(d);
         break;
       case "Albers":
-        d.V = parseFloat(u(c, '"Standard_Parallel_1",', "]"));
-        d.W = parseFloat(u(c, '"Standard_Parallel_2",', "]"));
+        d.T = parseFloat(u(c, '"Standard_Parallel_1",', "]"));
+        d.U = parseFloat(u(c, '"Standard_Parallel_2",', "]"));
         c = new S(d);
         break;
       default:
@@ -668,13 +668,13 @@ function U(a, b) {
 }
 function sa(a) {
   J(a.url, {}, "", function(b) {
-    a.G(b)
+    a.F(b)
   })
 }
-U.prototype.G = function(a) {
+U.prototype.F = function(a) {
   var b = this;
   w(a, this);
-  this.spatialReference = a.spatialReference.wkt ? K.ya(a.spatialReference.wkt) : r[a.spatialReference.wkid];
+  this.spatialReference = a.spatialReference.wkt ? t.sa(a.spatialReference.wkt) : r[a.spatialReference.wkid];
   a.tables !== undefined ? J(this.url + "/layers", {}, "", function(c) {
     ta(b, c)
   }) : ta(b, a)
@@ -685,9 +685,9 @@ function ta(a, b) {
   if(b.tables) {
     a.tables = d
   }
-  var e, f, j, h;
+  var e, f, i, h;
   f = 0;
-  for(j = b.layers.length;f < j;f++) {
+  for(i = b.layers.length;f < i;f++) {
     h = b.layers[f];
     e = new oa(a.url + "/" + h.id);
     w(h, e);
@@ -696,7 +696,7 @@ function ta(a, b) {
   }
   if(b.tables) {
     f = 0;
-    for(j = b.tables.length;f < j;f++) {
+    for(i = b.tables.length;f < i;f++) {
       h = b.tables[f];
       e = new oa(a.url + "/" + h.id);
       w(h, e);
@@ -704,10 +704,10 @@ function ta(a, b) {
     }
   }
   f = 0;
-  for(j = c.length;f < j;f++) {
+  for(i = c.length;f < i;f++) {
     e = c[f];
     if(e.subLayerIds) {
-      e.M = [];
+      e.subLayers = [];
       d = 0;
       for(h = e.subLayerIds.length;d < h;d++) {
         var g;
@@ -728,7 +728,7 @@ function ta(a, b) {
           }
           g = null
         }
-        e.M.push(g);
+        e.subLayers.push(g);
         g.ra = e
       }
     }
@@ -755,9 +755,9 @@ function va(a) {
     d = 0;
     for(e = a.layers.length;d < e;d++) {
       c = a.layers[d];
-      if(c.M) {
-        for(var f = 0, j = c.M.length;f < j;f++) {
-          if(c.M[f].visible === false) {
+      if(c.subLayers) {
+        for(var f = 0, i = c.subLayers.length;f < i;f++) {
+          if(c.subLayers[f].visible === false) {
             c.visible = false;
             break
           }
@@ -767,7 +767,7 @@ function va(a) {
     d = 0;
     for(e = a.layers.length;d < e;d++) {
       c = a.layers[d];
-      c.visible === true && b.push(c.id)
+      c.subLayers && c.subLayers.length > 0 || c.visible === true && b.push(c.id)
     }
   }
   return b
@@ -791,12 +791,12 @@ function wa(a, b, c, d) {
     }
     e.layerDefs = ea(f);
     f = b.layerIds;
-    var j = b.layerOption || "show";
+    var i = b.layerOption || "show";
     if(f === undefined) {
       f = va(a)
     }
     if(f.length > 0) {
-      e.layers = j + ":" + f.join(",")
+      e.layers = i + ":" + f.join(",")
     }else {
       if(a.o && c) {
         c({href:null});
@@ -805,15 +805,15 @@ function wa(a, b, c, d) {
     }
     e.transparent = b.transparent === false ? false : true;
     if(b.time) {
-      e.time = da(b.time, b.ta)
+      e.time = ca(b.time, b.ua)
     }
     e.ma = b.ma;
     if(e.f === "image") {
-      return a.url + "/export?" + la(e)
+      return a.url + "/export?" + ka(e)
     }else {
       J(a.url + "/export", e, "", function(h) {
         if(h.extent) {
-          h.bounds = ka(h.extent);
+          h.bounds = E(h.extent);
           delete h.extent;
           c(h)
         }else {
@@ -843,15 +843,15 @@ function xa(a, b, c, d) {
     e.oa = b.oa;
     e.returnGeometry = b.returnGeometry === false ? false : true;
     J(a.url + "/identify", e, "", function(f) {
-      var j, h, g;
+      var i, h, g;
       if(f.results) {
-        for(j = 0;j < f.results.length;j++) {
-          h = f.results[j];
+        for(i = 0;i < f.results.length;i++) {
+          h = f.results[i];
           a: {
             g = h.geometry;
             var l = b.overlayOptions, s = null, q = void 0, P = void 0, pa = void 0;
             q = void 0;
-            var qa = void 0, Q = void 0, H = void 0, ca = void 0, R = void 0;
+            var qa = void 0, Q = void 0, H = void 0, da = void 0, R = void 0;
             l = l || {};
             if(g) {
               s = [];
@@ -875,8 +875,8 @@ function xa(a, b, c, d) {
                     R = [];
                     q = 0;
                     for(qa = H.length;q < qa;q++) {
-                      ca = H[q];
-                      R.push(new m.LatLng(ca[1], ca[0]))
+                      da = H[q];
+                      R.push(new m.LatLng(da[1], da[0]))
                     }
                     if(g.paths) {
                       q = new m.Polyline(w(l.polylineOptions || l, {path:R}));
@@ -887,7 +887,7 @@ function xa(a, b, c, d) {
                   }
                 }
                 if(g.rings) {
-                  q = new m.Polygon(w(l.xa || l, {paths:ra}));
+                  q = new m.Polygon(w(l.ya || l, {paths:ra}));
                   s.push(q)
                 }
               }
@@ -915,7 +915,7 @@ function V(a) {
   if(m.Size) {
     this.ga = a ? new m.Size(a.cols, a.rows) : new m.Size(256, 256)
   }
-  this.K = Math.pow(2, this.minZoom) * this.fa;
+  this.J = Math.pow(2, this.minZoom) * this.fa;
   this.ca = a ? a.origin.x : -2.0037508342787E7;
   this.da = a ? a.origin.y : 2.0037508342787E7;
   if(a) {
@@ -932,8 +932,8 @@ V.prototype.fromLatLngToPoint = function(a, b) {
     return null
   }
   var c = this.z.forward([a.lng(), a.lat()]), d = b || new m.Point(0, 0);
-  d.x = (c[0] - this.ca) / this.K;
-  d.y = (this.da - c[1]) / this.K;
+  d.x = (c[0] - this.ca) / this.J;
+  d.y = (this.da - c[1]) / this.J;
   return d
 };
 V.prototype.fromLatLngToPoint = V.prototype.fromLatLngToPoint;
@@ -941,7 +941,7 @@ V.prototype.fromPointToLatLng = function(a) {
   if(a === null) {
     return null
   }
-  a = this.z.s([a.x * this.K + this.ca, this.da - a.y * this.K]);
+  a = this.z.s([a.x * this.J + this.ca, this.da - a.y * this.J]);
   return new m.LatLng(a[1], a[0])
 };
 var ya = new V;
@@ -953,27 +953,27 @@ function W(a, b) {
   }
   w(b, this);
   this.c = a instanceof U ? a : new U(a);
-  if(b.aa) {
+  if(b.$) {
     var c = u(this.c.url, "", "://");
-    this.ha = c + "://" + b.aa + u(this.c.url, c + "://" + u(this.c.url, "://", "/"), "");
-    this.ba = parseInt(u(b.aa, "[", "]"), 10)
+    this.ha = c + "://" + b.$ + u(this.c.url, c + "://" + u(this.c.url, "://", "/"), "");
+    this.ba = parseInt(u(b.$, "[", "]"), 10)
   }
   this.name = b.name || this.c.name;
   this.maxZoom = b.maxZoom || 19;
   this.minZoom = b.minZoom || 0;
-  this.$ = b.$ || this.maxZoom;
+  this.Y = b.Y || this.maxZoom;
   if(this.c.o) {
-    this.G(b)
+    this.F(b)
   }else {
     var d = this;
     m.event.addListenerOnce(this.c, "load", function() {
-      d.G(b)
+      d.F(b)
     })
   }
   this.j = {};
   this.v = b.map
 }
-W.prototype.G = function(a) {
+W.prototype.F = function(a) {
   if(this.c.tileInfo) {
     this.p = new V(this.c.tileInfo);
     this.minZoom = a.minZoom || this.p.minZoom;
@@ -983,33 +983,39 @@ W.prototype.G = function(a) {
 W.prototype.getTileUrl = function(a, b) {
   var c = b - (this.p ? this.p.minZoom : this.minZoom), d = "";
   if(!isNaN(a.x) && !isNaN(a.y) && c >= 0 && a.x >= 0 && a.y >= 0) {
-    d = this.c.url;
+    var e = this.c.url;
     if(this.ha) {
-      d = this.ha.replace("[" + this.ba + "]", "" + (a.y + a.x) % this.ba)
+      e = this.ha.replace("[" + this.ba + "]", "" + (a.y + a.x) % this.ba)
     }
-    if(this.c.singleFusedMapCache === false || b > this.$) {
-      c = this.p || (this.v ? this.v.getProjection() : ya);
-      if(!c instanceof V) {
-        c = ya
-      }
-      d = c.ga;
-      var e = 1 << b, f = new m.Point(a.x * d.width / e, (a.y + 1) * d.height / e);
-      e = new m.Point((a.x + 1) * d.width / e, a.y * d.height / e);
-      f = new m.LatLngBounds(c.fromPointToLatLng(f), c.fromPointToLatLng(e));
-      e = {f:"image"};
-      e.bounds = f;
-      e.format = "png32";
-      e.width = d.width;
-      e.height = d.height;
-      e.imageSR = c.z;
-      d = wa(this.c, e)
+    d = this.p || (this.v ? this.v.getProjection() : ya);
+    if(!d instanceof V) {
+      d = ya
+    }
+    var f = d.ga, i = 1 << b, h = new m.Point(a.x * f.width / i, (a.y + 1) * f.height / i);
+    i = new m.Point((a.x + 1) * f.width / i, a.y * f.height / i);
+    h = new m.LatLngBounds(d.fromPointToLatLng(h), d.fromPointToLatLng(i));
+    i = this.c;
+    if(i.fullExtent) {
+      i.Z = i.Z || E(i.fullExtent);
+      i = i.Z
     }else {
-      d = d + "/tile/" + c + "/" + a.y + "/" + a.x
+      i = null
+    }
+    if(this.c.singleFusedMapCache === false || b > this.Y) {
+      c = {f:"image"};
+      c.bounds = h;
+      c.format = "png32";
+      c.width = f.width;
+      c.height = f.height;
+      c.imageSR = d.z;
+      d = wa(this.c, c)
+    }else {
+      d = i && !i.intersects(h) ? "" : e + "/tile/" + c + "/" + a.y + "/" + a.x
     }
   }
   return d
 };
-W.prototype.L = function(a) {
+W.prototype.K = function(a) {
   this.e = a;
   var b = this.j;
   for(var c in b) {
@@ -1066,9 +1072,9 @@ function I(a, b) {
 }
 I.prototype.getTile = function(a, b, c) {
   for(var d = c.createElement("div"), e = "_" + a.x + "_" + a.y + "_" + b, f = 0;f < this.q.length;f++) {
-    var j = this.q[f];
-    if(b <= j.maxZoom && b >= j.minZoom) {
-      var h = j.getTileUrl(a, b);
+    var i = this.q[f];
+    if(b <= i.maxZoom && b >= i.minZoom) {
+      var h = i.getTileUrl(a, b);
       if(h) {
         var g = c.createElement(document.all ? "img" : "div");
         g.style.border = "0px none";
@@ -1086,9 +1092,9 @@ I.prototype.getTile = function(a, b, c) {
           g.style.backgroundImage = "url(" + h + ")"
         }
         d.appendChild(g);
-        j.j[e] = g;
-        if(j.e !== undefined) {
-          y(g, j.e)
+        i.j[e] = g;
+        if(i.e !== undefined) {
+          y(g, i.e)
         }else {
           this.e !== undefined && y(g, this.e)
         }
@@ -1111,7 +1117,7 @@ I.prototype.releaseTile = function(a) {
   }
 };
 I.prototype.releaseTile = I.prototype.releaseTile;
-I.prototype.L = function(a) {
+I.prototype.K = function(a) {
   this.e = a;
   var b = this.j;
   for(var c in b) {
@@ -1128,8 +1134,8 @@ function X(a, b) {
   this.minZoom = b.minZoom;
   this.maxZoom = b.maxZoom;
   this.e = b.opacity || 1;
-  this.ka = b.ua || {};
-  this.I = this.D = false;
+  this.ka = b.va || {};
+  this.H = this.C = false;
   this.n = null;
   b.map && this.setMap(b.map);
   this.v = null
@@ -1142,10 +1148,10 @@ X.prototype.onAdd = function() {
   this.n = a;
   this.getPanes().overlayLayer.appendChild(a);
   this.e && y(a, this.e);
-  this.ia = m.event.addListener(this.getMap(), "bounds_changed", ma(this.J, this));
+  this.ia = m.event.addListener(this.getMap(), "bounds_changed", la(this.I, this));
   a = this.getMap();
-  a.C = a.C || new m.MVCArray;
-  a.C.push(this);
+  a.agsOverlays = a.agsOverlays || new m.MVCArray;
+  a.agsOverlays.push(this);
   G(a);
   this.v = a
 };
@@ -1154,7 +1160,7 @@ X.prototype.onRemove = function() {
   m.event.removeListener(this.ia);
   this.n.parentNode.removeChild(this.n);
   this.n = null;
-  var a = this.v, b = a.C;
+  var a = this.v, b = a.agsOverlays;
   if(b) {
     for(var c = 0, d = b.getLength();c < d;c++) {
       if(b.getAt(c) == this) {
@@ -1168,18 +1174,18 @@ X.prototype.onRemove = function() {
 };
 X.prototype.onRemove = X.prototype.onRemove;
 X.prototype.draw = function() {
-  if(!this.D || this.I === true) {
-    this.J()
+  if(!this.C || this.H === true) {
+    this.I()
   }
 };
 X.prototype.draw = X.prototype.draw;
-X.prototype.L = function(a) {
+X.prototype.K = function(a) {
   this.e = a = Math.min(Math.max(a, 0), 1);
   y(this.n, a)
 };
-X.prototype.J = function() {
-  if(this.D === true) {
-    this.I = true
+X.prototype.I = function() {
+  if(this.C === true) {
+    this.H = true
   }else {
     var a = this.getMap(), b = a ? a.getBounds() : null;
     if(b) {
@@ -1189,34 +1195,36 @@ X.prototype.J = function() {
       var d = a.getDiv();
       c.width = d.offsetWidth;
       c.height = d.offsetHeight;
-      if((a = a.getProjection()) && a instanceof V) {
-        b = a.z
-      }
-      c.imageSR = b;
-      x(this, "drawstart");
-      var e = this;
-      this.D = true;
-      this.n.style.backgroundImage = "";
-      wa(this.c, c, function(f) {
-        e.D = false;
-        if(e.I === true) {
-          e.I = false;
-          e.J()
-        }else {
-          if(f.href) {
-            var j = e.getProjection(), h = f.bounds, g = j.fromLatLngToDivPixel(h.getSouthWest());
-            j = j.fromLatLngToDivPixel(h.getNorthEast());
-            h = e.n;
-            h.style.left = g.x + "px";
-            h.style.top = j.y + "px";
-            h.style.width = j.x - g.x + "px";
-            h.style.height = g.y - j.y + "px";
-            e.n.style.backgroundImage = "url(" + f.href + ")";
-            e.L(e.e)
-          }
-          x(e, "drawend")
+      if(!(d.offsetWidth == 0 || d.offsetHeight == 0)) {
+        if((a = a.getProjection()) && a instanceof V) {
+          b = a.z
         }
-      })
+        c.imageSR = b;
+        x(this, "drawstart");
+        var e = this;
+        this.C = true;
+        this.n.style.backgroundImage = "";
+        wa(this.c, c, function(f) {
+          e.C = false;
+          if(e.H === true) {
+            e.H = false;
+            e.I()
+          }else {
+            if(f.href) {
+              var i = e.getProjection(), h = f.bounds, g = i.fromLatLngToDivPixel(h.getSouthWest());
+              i = i.fromLatLngToDivPixel(h.getNorthEast());
+              h = e.n;
+              h.style.left = g.x + "px";
+              h.style.top = i.y + "px";
+              h.style.width = i.x - g.x + "px";
+              h.style.height = g.y - i.y + "px";
+              e.n.style.backgroundImage = "url(" + f.href + ")";
+              e.K(e.e)
+            }
+            x(e, "drawend")
+          }
+        })
+      }
     }
   }
 };
@@ -1235,7 +1243,13 @@ function Ea() {
   $ = new za(a);
   google.maps.event.addListener($, "load", function() {
     var b;
-    b = $.initialExtent ? ka($.initialExtent) : null;
+    b = $;
+    if(b.initialExtent) {
+      b.aa = b.aa || E(b.initialExtent);
+      b = b.aa
+    }else {
+      b = null
+    }
     if(b) {
       if(b.getSouthWest().lng() > b.getNorthEast().lng()) {
         Y.setCenter(new google.maps.LatLng(40, -100));
@@ -1309,7 +1323,7 @@ function Ga(a) {
             var e = "";
             if(c.results) {
               e += "Total # of Results:" + c.results.length;
-              for(var f = 0, j = c.results.length;f < j;f++) {
+              for(var f = 0, i = c.results.length;f < i;f++) {
                 var h = c.results[f];
                 if(f > 0) {
                   e += "<hr/>"
@@ -1363,9 +1377,9 @@ window.setLayerVisibility = function() {
       a[b].visible = c.checked === true
     }
   }
-  Z.J()
+  Z.I()
 };
 window.loadMapService = Ea;
 window.setOVOpacity = function(a) {
-  Z && Z.L(a)
+  Z && Z.K(a)
 };})()

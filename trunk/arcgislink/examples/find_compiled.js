@@ -203,7 +203,7 @@ function fa(a) {
 function K(a, b, c, d) {
   var e = "ags_jsonp_" + aa++ + "_" + Math.floor(Math.random() * 1E6), f = null;
   b = b || {};
-  b[c || "callback"] = "ags_jsonp." + e + " && ags_jsonp." + e;
+  b[c || "callback"] = "ags_jsonp." + e;
   b = fa(b);
   var j = document.getElementsByTagName("head")[0];
   if(!j) {
@@ -265,7 +265,7 @@ v.B = function(a, b) {
     }
   }
 };
-v.X = function(a, b) {
+v.V = function(a, b) {
   v.B(null, a);
   if(b) {
     a.length = 0
@@ -336,7 +336,7 @@ function P(a) {
   L.call(this, a);
   this.a = a.j / a.unit;
   var b = a.r;
-  this.F = a.Q;
+  this.F = a.R;
   var c = a.s * i;
   this.g = a.h * i;
   this.k = a.p;
@@ -425,7 +425,7 @@ n = new M({wkid:4326});
 o = new M({wkid:4269});
 q = new Q({wkid:102113, j:6378137, h:0, unit:1});
 t = {"4326":n, "4269":o, "102113":q, "102100":new Q({wkid:102100, j:6378137, h:0, unit:1})};
-v.W = function(a, b) {
+v.Q = function(a, b) {
   var c = t["" + a];
   if(c) {
     return c
@@ -458,7 +458,7 @@ v.W = function(a, b) {
         c = new N(d);
         break;
       case "Transverse_Mercator":
-        d.Q = parseFloat(w(c, '"Scale_Factor",', "]"));
+        d.R = parseFloat(w(c, '"Scale_Factor",', "]"));
         c = new P(d);
         break;
       case "Albers":
@@ -501,7 +501,7 @@ function ga(a) {
 }
 function ha(a, b) {
   x(b, a);
-  a.spatialReference = b.spatialReference.wkt ? L.V(b.spatialReference.wkt) : t[b.spatialReference.wkid];
+  a.spatialReference = b.spatialReference.wkt ? v.Q(b.spatialReference.wkt) : t[b.spatialReference.wkid];
   b.tables !== undefined ? K(a.url + "/layers", {}, "", function(c) {
     ia(a, c)
   }) : ia(a, b)
@@ -534,7 +534,7 @@ function ia(a, b) {
   for(j = c.length;f < j;f++) {
     e = c[f];
     if(e.subLayerIds) {
-      e.R = [];
+      e.subLayers = [];
       d = 0;
       for(h = e.subLayerIds.length;d < h;d++) {
         var g;
@@ -555,7 +555,7 @@ function ia(a, b) {
           }
           g = null
         }
-        e.R.push(g);
+        e.subLayers.push(g);
         g.T = e
       }
     }
@@ -651,7 +651,7 @@ function W(a) {
   this.minZoom = Math.floor(Math.log(this.u.i() / this.H / 256) / Math.LN2 + 0.5);
   this.maxZoom = a ? this.minZoom + this.N.length - 1 : 20;
   if(l.Size) {
-    this.Y = a ? new l.Size(a.cols, a.rows) : new l.Size(256, 256)
+    this.W = a ? new l.Size(a.cols, a.rows) : new l.Size(256, 256)
   }
   this.I = Math.pow(2, this.minZoom) * this.H;
   this.O = a ? a.origin.x : -2.0037508342787E7;

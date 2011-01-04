@@ -197,7 +197,7 @@ function ga(a) {
 function M(a, b, c, d) {
   var e = "ags_jsonp_" + da++ + "_" + Math.floor(Math.random() * 1E6), g = null;
   b = b || {};
-  b[c || "callback"] = "ags_jsonp." + e + " && ags_jsonp." + e;
+  b[c || "callback"] = "ags_jsonp." + e;
   b = ga(b);
   var n = document.getElementsByTagName("head")[0];
   if(!n) {
