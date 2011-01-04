@@ -20,6 +20,7 @@ function init() {
 }
 
 
+// find results ...
 function find(q) {
   removeOverlays();
   if (iw) 

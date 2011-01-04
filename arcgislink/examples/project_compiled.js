@@ -307,7 +307,7 @@ function ca(a) {
 function L(a, b, c, d) {
   var e = "ags_jsonp_" + i++ + "_" + Math.floor(Math.random() * 1E6), f = null;
   b = b || {};
-  b[c || "callback"] = "ags_jsonp." + e + " && ags_jsonp." + e;
+  b[c || "callback"] = "ags_jsonp." + e;
   b = ca(b);
   var h = document.getElementsByTagName("head")[0];
   if(!h) {

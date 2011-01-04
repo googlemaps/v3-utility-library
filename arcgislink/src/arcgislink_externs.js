@@ -72,6 +72,17 @@ var REST_JSON = {
     wkid: 4326,
     wkt: null
   },
+  fields:null,
+  drawingInfo:{
+    renderer:{
+      symbol:{
+        contentType:null,
+        imageData:null
+      }
+    }
+  },
+  
+  
   singleFusedMapCache: true,
   tileInfo: {
     rows: 512,
