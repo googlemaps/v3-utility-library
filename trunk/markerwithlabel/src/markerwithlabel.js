@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.1 [December 22, 2010]
+ * @version 1.1.1 [January 14, 2011]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -131,8 +131,8 @@ MarkerLabel_.prototype.onAdd = function () {
       }
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
         google.maps.event.trigger(me.marker_, "mousedown", e);
+        cAbortEvent(e); // Prevent map pan when starting a drag on a label
       }
-      cAbortEvent(e); // Prevent map pan when starting a drag on a label
     }),
     google.maps.event.addDomListener(document, "mouseup", function (mEvent) {
       var position;
