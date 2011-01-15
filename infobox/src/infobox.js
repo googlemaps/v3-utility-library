@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.2 [December 15, 2010]
+ * @version 1.1.3 [January 15, 2011]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -44,6 +44,7 @@
  * @property {boolean} disableAutoPan Disable auto-pan on <tt>open</tt> (default is <tt>false</tt>).
  * @property {number} maxWidth The maximum width (in pixels) of the InfoBox. Set to 0 if no maximum.
  * @property {Size} pixelOffset The offset (in pixels) from the top left corner of the InfoBox
+ *  (or the bottom left corner if the <code>alignBottom</code> property is <code>true</code>)
  *  to the map pixel corresponding to <tt>position</tt>.
  * @property {LatLng} position The geographic location at which to display the InfoBox.
  * @property {number} zIndex The CSS z-index style value for the InfoBox.
@@ -63,6 +64,8 @@
  * @property {Size} infoBoxClearance Minimum offset (in pixels) from the InfoBox to the
  *  map edge after an auto-pan.
  * @property {boolean} isHidden Hide the InfoBox on <tt>open</tt> (default is <tt>false</tt>).
+ * @property {boolean} alignBottom Align the bottom left corner of the InfoBox to the <code>position</code>
+ *  location (default is <tt>false</tt> which means that the top left of the InfoBox is aligned).
  * @property {string} pane The pane where the InfoBox is to appear (default is "floatPane").
  *  Set the pane to "mapPane" if the InfoBox is being used as a map label.
  *  Valid pane names are the property names for the <tt>google.maps.MapPanes</tt> object.
@@ -106,6 +109,7 @@ function InfoBox(opt_opts) {
   }
   this.infoBoxClearance_ = opt_opts.infoBoxClearance || new google.maps.Size(1, 1);
   this.isHidden_ = opt_opts.isHidden || false;
+  this.alignBottom_ = opt_opts.alignBottom || false;
   this.pane_ = opt_opts.pane || "floatPane";
   this.enableEventPropagation_ = opt_opts.enableEventPropagation || false;
 
@@ -331,10 +335,18 @@ InfoBox.prototype.panBox_ = function (disablePan) {
     } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
       xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
     }
-    if (pixPosition.y < (-iwOffsetY + padY)) {
-      yOffset = pixPosition.y + iwOffsetY - padY;
-    } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
-      yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+    if (this.alignBottom_) {
+      if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
+        yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
+      } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
+        yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+      }
+    } else {
+      if (pixPosition.y < (-iwOffsetY + padY)) {
+        yOffset = pixPosition.y + iwOffsetY - padY;
+      } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
+        yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+      }
     }
 
     if (!(xOffset === 0 && yOffset === 0)) {
@@ -453,7 +465,12 @@ InfoBox.prototype.draw = function () {
   var pixPosition = this.getProjection().fromLatLngToDivPixel(this.position_);
 
   this.div_.style.left = (pixPosition.x + this.pixelOffset_.width) + "px";
-  this.div_.style.top = (pixPosition.y + this.pixelOffset_.height) + "px";
+  
+  if (this.alignBottom_) {
+    this.div_.style.bottom = -(pixPosition.y + this.pixelOffset_.height) + "px";
+  } else {
+    this.div_.style.top = (pixPosition.y + this.pixelOffset_.height) + "px";
+  }
 
   if (this.isHidden_) {
 
