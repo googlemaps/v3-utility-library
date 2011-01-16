@@ -14,9 +14,10 @@
 
   * Works as a REALTOR at Royal !LePage Sunshine Coast in Sechelt, BC, Canada
   * Formerly worked at Apple Inc. and Sun Microsystems, Inc. in Silicon Valley
-  * Created the [http://map.garylittle.ca/ Sunshine Coast Interactive Real Estate Map] (uses Google Maps API v2)
+  * Created the [http://map.garylittle.ca/ Sunshine Coast Interactive Real Estate Map] (uses Google Maps API v3)
   * Created the [http://imap.garylittle.ca/ Sunshine Coast Interactive Real Estate Map for iPhone and Android phones] (uses Google Maps API v3)
   * Created the [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ InfoBox] class for Google Maps API v3
+  * Created the [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ MarkerWithLabel] class for Google Maps API v3
   * Worked on the [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ KeyDragZoom] class for Google Maps API v2/v3
   * Personal website: [http://www.garylittle.ca/ www.garylittle.ca]
 
