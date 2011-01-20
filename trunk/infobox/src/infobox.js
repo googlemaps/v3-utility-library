@@ -65,7 +65,7 @@
  *  map edge after an auto-pan.
  * @property {boolean} isHidden Hide the InfoBox on <tt>open</tt> (default is <tt>false</tt>).
  * @property {boolean} alignBottom Align the bottom left corner of the InfoBox to the <code>position</code>
- *  location (default is <tt>false</tt> which means that the top left of the InfoBox is aligned).
+ *  location (default is <tt>false</tt> which means that the top left corner of the InfoBox is aligned).
  * @property {string} pane The pane where the InfoBox is to appear (default is "floatPane").
  *  Set the pane to "mapPane" if the InfoBox is being used as a map label.
  *  Valid pane names are the property names for the <tt>google.maps.MapPanes</tt> object.
