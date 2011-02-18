@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.3 [January 15, 2011]
+ * @version 1.1.4 [February 18, 2011]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -311,50 +311,53 @@ InfoBox.prototype.panBox_ = function (disablePan) {
 
     map = this.getMap();
 
-    if (!map.getBounds().contains(this.position_)) {
-    // Marker not in visible area of map, so set center
-    // of map to the marker position first.
-      map.setCenter(this.position_);
-    }
+    if (map instanceof google.maps.Map) { // Only pan if attached to map, not panorama
 
-    bounds = map.getBounds();
-
-    var mapDiv = map.getDiv();
-    var mapWidth = mapDiv.offsetWidth;
-    var mapHeight = mapDiv.offsetHeight;
-    var iwOffsetX = this.pixelOffset_.width;
-    var iwOffsetY = this.pixelOffset_.height;
-    var iwWidth = this.div_.offsetWidth;
-    var iwHeight = this.div_.offsetHeight;
-    var padX = this.infoBoxClearance_.width;
-    var padY = this.infoBoxClearance_.height;
-    var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
-
-    if (pixPosition.x < (-iwOffsetX + padX)) {
-      xOffset = pixPosition.x + iwOffsetX - padX;
-    } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
-      xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
-    }
-    if (this.alignBottom_) {
-      if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
-        yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
-      } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
-        yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+      if (!map.getBounds().contains(this.position_)) {
+      // Marker not in visible area of map, so set center
+      // of map to the marker position first.
+        map.setCenter(this.position_);
       }
-    } else {
-      if (pixPosition.y < (-iwOffsetY + padY)) {
-        yOffset = pixPosition.y + iwOffsetY - padY;
-      } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
-        yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+
+      bounds = map.getBounds();
+
+      var mapDiv = map.getDiv();
+      var mapWidth = mapDiv.offsetWidth;
+      var mapHeight = mapDiv.offsetHeight;
+      var iwOffsetX = this.pixelOffset_.width;
+      var iwOffsetY = this.pixelOffset_.height;
+      var iwWidth = this.div_.offsetWidth;
+      var iwHeight = this.div_.offsetHeight;
+      var padX = this.infoBoxClearance_.width;
+      var padY = this.infoBoxClearance_.height;
+      var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
+
+      if (pixPosition.x < (-iwOffsetX + padX)) {
+        xOffset = pixPosition.x + iwOffsetX - padX;
+      } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
+        xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
       }
-    }
+      if (this.alignBottom_) {
+        if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
+          yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
+        } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
+          yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+        }
+      } else {
+        if (pixPosition.y < (-iwOffsetY + padY)) {
+          yOffset = pixPosition.y + iwOffsetY - padY;
+        } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
+          yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+        }
+      }
 
-    if (!(xOffset === 0 && yOffset === 0)) {
+      if (!(xOffset === 0 && yOffset === 0)) {
 
-      // Move the map to the shifted center.
-      //
-      var c = map.getCenter();
-      map.panBy(xOffset, yOffset);
+        // Move the map to the shifted center.
+        //
+        var c = map.getCenter();
+        map.panBy(xOffset, yOffset);
+      }
     }
   }
 };
@@ -689,11 +692,11 @@ InfoBox.prototype.hide = function () {
 };
 
 /**
- * Adds the InfoBox to the specified map. If <tt>anchor</tt>
+ * Adds the InfoBox to the specified map or Street View panorama. If <tt>anchor</tt>
  *  (usually a <tt>google.maps.Marker</tt>) is specified, the position
  *  of the InfoBox is set to the position of the <tt>anchor</tt>. If the
  *  anchor is dragged to a new location, the InfoBox moves as well.
- * @param {Map} map
+ * @param {Map|StreetViewPanorama} map
  * @param {MVCObject} [anchor]
  */
 InfoBox.prototype.open = function (map, anchor) {
