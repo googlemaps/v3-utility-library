@@ -956,7 +956,6 @@ InfoBubble.prototype.isOpen = function() {
 InfoBubble.prototype['isOpen'] = InfoBubble.prototype.isOpen;
 
 
-
 /**
  * Close the InfoBubble
  */
@@ -991,6 +990,7 @@ InfoBubble.prototype.open = function(opt_map, opt_anchor) {
 
   if (opt_anchor) {
     this.set('anchor', opt_anchor);
+    this.bindTo('anchorPoint', opt_anchor);
     this.bindTo('position', opt_anchor);
   }
 
@@ -1713,21 +1713,21 @@ InfoBubble.prototype.figureOutSize_ = function() {
  *  @return {number} The height of the anchor.
  */
 InfoBubble.prototype.getAnchorHeight_ = function() {
-  var anchorHeight = 0;
   var anchor = this.get('anchor');
   if (anchor) {
+    var anchorPoint = /** @type google.maps.Point */(this.get('anchorPoint'));
 
-    if (!anchorHeight && anchor.height) {
-      anchorHeight = anchor.height;
-    }
-
-    // HACK
-    if (!anchorHeight) {
-      anchorHeight = 34;
+    if (anchorPoint) {
+      return -1 * anchorPoint.y;
     }
   }
-  return anchorHeight;
+  return 0;
 };
+
+InfoBubble.prototype.anchorPoint_changed = function() {
+  this.draw();
+};
+InfoBubble.prototype['anchorPoint_changed'] = InfoBubble.prototype.anchorPoint_changed;
 
 
 /**
