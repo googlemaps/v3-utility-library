@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.4 [February 18, 2011]
+ * @version 1.1.5 [March 1, 2011]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -679,7 +679,9 @@ InfoBox.prototype.getZIndex = function () {
 InfoBox.prototype.show = function () {
 
   this.isHidden_ = false;
-  this.div_.style.visibility = "visible";
+  if (this.div_) {
+    this.div_.style.visibility = "visible";
+  }
 };
 
 /**
@@ -688,7 +690,9 @@ InfoBox.prototype.show = function () {
 InfoBox.prototype.hide = function () {
 
   this.isHidden_ = true;
-  this.div_.style.visibility = "hidden";
+  if (this.div_) {
+    this.div_.style.visibility = "hidden";
+  }
 };
 
 /**
