@@ -72,9 +72,8 @@
  * @property {boolean} enableEventPropagation Propagate mousedown, click, dblclick,
  *  and contextmenu events in the InfoBox (default is <tt>false</tt> to mimic the behavior
  *  of a <tt>google.maps.InfoWindow</tt>). Set this property to <tt>true</tt> if the InfoBox
- *  is being used as a map label. iPhone note: This property setting has no effect. Events are
- *  always propagated for an InfoBox in the "mapPane" pane and they are <i>not</i> propagated
- *  for an InfoBox in the "floatPane" pane.
+ *  is being used as a map label. iPhone note: This property setting has no effect; events are
+ *  always propagated.
  */
 
 /**
