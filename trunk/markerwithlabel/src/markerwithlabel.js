@@ -523,6 +523,7 @@ MarkerWithLabel.prototype = new google.maps.Marker();
  * @private
  */
 MarkerWithLabel.prototype.setMap = function (theMap) {
+
   // Call the inherited function...
   google.maps.Marker.prototype.setMap.apply(this, arguments);
 
