@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.1 [January 14, 2011]
+ * @version 1.1.1 [March 11, 2011]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -492,6 +492,10 @@ function MarkerWithLabel(opt_options) {
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
   opt_options.labelStyle = opt_options.labelStyle || {};
   opt_options.labelInBackground = opt_options.labelInBackground || false;
+  // Workaround a bug in API V3.4:
+  if (typeof opt_options.visible === "undefined") {
+    opt_options.visible = true;
+  }
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }
