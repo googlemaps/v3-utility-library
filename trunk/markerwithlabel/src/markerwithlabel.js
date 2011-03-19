@@ -497,9 +497,8 @@ MarkerLabel_.prototype.setVisible = function () {
  *  being created and a version of Google Maps API earlier than V3.3 is being used, this property
  *  must be set to <code>false</code>.
  * @property {boolean} [optimized] A flag indicating whether rendering is to be optimized for the
- *  marker, meaning that drawing is done in a &lt;canvas&gt; element. The default is <code>true</code>.
- *  <b>Important: Set <code>optimized</code> to <code>false</code> if any portion of the label and
- *  the marker will overlap. Failure to do this may result in unexpected spatial ordering.</b>
+ *  marker. <b>Important: The optimized rendering technique is not supported by MarkerWithLabel,
+ *  so the value of this parameter is always forced to <code>false</code>.
  */
 /**
  * Creates a MarkerWithLabel with the options specified in {@link MarkerWithLabelOptions}.
@@ -525,6 +524,10 @@ function MarkerWithLabel(opt_options) {
   if (typeof opt_options.draggable === "undefined") {
     opt_options.draggable = false;
   }
+  if (typeof opt_options.optimized === "undefined") {
+    opt_options.optimized = false;
+  }
+  opt_options.optimized = false; // Optimized rendering is not supported
 
   this.label = new MarkerLabel_(this); // Bind the label to the marker
 
