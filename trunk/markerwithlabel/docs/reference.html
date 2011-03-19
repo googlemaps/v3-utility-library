@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerWithLabel for V3 v1.1.1 [March 11, 2011] Reference</title>
+    <title>MarkerWithLabel for V3 v1.1.3 [March 19, 2011] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -152,6 +152,19 @@ MarkerWithLabel extends the Google Maps JavaScript API V3
               </tr>
             
               <tr class="odd">
+                <td><code>optimized</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether rendering is to be optimized for the
+ marker, meaning that drawing is done in a &lt;canvas&gt; element. The default is <code>true</code>.
+ <b>Important: Set <code>optimized</code> to <code>false</code> if any portion of the label and
+ the marker will overlap. Failure to do this may result in unexpected spatial ordering.</b></td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>raiseOnDrag</code></td>
                 
                   
