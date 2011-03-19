@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.1 [March 11, 2011]
+ * @version 1.1.3 [March 19, 2011]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -59,17 +59,31 @@ function MarkerLabel_(marker) {
   this.eventDiv_.setAttribute("onselectstart", "return false;");
   this.eventDiv_.setAttribute("ondragstart", "return false;");
 
-  // Set up the IMG for the "X" to be displayed when the marker is raised.
-  this.crossDiv_ = document.createElement("img");
-  this.crossDiv_.style.cssText = "position: absolute; z-index: 1000002; display: none;";
-  // Hopefully Google never changes the standard "X" attributes:
-  this.crossDiv_.style.marginLeft = "-8px";
-  this.crossDiv_.style.marginTop = "-9px";
-  this.crossDiv_.src = "http://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
+  // Get the DIV for the "X" to be displayed when the marker is raised.
+  this.crossDiv_ = MarkerLabel_.getSharedCross();
 }
 
 // MarkerLabel_ inherits from OverlayView:
 MarkerLabel_.prototype = new google.maps.OverlayView();
+
+/**
+ * Returns the DIV for the cross used when dragging a marker when the
+ * raiseOnDrag parameter set to true. One cross is shared with all markers.
+ * @private
+ */
+MarkerLabel_.getSharedCross = function () {
+  var div;
+  if (typeof MarkerLabel_.getSharedCross.crossDiv === "undefined") {
+    div = document.createElement("img");
+    div.style.cssText = "position: absolute; z-index: 1000002; display: none;";
+    // Hopefully Google never changes the standard "X" attributes:
+    div.style.marginLeft = "-8px";
+    div.style.marginTop = "-9px";
+    div.src = "http://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
+    MarkerLabel_.getSharedCross.crossDiv = div;
+  }
+  return MarkerLabel_.getSharedCross.crossDiv;
+};
 
 /**
  * Adds the DIV representing the label to the DOM. This method is called
@@ -108,7 +122,11 @@ MarkerLabel_.prototype.onAdd = function () {
 
   this.getPanes().overlayImage.appendChild(this.labelDiv_);
   this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_);
-  this.getPanes().overlayImage.appendChild(this.crossDiv_);
+  // One cross is shared with all markers, so only add it once:
+  if (typeof MarkerLabel_.getSharedCross.processed === "undefined") {
+    this.getPanes().overlayImage.appendChild(this.crossDiv_);
+    MarkerLabel_.getSharedCross.processed = true;
+  }
 
   this.listeners_ = [
     google.maps.event.addDomListener(this.eventDiv_, "mouseover", function (e) {
@@ -284,7 +302,6 @@ MarkerLabel_.prototype.onRemove = function () {
   var i;
   this.labelDiv_.parentNode.removeChild(this.labelDiv_);
   this.eventDiv_.parentNode.removeChild(this.eventDiv_);
-  this.crossDiv_.parentNode.removeChild(this.crossDiv_);
 
   // Remove event listeners:
   for (i = 0; i < this.listeners_.length; i++) {
@@ -479,6 +496,10 @@ MarkerLabel_.prototype.setVisible = function () {
  *  raised when the marker is dragged. The default is <code>true</code>. If a draggable marker is
  *  being created and a version of Google Maps API earlier than V3.3 is being used, this property
  *  must be set to <code>false</code>.
+ * @property {boolean} [optimized] A flag indicating whether rendering is to be optimized for the
+ *  marker, meaning that drawing is done in a &lt;canvas&gt; element. The default is <code>true</code>.
+ *  <b>Important: Set <code>optimized</code> to <code>false</code> if any portion of the label and
+ *  the marker will overlap. Failure to do this may result in unexpected spatial ordering.</b>
  */
 /**
  * Creates a MarkerWithLabel with the options specified in {@link MarkerWithLabelOptions}.
@@ -492,10 +513,6 @@ function MarkerWithLabel(opt_options) {
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
   opt_options.labelStyle = opt_options.labelStyle || {};
   opt_options.labelInBackground = opt_options.labelInBackground || false;
-  // Workaround a bug in API V3.4:
-  if (typeof opt_options.visible === "undefined") {
-    opt_options.visible = true;
-  }
   if (typeof opt_options.labelVisible === "undefined") {
     opt_options.labelVisible = true;
   }
