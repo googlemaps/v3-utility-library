@@ -218,7 +218,7 @@ function publish(symbolSet) {
     templateValues.objects.push(constructedTopLevelObject);
   }
 
-  var referenceTemplate = new JSDOC.JsPlate(publish.conf.templatesDir + "reference.tmpl");
+  var referenceTemplate = new JSDOC.JsPlate(publish.conf.templatesDir + "/reference.tmpl");
   var output = "";
   output = referenceTemplate.process(templateValues);
   IO.saveFile(publish.conf.outDir, "reference.html", output);

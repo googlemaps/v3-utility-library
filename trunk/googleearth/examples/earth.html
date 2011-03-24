@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Earth V3</title>
+    <style type="text/css">
+      body {
+        font-size: 83%;
+      }
+
+      #map {
+        height: 500px;
+      }
+
+    </style>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript"
+      src="https://www.google.com/jsapi?key=ABQIAAAA_KNcKfoyaTskjEp-kSSEjxSsDbTxMRg-JrUcPZT14QWonZA5mxRqx3ct_DbeHVelXNr1WbKEEJ5k-A"></script>
+    <script type="text/javascript" src="../src/googleearth-compiled.js"></script>
+
+    <script type="text/javascript">
+      google.load('earth', '1');
+      var map;
+      var googleEarth;
+      function init() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(41.8397, -87.644),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        googleEarth = new GoogleEarth(map);
+
+        google.maps.event.addListenerOnce(map, 'tilesloaded', addOverlays);
+      }
+
+      function addInfowindow(marker, infowindow) {
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+
+      function getRandomLatLng() {
+        var bounds = map.getBounds();
+        var southWest = bounds.getSouthWest();
+        var northEast = bounds.getNorthEast();
+        var lngSpan = northEast.lng() - southWest.lng();
+        var latSpan = northEast.lat() - southWest.lat();
+        var latLng = new google.maps.LatLng(
+            southWest.lat() + latSpan * Math.random(),
+            southWest.lng() + lngSpan * Math.random());
+        return latLng;
+      }
+
+      function addOverlays() {
+        // Add some markers
+        for (var i = 0; i < 5; i++) {
+          var marker = new google.maps.Marker({
+            position: getRandomLatLng(),
+            draggable : true,
+            title : 'this is a marker',
+            icon : 'http://code.google.com/apis/maps/documentation/javascript/examples/images/beachflag.png'
+          });
+
+        infowindow = new google.maps.InfoWindow({
+          content: 'This is the infowindow for a marker'
+        });
+        addInfowindow(marker, infowindow);
+        marker.setMap(map);
+        }
+
+        // Add a polyline
+        var polyOptions = {
+          strokeWeight: 9,
+          strokeColor : "#FFCC30"
+        }
+        polyline = new google.maps.Polyline(polyOptions);
+        polyline.setMap(map);
+        for (var i = 0; i < 2; i++) {
+          polyline.getPath().push(getRandomLatLng());
+        }
+
+        // Add a polygon
+        polyOptions.fillColor = "#FF0000";
+        polygon = new google.maps.Polygon(polyOptions);
+        polygon.setMap(map);
+        for (var i = 0; i < 3; i++) {
+          polygon.getPath().push(getRandomLatLng());
+        }
+
+        // Add a circle
+        circle = new google.maps.Circle(polyOptions);
+        circle.setMap(map);
+        circle.setCenter(getRandomLatLng());
+        circle.setRadius(9000);
+
+        // Add a rectangle
+        rectangle = new google.maps.Rectangle();
+        rectangle.setMap(map);
+        rectangle.setBounds(map.getBounds());
+
+        // Add a kml layer
+        var ctaLayer = new google.maps.KmlLayer(
+          "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml", {
+            preserveViewport : true
+          });
+        ctaLayer.setMap(map);
+
+        // Add a groundoverlay
+        var imageBounds = new google.maps.LatLngBounds();
+        imageBounds.extend(getRandomLatLng())
+          imageBounds.extend(getRandomLatLng());
+
+        var oldmap = new google.maps.GroundOverlay(
+          "http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg",
+          imageBounds);
+        oldmap.setMap(map);
+      }
+
+      google.maps.event.addDomListener(window, 'load', init);
+    </script>
+  </head>
+  <body>
+    <h1>Earth V3</h1>
+    <div id="map"></div>
+  </body>
+</html>
