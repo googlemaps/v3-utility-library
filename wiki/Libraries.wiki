@@ -82,3 +82,9 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarke
 A !InfoBubble is a customizable css3 infowindow.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/ Development Versions].
+
+== !GoogleEarth ==
+
+This library integrates the Google Earth API, and will render most map overlays appropriately.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/ Development Versions].
