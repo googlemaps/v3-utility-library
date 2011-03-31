@@ -47,11 +47,6 @@ function GoogleEarth(map) {
   /**
    * @private
    * @type {string} */
-  this.earthMapTypeId_ = 'GoogleEarthAPI';
-
-  /**
-   * @private
-   * @type {string} */
   this.earthTitle_ = 'Earth';
 
   /**
@@ -73,6 +68,12 @@ function GoogleEarth(map) {
   this.addEarthControl_();
 }
 window['GoogleEarth'] = GoogleEarth;
+
+/**
+ * @const
+ * @type {string} */
+GoogleEarth.MAP_TYPE_ID = 'GoogleEarthAPI';
+GoogleEarth['MAP_TYPE_ID'] = GoogleEarth.MAP_TYPE_ID;
 
 /**
  * @const
@@ -121,13 +122,13 @@ GoogleEarth.prototype.addEarthMapType_ = function() {
       }
   });
 
-  map.mapTypes.set(this.earthMapTypeId_, earthMapType);
+  map.mapTypes.set(GoogleEarth.MAP_TYPE_ID, earthMapType);
 
   var options = /** @type {google.maps.MapTypeControlOptions} */({
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP,
                    google.maps.MapTypeId.SATELLITE,
-                   this.earthMapTypeId_]
+                   GoogleEarth.MAP_TYPE_ID]
     }
   });
 
@@ -143,7 +144,7 @@ GoogleEarth.prototype.addEarthMapType_ = function() {
  * @private
  */
 GoogleEarth.prototype.mapTypeChanged_ = function() {
-  if (this.map_.getMapTypeId() == this.earthMapTypeId_) {
+  if (this.map_.getMapTypeId() == GoogleEarth.MAP_TYPE_ID) {
     this.showEarth_();
   } else {
     this.switchToMapView_();
@@ -875,8 +876,8 @@ GoogleEarth.modifyOpen_ = function() {
  * @private
  */
 GoogleEarth.modifySetMap_ = function(overlayClass) {
-  google.maps[overlayClass].prototype.setMapOriginal_ =
-      google.maps[overlayClass].prototype['setMap'];
+  var proto = google.maps[overlayClass].prototype;
+  proto['__gme_setMapOriginal'] = proto.setMap;
 
   GoogleEarth.overlays_[overlayClass] = {};
   google.maps[overlayClass].prototype['setMap'] = function(map) {
@@ -890,7 +891,7 @@ GoogleEarth.modifySetMap_ = function(overlayClass) {
       this['__gme_id'] = undefined;
     }
 
-    this.setMapOriginal_(map);
+    this['__gme_setMapOriginal'](map);
   };
 };
 
