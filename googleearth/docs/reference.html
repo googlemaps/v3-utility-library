@@ -4,16 +4,59 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
   </head>
-  <body>
+  <body onload="prettyPrint()">
     <h1>Google Earth API for Google Maps v3</h1>
     <p>
     This library integrates the Google Earth API, and will render most map
     overlays appropriately.
     </p>
-    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
 
+    <p>
+      To initialize the Earth API, just instantiate a new GoogleEarth object,
+      passing your map to it.  Here is the simplest case of a map with no 
+      overlays:
+    </p>
+    <pre class="prettyprint">
+    var myOptions = {
+      zoom: 4,
+      center: new google.maps.LatLng(48.25, 11.00),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('map'), myOptions);
+    var ge = new GoogleEarth(map);
+    </pre>
+
+    <p>
+      The current version of this library also supports a number of different
+      overlays and layers.  If you add any of the following to your map, they 
+      will also be displayed in Earth:
+
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker">Marker</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#InfoWindow">InfoWindow</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Polyline">Polyline</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Polygon">Polygon</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Rectangle">Rectangle</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Circle">Circle</a>,
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlay">GroundOverlay</a> and
+    <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#KmlLayer">KmlLayer</a>.
+<p>
+
+<p>
+  For an example that makes use of all these, check out
+  <a href="../examples/earth.html">earth.html</a>.
+</p>
       <h2><a name="GoogleEarth"></a>class GoogleEarth</h2>
       <h3>Constructor</h3>
       <table summary="class MarkerClusterer - Constructor" width="90%">
@@ -24,10 +67,24 @@
           </tr>
             <tr class="odd">
               <td><code>GoogleEarth(<span class="type">map:google.maps.Map</span>)</code></td>
-              <td>A wrapped Google Earth API instance, integrated w/Maps.</td>
+              <td>A wrapped Google Earth API instance, linked to the map.</td>
             </tr>
         </tbody>
       </table>
+
+       <h3>Constant</h3>
+        <table summary="class GoogleEarth - Methods" width="90%">
+          <tbody>
+            <tr>
+              <th>Constant</th>
+              <th>Description</th>
+            </tr>
+            <tr class="odd">
+              <td><code>MAP_TYPE_ID</code></td>
+              <td>This map type displays the 3D Earth Plugin</td>
+            </tr>
+          </tbody>
+        </table>
 
        <h3>Methods</h3>
         <table summary="class GoogleEarth - Methods" width="90%">
@@ -45,10 +102,13 @@
           </tbody>
         </table>
 
+
+
+
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
     <script type="text/javascript">
       _uacct = "UA-964209-4";
       urchinTracker();
     </script>
-  </body>
+</body>
 </html>
