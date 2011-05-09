@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.5 [March 1, 2011]
+ * @version 1.1.6 [May 9, 2011]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -587,9 +587,13 @@ InfoBox.prototype.setContent = function (content) {
     // (Ensures the close box does, in fact, float to the right.)
     //
     if (!this.fixedWidthSet_) {
-
       this.div_.style.width = this.div_.offsetWidth + "px";
-      this.div_.innerHTML = this.getCloseBoxImg_() + content;
+      if (typeof content.nodeType === "undefined") {
+        this.div_.innerHTML = this.getCloseBoxImg_() + content;
+      } else {
+        this.div_.innerHTML = this.getCloseBoxImg_();
+        // Note: don't append the content node again
+      }
     }
 
     this.addClickHandler_();
