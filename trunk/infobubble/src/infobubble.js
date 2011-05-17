@@ -457,10 +457,10 @@ InfoBubble.prototype.getZIndex = function() {
  * zIndex changed MVC callback
  */
 InfoBubble.prototype.zIndex_changed = function() {
-  var zIndex = this.getZIndex_();
+  var zIndex = this.getZIndex();
 
   this.bubble_.style['zIndex'] = this.baseZIndex_ = zIndex;
-  this.close_.style['zIndex'] = zIndex_ + 1;
+  this.close_.style['zIndex'] = zIndex + 1;
 };
 InfoBubble.prototype['zIndex_changed'] = InfoBubble.prototype.zIndex_changed;
 
