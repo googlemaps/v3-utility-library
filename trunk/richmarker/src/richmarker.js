@@ -729,7 +729,7 @@ RichMarker.prototype.onAdd = function() {
 
   var panes = this.getPanes();
   if (panes) {
-    panes.overlayImage.appendChild(this.markerWrapper_);
+    panes.overlayMouseTarget.appendChild(this.markerWrapper_);
   }
 
   google.maps.event.trigger(this, 'ready');
