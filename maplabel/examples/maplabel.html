@@ -24,34 +24,6 @@
 
         var map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-        var mapLabel = new MapLabel('This', new google.maps.LatLng(34.055, -118.25), {
-          map: map,
-          fontSize: 15
-        });
-        var marker = new google.maps.Marker;
-        marker.bindTo('map', mapLabel);
-        marker.bindTo('position', mapLabel);
-        marker.setDraggable(true);
-
-        var mapLabel = new MapLabel('Is', new google.maps.LatLng(34.045, -118.23), {
-          map: map,
-          fontSize: 25
-        });
-        var marker = new google.maps.Marker;
-        marker.bindTo('map', mapLabel);
-        marker.bindTo('position', mapLabel);
-        marker.setDraggable(true);
-
-        var mapLabel = new MapLabel('A', new google.maps.LatLng(34.04, -118.245), {
-          map: map,
-          strokeWidth: 10,
-          fontSize: 50
-        });
-        var marker = new google.maps.Marker;
-        marker.bindTo('map', mapLabel);
-        marker.bindTo('position', mapLabel);
-        marker.setDraggable(true);
-
         var mapLabel = new MapLabel({
           text: 'Test',
           position: new google.maps.LatLng(34.03, -118.235),
