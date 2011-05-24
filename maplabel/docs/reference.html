@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MapLabel for Google Maps V3 version 1.0 Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>MapLabel for Google Maps V3</h1>
+    <p>
+      This library allows text to be added to the map at a particular location.
+      Note that the users browser must support Canvas for the label to be displayed.
+    </p>
+
+    <h2 id="MapLabel">MapLabel class</h2>
+    <p>This class extends <a
+      href="http://code.google.com/apis/maps/documentation/javascript/reference.html#OverlayView"><code>OverlayView</code></a>.</p>
+
+    <h3>Constructor</h3>
+    <table summary="class MapLabel- Constructor" width="90%">
+      <tbody>
+        <tr>
+          <th>Constructor</th>
+          <th>Description</th>
+        </tr>
+
+        <tr>
+          <td><code>MapLabel(<span class="type">opt_options?:<a href="#MapLabelOptions">MapLabelOptions</a></span>)</code>
+          </td>
+          <td>
+            Creates a map label with the options specified. If a map is
+            specified, the label is added to the map upon construction. Note
+            that both text and position must be set for the label to display.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="MapLabelOptions">MapLabelOptions object specification</h2>
+    <table summary="MapLabel Options" width="90%">
+      <tbody>
+        <tr>
+          <th>Properties</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><code>align</code></td>
+          <td><code><span class="type">string</span></code></td>
+          <td>The horizontal text alignment. Options are left,
+            right or center. Default is <code>"center"</code>.</td>
+        </tr>
+        <tr>
+          <td><code>fontFamily</code></td>
+          <td><code><span class="type">string</span></code></td>
+          <td>The font family. Default is <code>"sans-serif"</code>.</td>
+        </tr>
+        <tr>
+          <td><code>fontSize</code></td>
+          <td><code><span class="type">number</span></code></td>
+          <td>The font size in pixels. Default is <code>12</code>.</td>
+        </tr>
+        <tr>
+          <td><code>fontColor</code></td>
+          <td><code><span class="type">string</span></code></td>
+          <td>The stroke color. All CSS3 colors are supported.
+            Default is <code>"#000000"</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>map</code></td>
+          <td><code><span class="type"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Map">Map</a></span></code></td>
+          <td>Map on which to display label.</td>
+        </tr>
+        <tr>
+          <td><code>maxZoom</code></td>
+          <td><code><span class="type">number</span></code></td>
+          <td>The maximum zoom level this label should be shown at.</td>
+        </tr>
+        <tr>
+          <td><code>minZoom</code></td>
+          <td><code><span class="type">number</span></code></td>
+          <td>The minimum zoom level this label should be shown at.</td>
+        </tr>
+        <tr>
+          <td><code>position</code></td>
+          <td><code><span class="type"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#LatLng">LatLng</a></span></code></td>
+          <td>Label position. Required.</td>
+        </tr>
+        <tr>
+          <td><code>strokeWeight</code></td>
+          <td><code><span class="type">number</span></code></td>
+          <td>The stroke width in pixels. Default is <code>4</code>.</td>
+        </tr>
+        <tr>
+          <td><code>strokeColor</code></td>
+          <td><code><span class="type">string</span></code></td>
+          <td>The stroke color. All CSS3 colors are supported.
+            Default is <code>"#FFFFFF"</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>text</code></td>
+          <td><code><span class="type">string</span></code></td>
+          <td>Label text. Required.</td>
+        </tr>
+        <tr>
+          <td><code>zIndex</code></td>
+          <td><code><span class="type">number</span></code></td>
+          <td>The zIndex of the label. Default is <code>1000</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
