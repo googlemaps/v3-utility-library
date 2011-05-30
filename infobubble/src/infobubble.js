@@ -996,7 +996,7 @@ InfoBubble.prototype.open = function(opt_map, opt_anchor) {
 
   // Show the bubble and the show
   this.bubble_.style['display'] = this.bubbleShadow_.style['display'] = '';
-  var animation = !!!this.get('disableAnimation');
+  var animation = !this.get('disableAnimation');
 
   if (animation) {
     // Add the animation
@@ -1007,7 +1007,7 @@ InfoBubble.prototype.open = function(opt_map, opt_anchor) {
   this.redraw_();
   this.isOpen_ = true;
 
-  var pan = !!!this.get('disableAutoPan');
+  var pan = !this.get('disableAutoPan');
   if (pan) {
     var that = this;
     window.setTimeout(function() {
@@ -1206,7 +1206,7 @@ InfoBubble.prototype['content_changed'] =
  * @private
  */
 InfoBubble.prototype.imageLoaded_ = function() {
-  var pan = !!!this.get('disableAutoPan');
+  var pan = !this.get('disableAutoPan');
   this.redraw_();
   if (pan && (this.tabs_.length == 0 || this.activeTab_.index == 0)) {
     this.panToView();
