@@ -52,7 +52,12 @@ function GoogleEarth(map) {
   /**
    * @private
    * @type {Object} */
-  this.placemarks_ = {};
+  this.moveEvents_ = [];
+
+  /**
+   * @private
+   * @type {Object} */
+  this.overlays_ = {};
 
   /**
    * @private
@@ -60,6 +65,7 @@ function GoogleEarth(map) {
   this.lastClickedPlacemark_ = null;
 
   /**
+   * Keep track of each time the 3D view is reloaded/refreshed
    * @private
    * @type {number} */
   this.displayCounter_ = 0;
@@ -173,11 +179,22 @@ GoogleEarth.prototype.showEarth_ = function() {
  * @private
  */
 GoogleEarth.prototype.refresh_ = function() {
-  this.placemarks_ = {};
+  this.overlays_ = {};
   this.flyToMapView_(true);
   this.clearPlacemarks_();
   this.displayCounter_++;
+  this.clearMoveEvents_();
   this.addMapOverlays_();
+};
+
+/**
+ * Clear all marker position_changed events
+ * @private
+ */
+GoogleEarth.prototype.clearMoveEvents_ = function() {
+  for (var i = 0, evnt; evnt = this.moveEvents_[i]; i++) {
+    google.maps.event.removeListener(evnt);
+  }
 };
 
 /**
@@ -251,14 +268,25 @@ GoogleEarth.getKMLColor_ = function(hex, opacity) {
   return abgr;
 };
 
+
+/**
+ * @param {google.maps.MVCObject} overlay the map overlay.
+ * @return {String} ID for the Placemark.
+ * @private
+ */
+GoogleEarth.prototype.generatePlacemarkId_ = function(overlay) {
+  var placemarkId = this.displayCounter_ + 'GEV3_' + overlay['__gme_id'];
+  return placemarkId;
+};
+
 /**
  * @param {google.maps.MVCObject} overlay the map overlay.
  * @return {google.earth.KmlPlacemark} placemark the placemark.
  * @private
  */
 GoogleEarth.prototype.createPlacemark_ = function(overlay) {
-  var placemarkId = this.displayCounter_ + 'GEV3_' + overlay['__gme_id'];
-  this.placemarks_[placemarkId] = overlay;
+  var placemarkId = this.generatePlacemarkId_(overlay);
+  this.overlays_[placemarkId] = overlay;
   return this.instance_.createPlacemark(placemarkId);
 };
 
@@ -336,6 +364,20 @@ GoogleEarth.prototype.addKML_ = function(url) {
 };
 
 /**
+ * @param {String} placemarkId the id of the placemark.
+ * @private
+ */
+GoogleEarth.prototype.updatePlacemark_ = function(placemarkId) {
+  //TODO(jlivni) generalize to work with more than just Markers/Points
+  var marker = this.overlays_[placemarkId];
+  var placemark = this.instance_.getElementById(placemarkId);
+  var geom = placemark.getGeometry();
+  var position = marker.getPosition();
+  geom.setLatitude(position.lat());
+  geom.setLongitude(position.lng());
+};
+
+/**
  * @param {google.maps.Marker} marker The map marker.
  * @private
  */
@@ -369,6 +411,16 @@ GoogleEarth.prototype.createPoint_ = function(marker) {
   placemark.setGeometry(point);
 
   ge.getFeatures().appendChild(placemark);
+
+  //add listener for marker move on Map
+  var that = this;
+  var moveEvent = google.maps.event.addListener(marker,
+    'position_changed',
+    function() {
+      var placemarkId = that.generatePlacemarkId_(marker);
+      that.updatePlacemark_(placemarkId);
+    });
+  this.moveEvents_.push(moveEvent);
 };
 
 /**
@@ -612,7 +664,7 @@ GoogleEarth.prototype.addEarthEvents_ = function() {
    // On click of a placemark we want to trigger the map click event.
   google.earth.addEventListener(ge.getGlobe(), 'click', function(event) {
     var target = event.getTarget();
-    var overlay = that.placemarks_[target.getId()];
+    var overlay = that.overlays_[target.getId()];
     if (overlay) {
       event.preventDefault();
       // Close any currently opened map info windows.
@@ -903,6 +955,7 @@ GoogleEarth.OVERLAY_CLASSES = ['Marker', 'Polyline', 'Polygon', 'Rectangle',
     'Circle', 'KmlLayer', 'GroundOverlay', 'InfoWindow'];
 
 /**
+ * Keep track of total number of placemarks added.
  * @type {number}
  * @private
  */
