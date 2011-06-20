@@ -149,6 +149,11 @@ MapLabel.prototype.draw = function() {
     return;
   }
 
+  if (!this.canvas_) {
+    // onAdd has not been called yet.
+    return;
+  }
+
   var latLng = /** @type {google.maps.LatLng} */ (this.get('position'));
   if (!latLng) {
     return;
