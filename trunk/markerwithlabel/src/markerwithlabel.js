@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.5 [July 10, 2011]
+ * @version 1.1.5 [July 11, 2011]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -72,6 +72,7 @@ MarkerLabel_.prototype = new google.maps.OverlayView();
 /**
  * Returns the DIV for the cross used when dragging a marker when the
  * raiseOnDrag parameter set to true. One cross is shared with all markers.
+ * @param {string} crossURL The URL of the cross image =.
  * @private
  */
 MarkerLabel_.getSharedCross = function (crossURL) {
