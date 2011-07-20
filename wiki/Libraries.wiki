@@ -28,6 +28,16 @@ The library creates and manages per-zoom-level clusters for large amounts of mar
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/ Released Versions].
 
+== !MarkerClustererPlus ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/examples/markerclustererplus.png]
+
+This is an enhanced version of the !MarkerClusterer library for managing large amounts of markers. It adds support for several new properties as well as support for four more events. It also allows greater control over the styling of the text that appears on the cluster marker. The documentation has been significantly improved and the overall code has been simplified and polished. Very large numbers of markers can now be managed without causing Javascript timeout errors on Internet Explorer. It is backward compatible with !MarkerClusterer.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/ Development Versions].
+
+
 == !MarkerManager ==
 
 This class is designed to manage adding and removing many points when the viewport changes.
