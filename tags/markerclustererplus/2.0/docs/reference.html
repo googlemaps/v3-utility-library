@@ -1,0 +1,1005 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MarkerClustererPlus for Google Maps V3 v2.0 [July 20, 2011] Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>MarkerClustererPlus for Google Maps V3</h1>
+    <p>
+The library creates and manages per-zoom-level clusters for large amounts of markers.
+<p>
+This is an enhanced V3 implementation of the
+<a href="http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/"
+>V2 MarkerClusterer</a> by Xiaoxi Wu. It is based on the
+<a href="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/"
+>V3 MarkerClusterer</a> port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
+<p>
+v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
+ adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>printable</code>,
+ <code>batchSizeIE</code>, and <code>calculator</code> properties as well as support for
+ four more events. It also allows greater control over the styling of the text that appears
+ on the cluster marker. The documentation has been significantly improved and the overall
+ code has been simplified and polished. Very large numbers of markers can now be managed
+ without causing Javascript timeout errors on Internet Explorer. Note that the name of the
+ <code>clusterclick</code> event has been deprecated. The new name is <code>click</code>,
+ so please change your application code now.</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="Cluster"></a>class Cluster</h2>
+      <p></p>
+      
+        <h3>Constructor</h3>
+        <table summary="class Cluster - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>Cluster(<span class="type">mc:MarkerClusterer</span>)</code></td>
+                
+                <td>Creates a single cluster that manages a group of proximate markers.
+ Used internally, do not call this constructor directly.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Methods</h3>
+        <table summary="class Cluster - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>getCenter()</code></td>
+                
+                  
+                    <td><code>google.maps.LatLng</code></td>
+                  
+                
+                <td>Returns the center of the cluster. You can call this from
+a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
+for the <code>MarkerClusterer</code> object.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getMarkers()</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>Returns the array of markers managed by the cluster. You can call this from
+a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
+for the <code>MarkerClusterer</code> object.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getSize()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the number of markers managed by the cluster. You can call this from
+a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
+for the <code>MarkerClusterer</code> object.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="ClusterIconInfo"></a>class ClusterIconInfo</h2>
+      <p>This class is an object containing general information about a cluster icon. This is
+ the object that a <code>calculator</code> function returns.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class ClusterIconInfo - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>index</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The index plus 1 of the element in the <code>styles</code>
+ array to be used to style the cluster icon.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>text</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The text of the label to be shown on the cluster icon.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="ClusterIconStyle"></a>class ClusterIconStyle</h2>
+      <p>This class represents the object for values in the <code>styles</code> array passed
+ to the <code><a href="reference.html#MarkerClusterer">MarkerClusterer</a></code> constructor. The element in this array that is used to
+ style the cluster icon is determined by calling the <code>calculator</code> function.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class ClusterIconStyle - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>anchor</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>The anchor position (in pixels) of the label text to be shown on
+ the cluster icon, relative to the top left corner of the icon.
+ The format is <code>[yoffset, xoffset]</code>. The <code>yoffset</code> must be positive
+ and less than <code>height</code> and the <code>xoffset</code> must be positive and less
+ than <code>width</code>. The default is to anchor the label text so that it is centered
+ on the icon.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>backgroundPosition</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The position of the cluster icon image
+ within the image defined by <code>url</code>. The format is <code>"xpos ypos"</code>
+ (the same format as for the CSS <code>background-position</code> property). You must set
+ this property appropriately when the image defined by <code>url</code> represents a sprite
+ containing multiple images.  The default value is <code>"0 0"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>fontFamily</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The value of the CSS <code>font-family</code>
+ property for the label text shown on the cluster icon.  The default value is <code>"Arial,sans-serif"</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>fontStyle</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The value of the CSS <code>font-style</code>
+ property for the label text shown on the cluster icon.  The default value is <code>"normal"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>fontWeight</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The value of the CSS <code>font-weight</code>
+ property for the label text shown on the cluster icon.  The default value is <code>"bold"</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>height</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The height (in pixels) of the cluster icon. Required.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>textColor</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The color of the label text shown on the
+ cluster icon.  The default value is <code>"black"</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>textDecoration</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The value of the CSS <code>text-decoration</code>
+ property for the label text shown on the cluster icon.  The default value is <code>"none"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>textSize</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The size (in pixels) of the label text shown on the
+ cluster icon.  The default value is <code>11</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>url</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The URL of the cluster icon image file. Required.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>width</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The width (in pixels) of the cluster icon. Required.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="MarkerClusterer"></a>class MarkerClusterer</h2>
+      <p>  This class extends <code>google.maps.OverlayView</code>.</p>
+      
+        <h3>Constructor</h3>
+        <table summary="class MarkerClusterer - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>MarkerClusterer(<span class="type">map:google.maps.Map</span>, <span class="type">opt_markers?:Array.&lt;google.maps.Marker&gt;</span>, <span class="type">opt_options?:MarkerClustererOptions</span>)</code></td>
+                
+                <td>Creates a MarkerClusterer object with the options specified in <code><a href="reference.html#MarkerClustererOptions">MarkerClustererOptions</a></code>.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Methods</h3>
+        <table summary="class MarkerClusterer - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>addMarker(<span class="type">marker:google.maps.Marker</span>, <span class="type">opt_nodraw?:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Adds a marker to the clusterer. The clusters are redrawn unless
+ <code>opt_nodraw</code> is set to <code>true</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>addMarkers(<span class="type">markers:Array.&lt;google.maps.Marker&gt;</span>, <span class="type">opt_nodraw?:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Adds an array of markers to the clusterer. The clusters are redrawn unless
+ <code>opt_nodraw</code> is set to <code>true</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>clearMarkers()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Removes all clusters and markers from the map and also removes all markers
+ managed by the clusterer.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>fitMapToMarkers()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Fits the map to the bounds of the markers managed by the clusterer.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getAverageCenter()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns the value of the <code>averageCenter</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getBatchSizeIE()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the value of the <code>batchSizeIE</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getCalculator()</code></td>
+                
+                  
+                    <td><code>function</code></td>
+                  
+                
+                <td>Returns the value of the <code>calculator</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getGridSize()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the value of the <code>gridSize</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getIgnoreHidden()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns the value of the <code>ignoreHidden</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getImageExtension()</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>Returns the value of the <code>imageExtension</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getImagePath()</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>Returns the value of the <code>imagePath</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getImageSizes()</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>Returns the value of the <code>imageSizes</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getMarkers()</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>Returns the array of markers managed by the clusterer.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getMaxZoom()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the value of the <code>maxZoom</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getMinimumClusterSize()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the value of the <code>minimumClusterSize</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getPrintable()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns the value of the <code>printable</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getStyles()</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>Returns the value of the <code>styles</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getTitle()</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>Returns the value of the <code>title</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getTotalClusters()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the number of clusters formed by the clusterer.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getTotalMarkers()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the number of markers managed by the clusterer.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getZoomOnClick()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns the value of the <code>zoomOnClick</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>removeMarker(<span class="type">marker:google.maps.Marker</span>, <span class="type">opt_nodraw?:boolean</span>)</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Removes a marker from the cluster.  The clusters are redrawn unless
+ <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
+ marker was removed from the clusterer.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>removeMarkers(<span class="type">markers:Array.&lt;google.maps.Marker&gt;</span>, <span class="type">opt_nodraw?:boolean</span>)</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Removes an array of markers from the cluster. The clusters are redrawn unless
+ <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
+ were removed from the clusterer.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>repaint()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Recalculates and redraws all the marker clusters from scratch.
+ Call this after changing any properties.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setAverageCenter(<span class="type">averageCenter:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>averageCenter</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setBatchSizeIE(<span class="type">batchSizeIE:number</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>batchSizeIE</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setCalculator(<span class="type">calculator:function(Array.&lt;google.maps.Marker&gt;|number)</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>calculator</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setGridSize(<span class="type">gridSize:number</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>gridSize</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setIgnoreHidden(<span class="type">ignoreHidden:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>ignoreHidden</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setImageExtension(<span class="type">imageExtension:string</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>imageExtension</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setImagePath(<span class="type">imagePath:string</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>imagePath</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setImageSizes(<span class="type">imageSizes:Array</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>imageSizes</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setMaxZoom(<span class="type">maxZoom:number</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>maxZoom</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setMinimumClusterSize(<span class="type">minimumClusterSize:number</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>minimumClusterSize</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setPrintable(<span class="type">printable:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>printable</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setStyles(<span class="type">styles:Array.&lt;ClusterIconStyle&gt;</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>styles</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setTitle(<span class="type">title:string</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>title</code> property.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setZoomOnClick(<span class="type">zoomOnClick:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>zoomOnClick</code> property.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Events</h3>
+        <table summary="class MarkerClusterer - Events" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Events</th>
+              
+                
+                  <th>Arguments</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>click</code></td>
+                
+                  
+                    <td><code><span class="type">c:Cluster</span></code></td>
+                  
+                
+                <td>This event is fired when a cluster marker is clicked.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>clusteringbegin</code></td>
+                
+                  
+                    <td><code><span class="type">mc:MarkerClusterer</span></code></td>
+                  
+                
+                <td>This event is fired when the <code>MarkerClusterer</code> begins
+ clustering markers.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>clusteringend</code></td>
+                
+                  
+                    <td><code><span class="type">mc:MarkerClusterer</span></code></td>
+                  
+                
+                <td>This event is fired when the <code>MarkerClusterer</code> stops
+ clustering markers.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>mouseout</code></td>
+                
+                  
+                    <td><code><span class="type">c:Cluster</span></code></td>
+                  
+                
+                <td>This event is fired when the mouse moves out of a cluster marker.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>mouseover</code></td>
+                
+                  
+                    <td><code><span class="type">c:Cluster</span></code></td>
+                  
+                
+                <td>This event is fired when the mouse moves over a cluster marker.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="MarkerClustererOptions"></a>class MarkerClustererOptions</h2>
+      <p>This class represents the optional parameter passed to
+ the <code><a href="reference.html#MarkerClusterer">MarkerClusterer</a></code> constructor.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class MarkerClustererOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>averageCenter</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Whether the position of a cluster marker should be
+ the average position of all markers in the cluster. If set to <code>false</code>, the
+ cluster marker is positioned at the location of the first marker added to the cluster.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>batchSizeIE</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>When Internet Explorer is
+ being used, markers are processed in several batches with a small delay inserted between
+ each batch in an attempt to avoid Javascript timeout errors. Set this property to the
+ number of markers to be processed in a single batch; select as high a number as you can
+ without causing a timeout error in the browser. This number might need to be as low as 100
+ if 15,000 markers are being managed, for example.  The default value is <code>MarkerClusterer.BATCH_SIZE_IE</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>calculator</code></td>
+                
+                  
+                    <td><code>function</code></td>
+                  
+                
+                <td>The function used to determine
+ the text to be displayed on a cluster marker and the index indicating which style to use
+ for the cluster marker. The input parameters for the function are (1) the array of markers
+ represented by a cluster marker and (2) the number of cluster icon styles. It returns a
+ <code><a href="reference.html#ClusterIconInfo">ClusterIconInfo</a></code> object. The default <code>calculator</code> returns a
+ <code>text</code> property which is the number of markers in the cluster and an
+ <code>index</code> property which is one higher than the lowest integer such that
+ <code>10^i</code> exceeds the number of markers in the cluster, or the size of the styles
+ array, whichever is less. The <code>styles</code> array element used has an index of
+ <code>index</code> minus 1. For example, the default <code>calculator</code> returns a
+ <code>text</code> value of <code>"125"</code> and an <code>index</code> of <code>3</code>
+ for a cluster icon representing 125 markers so the element used in the <code>styles</code>
+ array is <code>2</code>.  The default value is <code>MarkerClusterer.CALCULATOR</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>gridSize</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The grid size of a cluster in pixels. The grid is a square.  The default value is <code>60</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>ignoreHidden</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Whether to ignore hidden markers in clusters. You
+ may want to set this to <code>true</code> to ensure that hidden markers are not included
+ in the marker count that appears on a cluster marker (this count is the value of the
+ <code>text</code> property of the result returned by the default <code>calculator</code>).
+ If set to <code>true</code> and you change the visibility of a marker being clustered, be
+ sure to also call <code>MarkerClusterer.repaint()</code>.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>imageExtension</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The extension name for the cluster icon image files (e.g., <code>"png"</code> or
+ <code>"jpg"</code>).  The default value is <code>MarkerClusterer.IMAGE_EXTENSION</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>imagePath</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The full URL of the root name of the group of image files to use for cluster icons.
+ The complete file name is of the form <code>imagePath</code>n.<code>imageExtension</code>
+ where n is the image file number (1, 2, etc.).  The default value is <code>MarkerClusterer.IMAGE_PATH</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>imageSizes</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>An array of numbers containing the widths of the group of
+ <code>imagePath</code>n.<code>imageExtension</code> image files.
+ (The images are assumed to be square.)  The default value is <code>MarkerClusterer.IMAGE_SIZES</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>maxZoom</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The maximum zoom level at which clustering is enabled or
+ <code>null</code> if clustering is to be enabled at all zoom levels.  The default value is <code>null</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>minimumClusterSize</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The minimum number of markers needed in a cluster
+ before the markers are hidden and a cluster marker appears.  The default value is <code>2</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>printable</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Whether to make the cluster icons printable. Do not
+ set to <code>true</code> if the <code>url</code> fields in the <code>styles</code> array
+ refer to image sprite files.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>styles</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>An array of <code><a href="reference.html#ClusterIconStyle">ClusterIconStyle</a></code> elements defining the styles
+ of the cluster markers to be used. The element to be used to style a given cluster marker
+ is determined by the function defined by the <code>calculator</code> property.
+ The default is an array of <code><a href="reference.html#ClusterIconStyle">ClusterIconStyle</a></code> elements whose properties are derived
+ from the values for <code>imagePath</code>, <code>imageExtension</code>, and
+ <code>imageSizes</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>title</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The tooltip to display when the mouse moves over a cluster
+ marker.  The default value is <code>""</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>zoomOnClick</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Whether to zoom the map when a cluster marker is
+ clicked. You may want to set this to <code>false</code> if you have installed a handler
+ for the <code>click</code> event and it deals with zooming on its own.  The default value is <code>true</code>.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>
