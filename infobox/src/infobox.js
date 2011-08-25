@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.7 [July 8, 2011]
+ * @version 1.1.8 [August 24, 2011]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -212,6 +212,9 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
       this.eventListener1_ = google.maps.event.addDomListener(this.div_, "mousedown", cancelHandler);
       this.eventListener2_ = google.maps.event.addDomListener(this.div_, "click", cancelHandler);
       this.eventListener3_ = google.maps.event.addDomListener(this.div_, "dblclick", cancelHandler);
+      this.eventListener4_ = google.maps.event.addDomListener(this.div_, "mouseover", function (e) {
+        this.style.cursor = "default";
+      });
     }
 
     this.contextListener_ = google.maps.event.addDomListener(this.div_, "contextmenu", ignoreHandler);
@@ -746,9 +749,11 @@ InfoBox.prototype.close = function () {
     google.maps.event.removeListener(this.eventListener1_);
     google.maps.event.removeListener(this.eventListener2_);
     google.maps.event.removeListener(this.eventListener3_);
+    google.maps.event.removeListener(this.eventListener4_);
     this.eventListener1_ = null;
     this.eventListener2_ = null;
     this.eventListener3_ = null;
+    this.eventListener4_ = null;
   }
 
   if (this.moveListener_) {
