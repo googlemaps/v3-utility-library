@@ -749,11 +749,11 @@ GoogleEarth.prototype.setZIndexes_ = function(mapTypeControlDiv) {
   for (var i = 0, sibling; sibling = siblings[i]; i++) {
     sibling['__gme_ozi'] = sibling.style.zIndex;
     // Sets the zIndex of all controls to be behind Earth.
-    sibling.style.zIndex = 0;
+    sibling.style.zIndex = -1;
   }
 
   mapTypeControlDiv['__gme_ozi'] = oldIndex;
-  this.controlDiv_.style.zIndex = mapTypeControlDiv.style.zIndex = 2000;
+  this.controlDiv_.style.zIndex = mapTypeControlDiv.style.zIndex = 0;
 };
 
 /**
