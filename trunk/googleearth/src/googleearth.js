@@ -762,10 +762,8 @@ GoogleEarth.prototype.setZIndexes_ = function(mapTypeControlDiv) {
 GoogleEarth.prototype.unsetZIndexes_ = function() {
   var siblings = this.controlDiv_.parentNode.childNodes;
   for (var i = 0, sibling; sibling = siblings[i]; i++) {
-    if (sibling['__gme_ozi']) {
-      // Set the old zIndex back
-      sibling.style.zIndex = sibling['__gme_ozi'];
-    }
+    // Set the old zIndex back
+    sibling.style.zIndex = sibling['__gme_ozi'];
   }
 };
 
