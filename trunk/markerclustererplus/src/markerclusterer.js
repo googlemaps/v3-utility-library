@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.1 [July 27, 2011]
+ * @version 2.0.2 [September 7, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -55,6 +55,11 @@
  *  and less than <code>height</code> and the <code>xoffset</code> must be positive and less
  *  than <code>width</code>. The default is to anchor the label text so that it is centered
  *  on the icon.
+ * @property {Array} [anchorIcon] The anchor position (in pixels) of the cluster icon. This is the
+ *  spot on the cluster icon that is to be aligned with the cluster position. The format is
+ *  <code>[yoffset, xoffset]</code> where <code>yoffset</code> increases as you go down and
+ *  <code>xoffset</code> increases to the right. The default anchor position is the center of the
+ *  cluster icon.
  * @property {string} [textColor="black"] The color of the label text shown on the
  *  cluster icon.
  * @property {number} [textSize=11] The size (in pixels) of the label text shown on the
@@ -237,6 +242,7 @@ ClusterIcon.prototype.useStyle = function (sums) {
   this.height_ = style.height;
   this.width_ = style.width;
   this.anchor_ = style.anchor;
+  this.anchorIcon_ = style.anchorIcon || [parseInt(this.height_ / 2, 10), parseInt(this.width_ / 2, 10)];
   this.textColor_ = style.textColor || "black";
   this.textSize_ = style.textSize || 11;
   this.textDecoration_ = style.textDecoration || "none";
@@ -308,8 +314,8 @@ ClusterIcon.prototype.createCss = function (pos) {
  */
 ClusterIcon.prototype.getPosFromLatLng_ = function (latlng) {
   var pos = this.getProjection().fromLatLngToDivPixel(latlng);
-  pos.x -= parseInt(this.width_ / 2, 10);
-  pos.y -= parseInt(this.height_ / 2, 10);
+  pos.x -= this.anchorIcon_[1];
+  pos.y -= this.anchorIcon_[0];
   return pos;
 };
 
@@ -1468,7 +1474,7 @@ MarkerClusterer.prototype.extend = function (obj1, obj2) {
  * The default function for determining the label text and style
  * for a cluster icon.
  *
- * @param {Array.<google.maps.Marker>} markers The array of represented by the cluster.
+ * @param {Array.<google.maps.Marker>} markers The array of markers represented by the cluster.
  * @param {number} numStyles The number of marker styles available.
  * @return {ClusterIconInfo} The information resource for the cluster.
  * @constant
