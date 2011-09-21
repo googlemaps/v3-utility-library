@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.2 [September 9, 2011]
+ * @version 2.0.3 [September 20, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -823,7 +823,7 @@ MarkerClusterer.prototype.setMinimumClusterSize = function (minimumClusterSize) 
  *  @return {number} The maximum zoom level.
  */
 MarkerClusterer.prototype.getMaxZoom = function () {
-  return this.maxZoom_ || this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom;
+  return this.maxZoom_;
 };
 
 
