@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.3 [September 20, 2011]
+ * @version 2.0.3 [September 21, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -439,6 +439,7 @@ Cluster.prototype.remove = function () {
 Cluster.prototype.addMarker = function (marker) {
   var i;
   var mCount;
+  var mz;
 
   if (this.isMarkerAlreadyAdded_(marker)) {
     return false;
@@ -461,7 +462,8 @@ Cluster.prototype.addMarker = function (marker) {
   this.markers_.push(marker);
 
   mCount = this.markers_.length;
-  if (this.map_.getZoom() > this.markerClusterer_.getMaxZoom()) {
+  mz = this.markerClusterer_.getMaxZoom();
+  if (mz !== null && this.map_.getZoom() > mz) {
     // Zoomed in past max zoom, so show the marker.
     if (marker.getMap() !== this.map_) {
       marker.setMap(this.map_);
@@ -511,8 +513,9 @@ Cluster.prototype.calculateBounds_ = function () {
  */
 Cluster.prototype.updateIcon_ = function () {
   var mCount = this.markers_.length;
+  var mz = this.markerClusterer_.getMaxZoom();
 
-  if (this.map_.getZoom() > this.markerClusterer_.getMaxZoom()) {
+  if (mz !== null && this.map_.getZoom() > mz) {
     this.clusterIcon_.hide();
     return;
   }
