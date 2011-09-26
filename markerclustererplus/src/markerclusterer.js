@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.4 [September 21, 2011]
+ * @version 2.0.5 [September 26, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -125,6 +125,7 @@ ClusterIcon.prototype.onAdd = function () {
   this.getPanes().overlayMouseTarget.appendChild(this.div_);
 
   google.maps.event.addDomListener(this.div_, "click", function (e) {
+    var mz;
     var mc = cClusterIcon.cluster_.getMarkerClusterer();
     /**
      * This event is fired when a cluster marker is clicked.
@@ -137,19 +138,20 @@ ClusterIcon.prototype.onAdd = function () {
 
     // The default click handler follows. Disable it by setting
     // the zoomOnClick property to false.
-    var mz = mc.getMaxZoom();
     if (mc.getZoomOnClick()) {
       // Zoom into the cluster.
+      mz = mc.getMaxZoom();
       mc.getMap().fitBounds(cClusterIcon.cluster_.getBounds());
       // Don't zoom beyond the max zoom level
-      if (mz && (mc.getMap().getZoom() > mz)) {
+      if (mz !== null && (mc.getMap().getZoom() > mz)) {
         mc.getMap().setZoom(mz + 1);
       }
-      // Prevent event propagation to map:
-      e.cancelBubble = true;
-      if (e.stopPropagation) {
-        e.stopPropagation();
-      }
+    }
+
+    // Prevent event propagation to the map:
+    e.cancelBubble = true;
+    if (e.stopPropagation) {
+      e.stopPropagation();
     }
   });
 
