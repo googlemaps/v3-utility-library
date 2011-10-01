@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.5 [September 26, 2011]
+ * @version 2.0.5 [September 30, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -1085,6 +1085,16 @@ MarkerClusterer.prototype.getMarkers = function () {
  */
 MarkerClusterer.prototype.getTotalMarkers = function () {
   return this.markers_.length;
+};
+
+
+/**
+ * Returns the current array of clusters formed by the clusterer.
+ *
+ * @return {Array} The array of clusters formed by the clusterer.
+ */
+MarkerClusterer.prototype.getClusters = function () {
+  return this.clusters_;
 };
 
 
