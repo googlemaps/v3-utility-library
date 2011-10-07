@@ -62,10 +62,23 @@ var REST_JSON = {
   layers: [{
     id: 0,
     name: null,
+    displayFieldName:null,
     defaultVisibility: true,
     parentLayerId: -1,
     subLayerIds: null,
-    subLayers:[]
+    subLayers:[],
+    // legend
+    layerId:null,
+    layerName:'',
+    layerType:'Feature Layer',
+    minScale:0,
+    maxScale:0,
+    legend:{
+      label:'',
+      url:'',
+      imageData:'',
+      contentType:'image/png'
+    }
   }],
   tables: null,
   spatialReference: {

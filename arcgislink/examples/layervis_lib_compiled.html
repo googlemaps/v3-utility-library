@@ -3,7 +3,18 @@
         <!-- meta name="viewport" content="initial-scale=1.0, user-scalable=no" / -->
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <title>Layer Visibility</title>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        <script type="text/javascript">
+            //copy from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
+            function getURLParam(name) {
+              var regexS = "[\\?&]" + name + "=([^&#]*)";
+              var regex = new RegExp(regexS);
+              var results = regex.exec(window.location.href);
+              return (results === null ? "" : decodeURIComponent(results[1]));
+            }
+            var gmaps_v = getURLParam('v');
+            if (gmaps_v) gmaps_v = '&v='+gmaps_v;
+            var script = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false' + gmaps_v + '"></' + 'script>';
+            document.write(script);
         </script>
         <script type="text/javascript" src="../src/arcgislink_compiled.js">
         </script>

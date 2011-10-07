@@ -141,6 +141,9 @@ function onClickOptionChanged() {
 function doIdentify(location) {
   if (!location) 
     return;
+    if (iw) {
+      iw.close();
+    }
   var layerOpt = document.getElementById('clickOpts').value;
   if (ov && svc.hasLoaded()) {
     var params = {
@@ -187,7 +190,13 @@ function processIdentifyResults(res, ll) {
       html += '</table></td></tr></table></div>';
       
     }
-    document.getElementById('info').innerHTML = html;
+    //document.getElementById('info').innerHTML = html;
+    if (!iw) {
+      iw = new google.maps.InfoWindow();
+    }
+    iw.setContent(html);
+    iw.setPosition(ll);
+    iw.open(map);
     if (marker == null) {
       marker = new google.maps.Marker({
         position: ll,
