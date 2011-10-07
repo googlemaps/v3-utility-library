@@ -31,7 +31,9 @@ function init() {
     center: new google.maps.LatLng(35.227, -80.84),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControlOptions: {
-      mapTypeIds: agsIds
+      mapTypeIds: agsIds,
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+
     }
   }
   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
