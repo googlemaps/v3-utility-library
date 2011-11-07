@@ -684,8 +684,6 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
     // Try to avoid IE timeout when processing a huge number of markers:
     this.batchSize_ = this.batchSizeIE_;
-  } else {
-    this.batchSize_ = this.batchSize_;
   }
 
   this.setupStyles_();
