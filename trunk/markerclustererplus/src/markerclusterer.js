@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.5 [September 30, 2011]
+ * @version 2.0.6 [November 6, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -607,6 +607,9 @@ Cluster.prototype.isMarkerAlreadyAdded_ = function (marker) {
  *  The default is an array of {@link ClusterIconStyle} elements whose properties are derived
  *  from the values for <code>imagePath</code>, <code>imageExtension</code>, and
  *  <code>imageSizes</code>.
+ * @property {number} [batchSize=MarkerClusterer.BATCH_SIZE] Set this property to the
+ *  number of markers to be processed in a single batch when using a browser other than
+ *  Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).
  * @property {number} [batchSizeIE=MarkerClusterer.BATCH_SIZE_IE] When Internet Explorer is
  *  being used, markers are processed in several batches with a small delay inserted between
  *  each batch in an attempt to avoid Javascript timeout errors. Set this property to the
@@ -675,13 +678,14 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   this.imageExtension_ = opt_options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
   this.imageSizes_ = opt_options.imageSizes || MarkerClusterer.IMAGE_SIZES;
   this.calculator_ = opt_options.calculator || MarkerClusterer.CALCULATOR;
+  this.batchSize_ = opt_options.batchSize || MarkerClusterer.BATCH_SIZE;
   this.batchSizeIE_ = opt_options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
 
   if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
     // Try to avoid IE timeout when processing a huge number of markers:
     this.batchSize_ = this.batchSizeIE_;
   } else {
-    this.batchSize_ = MarkerClusterer.BATCH_SIZE;
+    this.batchSize_ = this.batchSize_;
   }
 
   this.setupStyles_();
