@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerClustererPlus for Google Maps V3 v2.0.5 [September 30, 2011] Reference</title>
+    <title>MarkerClustererPlus for Google Maps V3 v2.0.6 [November 6, 2011] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -848,6 +848,18 @@ for the <code>MarkerClusterer</code> object.</td>
               </tr>
             
               <tr class="even">
+                <td><code>batchSize</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Set this property to the
+ number of markers to be processed in a single batch when using a browser other than
+ Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).  The default value is <code>MarkerClusterer.BATCH_SIZE</code>.</td>
+              </tr>
+            
+              <tr class="odd">
                 <td><code>batchSizeIE</code></td>
                 
                   
@@ -862,7 +874,7 @@ for the <code>MarkerClusterer</code> object.</td>
  if 15,000 markers are being managed, for example.  The default value is <code>MarkerClusterer.BATCH_SIZE_IE</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>calculator</code></td>
                 
                   
@@ -884,7 +896,7 @@ for the <code>MarkerClusterer</code> object.</td>
  array is <code>2</code>.  The default value is <code>MarkerClusterer.CALCULATOR</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>gridSize</code></td>
                 
                   
@@ -894,7 +906,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>The grid size of a cluster in pixels. The grid is a square.  The default value is <code>60</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>ignoreHidden</code></td>
                 
                   
@@ -909,7 +921,7 @@ for the <code>MarkerClusterer</code> object.</td>
  sure to also call <code>MarkerClusterer.repaint()</code>.  The default value is <code>false</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>imageExtension</code></td>
                 
                   
@@ -920,7 +932,7 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>"jpg"</code>).  The default value is <code>MarkerClusterer.IMAGE_EXTENSION</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>imagePath</code></td>
                 
                   
@@ -932,7 +944,7 @@ for the <code>MarkerClusterer</code> object.</td>
  where n is the image file number (1, 2, etc.).  The default value is <code>MarkerClusterer.IMAGE_PATH</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>imageSizes</code></td>
                 
                   
@@ -944,7 +956,7 @@ for the <code>MarkerClusterer</code> object.</td>
  (The images are assumed to be square.)  The default value is <code>MarkerClusterer.IMAGE_SIZES</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>maxZoom</code></td>
                 
                   
@@ -955,7 +967,7 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>null</code> if clustering is to be enabled at all zoom levels.  The default value is <code>null</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>minimumClusterSize</code></td>
                 
                   
@@ -966,7 +978,7 @@ for the <code>MarkerClusterer</code> object.</td>
  before the markers are hidden and a cluster marker appears.  The default value is <code>2</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>printable</code></td>
                 
                   
@@ -978,7 +990,7 @@ for the <code>MarkerClusterer</code> object.</td>
  refer to image sprite files.  The default value is <code>false</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>styles</code></td>
                 
                   
@@ -993,7 +1005,7 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>imageSizes</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>title</code></td>
                 
                   
@@ -1004,7 +1016,7 @@ for the <code>MarkerClusterer</code> object.</td>
  marker.  The default value is <code>""</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>zoomOnClick</code></td>
                 
                   
