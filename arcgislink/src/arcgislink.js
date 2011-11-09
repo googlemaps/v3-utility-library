@@ -3623,7 +3623,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
           me.overlay_.setMap(null);
           me.overlay_ = null;
         }
-       me.overlay_ = new ImageOverlay(json.bounds, json.href, me.map_);
+       me.overlay_ = new ImageOverlay(json.bounds, json.href, me.map_, me.opacity_);
        
       }
       /**
@@ -3682,11 +3682,12 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * @param {Object} url
    * @param {Object} map
    */
-  function ImageOverlay(bounds, url, map) {
+  function ImageOverlay(bounds, url, map, op) {
     this.bounds_ = bounds;
     this.url_ = url;
     this.map_ = map;
     this.div_ = null;
+    this.op_ = op;
     this.setMap(map);
   }
   
@@ -3704,6 +3705,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
+    setNodeOpacity_(div, this.op_);
     panes.overlayLayer.appendChild(div);
   };
   ImageOverlay.prototype.draw = function() {
