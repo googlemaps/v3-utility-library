@@ -978,12 +978,27 @@ InfoBubble.prototype['close'] = InfoBubble.prototype.close;
 
 
 /**
- * Open the InfoBubble
+ * Open the InfoBubble (asynchronous).
  *
  * @param {google.maps.Map=} opt_map Optional map to open on.
  * @param {google.maps.MVCObject=} opt_anchor Optional anchor to position at.
  */
 InfoBubble.prototype.open = function(opt_map, opt_anchor) {
+  var that = this;
+  window.setTimeout(function() {
+    that.open_(opt_map, opt_anchor);
+  }, 0);
+};
+
+/**
+ * Open the InfoBubble
+ * @private
+ * @param {google.maps.Map=} opt_map Optional map to open on.
+ * @param {google.maps.MVCObject=} opt_anchor Optional anchor to position at.
+ */
+InfoBubble.prototype.open_ = function(opt_map, opt_anchor) {
+  this.updateContent_();
+
   if (opt_map) {
     this.setMap(opt_map);
   }
@@ -1169,7 +1184,7 @@ InfoBubble.prototype['getContent'] = InfoBubble.prototype.getContent;
 /**
  * Sets the marker content and adds loading events to images
  */
-InfoBubble.prototype.content_changed = function() {
+InfoBubble.prototype.updateContent_ = function() {
   if (!this.content_) {
     // The Content area doesnt exist.
     return;
@@ -1197,9 +1212,6 @@ InfoBubble.prototype.content_changed = function() {
   }
   this.redraw_();
 };
-InfoBubble.prototype['content_changed'] =
-    InfoBubble.prototype.content_changed;
-
 
 /**
  * Image loaded
