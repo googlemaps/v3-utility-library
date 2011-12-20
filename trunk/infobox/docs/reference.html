@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>InfoBox v1.1.10 [December 11, 2011] Reference</title>
+    <title>InfoBox v1.1.10 [December 19, 2011] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -14,15 +14,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  An InfoBox behaves like a <tt>google.maps.InfoWindow</tt>, but it supports several
  additional properties for advanced styling. An InfoBox can also be used as a map label.
  <p>
- An InfoBox also fires the same events as a <tt>google.maps.InfoWindow</tt>.
- <p>
- Browsers tested:
- <p>
- Mac -- Safari (4.0.4), Firefox (3.6), Opera (10.10), Chrome (4.0.249.43), OmniWeb (5.10.1)
- <br>
- Win -- Safari, Firefox, Opera, Chrome (3.0.195.38), Internet Explorer (8.0.6001.18702)
- <br>
- iPod Touch/iPhone -- Safari (3.1.2)</p>
+ An InfoBox also fires the same events as a <tt>google.maps.InfoWindow</tt>.</p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
     
       <h2><a name="InfoBox"></a>class InfoBox</h2>
@@ -373,11 +365,10 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                     <td><code>boolean</code></td>
                   
                 
-                <td>Propagate mousedown, click, dblclick,
- and contextmenu events in the InfoBox (default is <tt>false</tt> to mimic the behavior
- of a <tt>google.maps.InfoWindow</tt>). Set this property to <tt>true</tt> if the InfoBox
- is being used as a map label. iPhone note: This property setting has no effect; events are
- always propagated.</td>
+                <td>Propagate mousedown, mousemove, mouseover, mouseout,
+ mouseup, click, dblclick, touchstart, touchend, touchmove, and contextmenu events in the InfoBox
+ (default is <tt>false</tt> to mimic the behavior of a <tt>google.maps.InfoWindow</tt>). Set
+ this property to <tt>true</tt> if the InfoBox is being used as a map label.</td>
               </tr>
             
               <tr class="odd">
