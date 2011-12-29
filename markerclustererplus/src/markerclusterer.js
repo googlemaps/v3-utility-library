@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.6 [November 6, 2011]
+ * @version 2.0.7 [December 28, 2011]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -280,7 +280,6 @@ ClusterIcon.prototype.createCss = function (pos) {
   var style = [];
   if (!this.cluster_.printable_) {
     style.push('background-image:url(' + this.url_ + ');');
-    style.push('background-size:' + this.width_ + 'px ' + this.height_ + 'px;'); //For iPhone retina display
     style.push('background-position:' + this.backgroundPosition_ + ';');
   }
 
@@ -310,6 +309,7 @@ ClusterIcon.prototype.createCss = function (pos) {
       this.textSize_ + 'px; font-family:' + this.fontFamily_ + '; font-weight:' +
       this.fontWeight_ + '; font-style:' + this.fontStyle_ + '; text-decoration:' +
       this.textDecoration_ + ';');
+
   return style.join("");
 };
 
