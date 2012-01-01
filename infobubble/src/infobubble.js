@@ -1330,6 +1330,7 @@ InfoBubble.prototype['setTabActive'] = InfoBubble.prototype.setTabActive;
 InfoBubble.prototype.setTabActive_ = function(tab) {
   if (!tab) {
     this.setContent('');
+    this.updateContent_();
     return;
   }
 
@@ -1349,6 +1350,7 @@ InfoBubble.prototype.setTabActive_ = function(tab) {
   tab.style['paddingBottom'] = this.px(padding + borderWidth);
 
   this.setContent(this.tabs_[tab.index].content);
+  this.updateContent_();
 
   this.activeTab_ = tab;
 
@@ -1497,6 +1499,7 @@ InfoBubble.prototype.updateTab = function(index, opt_label, opt_content) {
 
   if (this.activeTab_ == tab.tab) {
     this.setContent(tab.content);
+    this.updateContent_();
   }
   this.redraw_();
 };
