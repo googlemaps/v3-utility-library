@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.10 [December 19, 2011]
+ * @version 1.1.11 [January 9, 2012]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -200,13 +200,20 @@ InfoBox.prototype.createInfoBoxDiv_ = function () {
 
       // Cancel event propagation.
       //
-      events = ["mousedown", "mousemove", "mouseover", "mouseout", "mouseup",
+      // Note: mousemove not included (to resolve Issue 152)
+      events = ["mousedown", "mouseover", "mouseout", "mouseup",
       "click", "dblclick", "touchstart", "touchend", "touchmove"];
 
       for (i = 0; i < events.length; i++) {
 
         this.eventListeners_.push(google.maps.event.addDomListener(this.div_, events[i], cancelHandler));
       }
+      
+      // Workaround for Google bug that causes the cursor to change to a pointer
+      // when the mouse moves over a marker underneath InfoBox.
+      this.eventListeners_.push(google.maps.event.addDomListener(this.div_, "mouseover", function (e) {
+        this.style.cursor = "default";
+      }));
     }
 
     this.contextListener_ = google.maps.event.addDomListener(this.div_, "contextmenu", ignoreHandler);
