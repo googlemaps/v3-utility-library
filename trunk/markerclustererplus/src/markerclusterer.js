@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.7 [December 28, 2011]
+ * @version 2.0.8 [February 9, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -116,6 +116,8 @@ function ClusterIcon(cluster, styles) {
  */
 ClusterIcon.prototype.onAdd = function () {
   var cClusterIcon = this;
+  var cMouseDownInCluster;
+  var cDraggingMapByCluster;
 
   this.div_ = document.createElement("div");
   if (this.visible_) {
@@ -124,34 +126,47 @@ ClusterIcon.prototype.onAdd = function () {
 
   this.getPanes().overlayMouseTarget.appendChild(this.div_);
 
+  // Fix for Issue 157
+  google.maps.event.addListener(this.getMap(), "bounds_changed", function () {
+    cDraggingMapByCluster = cMouseDownInCluster;
+  });
+
+  google.maps.event.addDomListener(this.div_, "mousedown", function () {
+    cMouseDownInCluster = true;
+    cDraggingMapByCluster = false;
+  });
+
   google.maps.event.addDomListener(this.div_, "click", function (e) {
-    var mz;
-    var mc = cClusterIcon.cluster_.getMarkerClusterer();
-    /**
-     * This event is fired when a cluster marker is clicked.
-     * @name MarkerClusterer#click
-     * @param {Cluster} c The cluster that was clicked.
-     * @event
-     */
-    google.maps.event.trigger(mc, "click", cClusterIcon.cluster_);
-    google.maps.event.trigger(mc, "clusterclick", cClusterIcon.cluster_); // deprecated name
+    cMouseDownInCluster = false;
+    if (!cDraggingMapByCluster) {
+      var mz;
+      var mc = cClusterIcon.cluster_.getMarkerClusterer();
+      /**
+       * This event is fired when a cluster marker is clicked.
+       * @name MarkerClusterer#click
+       * @param {Cluster} c The cluster that was clicked.
+       * @event
+       */
+      google.maps.event.trigger(mc, "click", cClusterIcon.cluster_);
+      google.maps.event.trigger(mc, "clusterclick", cClusterIcon.cluster_); // deprecated name
 
-    // The default click handler follows. Disable it by setting
-    // the zoomOnClick property to false.
-    if (mc.getZoomOnClick()) {
-      // Zoom into the cluster.
-      mz = mc.getMaxZoom();
-      mc.getMap().fitBounds(cClusterIcon.cluster_.getBounds());
-      // Don't zoom beyond the max zoom level
-      if (mz !== null && (mc.getMap().getZoom() > mz)) {
-        mc.getMap().setZoom(mz + 1);
+      // The default click handler follows. Disable it by setting
+      // the zoomOnClick property to false.
+      if (mc.getZoomOnClick()) {
+        // Zoom into the cluster.
+        mz = mc.getMaxZoom();
+        mc.getMap().fitBounds(cClusterIcon.cluster_.getBounds());
+        // Don't zoom beyond the max zoom level
+        if (mz !== null && (mc.getMap().getZoom() > mz)) {
+          mc.getMap().setZoom(mz + 1);
+        }
       }
-    }
 
-    // Prevent event propagation to the map:
-    e.cancelBubble = true;
-    if (e.stopPropagation) {
-      e.stopPropagation();
+      // Prevent event propagation to the map:
+      e.cancelBubble = true;
+      if (e.stopPropagation) {
+        e.stopPropagation();
+      }
     }
   });
 
