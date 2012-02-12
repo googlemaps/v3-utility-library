@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>MarkerCluster for v3 Documentation: Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+<h1>MarkerClustererPlus Examples</h1>
+
+<p><a href="reference.html">API Reference</a></p>
+
+<p>
+Note: Be sure to include <tt>markerclusterer.js</tt> or <tt>markerclusterer_packed.js</tt> in your HTML document.
+<pre class="prettyprint">
+	&lt;script src=&quot;/path/to/markerclusterer.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</pre>
+</p>
+
+    <p>To use a marker clusterer, create a <code>MarkerClusterer</code> object.
+        In the simplest case, just pass a map to it.</p>
+<pre class="prettyprint">
+var center = new google.maps.LatLng(37.4419, -122.1419);
+var options = {
+  'zoom': 13,
+  'center': center,
+  'mapTypeId': google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("map"), options);
+var mc = new MarkerClusterer(map);
+</pre>
+
+     <p>You may also specify a number of options to fine-tune the marker
+        clusterer's performance. These options are passed via an object.
+     </p>
+
+<pre class="prettyprint">
+var center = new google.maps.LatLng(37.4419, -122.1419);
+var options = {
+  'zoom': 13,
+  'center': center,
+  'mapTypeId': google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("map"), options);
+
+var mcOptions = {gridSize: 50, maxZoom: 15};
+var mc = new MarkerClusterer(map, [], mcOptions);
+</pre>
+
+    <p>Once you create a marker clusterer, you will want to add markers to it.
+      You can add markers using the
+      <code>addMarker()</code> or <code>addMarkers()</code>method or by
+      providing an array of markers to the constructor:</p>
+<pre class="prettyprint">
+var center = new google.maps.LatLng(37.4419, -122.1419);
+var options = {
+  'zoom': 13,
+  'center': center,
+  'mapTypeId': google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("map"), options);
+
+var mcOptions = {gridSize: 50, maxZoom: 15};
+var markers = [...]; // Create the markers you want to add and collect them into a array.
+var mc = new MarkerClusterer(map, markers, mcOptions);
+</pre>
+
+    <h2><a name="Marker_Clusterer" id="Marker_Clusterer"></a>Simple Example</h2>
+
+    <p>This example will show 100 markers on map.</p>
+
+<pre class="prettyprint">
+var center = new google.maps.LatLng(37.4419, -122.1419);
+var options = {
+  'zoom': 13,
+  'center': center,
+  'mapTypeId': google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("map"), options);
+
+var markers = [];
+for (var i = 0; i &lt; 100; i++) {
+  var latLng = new google.maps.LatLng(data.photos[i].latitude,
+      data.photos[i].longitude);
+  var marker = new google.maps.Marker({'position': latLng});
+  markers.push(marker);
+}
+var markerCluster = new MarkerClusterer(map, markers);
+</pre>
+
+    <p><a href="../examples/simple_example.html">View example (simple_example.html)</a></p>
+
+    <h2>
+      <a name="Marker_Clusterer_Advanced" id="Marker_Clusterer_Advanced"></a>
+      Advanced Example
+    </h2>
+    <p>With this example, you can test a marker clusterer with
+    different maximum zoom levels, grid sizes and styles, all the options.<br /></p>
+    <p><a href="../examples/advanced_example.html">View example
+      (advanced_example.html)</a></p>
+
+    <h2>
+      <a name="Marker_Clusterer_Speed_Test" id="Marker_Clusterer_Speed_Test"></a>
+      Speed Test Example
+    </h2>
+    <p>This example compares adding markers with a
+    marker clusterer to the normal method of adding markers, and
+    display the time for each.</p>
+    <p><a href="../examples/speed_test_example.html">View example
+      (speed_test_example.html)</a></p>
+
+    <h2>
+      <a name="Marker_Clusterer_Events" id="Marker_Clusterer_Events"></a>
+      Event Handling Example
+    </h2>
+    <p>This example shows how to add event listeners to a
+    marker clusterer.</p>
+    <p><a href="../examples/events_example.html">View example
+      (events_example.html)</a></p>
+  </body>
+</html>
