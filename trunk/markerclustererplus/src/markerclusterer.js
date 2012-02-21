@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.8 [February 9, 2012]
+ * @version 2.0.9 [February 20, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -724,6 +724,14 @@ MarkerClusterer.prototype.onAdd = function () {
   this.listeners_ = [
     google.maps.event.addListener(this.getMap(), "zoom_changed", function () {
       cMarkerClusterer.resetViewport_(false);
+      // Workaround for this Google bug: when map is at level 0 and "-" of
+      // zoom slider is clicked, a "zoom_changed" event is fired even though
+      // the map doesn't zoom out any further. In this situation, no "idle"
+      // event is triggered so the cluster markers that have been removed
+      // do not get redrawn.
+      if (this.getZoom() === 0) {
+        google.maps.event.trigger(this, "idle");
+      }
     }),
     google.maps.event.addListener(this.getMap(), "idle", function () {
       cMarkerClusterer.redraw_();
@@ -1431,6 +1439,7 @@ MarkerClusterer.prototype.addToClosestCluster_ = function (marker) {
  */
 MarkerClusterer.prototype.createClusters_ = function (iFirst) {
   var i, marker;
+  var mapBounds;
   var cMarkerClusterer = this;
   if (!this.ready_) {
     return;
@@ -1455,8 +1464,14 @@ MarkerClusterer.prototype.createClusters_ = function (iFirst) {
 
   // Get our current map view bounds.
   // Create a new bounds object so we don't affect the map.
-  var mapBounds = new google.maps.LatLngBounds(this.getMap().getBounds().getSouthWest(),
+  //
+  // See Comments 9 & 11 on Issue 3651 relating to this workaround for a Google Maps bug:
+  if (this.getMap().getZoom() > 3) {
+    mapBounds = new google.maps.LatLngBounds(this.getMap().getBounds().getSouthWest(),
       this.getMap().getBounds().getNorthEast());
+  } else {
+    mapBounds = new google.maps.LatLngBounds(new google.maps.LatLng(85.02070771743472, -178.48388434375), new google.maps.LatLng(-85.08136444384544, 178.00048865625));
+  }
   var bounds = this.getExtendedBounds(mapBounds);
 
   var iLast = Math.min(iFirst + this.batchSize_, this.markers_.length);
