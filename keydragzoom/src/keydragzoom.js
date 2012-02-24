@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.5 [December 8, 2010]
+ * @version 2.0.6 [February 24, 2012]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -295,7 +295,9 @@
       // Prevents selection of other elements on the webpage
       // when a drag zoom operation is in progress:
       this.veilDiv_[i].onselectstart = function () {
-        return false;
+// The following line has been removed because it seems to cause trouble with Chrome/Win.
+// Not sure why, but it seems to work. See Issue 139.
+//        return false;
       };
       // Apply default style values for the veil:
       setVals(this.veilDiv_[i].style, {
@@ -331,7 +333,7 @@
     this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT_TOP;
     this.visualPositionOffset_ = opt_zoomOpts.visualPositionOffset || new google.maps.Size(35, 0);
     this.visualPositionIndex_ = opt_zoomOpts.visualPositionIndex || null;
-    this.visualSprite_ = opt_zoomOpts.visualSprite || "http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
+    this.visualSprite_ = opt_zoomOpts.visualSprite || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
     this.visualSize_ = opt_zoomOpts.visualSize || new google.maps.Size(20, 20);
     this.visualTips_ = opt_zoomOpts.visualTips || {};
     this.visualTips_.off =  this.visualTips_.off || "Turn on drag zoom mode";
