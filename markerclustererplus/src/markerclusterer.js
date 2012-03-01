@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.9 [February 20, 2012]
+ * @version 2.0.10 [February 29, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -728,8 +728,8 @@ MarkerClusterer.prototype.onAdd = function () {
       // zoom slider is clicked, a "zoom_changed" event is fired even though
       // the map doesn't zoom out any further. In this situation, no "idle"
       // event is triggered so the cluster markers that have been removed
-      // do not get redrawn.
-      if (this.getZoom() === 0) {
+      // do not get redrawn. Same goes for a zoom in at maxZoom.
+      if (this.getZoom() === 0 || this.getZoom() === this.get("maxZoom")) {
         google.maps.event.trigger(this, "idle");
       }
     }),
