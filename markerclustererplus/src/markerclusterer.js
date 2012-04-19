@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.10 [February 29, 2012]
+ * @version 2.0.11 [April 19, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -101,6 +101,7 @@ function ClusterIcon(cluster, styles) {
   cluster.getMarkerClusterer().extend(ClusterIcon, google.maps.OverlayView);
 
   this.cluster_ = cluster;
+  this.className_ = cluster.getMarkerClusterer().getClusterClass();
   this.styles_ = styles;
   this.center_ = null;
   this.div_ = null;
@@ -120,6 +121,7 @@ ClusterIcon.prototype.onAdd = function () {
   var cDraggingMapByCluster;
 
   this.div_ = document.createElement("div");
+  this.div_.className = this.className_;
   if (this.visible_) {
     this.show();
   }
@@ -616,6 +618,9 @@ Cluster.prototype.isMarkerAlreadyAdded_ = function (marker) {
  *  <code>text</code> value of <code>"125"</code> and an <code>index</code> of <code>3</code>
  *  for a cluster icon representing 125 markers so the element used in the <code>styles</code>
  *  array is <code>2</code>.
+ * @property {string} [clusterClass="cluster"] The name of the CSS class defining general styles
+ *  for the cluster markers. Use this class to define CSS styles that are not set up by the code
+ *  that processes the <code>styles</code> array.
  * @property {Array} [styles] An array of {@link ClusterIconStyle} elements defining the styles
  *  of the cluster markers to be used. The element to be used to style a given cluster marker
  *  is determined by the function defined by the <code>calculator</code> property.
@@ -695,6 +700,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   this.calculator_ = opt_options.calculator || MarkerClusterer.CALCULATOR;
   this.batchSize_ = opt_options.batchSize || MarkerClusterer.BATCH_SIZE;
   this.batchSizeIE_ = opt_options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
+  this.clusterClass_ = opt_options.clusterClass || "cluster";
 
   if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
     // Try to avoid IE timeout when processing a huge number of markers:
@@ -1090,6 +1096,26 @@ MarkerClusterer.prototype.getBatchSizeIE = function () {
  */
 MarkerClusterer.prototype.setBatchSizeIE = function (batchSizeIE) {
   this.batchSizeIE_ = batchSizeIE;
+};
+
+
+/**
+ * Returns the value of the <code>clusterClass</code> property.
+ *
+ * @return {string} the value of the clusterClass property.
+ */
+MarkerClusterer.prototype.getClusterClass = function () {
+  return this.clusterClass_;
+};
+
+
+/**
+ * Sets the value of the <code>clusterClass</code> property.
+ *
+ *  @param {number} clusterClass The value of the clusterClass property.
+ */
+MarkerClusterer.prototype.setClusterClass = function (clusterClass) {
+  this.clusterClass_ = clusterClass;
 };
 
 
