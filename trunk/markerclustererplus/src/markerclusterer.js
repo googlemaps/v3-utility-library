@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.11 [April 19, 2012]
+ * @version 2.0.12 [April 21, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -141,6 +141,7 @@ ClusterIcon.prototype.onAdd = function () {
   google.maps.event.addDomListener(this.div_, "click", function (e) {
     cMouseDownInCluster = false;
     if (!cDraggingMapByCluster) {
+      var theBounds;
       var mz;
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
@@ -157,11 +158,16 @@ ClusterIcon.prototype.onAdd = function () {
       if (mc.getZoomOnClick()) {
         // Zoom into the cluster.
         mz = mc.getMaxZoom();
-        mc.getMap().fitBounds(cClusterIcon.cluster_.getBounds());
-        // Don't zoom beyond the max zoom level
-        if (mz !== null && (mc.getMap().getZoom() > mz)) {
-          mc.getMap().setZoom(mz + 1);
-        }
+        theBounds = cClusterIcon.cluster_.getBounds();
+        mc.getMap().fitBounds(theBounds);
+        // There is a fix for Issue 170 here:
+        setTimeout(function () {
+          mc.getMap().fitBounds(theBounds);
+          // Don't zoom beyond the max zoom level
+          if (mz !== null && (mc.getMap().getZoom() > mz)) {
+            mc.getMap().setZoom(mz + 1);
+          }
+        }, 100);
       }
 
       // Prevent event propagation to the map:
@@ -1112,7 +1118,7 @@ MarkerClusterer.prototype.getClusterClass = function () {
 /**
  * Sets the value of the <code>clusterClass</code> property.
  *
- *  @param {number} clusterClass The value of the clusterClass property.
+ *  @param {string} clusterClass The value of the clusterClass property.
  */
 MarkerClusterer.prototype.setClusterClass = function (clusterClass) {
   this.clusterClass_ = clusterClass;
