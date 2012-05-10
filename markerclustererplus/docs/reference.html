@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerClustererPlus for Google Maps V3 v2.0.12 [April 21, 2012] Reference</title>
+    <title>MarkerClustererPlus for Google Maps V3 v2.0.13 [May 8, 2012] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -142,6 +142,18 @@ for the <code>MarkerClusterer</code> object.</td>
                   
                 
                 <td>The text of the label to be shown on the cluster icon.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>title</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The tooltip to display when the mouse moves over the cluster icon.
+ If this value is <code>undefined</code> or <code>""</code>, <code>title</code> is set to the
+ value of the <code>title</code> property passed to the MarkerClusterer.</td>
               </tr>
             
           </tbody>
@@ -913,7 +925,10 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>index</code> minus 1. For example, the default <code>calculator</code> returns a
  <code>text</code> value of <code>"125"</code> and an <code>index</code> of <code>3</code>
  for a cluster icon representing 125 markers so the element used in the <code>styles</code>
- array is <code>2</code>.  The default value is <code>MarkerClusterer.CALCULATOR</code>.</td>
+ array is <code>2</code>. A <code>calculator</code> may also return a <code>title</code>
+ property that contains the text of the tooltip to be used for the cluster marker. If
+  <code>title</code> is not defined, the tooltip is set to the value of the <code>title</code>
+  property for the MarkerClusterer.  The default value is <code>MarkerClusterer.CALCULATOR</code>.</td>
               </tr>
             
               <tr class="odd">
@@ -1045,7 +1060,8 @@ for the <code>MarkerClusterer</code> object.</td>
                   
                 
                 <td>The tooltip to display when the mouse moves over a cluster
- marker.  The default value is <code>""</code>.</td>
+ marker. (Alternatively, you can use a custom <code>calculator</code> function to specify a
+ different tooltip for each cluster marker.)  The default value is <code>""</code>.</td>
               </tr>
             
               <tr class="even">
