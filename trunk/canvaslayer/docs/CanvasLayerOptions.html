@@ -1,298 +1,262 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>JsDoc Reference - CanvasLayerOptions</title>
+  <head>
+    <meta charset="utf-8">
+    <title>JsDoc Reference - CanvasLayerOptions</title>
 
-		<style type="text/css">
-			/* default.css */
-body
-{
-	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
-	width: 800px;
-}
+    <style type="text/css">
+      body {
+        font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+        width: 800px;
+      }
 
-.header
-{
-	clear: both;
-	background-color: #ccc;
-	padding: 8px;
-}
+      .header {
+        clear: both;
+        background-color: #ccc;
+        padding: 8px;
+      }
 
-h1
-{
-	font-size: 150%;
-	font-weight: bold;
-	padding: 0;
-	margin: 1em 0 0 .3em;
-}
+      h1 {
+        font-size: 150%;
+        font-weight: bold;
+        padding: 0;
+        margin: 1em 0 0 .3em;
+      }
 
-hr
-{
-	border: none 0;
-	border-top: 1px solid #7F8FB1;
-	height: 1px;
-}
+      hr {
+        border: none 0;
+        border-top: 1px solid #7F8FB1;
+        height: 1px;
+      }
 
-pre.code
-{
-	display: block;
-	padding: 8px;
-	border: 1px dashed #ccc;
-}
+      pre.code {
+        display: block;
+        padding: 8px;
+        border: 1px dashed #ccc;
+      }
 
-#index
-{
-	margin-top: 24px;
-	float: left;
-	width: 160px;
-	position: absolute;
-	left: 8px;
-	background-color: #F3F3F3;
-	padding: 8px;
-}
+      #index {
+        margin-top: 24px;
+        float: left;
+        width: 160px;
+        position: absolute;
+        left: 8px;
+        background-color: #F3F3F3;
+        padding: 8px;
+      }
 
-#content
-{
-	margin-left: 100px;
-	width: 600px;
-}
+      #content {
+        margin-left: 100px;
+        width: 600px;
+      }
 
-.classList
-{
-	list-style-type: none;
-	padding: 0;
-	margin: 0 0 0 8px;
-	font-family: arial, sans-serif;
-	font-size: 1em;
-	overflow: auto;
-}
+      .classList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 0 8px;
+        font-family: arial, sans-serif;
+        font-size: 1em;
+        overflow: auto;
+      }
 
-.classList li
-{
-	padding: 0;
-	margin: 0 0 8px 0;
-}
+      .classList li {
+        padding: 0;
+        margin: 0 0 8px 0;
+      }
 
-.summaryTable { width: 100%; }
+      .summaryTable { width: 100%; }
 
-h1.classTitle
-{
-	font-size:170%;
-	line-height:130%;
-}
+      h1.classTitle {
+        font-size:170%;
+        line-height:130%;
+      }
 
-h2 { font-size: 110%; }
-caption, div.sectionTitle
-{
-	background-color: #7F8FB1;
-	color: #fff;
-	font-size:130%;
-	text-align: left;
-	padding: 2px 6px 2px 6px;
-	border: 1px #7F8FB1 solid;
-}
+      h2 { font-size: 110%; }
 
-div.sectionTitle { margin-bottom: 8px; }
-.summaryTable thead { display: none; }
+      caption, div.sectionTitle {
+        background-color: #7F8FB1;
+        color: #fff;
+        font-size:130%;
+        text-align: left;
+        padding: 2px 6px 2px 6px;
+        border: 1px #7F8FB1 solid;
+      }
 
-.summaryTable td
-{
-	vertical-align: top;
-	padding: 4px;
-	border-bottom: 1px #7F8FB1 solid;
-	border-right: 1px #7F8FB1 solid;
-}
+      div.sectionTitle { margin-bottom: 8px; }
+      .summaryTable thead { display: none; }
 
-/*col#summaryAttributes {}*/
-.summaryTable td.attributes
-{
-	border-left: 1px #7F8FB1 solid;
-	width: 140px;
-	text-align: right;
-}
+      .summaryTable td {
+        vertical-align: top;
+        padding: 4px;
+        border-bottom: 1px #7F8FB1 solid;
+        border-right: 1px #7F8FB1 solid;
+      }
 
-td.attributes, .fixedFont
-{
-	line-height: 15px;
-	color: #002EBE;
-	font-family: "Courier New",Courier,monospace;
-	font-size: 13px;
-}
+      .summaryTable td.attributes {
+        border-left: 1px #7F8FB1 solid;
+        width: 140px;
+        text-align: right;
+      }
 
-.summaryTable td.nameDescription
-{
-	text-align: left;
-	font-size: 13px;
-	line-height: 15px;
-}
+      td.attributes, .fixedFont {
+        line-height: 15px;
+        color: #002EBE;
+        font-family: "Courier New",Courier,monospace;
+        font-size: 13px;
+      }
 
-.summaryTable td.nameDescription, .description
-{
-	line-height: 15px;
-	padding: 4px;
-	padding-left: 4px;
-}
+      .summaryTable td.nameDescription {
+        text-align: left;
+        font-size: 13px;
+        line-height: 15px;
+      }
 
-.summaryTable { margin-bottom: 8px; }
+      .summaryTable td.nameDescription, .description {
+        line-height: 15px;
+        padding: 4px;
+        padding-left: 4px;
+      }
 
-ul.inheritsList
-{
-	list-style: square;
-	margin-left: 20px;
-	padding-left: 0;
-}
+      .summaryTable { margin-bottom: 8px; }
 
-.detailList {
-	margin-left: 20px; 
-	line-height: 15px;
-}
-.detailList dt { margin-left: 20px; }
+      ul.inheritsList {
+        list-style: square;
+        margin-left: 20px;
+        padding-left: 0;
+      }
 
-.detailList .heading
-{
-	font-weight: bold;
-	padding-bottom: 6px;
-	margin-left: 0;
-}
+      .detailList {
+        margin-left: 20px; 
+        line-height: 15px;
+      }
+      .detailList dt { margin-left: 20px; }
 
-.light, td.attributes, .light a:link, .light a:visited
-{
-	color: #777;
-	font-style: italic;
-}
+      .detailList .heading {
+        font-weight: bold;
+        padding-bottom: 6px;
+        margin-left: 0;
+      }
 
-.fineprint
-{
-	text-align: right;
-	font-size: 10px;
-}
-		</style>
-	</head>
+      .light, td.attributes, .light a:link, .light a:visited {
+        color: #777;
+        font-style: italic;
+      }
 
-	<body>
-<!-- ============================== header ================================= -->	
-		<!-- begin static/header.html -->
-		<div id="header">
-</div>
-		<!-- end static/header.html -->
-		
-		<div id="content">
+      .fineprint {
+        text-align: right;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+<!-- ============================== header ================================= -->  
+    <!-- begin static/header.html -->
+    <div id="header"></div>
+    <!-- end static/header.html -->
+
+    <div id="content">
 <!-- ============================== class title ============================ -->
-			<h1 class="classTitle">
-				
-				Interface CanvasLayerOptions
-			</h1>
+      <h1 class="classTitle">
+        Interface CanvasLayerOptions
+      </h1>
 
-<!-- ============================== class summary ========================== -->			
-			<p class="description">
-
+<!-- ============================== class summary ========================== -->      
+      <p class="description">
           Definitions of all options for a <a href="reference.html">CanvasLayer</a>.
-					<br /><br /><i>Defined in: </i> <a href="../src/CanvasLayerOptions.js">CanvasLayerOptions.js</a>.
-				
-			</p>
+          <br /><br /><i>Defined in: </i> <a href="../src/CanvasLayerOptions.js">CanvasLayerOptions.js</a>.
+      </p>
 
-<!-- ============================== constructor summary ==================== -->			
-			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the interface CanvasLayerOptions.">
-				<caption>Interface Summary</caption>
-				<thead>
-					<tr>
-						<th scope="col">Interface Attributes</th>
-						<th scope="col">Interface Name and Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="attributes">&nbsp;</td>
-						<td class="nameDescription" >
-							<div class="fixedFont">
-								<b><a href="#">CanvasLayerOptions</a></b>()
-							</div>
-							<div class="description">Options for a <a href="reference.html">CanvasLayer</a>.</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			
+<!-- ============================== constructor summary ==================== -->      
+      <table class="summaryTable" cellspacing="0" summary="A summary of the interface CanvasLayerOptions.">
+        <caption>Interface Summary</caption>
+        <thead>
+          <tr>
+            <th scope="col">Interface Attributes</th>
+            <th scope="col">Interface Name and Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription" >
+              <div class="fixedFont">
+                <b><a href="#">CanvasLayerOptions</a></b>()
+              </div>
+              <div class="description">Options for a <a href="reference.html">CanvasLayer</a>.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
 <!-- ============================== properties summary ===================== -->
-			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the interface CanvasLayerOptions.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes"><span class="light">{boolean}</span></td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="CanvasLayerOptions.html#animate">animate</a></b>
-								</div>
-								<div class="description">If true, updateHandler will be called repeatedly, once per frame. If false, updateHandler will only be called when a map property changes that could require the canvas content to be redrawn.</div>
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="attributes"><span class="light">{google.maps.Map}</span></td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="CanvasLayerOptions.html#map">map</a></b>
-								</div>
-								<div class="description">Map on which to overlay the canvas.</div>
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="attributes"><span class="light">{string}</span></td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="CanvasLayerOptions.html#paneName">paneName</a></b>
-								</div>
-								<div class="description">The name of the MapPane in which this layer will be displayed. See <a href="https://developers.google.com/maps/documentation/javascript/reference#MapPanes">google.maps.MapPanes</a> for the panes available. Default is "overlayLayer".</div>
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="attributes"><span class="light">{function}</span></td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="CanvasLayerOptions.html#resizeHandler">resizeHandler</a></b>
-								</div>
-								<div class="description">A function that is called whenever the canvas has been resized to fit the map.</div>
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="attributes"><span class="light">{function}</span></td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="CanvasLayerOptions.html#updateHandler">updateHandler</a></b>
-								</div>
-								<div class="description">A function that is called when a repaint of the canvas is required.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-					
-				
-			
-			
-<!-- ============================== event details ========================= -->		
-			
-		</div>
+      <table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the interface CanvasLayerOptions.">
+        <caption>Field Summary</caption>
+        <thead>
+          <tr>
+            <th scope="col">Field Attributes</th>
+            <th scope="col">Field Name and Description</th>
+          </tr>
+        </thead>
+        <tbody>
 
-		
+          <tr>
+            <td class="attributes"><span class="light">{boolean}</span></td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="CanvasLayerOptions.html#animate">animate</a></b>
+              </div>
+              <div class="description">If true, updateHandler will be called repeatedly, once per frame. If false, updateHandler will only be called when a map property changes that could require the canvas content to be redrawn.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes"><span class="light">{google.maps.Map}</span></td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="CanvasLayerOptions.html#map">map</a></b>
+              </div>
+              <div class="description">Map on which to overlay the canvas.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes"><span class="light">{string}</span></td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="CanvasLayerOptions.html#paneName">paneName</a></b>
+              </div>
+              <div class="description">The name of the MapPane in which this layer will be displayed. See <a href="https://developers.google.com/maps/documentation/javascript/reference#MapPanes">google.maps.MapPanes</a> for the panes available. Default is "overlayLayer".</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes"><span class="light">{function}</span></td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="CanvasLayerOptions.html#resizeHandler">resizeHandler</a></b>
+              </div>
+              <div class="description">A function that is called whenever the canvas has been resized to fit the map.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes"><span class="light">{function}</span></td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="CanvasLayerOptions.html#updateHandler">updateHandler</a></b>
+              </div>
+              <div class="description">A function that is called when a repaint of the canvas is required.</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+<!-- ============================== event details ========================= -->   
+    </div>
+
 <!-- ============================== footer ================================= -->
-		<div class="fineprint" style="clear:both">
-		</div>
-	</body>
+    <div class="fineprint" style="clear:both">
+    </div>
+  </body>
 </html>

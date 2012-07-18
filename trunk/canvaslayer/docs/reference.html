@@ -1,765 +1,495 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>JsDoc Reference - CanvasLayer</title>
+  <head>
+    <meta charset="utf-8">
+    <title>JsDoc Reference - CanvasLayer</title>
 
-		<style type="text/css">
-			/* default.css */
-body
-{
-	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
-	width: 800px;
-}
+    <style type="text/css">
+      body {
+        font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+        width: 800px;
+      }
 
-.header
-{
-	clear: both;
-	background-color: #ccc;
-	padding: 8px;
-}
+      .header {
+        clear: both;
+        background-color: #ccc;
+        padding: 8px;
+      }
 
-h1
-{
-	font-size: 150%;
-	font-weight: bold;
-	padding: 0;
-	margin: 1em 0 0 .3em;
-}
+      h1 {
+        font-size: 150%;
+        font-weight: bold;
+        padding: 0;
+        margin: 1em 0 0 .3em;
+      }
 
-hr
-{
-	border: none 0;
-	border-top: 1px solid #7F8FB1;
-	height: 1px;
-}
+      hr {
+        border: none 0;
+        border-top: 1px solid #7F8FB1;
+        height: 1px;
+      }
 
-pre.code
-{
-	display: block;
-	padding: 8px;
-	border: 1px dashed #ccc;
-}
+      pre.code {
+        display: block;
+        padding: 8px;
+        border: 1px dashed #ccc;
+      }
 
-#index
-{
-	margin-top: 24px;
-	float: left;
-	width: 160px;
-	position: absolute;
-	left: 8px;
-	background-color: #F3F3F3;
-	padding: 8px;
-}
+      #index {
+        margin-top: 24px;
+        float: left;
+        width: 160px;
+        position: absolute;
+        left: 8px;
+        background-color: #F3F3F3;
+        padding: 8px;
+      }
 
-#content
-{
-	margin-left: 100px;
-	width: 600px;
-}
+      #content {
+        margin-left: 100px;
+        width: 600px;
+      }
 
-.classList
-{
-	list-style-type: none;
-	padding: 0;
-	margin: 0 0 0 8px;
-	font-family: arial, sans-serif;
-	font-size: 1em;
-	overflow: auto;
-}
+      .classList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 0 8px;
+        font-family: arial, sans-serif;
+        font-size: 1em;
+        overflow: auto;
+      }
 
-.classList li
-{
-	padding: 0;
-	margin: 0 0 8px 0;
-}
+      .classList li {
+        padding: 0;
+        margin: 0 0 8px 0;
+      }
 
-.summaryTable { width: 100%; }
+      .summaryTable { width: 100%; }
 
-h1.classTitle
-{
-	font-size:170%;
-	line-height:130%;
-}
+      h1.classTitle {
+        font-size:170%;
+        line-height:130%;
+      }
 
-h2 { font-size: 110%; }
-caption, div.sectionTitle
-{
-	background-color: #7F8FB1;
-	color: #fff;
-	font-size:130%;
-	text-align: left;
-	padding: 2px 6px 2px 6px;
-	border: 1px #7F8FB1 solid;
-}
+      h2 { font-size: 110%; }
 
-div.sectionTitle { margin-bottom: 8px; }
-.summaryTable thead { display: none; }
+      caption, div.sectionTitle {
+        background-color: #7F8FB1;
+        color: #fff;
+        font-size:130%;
+        text-align: left;
+        padding: 2px 6px 2px 6px;
+        border: 1px #7F8FB1 solid;
+      }
 
-.summaryTable td
-{
-	vertical-align: top;
-	padding: 4px;
-	border-bottom: 1px #7F8FB1 solid;
-	border-right: 1px #7F8FB1 solid;
-}
+      div.sectionTitle { margin-bottom: 8px; }
+      .summaryTable thead { display: none; }
 
-/*col#summaryAttributes {}*/
-.summaryTable td.attributes
-{
-	border-left: 1px #7F8FB1 solid;
-	width: 140px;
-	text-align: right;
-}
+      .summaryTable td {
+        vertical-align: top;
+        padding: 4px;
+        border-bottom: 1px #7F8FB1 solid;
+        border-right: 1px #7F8FB1 solid;
+      }
 
-td.attributes, .fixedFont
-{
-	line-height: 15px;
-	color: #002EBE;
-	font-family: "Courier New",Courier,monospace;
-	font-size: 13px;
-}
+      .summaryTable td.attributes {
+        border-left: 1px #7F8FB1 solid;
+        width: 140px;
+        text-align: right;
+      }
 
-.summaryTable td.nameDescription
-{
-	text-align: left;
-	font-size: 13px;
-	line-height: 15px;
-}
+      td.attributes, .fixedFont {
+        line-height: 15px;
+        color: #002EBE;
+        font-family: "Courier New",Courier,monospace;
+        font-size: 13px;
+      }
 
-.summaryTable td.nameDescription, .description
-{
-	line-height: 15px;
-	padding: 4px;
-	padding-left: 4px;
-}
+      .summaryTable td.nameDescription {
+        text-align: left;
+        font-size: 13px;
+        line-height: 15px;
+      }
 
-.summaryTable { margin-bottom: 8px; }
+      .summaryTable td.nameDescription, .description {
+        line-height: 15px;
+        padding: 4px;
+        padding-left: 4px;
+      }
 
-ul.inheritsList
-{
-	list-style: square;
-	margin-left: 20px;
-	padding-left: 0;
-}
+      .summaryTable { margin-bottom: 8px; }
 
-.detailList {
-	margin-left: 20px; 
-	line-height: 15px;
-}
-.detailList dt { margin-left: 20px; }
+      ul.inheritsList {
+        list-style: square;
+        margin-left: 20px;
+        padding-left: 0;
+      }
 
-.detailList .heading
-{
-	font-weight: bold;
-	padding-bottom: 6px;
-	margin-left: 0;
-}
+      .detailList {
+        margin-left: 20px; 
+        line-height: 15px;
+      }
+      .detailList dt { margin-left: 20px; }
 
-.light, td.attributes, .light a:link, .light a:visited
-{
-	color: #777;
-	font-style: italic;
-}
+      .detailList .heading {
+        font-weight: bold;
+        padding-bottom: 6px;
+        margin-left: 0;
+      }
 
-.fineprint
-{
-	text-align: right;
-	font-size: 10px;
-}
-		</style>
-	</head>
+      .light, td.attributes, .light a:link, .light a:visited {
+        color: #777;
+        font-style: italic;
+      }
 
-	<body>
-<!-- ============================== header ================================= -->	
-		<!-- begin static/header.html -->
-		<div id="header">
-</div>
-		<!-- end static/header.html -->
-		
-		<div id="content">
+      .fineprint {
+        text-align: right;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+<!-- ============================== header ================================= -->  
+    <!-- begin static/header.html -->
+    <div id="header"></div>
+    <!-- end static/header.html -->
+
+    <div id="content">
 <!-- ============================== class title ============================ -->
-			<h1 class="classTitle">
-				
-				Class CanvasLayer
-			</h1>
+      <h1 class="classTitle">
 
-<!-- ============================== class summary ========================== -->			
-			<p class="description">
-				
-				A map layer that provides a canvas over the slippy map and a callback system for efficient animation.
-				<br /><br />Extends
-					<a href="https://developers.google.com/maps/documentation/javascript/reference#OverlayView">google.maps.OverlayView</a>.<br />
-					<i>Defined in: </i> <a href="../src/CanvasLayer.js">CanvasLayer.js</a>.
-				
-			</p>
+        Class CanvasLayer
+      </h1>
 
-<!-- ============================== constructor summary ==================== -->			
-			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CanvasLayer.">
-				<caption>Class Summary</caption>
-				<thead>
-					<tr>
-						<th scope="col">Constructor Attributes</th>
-						<th scope="col">Constructor Name and Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="attributes">&nbsp;</td>
-						<td class="nameDescription" >
-							<div class="fixedFont">
-								<b><a href="reference.html#constructor">CanvasLayer</a></b>(opt_options)
-							</div>
-							<div class="description">A map layer that provides a canvas over the slippy map and a callback system for efficient animation.</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			
+<!-- ============================== class summary ========================== -->      
+      <p class="description">
+
+        A map layer that provides a canvas over the slippy map and a callback system for efficient animation.
+        <br /><br />Extends
+          <a href="https://developers.google.com/maps/documentation/javascript/reference#OverlayView">google.maps.OverlayView</a>.<br />
+          <i>Defined in: </i> <a href="../src/CanvasLayer.js">CanvasLayer.js</a>.
+      </p>
+
+<!-- ============================== constructor summary ==================== -->      
+
+      <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CanvasLayer.">
+        <caption>Class Summary</caption>
+        <thead>
+          <tr>
+            <th scope="col">Constructor Attributes</th>
+            <th scope="col">Constructor Name and Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription" >
+              <div class="fixedFont">
+                <b><a href="reference.html#constructor">CanvasLayer</a></b>(opt_options)
+              </div>
+              <div class="description">A map layer that provides a canvas over the slippy map and a callback system for efficient animation.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
 <!-- ============================== properties summary ===================== -->
-			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class CanvasLayer.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="reference.html#canvas">canvas</a></b>
-								</div>
-								<div class="description">The canvas element.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-				<dl class="inheritsList">
-				
-				</dl>
-				
-			
+      <table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class CanvasLayer.">
+        <caption>Field Summary</caption>
+        <thead>
+          <tr>
+            <th scope="col">Field Attributes</th>
+            <th scope="col">Field Name and Description</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont">
+              <b><a href="reference.html#canvas">canvas</a></b>
+              </div>
+              <div class="description">The canvas element.</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <dl class="inheritsList"></dl>
 
 <!-- ============================== methods summary ======================== -->
-			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class CanvasLayer.">
-					<caption>Method Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#getPaneName">getPaneName</a></b>()
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#getTopLeft">getTopLeft</a></b>()
-								</div>
-								<div class="description">A convenience method to get the current LatLng coordinate of the top left of
-the current view of the map.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#isAnimated">isAnimated</a></b>()
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#scheduleUpdate">scheduleUpdate</a></b>()
-								</div>
-								<div class="description">Schedule a requestAnimationFrame callback to updateHandler.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#setAnimate">setAnimate</a></b>(animate)
-								</div>
-								<div class="description">Set the animated state of the layer.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#setOptions">setOptions</a></b>(options)
-								</div>
-								<div class="description">Sets any options provided.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#setPaneName">setPaneName</a></b>(paneName)
-								</div>
-								<div class="description">Set the MapPane in which this layer will be displayed, by name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#setResizeHandler">setResizeHandler</a></b>(opt_resizeHandler)
-								</div>
-								<div class="description">Set a function that will be called whenever the parent map and the overlay's
-canvas have been resized.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="reference.html#setUpdateHandler">setUpdateHandler</a></b>(opt_updateHandler)
-								</div>
-								<div class="description">Set a function that will be called when a repaint of the canvas is required.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-				<dl class="inheritsList">
-				
-				</dl>
-				
-			
+      <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class CanvasLayer.">
+        <caption>Method Summary</caption>
+        <thead>
+          <tr>
+            <th scope="col">Method Attributes</th>
+            <th scope="col">Method Name and Description</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#getPaneName">getPaneName</a></b>()
+              </div>
+              <div class="description"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#getTopLeft">getTopLeft</a></b>()
+              </div>
+              <div class="description">A convenience method to get the current LatLng coordinate of the top left of the current view of the map.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#isAnimated">isAnimated</a></b>()
+              </div>
+              <div class="description"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#scheduleUpdate">scheduleUpdate</a></b>()
+              </div>
+              <div class="description">Schedule a requestAnimationFrame callback to updateHandler.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#setAnimate">setAnimate</a></b>(animate)
+              </div>
+              <div class="description">Set the animated state of the layer.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#setOptions">setOptions</a></b>(options)
+              </div>
+              <div class="description">Sets any options provided.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#setPaneName">setPaneName</a></b>(paneName)
+              </div>
+              <div class="description">Set the MapPane in which this layer will be displayed, by name.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#setResizeHandler">setResizeHandler</a></b>(opt_resizeHandler)
+              </div>
+              <div class="description">Set a function that will be called whenever the parent map and the overlay's canvas have been resized.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="attributes">&nbsp;</td>
+            <td class="nameDescription">
+              <div class="fixedFont"><b><a href="reference.html#setUpdateHandler">setUpdateHandler</a></b>(opt_updateHandler)
+              </div>
+              <div class="description">Set a function that will be called when a repaint of the canvas is required.</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <dl class="inheritsList"></dl>
 <!-- ============================== events summary ======================== -->
-			
 
-<!-- ============================== constructor details ==================== -->		
-			
-			<div class="details"><a name="constructor"> </a>
-				<div class="sectionTitle">
-					Class Detail
-				</div>
-				
-				<div class="fixedFont">
-						<b>CanvasLayer</b>(opt_options)
-				</div>
-				
-				<div class="description">
-					A map layer that provides a canvas over the slippy map and a callback
-system for efficient animation. Requires canvas and CSS 2D transform
-support.
-					
-				</div>
-				
-				
-				
-				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								<span class="light fixedFont">{CanvasLayerOptions}</span>  <b>opt_options</b>
-								
-							</dt>
-								<dd>Options to set in this CanvasLayer (optional). See <a href="CanvasLayerOptions.html">CanvasLayerOptions</a>.</dd>
-						
-						</dl>
-					
-					
-					
-					
-					
-					
-					
+<!-- ============================== constructor details ==================== -->    
+      <div class="details"><a name="constructor"> </a>
+        <div class="sectionTitle">
+          Class Detail
+        </div>
 
-			</div>
-			
+        <div class="fixedFont">
+            <b>CanvasLayer</b>(opt_options)
+        </div>
 
-<!-- ============================== field details ========================== -->		
-			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="canvas"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>canvas</b>
-					
-					</div>
-					<div class="description">
-						The canvas element.
-						
-						
-					</div>
-					
-					
+        <div class="description">
+          A map layer that provides a canvas over the slippy map and a callback system for efficient animation. Requires canvas and CSS 2D transform support.
+        </div>
 
-						
-						
-						
-						
+        <dl class="detailList">
+          <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{CanvasLayerOptions}</span>  <b>opt_options</b>
+          </dt>
+            <dd>Options to set in this CanvasLayer (optional). See <a href="CanvasLayerOptions.html">CanvasLayerOptions</a>.</dd>
+        </dl>
+      </div>
 
-					
-				
-			
+<!-- ============================== field details ========================== -->    
+      <div class="sectionTitle">
+        Field Detail
+      </div>
 
-<!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Method Detail
-				</div>
-				
-					
-				
-					<a name="getPaneName"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>getPaneName</b>()
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{string}</span> The name of the current container pane.</dd>
-							
-							</dl>
-						
-						
-						
+      <a name="canvas"> </a>
+      <div class="fixedFont">
+      <b>canvas</b>
+      </div>
+      <div class="description">
+        The canvas element.
+      </div>
+<!-- ============================== method details ========================= -->    
+      <div class="sectionTitle">
+        Method Detail
+      </div>
 
-					<hr />
-				
-					<a name="getTopLeft"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{google.maps.LatLng}</span>
-					<b>getTopLeft</b>()
-					
-					</div>
-					<div class="description">
-						A convenience method to get the current LatLng coordinate of the top left of
-the current view of the map.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{google.maps.LatLng}</span> The top left coordinate.</dd>
-							
-							</dl>
-						
-						
-						
+      <a name="getPaneName"> </a>
+      <div class="fixedFont">
 
-					<hr />
-				
-					<a name="isAnimated"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{boolean}</span>
-					<b>isAnimated</b>()
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{boolean}</span> Whether the canvas is animated.</dd>
-							
-							</dl>
-						
-						
-						
+      <span class="light">{string}</span>
+      <b>getPaneName</b>()
+      </div>
+      <div class="description">
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Returns:</dt>
+          <dd><span class="light fixedFont">{string}</span> The name of the current container pane.</dd>
+        </dl>
+      <hr />
 
-					<hr />
-				
-					<a name="scheduleUpdate"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>scheduleUpdate</b>()
-					
-					</div>
-					<div class="description">
-						Schedule a requestAnimationFrame callback to updateHandler. If one is
-already scheduled, there is no effect.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
+      <a name="getTopLeft"> </a>
+      <div class="fixedFont">
+      <span class="light">{google.maps.LatLng}</span>
+      <b>getTopLeft</b>()
+      </div>
+      <div class="description">
+        A convenience method to get the current LatLng coordinate of the top left of the current view of the map.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Returns:</dt>
+          <dd><span class="light fixedFont">{google.maps.LatLng}</span> The top left coordinate.</dd>
+        </dl>
+      <hr />
 
-					<hr />
-				
-					<a name="setAnimate"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setAnimate</b>(animate)
-					
-					</div>
-					<div class="description">
-						Set the animated state of the layer. If true, updateHandler will be called
-repeatedly, once per frame. If false, updateHandler will only be called when
-a map property changes that could require the canvas content to be redrawn.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>animate</b>
-									
-								</dt>
-								<dd>Whether the canvas is animated.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
+      <a name="isAnimated"> </a>
+      <div class="fixedFont">
+      <span class="light">{boolean}</span>
+      <b>isAnimated</b>()
+      </div>
+      <div class="description">
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Returns:</dt>
+          <dd><span class="light fixedFont">{boolean}</span> Whether the canvas is animated.</dd>
+        </dl>
+      <hr />
 
-					<hr />
-				
-					<a name="setOptions"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setOptions</b>(options)
-					
-					</div>
-					<div class="description">
-						Sets any options provided. See <a href="CanvasLayerOptions.html">CanvasLayerOptions</a> for more information.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{CanvasLayerOptions}</span> <b>options</b>
-									
-								</dt>
-								<dd>The options to set.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
+      <a name="scheduleUpdate"> </a>
+      <div class="fixedFont">
+      <b>scheduleUpdate</b>()
+      </div>
+      <div class="description">
+        Schedule a requestAnimationFrame callback to updateHandler. If one is already scheduled, there is no effect.
+      </div>
+      <hr />
 
-					<hr />
-				
-					<a name="setPaneName"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setPaneName</b>(paneName)
-					
-					</div>
-					<div class="description">
-						Set the MapPane in which this layer will be displayed, by name. See <a href="https://developers.google.com/maps/documentation/javascript/reference#MapPanes">google.maps.MapPanes</a> for the panes available.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>paneName</b>
-									
-								</dt>
-								<dd>The name of the desired MapPane.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
+      <a name="setAnimate"> </a>
+      <div class="fixedFont">
+      <b>setAnimate</b>(animate)
+      </div>
+      <div class="description">
+        Set the animated state of the layer. If true, updateHandler will be called repeatedly, once per frame. If false, updateHandler will only be called when a map property changes that could require the canvas content to be redrawn.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{boolean}</span> <b>animate</b>
+          </dt>
+          <dd>Whether the canvas is animated.</dd>
+        </dl>
+      <hr />
+      <a name="setOptions"> </a>
+      <div class="fixedFont">
+      <b>setOptions</b>(options)
+      </div>
+      <div class="description">
+        Sets any options provided. See <a href="CanvasLayerOptions.html">CanvasLayerOptions</a> for more information.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{CanvasLayerOptions}</span> <b>options</b>
+          </dt>
+          <dd>The options to set.</dd>
+        </dl>
+      <hr />
 
-					<hr />
-				
-					<a name="setResizeHandler"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setResizeHandler</b>(opt_resizeHandler)
-					
-					</div>
-					<div class="description">
-						Set a function that will be called whenever the parent map and the overlay's
-canvas have been resized. If opt_resizeHandler is null or unspecified, any
-existing callback is removed.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>opt_resizeHandler</b>
-									
-								</dt>
-								<dd>The resize callback function (optional).</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
+      <a name="setPaneName"> </a>
+      <div class="fixedFont">
+      <b>setPaneName</b>(paneName)
+      </div>
+      <div class="description">
+        Set the MapPane in which this layer will be displayed, by name. See <a href="https://developers.google.com/maps/documentation/javascript/reference#MapPanes">google.maps.MapPanes</a> for the panes available.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{string}</span> <b>paneName</b>
+          </dt>
+          <dd>The name of the desired MapPane.</dd>
+        </dl>
+      <hr />
 
-					<hr />
-				
-					<a name="setUpdateHandler"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setUpdateHandler</b>(opt_updateHandler)
-					
-					</div>
-					<div class="description">
-						Set a function that will be called when a repaint of the canvas is required.
-If opt_updateHandler is null or unspecified, any existing callback is
-removed.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>opt_updateHandler</b>
-									
-								</dt>
-								<dd>The update callback function (optional).</dd>
-							
-							</dl>
-						
-						
-						
-						
+      <a name="setResizeHandler"> </a>
+      <div class="fixedFont">
+      <b>setResizeHandler</b>(opt_resizeHandler)
+      </div>
+      <div class="description">
+        Set a function that will be called whenever the parent map and the overlay's canvas have been resized. If opt_resizeHandler is null or unspecified, any existing callback is removed.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{function}</span> <b>opt_resizeHandler</b>
+          </dt>
+          <dd>The resize callback function (optional).</dd>
+        </dl>
+      <hr />
 
-					
-				
-			
-			
-<!-- ============================== event details ========================= -->		
-			
+      <a name="setUpdateHandler"> </a>
+      <div class="fixedFont">
+      <b>setUpdateHandler</b>(opt_updateHandler)
+      </div>
+      <div class="description">
+        Set a function that will be called when a repaint of the canvas is required. If opt_updateHandler is null or unspecified, any existing callback is removed.
+      </div>
+        <dl class="detailList">
+        <dt class="heading">Parameters:</dt>
+          <dt>
+            <span class="light fixedFont">{function}</span> <b>opt_updateHandler</b>
+          </dt>
+          <dd>The update callback function (optional).</dd>
+        </dl>
 
-		</div>
-
-		
+<!-- ============================== event details ========================= -->   
+    </div>
 <!-- ============================== footer ================================= -->
-		<div class="fineprint" style="clear:both">
-		</div>
-	</body>
+    <div class="fineprint" style="clear:both">
+    </div>
+  </body>
 </html>
