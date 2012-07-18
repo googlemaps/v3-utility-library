@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello 2d World</title>
+    <style>
+      html, body, #map-div {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="../src/CanvasLayer.js"></script>
+
+    <script>
+      var map;
+      var canvasLayer;
+      var context;
+
+      var rectLatLng = new google.maps.LatLng(40, -95);
+      var rectWidth = 6.5;
+
+      function init() {
+        // initialize the map
+        var mapOptions = {
+          zoom: 4,
+          center: new google.maps.LatLng(39.3, -95.8),
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          styles: [
+            {
+              featureType: 'water',
+              stylers: [{ color: '#c3cfdd'}]
+            },
+            {
+              featureType: 'poi',
+              stylers: [{visibility: 'off'}]
+            }
+          ]
+        };
+        var mapDiv = document.getElementById('map-div');
+        map = new google.maps.Map(mapDiv, mapOptions);
+
+        // initialize the canvasLayer
+        var canvasLayerOptions = {
+          map: map,
+          resizeHandler: resize,
+          animate: false,
+          updateHandler: update
+        };
+        canvasLayer = new CanvasLayer(canvasLayerOptions);
+        context = canvasLayer.canvas.getContext('2d');
+      }
+
+      function resize() {
+        // nothing to do here
+      }
+
+      function update() {
+        // clear previous canvas contents
+        var canvasWidth = canvasLayer.canvas.width;
+        var canvasHeight = canvasLayer.canvas.height;
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+        // we like our rectangles green
+        context.fillStyle = 'rgba(0, 255, 0, 1)';
+        
+        /* We need to scale and translate the map for current view.
+         * see https://developers.google.com/maps/documentation/javascript/maptypes#MapCoordinates
+         */
+        var mapProjection = map.getProjection();
+
+        /**
+         * Clear transformation from last update by setting to identity matrix.
+         * Could use context.resetTransform(), but most browsers don't support
+         * it yet.
+         */
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        
+        // scale is just 2^zoom
+        var scale = Math.pow(2, map.zoom);
+        context.scale(scale, scale);
+
+        /* If the map was not translated, the topLeft corner would be 0,0 in
+         * world coordinates. Our translation is just the vector from the
+         * world coordinate of the topLeft corder to 0,0.
+         */
+        var offset = mapProjection.fromLatLngToPoint(canvasLayer.getTopLeft());
+        context.translate(-offset.x, -offset.y);
+
+        // project rectLatLng to world coordinates and draw
+        var worldPoint = mapProjection.fromLatLngToPoint(rectLatLng);
+        context.fillRect(worldPoint.x, worldPoint.y, rectWidth, rectWidth);
+      }
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+  </head>
+
+  <body>
+    <div id="map-div"></div>
+  </body>
+</html>
