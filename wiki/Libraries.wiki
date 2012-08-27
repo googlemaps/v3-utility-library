@@ -98,3 +98,11 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubbl
 This library integrates the Google Earth API, and will render most map overlays appropriately.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/ Development Versions].
+
+== !GeolocationMarker ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/example.png]
+
+Adds a marker and accuracy circle to the map based on the user's location. Updates automatically as their location changes.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/ Development Versions]
