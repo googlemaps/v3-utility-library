@@ -29,8 +29,8 @@
         GeoMarker.setCircleOptions({fillColor: '#808080'});
 
         google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function(e) {
-          map.setCenter(e.latLng);
-          map.fitBounds(e.latLngBounds);
+          map.setCenter(e.position);
+          map.fitBounds(e.bounds);
         });
 
         google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
