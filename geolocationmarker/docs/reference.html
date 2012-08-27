@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Geolocation Marker Reference</title>
+  <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+  <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"></link>
+  <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+  <h1>Geolocation Marker for Google Maps v3</h1>
+  <p>This library uses geolocation to add a marker and accuracy circle to a map. The marker
+    position is automatically updated as the user position changes.</p>
+  <p>To add the Geolocation Marker, just instantiate a new GeolocationMarker object, passing
+    your map to it: </p>
+  <pre class="prettyprint">var mapOptions = {
+  zoom: 17,
+  center: new google.maps.LatLng(-34.397, 150.644),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var map = new google.maps.Map(document.getElementById('map_canvas'),
+  mapOptions);
+var GeoMarker = new GeolocationMarker(map);</pre>
+  <p>See the <a href="../examples/mylocation.html">example</a>.</p>
+  <h2 id="GeolocationMarker">class GeolocationMarker</h2>
+  <h3>Constructor</h3>
+  <table summary="class GeolocationMarker - Constructor" width="90%">
+    <tbody>
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>GeolocationMarker(map?:<a href="https://developers.google.com/maps/documentation/javascript/reference#Map">google.maps.Map</a>,
+            marker_opts?:<a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions">google.maps.MarkerOptions</a>,
+            circle_opts?:<a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">google.maps.CircleOptions</a>)</code>
+        </td>
+        <td>
+          A marker and accuracy circle positioned on the map to track the user's location.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Methods</h3>
+  <table summary="class GeolocationMarker - Methods" width="90%">
+    <tbody>
+      <tr>
+        <th>Methods</th>
+        <th>Return&nbsp;Value</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>getAccuracy()</code>
+        </td>
+        <td>
+          <code>number</code>
+        </td>
+        <td>
+          Returns the current accuracy of the location data. Will return <code>null</code>
+          if a position has not yet been obtained.
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>getBounds()</code>
+        </td>
+        <td>
+          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds">
+            google.maps.LatLngBounds</a></code>
+        </td>
+        <td>
+          Returns the lat/lng bounds containing the marker and accuracy circle. Will return
+          <code>null</code> if a position has not yet been obtained.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>getMap()</code>
+        </td>
+        <td>
+          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#Map">
+            google.maps.Map</a></code>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>getPosition()</code>
+        </td>
+        <td>
+          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">
+            google.maps.LatLng</a></code>
+        </td>
+        <td>
+          Returns the center of the marker and accuracy circle. Will return <code>null</code>
+          if a position has not yet been obtained.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>setCircleOptions(options:<a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">google.maps.CircleOptions</a>)</code>
+        </td>
+        <td>
+        </td>
+        <td>
+          This method will ignore certain properties of the <a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">
+            google.maps.CircleOptions</a> object. It will ignore <code>position</code>
+          and <code>map</code> properties as these are set by the library.
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>setMap(map:<a href="https://developers.google.com/maps/documentation/javascript/reference#Map">Map</a>)</code>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>setMarkerOptions(options:<a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions">google.maps.MarkerOptions</a>)</code>
+        </td>
+        <td>
+        </td>
+        <td>
+          This method will ignore certain properties of the <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions">
+            google.maps.MarkerOptions</a> object. It will ignore <code>position</code>
+          and <code>map</code> properties as these are set by the library.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Events</h3>
+  <table summary="class GeolocationMarker - Events" width="90%">
+    <tbody>
+      <tr>
+        <th>Events</th>
+        <th>Arguments</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>position_changed</code>
+        </td>
+        <td>
+          <code><a href="#GeolocationMarkerPositionChangedEvent">GeolocationMarkerPositionChangedEvent</a></code>
+        </td>
+        <td>
+          Triggered whenever the marker position changes.
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>geolocation_error</code>
+        </td>
+        <td>
+          <code><a href="http://dev.w3.org/geo/api/spec-source.html#position_error_interface">
+            PositionErrorInterface</a></code>
+        </td>
+        <td>
+          Triggered whenever geolocation fails. Can be caused by a user denying permission
+          to access location data.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 id="GeolocationMarkerPositionChangedEvent">class GeolocationMarkerPositionChangedEvent</h2>
+  <p>This object is passed to <code>position_changed</code> event listeners.</p>
+  <table summary="class GeolocationMarkerPositionChangedEvent - Properites" width="90%">
+    <tbody>
+      <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>accuracy</code>
+        </td>
+        <td>
+          <code>number</code>
+        </td>
+        <td>
+          Accuracy (in meters) of the location data.
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>bounds</code>
+        </td>
+        <td>
+          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds">
+            google.maps.LatLngBounds</a></code>
+        </td>
+        <td>
+          The lat/lng bounds containing the marker and accuracy circle.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>position</code>
+        </td>
+        <td>
+          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">
+            google.maps.LatLng</a></code>
+        </td>
+        <td>
+          The center of the marker and accuracy circle.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
