@@ -24,6 +24,7 @@ var map = new google.maps.Map(document.getElementById('map_canvas'),
 var GeoMarker = new GeolocationMarker(map);</pre>
   <p>See the <a href="../examples/mylocation.html">example</a>.</p>
   <h2 id="GeolocationMarker">class GeolocationMarker</h2>
+  <p>This class extends <a href="https://developers.google.com/maps/documentation/javascript/reference#MVCObject">google.maps.MVCObject</a>.</p>
   <h3>Constructor</h3>
   <table summary="class GeolocationMarker - Constructor" width="90%">
     <tbody>
@@ -108,7 +109,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
         </td>
         <td>
           This method will ignore certain properties of the <a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">
-            google.maps.CircleOptions</a> object. It will ignore <code>position</code>
+            google.maps.CircleOptions</a> object. It will ignore <code>position</code>, <code>radius</code>
           and <code>map</code> properties as these are set by the library.
         </td>
       </tr>
@@ -145,14 +146,10 @@ var GeoMarker = new GeolocationMarker(map);</pre>
       </tr>
       <tr class="odd">
         <td>
-          <code>position_changed</code>
+          <code>accuracy_changed</code>
         </td>
-        <td>
-          <code><a href="#GeolocationMarkerPositionChangedEvent">GeolocationMarkerPositionChangedEvent</a></code>
-        </td>
-        <td>
-          Triggered whenever the marker position changes.
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr class="even">
         <td>
@@ -167,51 +164,12 @@ var GeoMarker = new GeolocationMarker(map);</pre>
           to access location data.
         </td>
       </tr>
-    </tbody>
-  </table>
-  <h2 id="GeolocationMarkerPositionChangedEvent">class GeolocationMarkerPositionChangedEvent</h2>
-  <p>This object is passed to <code>position_changed</code> event listeners.</p>
-  <table summary="class GeolocationMarkerPositionChangedEvent - Properites" width="90%">
-    <tbody>
-      <tr>
-        <th>Properties</th>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
       <tr class="odd">
         <td>
-          <code>accuracy</code>
+          <code>position_changed</code>
         </td>
-        <td>
-          <code>number</code>
-        </td>
-        <td>
-          Accuracy (in meters) of the location data.
-        </td>
-      </tr>
-      <tr class="even">
-        <td>
-          <code>bounds</code>
-        </td>
-        <td>
-          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds">
-            google.maps.LatLngBounds</a></code>
-        </td>
-        <td>
-          The lat/lng bounds containing the marker and accuracy circle.
-        </td>
-      </tr>
-      <tr class="odd">
-        <td>
-          <code>position</code>
-        </td>
-        <td>
-          <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">
-            google.maps.LatLng</a></code>
-        </td>
-        <td>
-          The center of the marker and accuracy circle.
-        </td>
+        <td></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
