@@ -24,12 +24,13 @@
 
 /**
  * @constructor
+ * @extends {google.maps.MVCObject}
  * @param {google.maps.Map=} opt_map
  * @param {(google.maps.MarkerOptions|Object.<string>)=} opt_markerOpts
  * @param {(google.maps.CircleOptions|Object.<string>)=} opt_circleOpts
  */
 function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
-  
+
   var markerOpts = {
     'clickable': false,
     'cursor': 'pointer',
@@ -45,11 +46,11 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
     'title': 'Current location',
     'zIndex': 2
   };
-  
+
   if(opt_markerOpts) {
     markerOpts = this.copyOptions_(markerOpts, opt_markerOpts);
   }
-  
+
   var circleOpts = {
     'clickable': false,
     'radius': 0,
@@ -64,23 +65,35 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
   if(opt_circleOpts) {
     circleOpts = this.copyOptions_(circleOpts, opt_circleOpts);
   }
-    
+
   this.marker_ = new google.maps.Marker(markerOpts);
   this.circle_ = new google.maps.Circle(circleOpts);
+
+  /**
+   * @expose
+   * @type {number?}
+   */
+  this.accuracy = null;
+
+  /**
+   * @expose
+   * @type {google.maps.LatLng?}
+   */
+  this.position = null;
   
-  this.circle_.bindTo('center', this.marker_, 'position');
+  /**
+   * @expose
+   * @type {google.maps.Map?}
+   */
+  this.map = null;
+
   this.circle_.bindTo('map', this.marker_);
-  
+
   if(opt_map) {
     this.setMap(opt_map);
   }
 }
-
-/**
- * @private
- * @type {google.maps.Map}
- */
-GeolocationMarker.prototype.map_ = null;
+GeolocationMarker.prototype = new google.maps.MVCObject;
 
 /**
  * @private
@@ -96,21 +109,17 @@ GeolocationMarker.prototype.circle_ = null;
 
 /** @return {google.maps.Map} */
 GeolocationMarker.prototype.getMap = function() {
-  return this.map_;
+  return this.map;
 };
 
 /** @return {google.maps.LatLng?} */
 GeolocationMarker.prototype.getPosition = function() {
-  if (this.map_) {
-    return this.marker_.getPosition();
-  } else {
-    return null;
-  }
+  return this.position;
 };
 
 /** @return {google.maps.LatLngBounds?} */
 GeolocationMarker.prototype.getBounds = function() {
-  if (this.map_) {
+  if (this.position) {
     return this.circle_.getBounds();
   } else {
     return null;
@@ -119,11 +128,7 @@ GeolocationMarker.prototype.getBounds = function() {
 
 /** @return {number?} */
 GeolocationMarker.prototype.getAccuracy = function() {
-  if (this.map_) {
-    return this.circle_.getRadius();
-  } else {
-    return null;
-  }
+  return /** @type {number?} */ (this.get('accuracy'));
 };
 
 /**
@@ -134,10 +139,15 @@ GeolocationMarker.prototype.watchId_ = -1;
 
 /** @param {google.maps.Map} map */
 GeolocationMarker.prototype.setMap = function(map) {
-  this.map_ = map;
+  this.set('map', map);
   if (map) {
     this.watchPosition_();
   } else {
+    this.marker_.unbind('position');
+    this.circle_.unbind('center');
+    this.circle_.unbind('radius');
+    this.accuracy = null;
+    this.position = null;
     navigator.geolocation.clearWatch(this.watchId_);
     this.watchId_ = -1;
     this.marker_.setMap(map);
@@ -160,23 +170,24 @@ GeolocationMarker.prototype.setCircleOptions = function(circleOpts) {
  */
 GeolocationMarker.prototype.updatePosition_ = function(position) {
   var newPosition = new google.maps.LatLng(position.coords.latitude,
-      position.coords.longitude);
-  
-  this.circle_.setRadius(position.coords.accuracy);
-  
-  if (!this.marker_.getMap() ||
-      !newPosition.equals(this.marker_.getPosition())) {
-    this.marker_.setPosition(
-        new google.maps.LatLng(position.coords.latitude,
-            position.coords.longitude));
+      position.coords.longitude), mapNotSet = this.marker_.getMap() == null,
+      positionChanged = false;
 
-    this.marker_.setPosition(newPosition);
-    if (!this.marker_.getMap()) {
-      this.marker_.setMap(this.map_);
-    }
-    var PosChangedData = new GeolocationMarkerPositionChangedEvent(newPosition,
-        this.circle_.getBounds(), position.coords.accuracy);
-    google.maps.event.trigger(this, 'position_changed', PosChangedData);
+  if(mapNotSet) {
+    this.marker_.setMap(this.getMap());
+    this.marker_.bindTo('position', this);
+    this.circle_.bindTo('center', this, 'position');
+    this.circle_.bindTo('radius', this, 'accuracy');
+  } else {
+    positionChanged = this.position == null || !this.position.equals(newPosition);
+  }
+
+  if (this.accuracy != position.coords.accuracy) {
+    this.set('accuracy', position.coords.accuracy);
+  }
+
+  if(mapNotSet || positionChanged) {
+    this.set('position', newPosition);
   }
 };
 
@@ -186,7 +197,7 @@ GeolocationMarker.prototype.updatePosition_ = function(position) {
  */
 GeolocationMarker.prototype.watchPosition_ = function() {
   var self = this;
-  
+
   var positionOpts =
       /** @type {GeolocationPositionOptions} */
       ({enableHighAccuracy: true, maximumAge: 1000});
@@ -223,34 +234,3 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
   'position': true,
   'radius': true
 }
-
-/**
- * @constructor
- * @private
- * @param {google.maps.LatLng=} latLng
- * @param {google.maps.LatLngBounds=} latLngBounds
- * @param {number=} accuracy
- */
-function GeolocationMarkerPositionChangedEvent(latLng, latLngBounds,
-    accuracy) {
-  if(latLng) {
-    this['position'] = latLng;
-  }
-  
-  if(latLngBounds) {
-    this['bounds'] = latLngBounds;
-  }
-
-  if(accuracy) {
-    this['accuracy'] = accuracy;
-  }
-}
-
-/** @type {google.maps.LatLng} */
-GeolocationMarkerPositionChangedEvent.prototype['position'] = null;
-
-/** @type {google.maps.LatLngBounds} */
-GeolocationMarkerPositionChangedEvent.prototype['bounds'] = null;
-
-/** @type {?number} */
-GeolocationMarkerPositionChangedEvent.prototype['accuracy'] = null;
