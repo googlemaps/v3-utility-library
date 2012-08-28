@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <title>Geolocation Marker Reference</title>
-  <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
-  <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"></link>
+  <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css" />
+  <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css" />
   <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
 </head>
 <body onload="prettyPrint()">
@@ -26,7 +26,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
   <h2 id="GeolocationMarker">class GeolocationMarker</h2>
   <p>This class extends <a href="https://developers.google.com/maps/documentation/javascript/reference#MVCObject">google.maps.MVCObject</a>.</p>
   <h3>Constructor</h3>
-  <table summary="class GeolocationMarker - Constructor" width="90%">
+  <table style="width:90%">
     <tbody>
       <tr>
         <th>Constructor</th>
@@ -45,7 +45,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
     </tbody>
   </table>
   <h3>Methods</h3>
-  <table summary="class GeolocationMarker - Methods" width="90%">
+  <table style="width:90%">
     <tbody>
       <tr>
         <th>Methods</th>
@@ -57,7 +57,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
           <code>getAccuracy()</code>
         </td>
         <td>
-          <code>number</code>
+          <code>number|null</code>
         </td>
         <td>
           Returns the current accuracy of the location data. Will return <code>null</code>
@@ -70,7 +70,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
         </td>
         <td>
           <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds">
-            google.maps.LatLngBounds</a></code>
+            google.maps.LatLngBounds</a>|null</code>
         </td>
         <td>
           Returns the lat/lng bounds containing the marker and accuracy circle. Will return
@@ -94,7 +94,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
         </td>
         <td>
           <code><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLng">
-            google.maps.LatLng</a></code>
+            google.maps.LatLng</a>|null</code>
         </td>
         <td>
           Returns the center of the marker and accuracy circle. Will return <code>null</code>
@@ -137,7 +137,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
     </tbody>
   </table>
   <h3>Events</h3>
-  <table summary="class GeolocationMarker - Events" width="90%">
+  <table style="width:90%">
     <tbody>
       <tr>
         <th>Events</th>
