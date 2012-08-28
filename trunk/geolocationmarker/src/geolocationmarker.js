@@ -41,7 +41,9 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
         new google.maps.Size(15,15),
         new google.maps.Point(0,0),
         new google.maps.Point(7,7)),
-    'optimized': false,
+
+    // This marker may move frequently - don't force canvas tile redraw
+    'optimized': false, 
     'position': new google.maps.LatLng(0, 0),
     'title': 'Current location',
     'zIndex': 2
@@ -128,7 +130,7 @@ GeolocationMarker.prototype.getBounds = function() {
 
 /** @return {number?} */
 GeolocationMarker.prototype.getAccuracy = function() {
-  return /** @type {number?} */ (this.get('accuracy'));
+  return this.accuracy;
 };
 
 /**
@@ -218,7 +220,7 @@ GeolocationMarker.prototype.watchPosition_ = function() {
  */
 GeolocationMarker.prototype.copyOptions_ = function(target, source) {
   for(var opt in source) {
-    if(!GeolocationMarker.DISALLOWED_OPTIONS[opt]) {
+    if(GeolocationMarker.DISALLOWED_OPTIONS[opt] !== true) {
       target[opt] = source[opt];
     }
   }
