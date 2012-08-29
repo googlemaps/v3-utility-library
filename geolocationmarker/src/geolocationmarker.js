@@ -98,6 +98,22 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
 GeolocationMarker.prototype = new google.maps.MVCObject;
 
 /**
+ * @override
+ * @expose
+ * @param {string} key
+ * @param {*} value
+ */
+GeolocationMarker.prototype.set = function(key, value) {
+  if (/position|accuracy/i.test(key)) {
+    throw '\'' + key + '\' is a read-only property.';
+  } else if (/map/i.test(key)) {
+    this.setMap(/** @type {google.maps.Map} */ (value));
+  } else {
+    google.maps.MVCObject.prototype.set.apply(this, arguments);
+  }
+};
+
+/**
  * @private
  * @type {google.maps.Marker}
  */
@@ -141,7 +157,8 @@ GeolocationMarker.prototype.watchId_ = -1;
 
 /** @param {google.maps.Map} map */
 GeolocationMarker.prototype.setMap = function(map) {
-  this.set('map', map);
+  this.map = map;
+  this.notify('map');
   if (map) {
     this.watchPosition_();
   } else {
@@ -172,24 +189,24 @@ GeolocationMarker.prototype.setCircleOptions = function(circleOpts) {
  */
 GeolocationMarker.prototype.updatePosition_ = function(position) {
   var newPosition = new google.maps.LatLng(position.coords.latitude,
-      position.coords.longitude), mapNotSet = this.marker_.getMap() == null,
-      positionChanged = false;
+      position.coords.longitude), mapNotSet = this.marker_.getMap() == null;
 
   if(mapNotSet) {
-    this.marker_.setMap(this.getMap());
+    this.marker_.setMap(this.map);
     this.marker_.bindTo('position', this);
     this.circle_.bindTo('center', this, 'position');
     this.circle_.bindTo('radius', this, 'accuracy');
-  } else {
-    positionChanged = this.position == null || !this.position.equals(newPosition);
   }
 
   if (this.accuracy != position.coords.accuracy) {
-    this.set('accuracy', position.coords.accuracy);
+    this.accuracy = position.coords.accuracy;
+    this.notify('accuracy');
   }
 
-  if(mapNotSet || positionChanged) {
-    this.set('position', newPosition);
+  if (mapNotSet || this.position == null ||
+      !this.position.equals(newPosition)) {
+    this.position = newPosition;
+    this.notify('position');
   }
 };
 
@@ -225,7 +242,7 @@ GeolocationMarker.prototype.copyOptions_ = function(target, source) {
     }
   }
   return target;
-}
+};
 
 /**
  * @const
@@ -235,4 +252,4 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
   'map': true,
   'position': true,
   'radius': true
-}
+};
