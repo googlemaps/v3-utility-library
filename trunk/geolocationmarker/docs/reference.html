@@ -23,6 +23,9 @@ var map = new google.maps.Map(document.getElementById('map_canvas'),
   mapOptions);
 var GeoMarker = new GeolocationMarker(map);</pre>
   <p>See the <a href="../examples/mylocation.html">example</a>.</p>
+  <p style="font-style:italic;">Note: This library will only function in browsers supporting the
+  <a href="http://dev.w3.org/geo/api/spec-source.html">W3C Geolocation API</a>.
+  This excludes Internet Explorer versions 8 and older.</p>
   <h2 id="GeolocationMarker">class GeolocationMarker</h2>
   <p>This class extends <a href="https://developers.google.com/maps/documentation/javascript/reference#MVCObject">google.maps.MVCObject</a>.</p>
   <h3>Constructor</h3>
@@ -90,6 +93,18 @@ var GeoMarker = new GeolocationMarker(map);</pre>
       </tr>
       <tr class="even">
         <td>
+          <code>getMinimumAccuracy()</code>
+        </td>
+        <td>
+          <code>number|null</code>
+        </td>
+        <td>
+          Returns the minimum accuracy (in meters) that must be achieved before the marker is initially drawn on the map.
+          Returns <code>null</code> if no minimum is specified.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
           <code>getPosition()</code>
         </td>
         <td>
@@ -101,6 +116,20 @@ var GeoMarker = new GeolocationMarker(map);</pre>
           if a position has not yet been obtained.
         </td>
       </tr>
+      <tr class="even">
+        <td>
+          <code>getPositionOptions()</code>
+        </td>
+        <td>
+          <code><a href="http://dev.w3.org/geo/api/spec-source.html#position_options_interface">
+            PositionOptionsInterface</a></code>
+        </td>
+        <td>
+          Returns the current options used to call the
+          <a href="http://dev.w3.org/geo/api/spec-source.html#watch-position">geolocation.watchPosition</a>
+          method.
+        </td>
+      </tr>
       <tr class="odd">
         <td>
           <code>setCircleOptions(options:<a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">google.maps.CircleOptions</a>)</code>
@@ -109,7 +138,7 @@ var GeoMarker = new GeolocationMarker(map);</pre>
         </td>
         <td>
           This method will ignore certain properties of the <a href="https://developers.google.com/maps/documentation/javascript/reference#CircleOptions">
-            google.maps.CircleOptions</a> object. It will ignore <code>position</code>, <code>radius</code>
+          google.maps.CircleOptions</a> object. It will ignore <code>position</code>, <code>radius</code>
           and <code>map</code> properties as these are set by the library.
         </td>
       </tr>
@@ -132,6 +161,27 @@ var GeoMarker = new GeolocationMarker(map);</pre>
           This method will ignore certain properties of the <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions">
             google.maps.MarkerOptions</a> object. It will ignore <code>position</code>
           and <code>map</code> properties as these are set by the library.
+        </td>
+      </tr>
+      <tr class="even">
+        <td>
+          <code>setMinimumAccuracy(accuracy:number|null)</code>
+        </td>
+        <td></td>
+        <td>
+          Sets the minimum accuracy (in meters) that must be achieved before the marker is initially drawn on the map.
+        </td>
+      </tr>
+      <tr class="odd">
+        <td>
+          <code>setPositionOptions(positionOpts:<a href="http://dev.w3.org/geo/api/spec-source.html#position_options_interface">
+            PositionOptionsInterface</a>)</code>
+        </td>
+        <td></td>
+        <td>
+          Sets the options used to call the
+          <a href="http://dev.w3.org/geo/api/spec-source.html#watch-position">geolocation.watchPosition</a>
+          method.
         </td>
       </tr>
     </tbody>
