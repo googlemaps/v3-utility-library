@@ -22,12 +22,25 @@
  * scripts, these exports are not needed. 
  */
 
-GeolocationMarker.prototype['getAccuracy'] = GeolocationMarker.prototype.getAccuracy;
-GeolocationMarker.prototype['getBounds'] = GeolocationMarker.prototype.getBounds;
+GeolocationMarker.prototype['getAccuracy'] =
+    GeolocationMarker.prototype.getAccuracy;
+GeolocationMarker.prototype['getBounds'] =
+    GeolocationMarker.prototype.getBounds;
 GeolocationMarker.prototype['getMap'] = GeolocationMarker.prototype.getMap;
-GeolocationMarker.prototype['getPosition'] = GeolocationMarker.prototype.getPosition;
-GeolocationMarker.prototype['setCircleOptions'] = GeolocationMarker.prototype.setCircleOptions;
+GeolocationMarker.prototype['getMinimumAccuracy'] =
+    GeolocationMarker.prototype.getMinimumAccuracy;
+GeolocationMarker.prototype['getPosition'] =
+    GeolocationMarker.prototype.getPosition;
+GeolocationMarker.prototype['getPositionOptions'] =
+    GeolocationMarker.prototype.getPositionOptions;
+GeolocationMarker.prototype['setCircleOptions'] =
+    GeolocationMarker.prototype.setCircleOptions;
 GeolocationMarker.prototype['setMap'] = GeolocationMarker.prototype.setMap;
-GeolocationMarker.prototype['setMarkerOptions'] = GeolocationMarker.prototype.setMarkerOptions;
+GeolocationMarker.prototype['setMarkerOptions'] =
+    GeolocationMarker.prototype.setMarkerOptions;
+GeolocationMarker.prototype['setMinimumAccuracy'] =
+    GeolocationMarker.prototype.setMinimumAccuracy;
+GeolocationMarker.prototype['setPositionOptions'] =
+    GeolocationMarker.prototype.setPositionOptions;
 
 window['GeolocationMarker'] = GeolocationMarker;
