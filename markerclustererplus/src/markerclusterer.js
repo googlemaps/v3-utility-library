@@ -3,7 +3,7 @@
 
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.0.14 [May 16, 2012]
+ * @version 2.0.15 [October 18, 2012]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -774,7 +774,9 @@ MarkerClusterer.prototype.onRemove = function () {
 
   // Put all the managed markers back on the map:
   for (i = 0; i < this.markers_.length; i++) {
-    this.markers_[i].setMap(this.activeMap_);
+    if (this.markers_[i].getMap() !== this.activeMap_) {
+      this.markers_[i].setMap(this.activeMap_);
+    }
   }
 
   // Remove all clusters:
