@@ -1,8 +1,8 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.5 [July 11, 2011]
+ * @version 1.1.6 [January 9, 2012]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
- * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
+ * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
  *  <code>google.maps.Marker</code> class.
  *  <p>
@@ -535,8 +535,8 @@ function MarkerWithLabel(opt_options) {
   if (typeof opt_options.optimized === "undefined") {
     opt_options.optimized = false;
   }
-  opt_options.crossImage = opt_options.crossImage || "http://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
-  opt_options.handCursor = opt_options.handCursor || "http://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur";
+  opt_options.crossImage = opt_options.crossImage || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
+  opt_options.handCursor = opt_options.handCursor || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur";
   opt_options.optimized = false; // Optimized rendering is not supported
 
   this.label = new MarkerLabel_(this, opt_options.crossImage, opt_options.handCursor); // Bind the label to the marker
@@ -553,7 +553,7 @@ MarkerWithLabel.prototype = new google.maps.Marker();
 
 /**
  * Overrides the standard Marker setMap function.
- * @param {Map} marker The map to which the marker is to be added.
+ * @param {Map} theMap The map to which the marker is to be added.
  * @private
  */
 MarkerWithLabel.prototype.setMap = function (theMap) {
