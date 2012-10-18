@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+ <title>Lettered Marker</title>
+ <style type="text/css">
+   .labels {
+     color: white;
+     background-color: red;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     text-align: center;
+     width: 10px;
+     white-space: nowrap;
+   }
+ </style>
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+ <script type="text/javascript" src="../src/markerwithlabel.js"></script>
+ <script type="text/javascript">
+   function initMap() {
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
+     var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
+
+     var map = new google.maps.Map(document.getElementById('map_canvas'), {
+       zoom: 12,
+       center: latLng,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     });
+
+     var marker = new MarkerWithLabel({
+       position: homeLatLng,
+       map: map,
+       draggable: true,
+       raiseOnDrag: true,
+       labelContent: "A",
+       labelAnchor: new google.maps.Point(3, 30),
+       labelClass: "labels", // the CSS class for the label
+       labelInBackground: false
+     });
+
+     var iw = new google.maps.InfoWindow({
+       content: "Home For Sale"
+     });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
+   }
+   function log(h) {
+     document.getElementById("log").innerHTML += h + "<br />";
+   }
+ </script>
+</head>
+<body onload="initMap()">
+<p>With MarkerWithLabel you can easily modify a standard marker to include an identifying character of your choice. In this case the marker is superimposed with the letter "A".</p>
+ <div id="map_canvas" style="height: 400px; width: 100%;"></div>
+ <div id="log"></div>
+</body>
+</html>
