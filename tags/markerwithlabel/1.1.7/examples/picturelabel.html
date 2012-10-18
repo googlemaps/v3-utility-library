@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+ <title>Picture Label for Marker</title>
+ <style type="text/css">
+   .labels {
+     color: white;
+     background-color: red;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     text-align: center;
+     width: 100px;
+     white-space: nowrap;
+   }
+ </style>
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+ <script type="text/javascript" src="../src/markerwithlabel.js"></script>
+ <script type="text/javascript">
+   function initMap() {
+     var latLng = new google.maps.LatLng(49.47805, -123.84716);
+     var homeLatLng = new google.maps.LatLng(49.47805, -123.84716);
+
+     var map = new google.maps.Map(document.getElementById('map_canvas'), {
+       zoom: 12,
+       center: latLng,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     });
+     
+     var pictureLabel = document.createElement("img");
+     pictureLabel.src = "home.jpg";
+
+     var marker = new MarkerWithLabel({
+       position: homeLatLng,
+       map: map,
+       draggable: true,
+       raiseOnDrag: true,
+       labelContent: pictureLabel,
+       labelAnchor: new google.maps.Point(50, 0),
+       labelClass: "labels", // the CSS class for the label
+       labelStyle: {opacity: 0.50}
+     });
+
+     var iw = new google.maps.InfoWindow({
+       content: "Home For Sale"
+     });
+     google.maps.event.addListener(marker, "click", function (e) { iw.open(map, this); });
+   }
+   function log(h) {
+     document.getElementById("log").innerHTML += h + "<br />";
+   }
+ </script>
+</head>
+<body onload="initMap()">
+<p>This is an example of how to use a picture as a marker label. Since the picture label is quite large, the opacity of the label is set to 0.50 to make it possible to get a rough idea of what's on the map behind the picture.</p>
+ <div id="map_canvas" style="height: 400px; width: 100%;"></div>
+ <div id="log"></div>
+</body>
+</html>
