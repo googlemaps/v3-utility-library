@@ -1,0 +1,108 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>MarkerClustererPlus V3 Example</title>
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 10px 20px 20px;
+        font-family: Arial;
+        font-size: 16px;
+      }
+
+      #map-container {
+        padding: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #ccc #999 #ccc;
+        -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+        width: 600px;
+      }
+
+      #map {
+        width: 600px;
+        height: 400px;
+      }
+
+    </style>
+
+    <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+    <script type="text/javascript" src="../src/data.json"></script>
+    <script type="text/javascript">
+      var script = '<script type="text/javascript" src="../src/markerclusterer';
+      if (document.location.search.indexOf('compiled') !== -1) {
+        script += '_packed';
+      }
+      script += '.js"><' + '/script>';
+      document.write(script);
+    </script>
+
+    <script type="text/javascript">
+      function initialize() {
+        var center = new google.maps.LatLng(37.4419, -122.1419);
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: center,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var markers = [];
+        for (var i = 0; i < 100; i++) {
+          var dataPhoto = data.photos[i];
+          var latLng = new google.maps.LatLng(dataPhoto.latitude,
+              dataPhoto.longitude);
+          var marker = new google.maps.Marker({
+            position: latLng
+          });
+          markers.push(marker);
+        }
+        var markerCluster = new MarkerClusterer(map, markers, {
+          averageCenter: true
+        });
+
+        google.maps.event.addListener(markerCluster, "click", function (c) {
+          log("click: ");
+          log("&mdash;Center of cluster: " + c.getCenter());
+          log("&mdash;Number of managed markers in cluster: " + c.getSize());
+          var m = c.getMarkers();
+          var p = [];
+          for (var i = 0; i < m.length; i++ ){
+            p.push(m[i].getPosition());
+          }
+          log("&mdash;Locations of managed markers: " + p.join(", "));
+          
+        });
+        google.maps.event.addListener(markerCluster, "mouseover", function (c) {
+          log("mouseover: ");
+          log("&mdash;Center of cluster: " + c.getCenter());
+          log("&mdash;Number of managed markers in cluster: " + c.getSize());
+        });
+        google.maps.event.addListener(markerCluster, "mouseout", function (c) {
+          log("mouseout: ");
+          log("&mdash;Center of cluster: " + c.getCenter());
+          log("&mdash;Number of managed markers in cluster: " + c.getSize());
+        });
+      }
+
+     function log(h) {
+       document.getElementById("log").innerHTML += h + "<br />";
+     }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <h3>Event listening example for MarkerClustererPlus</h3>
+    <p>
+      <a href="?packed">Packed</a> |
+      <a href="?">Standard</a> version of the script.
+    </p>
+    <div id="map-container"><div id="map"></div></div>
+    <div id="log"></div>
+  </body>
+</html>
