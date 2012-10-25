@@ -38,9 +38,10 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
     'flat': true,
     'icon': new google.maps.MarkerImage(
         'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/gpsloc.png',
-        new google.maps.Size(15,15),
-        new google.maps.Point(0,0),
-        new google.maps.Point(7,7)),
+        new google.maps.Size(34, 34),
+        null,
+        new google.maps.Point(8, 8),
+        new google.maps.Size(17, 17)),
 
     // This marker may move frequently - don't force canvas tile redraw
     'optimized': false, 
@@ -171,7 +172,7 @@ GeolocationMarker.prototype.getMinimumAccuracy = function() {
 
 /** @param {number?} accuracy */
 GeolocationMarker.prototype.setMinimumAccuracy = function(accuracy) {
-  return this.set('minimum_accuracy', accuracy);
+  this.set('minimum_accuracy', accuracy);
 };
 
 /**
@@ -228,14 +229,14 @@ GeolocationMarker.prototype.updatePosition_ = function(position) {
   }
 
   if (this.accuracy != position.coords.accuracy) {
-    this.accuracy = position.coords.accuracy;
-    this.notify('accuracy');
+    // The local set method does not allow accuracy to be updated
+    google.maps.MVCObject.prototype.set.call(this, 'accuracy', position.coords.accuracy);
   }
 
   if (mapNotSet || this.position == null ||
       !this.position.equals(newPosition)) {
-    this.position = newPosition;
-    this.notify('position');
+	// The local set method does not allow position to be updated
+    google.maps.MVCObject.prototype.set.call(this, 'position', newPosition);
   }
 };
 
