@@ -95,7 +95,7 @@ MarkerManager.prototype.initialize = function (map, opt_opts) {
   // Find max zoom level
   var mapMaxZoom = 1;
   for (var sType in mapTypes ) {
-    if (typeof map.mapTypes.get(sType) === 'object' && typeof map.mapTypes.get(sType).maxZoom === 'number') {
+    if (mapTypes.hasOwnProperty(sType) && mapTypes.get(sType).maxZoom === 'number') {
       var mapTypeMaxZoom = map.mapTypes.get(sType).maxZoom;
       if (mapTypeMaxZoom > mapMaxZoom) {
         mapMaxZoom = mapTypeMaxZoom;
