@@ -26,8 +26,8 @@
           google.maps.event.addListener(dz, 'activate', function () {
             log('KeyDragZoom Activated');
           });
-          google.maps.event.addListener(dz, 'deactivate', function () {
-            log('KeyDragZoom Deactivated');
+          google.maps.event.addListener(dz, 'deactivate', function (bnds) {
+            log('KeyDragZoom Deactivated: ' + bnds);
           });
           google.maps.event.addListener(dz, 'dragstart', function (latlng) {
             log('KeyDragZoom Started: ' + latlng);

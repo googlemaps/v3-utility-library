@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.6 [February 24, 2012]
+ * @version 2.0.7 [November 21, 2012]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -780,11 +780,22 @@
    */
   DragZoom.prototype.onKeyUp_ = function (e) {
     var i;
+    var left, top, width, height, prj, sw, ne;
+    var bnds = null;
     if (this.map_ && this.hotKeyDown_) {
       this.hotKeyDown_ = false;
       if (this.dragging_) {
         this.boxDiv_.style.display = "none";
         this.dragging_ = false;
+        // Calculate the bounds when drag zoom was cancelled
+        left = Math.min(this.startPt_.x, this.endPt_.x);
+        top = Math.min(this.startPt_.y, this.endPt_.y);
+        width = Math.abs(this.startPt_.x - this.endPt_.x);
+        height = Math.abs(this.startPt_.y - this.endPt_.y);
+        prj = this.prjov_.getProjection();
+        sw = prj.fromContainerPixelToLatLng(new google.maps.Point(left, top + height));
+        ne = prj.fromContainerPixelToLatLng(new google.maps.Point(left + width, top));
+        bnds = new google.maps.LatLngBounds(sw, ne);
       }
       for (i = 0; i < this.veilDiv_.length; i++) {
         this.veilDiv_[i].style.display = "none";
@@ -796,10 +807,14 @@
       }
       /**
        * This event is fired when the hot key is released.
+       * The parameter passed is the geographic bounds of the selected area immediately
+       * before the hot key was released.
        * @name DragZoom#deactivate
+       * @param {LatLngBounds} bnds The geographic bounds of the selected area immediately
+       *  before the hot key was released.
        * @event
        */
-      google.maps.event.trigger(this, "deactivate");
+      google.maps.event.trigger(this, "deactivate", bnds);
     }
   };
   /**
