@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.7 [November 21, 2012]
+ * @version 2.0.8 [November 22, 2012]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -212,47 +212,46 @@
   /**
    * @name KeyDragZoomOptions
    * @class This class represents the optional parameter passed into <code>google.maps.Map.enableKeyDragZoom</code>.
-   * @property {string} [key] The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.
-   *  The default is <code>shift</code>. NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3
-   *  since, unlike with V2, it causes a context menu to appear when running on the Macintosh. Also note that the
+   * @property {string} [key="shift"] The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>.
+   *  NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2,
+   *  it causes a context menu to appear when running on the Macintosh. Also note that the
    *  <code>alt</code> hot key refers to the Option key on a Macintosh.
-   * @property {Object} [boxStyle] An object literal defining the css styles of the zoom box.
-   *  The default is <code>{border: "4px solid #736AFF"}</code>.
+   * @property {Object} [boxStyle={border: "4px solid #736AFF"}]
+   *  An object literal defining the CSS styles of the zoom box.
    *  Border widths must be specified in pixel units (or as thin, medium, or thick).
-   * @property {Object} [veilStyle] An object literal defining the css styles of the veil pane
-   *  which covers the map when a drag zoom is activated. The previous name for this property was
-   *  <code>paneStyle</code> but the use of this name is now deprecated.
-   *  The default is <code>{backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}</code>.
-   * @property {boolean} [visualEnabled] A flag indicating whether a visual control is to be used.
-   *  The default is <code>false</code>.
-   * @property {string} [visualClass] The name of the CSS class defining the styles for the visual
+   * @property {Object} [veilStyle={backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}]
+   *  An object literal defining the CSS styles of the veil pane which covers the map when a drag
+   *  zoom is activated. The previous name for this property was <code>paneStyle</code> but the use
+   *  of this name is now deprecated.
+   * @property {boolean} [noZoom=false] A flag indicating whether to disable zooming after an area is
+   *  selected. Set this to <code>true</code> to allow KeyDragZoom to be used as a simple area
+   *  selection tool.
+   * @property {boolean} [visualEnabled=false] A flag indicating whether a visual control is to be used.
+   * @property {string} [visualClass=""] The name of the CSS class defining the styles for the visual
    *  control. To prevent the visual control from being printed, set this property to the name of
    *  a class, defined inside a <code>@media print</code> rule, which sets the CSS
    *  <code>display</code> style to <code>none</code>.
-   * @property {ControlPosition} [visualPosition] The position of the visual control.
-   *  The default position is on the left side of the map below other controls in the top left
-   *  &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT_TOP</code>.
-   * @property {Size} [visualPositionOffset] The width and height values provided by this
-   *  property are the offsets (in pixels) from the location at which the control would normally
-   *  be drawn to the desired drawing location. The default is (35,0).
-   * @property {number} [visualPositionIndex] The index of the visual control.
+   * @property {ControlPosition} [visualPosition=google.maps.ControlPosition.LEFT_TOP]
+   *  The position of the visual control.
+   * @property {Size} [visualPositionOffset=google.maps.Size(35, 0)] The width and height values
+   *  provided by this property are the offsets (in pixels) from the location at which the control
+   *  would normally be drawn to the desired drawing location.
+   * @property {number} [visualPositionIndex=null] The index of the visual control.
    *  The index is for controlling the placement of the control relative to other controls at the
    *  position given by <code>visualPosition</code>; controls with a lower index are placed first.
    *  Use a negative value to place the control <i>before</i> any default controls. No index is
-   *  generally required; the default is <code>null</code>.
-   * @property {String} [visualSprite] The URL of the sprite image used for showing the visual control
-   *  in the on, off, and hot (i.e., when the mouse is over the control) states. The three images
-   *  within the sprite must be the same size and arranged in on-hot-off order in a single row
-   *  with no spaces between images.
-   *  The default is <code>http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png</code>.
-   * @property {Size} [visualSize] The width and height values provided by this property are
-   *  the size (in pixels) of each of the images within <code>visualSprite</code>.
-   *  The default is (20,20).
-   * @property {Object} [visualTips] An object literal defining the help tips that appear when
+   *  generally required.
+   * @property {String} [visualSprite="http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png"]
+   *  The URL of the sprite image used for showing the visual control in the on, off, and hot
+   *  (i.e., when the mouse is over the control) states. The three images within the sprite must
+   *  be the same size and arranged in on-hot-off order in a single row with no spaces between images.
+   * @property {Size} [visualSize=google.maps.Size(20, 20)] The width and height values provided by
+   *  this property are the size (in pixels) of each of the images within <code>visualSprite</code>.
+   * @property {Object} [visualTips={off: "Turn on drag zoom mode", on: "Turn off drag zoom mode"}]
+   *  An object literal defining the help tips that appear when
    *  the mouse moves over the visual control. The <code>off</code> property is the tip to be shown
    *  when the control is off and the <code>on</code> property is the tip to be shown when the
    *  control is on.
-   *  The default values are "Turn on drag zoom mode" and "Turn off drag zoom mode", respectively.
    */
   /**
    * @name DragZoom
@@ -328,6 +327,7 @@
       this.map_.getDiv().appendChild(this.veilDiv_[i]);
     }
 
+    this.noZoom_ = opt_zoomOpts.noZoom || false;
     this.visualEnabled_ = opt_zoomOpts.visualEnabled || false;
     this.visualClass_ = opt_zoomOpts.visualClass || "";
     this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT_TOP;
@@ -732,30 +732,34 @@
       var ne = prj.fromContainerPixelToLatLng(new google.maps.Point(left + width, top));
       var bnds = new google.maps.LatLngBounds(sw, ne);
 
-      // Sometimes fitBounds causes a zoom OUT, so restore original zoom level if this happens.
-      z = this.map_.getZoom();
-      this.map_.fitBounds(bnds);
-      if (this.map_.getZoom() < z) {
-        this.map_.setZoom(z);
-      }
+      if (this.noZoom_) {
+        this.boxDiv_.style.display = "none";
+      } else {
+        // Sometimes fitBounds causes a zoom OUT, so restore original zoom level if this happens.
+        z = this.map_.getZoom();
+        this.map_.fitBounds(bnds);
+        if (this.map_.getZoom() < z) {
+          this.map_.setZoom(z);
+        }
 
-      // Redraw box after zoom:
-      var swPt = prj.fromLatLngToContainerPixel(sw);
-      var nePt = prj.fromLatLngToContainerPixel(ne);
-      if (kGoogleCenteringBug) {
-        swPt.x -= this.borderWidths_.left;
-        swPt.y -= this.borderWidths_.top;
-        nePt.x -= this.borderWidths_.left;
-        nePt.y -= this.borderWidths_.top;
+        // Redraw box after zoom:
+        var swPt = prj.fromLatLngToContainerPixel(sw);
+        var nePt = prj.fromLatLngToContainerPixel(ne);
+        if (kGoogleCenteringBug) {
+          swPt.x -= this.borderWidths_.left;
+          swPt.y -= this.borderWidths_.top;
+          nePt.x -= this.borderWidths_.left;
+          nePt.y -= this.borderWidths_.top;
+        }
+        this.boxDiv_.style.left = swPt.x + "px";
+        this.boxDiv_.style.top = nePt.y + "px";
+        this.boxDiv_.style.width = (Math.abs(nePt.x - swPt.x) - (this.boxBorderWidths_.left + this.boxBorderWidths_.right)) + "px";
+        this.boxDiv_.style.height = (Math.abs(nePt.y - swPt.y) - (this.boxBorderWidths_.top + this.boxBorderWidths_.bottom)) + "px";
+        // Hide box asynchronously after 1 second:
+        setTimeout(function () {
+          me.boxDiv_.style.display = "none";
+        }, 1000);
       }
-      this.boxDiv_.style.left = swPt.x + "px";
-      this.boxDiv_.style.top = nePt.y + "px";
-      this.boxDiv_.style.width = (Math.abs(nePt.x - swPt.x) - (this.boxBorderWidths_.left + this.boxBorderWidths_.right)) + "px";
-      this.boxDiv_.style.height = (Math.abs(nePt.y - swPt.y) - (this.boxBorderWidths_.top + this.boxBorderWidths_.bottom)) + "px";
-      // Hide box asynchronously after 1 second:
-      setTimeout(function () {
-        me.boxDiv_.style.display = "none";
-      }, 1000);
       this.dragging_ = false;
       this.onMouseMove_(e); // Updates the veil
       /**

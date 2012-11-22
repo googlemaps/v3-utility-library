@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>KeyDragZoom for V3 v2.0.7 [November 21, 2012] Reference</title>
+    <title>KeyDragZoom for V3 v2.0.8 [November 22, 2012] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -168,7 +168,7 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                     <td><code>Object</code></td>
                   
                 
-                <td>An object literal defining the css styles of the zoom box. The default is <code>{border: "4px solid #736AFF"}</code>. Border widths must be specified in pixel units (or as thin, medium, or thick).</td>
+                <td>An object literal defining the CSS styles of the zoom box. Border widths must be specified in pixel units (or as thin, medium, or thick).  The default value is <code>{border: "4px solid #736AFF"}</code>.</td>
               </tr>
             
               <tr class="even">
@@ -178,97 +178,107 @@ This library adds a drag zoom capability to a V3 Google map. When drag zoom is 
                     <td><code>string</code></td>
                   
                 
-                <td>The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>. The default is <code>shift</code>. NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2, it causes a context menu to appear when running on the Macintosh. Also note that the <code>alt</code> hot key refers to the Option key on a Macintosh.</td>
+                <td>The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>. NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2, it causes a context menu to appear when running on the Macintosh. Also note that the <code>alt</code> hot key refers to the Option key on a Macintosh.  The default value is <code>"shift"</code>.</td>
               </tr>
             
               <tr class="odd">
+                <td><code>noZoom</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether to disable zooming after an area is selected. Set this to <code>true</code> to allow KeyDragZoom to be used as a simple area selection tool.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>veilStyle</code></td>
                 
                   
                     <td><code>Object</code></td>
                   
                 
-                <td>An object literal defining the css styles of the veil pane which covers the map when a drag zoom is activated. The previous name for this property was <code>paneStyle</code> but the use of this name is now deprecated. The default is <code>{backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}</code>.</td>
+                <td>An object literal defining the CSS styles of the veil pane which covers the map when a drag zoom is activated. The previous name for this property was <code>paneStyle</code> but the use of this name is now deprecated.  The default value is <code>{backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>visualClass</code></td>
                 
                   
                     <td><code>string</code></td>
                   
                 
-                <td>The name of the CSS class defining the styles for the visual control. To prevent the visual control from being printed, set this property to the name of a class, defined inside a <code>@media print</code> rule, which sets the CSS <code>display</code> style to <code>none</code>.</td>
+                <td>The name of the CSS class defining the styles for the visual control. To prevent the visual control from being printed, set this property to the name of a class, defined inside a <code>@media print</code> rule, which sets the CSS <code>display</code> style to <code>none</code>.  The default value is <code>""</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>visualEnabled</code></td>
                 
                   
                     <td><code>boolean</code></td>
                   
                 
-                <td>A flag indicating whether a visual control is to be used. The default is <code>false</code>.</td>
+                <td>A flag indicating whether a visual control is to be used.  The default value is <code>false</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>visualPosition</code></td>
                 
                   
                     <td><code>ControlPosition</code></td>
                   
                 
-                <td>The position of the visual control. The default position is on the left side of the map below other controls in the top left &mdash; i.e., a position of <code>google.maps.ControlPosition.LEFT_TOP</code>.</td>
+                <td>The position of the visual control.  The default value is <code>google.maps.ControlPosition.LEFT_TOP</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>visualPositionIndex</code></td>
                 
                   
                     <td><code>number</code></td>
                   
                 
-                <td>The index of the visual control. The index is for controlling the placement of the control relative to other controls at the position given by <code>visualPosition</code>; controls with a lower index are placed first. Use a negative value to place the control <i>before</i> any default controls. No index is generally required; the default is <code>null</code>.</td>
+                <td>The index of the visual control. The index is for controlling the placement of the control relative to other controls at the position given by <code>visualPosition</code>; controls with a lower index are placed first. Use a negative value to place the control <i>before</i> any default controls. No index is generally required.  The default value is <code>null</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>visualPositionOffset</code></td>
                 
                   
                     <td><code>Size</code></td>
                   
                 
-                <td>The width and height values provided by this property are the offsets (in pixels) from the location at which the control would normally be drawn to the desired drawing location. The default is (35,0).</td>
+                <td>The width and height values provided by this property are the offsets (in pixels) from the location at which the control would normally be drawn to the desired drawing location.  The default value is <code>google.maps.Size(35, 0)</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>visualSize</code></td>
                 
                   
                     <td><code>Size</code></td>
                   
                 
-                <td>The width and height values provided by this property are the size (in pixels) of each of the images within <code>visualSprite</code>. The default is (20,20).</td>
+                <td>The width and height values provided by this property are the size (in pixels) of each of the images within <code>visualSprite</code>.  The default value is <code>google.maps.Size(20, 20)</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>visualSprite</code></td>
                 
                   
                     <td><code>String</code></td>
                   
                 
-                <td>The URL of the sprite image used for showing the visual control in the on, off, and hot (i.e., when the mouse is over the control) states. The three images within the sprite must be the same size and arranged in on-hot-off order in a single row with no spaces between images. The default is <code>http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png</code>.</td>
+                <td>The URL of the sprite image used for showing the visual control in the on, off, and hot (i.e., when the mouse is over the control) states. The three images within the sprite must be the same size and arranged in on-hot-off order in a single row with no spaces between images.  The default value is <code>"http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png"</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>visualTips</code></td>
                 
                   
                     <td><code>Object</code></td>
                   
                 
-                <td>An object literal defining the help tips that appear when the mouse moves over the visual control. The <code>off</code> property is the tip to be shown when the control is off and the <code>on</code> property is the tip to be shown when the control is on. The default values are "Turn on drag zoom mode" and "Turn off drag zoom mode", respectively.</td>
+                <td>An object literal defining the help tips that appear when the mouse moves over the visual control. The <code>off</code> property is the tip to be shown when the control is off and the <code>on</code> property is the tip to be shown when the control is on.  The default value is <code>{off: "Turn on drag zoom mode", on: "Turn off drag zoom mode"}</code>.</td>
               </tr>
             
           </tbody>
