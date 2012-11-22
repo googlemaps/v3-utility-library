@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>MarkerManager Documentation: Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+<h1><a name="Marker_Manager_Examples" id="Marker_Manager_Examples"></a>Marker Manager Examples</h1>
+
+<p>To use a marker manager, create a <code>MarkerManager</code> object. In the simplest case, just pass a map to it.</p>
+<pre class="prettyprint">
+var myOptions = {
+  zoom: 4,
+  center: new google.maps.LatLng(48.25, 11.00),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+map = new google.maps.Map(document.getElementById('map'), myOptions);
+mgr = new MarkerManager(map);
+</pre>
+
+<p>You may also specify a number of options to fine-tune the marker manager's performance. These options are passed via a <code>MarkerManagerOptions</code> object, which contains the following fields:</p>
+
+<ul>
+  <li><code>maxZoom</code>: specifies the maximum zoom level monitored by this marker manager. The default value is the highest zoom level supported by Google maps.</li>
+  <li><code>borderPadding</code>: specifies the extra padding, in pixels, monitored by the manager outside the current viewport. This allows for markers just out of sight to be displayed on the map, improving panning over small ranges. The default value is 100.</li>
+  <li><code>trackMarkers</code>: specifies whether movement of movements of markers should be tracked by the marker manager. If you wish to have managed markers that change their positions through the <code>setPoint()</code> method, set this value to <code>true</code>. By default, this flag is set to <code>false</code>. Note that if you move markers with this value set to <code>false</code>, they will appear in both the original location and the new location(s).</li>
+
+</ul>
+<p>
+The <code>MarkerManagerOptions</code> object is an object literal, so you simply declare the object without a constructor:
+</p>
+<pre class="prettyprint">
+var mgrOptions = { borderPadding: 50, maxZoom: 15, trackMarkers: true };
+var mgr = new MarkerManager(map, mgrOptions);
+</pre>
+
+<p>Once you create a manager, you will want to add markers to it. <code>MarkerManager</code> supports adding single markers one at a time using the <code>addMarker()</code> method or a collection passed as an array using the <code>addMarkers()</code> method. Single markers added using <code>addMarker()</code> will appear immediately on the map provided that they fall within the current view and specified zoom level constraints.</p>
+
+<p>Adding markers collectively using <code>addMarkers()</code> is recommended as it is more efficient. Markers added using the <code>addMarkers()</code> method will not appear on the map until you explicitly call the <code>MarkerManager</code>'s <code>refresh()</code> method, which adds all markers within the current viewport and border padding region to the map. After this initial display, <code>MarkerManager</code> takes care of all visual updates by monitoring the map's "moveend" events.</p>
+
+<h2><a name="Marker_Manager_Weather" id="Marker_Manager_Weather"></a>Zoom Level Example: Weather Map</h2>
+
+<p>The following example creates a mock weather map for Europe. At zoom level 3, 20 randomly distributed weather icons are displayed. At level 6, when all 200 cities with population over 300,000 are easily distinguished, an additional 200 markers are shown. Finally, at level 8, 1000 markers are shown. (Note: to simplify the example, markers will be added at random locations.)</p>
+
+<pre class="prettyprint">
+function setupMap() {
+  var myOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(48.25, 11.00),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+  setupWeatherMarkers();
+  
+}
+function getWeatherMarkers(n) {
+  var batch = [];
+  for (var i = 0; i < n; ++i) {
+    var tmpIcon = getWeatherIcon();
+
+    batch.push(new google.maps.Marker({
+        position: getRandomPoint(),
+        shadow: tmpIcon.shadow,
+        icon: tmpIcon.icon,
+        shape: tmpIcon.shape,
+        title: 'Weather marker'
+        })
+    );
+  }
+  return batch;
+}
+
+function setupWeatherMarkers() {
+  mgr = new MarkerManager(map);
+
+  google.maps.event.addListener(mgr, 'loaded', function(){
+      mgr.addMarkers(getWeatherMarkers(20), 3);
+      mgr.addMarkers(getWeatherMarkers(200), 6);
+      mgr.addMarkers(getWeatherMarkers(1000), 8);
+
+      mgr.refresh();
+  });
+}
+</pre>
+
+<p><a href="../examples/weather_map.html">View example (weather_map.html)</a></p>
+
+<h2><a name="Marker_Manager_Offices" id="Marker_Manager_Offices"></a>Clustering Example: Google Offices</h2>
+
+<p>The marker manager can also perform simple clustering of markers. While it does not do so automatically, you can achieve the desired effect by setting both the minimum and maximum zoom at which a given marker is shown. In this example we create a map of Google offices in North America. At the highest level we show flags of countries in which offices are located. For zoom levels 3 to 7 we show icons over population centers where one or more offices are located. Finally, at levels 8 or higher, we show individual markers for each office.</p>
+
+<pre class="prettyprint">
+var officeLayer = [
+  {
+    "zoom": [0, 3],
+    "places": [
+      { "name": "US Offices", "icon": ["us", "flag-shadow"], "posn": [40, -97] },
+      { "name": "Canadian Offices", "icon": ["ca", "flag-shadow"], "posn": [58, -101] }
+    ]
+  },
+  ...
+};
+
+function setupOfficeMarkers() {
+  allmarkers.length = 0;
+  for (var i in officeLayer) {
+    if (officeLayer.hasOwnProperty(i)) {
+      var layer = officeLayer[i];
+
+      var markers = [];
+      for (var j in layer["places"]) {
+        if (layer["places"].hasOwnProperty(j)) {
+          var place = layer["places"][j];
+          var icon = getIcon(place["icon"]);
+
+          var title = place["name"];
+          var posn = new google.maps.LatLng(place["posn"][0], place["posn"][1]);
+          var marker = createMarker(posn, title, getIcon(place["icon"]));
+          markers.push(marker);
+          allmarkers.push(marker);
+        }
+      }
+      mgr.addMarkers(markers, layer["zoom"][0], layer["zoom"][1]);
+    }
+
+  }
+  mgr.refresh();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+</pre>
+
+<p>The marker manager now has functions to let you delete individual markers or all the markers in the manager, using <code>deleteMarker</code> and <code>clearMarkers</code> respectively.
+In the Google Offices example, you can delete a marker by double clicking on it, or entering an integer index in the text box and clicking the delete button.
+You can clear all the markers by clicking the clear button, and reload them again by clicking the reload button. The relevant code snippets are shown below.
+</p>
+
+<pre class="prettyprint">
+function createMarker(posn, title, icon) {
+  var markerOptions = {
+    position: posn,
+    title: title
+  };
+  if(icon !== false){
+    markerOptions.shadow = icon.shadow;
+    markerOptions.icon   = icon.icon;
+    markerOptions.shape  = icon.shape;
+  }
+
+  var marker = new google.maps.Marker(markerOptions);
+
+  google.maps.event.addListener(marker, 'dblclick', function() {
+    mgr.removeMarker(marker)
+    updateStatus(mgr.getMarkerCount(map.getZoom()));
+  });
+  return marker;
+}
+
+function showMarkers() {
+  mgr.show();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+function hideMarkers() {
+  mgr.hide();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+function deleteMarker() {
+  var markerNum = parseInt(document.getElementById("markerNum").value);
+  mgr.removeMarker(allmarkers[markerNum]);
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+function clearMarkers() {
+  mgr.clearMarkers();
+  updateStatus(mgr.getMarkerCount(map.getZoom()));
+}
+
+function reloadMarkers() {
+  setupOfficeMarkers();
+}
+</pre>
+
+<p><a href="../examples/google_northamerica_offices.html">View example (google_northamerica_offices.html)</a></p>
+
+
+</body>
+</html>
