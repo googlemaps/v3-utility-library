@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>InfoBox v1.1.11 [January 9, 2012] Reference</title>
+    <title>InfoBox v1.1.12 [December 10, 2012] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -95,6 +95,16 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
               </tr>
             
               <tr class="odd">
+                <td><code>getVisible()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns a flag indicating whether the InfoBox is visible.</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>getZIndex()</code></td>
                 
                   
@@ -104,17 +114,17 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                 <td>Returns the zIndex for the InfoBox.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>hide()</code></td>
                 
                   
                     <td><code>None</code></td>
                   
                 
-                <td>Hides the InfoBox.</td>
+                <td>Hides the InfoBox. [Deprecated; use <tt>setVisible</tt> instead.]</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>onRemove()</code></td>
                 
                   
@@ -124,7 +134,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                 <td>Invoked when <tt>close</tt> is called. Do not call it directly.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>open(<span class="type">map:Map|StreetViewPanorama</span>, <span class="type">anchor?:MVCObject</span>)</code></td>
                 
                   
@@ -137,7 +147,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  anchor is dragged to a new location, the InfoBox moves as well.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>setContent(<span class="type">content:string|Node</span>)</code></td>
                 
                   
@@ -148,7 +158,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  The content can be plain text or an HTML DOM node.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>setOptions(<span class="type">opt_opts:InfoBoxOptions</span>)</code></td>
                 
                   
@@ -161,7 +171,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
  is <tt>open</tt>ed.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>setPosition(<span class="type">latlng:LatLng</span>)</code></td>
                 
                   
@@ -169,6 +179,16 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                   
                 
                 <td>Sets the geographic location of the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setVisible(<span class="type">isVisible:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the visibility of the InfoBox.</td>
               </tr>
             
               <tr class="even">
@@ -188,7 +208,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                     <td><code>None</code></td>
                   
                 
-                <td>Shows the InfoBox.</td>
+                <td>Shows the InfoBox. [Deprecated; use <tt>setVisible</tt> instead.]</td>
               </tr>
             
           </tbody>
@@ -297,8 +317,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                     <td><code>string</code></td>
                   
                 
-                <td>The name of the CSS class defining the styles for the InfoBox container.
- The default name is <code>infoBox</code>.</td>
+                <td>The name of the CSS class defining the styles for the InfoBox container.  The default value is <code>"infoBox"</code>.</td>
               </tr>
             
               <tr class="odd">
@@ -355,7 +374,7 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                     <td><code>boolean</code></td>
                   
                 
-                <td>Disable auto-pan on <tt>open</tt> (default is <tt>false</tt>).</td>
+                <td>Disable auto-pan on <tt>open</tt>.  The default value is <code>false</code>.</td>
               </tr>
             
               <tr class="even">
@@ -389,7 +408,8 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
                     <td><code>boolean</code></td>
                   
                 
-                <td>Hide the InfoBox on <tt>open</tt> (default is <tt>false</tt>).</td>
+                <td>Hide the InfoBox on <tt>open</tt>.
+ [Deprecated in favor of the <tt>visible</tt> property.]  The default value is <code>false</code>.</td>
               </tr>
             
               <tr class="odd">
@@ -437,6 +457,16 @@ InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
               </tr>
             
               <tr class="odd">
+                <td><code>visible</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Show the InfoBox on <tt>open</tt>.  The default value is <code>true</code>.</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>zIndex</code></td>
                 
                   
