@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>KeyDragZoom for V3 v2.0.9 [December 17, 2012] NOT YET RELEASED Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>KeyDragZoom for V3</h1>
+    <p>
+This library adds a drag zoom capability to a V3 Google map. When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code> while dragging a box around an area of interest will zoom the map in to that area when the mouse button is released. Optionally, a visual control can also be supplied for turning a drag zoom operation on and off. Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code> <p> NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2, it causes a context menu to appear when running on the Macintosh. <p> Note that if the map's container has a border around it, the border widths must be specified in pixel units (or as thin, medium, or thick). This is required because of an MSIE limitation.  <p>NL: 2009-05-28: initial port to core API V3. <br>NL: 2009-11-02: added a temp fix for -moz-transform for FF3.5.x using code from Paul Kulchenko (http://notebook.kulchenko.com/maps/gridmove). <br>NL: 2010-02-02: added a fix for IE flickering on divs onmousemove, caused by scroll value when get mouse position. <br>GL: 2010-06-15: added a visual control option.</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="DragZoom"></a>class DragZoom</h2>
+      <p>This class represents a drag zoom object for a map. The object is activated by holding down the hot keyor by turning on the visual control.This object is created when <code>google.maps.Map.enableKeyDragZoom</code> is called; it cannot be created directly.Use <code>google.maps.Map.getDragZoomObject</code> to gain access to this object in order to attach event listeners.</p>
+      
+        <h3>Events</h3>
+        <table summary="class DragZoom - Events" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Events</th>
+              
+                
+                  <th>Arguments</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>activate</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the hot key is pressed.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>deactivate</code></td>
+                
+                  
+                    <td><code><span class="type">bnds:LatLngBounds</span></code></td>
+                  
+                
+                <td>This event is fired when the hot key is released.The parameter passed is the geographic bounds of the selected area immediatelybefore the hot key was released.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>drag</code></td>
+                
+                  
+                    <td><code><span class="type">southwestPixel:Point</span>, <span class="type">northeastPixel:Point</span>, <span class="type">prj:MapCanvasProjection</span></code></td>
+                  
+                
+                <td>This event is fired repeatedly while the user drags a box across the area of interest.The southwest and northeast point are passed as parameters of type <code>google.maps.Point</code>(for performance reasons), relative to the map container. Also passed is the projection objectso that the event listener, if necessary, can convert the pixel positions to geographiccoordinates using <code>google.maps.MapCanvasProjection.fromContainerPixelToLatLng</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>dragend</code></td>
+                
+                  
+                    <td><code><span class="type">bnds:LatLngBounds</span></code></td>
+                  
+                
+                <td>This event is fired when the drag operation ends.The parameter passed is the geographic bounds of the selected area.Note that this event is <i>not</i> fired if the hot key is released before the drag operation ends.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>dragstart</code></td>
+                
+                  
+                    <td><code><span class="type">latlng:LatLng</span></code></td>
+                  
+                
+                <td>This event is fired when the drag operation begins.The parameter passed is the geographic position of the starting point.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="google.maps.Map"></a>class Map</h2>
+      <p>These are new methods added to the Google Maps JavaScript API V3's<a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Map">Map</a>class.</p>
+      
+        <h3>Methods</h3>
+        <table summary="class Map - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>disableKeyDragZoom()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Disables drag zoom.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>enableKeyDragZoom(<span class="type">opt_zoomOpts:KeyDragZoomOptions</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Enables drag zoom. The user can zoom to an area of interest by holding down the hot key<code>(shift | ctrl | alt )</code> while dragging a box around the area or by turningon the visual control then dragging a box around the area.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getDragZoomObject()</code></td>
+                
+                  
+                    <td><code>DragZoom</code></td>
+                  
+                
+                <td>Returns the DragZoom object which is created when <code>google.maps.Map.enableKeyDragZoom</code> is called.With this object you can use <code>google.maps.event.addListener</code> to attach event listenersfor the "activate", "deactivate", "dragstart", "drag", and "dragend" events.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>keyDragZoomEnabled()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns <code>true</code> if the drag zoom feature has been enabled.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="KeyDragZoomOptions"></a>class KeyDragZoomOptions</h2>
+      <p>This class represents the optional parameter passed into <code>google.maps.Map.enableKeyDragZoom</code>.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class KeyDragZoomOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>boxStyle</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal defining the CSS styles of the zoom box. Border widths must be specified in pixel units (or as thin, medium, or thick).  The default value is <code>{border: "4px solid #736AFF"}</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>key</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The hot key to hold down to activate a drag zoom, <code>shift | ctrl | alt</code>. NOTE: Do not use Ctrl as the hot key with Google Maps JavaScript API V3 since, unlike with V2, it causes a context menu to appear when running on the Macintosh. Also note that the <code>alt</code> hot key refers to the Option key on a Macintosh.  The default value is <code>"shift"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>noZoom</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether to disable zooming after an area is selected. Set this to <code>true</code> to allow KeyDragZoom to be used as a simple area selection tool.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>veilStyle</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal defining the CSS styles of the veil pane which covers the map when a drag zoom is activated. The previous name for this property was <code>paneStyle</code> but the use of this name is now deprecated.  The default value is <code>{backgroundColor: "gray", opacity: 0.25, cursor: "crosshair"}</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>visualClass</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The name of the CSS class defining the styles for the visual control. To prevent the visual control from being printed, set this property to the name of a class, defined inside a <code>@media print</code> rule, which sets the CSS <code>display</code> style to <code>none</code>.  The default value is <code>""</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>visualEnabled</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether a visual control is to be used.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>visualPosition</code></td>
+                
+                  
+                    <td><code>ControlPosition</code></td>
+                  
+                
+                <td>The position of the visual control.  The default value is <code>google.maps.ControlPosition.LEFT_TOP</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>visualPositionIndex</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The index of the visual control. The index is for controlling the placement of the control relative to other controls at the position given by <code>visualPosition</code>; controls with a lower index are placed first. Use a negative value to place the control <i>before</i> any default controls. No index is generally required.  The default value is <code>null</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>visualPositionOffset</code></td>
+                
+                  
+                    <td><code>Size</code></td>
+                  
+                
+                <td>The width and height values provided by this property are the offsets (in pixels) from the location at which the control would normally be drawn to the desired drawing location.  The default value is <code>google.maps.Size(35, 0)</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>visualSize</code></td>
+                
+                  
+                    <td><code>Size</code></td>
+                  
+                
+                <td>The width and height values provided by this property are the size (in pixels) of each of the images within <code>visualSprite</code>.  The default value is <code>google.maps.Size(20, 20)</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>visualSprite</code></td>
+                
+                  
+                    <td><code>String</code></td>
+                  
+                
+                <td>The URL of the sprite image used for showing the visual control in the on, off, and hot (i.e., when the mouse is over the control) states. The three images within the sprite must be the same size and arranged in on-hot-off order in a single row with no spaces between images.  The default value is <code>"http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png"</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>visualTips</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal defining the help tips that appear when the mouse moves over the visual control. The <code>off</code> property is the tip to be shown when the control is off and the <code>on</code> property is the tip to be shown when the control is on.  The default value is <code>{off: "Turn on drag zoom mode", on: "Turn off drag zoom mode"}</code>.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>

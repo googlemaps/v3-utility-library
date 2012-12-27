@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Drag Zoom</title>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+        </script>
+        <script type="text/javascript">
+         document.write('<script type="text/javascript" src="../src/keydragzoom'+(document.location.search.indexOf('packed')>-1?'_packed':'')+'.js"><'+'/script>');
+        </script>
+        <script type="text/javascript">
+        var map;
+        function init() {
+          var myOptions = {
+            zoom: 13,
+            center: new google.maps.LatLng(49.2903, -123.1294),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+          map.enableKeyDragZoom({
+            key: "shift", 
+            boxStyle: {
+              border: "4px dashed black",
+              backgroundColor: "transparent",
+              opacity: 1.0
+            },
+            veilStyle: {
+              backgroundColor: "red",
+              opacity: 0.35,
+              cursor: "crosshair"
+            },
+            visualEnabled: true
+          });
+        }
+        </script>
+
+    </head>
+    <body onload="init()">
+       <a href='?packed'>Packed</a> | <a href='?'>Unpacked</a> Version of the script.
+
+       <br />
+       Hold down the <span style="color: red; font-weight: bold;" >Shift</span> key while dragging a box.
+
+       <div id="map" style="border: 10px solid black; margin: 10px; width: 700px; height: 500px;"></div>
+
+    </body>
+</html>

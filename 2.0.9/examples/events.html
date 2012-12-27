@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Drag Zoom Events</title>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+        </script>
+        <script type="text/javascript">
+         document.write('<script type="text/javascript" src="../src/keydragzoom'+(document.location.search.indexOf('packed')>-1?'_packed':'')+'.js"><'+'/script>');
+        </script>
+        <script type="text/javascript">
+        var map;
+        function init() {
+          var myOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng(49.49088, -123.75446),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          map = new google.maps.Map(document.getElementById("map"), myOptions);
+ 
+          map.enableKeyDragZoom({
+            visualEnabled: true
+          });
+
+          var dz = map.getDragZoomObject();
+          google.maps.event.addListener(dz, 'activate', function () {
+            log('KeyDragZoom Activated');
+          });
+          google.maps.event.addListener(dz, 'deactivate', function (bnds) {
+            log('KeyDragZoom Deactivated: ' + bnds);
+          });
+          google.maps.event.addListener(dz, 'dragstart', function (latlng) {
+            log('KeyDragZoom Started: ' + latlng);
+          });
+          google.maps.event.addListener(dz, 'drag', function (startPt, endPt, prj) {
+            log('KeyDragZoom Dragging: ' + startPt + endPt);
+          });
+          google.maps.event.addListener(dz, 'dragend', function (bnds) {
+            log('KeyDragZoom Ended: ' + bnds);
+          });
+        }
+        
+        function log(msg) {
+          document.getElementById('msg').innerHTML += "<br />" + msg;
+        }
+        </script>
+
+<style>
+#map {
+width: 700px;
+height: 500px;
+}
+</style>
+
+    </head>
+    <body onload="init()">
+       <a href='?packed'>Packed</a> | <a href='?'>Unpacked</a> Version of the script.
+
+       <br />
+       Hold down the <span style="color: red; font-weight: bold;" >Shift</span> key while dragging a box or use the visual control below the zoom control to turn drag zoom on and off.
+
+       <div id="map"></div>
+       <div id="msg"></div>
+
+    </body>
+</html>
