@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.8 [November 22, 2012]
+ * @version 2.0.9 [December 17, 2012] NOT YET RELEASED
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -294,9 +294,7 @@
       // Prevents selection of other elements on the webpage
       // when a drag zoom operation is in progress:
       this.veilDiv_[i].onselectstart = function () {
-// The following line has been removed because it seems to cause trouble with Chrome/Win.
-// Not sure why, but it seems to work. See Issue 139.
-//        return false;
+        return false;
       };
       // Apply default style values for the veil:
       setVals(this.veilDiv_[i].style, {
@@ -591,9 +589,6 @@
        */
       google.maps.event.trigger(this, "activate");
     }
-    if (this.visualEnabled_ && this.isHotKeyDown_(e)) {
-      this.buttonDiv_.style.display = "none";
-    }
   };
   /**
    * Get the <code>google.maps.Point</code> of the mouse position.
@@ -623,9 +618,6 @@
       this.boxDiv_.style.width = this.boxDiv_.style.height = "0px";
       var prj = this.prjov_.getProjection();
       var latlng = prj.fromContainerPixelToLatLng(this.startPt_);
-      if (this.visualEnabled_) {
-        this.buttonDiv_.style.display = "none";
-      }
       /**
        * This event is fired when the drag operation begins.
        * The parameter passed is the geographic position of the starting point.
