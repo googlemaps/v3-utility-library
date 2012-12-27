@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Drag Zoom Using Alt/Option Key</title>
+        <style>
+          #map {
+            width:700px; height:500px; border:1px solid #000;
+          }
+        </style>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+        </script>
+        <script type="text/javascript">
+         document.write('<script type="text/javascript" src="../src/keydragzoom'+(document.location.search.indexOf('packed')>-1?'_packed':'')+'.js"><'+'/script>');
+        </script>
+        <script type="text/javascript">
+        var map;
+        function init() {
+          var myOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng(35.227, -80.84),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+          map.enableKeyDragZoom({
+            key: 'alt'
+          });
+        }
+        </script>
+    </head>
+    <body onload="init()">
+       <a href='?packed'>Packed</a> | <a href='?'>Unpacked</a> Version of the script.
+       
+       <br />
+       Hold down the <span style="color: red; font-weight: bold;" >Alt/Option</span> key while dragging a box.
+       
+       <div id="map"></div>
+       
+    </body>
+</html>
