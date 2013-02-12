@@ -2,6 +2,12 @@
 
 The libraries listed below are all open source.  Note that some are hosted on GitHub, so simply checking out all the code under the "Source" tab above does not get you every library listed here.  Instead, click the link next to the library you are interested in.
 
+== Day Night Overlay ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/daynightoverlay.png]
+
+Day Night Overlay provides a custom overlay which shows an approximation of where the day/night line runs at any given date.
+Browse the [https://github.com/kaktus621/google-maps-api-addons github repository] or see the [http://plus.martinmatysiak.de/daynightoverlay/examples/ live samples].
 
 == !InfoBox ==
 
