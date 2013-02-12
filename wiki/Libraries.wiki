@@ -1,15 +1,6 @@
 #summary List of libraries here and quick links to them
 
-Below is a list of the libraries being worked on in this project, with links to their final released versions and their in-development versions. 
-
-
-
-== !KeyDragZoom ==
-
-This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
-
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Versions].
+The libraries listed below are all open source.  Note that some are hosted on GitHub, so simply checking out all the code under the "Source" tab above does not get you every library listed here.  Instead, click the link next to the library you are interested in.
 
 
 == !InfoBox ==
@@ -38,6 +29,34 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclus
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/ Development Versions].
 
 
+== !MarkerWithLabel ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/examples/markerwithlabel-screen.png]
+
+This class behaves like {{{google.maps.Marker}}}, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/ Released Versions]
+or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
+
+== !StyledMarker ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/examples/styledMarker.png]
+
+This class is a Marker that can be styled by changing its color, changing its shape, or adding text labels. Makes use of MVCObject to make changing styles for multiple markers easy.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/ Development Versions].
+
+
+== !GeolocationMarker ==
+
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/example.png]
+
+Adds a marker and accuracy circle to the map based on the user's location. Updates automatically as their location changes.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/ Development Versions]
+
+
 == !MarkerManager ==
 
 This class is designed to manage adding and removing many points when the viewport changes.
@@ -63,23 +82,14 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggab
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/ExtDraggableObject/ Development Versions].
 
 
-== !MarkerWithLabel ==
+== !KeyDragZoom ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/examples/markerwithlabel-screen.png]
+This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
 
-This class behaves like {{{google.maps.Marker}}}, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/ Released Versions] or
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/ Development Versions].
 
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/ Released Versions]
-or
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
 
-== !StyledMarker ==
-
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/examples/styledMarker.png]
-
-This class is a Marker that can be styled by changing its color, changing its shape, or adding text labels. Makes use of MVCObject to make changing styles for multiple markers easy.
-
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/ Development Versions].
 
 == !RichMarker ==
 
@@ -98,11 +108,3 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubbl
 This library integrates the Google Earth API, and will render most map overlays appropriately.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/ Development Versions].
-
-== !GeolocationMarker ==
-
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/example.png]
-
-Adds a marker and accuracy circle to the map based on the user's location. Updates automatically as their location changes.
-
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/ Development Versions]
