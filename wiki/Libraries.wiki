@@ -60,7 +60,7 @@ or
 
 == !StyledMarker ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/examples/styledMarker.png]
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/styled_marker.png]
 
 This class is a Marker that can be styled by changing its color, changing its shape, or adding text labels. Makes use of MVCObject to make changing styles for multiple markers easy.
 
@@ -69,11 +69,23 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmar
 
 == !GeolocationMarker ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/example.png]
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/geolocation_marker.png]
 
 Adds a marker and accuracy circle to the map based on the user's location. Updates automatically as their location changes.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/ Development Versions]
+
+
+
+== !GoogleEarth ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/earth_api.png]
+
+
+This library integrates the Google Earth API, and will render most map overlays appropriately in the 3D plugin.
+
+Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/ Development Versions].
+
 
 
 == !MarkerManager ==
@@ -121,9 +133,3 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarke
 A !InfoBubble is a customizable css3 infowindow.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/ Development Versions].
-
-== !GoogleEarth ==
-
-This library integrates the Google Earth API, and will render most map overlays appropriately.
-
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/ Development Versions].
