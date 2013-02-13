@@ -22,7 +22,7 @@ Browse the [https://github.com/JasonSanford/GeoJSON-to-Google-Maps github reposi
 
 == !InfoBox ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png width="300"]
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
 
 This class behaves like {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
