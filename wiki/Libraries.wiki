@@ -98,6 +98,9 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markermana
 
 == Route Boxer ==
 
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/route_boxer.png]
+
+
 This class creates a set of LatLngBounds that are guaranteed to enclose every point within a given distance of a Polyline. It is intended to support adding Search along a route to an application backed by a spatial database that supports bounds queries (such as the Google Maps Data API).
 
 
@@ -105,6 +108,9 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/routeboxer
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/ Development Versions].
 
 == !ExtDraggableObject ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/ext_draggable_object.png]
+
 
 This class sets up a DOM object to be draggable around the screen, similar to the V2 GDraggableObject. Has several extensions, such as the ability to restrict the object to vertical or horizontal only movement, move the object by a certain increment, or return the object to its original position before dragging started.
 
@@ -114,6 +120,9 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggab
 
 
 == !KeyDragZoom ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/key_drag_zoom.png]
+
 
 This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
 
