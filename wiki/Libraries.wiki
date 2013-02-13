@@ -22,7 +22,7 @@ Browse the [https://github.com/JasonSanford/GeoJSON-to-Google-Maps github reposi
 
 == !InfoBox ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
+[[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobox.png]
 
 This class behaves like {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
@@ -40,7 +40,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclu
 
 == !MarkerClustererPlus ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/examples/markerclustererplus.png]
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer_plus.png]
 
 This is an enhanced version of the !MarkerClusterer library for managing large amounts of markers. It adds support for several new properties as well as support for four more events. It also allows greater control over the styling of the text that appears on the cluster marker. The documentation has been significantly improved and the overall code has been simplified and polished. Very large numbers of markers can now be managed without causing Javascript timeout errors on Internet Explorer. It is backward compatible with !MarkerClusterer.
 
@@ -50,7 +50,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclus
 
 == !MarkerWithLabel ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/examples/markerwithlabel-screen.png]
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_with_label.png]
 
 This class behaves like {{{google.maps.Marker}}}, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
 
