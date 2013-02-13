@@ -133,11 +133,15 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoo
 
 == !RichMarker ==
 
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/rich_marker.png]
+
 A !RichMarker that allows any HTML/DOM to be added to a map and be draggable.
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/ Development Versions].
 
 == !InfoBubble ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobubble.png]
 
 A !InfoBubble is a customizable css3 infowindow.
 
