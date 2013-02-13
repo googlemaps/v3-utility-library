@@ -30,7 +30,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ R
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/ Development Versions].
 
 
-== !MarkerClusterer ==
+== Marker Clusterer ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer.png]
 
@@ -38,7 +38,7 @@ The library creates and manages per-zoom-level clusters for large amounts of mar
 
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/ Released Versions].
 
-== !MarkerClustererPlus ==
+== Marker Clusterer Plus ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer_plus.png]
 
@@ -48,7 +48,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclus
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/ Development Versions].
 
 
-== !MarkerWithLabel ==
+==  Marker With Label ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_with_label.png]
 
@@ -58,7 +58,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwith
 or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/ Development Versions].
 
-== !StyledMarker ==
+== Styled Marker ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/styled_marker.png]
 
@@ -67,7 +67,7 @@ This class is a Marker that can be styled by changing its color, changing its sh
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/ Development Versions].
 
 
-== !GeolocationMarker ==
+== Geolocation Marker ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/geolocation_marker.png]
 
@@ -77,7 +77,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocati
 
 
 
-== !GoogleEarth ==
+== Google Earth API ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/earth_api.png]
 
@@ -88,7 +88,7 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleear
 
 
 
-== !MarkerManager ==
+== Marker Manager ==
 
 This class is designed to manage adding and removing many points when the viewport changes.
 
@@ -96,7 +96,7 @@ This class is designed to manage adding and removing many points when the viewpo
 Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markermanager/ Released Versions] or
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/ Development Versions].
 
-== !RouteBoxer ==
+== Route Boxer ==
 
 This class creates a set of LatLngBounds that are guaranteed to enclose every point within a given distance of a Polyline. It is intended to support adding Search along a route to an application backed by a spatial database that supports bounds queries (such as the Google Maps Data API).
 
