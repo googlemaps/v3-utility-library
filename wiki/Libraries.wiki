@@ -88,14 +88,6 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleear
 
 
 
-== Marker Manager ==
-
-This class is designed to manage adding and removing many points when the viewport changes.
-
-
-Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/markermanager/ Released Versions] or
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/ Development Versions].
-
 == Route Boxer ==
 
 [http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/route_boxer.png]
