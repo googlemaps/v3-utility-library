@@ -10,6 +10,16 @@ Day Night Overlay provides a custom overlay which shows an approximation of wher
 
 Browse the [https://github.com/kaktus621/google-maps-api-addons github repository] or see the [http://plus.martinmatysiak.de/daynightoverlay/examples/ live samples].
 
+
+== GeoJSON to Google Maps  ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/geojson.png]
+
+The GeoJSON to Google Maps API library lets you easily convert GeoJSON to Overlays, along with default styling rules.
+
+Browse the [https://github.com/JasonSanford/GeoJSON-to-Google-Maps github repository] for code and examples.
+
+
 == !InfoBox ==
 
 [http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
