@@ -22,7 +22,7 @@ Browse the [https://github.com/JasonSanford/GeoJSON-to-Google-Maps github reposi
 
 == !InfoBox ==
 
-[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png]
+[http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/infobox.png width="300"]
 
 This class behaves like {{{google.maps.InfoWindow}}}, but it supports several additional properties for advanced styling. An !InfoBox can also be used as a map label.
 
@@ -31,6 +31,8 @@ Browse [http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/ R
 
 
 == !MarkerClusterer ==
+
+[http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer.png]
 
 The library creates and manages per-zoom-level clusters for large amounts of markers.  This is a V3 implementation of the V2 !MarkerClusterer.
 
