@@ -36,6 +36,20 @@
 /*global document,google */
 
 /**
+ * @param {Function} childCtor Child class.
+ * @param {Function} parentCtor Parent class.
+ */
+function inherits(childCtor, parentCtor) {
+  /** @constructor */
+  function tempCtor() {};
+  tempCtor.prototype = parentCtor.prototype;
+  childCtor.superClass_ = parentCtor.prototype;
+  childCtor.prototype = new tempCtor();
+  /** @override */
+  childCtor.prototype.constructor = childCtor;
+}
+
+/**
  * This constructor creates a label and associates it with a marker.
  * It is for the private use of the MarkerWithLabel class.
  * @constructor
@@ -65,9 +79,7 @@ function MarkerLabel_(marker, crossURL, handCursorURL) {
   // Get the DIV for the "X" to be displayed when the marker is raised.
   this.crossDiv_ = MarkerLabel_.getSharedCross(crossURL);
 }
-
-// MarkerLabel_ inherits from OverlayView:
-MarkerLabel_.prototype = new google.maps.OverlayView();
+inherits(MarkerLabel_, google.maps.OverlayView);
 
 /**
  * Returns the DIV for the cross used when dragging a marker when the
@@ -549,9 +561,7 @@ function MarkerWithLabel(opt_options) {
   // that the marker label listens for in order to react to state changes.
   google.maps.Marker.apply(this, arguments);
 }
-
-// MarkerWithLabel inherits from <code>Marker</code>:
-MarkerWithLabel.prototype = new google.maps.Marker();
+inherits(MarkerWithLabel, google.maps.Marker);
 
 /**
  * Overrides the standard Marker setMap function.
