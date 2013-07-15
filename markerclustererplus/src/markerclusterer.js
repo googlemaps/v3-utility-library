@@ -132,7 +132,7 @@ ClusterIcon.prototype.onAdd = function () {
   this.getPanes().overlayMouseTarget.appendChild(this.div_);
 
   // Fix for Issue 157
-  google.maps.event.addListener(this.getMap(), "bounds_changed", function () {
+  this.boundsChangedListener_ = google.maps.event.addListener(this.getMap(), "bounds_changed", function () {
     cDraggingMapByCluster = cMouseDownInCluster;
   });
 
@@ -211,6 +211,7 @@ ClusterIcon.prototype.onAdd = function () {
 ClusterIcon.prototype.onRemove = function () {
   if (this.div_ && this.div_.parentNode) {
     this.hide();
+    google.maps.event.removeListener(this.boundsChangedListener_);
     google.maps.event.clearInstanceListeners(this.div_);
     this.div_.parentNode.removeChild(this.div_);
     this.div_ = null;
