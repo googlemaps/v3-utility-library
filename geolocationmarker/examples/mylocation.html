@@ -12,7 +12,7 @@
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    <script src="../src/geolocationmarker-compiled.js"></script>
+    <script src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js"></script>
     <script>
       var map, GeoMarker;
     
@@ -41,6 +41,10 @@
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
+      
+      if(!navigator.geolocation) {
+        alert('Your browser does not support geolocation');
+      }
     </script>
   </head>
   <body>
