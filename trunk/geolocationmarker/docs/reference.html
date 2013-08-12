@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <title>Geolocation Marker Reference</title>
-  <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css" />
-  <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css" />
-  <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
+  <link rel="stylesheet" type="text/css" href="//code.google.com/css/codesite.css" />
+  <link rel="stylesheet" type="text/css" href="//google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css" />
+  <script type="text/javascript" src="//code.google.com/js/prettify.js"></script>
 </head>
 <body onload="prettyPrint()">
   <h1>Geolocation Marker for Google Maps v3</h1>
   <p>This library uses geolocation to add a marker and accuracy circle to a map. The marker
     position is automatically updated as the user position changes.</p>
-  <p><img alt="" src="../images/example.png" width="300" height="219" /></p>
+  <p><img alt="" src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/example.png" width="300" height="219" /></p>
   <p>To add the Geolocation Marker, just instantiate a new GeolocationMarker object, passing
     your map to it: </p>
   <pre class="prettyprint">var mapOptions = {
@@ -22,7 +22,7 @@
 var map = new google.maps.Map(document.getElementById('map_canvas'),
   mapOptions);
 var GeoMarker = new GeolocationMarker(map);</pre>
-  <p>See the <a href="../examples/mylocation.html">example</a>.</p>
+  <p>See the <a href="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/examples/mylocation.html">example</a>.</p>
   <p style="font-style:italic;">Note: This library will only function in browsers supporting the
   <a href="http://dev.w3.org/geo/api/spec-source.html">W3C Geolocation API</a>.
   This excludes Internet Explorer versions 8 and older.</p>
