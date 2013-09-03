@@ -17,7 +17,7 @@ Browse the [https://github.com/kaktus621/google-maps-api-addons github repositor
 
 The GeoJSON to Google Maps API library lets you easily convert GeoJSON to Overlays, along with default styling rules.
 
-Browse the [https://github.com/JasonSanford/GeoJSON-to-Google-Maps github repository] for code and examples.
+Browse the [https://github.com/JasonSanford/geojson-google-maps github repository] for code and examples.
 
 
 == !InfoBox ==
