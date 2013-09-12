@@ -237,7 +237,7 @@ CanvasLayer.prototype.setOptions = function(options) {
   }
 
   if (options.paneName !== undefined) {
-    this.setPane(options.paneName);
+    this.setPaneName(options.paneName);
   }
 
   if (options.updateHandler !== undefined) {
