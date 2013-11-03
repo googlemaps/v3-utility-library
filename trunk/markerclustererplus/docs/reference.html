@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MarkerClustererPlus for Google Maps V3 v2.0.15 [October 18, 2012] Reference</title>
+    <title>MarkerClustererPlus for Google Maps V3 v2.1 [November 2, 2013] Reference</title>
     <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
   </head>
@@ -18,14 +18,13 @@ This is an enhanced V3 implementation of the
 >V3 MarkerClusterer</a> port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
 <p>
 v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
- adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>printable</code>,
- <code>batchSizeIE</code>, and <code>calculator</code> properties as well as support for
- four more events. It also allows greater control over the styling of the text that appears
- on the cluster marker. The documentation has been significantly improved and the overall
- code has been simplified and polished. Very large numbers of markers can now be managed
- without causing Javascript timeout errors on Internet Explorer. Note that the name of the
- <code>clusterclick</code> event has been deprecated. The new name is <code>click</code>,
- so please change your application code now.</p>
+ adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>batchSizeIE</code>,
+ and <code>calculator</code> properties as well as support for four more events. It also allows
+ greater control over the styling of the text that appears on the cluster marker. The
+ documentation has been significantly improved and the overall code has been simplified and
+ polished. Very large numbers of markers can now be managed without causing Javascript timeout
+ errors on Internet Explorer. Note that the name of the <code>clusterclick</code> event has been
+ deprecated. The new name is <code>click</code>, so please change your application code now.</p>
     <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
     
       <h2><a name="Cluster"></a>class Cluster</h2>
@@ -180,21 +179,6 @@ for the <code>MarkerClusterer</code> object.</td>
             </tr>
             
               <tr class="odd">
-                <td><code>anchor</code></td>
-                
-                  
-                    <td><code>Array</code></td>
-                  
-                
-                <td>The anchor position (in pixels) of the label text to be shown on
- the cluster icon, relative to the top left corner of the icon.
- The format is <code>[yoffset, xoffset]</code>. The <code>yoffset</code> must be positive
- and less than <code>height</code> and the <code>xoffset</code> must be positive and less
- than <code>width</code>. The default is to anchor the label text so that it is centered
- on the icon.</td>
-              </tr>
-            
-              <tr class="even">
                 <td><code>anchorIcon</code></td>
                 
                   
@@ -204,8 +188,21 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>The anchor position (in pixels) of the cluster icon. This is the
  spot on the cluster icon that is to be aligned with the cluster position. The format is
  <code>[yoffset, xoffset]</code> where <code>yoffset</code> increases as you go down and
- <code>xoffset</code> increases to the right. The default anchor position is the center of the
- cluster icon.</td>
+ <code>xoffset</code> increases to the right of the top-left corner of the icon. The default
+ anchor position is the center of the cluster icon.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>anchorText</code></td>
+                
+                  
+                    <td><code>Array</code></td>
+                  
+                
+                <td>The position (in pixels) from the center of the cluster icon to
+ where the text label is to be centered and drawn. The format is <code>[yoffset, xoffset]</code>
+ where <code>yoffset</code> increases as you go down from center and <code>xoffset</code>
+ increases to the right of center. The default is <code>[0, 0]</code>.</td>
               </tr>
             
               <tr class="odd">
@@ -219,14 +216,14 @@ for the <code>MarkerClusterer</code> object.</td>
  within the image defined by <code>url</code>. The format is <code>"xpos ypos"</code>
  (the same format as for the CSS <code>background-position</code> property). You must set
  this property appropriately when the image defined by <code>url</code> represents a sprite
- containing multiple images.  The default value is <code>"0 0"</code>.</td>
+ containing multiple images. Note that the position <i>must</i> be specified in px units.  The default value is <code>"0 0"</code>.</td>
               </tr>
             
               <tr class="even">
                 <td><code>fontFamily</code></td>
                 
                   
-                    <td><code>number</code></td>
+                    <td><code>string</code></td>
                   
                 
                 <td>The value of the CSS <code>font-family</code>
@@ -237,7 +234,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td><code>fontStyle</code></td>
                 
                   
-                    <td><code>number</code></td>
+                    <td><code>string</code></td>
                   
                 
                 <td>The value of the CSS <code>font-style</code>
@@ -248,7 +245,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td><code>fontWeight</code></td>
                 
                   
-                    <td><code>number</code></td>
+                    <td><code>string</code></td>
                   
                 
                 <td>The value of the CSS <code>font-weight</code>
@@ -262,7 +259,7 @@ for the <code>MarkerClusterer</code> object.</td>
                     <td><code>number</code></td>
                   
                 
-                <td>The height (in pixels) of the cluster icon. Required.</td>
+                <td>The display height (in pixels) of the cluster icon. Required.</td>
               </tr>
             
               <tr class="even">
@@ -280,7 +277,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td><code>textDecoration</code></td>
                 
                   
-                    <td><code>number</code></td>
+                    <td><code>string</code></td>
                   
                 
                 <td>The value of the CSS <code>text-decoration</code>
@@ -315,7 +312,7 @@ for the <code>MarkerClusterer</code> object.</td>
                     <td><code>number</code></td>
                   
                 
-                <td>The width (in pixels) of the cluster icon. Required.</td>
+                <td>The display width (in pixels) of the cluster icon. Required.</td>
               </tr>
             
           </tbody>
@@ -452,6 +449,16 @@ for the <code>MarkerClusterer</code> object.</td>
               </tr>
             
               <tr class="even">
+                <td><code>getEnableRetinaIcons()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns the value of the <code>enableRetinaIcons</code> property.</td>
+              </tr>
+            
+              <tr class="odd">
                 <td><code>getGridSize()</code></td>
                 
                   
@@ -461,7 +468,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>gridSize</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>getIgnoreHidden()</code></td>
                 
                   
@@ -471,7 +478,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>ignoreHidden</code> property.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>getImageExtension()</code></td>
                 
                   
@@ -481,7 +488,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>imageExtension</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>getImagePath()</code></td>
                 
                   
@@ -491,7 +498,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>imagePath</code> property.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>getImageSizes()</code></td>
                 
                   
@@ -501,7 +508,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>imageSizes</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>getMarkers()</code></td>
                 
                   
@@ -511,7 +518,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the array of markers managed by the clusterer.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>getMaxZoom()</code></td>
                 
                   
@@ -521,7 +528,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Returns the value of the <code>maxZoom</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>getMinimumClusterSize()</code></td>
                 
                   
@@ -529,16 +536,6 @@ for the <code>MarkerClusterer</code> object.</td>
                   
                 
                 <td>Returns the value of the <code>minimumClusterSize</code> property.</td>
-              </tr>
-            
-              <tr class="even">
-                <td><code>getPrintable()</code></td>
-                
-                  
-                    <td><code>boolean</code></td>
-                  
-                
-                <td>Returns the value of the <code>printable</code> property.</td>
               </tr>
             
               <tr class="odd">
@@ -667,6 +664,16 @@ for the <code>MarkerClusterer</code> object.</td>
               </tr>
             
               <tr class="odd">
+                <td><code>setEnableRetinaIcons(<span class="type">enableRetinaIcons:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the value of the <code>enableRetinaIcons</code> property.</td>
+              </tr>
+            
+              <tr class="even">
                 <td><code>setGridSize(<span class="type">gridSize:number</span>)</code></td>
                 
                   
@@ -676,7 +683,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>gridSize</code> property.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>setIgnoreHidden(<span class="type">ignoreHidden:boolean</span>)</code></td>
                 
                   
@@ -686,7 +693,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>ignoreHidden</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>setImageExtension(<span class="type">imageExtension:string</span>)</code></td>
                 
                   
@@ -696,7 +703,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>imageExtension</code> property.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>setImagePath(<span class="type">imagePath:string</span>)</code></td>
                 
                   
@@ -706,7 +713,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>imagePath</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>setImageSizes(<span class="type">imageSizes:Array</span>)</code></td>
                 
                   
@@ -716,7 +723,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>imageSizes</code> property.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>setMaxZoom(<span class="type">maxZoom:number</span>)</code></td>
                 
                   
@@ -726,7 +733,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>Sets the value of the <code>maxZoom</code> property.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>setMinimumClusterSize(<span class="type">minimumClusterSize:number</span>)</code></td>
                 
                   
@@ -734,16 +741,6 @@ for the <code>MarkerClusterer</code> object.</td>
                   
                 
                 <td>Sets the value of the <code>minimumClusterSize</code> property.</td>
-              </tr>
-            
-              <tr class="even">
-                <td><code>setPrintable(<span class="type">printable:boolean</span>)</code></td>
-                
-                  
-                    <td><code>None</code></td>
-                  
-                
-                <td>Sets the value of the <code>printable</code> property.</td>
               </tr>
             
               <tr class="odd">
@@ -944,6 +941,19 @@ for the <code>MarkerClusterer</code> object.</td>
               </tr>
             
               <tr class="even">
+                <td><code>enableRetinaIcons</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Whether to allow the use of cluster icons that
+have sizes that are some multiple (typically double) of their actual display size. Icons such
+as these look better when viewed on high-resolution monitors such as Apple's Retina displays.
+Note: if this property is <code>true</code>, sprites cannot be used as cluster icons.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="odd">
                 <td><code>gridSize</code></td>
                 
                   
@@ -953,7 +963,7 @@ for the <code>MarkerClusterer</code> object.</td>
                 <td>The grid size of a cluster in pixels. The grid is a square.  The default value is <code>60</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>ignoreHidden</code></td>
                 
                   
@@ -968,7 +978,7 @@ for the <code>MarkerClusterer</code> object.</td>
  sure to also call <code>MarkerClusterer.repaint()</code>.  The default value is <code>false</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>imageExtension</code></td>
                 
                   
@@ -979,7 +989,7 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>"jpg"</code>).  The default value is <code>MarkerClusterer.IMAGE_EXTENSION</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>imagePath</code></td>
                 
                   
@@ -991,7 +1001,7 @@ for the <code>MarkerClusterer</code> object.</td>
  where n is the image file number (1, 2, etc.).  The default value is <code>MarkerClusterer.IMAGE_PATH</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>imageSizes</code></td>
                 
                   
@@ -1003,7 +1013,7 @@ for the <code>MarkerClusterer</code> object.</td>
  (The images are assumed to be square.)  The default value is <code>MarkerClusterer.IMAGE_SIZES</code>.</td>
               </tr>
             
-              <tr class="odd">
+              <tr class="even">
                 <td><code>maxZoom</code></td>
                 
                   
@@ -1014,7 +1024,7 @@ for the <code>MarkerClusterer</code> object.</td>
  <code>null</code> if clustering is to be enabled at all zoom levels.  The default value is <code>null</code>.</td>
               </tr>
             
-              <tr class="even">
+              <tr class="odd">
                 <td><code>minimumClusterSize</code></td>
                 
                   
@@ -1023,18 +1033,6 @@ for the <code>MarkerClusterer</code> object.</td>
                 
                 <td>The minimum number of markers needed in a cluster
  before the markers are hidden and a cluster marker appears.  The default value is <code>2</code>.</td>
-              </tr>
-            
-              <tr class="odd">
-                <td><code>printable</code></td>
-                
-                  
-                    <td><code>boolean</code></td>
-                  
-                
-                <td>Whether to make the cluster icons printable. Do not
- set to <code>true</code> if the <code>url</code> fields in the <code>styles</code> array
- refer to image sprite files.  The default value is <code>false</code>.</td>
               </tr>
             
               <tr class="even">
