@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1 [November 3, 2013]
+ * @version 2.1.1 [November 4, 2013]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -254,11 +254,20 @@ ClusterIcon.prototype.show = function () {
           ((-1 * spriteV) + this.height_) + "px, " + (-1 * spriteH) + "px);";
     }
     img += "'>";
-    // (Would like to use "width: inherit;" below, but doesn't work with MSIE)
-    this.div_.innerHTML = img + "<div style='position: absolute; " +
-        "top: " + this.anchorText_[0] + "px; " +
-        "left: " + this.anchorText_[1] + "px; " +
-        "width: " + this.width_ + "px;'>" + this.sums_.text + "</div>";
+    this.div_.innerHTML = img + "<div style='" +
+        "position: absolute;" +
+        "top: " + this.anchorText_[0] + "px;" +
+        "left: " + this.anchorText_[1] + "px;" +
+        "color: " + this.textColor_ + ";" +
+        "font-size: " + this.textSize_ + "px;" +
+        "font-family: " + this.fontFamily_ + ";" +
+        "font-weight: " + this.fontWeight_ + ";" +
+        "font-style: " + this.fontStyle_ + ";" +
+        "text-decoration: " + this.textDecoration_ + ";" +
+        "text-align: center;" +
+        "width: " + this.width_ + "px;" +
+        "line-height:" + this.height_ + "px;" +
+        "'>" + this.sums_.text + "</div>";
     if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
       this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
     } else {
@@ -313,13 +322,9 @@ ClusterIcon.prototype.setCenter = function (center) {
  */
 ClusterIcon.prototype.createCss = function (pos) {
   var style = [];
-  style.push('width:' + this.width_ + 'px; height:' + this.height_ + 'px;');
-  style.push('text-align:center; line-height:' + this.height_ + 'px;');
-  style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
-      pos.x + 'px; color:' + this.textColor_ + '; position:absolute; font-size:' +
-      this.textSize_ + 'px; font-family:' + this.fontFamily_ + '; font-weight:' +
-      this.fontWeight_ + '; font-style:' + this.fontStyle_ + '; text-decoration:' +
-      this.textDecoration_ + ';');
+  style.push("cursor: pointer;");
+  style.push("position: absolute; top: " + pos.y + "px; left: " + pos.x + "px;");
+  style.push("width: " + this.width_ + "px; height: " + this.height_ + "px;");
   return style.join("");
 };
 
@@ -1183,10 +1188,12 @@ MarkerClusterer.prototype.addMarker = function (marker, opt_nodraw) {
  * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
  */
 MarkerClusterer.prototype.addMarkers = function (markers, opt_nodraw) {
-  var i;
-  for (i = 0; i < markers.length; i++) {
-    this.pushMarkerTo_(markers[i]);
-  }
+  var key;
+  for (key in markers) {
+    if (markers.hasOwnProperty(key)) {
+      this.pushMarkerTo_(markers[key]);
+    }
+  }  
   if (!opt_nodraw) {
     this.redraw_();
   }
