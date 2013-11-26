@@ -1630,3 +1630,14 @@ MarkerClusterer.IMAGE_EXTENSION = "png";
  * @constant
  */
 MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
+
+if (typeof String.prototype.trim !== 'function') {
+  /**
+   * IE hack since trim() doesn't exist in all browsers
+   * @return {string} The string with removed whitespace
+   */
+  String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, ''); 
+  }
+}
+
