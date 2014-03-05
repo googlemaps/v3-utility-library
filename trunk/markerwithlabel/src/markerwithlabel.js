@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.8 [February 26, 2013]
+ * @version 1.1.9 [June 30, 2013]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
