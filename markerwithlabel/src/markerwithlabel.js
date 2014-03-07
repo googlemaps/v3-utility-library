@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.1.9 [June 30, 2013]
+ * @version 1.1.9 [March 6, 2014]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -38,14 +38,15 @@
 /**
  * @param {Function} childCtor Child class.
  * @param {Function} parentCtor Parent class.
+ * @private
  */
 function inherits(childCtor, parentCtor) {
-  /** @constructor */
-  function tempCtor() {};
+  /* @constructor */
+  function tempCtor() {}
   tempCtor.prototype = parentCtor.prototype;
   childCtor.superClass_ = parentCtor.prototype;
   childCtor.prototype = new tempCtor();
-  /** @override */
+  /* @override */
   childCtor.prototype.constructor = childCtor;
 }
 
@@ -79,6 +80,7 @@ function MarkerLabel_(marker, crossURL, handCursorURL) {
   // Get the DIV for the "X" to be displayed when the marker is raised.
   this.crossDiv_ = MarkerLabel_.getSharedCross(crossURL);
 }
+
 inherits(MarkerLabel_, google.maps.OverlayView);
 
 /**
@@ -561,6 +563,7 @@ function MarkerWithLabel(opt_options) {
   // that the marker label listens for in order to react to state changes.
   google.maps.Marker.apply(this, arguments);
 }
+
 inherits(MarkerWithLabel, google.maps.Marker);
 
 /**
