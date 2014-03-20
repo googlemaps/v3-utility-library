@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>InfoBox v1.1.12 [December 11, 2012] Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>InfoBox</h1>
+    <p>
+InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
+ <p>
+ An InfoBox behaves like a <tt>google.maps.InfoWindow</tt>, but it supports several
+ additional properties for advanced styling. An InfoBox can also be used as a map label.
+ <p>
+ An InfoBox also fires the same events as a <tt>google.maps.InfoWindow</tt>.</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="InfoBox"></a>class InfoBox</h2>
+      <p></p>
+      
+        <h3>Constructor</h3>
+        <table summary="class InfoBox - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>InfoBox(<span class="type">opt_opts?:InfoBoxOptions</span>)</code></td>
+                
+                <td>Creates an InfoBox with the options specified in <code><a href="reference.html#InfoBoxOptions">InfoBoxOptions</a></code>.
+ Call <tt>InfoBox.open</tt> to add the box to the map.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Methods</h3>
+        <table summary="class InfoBox - Methods" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Methods</th>
+              
+                
+                  <th>Return&nbsp;Value</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>close()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Removes the InfoBox from the map.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>draw()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Draws the InfoBox based on the current map projection and zoom level.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getContent()</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>Returns the content of the InfoBox.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getPosition()</code></td>
+                
+                  
+                    <td><code>LatLng</code></td>
+                  
+                
+                <td>Returns the geographic location of the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>getVisible()</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Returns a flag indicating whether the InfoBox is visible.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>getZIndex()</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>Returns the zIndex for the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>hide()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Hides the InfoBox. [Deprecated; use <tt>setVisible</tt> instead.]</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>onRemove()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Invoked when <tt>close</tt> is called. Do not call it directly.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>open(<span class="type">map:Map|StreetViewPanorama</span>, <span class="type">anchor?:MVCObject</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Adds the InfoBox to the specified map or Street View panorama. If <tt>anchor</tt>
+ (usually a <tt>google.maps.Marker</tt>) is specified, the position
+ of the InfoBox is set to the position of the <tt>anchor</tt>. If the
+ anchor is dragged to a new location, the InfoBox moves as well.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setContent(<span class="type">content:string|Node</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the content of the InfoBox.
+ The content can be plain text or an HTML DOM node.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setOptions(<span class="type">opt_opts:InfoBoxOptions</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the options for the InfoBox. Note that changes to the <tt>maxWidth</tt>,
+ <tt>closeBoxMargin</tt>, <tt>closeBoxURL</tt>, and <tt>enableEventPropagation</tt>
+ properties have no affect until the current InfoBox is <tt>close</tt>d and a new one
+ is <tt>open</tt>ed.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setPosition(<span class="type">latlng:LatLng</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the geographic location of the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>setVisible(<span class="type">isVisible:boolean</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the visibility of the InfoBox.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>setZIndex(<span class="type">index:number</span>)</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Sets the zIndex style for the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>show()</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>Shows the InfoBox. [Deprecated; use <tt>setVisible</tt> instead.]</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3>Events</h3>
+        <table summary="class InfoBox - Events" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Events</th>
+              
+                
+                  <th>Arguments</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>closeclick</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the InfoBox's close box is clicked.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>content_changed</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the content of the InfoBox changes.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>domready</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the DIV containing the InfoBox's content is attached to the DOM.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>position_changed</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the position of the InfoBox changes.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>zindex_changed</code></td>
+                
+                  
+                    <td><code>None</code></td>
+                  
+                
+                <td>This event is fired when the zIndex of the InfoBox changes.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="InfoBoxOptions"></a>class InfoBoxOptions</h2>
+      <p>This class represents the optional parameter passed to the <code><a href="reference.html#InfoBox">InfoBox</a></code> constructor.  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class InfoBoxOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>alignBottom</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Align the bottom left corner of the InfoBox to the <code>position</code>
+ location (default is <tt>false</tt> which means that the top left corner of the InfoBox is aligned).</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>boxClass</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The name of the CSS class defining the styles for the InfoBox container.  The default value is <code>"infoBox"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>boxStyle</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal whose properties define specific CSS
+ style values to be applied to the InfoBox. Style values defined here override those that may
+ be defined in the <code>boxClass</code> style sheet. If this property is changed after the
+ InfoBox has been created, all previously set styles (except those defined in the style sheet)
+ are removed from the InfoBox before the new style values are applied.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>closeBoxMargin</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The CSS margin style value for the close box.
+ The default is "2px" (a 2-pixel margin on all sides).</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>closeBoxURL</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The URL of the image representing the close box.
+ Note: The default is the URL for Google's standard close box.
+ Set this property to "" if no close box is required.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>content</code></td>
+                
+                  
+                    <td><code>string|Node</code></td>
+                  
+                
+                <td>The content of the InfoBox (plain text or an HTML DOM node).</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>disableAutoPan</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Disable auto-pan on <tt>open</tt>.  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>enableEventPropagation</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Propagate mousedown, mousemove, mouseover, mouseout,
+ mouseup, click, dblclick, touchstart, touchend, touchmove, and contextmenu events in the InfoBox
+ (default is <tt>false</tt> to mimic the behavior of a <tt>google.maps.InfoWindow</tt>). Set
+ this property to <tt>true</tt> if the InfoBox is being used as a map label.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>infoBoxClearance</code></td>
+                
+                  
+                    <td><code>Size</code></td>
+                  
+                
+                <td>Minimum offset (in pixels) from the InfoBox to the
+ map edge after an auto-pan.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>isHidden</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Hide the InfoBox on <tt>open</tt>.
+ [Deprecated in favor of the <tt>visible</tt> property.]  The default value is <code>false</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>maxWidth</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The maximum width (in pixels) of the InfoBox. Set to 0 if no maximum.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>pane</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The pane where the InfoBox is to appear (default is "floatPane").
+ Set the pane to "mapPane" if the InfoBox is being used as a map label.
+ Valid pane names are the property names for the <tt>google.maps.MapPanes</tt> object.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>pixelOffset</code></td>
+                
+                  
+                    <td><code>Size</code></td>
+                  
+                
+                <td>The offset (in pixels) from the top left corner of the InfoBox
+ (or the bottom left corner if the <code>alignBottom</code> property is <code>true</code>)
+ to the map pixel corresponding to <tt>position</tt>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>position</code></td>
+                
+                  
+                    <td><code>LatLng</code></td>
+                  
+                
+                <td>The geographic location at which to display the InfoBox.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>visible</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>Show the InfoBox on <tt>open</tt>.  The default value is <code>true</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>zIndex</code></td>
+                
+                  
+                    <td><code>number</code></td>
+                  
+                
+                <td>The CSS z-index style value for the InfoBox.
+ Note: This value overrides a zIndex setting specified in the <tt>boxStyle</tt> property.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>
