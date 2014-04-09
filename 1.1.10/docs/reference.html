@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MarkerWithLabel for V3 v1.1.10 [April 8, 2014] Reference</title>
+    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
+  </head>
+  <body>
+    <h1>MarkerWithLabel for V3</h1>
+    <p>
+MarkerWithLabel extends the Google Maps JavaScript API V3
+ <code>google.maps.Marker</code> class.
+ <p>
+ MarkerWithLabel allows you to define markers with associated labels. As you would expect,
+ if the marker is draggable, so too will be the label. In addition, a marker with a label
+ responds to all mouse events in the same manner as a regular marker. It also fires mouse
+ events and "property changed" events just as a regular marker would. Version 1.1 adds
+ support for the raiseOnDrag feature introduced in API V3.3.
+ <p>
+ If you drag a marker by its label, you can cancel the drag and return the marker to its
+ original position by pressing the <code>Esc</code> key. This doesn't work if you drag the marker
+ itself because this feature is not (yet) supported in the <code>google.maps.Marker</code> class.</p>
+    <p>For a description and examples of how to use this library, check out the <a href="examples.html">how-to</a>.</p>
+    
+      <h2><a name="MarkerWithLabel"></a>class MarkerWithLabel</h2>
+      <p></p>
+      
+        <h3>Constructor</h3>
+        <table summary="class MarkerWithLabel - Constructor" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Constructor</th>
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>MarkerWithLabel(<span class="type">opt_options?:MarkerWithLabelOptions</span>)</code></td>
+                
+                <td>Creates a MarkerWithLabel with the options specified in <code><a href="reference.html#MarkerWithLabelOptions">MarkerWithLabelOptions</a></code>.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+      <h2><a name="MarkerWithLabelOptions"></a>class MarkerWithLabelOptions</h2>
+      <p>This class represents the optional parameter passed to the <code><a href="reference.html#MarkerWithLabel">MarkerWithLabel</a></code> constructor.
+ The properties available are the same as for <code>google.maps.Marker</code> with the addition
+ of the properties listed below. To change any of these additional properties after the labeled
+ marker has been created, call <code>google.maps.Marker.set(propertyName, propertyValue)</code>.
+ <p>
+ When any of these properties changes, a property changed event is fired. The names of these
+ events are derived from the name of the property and are of the form <code>propertyname_changed</code>.
+ For example, if the content of the label changes, a <code>labelcontent_changed</code> event
+ is fired.
+ <p>  There is no constructor for this class.  Instead, this class is instantiated as a javascript object literal.</p>
+      
+        <h3>Properties</h3>
+        <table summary="class MarkerWithLabelOptions - Properties" width="90%">
+          
+          <tbody>
+            <tr>
+              <th>Properties</th>
+              
+                
+                  <th>Type</th>
+                
+              
+              <th>Description</th>
+            </tr>
+            
+              <tr class="odd">
+                <td><code>crossImage</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The URL of the cross image to be displayed while dragging a marker.  The default value is <code>"http://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png"</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>handCursor</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The URL of the cursor to be displayed while dragging a marker.  The default value is <code>"http://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur"</code>.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>labelAnchor</code></td>
+                
+                  
+                    <td><code>Point</code></td>
+                  
+                
+                <td>By default, a label is drawn with its anchor point at (0,0) so
+ that its top left corner is positioned at the anchor point of the associated marker. Use this
+ property to change the anchor point of the label. For example, to center a 50px-wide label
+ beneath a marker, specify a <code>labelAnchor</code> of <code>google.maps.Point(25, 0)</code>.
+ (Note: x-values increase to the right and y-values increase to the top.)</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>labelClass</code></td>
+                
+                  
+                    <td><code>string</code></td>
+                  
+                
+                <td>The name of the CSS class defining the styles for the label.
+ Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
+ <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
+ <code>marginTop</code> are ignored; these styles are for internal use only.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>labelContent</code></td>
+                
+                  
+                    <td><code>string|Node</code></td>
+                  
+                
+                <td>The content of the label (plain text or an HTML DOM node).</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>labelInBackground</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether a label that overlaps its
+ associated marker should appear in the background (i.e., in a plane below the marker).
+ The default is <code>false</code>, which causes the label to appear in the foreground.</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>labelStyle</code></td>
+                
+                  
+                    <td><code>Object</code></td>
+                  
+                
+                <td>An object literal whose properties define specific CSS
+ style values to be applied to the label. Style values defined here override those that may
+ be defined in the <code>labelClass</code> style sheet. If this property is changed after the
+ label has been created, all previously set styles (except those defined in the style sheet)
+ are removed from the label before the new style values are applied.
+ Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
+ <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
+ <code>marginTop</code> are ignored; these styles are for internal use only.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>labelVisible</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether the label is to be visible.
+ The default is <code>true</code>. Note that even if <code>labelVisible</code> is
+ <code>true</code>, the label will <i>not</i> be visible unless the associated marker is also
+ visible (i.e., unless the marker's <code>visible</code> property is <code>true</code>).</td>
+              </tr>
+            
+              <tr class="odd">
+                <td><code>optimized</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether rendering is to be optimized for the
+ marker. <b>Important: The optimized rendering technique is not supported by MarkerWithLabel,
+ so the value of this parameter is always forced to <code>false</code>.</td>
+              </tr>
+            
+              <tr class="even">
+                <td><code>raiseOnDrag</code></td>
+                
+                  
+                    <td><code>boolean</code></td>
+                  
+                
+                <td>A flag indicating whether the label and marker are to be
+ raised when the marker is dragged. The default is <code>true</code>. If a draggable marker is
+ being created and a version of Google Maps API earlier than V3.3 is being used, this property
+ must be set to <code>false</code>.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-964209-4";
+      urchinTracker();
+    </script> 
+  </body>
+</html>
