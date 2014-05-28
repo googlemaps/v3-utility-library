@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.1 [November 4, 2013]
+ * @version 2.1.2 [May 28, 2014]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -244,8 +244,8 @@ ClusterIcon.prototype.show = function () {
     var img = "";
     // NOTE: values must be specified in px units
     var bp = this.backgroundPosition_.split(" ");
-    var spriteH = parseInt(bp[0].trim(), 10);
-    var spriteV = parseInt(bp[1].trim(), 10);
+    var spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
+    var spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.cssText = this.createCss(pos);
     img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
@@ -1630,14 +1630,3 @@ MarkerClusterer.IMAGE_EXTENSION = "png";
  * @constant
  */
 MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
-
-if (typeof String.prototype.trim !== 'function') {
-  /**
-   * IE hack since trim() doesn't exist in all browsers
-   * @return {string} The string with removed whitespace
-   */
-  String.prototype.trim = function() {
-    return this.replace(/^\s+|\s+$/g, ''); 
-  }
-}
-
