@@ -82,14 +82,7 @@
 
     <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
     <script src="../src/data.json" type="text/javascript"></script>
-    <script type="text/javascript">
-      var script = '<script type="text/javascript" src="../src/markerclusterer';
-      if (document.location.search.indexOf('packed') !== -1) {
-        script += '_packed';
-      }
-      script += '.js"><' + '/script>';
-      document.write(script);
-    </script>
+    <script type="text/javascript" src="../src/markerclusterer.js"></script>
 
     <script type="text/javascript" src="speed_test.js"></script>
 
@@ -100,10 +93,6 @@
   <body>
     <div id="panel">
       <h3>An example of MarkerClustererPlus</h3>
-      <p>
-        <a href="?packed">Packed</a> |
-        <a href="?">Standard</a> version of the script.
-      </p>
 
       <div>
         <input type="checkbox" checked="checked" id="usegmm"/>
