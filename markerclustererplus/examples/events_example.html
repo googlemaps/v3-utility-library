@@ -32,14 +32,7 @@
 
     <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
     <script type="text/javascript" src="../src/data.json"></script>
-    <script type="text/javascript">
-      var script = '<script type="text/javascript" src="../src/markerclusterer';
-      if (document.location.search.indexOf('compiled') !== -1) {
-        script += '_packed';
-      }
-      script += '.js"><' + '/script>';
-      document.write(script);
-    </script>
+    <script type="text/javascript" src="../src/markerclusterer.js"></script>
 
     <script type="text/javascript">
       function initialize() {
@@ -98,10 +91,6 @@
   </head>
   <body>
     <h3>Event listening example for MarkerClustererPlus</h3>
-    <p>
-      <a href="?packed">Packed</a> |
-      <a href="?">Standard</a> version of the script.
-    </p>
     <div id="map-container"><div id="map"></div></div>
     <div id="log"></div>
   </body>
