@@ -547,3 +547,12 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   // ... then deal with the label:
   this.label.setMap(theMap);
 };
+
+/**
+ * Removes a circular reference to allow the gc to cleanup
+ */
+MarkerWithLabel.prototype.dispose = function() {
+  this.setMap(null);
+  this.label.marker_ = null;
+  this.label = null;
+};
