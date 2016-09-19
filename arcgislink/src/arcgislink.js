@@ -1,5 +1,5 @@
 (function(){  
-/*
+/** @preserve
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- */
-/**
- * @preserve http://google-maps-utility-library-v3.googlecode.com
- */
-/**
+ *
+ *
+ * https://github.com/ImmobilienScout24/googlemaps-v3-utility-library
  * @name ArcGIS Server Link for Google Maps JavaScript API V3
  * @version 1.0
  * @author: Nianwei Liu (nianwei at gmail dot com)
+ */
+/**
+ *
  * @fileoverview 
  *  <p><a href="examples.html">Examples</a>
  *   </p> 
@@ -3197,6 +3198,10 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
       this.minZoom = opt_layerOpts.minZoom || this.projection_.minZoom;
       this.maxZoom = opt_layerOpts.maxZoom || this.projection_.maxZoom;
     }
+
+    if (opt_layerOpts.readyCallback) {
+      opt_layerOpts.readyCallback();
+    }
   };
   
   
@@ -3216,7 +3221,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
         u = this.urlTemplate_.replace('[' + this.numOfHosts_ + ']', '' + ((tile.y + tile.x) % this.numOfHosts_));
       }
       var prj = this.projection_ || (this.map_ ? this.map_.getProjection() : Projection.WEB_MECATOR);
-      if (!prj instanceof Projection) {
+      if (!prj || !(prj instanceof Projection)) {
         // if use Google's image 
         prj = Projection.WEB_MECATOR;
       }
@@ -3630,8 +3635,17 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
           me.overlay_ = null;
         }
        me.overlay_ = new ImageOverlay(json.bounds, json.href, me.map_, me.opacity_);
-       
+
+      } else if (json.imageData) {
+        if (me.overlay_) {
+          me.overlay_.setMap(null);
+          me.overlay_ = null;
+        }
+
+        var imageSource = "data:image/gif;base64," + json.imageData;
+        me.overlay_ = new ImageOverlay(json.bounds, imageSource, me.map_, me.opacity_);
       }
+
       /**
        * This event is fired after the the drawing request was returned by server.
        * @name MapOverlay#drawend
