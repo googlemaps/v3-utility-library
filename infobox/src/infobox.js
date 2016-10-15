@@ -94,10 +94,13 @@ function InfoBox(opt_opts) {
   this.boxClass_ = opt_opts.boxClass || "infoBox";
   this.boxStyle_ = opt_opts.boxStyle || {};
   this.closeBoxMargin_ = opt_opts.closeBoxMargin || "2px";
-  this.closeBoxURL_ = opt_opts.closeBoxURL || "http://www.google.com/intl/en_us/mapfiles/close.gif";
-  if (opt_opts.closeBoxURL === "") {
-    this.closeBoxURL_ = "";
+  
+  if (opt_opts.closeBoxURL !== false) {
+    this.closeBoxURL_ = opt_opts.closeBoxURL || "http://www.google.com/intl/en_us/mapfiles/close.gif";
+  } else {
+    this.closeBoxURL_ = '';
   }
+  
   this.infoBoxClearance_ = opt_opts.infoBoxClearance || new google.maps.Size(1, 1);
 
   if (typeof opt_opts.visible === "undefined") {
