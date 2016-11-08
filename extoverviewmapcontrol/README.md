@@ -17,4 +17,4 @@ contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
 [contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/extoverviewmapcontrol/CONTRIB.md
-[more]: http://github.com/googlemaps/v3-utility-library/blob/master/extoverviewmapcontrol/docs/reference.html
+[more]: http://htmlpreview.github.io/?http://github.com/googlemaps/v3-utility-library/blob/master/extoverviewmapcontrol/docs/reference.html
