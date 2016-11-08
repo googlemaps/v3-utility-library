@@ -8,10 +8,6 @@ MarkerWithLabel allows you to define markers with associated labels. As you woul
 
 If you drag a marker by its label, you can cancel the drag and return the marker to its original position by pressing the Esc key. This doesn't work if you drag the marker itself because this feature is not (yet) supported in the google.maps.Marker class. 
 
-###How it Works:
-
-The MarkerManager places its markers onto a grid, similar to the map tiles. When the user moves the viewport, it computes which grid cells have entered or left the viewport, and shows or hides all the markers in those cells. (If the users scrolls the viewport beyond the markers that are loaded, no markers will be visible until the EVENT_moveend triggers an update.) In practical consequences, this allows 10,000 markers to be distributed over a large area, and as long as only 100-200 are visible in any given viewport, the user will see good performance corresponding to the 100 visible markers, rather than poor performance corresponding to the total 10,000 markers. Note that some code is optimized for speed over space, with the goal of accommodating thousands of markers.
-
 [Read more][more]
 
 ## Support
