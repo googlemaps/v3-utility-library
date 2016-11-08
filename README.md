@@ -35,7 +35,7 @@ contribute, please read [How to Contribute][contrib].
  
 [ArcGIS Server Link for Google Maps JavaScript API V3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/arcgislink/docs/reference.html
 [CanvasLayer]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/canvaslayer/docs/reference.html
-[ExtOverviewMapControl for V3]: http://github.com/googlemaps/v3-utility-library/blob/master/extoverviewmapcontrol/docs/reference.html
+[ExtOverviewMapControl for V3]: http://htmlpreview.github.io/?http://github.com/googlemaps/v3-utility-library/blob/master/extoverviewmapcontrol/docs/reference.html
 [Geolocation Marker for Google Maps v3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/geolocationmarker/docs/reference.html
 [Google Earth API for Google Maps v3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/googleearth/docs/reference.html
 [InfoBox]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/infobox/docs/reference.html
