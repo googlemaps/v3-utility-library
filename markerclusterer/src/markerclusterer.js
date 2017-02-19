@@ -43,6 +43,13 @@
  *                cluster.
  *     'zoomOnClick': (boolean) Whether the default behaviour of clicking on a
  *                    cluster is to zoom into it.
+ *     'imagePath': (string) The base URL where the images representing
+ *                  clusters will be found. The full URL will be:
+ *                  {imagePath}[1-5].{imageExtension}
+ *                  Default: '../images/m'.
+ *     'imageExtension': (string) The suffix for images URL representing
+ *                       clusters will be found. See _imagePath_ for details.
+ *                       Default: 'png'.
  *     'averageCenter': (boolean) Wether the center of each cluster should be
  *                      the average of all markers in the cluster.
  *     'minimumClusterSize': (number) The minimum number of markers to be in a
