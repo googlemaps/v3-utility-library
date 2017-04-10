@@ -519,9 +519,12 @@ MarkerClusterer.prototype.removeMarker = function(marker, opt_nodraw) {
  * @param {boolean=} opt_nodraw Optional boolean to force no redraw.
  */
 MarkerClusterer.prototype.removeMarkers = function(markers, opt_nodraw) {
+  // create a local copy of markers if required
+  // (removeMarker_ modifies the getMarkers() array in place)
+  var markersCopy = markers === this.getMarkers() ? markers.slice() : markers;
   var removed = false;
 
-  for (var i = 0, marker; marker = markers[i]; i++) {
+  for (var i = 0, marker; marker = markersCopy[i]; i++) {
     var r = this.removeMarker_(marker);
     removed = removed || r;
   }
