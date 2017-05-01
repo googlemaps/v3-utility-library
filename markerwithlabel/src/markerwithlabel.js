@@ -127,10 +127,10 @@ MarkerLabel_.prototype.onAdd = function () {
     me.marker_.setAnimation(null);
   };
 
-  this.getPanes().markerLayer.appendChild(this.labelDiv_);
+  this.getPanes().overlayMouseTarget.appendChild(this.labelDiv_);
   // One cross is shared with all markers, so only add it once:
   if (typeof MarkerLabel_.getSharedCross.processed === "undefined") {
-    this.getPanes().markerLayer.appendChild(this.crossDiv_);
+    this.getPanes().overlayMouseTarget.appendChild(this.crossDiv_);
     MarkerLabel_.getSharedCross.processed = true;
   }
 
