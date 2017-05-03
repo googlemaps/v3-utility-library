@@ -935,9 +935,9 @@ Cluster.prototype.remove = function() {
 
 
 /**
- * Returns the center of the cluster.
+ * Returns the number of markers in the cluster.
  *
- * @return {number} The cluster center.
+ * @return {number} The number of markers in the cluster.
  */
 Cluster.prototype.getSize = function() {
   return this.markers_.length;
@@ -945,9 +945,9 @@ Cluster.prototype.getSize = function() {
 
 
 /**
- * Returns the center of the cluster.
+ * Returns a list of the markers in the cluster.
  *
- * @return {Array.<google.maps.Marker>} The cluster center.
+ * @return {Array.<google.maps.Marker>} The markers in the cluster.
  */
 Cluster.prototype.getMarkers = function() {
   return this.markers_;
