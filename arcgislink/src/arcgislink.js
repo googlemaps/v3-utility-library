@@ -1,5 +1,5 @@
 (function(){  
-/*
+/** @preserve
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- */
-/**
- * @preserve http://google-maps-utility-library-v3.googlecode.com
- */
-/**
+ *
+ *
+ * https://github.com/ImmobilienScout24/googlemaps-v3-utility-library
  * @name ArcGIS Server Link for Google Maps JavaScript API V3
  * @version 1.0
  * @author: Nianwei Liu (nianwei at gmail dot com)
+ */
+/**
+ *
  * @fileoverview 
  *  <p><a href="examples.html">Examples</a>
  *   </p> 
@@ -1589,14 +1590,16 @@ Util.registerSR = function(wkidt, wktOrSR) {
    * @class  The catalog resource is the root node and initial entry point into an ArcGIS Server host.
    * This resource represents a catalog of folders and services published on the host.
    *  @param {String} url
+   *  @param {Object} urlParams additional URL parameters added to each map service call
    * @property {String} [currentVersion] currentVersion
  * @property {Array.string} [folders] folders list
  * @property {Array.string} [services] list of services. Each has <code>name, type</code> property.
    */
-  function Catalog(url) {
+  function Catalog(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     var me = this;
-    getJSON_(url, {}, '', function(json) {
+    getJSON_(url, this.urlParams, '', function(json) {
       augmentObject_(json, me);
       /**
        * This event is fired when the catalog info is loaded.
@@ -1626,6 +1629,7 @@ Util.registerSR = function(wkidt, wktOrSR) {
    *  published by ArcGIS Server.
    * @constructor
    * @param {String} url
+   * @param {Object} urlParams additional URL parameters added to each map service call
    * @property {Number} [id] layer ID
    * @property {String} [name] layer Name
    * @property {String} [type] Feature Layer|Image Layer
@@ -1647,8 +1651,9 @@ Util.registerSR = function(wkidt, wktOrSR) {
  * @property {Array.String} [types] subtypes: id, name, domains.
  * @property {Array.String} [relationships] relationships (id, name, relatedTableId)
    */
-function Layer(url) {
+function Layer(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.definition = null;
 }
 
@@ -1661,7 +1666,7 @@ Layer.prototype.load = function() {
     if (this.loaded_) {
       return;
     }
-    getJSON_(this.url, {}, '', function (json) {
+    getJSON_(this.url, this.urlParams, '', function (json) {
     augmentObject_(json, me);
       me.loaded_ = true;
       /**
@@ -1784,6 +1789,7 @@ Layer.prototype.isInScale = function(scale) {
     params.returnGeometry = p.returnGeometry === false ? false : true;
     params.returnIdsOnly = p.returnIdsOnly === true ? true : false;
     delete params.overlayOptions;
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/query', params, '', function(json) {
       parseFeatures_(json.features, p.overlayOptions);
       callback(json, json.error);
@@ -1840,6 +1846,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
       params.outFields = params.outFields.join(',');
     }
     params.returnGeometry = params.returnGeometry === false ? false : true;
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/query', params, '', function (json) {
       handleErr_(errback, json);
       callback(json);
@@ -1862,6 +1869,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * It represents an ArcGIS Server map service that offer access to map and layer content
    * @constructor
    * @param {String} url
+   * @param {Object} urlParams additional URL parameters added to each map service call
    * @property {String} [url] map service URL
    * @property {String} [serviceDescription] serviceDescription
    * @property {String} [mapName] map frame Name inside the map document
@@ -1877,8 +1885,9 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * @property {String} [supportedImageFormatTypes] supportedImageFormatTypes, comma delimited list.
    * @property {Object} [documentInfo] Object with the folloing properties: <code>Title, Author,Comments,Subject,Category,Keywords</code>
    */
-  function MapService(url, opts) {
+  function MapService(url, urlParams, opts) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.loaded_ = false;
     var tks = url.split("/");
     this.name = tks[tks.length - 2].replace(/_/g, ' ');
@@ -1898,7 +1907,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    */
   MapService.prototype.loadServiceInfo = function() {
     var me = this;
-    getJSON_(this.url, {}, '', function(json) {
+    getJSON_(this.url, this.urlParams, '', function(json) {
       me.init_(json);
     });
   };
@@ -1921,10 +1930,10 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     }
     if (json.tables !== undefined) {
       // v10.0 +
-      getJSON_(this.url + '/layers', {}, '', function (json2) {
+      getJSON_(this.url + '/layers', this.urlParams, '', function (json2) {
         me.initLayers_(json2);
         // V10 SP1 
-        getJSON_(me.url + '/legend', {}, '', function (json3){
+        getJSON_(me.url + '/legend', me.urlParams, '', function (json3){
           me.initLegend_(json3);
           me.setLoaded_();
         });
@@ -2239,7 +2248,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     }
     //TODO: finish once v10 released
     params.layerTimeOptions = p.layerTimeOptions;
-    
+    params = augmentObject_(this.urlParams, params);
     if (params.f === 'image') {
       return this.url + '/export?' + formatParams_(params);
     } else {
@@ -2338,7 +2347,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     }
     params.maxAllowableOffset = p.maxAllowableOffset;
     params.returnGeometry = (p.returnGeometry === false ? false : true);
-    
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/identify', params, '', function (json) {
       // process results;
       var rets = null;
@@ -2425,6 +2434,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     }
     params.sr = 4326;
     params.returnGeometry = (opts.returnGeometry === false ? false : true);
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/find', params, '', function (json) {
       var rets = null;
       var i, js, g;
@@ -2470,6 +2480,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
  *  service.
  * @constructor
  * @param {String} url
+ * @param {Object} urlParams additional URL parameters added to each map service call
  * @property {String} [serviceDescription] serviceDescription
  * @property {Array.Field} [addressFields] input fields. 
  *    Each entry is an object of type {@link Field}, plus <code>required(true|false)</code>
@@ -2480,11 +2491,12 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
  * @property {SpatialReference} [spatialReference] spatialReference
  * @property {Object} [locatorProperties] an object with key-value pair that is specific to Locator type.
  */
-  function GeocodeService(url) {
+  function GeocodeService(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.loaded_ = false;
     var me = this;
-    getJSON_(url, {}, '', function (json) {
+    getJSON_(url, this.urlParams, '', function (json) {
       me.init_(json);
     });
   }
@@ -2559,6 +2571,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
       params.outFields = params.outFields.join(',');
     }
     //params.outSR = 4326;
+    params = augmentObject_(this.urlParams, params);
     var me = this;
     getJSON_(this.url + '/findAddressCandidates', params, '', function (json) {
       if (json.candidates) {
@@ -2657,9 +2670,11 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
  * <a href="http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/geometryserver.html">Geometry</a>
  *  service.
  * @param {String} url
+ * @param {Object} urlParams additional URL parameters added to each map service call
  */
-  function GeometryService(url) {
-    this.url  = url;
+  function GeometryService(url, urlParams) {
+    this.url = url;
+    this.urlParams = urlParams || {};
     this.t = 'geocodeservice';
   }
   
@@ -2691,6 +2706,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    */
   GeometryService.prototype.project = function (p, callback, errback) {
     var params = prepareGeometryParams_(p);
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/project', params, "callback", function (json) {
       var geom = [];
       if (p.outSpatialReference === 4326 || p.outSpatialReference.wkid === 4326) {
@@ -2762,6 +2778,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     if (p.unit) {
       params.unit = p.unit;
     }
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/buffer', params, "callback", function (json) {
       var geom = [];
       if (json.geometries) {
@@ -2782,13 +2799,15 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * @property {Array.string} [tasks]
    * @property {String} [executionType]
    * @property {String} [resultMapServerName]
-   * @param {String} url http://[catalog-url]/[serviceName]/GPServer 
+   * @param {String} url http://[catalog-url]/[serviceName]/GPServer
+   * @param {Object} urlParams additional URL parameters added to each map service call
    */
-  function GPService(url) {
+  function GPService(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.loaded_ = false;
     var me = this;
-    getJSON_(url, {}, '', function (json) {
+    getJSON_(url, this.urlParams, '', function (json) {
       augmentObject_(json, me);
       me.loaded_ = true;
       /**
@@ -2825,13 +2844,15 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * @property {String} [name]
    * @property {Array.string} [tasks]
    * @property {String} [resultMapServerName]
-   * @param {String} url http://[catalog-url]/[serviceName]/GPServer 
+   * @param {String} url http://[catalog-url]/[serviceName]/GPServer
+   * @param {Object} urlParams additional URL parameters added to each map service call
    */
-  function GPTask(url) {
+  function GPTask(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.loaded_ = false;
     var me = this;
-    getJSON_(url, {}, '', function (json) {
+    getJSON_(url, this.urlParams, '', function (json) {
       augmentObject_(json, me);
       me.loaded_ = true;
       /**
@@ -2866,7 +2887,8 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     }
     if (p.processSpatialReference) {
       params['env:processSR'] = formatSRParam_(p.processSpatialReference);
-    } 
+    }
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/execute', params, '', function (json) {
       if (json.results) {
         var res, f;
@@ -2906,13 +2928,15 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * @property {Array.string} routeLayers
    * @property {Array.string} serviceAreaLayers
    * @property {Array.string} closestFacilityLayers
-   * @param {String} url http://[catalog-url]/[serviceName]/NAServer 
+   * @param {String} url http://[catalog-url]/[serviceName]/NAServer
+   * @param {Object} urlParams additional URL parameters added to each map service call
    */
-  function NetworkService(url) {
+  function NetworkService(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
     this.loaded_ = false;
     var me = this;
-  getJSON_(url, {}, '', function(json) {
+  getJSON_(url, this.urlParams, '', function(json) {
       augmentObject_(json, me);
       me.loaded_ = true;
      /**
@@ -2947,9 +2971,11 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
    * It can solve a route based on stops, barrier
    * @constructor
    * @param {String} url
+   * @param {Object} urlParams additional URL parameters added to each map service call
    */
-  function RouteTask(url) {
+  function RouteTask(url, urlParams) {
     this.url = url;
+    this.urlParams = urlParams || {};
   }
   /**
    * Solve a route based on inputs such as stops and barriers. Result of type {@link RouteResults} 
@@ -2979,7 +3005,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     params.returnDirections = (opts.returnDirections === true ? true : false);
     params.returnBarriers = (opts.returnBarriers === true ? true : false);
     params.returnStops = (opts.returnStops === true ? true : false);
-    
+    params = augmentObject_(this.urlParams, params);
     getJSON_(this.url + '/solve', params, '', function (json) {
       if (json.routes) {
         parseFeatures_(json.routes.features, opts.overlayOptions);
@@ -3197,6 +3223,10 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
       this.minZoom = opt_layerOpts.minZoom || this.projection_.minZoom;
       this.maxZoom = opt_layerOpts.maxZoom || this.projection_.maxZoom;
     }
+
+    if (opt_layerOpts.readyCallback) {
+      opt_layerOpts.readyCallback();
+    }
   };
   
   
@@ -3216,7 +3246,7 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
         u = this.urlTemplate_.replace('[' + this.numOfHosts_ + ']', '' + ((tile.y + tile.x) % this.numOfHosts_));
       }
       var prj = this.projection_ || (this.map_ ? this.map_.getProjection() : Projection.WEB_MECATOR);
-      if (!prj instanceof Projection) {
+      if (!prj || !(prj instanceof Projection)) {
         // if use Google's image 
         prj = Projection.WEB_MECATOR;
       }
@@ -3630,8 +3660,17 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
           me.overlay_ = null;
         }
        me.overlay_ = new ImageOverlay(json.bounds, json.href, me.map_, me.opacity_);
-       
+
+      } else if (json.imageData) {
+        if (me.overlay_) {
+          me.overlay_.setMap(null);
+          me.overlay_ = null;
+        }
+
+        var imageSource = "data:image/gif;base64," + json.imageData;
+        me.overlay_ = new ImageOverlay(json.bounds, imageSource, me.map_, me.opacity_);
       }
+
       /**
        * This event is fired after the the drawing request was returned by server.
        * @name MapOverlay#drawend
