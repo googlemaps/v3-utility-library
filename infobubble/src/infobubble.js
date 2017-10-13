@@ -89,12 +89,12 @@ function InfoBubble(opt_options) {
   if (options['arrowStyle'] == undefined) {
     options['arrowStyle'] = this.ARROW_STYLE_;
   }
-  
+
   if (options['closeButtonSrc'] == undefined) {
     options['closeButtonSrc'] = this.CLOSE_BUTTON_SRC_;
   }
 
-  this.buildDom_();
+  this.buildDom_(options);
 
   this.setValues(options);
 }
@@ -210,7 +210,7 @@ InfoBubble.prototype.extend = function(obj1, obj2) {
  * Builds the InfoBubble dom
  * @private
  */
-InfoBubble.prototype.buildDom_ = function() {
+InfoBubble.prototype.buildDom_ = function(options) {
   var bubble = this.bubble_ = document.createElement('DIV');
   bubble.style['position'] = 'absolute';
   bubble.style['zIndex'] = this.baseZIndex_;
@@ -226,7 +226,7 @@ InfoBubble.prototype.buildDom_ = function() {
   close.style['border'] = 0;
   close.style['zIndex'] = this.baseZIndex_ + 1;
   close.style['cursor'] = 'pointer';
-  close.src = this.get('closeButtonSrc');;
+  close.src = options.closeButtonSrc';
 
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {
