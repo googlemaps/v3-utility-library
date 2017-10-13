@@ -226,7 +226,7 @@ InfoBubble.prototype.buildDom_ = function(options) {
   close.style['border'] = 0;
   close.style['zIndex'] = this.baseZIndex_ + 1;
   close.style['cursor'] = 'pointer';
-  close.src = options.closeButtonSrc';
+  close.src = options.closeButtonSrc;
 
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {
