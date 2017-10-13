@@ -90,7 +90,7 @@ function InfoBubble(opt_options) {
     options['arrowStyle'] = this.ARROW_STYLE_;
   }
 
-  if (options['closeButtonSrc'] == undefined) {
+  if (!options['closeButtonSrc']) {
     options['closeButtonSrc'] = this.CLOSE_BUTTON_SRC_;
   }
 
