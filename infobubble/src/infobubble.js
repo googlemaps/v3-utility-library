@@ -89,6 +89,10 @@ function InfoBubble(opt_options) {
   if (options['arrowStyle'] == undefined) {
     options['arrowStyle'] = this.ARROW_STYLE_;
   }
+  
+  if (options['closeButtonSrc'] == undefined) {
+    options['closeButtonSrc'] = this.CLOSE_BUTTON_SRC_;
+  }
 
   this.buildDom_();
 
@@ -176,6 +180,13 @@ InfoBubble.prototype.BORDER_RADIUS_ = 10;
  */
 InfoBubble.prototype.BACKGROUND_COLOR_ = '#fff';
 
+/**
+ * Default background color
+ * @const
+ * @private
+ */
+InfoBubble.prototype.CLOSE_BUTTON_SRC_ = 'https://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
+
 
 /**
  * Extends a objects prototype by anothers.
@@ -215,7 +226,7 @@ InfoBubble.prototype.buildDom_ = function() {
   close.style['border'] = 0;
   close.style['zIndex'] = this.baseZIndex_ + 1;
   close.style['cursor'] = 'pointer';
-  close.src = 'https://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
+  close.src = this.get('closeButtonSrc');;
 
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {
