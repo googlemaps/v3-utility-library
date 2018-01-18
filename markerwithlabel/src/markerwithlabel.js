@@ -523,7 +523,7 @@ function MarkerWithLabel(opt_options) {
   opt_options.handCursor = opt_options.handCursor || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur";
   opt_options.optimized = false; // Optimized rendering is not supported
 
-  this.label = new MarkerLabel_(this, opt_options.crossImage, opt_options.handCursor); // Bind the label to the marker
+  this.markerLabel = new MarkerLabel_(this, opt_options.crossImage, opt_options.handCursor); // Bind the label to the marker
 
   // Call the parent constructor. It calls Marker.setValues to initialize, so all
   // the new parameters are conveniently saved and can be accessed with get/set.
@@ -545,5 +545,5 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   google.maps.Marker.prototype.setMap.apply(this, arguments);
 
   // ... then deal with the label:
-  this.label.setMap(theMap);
+  this.markerLabel.setMap(theMap);
 };
