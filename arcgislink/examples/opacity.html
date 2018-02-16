@@ -4,7 +4,6 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <title>Opacity</title>
         <script type="text/javascript">
-            //copy from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
             function getURLParam(name) {
               var regexS = "[\\?&]" + name + "=([^&#]*)";
               var regex = new RegExp(regexS);
@@ -18,8 +17,8 @@
         </script>
          <script type="text/javascript" src="../src/arcgislink.js">
         </script>
-        
-        <script type="text/javascript" src='http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggableobject/1.0/src/ExtDraggableObject.js'>
+
+        <script type="text/javascript" src='../../ExtDraggableObject/src/ExtDraggableObject.js'>
         </script>
         <style>
         .btn {
@@ -29,7 +28,7 @@
             font-weight: bold;
             text-align: center;
         }
-          
+
         </style>
         <script type="text/javascript">
           function showOp(op){
@@ -50,23 +49,23 @@
             opacity: opacity
           });
           map.overlayMapTypes.insertAt(0, agsType);
-          
+
           var bar = document.getElementById("op");
           var container = document.getElementById("opSlider");
           var range = (parseInt(container.style.width)-parseInt(bar.style.width));
           map.controls[google.maps.ControlPosition.TOP].push(document.getElementById('opContainer'));
           var opSlider = new ExtDraggableObject(bar, {
-            restrictY:true, 
+            restrictY:true,
             container:container});
           opSlider.setValueX(range * opacity);
           showOp(opacity);
-          
+
           google.maps.event.addListener(opSlider, 'drag', function(evt){
              var op = opSlider.left()/range;
              agsType.setOpacity(op);
              showOp(op);
           });
-         
+
           google.maps.event.addDomListener(document.getElementById('less'), 'click', function(){
              var op = Math.max(agsType.getOpacity()-0.1, 0);
              agsType.setOpacity(op);
@@ -100,8 +99,8 @@
             <div id="more" title="More" style="padding: 0px; margin:0px;position:absolute;top:0px;left:184px;overflow:hidden;background-color:white;width:20px;height:20px;cursor:pointer;text-align:center;">
                 &nbsp;+&nbsp;
             </div>
-            
-                
+
+
         </div>
 
     </body>

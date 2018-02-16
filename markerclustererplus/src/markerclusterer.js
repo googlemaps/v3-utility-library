@@ -6,9 +6,9 @@
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
  * <p>
  * This is an enhanced V3 implementation of the
- * <a href="http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/"
+ * <a href="../../markerclusterer/"
  * >V2 MarkerClusterer</a> by Xiaoxi Wu. It is based on the
- * <a href="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/"
+ * <a href="../../markerclusterer/"
  * >V3 MarkerClusterer</a> port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
  * <p>
  * v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
@@ -1193,7 +1193,7 @@ MarkerClusterer.prototype.addMarkers = function (markers, opt_nodraw) {
     if (markers.hasOwnProperty(key)) {
       this.pushMarkerTo_(markers[key]);
     }
-  }  
+  }
   if (!opt_nodraw) {
     this.redraw_();
   }

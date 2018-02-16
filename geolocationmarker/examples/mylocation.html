@@ -12,10 +12,10 @@
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    <script src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js"></script>
+    <script src="../../geolocationmarker/src/geolocationmarker-compiled.js"></script>
     <script>
       var map, GeoMarker;
-    
+
       function initialize() {
         var mapOptions = {
           zoom: 17,
@@ -24,7 +24,7 @@
         };
         map = new google.maps.Map(document.getElementById('map_canvas'),
             mapOptions);
-    
+
         GeoMarker = new GeolocationMarker();
         GeoMarker.setCircleOptions({fillColor: '#808080'});
 
@@ -41,7 +41,7 @@
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
-      
+
       if(!navigator.geolocation) {
         alert('Your browser does not support geolocation');
       }

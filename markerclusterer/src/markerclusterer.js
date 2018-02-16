@@ -10,10 +10,6 @@
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of
  * markers.
- * <br/>
- * This is a v3 implementation of the
- * <a href="http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/"
- * >v2 MarkerClusterer</a>.
  */
 
 /**
@@ -1308,11 +1304,11 @@ ClusterIcon.prototype['onAdd'] = ClusterIcon.prototype.onAdd;
 ClusterIcon.prototype['draw'] = ClusterIcon.prototype.draw;
 ClusterIcon.prototype['onRemove'] = ClusterIcon.prototype.onRemove;
 
-Object.keys = Object.keys || function(o) {  
-    var result = [];  
-    for(var name in o) {  
-        if (o.hasOwnProperty(name))  
-          result.push(name);  
-    }  
-    return result;  
+Object.keys = Object.keys || function(o) {
+    var result = [];
+    for(var name in o) {
+        if (o.hasOwnProperty(name))
+          result.push(name);
+    }
+    return result;
 };

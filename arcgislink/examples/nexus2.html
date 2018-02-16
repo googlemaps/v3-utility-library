@@ -27,14 +27,13 @@
     </style>
     <body style="margin:10 10 10 10">
         <script type="text/javascript">
-            //copied from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
             function getURLParam(name){
                 var regexS = "[\\?&]" + name + "=([^&#]*)";
                 var regex = new RegExp(regexS);
                 var results = regex.exec(window.location.href);
                 return (results === null ? "" : decodeURIComponent(results[1]));
             }
-            
+
             var u = getURLParam('u');
             var o = getURLParam('o') || 'v';
             document.write("<img id='n' src='nexus_" + o + ".jpg' class='i"+o+"'/>");

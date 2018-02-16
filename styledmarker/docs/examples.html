@@ -1,21 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
-  <head> 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/> 
-    <title>StyledMarker Examples</title> 
-    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"/> 
-    <link rel="stylesheet" type="text/css" href="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"/> 
-    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script> 
-  </head> 
-  <body onload="prettyPrint()"> 
-<div> 
-<a name="Top"></a>  
-<h1><a></a><span lang="en-us">StyledMarker</span> Examples</h1> 
-</div> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>StyledMarker Examples</title>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"/>
+  </head>
+  <body>
+<div>
+<a name="Top"></a>
+<h1><a></a><span lang="en-us">StyledMarker</span> Examples</h1>
+</div>
 <p>This library is used to create <code><span lang="en-us">Markers</span></code> that can be styled in different ways, such as changing the color or shape, or adding text labels. Below are examples of how to use this library. For more details see the <a href="reference.html">reference</a>.</p>
-<div> 
-<h2><a name="simple"></a>Simple Example</h2> 
-<p> 
+<div>
+<h2><a name="simple"></a>Simple Example</h2>
+<p>
   A <code><span lang="en-us">StyledMarker</span></code> is a <code><span lang="en-us">Marker</span></code> with an additional option passed to the <code><span lang="en-us">MarkerOptions</span></code>. Specify <code><span lang="en-us">styleIcon</span></code> in the options to create a styled <code><span lang="en-us">Marker</span></code>. This option takes a <code><span lang="en-us">StyledIcon</span></code> and applies it to the <code><span lang="en-us">Marker</span></code> to style it.
 </p>
 <pre class="prettyprint">     var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"00ff00",text:"A"}),position:myLatLng,map:map});</pre>
@@ -31,8 +29,8 @@
 <a target="_blank" href="../examples/simple.htm">View example </a>
 </p>
 </div>
-<div> 
-<h2><a name="simple"></a>Changing Style Properties Example</h2> 
+<div>
+<h2><a name="simple"></a>Changing Style Properties Example</h2>
 <p>
   Properties for the <code><span lang="en-us">StyledIcon</span></code> can be changed by using the <code><span lang="en-us">set</span></code> method. Pass the name of the property you want to change and the value.
 </p>
@@ -41,9 +39,9 @@
 <a target="_blank" href="../examples/elevation.htm">View example </a>
 </p>
 </div>
-<div> 
-<h2><a name="simple"></a>Changing Multiple Marker Style Properties Example</h2> 
-<p> 
+<div>
+<h2><a name="simple"></a>Changing Multiple Marker Style Properties Example</h2>
+<p>
   A <code><span lang="en-us">StyledIcon</span></code> can be created and passed to more than one <code><span lang="en-us">StyledMarker</span></code> to style many markers the same way.
 </p>
 <pre class="prettyprint">    var styleIcon = new StyledIcon(StyledIconTypes.BUBBLE,{color:"#ff0000",text:"Stop"});
@@ -61,8 +59,8 @@
 </p>
 </div>
 <div>
-<h2><a name="simple"></a>Using Classes Example</h2> 
-<p> 
+<h2><a name="simple"></a>Using Classes Example</h2>
+<p>
   A <code><span lang="en-us">StyledIcon</span></code> can be passed as a class to <code><span lang="en-us">StyledIconOptions</span></code> to set global properties on multiple <code><span lang="en-us">StyledIcons</span></code>. When creating a class use <code><span lang="en-us">StyledIconType.CLASS</span></code>.
 </p>
 <pre class="prettyprint">    var styleIconClass = new StyledIcon(StyledIconTypes.CLASS,{color:"#ff0000"});
@@ -75,5 +73,5 @@
 <a target="_blank" href="../examples/class_use.htm">View example </a>
 </p>
 </div>
-</body> 
-</html> 
+</body>
+</html>

@@ -1,7 +1,4 @@
-(function(){/*
- http://google-maps-utility-library-v3.googlecode.com
-*/
-var f = Math.PI / 180, aa = 0, h = google.maps, i, k, l, p = {w:null, H:false}, q = {}, s = {};
+(function(){var f = Math.PI / 180, aa = 0, h = google.maps, i, k, l, p = {w:null, H:false}, q = {}, s = {};
 function u(a, b, c) {
   var d = b === "" ? 0 : a.indexOf(b);
   return a.substring(d + b.length, c === "" ? a.length : a.indexOf(c, d + b.length))

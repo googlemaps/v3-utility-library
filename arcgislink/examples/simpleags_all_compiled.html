@@ -4,7 +4,6 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <title>Simple AGS</title>
         <script type="text/javascript">
-            //copy from http://gmaps-samples.googlecode.com/svn/trunk/versionchecker.html?v=2.86
             function getURLParam(name) {
               var regexS = "[\\?&]" + name + "=([^&#]*)";
               var regex = new RegExp(regexS);
@@ -21,14 +20,14 @@
     </head>
     <body>
       <div style="width:100%">
-        This sample has the basic functions of a GIS application: 
+        This sample has the basic functions of a GIS application:
         <br/>
-        1) A table of contents(TOC) to allow layers turn on/off, layers visiblity controled by map scale and reflected on TOC. 
+        1) A table of contents(TOC) to allow layers turn on/off, layers visiblity controled by map scale and reflected on TOC.
         <br/>
         2) Allow click on map to do spatial query, with options to choose layers.<hr/>
        </div>
        <div style="width:100%">
-            Switch to a different map service: 
+            Switch to a different map service:
             <select id="svc" onchange="loadMapService()">
                 <option selected="selected">Specialty/ESRI_StateCityHighway_USA/MapServer</option>
                 <option>Specialty/ESRI_StatesCitiesRivers_USA/MapServer</option>
@@ -47,23 +46,23 @@
         </div>
         <div id="svcDesc" style="border:1px solid red; width:100%">
         </div>
-       
+
   <div style="width:100%">
      <div style="position:absolute;width:20%;left:0;overflow:auto; padding:5px">
                         <div id="svcInfo">
                         </div>
-                        Note:Layers from cached service or Layers that are not visible in current zoom level are disabled. 
+                        Note:Layers from cached service or Layers that are not visible in current zoom level are disabled.
                         <br/>
                         <div id="toc" style="border:1px solid gray">
                         </div>
-                        Click anywhere on map to show data(on right side of map). 
+                        Click anywhere on map to show data(on right side of map).
                         <br/>
                         Retrieve data for layer:
                         <div id="clickOptsDiv">
                         </div>
                     </div>
     <div id="map_canvas" style="position:absolute;width:78%;overflow:hidden;  height:400px; left:20%;border:1px; margin:5px; solid #000;">
-                   
+
                     </div>
                      <div id="working" style="width:150px;height:100px;visibility:hidden;position:absolute;top:250px;left:450px;background-color:yellow">
                     Working....
@@ -72,23 +71,23 @@
      <!--   <table>
             <tr>
                 <td valign="top">
-                   
+
                 </td>
                 <td>
-                  
-                    
-                    
+
+
+
                 </td>
-                
+
                 <td valign="top" width="200">
                     Map data at clicked location:
                     <div id="info" style="border:1px solid gray; height:380px; overflow:auto">
                     </div>
                 </td>
-               
+
             </tr>
         </table> -->
-        
-        
+
+
     </body>
 </html>

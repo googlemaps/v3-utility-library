@@ -3,10 +3,8 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>RouteBoxer Documentation: Examples</title>
-    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
-    <link rel="stylesheet" type="text/css" href="http://gmaps-utility-library.googlecode.com/svn/trunk/util/docs/template/local_extensions.css"></link>
+    <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
     <link rel="stylesheet" type="text/css" href="examples.css"></link>
-    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
     <script type="text/javascript">
     var current = 1;
     function slide(n) {
@@ -20,7 +18,7 @@
     }
     </script>
   </head>
-  <body onload="prettyPrint()">
+  <body>
 <h1>RouteBoxer</h1>
 
 <p>The RouteBoxer class generates a set of <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#LatLngBounds"><code>LatLngBounds</code></a> objects
@@ -36,7 +34,7 @@ given distance from the route (twice the distance across the diagonal of a squar
 
 <p>To use the RouteBoxer class, first load the RouteBoxer.js file into your page:</p>
 
-<pre class="prettyprint">&lt;script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js"&gt;&lt;/script&gt;</pre>
+<pre class="prettyprint">&lt;script type="text/javascript" src="../../routeboxer/src/RouteBoxer.js"&gt;&lt;/script&gt;</pre>
 
 <p>Then create a <a href="reference.html"><code>RouteBoxer</code></a> object, and pass an array of
 <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#LatLng"><code>google.maps.LatLng</a></code> objects and a distance to the <code>RouteBoxer.box()</code> method.
@@ -50,14 +48,14 @@ var distance = 20; // km
 
 directionService.route(request, function(result, status) {
   if (status == google.maps.DirectionsStatus.OK) {
-  
+
     // Box the overview path of the first route
     var path = result.routes[0].overview_path;
     var boxes = routeBoxer.box(path, distance);
-    
+
     for (var i = 0; i < boxes.length; i++) {
       var bounds = box[i];
-      // Perform search over this bounds 
+      // Perform search over this bounds
     }
   }
 });

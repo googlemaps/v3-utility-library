@@ -3,11 +3,9 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>InfoBox Documentation: Examples</title>
-    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
-    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
   </head>
-  <body onload="prettyPrint()">
+  <body>
 <h1>InfoBox Examples</h1>
 
 <p><a href="reference.html">API Reference</a></p>
@@ -22,7 +20,7 @@ Note: Be sure to include <tt>infobox.js</tt> or <tt>infobox_packed.js</tt> in yo
 <p>The example below shows the typical use of an InfoBox &mdash; as an enhanced version of an
 <tt>InfoWindow</tt>. The background of the InfoBox is set to an 8-pixel high, mostly-transparent GIF
 that has an upward pointing arrow 140 pixels to the right (half-way along the width of the InfoBox).
-The content for the InfoBox has margin-top set to 8px so that this background image is visible; the 
+The content for the InfoBox has margin-top set to 8px so that this background image is visible; the
 rest of the InfoBox appears yellow because that's the background color of the content. The
 <tt>pixelOffset</tt> is set to (-140, 0) so that the InfoBox is centered appropriately.</p>
 <pre class="prettyprint">
@@ -32,18 +30,18 @@ rest of the InfoBox appears yellow because that's the background color of the co
 	 position: new google.maps.LatLng(49.47216, -123.76307),
 	 visible: true
 	});
-		
+
         var boxText = document.createElement("div");
         boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
         boxText.innerHTML = "City Hall, Sechelt&lt;br&gt;British Columbia&lt;br&gt;Canada";
-		
+
 	var myOptions = {
 		 content: boxText
 		,disableAutoPan: false
 		,maxWidth: 0
 		,pixelOffset: new google.maps.Size(-140, 0)
 		,zIndex: null
-		,boxStyle: { 
+		,boxStyle: {
 		  background: "url('tipbox.gif') no-repeat"
 		  ,opacity: 0.75
 		  ,width: "280px"

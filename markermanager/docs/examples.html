@@ -3,11 +3,9 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>MarkerManager Documentation: Examples</title>
-    <link rel="stylesheet" type="text/css" href="http://code.google.com/css/codesite.css"></link>
     <link rel="stylesheet" type="text/css" href="../../util/docs/template/local_extensions.css"></link>
-    <script type="text/javascript" src="http://code.google.com/js/prettify.js"></script>
   </head>
-  <body onload="prettyPrint()">
+  <body>
 <h1><a name="Marker_Manager_Examples" id="Marker_Manager_Examples"></a>Marker Manager Examples</h1>
 
 <p>To use a marker manager, create a <code>MarkerManager</code> object. In the simplest case, just pass a map to it.</p>
@@ -55,7 +53,7 @@ function setupMap() {
   map = new google.maps.Map(document.getElementById('map'), myOptions);
 
   setupWeatherMarkers();
-  
+
 }
 function getWeatherMarkers(n) {
   var batch = [];
