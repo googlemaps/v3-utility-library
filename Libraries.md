@@ -18,15 +18,6 @@ The GeoJSON to Google Maps API library lets you easily convert GeoJSON to Overla
 Browse the [github repository](https://github.com/JasonSanford/geojson-google-maps) for code and examples.
 
 
-## InfoBox ##
-
-[![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobox.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobox.png)
-
-This class behaves like `google.maps.InfoWindow`, but it supports several additional properties for advanced styling. An InfoBox can also be used as a map label.
-
-See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/infobox) for code and examples.
-
-
 ## Marker Clusterer ##
 
 ![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer.png)
@@ -36,7 +27,7 @@ The library creates and manages per-zoom-level clusters for large amounts of mar
 Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/) or
 [Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/).
 
-## Marker Clusterer Plus ##
+## MarkerClustererPlus ##
 
 ![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer_plus.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_clusterer_plus.png)
 
@@ -45,13 +36,32 @@ This is an enhanced version of the MarkerClusterer library for managing large am
 See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/markerclustererplus) for code and examples.
 
 
-## Marker With Label ##
+## MarkerWithLabel ##
 
 ![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_with_label.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/marker_with_label.png)
 
 This class behaves like `google.maps.Marker`, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
 
 See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel) for code and examples.
+
+
+## InfoBox ##
+
+[![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobox.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/infobox.png)
+
+This class behaves like `google.maps.InfoWindow`, but it supports several additional properties for advanced styling. An InfoBox can also be used as a map label.
+
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/infobox) for code and examples.
+
+
+## KeyDragZoom ##
+
+![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/key_drag_zoom.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/key_drag_zoom.png)
+
+
+This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
+
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/keydragzoom) for code and examples.
 
 
 ## Styled Marker ##
@@ -105,16 +115,6 @@ This class sets up a DOM object to be draggable around the screen, similar to th
 
 Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/extdraggableobject/) or
 [Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/ExtDraggableObject/).
-
-
-## KeyDragZoom ##
-
-![http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/key_drag_zoom.png](http://commondatastorage.googleapis.com/maps-devrel/utility-thumbnails/key_drag_zoom.png)
-
-
-This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
-
-See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/keydragzoom) for code and examples.
 
 
 ## RichMarker ##
