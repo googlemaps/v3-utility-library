@@ -1,6 +1,6 @@
 /**
  * @name KeyDragZoom for V3
- * @version 2.0.9 [December 17, 2012] NOT YET RELEASED
+ * @version 2.0.13 [February 17, 2018]
  * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a V3 Google map.
  *  When drag zoom is enabled, holding down a designated hot key <code>(shift | ctrl | alt)</code>
@@ -241,7 +241,7 @@
    *  position given by <code>visualPosition</code>; controls with a lower index are placed first.
    *  Use a negative value to place the control <i>before</i> any default controls. No index is
    *  generally required.
-   * @property {String} [visualSprite="http://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png"]
+   * @property {String} [visualSprite="//maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png"]
    *  The URL of the sprite image used for showing the visual control in the on, off, and hot
    *  (i.e., when the mouse is over the control) states. The three images within the sprite must
    *  be the same size and arranged in on-hot-off order in a single row with no spaces between images.
@@ -331,7 +331,7 @@
     this.visualPosition_ = opt_zoomOpts.visualPosition || google.maps.ControlPosition.LEFT_TOP;
     this.visualPositionOffset_ = opt_zoomOpts.visualPositionOffset || new google.maps.Size(35, 0);
     this.visualPositionIndex_ = opt_zoomOpts.visualPositionIndex || null;
-    this.visualSprite_ = opt_zoomOpts.visualSprite || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
+    this.visualSprite_ = opt_zoomOpts.visualSprite || "//maps.gstatic.com/mapfiles/ftr/controls/dragzoom_btn.png";
     this.visualSize_ = opt_zoomOpts.visualSize || new google.maps.Size(20, 20);
     this.visualTips_ = opt_zoomOpts.visualTips || {};
     this.visualTips_.off =  this.visualTips_.off || "Turn on drag zoom mode";
@@ -346,6 +346,7 @@
     setVals(this.boxDiv_.style, opt_zoomOpts.boxStyle);
     // Apply mandatory style values:
     setVals(this.boxDiv_.style, {
+      boxSizing: "content-box", // Added 2017-08-09
       position: "absolute",
       display: "none"
     });
@@ -420,6 +421,11 @@
     control.style.height = this.visualSize_.height + "px";
     control.style.width = this.visualSize_.width + "px";
     control.title = this.visualTips_.off;
+    control.style.WebkitUserSelect = "none";
+    control.style.KhtmlUserSelect = "none";
+    control.style.MozUserSelect = "none";
+    control.style.OUserSelect = "none";
+    control.style.userSelect = "none";
     image = document.createElement("img");
     image.src = this.visualSprite_;
     image.style.position = "absolute";
@@ -458,7 +464,8 @@
     setVals(control.style, {
       cursor: "pointer",
       marginTop: offset.height + "px",
-      marginLeft: offset.width + "px"
+      marginLeft: offset.width + "px",
+      marginRight: offset.width + "px"
     });
     return control;
   };

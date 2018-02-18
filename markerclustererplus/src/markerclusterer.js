@@ -1,15 +1,13 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.2 [May 28, 2014]
+ * @version 2.1.5 [July 21, 2016]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
  * <p>
- * This is an enhanced V3 implementation of the
- * <a href="../../markerclusterer/"
- * >V2 MarkerClusterer</a> by Xiaoxi Wu. It is based on the
- * <a href="../../markerclusterer/"
- * >V3 MarkerClusterer</a> port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
+ * This is an enhanced V3 implementation of the V2 MarkerClusterer by Xiaoxi Wu. It is
+ * based on the V3 MarkerClusterer port by Luke Mahe. MarkerClustererPlus was created
+ * by Gary Little.
  * <p>
  * v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
  *  adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>batchSizeIE</code>,
@@ -249,7 +247,9 @@ ClusterIcon.prototype.show = function () {
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.cssText = this.createCss(pos);
     img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
-    if (!this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
+    if (this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
+      img += "width: " + this.width_ + "px; height: " + this.height_ + "px;";
+    } else {
       img += "clip: rect(" + (-1 * spriteV) + "px, " + ((-1 * spriteH) + this.width_) + "px, " +
           ((-1 * spriteV) + this.height_) + "px, " + (-1 * spriteH) + "px);";
     }
@@ -325,6 +325,11 @@ ClusterIcon.prototype.createCss = function (pos) {
   style.push("cursor: pointer;");
   style.push("position: absolute; top: " + pos.y + "px; left: " + pos.x + "px;");
   style.push("width: " + this.width_ + "px; height: " + this.height_ + "px;");
+  style.push("-webkit-user-select: none;");
+  style.push("-khtml-user-select: none;");
+  style.push("-moz-user-select: none;");
+  style.push("-o-user-select: none;");
+  style.push("user-select: none;");
   return style.join("");
 };
 
@@ -1611,7 +1616,7 @@ MarkerClusterer.BATCH_SIZE_IE = 500;
  * @type {string}
  * @constant
  */
-MarkerClusterer.IMAGE_PATH = "../images/m";
+MarkerClusterer.IMAGE_PATH = "http://www.garylittle.ca/artwork/mcp/m";
 
 
 /**
