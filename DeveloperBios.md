@@ -12,13 +12,15 @@
 
 [![](http://www.garylittle.ca/artwork/gary-75x100.jpg)](http://www.garylittle.ca/about-gary-little.html)
 
-  * Works as a REALTOR at Royal LePage Sunshine Coast in Sechelt, BC, Canada
+  * Works as a REALTOR&reg; at Royal LePage Sussex in Sechelt, British Columbia, Canada
   * Formerly worked at Apple Inc. and Sun Microsystems, Inc. in Silicon Valley
-  * Created the [Sunshine Coast Interactive Real Estate Map](http://map.garylittle.ca/) (uses Google Maps API v3)
-  * Created the [Sunshine Coast Interactive Real Estate Map for iPhone and Android phones](http://imap.garylittle.ca/) (uses Google Maps API v3)
-  * Created the [InfoBox](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/) class for Google Maps API v3
-  * Created the [MarkerWithLabel](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/) class for Google Maps API v3
-  * Worked on the [KeyDragZoom](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/) class for Google Maps API v2/v3
+  * Created the [Vancouver & Area Interactive Real Estate Map](http://map.garylittle.ca/) (uses Google Maps API v3)
+  * Created the [Vancouver & Area Interactive Real Estate Map for iPhone and Android phones](http://imap.garylittle.ca/) (uses Google Maps API v3)
+  * Created the [British Columbia Waterfall & Dam Map](http://www.garylittle.ca/waterfallsbc.html) (uses Google Maps API v3)
+  * Created the [InfoBox](https://github.com/googlemaps/v3-utility-library/tree/master/infobox) class for Google Maps API v3
+  * Created the [MarkerClustererPlus](https://github.com/googlemaps/v3-utility-library/tree/master/markerclustererplus) class for Google Maps API v3
+  * Created the [MarkerWithLabel](https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel) class for Google Maps API v3
+  * Worked on the [KeyDragZoom](https://github.com/googlemaps/v3-utility-library/tree/master/keydragzoom) class for Google Maps API v2/v3
   * Personal website: [www.garylittle.ca](http://www.garylittle.ca/)
 
 **Björn Brala**
