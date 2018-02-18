@@ -24,8 +24,7 @@ Browse the [github repository](https://github.com/JasonSanford/geojson-google-ma
 
 This class behaves like `google.maps.InfoWindow`, but it supports several additional properties for advanced styling. An InfoBox can also be used as a map label.
 
-Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/) or
-[Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/).
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/infobox) for code and examples.
 
 
 ## Marker Clusterer ##
@@ -43,8 +42,7 @@ Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/
 
 This is an enhanced version of the MarkerClusterer library for managing large amounts of markers. It adds support for several new properties as well as support for four more events. It also allows greater control over the styling of the text that appears on the cluster marker. The documentation has been significantly improved and the overall code has been simplified and polished. Very large numbers of markers can now be managed without causing Javascript timeout errors on Internet Explorer. It is backward compatible with MarkerClusterer.
 
-Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/) or
-[Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/).
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/markerclustererplus) for code and examples.
 
 
 ## Marker With Label ##
@@ -53,9 +51,8 @@ Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/
 
 This class behaves like `google.maps.Marker`, but it supports the association of a label with the marker. If the marker is draggable, so too will be the label. In addition, a marker with a label responds to all mouse events in the same manner as a regular marker. It also fires mouse events and "property changed" events just as a regular marker would.
 
-Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/)
-or
-[Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/).
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel) for code and examples.
+
 
 ## Styled Marker ##
 
@@ -117,9 +114,7 @@ Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/
 
 This class allows a user to zoom in to an area on the map by holding down a hot key (e.g. Shift) while dragging a box around the area. Version 2.0 adds an optional visual control for turning zoom mode on and off.
 
-Browse [Released Versions](http://google-maps-utility-library-v3.googlecode.com/svn/tags/keydragzoom/) or
-[Development Versions](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/keydragzoom/).
-
+See the [github repository](https://github.com/googlemaps/v3-utility-library/tree/master/keydragzoom) for code and examples.
 
 
 ## RichMarker ##
