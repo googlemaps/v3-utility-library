@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.5 [July 21, 2016]
+ * @version 2.1.6 [February 19, 2018]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -219,6 +219,7 @@ ClusterIcon.prototype.draw = function () {
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.top = pos.y + "px";
     this.div_.style.left = pos.x + "px";
+	this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1; // Put above all unclustered markers
   }
 };
 
