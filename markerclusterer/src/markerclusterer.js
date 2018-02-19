@@ -1116,6 +1116,7 @@ ClusterIcon.prototype.draw = function() {
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.top = pos.y + 'px';
     this.div_.style.left = pos.x + 'px';
+    this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1;
   }
 };
 
