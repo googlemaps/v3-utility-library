@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.17 [February 17, 2018]
+ * @version 1.1.18 [February 19, 2018]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -118,7 +118,6 @@ function InfoBox(opt_opts) {
   this.div_ = null;
   this.closeListener_ = null;
   this.moveListener_ = null;
-  this.mapListener_ = null;
   this.contextListener_ = null;
   this.eventListeners_ = null;
   this.fixedWidthSet_ = null;
@@ -809,10 +808,6 @@ InfoBox.prototype.open = function (map, anchor) {
     this.moveListener_ = google.maps.event.addListener(anchor, "position_changed", function () {
       me.setPosition(this.getPosition());
     });
-
-    this.mapListener_ = google.maps.event.addListener(anchor, "map_changed", function () {
-      me.setMap(this.map);
-    });    
   }
 
   this.setMap(map);
@@ -851,12 +846,6 @@ InfoBox.prototype.close = function () {
     this.moveListener_ = null;
   }
 
-  if (this.mapListener_) {
-    
-    google.maps.event.removeListener(this.mapListener_);
-    this.mapListener_ = null;    
-  }
- 
   if (this.contextListener_) {
 
     google.maps.event.removeListener(this.contextListener_);
