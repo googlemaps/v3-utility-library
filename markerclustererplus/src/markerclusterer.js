@@ -735,20 +735,25 @@ MarkerClusterer.prototype.onAdd = function () {
   this.ready_ = true;
 
   this.repaint();
+  
+  this.prevZoom_ = this.getMap().getZoom();
 
   // Add the map event listeners
   this.listeners_ = [
-    google.maps.event.addListener(this.getMap(), "zoom_changed", function () {
-      cMarkerClusterer.resetViewport_(false);
-      // Workaround for this Google bug: when map is at level 0 and "-" of
-      // zoom slider is clicked, a "zoom_changed" event is fired even though
-      // the map doesn't zoom out any further. In this situation, no "idle"
-      // event is triggered so the cluster markers that have been removed
-      // do not get redrawn. Same goes for a zoom in at maxZoom.
-      if (this.getZoom() === (this.get("minZoom") || 0) || this.getZoom() === this.get("maxZoom")) {
-        google.maps.event.trigger(this, "idle");
+    google.maps.event.addListener(this.getMap(), 'zoom_changed', function() {
+      // Determines map type and prevent illegal zoom levels
+      var zoom = this.getMap().getZoom();
+      var minZoom = this.getMap().minZoom || 0;
+      var maxZoom = Math.min(this.getMap().maxZoom || 100,
+                           this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom);
+      zoom = Math.min(Math.max(zoom,minZoom),maxZoom);
+  
+      if (this.prevZoom_ != zoom) {
+        this.prevZoom_ = zoom;
+        this.resetViewport_();
       }
-    }),
+    }.bind(this)),
+    
     google.maps.event.addListener(this.getMap(), "idle", function () {
       cMarkerClusterer.redraw_();
     })
@@ -824,7 +829,7 @@ MarkerClusterer.prototype.fitMapToMarkers = function () {
   var markers = this.getMarkers();
   var bounds = new google.maps.LatLngBounds();
   for (i = 0; i < markers.length; i++) {
-    bounds.extend(markers[i].getPosition());
+    if (!this.ignoreHidden_ || markers[i].getVisible()) bounds.extend(markers[i].getPosition());
   }
 
   this.getMap().fitBounds(bounds);
