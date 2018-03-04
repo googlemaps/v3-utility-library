@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.5 [July 21, 2016]
+ * @version 2.1.7 [March 3, 2018]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -132,6 +132,11 @@ ClusterIcon.prototype.onAdd = function () {
     cMouseDownInCluster = true;
     cDraggingMapByCluster = false;
   });
+  
+// March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
+  google.maps.event.addDomListener(this.div_, "touchstart", function (e) {
+  	e.stopPropagation();
+  });
 
   google.maps.event.addDomListener(this.div_, "click", function (e) {
     cMouseDownInCluster = false;
@@ -219,7 +224,7 @@ ClusterIcon.prototype.draw = function () {
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.top = pos.y + "px";
     this.div_.style.left = pos.x + "px";
-    this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1;
+    this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1; // Put above all unclustered markers
   }
 };
 
@@ -735,20 +740,25 @@ MarkerClusterer.prototype.onAdd = function () {
   this.ready_ = true;
 
   this.repaint();
+  
+  this.prevZoom_ = this.getMap().getZoom();
 
   // Add the map event listeners
   this.listeners_ = [
     google.maps.event.addListener(this.getMap(), "zoom_changed", function () {
-      cMarkerClusterer.resetViewport_(false);
-      // Workaround for this Google bug: when map is at level 0 and "-" of
-      // zoom slider is clicked, a "zoom_changed" event is fired even though
-      // the map doesn't zoom out any further. In this situation, no "idle"
-      // event is triggered so the cluster markers that have been removed
-      // do not get redrawn. Same goes for a zoom in at maxZoom.
-      if (this.getZoom() === (this.get("minZoom") || 0) || this.getZoom() === this.get("maxZoom")) {
-        google.maps.event.trigger(this, "idle");
+      // Fix for bug #407
+      // Determines map type and prevents illegal zoom levels
+      var zoom = this.getMap().getZoom();
+      var minZoom = this.getMap().minZoom || 0;
+      var maxZoom = Math.min(this.getMap().maxZoom || 100,
+                             this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom);
+      zoom = Math.min(Math.max(zoom,minZoom),maxZoom);
+      
+      if (this.prevZoom_ != zoom) {
+        this.prevZoom_ = zoom;
+        this.resetViewport_(false);
       }
-    }),
+    }.bind(this)),
     google.maps.event.addListener(this.getMap(), "idle", function () {
       cMarkerClusterer.redraw_();
     })
@@ -824,7 +834,10 @@ MarkerClusterer.prototype.fitMapToMarkers = function () {
   var markers = this.getMarkers();
   var bounds = new google.maps.LatLngBounds();
   for (i = 0; i < markers.length; i++) {
-    bounds.extend(markers[i].getPosition());
+    // March 3, 2018: Bug fix -- honor the ignoreHidden property
+    if (markers[i].getVisible() || !this.getIgnoreHidden()) {
+      bounds.extend(markers[i].getPosition());
+    }
   }
 
   this.getMap().fitBounds(bounds);
