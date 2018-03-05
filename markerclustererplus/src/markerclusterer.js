@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.7 [March 3, 2018]
+ * @version 2.1.8 [March 5, 2018]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -134,9 +134,10 @@ ClusterIcon.prototype.onAdd = function () {
   });
   
 // March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
-  google.maps.event.addDomListener(this.div_, "touchstart", function (e) {
-  	e.stopPropagation();
-  });
+// But it doesn't work with earlier releases so back to the drawing board.
+//  google.maps.event.addDomListener(this.div_, "touchstart", function (e) {
+//  	e.stopPropagation();
+//  });
 
   google.maps.event.addDomListener(this.div_, "click", function (e) {
     cMouseDownInCluster = false;
