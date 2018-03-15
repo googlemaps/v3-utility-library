@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.7 [March 3, 2018]
+ * @version 2.1.9 [March 14, 2018]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -114,6 +114,9 @@ ClusterIcon.prototype.onAdd = function () {
   var cClusterIcon = this;
   var cMouseDownInCluster;
   var cDraggingMapByCluster;
+  var gmVersion = google.maps.version.split(".");
+  
+  gmVersion = parseInt(gmVersion[0] * 100, 10) + parseInt(gmVersion[1], 10);
 
   this.div_ = document.createElement("div");
   this.div_.className = this.className_;
@@ -134,9 +137,12 @@ ClusterIcon.prototype.onAdd = function () {
   });
   
 // March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
-  google.maps.event.addDomListener(this.div_, "touchstart", function (e) {
-  	e.stopPropagation();
-  });
+// But it doesn't work with earlier releases so do a version check.
+  if (gmVersion >= 332) { // Ugly version-dependent code
+    google.maps.event.addDomListener(this.div_, "touchstart", function (e) {
+      e.stopPropagation();
+    });
+  }
 
   google.maps.event.addDomListener(this.div_, "click", function (e) {
     cMouseDownInCluster = false;
@@ -752,7 +758,7 @@ MarkerClusterer.prototype.onAdd = function () {
       var minZoom = this.getMap().minZoom || 0;
       var maxZoom = Math.min(this.getMap().maxZoom || 100,
                              this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom);
-      zoom = Math.min(Math.max(zoom,minZoom),maxZoom);
+      zoom = Math.min(Math.max(zoom, minZoom), maxZoom);
       
       if (this.prevZoom_ != zoom) {
         this.prevZoom_ = zoom;

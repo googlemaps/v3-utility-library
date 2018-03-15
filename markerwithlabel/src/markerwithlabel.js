@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.2 [December 29, 2016]
+ * @version 1.2.1 [March 7, 2018]
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -322,8 +322,10 @@ MarkerLabel_.prototype.addMouseListeners = function () {
 MarkerLabel_.prototype.removeMouseListeners = function () {
   var i;
 
-  for (i = 0; i < this.listeners1_.length; i++) {
-    google.maps.event.removeListener(this.listeners1_[i]);
+  if (this.listeners1_) {
+    for (i = 0; i < this.listeners1_.length; i++) {
+      google.maps.event.removeListener(this.listeners1_[i]);
+    }
   }
 };
 
@@ -335,14 +337,19 @@ MarkerLabel_.prototype.removeMouseListeners = function () {
  */
 MarkerLabel_.prototype.onRemove = function () {
   var i;
-  this.labelDiv_.parentNode.removeChild(this.labelDiv_);
-  this.eventDiv_.parentNode.removeChild(this.eventDiv_);
-  
+  if (this.labelDiv_.parentNode) {
+    this.labelDiv_.parentNode.removeChild(this.labelDiv_);
+  }
+  if (this.eventDiv_.parentNode) {
+    this.eventDiv_.parentNode.removeChild(this.eventDiv_);
+  }  
   // Remove event listeners:
   this.removeMouseListeners();
 
-  for (i = 0; i < this.listeners2_.length; i++) {
-    google.maps.event.removeListener(this.listeners2_[i]);
+  if (this.listeners2_) {
+    for (i = 0; i < this.listeners2_.length; i++) {
+      google.maps.event.removeListener(this.listeners2_[i]);
+    }
   }
 };
 
