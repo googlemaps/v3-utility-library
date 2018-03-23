@@ -43,6 +43,9 @@
  *                  clusters will be found. The full URL will be:
  *                  {imagePath}[1-5].{imageExtension}
  *                  Default: '../images/m'.
+ *     'imageList': (Array) The list of full path/url images to be used as 
+ *                  clusters icons. This array must be the same size as "sizes", 
+ *                  otherwise imagePath will be used
  *     'imageExtension': (string) The suffix for images URL representing
  *                       clusters will be found. See _imagePath_ for details.
  *                       Default: 'png'.
@@ -123,6 +126,18 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    */
   this.imagePath_ = options['imagePath'] ||
       this.MARKER_CLUSTER_IMAGE_PATH_;
+
+  /**
+   * @type {Array}
+   * @private
+   */
+  this.imageList_ = ('imageList' in options && options['imageList'].length) ? [].concat(options['imageList']) : null;
+
+  /**
+   * @type {Object}
+   * @private
+   */
+  this.commonStyleString_ = options['commonStyleString'] || null;
 
   /**
    * @type {string}
@@ -249,11 +264,19 @@ MarkerClusterer.prototype.setupStyles_ = function() {
   }
 
   for (var i = 0, size; size = this.sizes[i]; i++) {
-    this.styles_.push({
-      url: this.imagePath_ + (i + 1) + '.' + this.imageExtension_,
-      height: size,
-      width: size
-    });
+    if (this.imageList_ && this.imageList_.length === this.sizes.length) {
+      this.styles_.push({
+        url: this.imageList_[i],
+        height: size,
+        width: size
+      });
+    } else {
+      this.styles_.push({
+        url: this.imagePath_ + (i + 1) + '.' + this.imageExtension_,
+        height: size,
+        width: size
+      });
+    }
   }
 };
 
@@ -289,6 +312,15 @@ MarkerClusterer.prototype.setStyles = function(styles) {
 MarkerClusterer.prototype.getStyles = function() {
   return this.styles_;
 };
+
+/**
+ * Gets common optional style string
+ *
+ * @return {string} The inline style string
+ */
+MarkerClusterer.prototype.getCommonStyleString = function() {
+  return this.commonStyleString_;
+}
 
 
 /**
@@ -823,7 +855,7 @@ function Cluster(markerClusterer) {
   this.markers_ = [];
   this.bounds_ = null;
   this.clusterIcon_ = new ClusterIcon(this, markerClusterer.getStyles(),
-      markerClusterer.getGridSize());
+      markerClusterer.getGridSize(), markerClusterer.getCommonStyleString());
 }
 
 /**
@@ -1034,11 +1066,12 @@ Cluster.prototype.updateIcon = function() {
  *     'textSize': (number) The text size.
  *     'backgroundPosition: (string) The background postition x, y.
  * @param {number=} opt_padding Optional padding to apply to the cluster icon.
+ * @param {string} Optional style string to apply to all of the cluster icon
  * @constructor
  * @extends google.maps.OverlayView
  * @ignore
  */
-function ClusterIcon(cluster, styles, opt_padding) {
+function ClusterIcon(cluster, styles, opt_padding, style_string) {
   cluster.getMarkerClusterer().extend(ClusterIcon, google.maps.OverlayView);
 
   this.styles_ = styles;
@@ -1049,6 +1082,7 @@ function ClusterIcon(cluster, styles, opt_padding) {
   this.div_ = null;
   this.sums_ = null;
   this.visible_ = false;
+  this.commonStyleString_ = style_string || '';
 
   this.setMap(this.map_);
 }
@@ -1250,8 +1284,12 @@ ClusterIcon.prototype.createCss = function(pos) {
 
   style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
       pos.x + 'px; color:' + txtColor + '; position:absolute; font-size:' +
-      txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
+      txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold; ');
+
+  style.push(this.commonStyleString_);
+
   return style.join('');
+
 };
 
 
@@ -1275,6 +1313,7 @@ MarkerClusterer.prototype['getMap'] = MarkerClusterer.prototype.getMap;
 MarkerClusterer.prototype['getMarkers'] = MarkerClusterer.prototype.getMarkers;
 MarkerClusterer.prototype['getMaxZoom'] = MarkerClusterer.prototype.getMaxZoom;
 MarkerClusterer.prototype['getStyles'] = MarkerClusterer.prototype.getStyles;
+MarkerClusterer.prototype['getCommonStyleString'] = MarkerClusterer.prototype.getCommonStyleString;
 MarkerClusterer.prototype['getTotalClusters'] =
     MarkerClusterer.prototype.getTotalClusters;
 MarkerClusterer.prototype['getTotalMarkers'] =
