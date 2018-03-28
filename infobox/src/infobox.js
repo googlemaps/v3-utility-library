@@ -333,44 +333,57 @@ InfoBox.prototype.panBox_ = function (disablePan) {
         map.setCenter(this.position_);
       }
 
-      bounds = map.getBounds();
-
-      var mapDiv = map.getDiv();
-      var mapWidth = mapDiv.offsetWidth;
-      var mapHeight = mapDiv.offsetHeight;
       var iwOffsetX = this.pixelOffset_.width;
       var iwOffsetY = this.pixelOffset_.height;
       var iwWidth = this.div_.offsetWidth;
       var iwHeight = this.div_.offsetHeight;
       var padX = this.infoBoxClearance_.width;
       var padY = this.infoBoxClearance_.height;
-      var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
 
-      if (pixPosition.x < (-iwOffsetX + padX)) {
-        xOffset = pixPosition.x + iwOffsetX - padX;
-      } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
-        xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
-      }
-      if (this.alignBottom_) {
-        if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
-          yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
-        } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
-          yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+      if (google.maps.version.match('^3.30') || google.maps.version.match('^3.31')) {
+        var mapDiv = map.getDiv();
+        var mapWidth = mapDiv.offsetWidth;
+        var mapHeight = mapDiv.offsetHeight;
+        var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
+
+        if (pixPosition.x < (-iwOffsetX + padX)) {
+          xOffset = pixPosition.x + iwOffsetX - padX;
+        } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
+          xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
+        }
+        if (this.alignBottom_) {
+          if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
+            yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
+          } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
+            yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+          }
+        } else {
+          if (pixPosition.y < (-iwOffsetY + padY)) {
+            yOffset = pixPosition.y + iwOffsetY - padY;
+          } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
+            yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+          }
+        }
+
+        if (!(xOffset === 0 && yOffset === 0)) {
+
+          // Move the map to the shifted center.
+          //
+          var c = map.getCenter();
+          map.panBy(xOffset, yOffset);
         }
       } else {
-        if (pixPosition.y < (-iwOffsetY + padY)) {
-          yOffset = pixPosition.y + iwOffsetY - padY;
-        } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
-          yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+        var padding = {left: 0, right: 0, top: 0, bottom: 0};
+        padding.left = -iwOffsetX + padX;
+        padding.right = iwOffsetX + iwWidth + padX;
+        if (this.alignBottom_) {
+          padding.top = -iwOffsetY + padY + iwHeight;
+          padding.bottom = iwOffsetY + padY;
+        } else {
+          padding.top = -iwOffsetY + padY;
+          padding.bottom = iwOffsetY + iwHeight + padY;
         }
-      }
-
-      if (!(xOffset === 0 && yOffset === 0)) {
-
-        // Move the map to the shifted center.
-        //
-        var c = map.getCenter();
-        map.panBy(xOffset, yOffset);
+        map.panToBounds(new google.maps.LatLngBounds(this.position_), padding);
       }
     }
   }
