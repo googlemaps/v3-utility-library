@@ -164,11 +164,12 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   // Add the map event listeners
   var that = this;
   google.maps.event.addListener(this.map_, 'zoom_changed', function() {
+    var mapType = that.map_.mapTypes[that.map_.getMapTypeId()];
     // Determines map type and prevent illegal zoom levels
     var zoom = that.map_.getZoom();
     var minZoom = that.map_.minZoom || 0;
     var maxZoom = Math.min(that.map_.maxZoom || 100,
-                         that.map_.mapTypes[that.map_.getMapTypeId()].maxZoom);
+      mapType ? mapType.maxZoom : 100);
     zoom = Math.min(Math.max(zoom,minZoom),maxZoom);
 
     if (that.prevZoom_ != zoom) {
