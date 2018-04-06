@@ -340,7 +340,24 @@ InfoBox.prototype.panBox_ = function (disablePan) {
       var padX = this.infoBoxClearance_.width;
       var padY = this.infoBoxClearance_.height;
 
-      if (google.maps.version.match('^3.30') || google.maps.version.match('^3.31')) {
+      if (map.panToBounds.length == 2) {
+        // The new version of JS Maps API (v3.32) uses asynchronous rendering.
+        // Using projection.fromLatLngToContainerPixel does not work correctly
+        // anymore for JS Maps API v3.32 and above if there is a previous
+        // synchronous call that causes the map to move (e.g. setCenter when
+        // the position is not within bounds).
+        var padding = {left: 0, right: 0, top: 0, bottom: 0};
+        padding.left = -iwOffsetX + padX;
+        padding.right = iwOffsetX + iwWidth + padX;
+        if (this.alignBottom_) {
+          padding.top = -iwOffsetY + padY + iwHeight;
+          padding.bottom = iwOffsetY + padY;
+        } else {
+          padding.top = -iwOffsetY + padY;
+          padding.bottom = iwOffsetY + iwHeight + padY;
+        }
+        map.panToBounds(new google.maps.LatLngBounds(this.position_), padding);
+      } else {
         var mapDiv = map.getDiv();
         var mapWidth = mapDiv.offsetWidth;
         var mapHeight = mapDiv.offsetHeight;
@@ -372,18 +389,6 @@ InfoBox.prototype.panBox_ = function (disablePan) {
           var c = map.getCenter();
           map.panBy(xOffset, yOffset);
         }
-      } else {
-        var padding = {left: 0, right: 0, top: 0, bottom: 0};
-        padding.left = -iwOffsetX + padX;
-        padding.right = iwOffsetX + iwWidth + padX;
-        if (this.alignBottom_) {
-          padding.top = -iwOffsetY + padY + iwHeight;
-          padding.bottom = iwOffsetY + padY;
-        } else {
-          padding.top = -iwOffsetY + padY;
-          padding.bottom = iwOffsetY + iwHeight + padY;
-        }
-        map.panToBounds(new google.maps.LatLngBounds(this.position_), padding);
       }
     }
   }
