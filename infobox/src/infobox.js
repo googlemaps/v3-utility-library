@@ -341,11 +341,11 @@ InfoBox.prototype.panBox_ = function (disablePan) {
       var padY = this.infoBoxClearance_.height;
 
       if (map.panToBounds.length == 2) {
-        // The new version of JS Maps API (v3.32) uses asynchronous rendering.
-        // Using projection.fromLatLngToContainerPixel does not work correctly
-        // anymore for JS Maps API v3.32 and above if there is a previous
-        // synchronous call that causes the map to move (e.g. setCenter when
-        // the position is not within bounds).
+        // Using projection.fromLatLngToContainerPixel to compute the infowindow position
+        // does not work correctly anymore for JS Maps API v3.32 and above if there is a
+        // previous synchronous call that causes the map to animate (e.g. setCenter when
+        // the position is not within bounds). Hence, we are using panToBounds with
+        // padding instead, which works synchronously.
         var padding = {left: 0, right: 0, top: 0, bottom: 0};
         padding.left = -iwOffsetX + padX;
         padding.right = iwOffsetX + iwWidth + padX;
