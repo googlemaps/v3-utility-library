@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.18 [February 19, 2018]
+ * @version 1.1.19 [April 6, 2018]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
