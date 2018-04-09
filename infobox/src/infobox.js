@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.18 [February 19, 2018]
+ * @version 1.1.19 [April 6, 2018]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -333,44 +333,62 @@ InfoBox.prototype.panBox_ = function (disablePan) {
         map.setCenter(this.position_);
       }
 
-      bounds = map.getBounds();
-
-      var mapDiv = map.getDiv();
-      var mapWidth = mapDiv.offsetWidth;
-      var mapHeight = mapDiv.offsetHeight;
       var iwOffsetX = this.pixelOffset_.width;
       var iwOffsetY = this.pixelOffset_.height;
       var iwWidth = this.div_.offsetWidth;
       var iwHeight = this.div_.offsetHeight;
       var padX = this.infoBoxClearance_.width;
       var padY = this.infoBoxClearance_.height;
-      var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
 
-      if (pixPosition.x < (-iwOffsetX + padX)) {
-        xOffset = pixPosition.x + iwOffsetX - padX;
-      } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
-        xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
-      }
-      if (this.alignBottom_) {
-        if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
-          yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
-        } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
-          yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+      if (map.panToBounds.length == 2) {
+        // Using projection.fromLatLngToContainerPixel to compute the infowindow position
+        // does not work correctly anymore for JS Maps API v3.32 and above if there is a
+        // previous synchronous call that causes the map to animate (e.g. setCenter when
+        // the position is not within bounds). Hence, we are using panToBounds with
+        // padding instead, which works synchronously.
+        var padding = {left: 0, right: 0, top: 0, bottom: 0};
+        padding.left = -iwOffsetX + padX;
+        padding.right = iwOffsetX + iwWidth + padX;
+        if (this.alignBottom_) {
+          padding.top = -iwOffsetY + padY + iwHeight;
+          padding.bottom = iwOffsetY + padY;
+        } else {
+          padding.top = -iwOffsetY + padY;
+          padding.bottom = iwOffsetY + iwHeight + padY;
         }
+        map.panToBounds(new google.maps.LatLngBounds(this.position_), padding);
       } else {
-        if (pixPosition.y < (-iwOffsetY + padY)) {
-          yOffset = pixPosition.y + iwOffsetY - padY;
-        } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
-          yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+        var mapDiv = map.getDiv();
+        var mapWidth = mapDiv.offsetWidth;
+        var mapHeight = mapDiv.offsetHeight;
+        var pixPosition = this.getProjection().fromLatLngToContainerPixel(this.position_);
+
+        if (pixPosition.x < (-iwOffsetX + padX)) {
+          xOffset = pixPosition.x + iwOffsetX - padX;
+        } else if ((pixPosition.x + iwWidth + iwOffsetX + padX) > mapWidth) {
+          xOffset = pixPosition.x + iwWidth + iwOffsetX + padX - mapWidth;
         }
-      }
+        if (this.alignBottom_) {
+          if (pixPosition.y < (-iwOffsetY + padY + iwHeight)) {
+            yOffset = pixPosition.y + iwOffsetY - padY - iwHeight;
+          } else if ((pixPosition.y + iwOffsetY + padY) > mapHeight) {
+            yOffset = pixPosition.y + iwOffsetY + padY - mapHeight;
+          }
+        } else {
+          if (pixPosition.y < (-iwOffsetY + padY)) {
+            yOffset = pixPosition.y + iwOffsetY - padY;
+          } else if ((pixPosition.y + iwHeight + iwOffsetY + padY) > mapHeight) {
+            yOffset = pixPosition.y + iwHeight + iwOffsetY + padY - mapHeight;
+          }
+        }
 
-      if (!(xOffset === 0 && yOffset === 0)) {
+        if (!(xOffset === 0 && yOffset === 0)) {
 
-        // Move the map to the shifted center.
-        //
-        var c = map.getCenter();
-        map.panBy(xOffset, yOffset);
+          // Move the map to the shifted center.
+          //
+          var c = map.getCenter();
+          map.panBy(xOffset, yOffset);
+        }
       }
     }
   }
