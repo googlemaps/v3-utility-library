@@ -370,15 +370,19 @@ MarkerLabel_.prototype.draw = function () {
  */
 MarkerLabel_.prototype.setContent = function () {
   var content = this.marker_.get("labelContent");
-  if (typeof content.nodeType === "undefined") {
-    this.labelDiv_.innerHTML = content;
-    this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
-  } else {
-    this.labelDiv_.innerHTML = ""; // Remove current content
-    this.labelDiv_.appendChild(content);
-    content = content.cloneNode(true);
-    this.eventDiv_.innerHTML = ""; // Remove current content
-    this.eventDiv_.appendChild(content);
+  var previousContent = this.marker_._previousContent;
+  if(previousContent !== content){
+    this.marker_._previousContent = content;
+    if (typeof content.nodeType === "undefined") {
+      this.labelDiv_.innerHTML = content;
+      this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+    } else {
+      this.labelDiv_.innerHTML = ""; // Remove current content
+      this.labelDiv_.appendChild(content);
+      content = content.cloneNode(true);
+      this.eventDiv_.innerHTML = ""; // Remove current content
+      this.eventDiv_.appendChild(content);
+    }
   }
 };
 
