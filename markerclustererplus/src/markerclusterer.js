@@ -115,7 +115,7 @@ ClusterIcon.prototype.onAdd = function () {
   var cMouseDownInCluster;
   var cDraggingMapByCluster;
   var gmVersion = google.maps.version.split(".");
-  
+
   gmVersion = parseInt(gmVersion[0] * 100, 10) + parseInt(gmVersion[1], 10);
 
   this.div_ = document.createElement("div");
@@ -135,7 +135,7 @@ ClusterIcon.prototype.onAdd = function () {
     cMouseDownInCluster = true;
     cDraggingMapByCluster = false;
   });
-  
+
 // March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
 // But it doesn't work with earlier releases so do a version check.
   if (gmVersion >= 332) { // Ugly version-dependent code
@@ -746,7 +746,7 @@ MarkerClusterer.prototype.onAdd = function () {
   this.ready_ = true;
 
   this.repaint();
-  
+
   this.prevZoom_ = this.getMap().getZoom();
 
   // Add the map event listeners
@@ -759,7 +759,7 @@ MarkerClusterer.prototype.onAdd = function () {
       var maxZoom = Math.min(this.getMap().maxZoom || 100,
                              this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom);
       zoom = Math.min(Math.max(zoom, minZoom), maxZoom);
-      
+
       if (this.prevZoom_ != zoom) {
         this.prevZoom_ = zoom;
         this.resetViewport_(false);
@@ -1655,3 +1655,6 @@ MarkerClusterer.IMAGE_EXTENSION = "png";
  * @constant
  */
 MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
+
+var module = module || {};
+module.exports = MarkerClusterer;

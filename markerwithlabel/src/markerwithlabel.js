@@ -301,7 +301,7 @@ MarkerLabel_.prototype.addMouseListeners = function () {
       me.setZIndex();
     }),
     // Prevent touch events from passing through the label DIV to the underlying map.
-    // 
+    //
     google.maps.event.addDomListener(this.eventDiv_, "touchstart", function (e) {
       cTouchScreen = true;
       cStopPropagation(e);
@@ -342,7 +342,7 @@ MarkerLabel_.prototype.onRemove = function () {
   }
   if (this.eventDiv_.parentNode) {
     this.eventDiv_.parentNode.removeChild(this.eventDiv_);
-  }  
+  }
   // Remove event listeners:
   this.removeMouseListeners();
 
@@ -625,3 +625,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   // ... then deal with the label:
   this.label.setMap(theMap);
 };
+
+var module = module || {};
+module.exports = MarkerWithLabel;
