@@ -5,7 +5,7 @@
 
 /**
  * @name MarkerClusterer for Google Maps v3
- * @version version 1.0.1
+ * @version version 1.0.2
  * @author Luke Mahe
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of
@@ -1315,5 +1315,6 @@ Object.keys = Object.keys || function(o) {
     return result;
 };
 
-var module = module || {};
-module.exports = MarkerClusterer;
+if (typeof module == 'object') {
+  module.exports = MarkerClusterer;
+}

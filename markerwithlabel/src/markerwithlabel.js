@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.2.1 [March 7, 2018]
+ * @version 1.2.2
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -74,7 +74,10 @@ function MarkerLabel_(marker, crossURL) {
   this.crossDiv_ = MarkerLabel_.getSharedCross(crossURL);
 }
 
-inherits(MarkerLabel_, google.maps.OverlayView);
+if (typeof google !== 'undefined') {
+  inherits(MarkerLabel_, google.maps.OverlayView);
+}
+
 
 /**
  * Returns the DIV for the cross used when dragging a marker when the
@@ -610,7 +613,9 @@ function MarkerWithLabel(opt_options) {
   google.maps.Marker.apply(this, arguments);
 }
 
-inherits(MarkerWithLabel, google.maps.Marker);
+if (typeof google !== 'undefined') {
+  inherits(MarkerWithLabel, google.maps.Marker);
+}
 
 /**
  * Overrides the standard Marker setMap function.
@@ -626,5 +631,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   this.label.setMap(theMap);
 };
 
-var module = module || {};
-module.exports = MarkerWithLabel;
+if (typeof module == 'object') {
+  module.exports = MarkerWithLabel;
+}
