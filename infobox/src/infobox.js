@@ -626,8 +626,7 @@ InfoBox.prototype.setContent = function (content) {
     // Odd code required to make things work with MSIE.
     //
     if (!this.fixedWidthSet_) {
-
-      this.div_.style.width = "";
+        this.div_.style.width = this.div_.offsetWidth + "px";
     }
 
     if (typeof content.nodeType === "undefined") {
@@ -635,19 +634,6 @@ InfoBox.prototype.setContent = function (content) {
     } else {
       this.div_.innerHTML = this.getCloseBoxImg_();
       this.div_.appendChild(content);
-    }
-
-    // Perverse code required to make things work with MSIE.
-    // (Ensures the close box does, in fact, float to the right.)
-    //
-    if (!this.fixedWidthSet_) {
-      this.div_.style.width = this.div_.offsetWidth + "px";
-      if (typeof content.nodeType === "undefined") {
-        this.div_.innerHTML = this.getCloseBoxImg_() + content;
-      } else {
-        this.div_.innerHTML = this.getCloseBoxImg_();
-        this.div_.appendChild(content);
-      }
     }
 
     this.addClickHandler_();
