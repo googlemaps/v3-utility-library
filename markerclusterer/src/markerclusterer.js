@@ -164,7 +164,8 @@ function MarkerClusterer(map, opt_markers, opt_options) {
 
   // Add the map event listeners
   var that = this;
-  google.maps.event.addListener(this.map_, 'zoom_changed', function() {
+
+  this.zoomChangedListener = google.maps.event.addListener(this.map_, 'zoom_changed', function() {
     // Determines map type and prevent illegal zoom levels
     var zoom = that.map_.getZoom();
     var minZoom = that.map_.minZoom || 0;
@@ -178,7 +179,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
     }
   });
 
-  google.maps.event.addListener(this.map_, 'idle', function() {
+  this.idleListener = google.maps.event.addListener(this.map_, 'idle', function() {
     that.redraw();
   });
 
@@ -805,6 +806,18 @@ MarkerClusterer.prototype.createClusters_ = function() {
   }
 };
 
+/**
+ * Implementation of the onRemove interface.
+ * @ignore
+ */
+MarkerClusterer.prototype.onRemove = function() {
+  google.maps.event.removeListener(this.zoomChangedListener)
+  google.maps.event.removeListener(this.idleListener)
+  // Remove all the clusters
+  for (var i = 0, cluster; cluster = this.clusters_[i]; i++) {
+    cluster.remove();
+  }
+};
 
 /**
  * A cluster that contains markers.
@@ -1255,7 +1268,6 @@ ClusterIcon.prototype.createCss = function(pos) {
   return style.join('');
 };
 
-
 // Export Symbols for Closure
 // If you are not going to compile with closure then you can remove the
 // code below.
@@ -1298,6 +1310,7 @@ MarkerClusterer.prototype['setMaxZoom'] =
     MarkerClusterer.prototype.setMaxZoom;
 MarkerClusterer.prototype['onAdd'] = MarkerClusterer.prototype.onAdd;
 MarkerClusterer.prototype['draw'] = MarkerClusterer.prototype.draw;
+MarkerClusterer.prototype['onRemove'] = MarkerClusterer.prototype.onRemove;
 
 Cluster.prototype['getCenter'] = Cluster.prototype.getCenter;
 Cluster.prototype['getSize'] = Cluster.prototype.getSize;
@@ -1319,3 +1332,4 @@ Object.keys = Object.keys || function(o) {
 if (typeof module == 'object') {
   module.exports = MarkerClusterer;
 }
+
