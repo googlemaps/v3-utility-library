@@ -42,7 +42,7 @@ contribute, please read [How to Contribute][contrib].
 [InfoBubble]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/infobubble/examples/example.html
 [KeyDragZoom for V3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/keydragzoom/docs/reference.html
 [MapLabel for Google Maps V3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/maplabel/docs/reference.html
-[MarkerClusterer for Google Maps v3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/docs/reference.html
+[MarkerClusterer for Google Maps v3]: https://googlemaps.github.io/js-marker-clusterer/docs/reference.html
 [MarkerClustererPlus for Google Maps V3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/markerclustererplus/docs/reference.html
 [MarkerManager v3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/markermanager/docs/reference.html
 [MarkerWithLabel for V3]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/markerwithlabel/docs/reference.html
