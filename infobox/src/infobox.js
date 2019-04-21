@@ -1,6 +1,6 @@
 /**
  * @name InfoBox
- * @version 1.1.20 [April 9, 2018]
+ * @version 1.1.22 [April 18, 2019]
  * @author Gary Little (inspired by proof-of-concept code from Pamela Fox of Google)
  * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
  * @fileoverview InfoBox extends the Google Maps JavaScript API V3 <tt>OverlayView</tt> class.
@@ -116,7 +116,9 @@ function InfoBox(opt_opts) {
   this.enableEventPropagation_ = opt_opts.enableEventPropagation || false;
 
   this.div_ = null;
-  this.closeListener_ = null;
+  this.closeClickListener_ = null;
+  this.closeMouseOverListener_ = null;
+  this.closeMouseOutListener_ = null;
   this.moveListener_ = null;
   this.contextListener_ = null;
   this.eventListeners_ = null;
@@ -274,11 +276,15 @@ InfoBox.prototype.addClickHandler_ = function () {
   if (this.closeBoxURL_ !== "") {
 
     closeBox = this.div_.firstChild;
-    this.closeListener_ = google.maps.event.addDomListener(closeBox, "click", this.getCloseClickHandler_());
+    this.closeClickListener_ = google.maps.event.addDomListener(closeBox, "click", this.getCloseClickHandler_());
+    this.closeMouseOverListener_ = google.maps.event.addDomListener(closeBox, "mouseover", this.getCloseMouseOverHandler_());
+    this.closeMouseOutListener_ = google.maps.event.addDomListener(closeBox, "mouseout", this.getCloseMouseOutHandler_());
 
   } else {
 
-    this.closeListener_ = null;
+    this.closeClickListener_ = null;
+    this.closeMouseOverListener_ = null;
+    this.closeMouseOutListener_ = null;
   }
 };
 
@@ -309,6 +315,44 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
 
     me.close();
   };
+};
+
+/**
+ * Returns the function to call when the mouse moves over the InfoBox's close box.
+ * @private
+ */
+InfoBox.prototype.getCloseMouseOverHandler_ = function () {
+
+  var me = this;
+
+  return function (e) {
+
+    /**
+     * This event is fired when the mouse moves over the InfoBox's close box.
+     * @name InfoBox#closeclick
+     * @event
+     */
+    google.maps.event.trigger(me, "closemouseover");
+  }
+};
+
+/**
+ * Returns the function to call when the mouse moves out of the InfoBox's close box.
+ * @private
+ */
+InfoBox.prototype.getCloseMouseOutHandler_ = function () {
+
+  var me = this;
+
+  return function (e) {
+
+    /**
+     * This event is fired when the mouse moves out of the InfoBox's close box.
+     * @name InfoBox#closeclick
+     * @event
+     */
+    google.maps.event.trigger(me, "closemouseout");
+  }
 };
 
 /**
@@ -416,17 +460,8 @@ InfoBox.prototype.setBoxStyle_ = function () {
     for (i in boxStyle) {
 
       if (boxStyle.hasOwnProperty(i)) {
-
         this.div_.style[i] = boxStyle[i];
       }
-    }
-
-    // Fix for iOS disappearing InfoBox problem.
-    // See http://stackoverflow.com/questions/9229535/google-maps-markers-disappear-at-certain-zoom-level-only-on-iphone-ipad
-    // Required: use "matrix" technique to specify transforms in order to avoid this bug.
-    if ((typeof this.div_.style.WebkitTransform === "undefined") || (this.div_.style.WebkitTransform.indexOf("translateZ") === -1 && this.div_.style.WebkitTransform.indexOf("matrix") === -1)) {
-
-      this.div_.style.WebkitTransform = "translateZ(0)";
     }
 
     // Fix up opacity style for benefit of MSIE:
@@ -617,10 +652,14 @@ InfoBox.prototype.setContent = function (content) {
 
   if (this.div_) {
 
-    if (this.closeListener_) {
+    if (this.closeClickListener_) {
 
-      google.maps.event.removeListener(this.closeListener_);
-      this.closeListener_ = null;
+      google.maps.event.removeListener(this.closeClickListener_);
+      google.maps.event.removeListener(this.closeMouseOverListener_);
+      google.maps.event.removeListener(this.closeMouseOutListener_);
+      this.closeClickListener_ = null;
+      this.closeMouseOverListener_ = null;
+      this.closeMouseOutListener_ = null;
     }
 
     // Odd code required to make things work with MSIE.
@@ -787,6 +826,20 @@ InfoBox.prototype.getHeight = function () {
 };
 
 /**
+ * Returns the IMG node of the InfoBox's close box.
+ * @returns {Node}
+ */
+InfoBox.prototype.getCloseBoxImg = function () {
+  var img = null;
+
+  if (this.div_ && this.closeBoxURL_) {
+    img = this.div_.firstChild;
+  }
+  
+  return img;
+};
+
+/**
  * Shows the InfoBox. [Deprecated; use <tt>setVisible</tt> instead.]
  */
 InfoBox.prototype.show = function () {
@@ -845,10 +898,14 @@ InfoBox.prototype.close = function () {
 
   var i;
 
-  if (this.closeListener_) {
+  if (this.closeClickListener_) {
 
-    google.maps.event.removeListener(this.closeListener_);
-    this.closeListener_ = null;
+    google.maps.event.removeListener(this.closeClickListener_);
+    google.maps.event.removeListener(this.closeMouseOverListener_);
+    google.maps.event.removeListener(this.closeMouseOutListener_);
+    this.closeClickListener_ = null;
+    this.closeMouseOverListener_ = null;
+    this.closeMouseOutListener_ = null;
   }
 
   if (this.eventListeners_) {
