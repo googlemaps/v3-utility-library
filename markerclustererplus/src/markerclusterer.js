@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.11
+ * @version 2.1.12 [April 16, 2019]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -149,6 +149,7 @@ ClusterIcon.prototype.onAdd = function () {
     if (!cDraggingMapByCluster) {
       var theBounds;
       var mz;
+      var originalZoom;
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
        * This event is fired when a cluster marker is clicked.
@@ -164,15 +165,18 @@ ClusterIcon.prototype.onAdd = function () {
       if (mc.getZoomOnClick()) {
         // Zoom into the cluster.
         mz = mc.getMaxZoom();
+        originalZoom = mc.getMap().getZoom();
         theBounds = cClusterIcon.cluster_.getBounds();
         mc.getMap().fitBounds(theBounds);
-        // There is a fix for Issue 170 here:
+        // There is a fix for Issue 170 here.
+        // Also fixes https://github.com/googlemaps/v3-utility-library/issues/437
         setTimeout(function () {
-          mc.getMap().fitBounds(theBounds);
-          // Don't zoom beyond the max zoom level
-          if (mz !== null && (mc.getMap().getZoom() > mz)) {
-            mc.getMap().setZoom(mz + 1);
-          }
+          var currentZoom = mc.getMap().getZoom();
+          currentZoom = Math.max(currentZoom, originalZoom + 1);
+          // Don't zoom beyond the max zoom level if maxZoom specified
+          // or ensure we zoom at least one level over original zoom level. 
+          var newZoom = (mz !== null && (currentZoom > mz) ? mz + 1 : currentZoom);
+          mc.getMap().setZoom(newZoom);
         }, 100);
       }
 
@@ -751,21 +755,9 @@ MarkerClusterer.prototype.onAdd = function () {
 
   // Add the map event listeners
   this.listeners_ = [
-    google.maps.event.addListener(this.getMap(), "zoom_changed", function () {
-      // Fix for bug #407
-      // Determines map type and prevents illegal zoom levels
-      var zoom = this.getMap().getZoom();
-      var minZoom = this.getMap().minZoom || 0;
-      var maxZoom = Math.min(this.getMap().maxZoom || 100,
-                             this.getMap().mapTypes[this.getMap().getMapTypeId()].maxZoom);
-      zoom = Math.min(Math.max(zoom, minZoom), maxZoom);
-
-      if (this.prevZoom_ != zoom) {
-        this.prevZoom_ = zoom;
-        this.resetViewport_(false);
-      }
-    }.bind(this)),
+  // See https://github.com/googlemaps/v3-utility-library/issues/481#issuecomment-483675077
     google.maps.event.addListener(this.getMap(), "idle", function () {
+      cMarkerClusterer.resetViewport_();
       cMarkerClusterer.redraw_();
     })
   ];
@@ -1636,7 +1628,7 @@ MarkerClusterer.BATCH_SIZE_IE = 500;
  * @type {string}
  * @constant
  */
-MarkerClusterer.IMAGE_PATH = "../images/m";
+MarkerClusterer.IMAGE_PATH = "https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m";
 
 
 /**
@@ -1655,7 +1647,3 @@ MarkerClusterer.IMAGE_EXTENSION = "png";
  * @constant
  */
 MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
-
-if (typeof module == 'object') {
-  module.exports = MarkerClusterer;
-}
