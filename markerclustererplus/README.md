@@ -7,6 +7,10 @@ The library creates and manages per-zoom-level clusters for large amounts of mar
 
 It is based on the V3 MarkerClusterer port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
 
+## NPM
+
+Available via NPM as the package `@google/markerclustererplus`
+
 [Read more][more]
 
 ## Support

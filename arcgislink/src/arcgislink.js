@@ -3739,8 +3739,10 @@ Layer.prototype.queryRelatedRecords = function(qparams, callback, errback) {
     //div.style.height = (sw.y - ne.y) + 'px';
   };
   ImageOverlay.prototype.onRemove = function() {
-    this.div_.parentNode.removeChild(this.div_);
-    this.div_ = null;
+    if (this.div_) {
+      this.div_.parentNode.removeChild(this.div_);
+      this.div_ = null;
+    }
   }
   /**
  * Creates a copyright control

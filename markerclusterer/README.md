@@ -3,7 +3,11 @@ MarkerClusterer for Google Maps v3
 
 ## Description
 
-The library creates and manages per-zoom-level clusters for large amounts of markers. 
+Creates and manages per-zoom-level clusters for large amounts of markers.
+
+## NPM
+
+Available via NPM as the package `@google/markerclusterer`
 
 [Read more][more]
 

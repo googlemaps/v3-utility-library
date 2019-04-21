@@ -1,6 +1,6 @@
 /**
  * @name MarkerWithLabel for V3
- * @version 1.2.1 [March 7, 2018]
+ * @version 1.2.3
  * @author Gary Little (inspired by code from Marc Ridey of Google).
  * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
@@ -74,7 +74,10 @@ function MarkerLabel_(marker, crossURL) {
   this.crossDiv_ = MarkerLabel_.getSharedCross(crossURL);
 }
 
-inherits(MarkerLabel_, google.maps.OverlayView);
+if (typeof google !== 'undefined') {
+  inherits(MarkerLabel_, google.maps.OverlayView);
+}
+
 
 /**
  * Returns the DIV for the cross used when dragging a marker when the
@@ -301,7 +304,7 @@ MarkerLabel_.prototype.addMouseListeners = function () {
       me.setZIndex();
     }),
     // Prevent touch events from passing through the label DIV to the underlying map.
-    // 
+    //
     google.maps.event.addDomListener(this.eventDiv_, "touchstart", function (e) {
       cTouchScreen = true;
       cStopPropagation(e);
@@ -342,7 +345,7 @@ MarkerLabel_.prototype.onRemove = function () {
   }
   if (this.eventDiv_.parentNode) {
     this.eventDiv_.parentNode.removeChild(this.eventDiv_);
-  }  
+  }
   // Remove event listeners:
   this.removeMouseListeners();
 
@@ -370,15 +373,19 @@ MarkerLabel_.prototype.draw = function () {
  */
 MarkerLabel_.prototype.setContent = function () {
   var content = this.marker_.get("labelContent");
-  if (typeof content.nodeType === "undefined") {
-    this.labelDiv_.innerHTML = content;
-    this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
-  } else {
-    this.labelDiv_.innerHTML = ""; // Remove current content
-    this.labelDiv_.appendChild(content);
-    content = content.cloneNode(true);
-    this.eventDiv_.innerHTML = ""; // Remove current content
-    this.eventDiv_.appendChild(content);
+  var previousContent = this.marker_._previousContent;
+  if(previousContent !== content){
+    this.marker_._previousContent = content;
+    if (typeof content.nodeType === "undefined") {
+      this.labelDiv_.innerHTML = content;
+      this.eventDiv_.innerHTML = this.labelDiv_.innerHTML;
+    } else {
+      this.labelDiv_.innerHTML = ""; // Remove current content
+      this.labelDiv_.appendChild(content);
+      content = content.cloneNode(true);
+      this.eventDiv_.innerHTML = ""; // Remove current content
+      this.eventDiv_.appendChild(content);
+    }
   }
 };
 
@@ -606,7 +613,9 @@ function MarkerWithLabel(opt_options) {
   google.maps.Marker.apply(this, arguments);
 }
 
-inherits(MarkerWithLabel, google.maps.Marker);
+if (typeof google !== 'undefined') {
+  inherits(MarkerWithLabel, google.maps.Marker);
+}
 
 /**
  * Overrides the standard Marker setMap function.
@@ -621,3 +630,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   // ... then deal with the label:
   this.label.setMap(theMap);
 };
+
+if (typeof module == 'object') {
+  module.exports = MarkerWithLabel;
+}
