@@ -257,13 +257,14 @@ ClusterIcon.prototype.show = function () {
     var spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
     var spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
     var pos = this.getPosFromLatLng_(this.center_);
+    var ext = this.url_.substr( (this.url_.lastIndexOf('.') +1) );
     this.div_.style.cssText = this.createCss(pos);
     img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
-    if (this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
-      img += "width: " + this.width_ + "px; height: " + this.height_ + "px;";
-    } else {
+    if (!this.cluster_.getMarkerClusterer().enableRetinaIcons_ && ext != 'svg') {
       img += "clip: rect(" + (-1 * spriteV) + "px, " + ((-1 * spriteH) + this.width_) + "px, " +
           ((-1 * spriteV) + this.height_) + "px, " + (-1 * spriteH) + "px);";
+    }else {
+        img += "width: " + this.width_ + "px;" + "height: " + this.height_ + "px;";
     }
     img += "'>";
     this.div_.innerHTML = img + "<div style='" +
