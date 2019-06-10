@@ -21,4 +21,4 @@ contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
 [contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/CONTRIB.md
-[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/docs/reference.html
+[more]: https://googlemaps.github.io/js-marker-clusterer/docs/reference.html
