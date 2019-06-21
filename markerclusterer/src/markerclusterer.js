@@ -59,6 +59,7 @@
  *       'anchor': (Array) The anchor position of the label text.
  *       'textColor': (string) The text color.
  *       'textSize': (number) The text size.
+ *       'fontFamily': (string) The font family
  *       'backgroundPosition': (string) The position of the backgound x, y.
  * @constructor
  * @extends google.maps.OverlayView
@@ -1199,6 +1200,7 @@ ClusterIcon.prototype.useStyle = function() {
   this.textColor_ = style['textColor'];
   this.anchor_ = style['anchor'];
   this.textSize_ = style['textSize'];
+  this.fontFamily = style['fontFamily'];
   this.backgroundPosition_ = style['backgroundPosition'];
 };
 
@@ -1248,10 +1250,17 @@ ClusterIcon.prototype.createCss = function(pos) {
 
   var txtColor = this.textColor_ ? this.textColor_ : 'black';
   var txtSize = this.textSize_ ? this.textSize_ : 11;
-
-  style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
+  
+  if (typeof this.fontFamily === 'string' && this.fontFamily_ && this.fontFamily_.length > 0) {
+    style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
+      pos.x + 'px; color:' + txtColor + '; position:absolute; font-size:' +
+      txtSize + 'px; font-family:' + this.fontFamily_ + ',Arial,sans-serif; font-weight:bold');
+  } else {
+    style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
       pos.x + 'px; color:' + txtColor + '; position:absolute; font-size:' +
       txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
+  }
+  
   return style.join('');
 };
 
