@@ -1,6 +1,6 @@
 /**
  * @name MarkerClustererPlus for Google Maps V3
- * @version 2.1.12 [April 16, 2019]
+ * @version 2.1.14 [July 17, 2019]
  * @author Gary Little
  * @fileoverview
  * The library creates and manages per-zoom-level clusters for large amounts of markers.
@@ -261,13 +261,15 @@ ClusterIcon.prototype.show = function () {
     var spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
     var spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
     var pos = this.getPosFromLatLng_(this.center_);
+    var ext = this.url_.substr(this.url_.lastIndexOf(".") + 1);
     this.div_.style.cssText = this.createCss(pos);
     img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
-    if (this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
-      img += "width: " + this.width_ + "px; height: " + this.height_ + "px;";
-    } else {
+    // Enhancement May 12, 2019: allow use of SVG icons.
+    if (!this.cluster_.getMarkerClusterer().enableRetinaIcons_ && ext !== "svg") {
       img += "clip: rect(" + (-1 * spriteV) + "px, " + ((-1 * spriteH) + this.width_) + "px, " +
           ((-1 * spriteV) + this.height_) + "px, " + (-1 * spriteH) + "px);";
+    } else {
+      img += "width: " + this.width_ + "px; height: " + this.height_ + "px;";
     }
     img += "'>";
     this.div_.innerHTML = img + "<div style='" +
@@ -1099,6 +1101,26 @@ MarkerClusterer.prototype.getCalculator = function () {
  */
 MarkerClusterer.prototype.setCalculator = function (calculator) {
   this.calculator_ = calculator;
+};
+
+
+/**
+ * Returns the value of the <code>batchSize</code> property.
+ *
+ * @return {number} the value of the batchSize property.
+ */
+MarkerClusterer.prototype.getBatchSize = function () {
+  return this.batchSize_;
+};
+
+
+/**
+ * Sets the value of the <code>batchSize</code> property.
+ *
+ *  @param {number} batchSize The value of the batchSize property.
+ */
+MarkerClusterer.prototype.setBatchSize = function (batchSize) {
+  this.batchSize_ = batchSize;
 };
 
 
