@@ -6,7 +6,7 @@ Utility libraries for Google Maps JavaScript API v3
 In this project you can find a set of utility libraries developed for Google Maps JavaScript API v3:
 
 - ArcGIS Server Link for Google Maps JavaScript API V3
-- CanvasLayer]
+- CanvasLayer
 - ExtOverviewMapControl for V3
 - Geolocation Marker for Google Maps v3
 - InfoBox
