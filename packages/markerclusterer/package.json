@@ -1,10 +1,14 @@
 {
   "name": "@google/markerclusterer",
-  "version": "1.0.3",
+  "version": "2.0.0rc1",
   "author": "Google Inc.",
   "description": "The library creates and manages per-zoom-level clusters for large amounts of markers.",
-  "main": "src/markerclusterer.js",
-  "files": ["src/markerclusterer.js"],
+  "main": "dist/markerclusterer.umd.js",
+  "module": "dist/markerclusterer.esm.js",
+  "unpkg": "dist/markerclusterer.min.js",
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/googlemaps/v3-utility-library.git"
@@ -19,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/googlemaps/v3-utility-library/issues"
   },
-  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/markerclusterer"
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/markerclusterer",
+  "scripts": {
+    "prepare": "rollup --config"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^1.23.0",
+    "rollup-plugin-terser": "^5.1.2"
+  }
 }
