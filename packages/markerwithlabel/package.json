@@ -21,9 +21,5 @@
   "bugs": {
     "url": "https://github.com/googlemaps/v3-utility-library/issues"
   },
-  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel",
-  "dependencies": {
-    "rollup": "^1.23.0",
-    "rollup-plugin-terser": "^5.1.2"
-  }
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel"
 }

@@ -2,5 +2,20 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "allowBranch": [
+        "master"
+      ],
+      "conventionalCommits": true,
+      "ammend": true
+    }
+  },
+  "ignoreChanges": [
+    "**/examples/**",
+    "**/tests/**",
+    "**/docs/**",
+    "**/*.md"
+  ]
 }

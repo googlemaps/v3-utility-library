@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- stable
+- '6'
+- '4'
+before_deploy:
+- git remote set-url origin https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- git config --global user.email "jpoehnelt@google.com"
+- git checkout master
+- openssl aes-256-cbc -K $encrypted_9444ddcaafdc_key -iv $encrypted_9444ddcaafdc_iv
+  -in packages/markerclusterer/.npmrc.enc -out packages/markerclusterer/.npmrc -d
+deploy:
+- provider: script
+  script: npx lerna publish --yes --no-verify-access --no-git-reset --ignore markerclustererplus --ignore markerwithlabel
+  skip_cleanup: true
+  keep_history: true
+  on:
+    branch: master
+    node_js: stable
+env:
+  global:
+    secure: ECvG11CBLCkpY8OKiubf2skFrlUba1cvCWF5aIubiAKgZyuzbKTxRl4F10Zf63C2RH/uw+PAnIMQW974WmeWpPZzlVn0wUFUEs0KWAcjr90SyITewQHsRx1MqztZ+/TqVSQ3vy0yMENqhuERTGH9uIBOCNfqBjJlzr1PzMIRZF6gIJKn6SMVikWUmMXADQ3VBV+XYI74uKbJ+SPhBhRA17bbWkQGUwtg9gK4JW2HW49hZ9/rg7FAO+Gc9wQjlQcGG6Q8wszPSFC+yWZwwLB1vOjktqMz0maLbztQP/DpB0+mr0kU+7d95ECXiI3C3IuzGABlriwFzzFhYLDD7gwN++sgm+ZsBu5OUmKS0cNesFKaFoSrr317c/beG6G/i+7ByQz6FjeOnyQKwl2tmWqwjczXjNPOZUeGkwgPeBFYOmT7u8Hp+WudYTl5mWM8XFipMIdJHgvt9G0Myn0wxbTZ6kMX9qhDgkt+lTCQUE6lDPdxBCHkRw613p2RzH0FmtHkIWyfixXCCRZfYjeJ1yPZuzf4f4j3W2oomx9ly0yntmVbyuXhaRXQMRy4caCktGBea8OWXljFjSy0CBCFSC/P7piB+DSLzAz/lKnzlWJaLFZ7hi1e4B0FtnbcA/5R14EzosU0kFAAB+zvHUD7TjGJIn9NfavXYlJvZnnpCVBplFA=
