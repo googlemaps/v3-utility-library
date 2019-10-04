@@ -27,10 +27,9 @@
   "scripts": {
     "prepare": "rollup --config"
   },
-  "dependencies": {
-    "rollup": "^1.23.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "rollup": "^1.23.0",
     "rollup-plugin-terser": "^5.1.2"
   }
 }

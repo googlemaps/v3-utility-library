@@ -65,6 +65,23 @@ class MarkerClusterer {
   constructor(map, opt_markers, opt_options) {
     this.extend(MarkerClusterer, google.maps.OverlayView);
     this.map_ = map;
+    
+    /**
+     * The marker cluster image path.
+     *
+     * @type {string}
+     * @private
+     */
+    this.MARKER_CLUSTER_IMAGE_PATH_ = '../images/m';
+
+
+    /**
+     * The marker cluster image path.
+     *
+     * @type {string}
+     * @private
+     */
+    this.MARKER_CLUSTER_IMAGE_EXTENSION_ = 'png';
     /**
    * @type {Array.<google.maps.Marker>}
    * @private
@@ -179,23 +196,6 @@ class MarkerClusterer {
     if (opt_markers && (opt_markers.length || Object.keys(opt_markers).length)) {
       this.addMarkers(opt_markers, false);
     }
-
-    /**
- * The marker cluster image path.
- *
- * @type {string}
- * @private
- */
-    this.prototype.MARKER_CLUSTER_IMAGE_PATH_ = '../images/m';
-
-
-    /**
-     * The marker cluster image path.
-     *
-     * @type {string}
-     * @private
-     */
-    this.prototype.MARKER_CLUSTER_IMAGE_EXTENSION_ = 'png';
   }
 
 
@@ -239,6 +239,7 @@ class MarkerClusterer {
    * @private
    */
   setupStyles_() {
+    console.log(this)
     if (this.styles_.length) {
       return;
     }

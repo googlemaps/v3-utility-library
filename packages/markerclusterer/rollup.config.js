@@ -1,4 +1,5 @@
 import { terser } from 'rollup-plugin-terser';
+
 export default [
     {
         input: 'src/markerclusterer.js',
@@ -6,7 +7,7 @@ export default [
         output: {
             file: 'dist/markerclusterer.umd.js',
             format: 'umd',
-            name: 'markerclusterer',
+            name: 'MarkerClusterer',
             esModule: false
         }
     },
@@ -16,7 +17,8 @@ export default [
         output: {
             file: 'dist/markerclusterer.min.js',
             format: 'iife',
-            name: 'markerclusterer',
+            name: 'window',
+            extend: true,
         }
     },
     {
