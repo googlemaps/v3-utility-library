@@ -8,9 +8,14 @@
       "allowBranch": [
         "master"
       ],
-      "commitHooks": false,
       "conventionalCommits": true,
-      "message": "chore(release): [skip ci]"
+      "ammend": true
     }
-  }
+  },
+  "ignoreChanges": [
+    "**/examples/**",
+    "**/tests/**",
+    "**/docs/**",
+    "**/*.md"
+  ]
 }
