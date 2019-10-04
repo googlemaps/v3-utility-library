@@ -11,7 +11,7 @@ before_deploy:
   -in packages/markerclusterer/.npmrc.enc -out packages/markerclusterer/.npmrc -d
 deploy:
 - provider: script
-  script: npx lerna publish --yes --no-verify-access --ignore markerclustererplus --ignore markerwithlabel --no-git-tag-version --no-changelog
+  script: npx lerna publish --yes --no-verify-access --ignore markerclustererplus --ignore markerwithlabel
   skip_cleanup: true
   keep_history: true
   on:
