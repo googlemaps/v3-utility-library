@@ -2,5 +2,15 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "allowBranch": [
+        "master"
+      ],
+      "commitHooks": false,
+      "conventionalCommits": true,
+      "message": "chore(release): [skip ci]"
+    }
+  }
 }
