@@ -1,6 +1,6 @@
 {
   "name": "@google/markerclusterer",
-  "version": "2.0.0rc1",
+  "version": null,
   "author": "Google Inc.",
   "description": "The library creates and manages per-zoom-level clusters for large amounts of markers.",
   "main": "dist/markerclusterer.umd.js",
@@ -27,7 +27,6 @@
   "scripts": {
     "prepare": "rollup --config"
   },
-  "dependencies": {},
   "devDependencies": {
     "rollup": "^1.23.0",
     "rollup-plugin-terser": "^5.1.2"
