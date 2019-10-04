@@ -30,5 +30,10 @@
   "devDependencies": {
     "rollup": "^1.23.0",
     "rollup-plugin-terser": "^5.1.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com",
+    "tag": "alpha"
   }
 }
