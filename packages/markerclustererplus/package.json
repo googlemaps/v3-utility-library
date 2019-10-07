@@ -22,5 +22,15 @@
     "dist/*",
     "src/*"
   ],
-  "main": "src/markerclusterer.js"
+  "main": "dist/markerclustererplus.umd.js",
+  "unpkg": "dist/markerclustererplus.min.js",
+  "module": "dist/markerclustererplus.esm.js",
+  "scripts": {
+    "prepare": "rollup --config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com",
+    "tag": "alpha"
+  }
 }
