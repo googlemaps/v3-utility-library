@@ -19,7 +19,8 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/*"
   ],
   "main": "dist/markerclusterer.umd.js",
   "unpkg": "dist/markerclusterer.min.js",
