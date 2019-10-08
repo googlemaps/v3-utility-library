@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "module": "es6",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "target": "es6"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/**/*.test.*"]
+}
