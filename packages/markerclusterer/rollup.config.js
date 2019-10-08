@@ -8,7 +8,6 @@ export default [
             file: 'dist/markerclusterer.umd.js',
             format: 'umd',
             name: 'MarkerClusterer',
-            esModule: false
         }
     },
     {
@@ -17,8 +16,7 @@ export default [
         output: {
             file: 'dist/markerclusterer.min.js',
             format: 'iife',
-            name: 'window',
-            extend: true,
+            name: 'MarkerClusterer',
         }
     },
     {
