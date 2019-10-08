@@ -1,6 +1,6 @@
 {
   "name": "@google/markerclusterer",
-  "version": "2.0.0-alpha-4",
+  "version": "2.0.0-alpha.5.0",
   "description": "The library creates and manages per-zoom-level clusters for large amounts of markers.",
   "keywords": [
     "cluster",
