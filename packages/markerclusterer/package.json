@@ -22,7 +22,7 @@
     "dist/*",
     "src/*"
   ],
-  "main": "dist/markerclusterer.umd.js",
+  "main": "dist/markerclusterer.common.js",
   "unpkg": "dist/markerclusterer.min.js",
   "module": "dist/markerclusterer.esm.js",
   "scripts": {

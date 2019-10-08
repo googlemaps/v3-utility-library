@@ -27,5 +27,12 @@ export default [
             file: 'dist/markerclusterer.esm.js',
             format: 'esm'
         }
-    }
+    },
+    {
+        input: 'src/markerclusterer.js',
+        output: {
+            file: 'dist/markerclusterer.common.js',
+            format: 'cjs'
+        }
+    },
 ];
