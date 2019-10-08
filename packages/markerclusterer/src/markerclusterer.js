@@ -1255,4 +1255,4 @@ class ClusterIcon {
   }
 }
 
-export { MarkerClusterer };
+export default MarkerClusterer;
