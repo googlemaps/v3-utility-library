@@ -239,7 +239,6 @@ class MarkerClusterer {
    * @private
    */
   setupStyles_() {
-    console.log(this)
     if (this.styles_.length) {
       return;
     }
