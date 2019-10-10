@@ -5,7 +5,7 @@ export default [
         input: 'src/markerclusterer.js',
         plugins: [terser()],
         output: {
-            file: 'dist/markerclusterer.umd.js',
+            file: 'dist/markerclustererplus.umd.js',
             format: 'umd',
             name: 'MarkerClusterer',
         }
@@ -14,7 +14,7 @@ export default [
         input: 'src/markerclusterer.js',
         plugins: [terser()],
         output: {
-            file: 'dist/markerclusterer.min.js',
+            file: 'dist/markerclustererplus.min.js',
             format: 'iife',
             name: 'MarkerClusterer',
         }
@@ -22,7 +22,7 @@ export default [
     {
         input: 'src/markerclusterer.js',
         output: {
-            file: 'dist/markerclusterer.esm.js',
+            file: 'dist/markerclustererplus.esm.js',
             format: 'esm'
         }
     }
