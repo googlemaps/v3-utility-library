@@ -18,5 +18,5 @@ contribute, please read [How to Contribute][contrib].
 [esri]: http://sampleserver3.arcgisonline.com/ArcGIS/SDK/REST/index.html
 [api]: https://developers.google.com/maps/documentation/javascript/tutorial
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
-[contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/arcgislink/CONTRIB.md
-[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/arcgislink/docs/reference.html
+[contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/packages/arcgislink/CONTRIB.md
+[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/packages/arcgislink/docs/reference.html

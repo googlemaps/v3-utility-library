@@ -18,5 +18,5 @@ If you find a bug, or have a feature suggestion, please [log an issue][issues]. 
 contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
-[contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/routeboxer/CONTRIB.md
-[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/routeboxer/docs/reference.html
+[contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/packages/routeboxer/CONTRIB.md
+[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/packages/routeboxer/docs/reference.html
