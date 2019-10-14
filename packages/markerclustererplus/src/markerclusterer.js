@@ -251,6 +251,8 @@ class ClusterIcon {
    */
   show() {
     if (this.div_) {
+      var mc = this.cluster_.markerClusterer_;
+      var ariaLabel = mc.ariaLabelFn(this.sums_.text);
       var img = "";
       // NOTE: values must be specified in px units
       var bp = this.backgroundPosition_.split(" ");
@@ -258,7 +260,7 @@ class ClusterIcon {
       var spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
       var pos = this.getPosFromLatLng_(this.center_);
       this.div_.style.cssText = this.createCss(pos);
-      img = "<img src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
+      img = "<img aria-hidden='true' src='" + this.url_ + "' style='position: absolute; top: " + spriteV + "px; left: " + spriteH + "px; ";
       if (this.cluster_.getMarkerClusterer().enableRetinaIcons_) {
         img += "width: " + this.width_ + "px; height: " + this.height_ + "px;";
       } else {
@@ -266,7 +268,10 @@ class ClusterIcon {
           ((-1 * spriteV) + this.height_) + "px, " + (-1 * spriteH) + "px);";
       }
       img += "'>";
-      this.div_.innerHTML = img + "<div style='" +
+      this.div_.innerHTML = img + "<div " + 
+        "aria-label='" + ariaLabel + "' "
+        "tabindex='0' " +
+        "style='" +
         "position: absolute;" +
         "top: " + this.anchorText_[0] + "px;" +
         "left: " + this.anchorText_[1] + "px;" +
@@ -279,7 +284,7 @@ class ClusterIcon {
         "text-align: center;" +
         "width: " + this.width_ + "px;" +
         "line-height:" + this.height_ + "px;" +
-        "'>" + this.sums_.text + "</div>";
+        "'>" + "<span aria-hidden='true'>" + this.sums_.text + "</span>" + "</div>";
       if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
         this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
       } else {
@@ -597,6 +602,11 @@ class Cluster {
 }
 
 /**
+ * @callback {Function} ariaLabelFnType
+ * @param {number} numberOfHotels
+ * @returns {string}
+ */
+/**
  * @name MarkerClustererOptions
  * @class This class represents the optional parameter passed to
  *  the {@link MarkerClusterer} constructor.
@@ -669,6 +679,9 @@ class Cluster {
  *  An array of numbers containing the widths of the group of
  *  <code>imagePath</code>n.<code>imageExtension</code> image files.
  *  (The images are assumed to be square.)
+ * @property {ariaLabelFnType} [ariaLabelFn]
+ *  A function to take a number associated with the cluster and output a string to attach an 
+ *  ariaLabel to the cluter
  */
 /**
  * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
@@ -738,6 +751,7 @@ class MarkerClusterer {
     this.listeners_ = [];
     this.activeMap_ = null;
     this.ready_ = false;
+    this.ariaLabelFn = opt_options.ariaLabelFn || function () {return ''};
 
     this.gridSize_ = opt_options.gridSize || 60;
     this.minClusterSize_ = opt_options.minimumClusterSize || 2;
