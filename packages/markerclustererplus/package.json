@@ -20,7 +20,8 @@
   "author": "Google Inc.",
   "files": [
     "dist/*",
-    "src/*"
+    "src/*",
+    "images/*"
   ],
   "main": "dist/markerclustererplus.umd.js",
   "unpkg": "dist/markerclustererplus.min.js",
