@@ -603,7 +603,7 @@ class Cluster {
 
 /**
  * @callback {Function} ariaLabelFnType
- * @param {number} numberOfHotels
+ * @param {string} text The text attribute of the cluster
  * @returns {string}
  */
 /**
@@ -680,7 +680,7 @@ class Cluster {
  *  <code>imagePath</code>n.<code>imageExtension</code> image files.
  *  (The images are assumed to be square.)
  * @property {ariaLabelFnType} [ariaLabelFn]
- *  A function to take a number associated with the cluster and output a string to attach an 
+ *  A function to take the text attribute associated with the cluster and output a string to attach an 
  *  ariaLabel to the cluter
  */
 /**
