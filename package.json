@@ -1,0 +1,9 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.16.4",
+    "rollup": "^1.23.0",
+    "rollup-plugin-terser": "^5.1.2"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@google/markerclusterer",
+  "version": "2.0.0-beta.1",
+  "description": "The library creates and manages per-zoom-level clusters for large amounts of markers.",
+  "keywords": [
+    "cluster",
+    "google",
+    "maps",
+    "marker"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/markerclusterer",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "main": "dist/markerclusterer.umd.js",
+  "unpkg": "dist/markerclusterer.min.js",
+  "module": "dist/markerclusterer.esm.js",
+  "scripts": {
+    "prepare": "rollup --config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com",
+    "tag": "beta"
+  }
+}
