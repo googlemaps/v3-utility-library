@@ -2,8 +2,27 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "@types/googlemaps": "^3.37.7",
+    "@types/jest": "^24.0.19",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.5.1",
+    "eslint-plugin-jest": "^22.19.0",
+    "jest": "^24.9.0",
     "lerna": "^3.16.4",
-    "rollup": "^1.23.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "prettier": "^1.18.2",
+    "rollup": "^1.24.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "sort-package-json": "^1.22.1",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "@google-maps/loader": "file:packages/loader",
+    "@google/markerclusterer": "file:packages/markerclusterer",
+    "@google/markerclustererplus": "file:packages/markerclustererplus",
+    "@google/markerwithlabel": "file:packages/markerwithlabel"
   }
 }
