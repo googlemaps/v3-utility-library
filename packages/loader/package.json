@@ -1,0 +1,26 @@
+{
+  "name": "@google-maps/loader",
+  "version": "0.0.0",
+  "description": "Wrapper for the loading of Google Maps script in the browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "google",
+    "maps"
+  ],
+  "author": "Justin Poehnelt",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/assert": "^1.4.3",
+    "@types/expect": "^1.20.4",
+    "@types/googlemaps": "^3.37.7",
+    "@types/mocha": "^5.2.7",
+    "assert": "^2.0.0",
+    "jest": "^24.9.0",
+    "mocha": "^6.2.1",
+    "rollup": "^1.24.0"
+  }
+}
