@@ -122,7 +122,6 @@ ClusterIcon.prototype.onAdd = function () {
   this.div_ = document.createElement("div");
   this.div_.className = this.className_;
   this.eventDiv_ = this.div_.cloneNode();
-  this.eventDiv_.className += ' event';
 
   if (this.visible_) {
     this.show();
@@ -301,6 +300,7 @@ ClusterIcon.prototype.show = function () {
 
     this.syncDivStyle({
       title: this.div_.title,
+      innerHTML: this.div_.innerHTML,
     });
   }
   this.visible_ = true;
@@ -386,6 +386,7 @@ ClusterIcon.prototype.syncDivStyle = function (vars) {
   }
   if (this.eventDiv_ && this.div_) {
     this.eventDiv_.style.cssText = this.div_.style.cssText;
+    this.eventDiv_.style.opacity = 0;
   }
 }
 
