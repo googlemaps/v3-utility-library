@@ -5,3 +5,4 @@ script:
   - lerna bootstrap
   - lerna run lint
   - lerna run test
+  - lerna exec "codecov"
