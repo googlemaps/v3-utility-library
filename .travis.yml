@@ -1,5 +1,7 @@
 language: node_js
 node_js:
-- stable
-- '6'
-- '4'
+  - stable
+script:
+  - lerna exec -- npm install
+  - lerna exec -- npm run lint
+  - lerna exec -- npm test
