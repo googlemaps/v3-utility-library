@@ -2,7 +2,7 @@ Load for Google Maps v3
 ==================================
 
 ## Description
-Load the Google Maps V3 script with dynamically.
+Load the Google Maps V3 script with dynamically. This takes inspiration from the [google-maps](https://www.npmjs.com/package/google-maps) npm package but updates it with ES6, Promises, and TypeScript.
 
 ## NPM
 
@@ -10,7 +10,7 @@ Available via NPM as the package `@google-maps/loader`
 
 ## Example
 
-```
+``` javascript
 import { Loader } from '@google-maps/loader';
 
 const loader = new Loader({
@@ -19,15 +19,43 @@ const loader = new Loader({
   libraries: ["places"]
 });
 
-const init = e => {
-  new google.maps.Map(document.getElementById("map"), mapOptions);
+const mapOptions = {
+  center: {
+    lat: 0,
+    lng: 0
+  },
+  zoom: 4
 };
 
+const loader = new google.maps.plugins.loader.Loader({
+  apiKey: "",
+  version: "weekly",
+  libraries: ["places"]
+});
+```
+Using a promise for when the script has loaded.
+``` javascript
 // Promise
-loader.load().then(init);
+loader
+  .load()
+  .then(() => {
+    new google.maps.Map(document.getElementById("map"), mapOptions);
+  })
+  .catch(e => {
+    // do something
+  });
+```
 
+Alternatively, if you want to use a callback.
+``` javascript
 // Callback
-loader.loadCallback(init);
+loader.loadCallback(e => {
+  if (e) {
+    console.log(e);
+  } else {
+    new google.maps.Map(document.getElementById("map"), mapOptions);
+  }
+});
 
 ```
 

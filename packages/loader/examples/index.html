@@ -29,13 +29,24 @@
         libraries: ["places"]
       });
 
-      const init = e => {
-        new google.maps.Map(document.getElementById("map"), mapOptions);
-      };
+      // Promise
+      loader
+        .load()
+        .then(() => {
+          new google.maps.Map(document.getElementById("map"), mapOptions);
+        })
+        .catch(e => {
+          // do something
+        });
 
-      //loader.load().then(init);
-
-      loader.loadCallback(init);
+      // Callback
+      loader.loadCallback(e => {
+        if (e) {
+          console.log(e);
+        } else {
+          // new google.maps.Map(document.getElementById("map"), mapOptions);
+        }
+      });
     </script>
   </head>
 
