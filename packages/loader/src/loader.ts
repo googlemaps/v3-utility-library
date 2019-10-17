@@ -25,6 +25,7 @@ export class Loader {
   private callbacks: Array<(e: Event) => any> = [];
   private done = false;
   private loading = false;
+  private onerrorEvent: Event;
 
   constructor({
     apiKey,
@@ -114,26 +115,28 @@ export class Loader {
   }
 
   private loadErrorCallback(e: Event): void {
-    this.callback(e);
+    this.onerrorEvent = e;
+    this.callback();
   }
 
   private setCallback(): void {
     (window as any)[this.CALLBACK] = this.callback.bind(this);
   }
 
-  private callback(e: Event): void {
-    this.callbacks.forEach(cb => {
-      cb(e);
-    });
+  private callback(): void {
     this.done = true;
     this.loading = false;
+
+    this.callbacks.forEach(cb => {
+      cb(this.onerrorEvent);
+    });
 
     this.callbacks = [];
   }
 
   private execute(): void {
     if (this.done) {
-      this.callback(null);
+      this.callback();
     } else {
       if (this.loading) {
         // do nothing but wait
