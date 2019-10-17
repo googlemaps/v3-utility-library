@@ -22,7 +22,7 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@google-maps/loader": "file:packages/loader",
+    "@googlemaps/loader": "file:packages/loader",
     "@google/markerclusterer": "file:packages/markerclusterer",
     "@google/markerclustererplus": "file:packages/markerclustererplus",
     "@google/markerwithlabel": "file:packages/markerwithlabel"
