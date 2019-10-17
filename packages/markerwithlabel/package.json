@@ -22,5 +22,8 @@
     "dist/*",
     "src/*"
   ],
-  "main": "src/markerwithlabel.js"
+  "main": "src/markerwithlabel.js",
+  "scripts": {
+    "lint": "exit 0"
+  }
 }
