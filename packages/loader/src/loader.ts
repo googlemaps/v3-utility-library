@@ -1,7 +1,7 @@
 /// <reference types="@types/googlemaps" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-interface Options {
+export interface LoaderOptions {
   apiKey: string;
   version?: string;
   libraries?: string[];
@@ -34,7 +34,7 @@ export class Loader {
     clientId,
     region,
     version
-  }: Options) {
+  }: LoaderOptions) {
     this.version = version;
     this.apiKey = apiKey;
     this.libraries = libraries;

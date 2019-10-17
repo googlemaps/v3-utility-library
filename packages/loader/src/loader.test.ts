@@ -1,7 +1,7 @@
 /// <reference types="@types/jest" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Loader } from "./loader";
+import { Loader, LoaderOptions } from "./loader";
 
 test.each([
   [
@@ -12,7 +12,7 @@ test.each([
     { apiKey: "foo" },
     "https://maps.googleapis.com/maps/api/js?callback=__google_maps_callback&key=foo"
   ]
-])("createUrl is correct", (options: any, expected: string) => {
+])("createUrl is correct", (options: LoaderOptions, expected: string) => {
   const loader = new Loader(options);
   expect(loader.createUrl()).toEqual(expected);
 });
