@@ -2,25 +2,43 @@
   "name": "@google-maps/loader",
   "version": "0.0.0",
   "description": "Wrapper for the loading of Google Maps script in the browser",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "google",
     "maps"
   ],
-  "author": "Justin Poehnelt",
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/loader",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
   "license": "Apache-2.0",
+  "author": "Justin Poehnelt",
+  "main": "dist/loader.umd.js",
+  "unpkg": "dist/loader.min.js",
+  "module": "dist/loader.esm.js",
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c",
+    "test": "exit 0"
+  },
   "dependencies": {},
   "devDependencies": {
-    "@types/assert": "^1.4.3",
-    "@types/expect": "^1.20.4",
     "@types/googlemaps": "^3.37.7",
-    "@types/mocha": "^5.2.7",
-    "assert": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
     "jest": "^24.9.0",
-    "mocha": "^6.2.1",
-    "rollup": "^1.24.0"
+    "prettier": "^1.18.2",
+    "rollup": "^1.24.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "sort-package-json": "^1.22.1",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.4"
   }
 }
