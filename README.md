@@ -1,4 +1,8 @@
-Utility libraries for Google Maps JavaScript API v3
+[![Build Status](https://travis-ci.org/googlemaps/v3-utility-library.svg?branch=master)](https://travis-ci.org/googlemaps/v3-utility-library)
+[![codecov](https://codecov.io/gh/googlemaps/v3-utility-library/branch/master/graph/badge.svg)](https://codecov.io/gh/googlemaps/v3-utility-library)
+![GitHub contributors](https://img.shields.io/github/contributors/googlemaps/v3-utility-library)
+
+Plugins for Google Maps JavaScript API v3
 ===================================================
 
 ## Description
