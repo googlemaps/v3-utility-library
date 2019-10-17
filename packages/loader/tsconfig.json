@@ -9,5 +9,6 @@
     "sourceMap": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/*.test.*"]
+  "exclude": ["src/**/*.test.*"],
+  "esModuleInterop": true
 }

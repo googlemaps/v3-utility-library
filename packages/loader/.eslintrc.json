@@ -2,9 +2,10 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended"
   ],
   "parserOptions": {
-    "project": "tsconfig.json"
+    "project": "tsconfig.lint.json"
   }
 }

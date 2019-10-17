@@ -23,14 +23,16 @@
     "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
     "lint": "eslint src/*",
     "prepare": "rollup -c",
-    "test": "exit 0"
+    "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/googlemaps": "^3.37.7",
+    "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.3.3",
     "eslint": "^6.5.1",
+    "eslint-plugin-jest": "^22.19.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "rollup": "^1.24.0",
@@ -38,7 +40,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.24.3",
     "sort-package-json": "^1.22.1",
-    "typedoc": "^0.15.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   }
 }
