@@ -54,7 +54,6 @@ test("load should return a promise that resolves even if called twice", () => {
   (window as any)[loader["CALLBACK"]]();
 
   return promise;
-
 });
 
 test("loadCallaback callback", () => {
@@ -106,6 +105,5 @@ test("loader should wait if already loading", () => {
   const loader = new Loader({ apiKey: "" });
   loader["loading"] = true;
 
-  loader.load()
-
-})
+  loader.load();
+});
