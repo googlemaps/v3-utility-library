@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - stable
 script:
-  - lerna exec -- npm install
-  - lerna exec -- npm run lint
-  - lerna exec -- npm test
+  - lerna bootstrap
+  - lerna run lint
+  - lerna run test
