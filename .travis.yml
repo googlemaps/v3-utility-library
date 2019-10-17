@@ -1,7 +1,11 @@
 language: node_js
 node_js:
-  - stable
+- stable
 script:
-  - lerna bootstrap
-  - lerna run lint
-  - lerna run test
+- lerna bootstrap
+- lerna run lint
+- lerna run test
+- lerna exec "codecov"
+env:
+  global:
+    secure: tBVMdVCrBSggJUSlAmyiwOPrRr86NQ6GRcUa4JXwGJuDqb6twf8v7pzmUTnf4FMP+VSE0bVn0QxXHkfK4adyytqGtbjbKuaShvqR02J84F80gMV2IP5Ik+Y3GmvBL/lQKIRt1Jmsqa2mhLU2/qvy9K0iKP+bPuF/vm06Rt5jYZbUGQT9qPW0P96WyZcx85hEu+V+ydVEx8RQAkD507WW4SgRNlrDmQhfA2Kxpy7xkm1z7RizeHW0yDIWzMThZpt1AL788EsNBNo/U35x6NN2xDxLP99uUpCg3B7vnzU4Xfq4wUwb77+b6qSvDlrUQOLWfRmilcZorr7kQvk2/FnFpnHhTXkYpGzUaUTe+JrrkE1sq5qqkbYPtqKmA4xwnHjG5bvrapI1A2aWuknf9ErnTSPuHTei1LWTn3Cj3CmPzXI4scvSHIlIc5Ns7KODFm2k56SFiNYvJ86SgoEg+7jwEyEtuF3/9e9WUGGDnjHIpFvgiLhV34QPKOB3skyJF8NI9ZuPYFHBr78zSUHdYyZZTLrAClPVr1JuqB9T0aG+cGrtdVEA8u1NdIjRLVX647YfpDAAEnGdbDzjHx3YrQOJAkBe5nrMqr9000BhP8B1yDuETwbVMLoBat0HxqH4UJCy6rvsNvSScX2G2fAuDVx5Jyfb9vafGTuT1nyTH2jTN14=
