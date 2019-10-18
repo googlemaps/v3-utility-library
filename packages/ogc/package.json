@@ -1,0 +1,42 @@
+{
+  "name": "@googlemaps/ogc",
+  "version": "0.0.0",
+  "description": "Provides OGC plugin to Google Maps with features such as WMSLayer.",
+  "keywords": [
+    "cluster",
+    "google",
+    "maps",
+    "ogc",
+    "wms"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/package/ogc",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "main": "dist/ogc.umd.js",
+  "unpkg": "dist/ogc.min.js",
+  "module": "dist/ogc.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint --max-warnings 0 src/*",
+    "prepare": "rollup -c",
+    "test": "jest"
+  },
+  "dependencies": {
+    "query-string": "^6.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
