@@ -1,4 +1,4 @@
-Load for Google Maps v3
+Loader for Google Maps v3
 ==================================
 
 ## Description
