@@ -5,8 +5,10 @@
     "module": "es6",
     "noImplicitAny": true,
     "outDir": "./dist",
-    "target": "es6"
+    "target": "es6",
+    "sourceMap": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/*.test.*"]
+  "exclude": ["src/**/*.test.*"],
+  "esModuleInterop": true
 }

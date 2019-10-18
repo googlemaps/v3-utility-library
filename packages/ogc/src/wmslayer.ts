@@ -19,7 +19,7 @@ function xyzToBounds(x: number, y: number, zoom: number): Array<number> {
   return [minx, miny, maxx, maxy];
 }
 
-export interface WMSLayerOptions {
+interface WMSLayerOptions {
   url: string;
   layers: string;
   maxZoom: number;
@@ -91,4 +91,10 @@ const WMSLayer = function({
   });
 };
 
-export { EPSG_3857_EXTENT, DEFAULT_WMS_PARAMS, xyzToBounds, WMSLayer };
+export {
+  EPSG_3857_EXTENT,
+  DEFAULT_WMS_PARAMS,
+  xyzToBounds,
+  WMSLayer,
+  WMSLayerOptions
+};

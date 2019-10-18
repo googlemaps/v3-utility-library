@@ -15,7 +15,8 @@ export default [
     output: {
       file: "dist/ogc.umd.js",
       format: "umd",
-      name: "google.maps.plugins.ogc"
+      name: "google.maps.plugins.ogc",
+      sourcemap: true
     }
   },
   {
@@ -37,7 +38,8 @@ export default [
     plugins: [typescript()],
     output: {
       file: "dist/ogc.esm.js",
-      format: "esm"
+      format: "esm",
+      sourcemap: true
     }
   }
 ];
