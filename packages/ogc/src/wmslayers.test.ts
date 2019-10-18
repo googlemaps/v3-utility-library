@@ -2,7 +2,14 @@
 /// <reference types="@types/googlemaps" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { xyzToBounds, EPSG_3857_EXTENT, WMSLayer } from "./wmslayer";
+import {
+  xyzToBounds,
+  EPSG_3857_EXTENT,
+  WMSLayer,
+  WMSLayerOptions,
+  DEFAULT_WMS_PARAMS
+} from "./wmslayer";
+import { parse } from "query-string";
 
 const ImageMapType = jest.fn();
 
@@ -29,35 +36,57 @@ test("xyzToBounds is correct", () => {
   ]);
 });
 
-test("WMSLayer can be called with getTIleUrl", () => {
-  WMSLayer({
-    url: "https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms",
-    layers: "mrlc_display:NLCD_2016_Land_Cover_L48",
-    name: "Land Cover",
-    alt: "NLCD_2016_Land_Cover_L48",
-    maxZoom: 18,
-    styles: "mrlc:mrlc_NLCD_2016_Land_Cover_L48_20190424",
-    bgcolor: "0xFFFFFF",
-    version: "1.1.1",
-    transparent: true,
-    format: "image/jpeg",
-    outline: false
+test.each([
+  [
+    {
+      url: "https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms",
+      layers: "mrlc_display:NLCD_2016_Land_Cover_L48",
+      styles: "mrlc:mrlc_NLCD_2016_Land_Cover_L48_20190424",
+      bgcolor: "0xFFFFFF",
+      version: "1.2.3",
+      format: "image/jpeg",
+      outline: true,
+      transparent: true,
+      name: "Land Cover",
+      alt: "NLCD_2016_Land_Cover_L48",
+      maxZoom: 18,
+      minZoom: 0,
+      opacity: 1.0
+    }
+  ],
+  [
+    {
+      url: "https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms?",
+      layers: "mrlc_display:NLCD_2016_Land_Cover_L48",
+      maxZoom: 18
+    }
+  ]
+])("WMSLayer can be called with getTIleUrl", (options: WMSLayerOptions) => {
+  WMSLayer(options);
+
+  // need to get the mock in order of each
+  const tileUrl = ImageMapType.mock.calls[
+    ImageMapType.mock.calls.length - 1
+  ][0].getTileUrl(new google.maps.Point(0, 0), 1, null);
+
+  const [base, queryString] = tileUrl.split("?");
+
+  expect(base).toEqual("https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms");
+
+  const params = parse(queryString, {
+    parseNumbers: true,
+    parseBooleans: true
   });
 
-  const tileUrl = ImageMapType.mock.calls[0][0].getTileUrl(
-    new google.maps.Point(0, 0),
-    1,
-    null
-  );
-
-  const expected =
-    "https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms" +
-    "?bbox=-20037508.34789244%2C0%2C0%2C20037508.34789244" +
-    "&bgcolor=0xFFFFFF&format=image%2Fjpeg&height=256&" +
-    "layers=mrlc_display%3ANLCD_2016_Land_Cover_L48&outline=false" +
-    "&request=GetMap&service=WMS&srs=EPSG%3A3857" +
-    "&styles=mrlc%3Amrlc_NLCD_2016_Land_Cover_L48_20190424" +
-    "&transparent=true&version=1.1.1&width=256";
-
-  expect(tileUrl).toEqual(expected);
+  expect(params["layers"]).toEqual(options["layers"]);
+  expect(params["bgcolor"]).toEqual(parseInt(options["bgcolor"] || "0xFFFFFF"));
+  expect(params["styles"]).toEqual(options["styles"] || "");
+  expect(params["request"]).toEqual(DEFAULT_WMS_PARAMS.request);
+  expect(params["service"]).toEqual(DEFAULT_WMS_PARAMS.service);
+  expect(params["srs"]).toEqual(DEFAULT_WMS_PARAMS.srs);
+  expect(params["format"]).toEqual(options["format"] || "image/png");
+  expect(params["outline"]).toEqual(options["outline"] || false);
+  expect(params["version"]).toEqual(options["version"] || "1.1.1");
+  expect(params["height"]).toEqual(256);
+  expect(params["width"]).toEqual(256);
 });
