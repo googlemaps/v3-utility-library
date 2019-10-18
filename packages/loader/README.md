@@ -6,7 +6,7 @@ Load the Google Maps V3 script dynamically. This takes inspiration from the [goo
 
 ## NPM
 
-Available via NPM as the package `@google-maps/loader`
+Available via NPM as the package `@googlemaps/loader`
 
 ## Example
 
