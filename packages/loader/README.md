@@ -27,11 +27,6 @@ const mapOptions = {
   zoom: 4
 };
 
-const loader = new google.maps.plugins.loader.Loader({
-  apiKey: "",
-  version: "weekly",
-  libraries: ["places"]
-});
 ```
 Using a promise for when the script has loaded.
 ``` javascript
