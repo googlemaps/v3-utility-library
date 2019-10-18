@@ -7,12 +7,12 @@ Add a WMSLayer to Google Maps.
 
 ## NPM
 
-Available via NPM as the package `@google-maps/ogc`
+Available via NPM as the package `@googlemaps/ogc`
 
 ## Example
 
 ``` javascript
-import { WMSLayer } from '@google-maps/ogc';
+import { WMSLayer } from '@googlemaps/ogc';
 
 map = new google.maps.Map(document.getElementById("map"), mapOptions);
 

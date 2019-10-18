@@ -11,7 +11,7 @@ Available via NPM as the package `@googlemaps/loader`
 ## Example
 
 ``` javascript
-import { Loader } from '@google-maps/loader';
+import { Loader } from '@googlemaps/loader';
 
 const loader = new Loader({
   apiKey: "",
