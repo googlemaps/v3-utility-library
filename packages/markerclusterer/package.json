@@ -31,7 +31,6 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://wombat-dressing-room.appspot.com",
-    "tag": "beta"
+    "registry": "https://wombat-dressing-room.appspot.com"
   }
 }
