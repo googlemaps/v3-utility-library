@@ -268,7 +268,7 @@ class ClusterIcon {
       }
       img += "'>";
       this.div_.innerHTML = img + "<div " + 
-        "aria-label='" + ariaLabel + "' "
+        "aria-label='" + ariaLabel + "' " +
         "tabindex='0' " +
         "style='" +
         "position: absolute;" +
