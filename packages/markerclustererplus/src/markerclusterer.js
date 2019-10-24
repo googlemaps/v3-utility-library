@@ -34,19 +34,19 @@
 
 
 /**
- * @name ClusterIconStyle
- * @class This class represents the object for values in the <code>styles</code> array passed
+ * @typedef {Object} ClusterIconStyle
+ * Represents the object for values in the <code>styles</code> array passed
  *  to the {@link MarkerClusterer} constructor. The element in this array that is used to
  *  style the cluster icon is determined by calling the <code>calculator</code> function.
  *
  * @property {string} url The URL of the cluster icon image file. Required.
  * @property {number} height The display height (in pixels) of the cluster icon. Required.
  * @property {number} width The display width (in pixels) of the cluster icon. Required.
- * @property {Array} [anchorText] The position (in pixels) from the center of the cluster icon to
+ * @property {number[]} [anchorText] The position (in pixels) from the center of the cluster icon to
  *  where the text label is to be centered and drawn. The format is <code>[yoffset, xoffset]</code>
  *  where <code>yoffset</code> increases as you go down from center and <code>xoffset</code>
  *  increases to the right of center. The default is <code>[0, 0]</code>.
- * @property {Array} [anchorIcon] The anchor position (in pixels) of the cluster icon. This is the
+ * @property {number[]} [anchorIcon] The anchor position (in pixels) of the cluster icon. This is the
  *  spot on the cluster icon that is to be aligned with the cluster position. The format is
  *  <code>[yoffset, xoffset]</code> where <code>yoffset</code> increases as you go down and
  *  <code>xoffset</code> increases to the right of the top-left corner of the icon. The default
@@ -69,9 +69,10 @@
  *  this property appropriately when the image defined by <code>url</code> represents a sprite
  *  containing multiple images. Note that the position <i>must</i> be specified in px units.
  */
+
 /**
- * @name ClusterIconInfo
- * @class This class is an object containing general information about a cluster icon. This is
+ * @typedef {Object} ClusterIconInfo
+ * This is an object containing general information about a cluster icon. This is
  *  the object that a <code>calculator</code> function returns.
  *
  * @property {string} text The text of the label to be shown on the cluster icon.
@@ -87,7 +88,7 @@
  * @constructor
  * @extends google.maps.OverlayView
  * @param {Cluster} cluster The cluster with which the icon is to be associated.
- * @param {Array} [styles] An array of {@link ClusterIconStyle} defining the cluster icons
+ * @param {ClusterIconStyle[]} [styles] An array of {@link ClusterIconStyle} defining the cluster icons
  *  to use for various cluster sizes.
  * @private
  */
@@ -404,7 +405,7 @@ class Cluster {
    * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
    * for the <code>MarkerClusterer</code> object.
    *
-   * @return {Array} The array of markers in the cluster.
+   * @return {google.maps.Marker[]} The array of markers in the cluster.
    */
   getMarkers() {
     return this.markers_;
@@ -605,9 +606,10 @@ class Cluster {
  * @param {string} text The text attribute of the cluster
  * @returns {string}
  */
+
 /**
- * @name MarkerClustererOptions
- * @class This class represents the optional parameter passed to
+ * @typedef {Object} MarkerClustererOptions
+ * This represents the optional parameter passed to
  *  the {@link MarkerClusterer} constructor.
  * @property {number} [gridSize=60] The grid size of a cluster in pixels. The grid is a square.
  * @property {number} [maxZoom=null] The maximum zoom level at which clustering is enabled or
@@ -648,7 +650,7 @@ class Cluster {
  * @property {string} [clusterClass="cluster"] The name of the CSS class defining general styles
  *  for the cluster markers. Use this class to define CSS styles that are not set up by the code
  *  that processes the <code>styles</code> array.
- * @property {Array} [styles] An array of {@link ClusterIconStyle} elements defining the styles
+ * @property {ClusterIconStyle[]} [styles] An array of {@link ClusterIconStyle} elements defining the styles
  *  of the cluster markers to be used. The element to be used to style a given cluster marker
  *  is determined by the function defined by the <code>calculator</code> property.
  *  The default is an array of {@link ClusterIconStyle} elements whose properties are derived
@@ -674,23 +676,27 @@ class Cluster {
  * @property {string} [imageExtension=MarkerClusterer.IMAGE_EXTENSION]
  *  The extension name for the cluster icon image files (e.g., <code>"png"</code> or
  *  <code>"jpg"</code>).
- * @property {Array} [imageSizes=MarkerClusterer.IMAGE_SIZES]
+ * @property {number[]} [imageSizes=MarkerClusterer.IMAGE_SIZES]
  *  An array of numbers containing the widths of the group of
  *  <code>imagePath</code>n.<code>imageExtension</code> image files.
  *  (The images are assumed to be square.)
  * @property {ariaLabelFnType} [ariaLabelFn]
- *  A function to take the text attribute associated with the cluster and output a string to attach an 
+ *  A function to take the text attribute associated with the cluster and output a string to attach an
  *  ariaLabel to the cluter
  */
+
 /**
- * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
- * @constructor
+ * @class
  * @extends google.maps.OverlayView
- * @param {google.maps.Map} map The Google map to attach to.
- * @param {Array.<google.maps.Marker>} [opt_markers] The markers to be added to the cluster.
- * @param {MarkerClustererOptions} [opt_options] The optional parameters.
  */
 class MarkerClusterer {
+  /**
+   * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
+   * @constructor
+   * @param {google.maps.Map} map The Google map to attach to.
+   * @param {google.maps.Marker[]} [opt_markers] The markers to be added to the cluster.
+   * @param {MarkerClustererOptions} [opt_options] The optional parameters.
+   */
   constructor(map, opt_markers, opt_options) {
     // MarkerClusterer implements google.maps.OverlayView interface. We use the
     // extend function to extend MarkerClusterer with google.maps.OverlayView
@@ -741,7 +747,7 @@ class MarkerClusterer {
     /**
      * The default array of sizes for the marker cluster images.
      *
-     * @type {Array.<number>}
+     * @type {number[]}
      * @constant
      */
     this.IMAGE_SIZES = [53, 56, 66, 78, 90];
@@ -970,7 +976,7 @@ class MarkerClusterer {
   /**
    *  Returns the value of the <code>styles</code> property.
    *
-   *  @return {Array} The array of styles defining the cluster markers to be used.
+   *  @return {ClusterIconStyle[]} The array of styles defining the cluster markers to be used.
    */
   getStyles() {
     return this.styles_;
@@ -980,7 +986,7 @@ class MarkerClusterer {
   /**
    *  Sets the value of the <code>styles</code> property.
    *
-   *  @param {Array.<ClusterIconStyle>} styles The array of styles to use.
+   *  @param {ClusterIconStyle[]} styles The array of styles to use.
    */
   setStyles(styles) {
     this.styles_ = styles;
@@ -1130,7 +1136,7 @@ class MarkerClusterer {
   /**
    * Returns the value of the <code>imageSizes</code> property.
    *
-   * @return {Array} The value of the imageSizes property.
+   * @return {number[]} The value of the imageSizes property.
    */
   getImageSizes() {
     return this.imageSizes_;
@@ -1140,7 +1146,7 @@ class MarkerClusterer {
   /**
    *  Sets the value of the <code>imageSizes</code> property.
    *
-   *  @param {Array} imageSizes The value of the imageSizes property.
+   *  @param {number[]} imageSizes The value of the imageSizes property.
    */
   setImageSizes(imageSizes) {
     this.imageSizes_ = imageSizes;
@@ -1160,7 +1166,7 @@ class MarkerClusterer {
   /**
    * Sets the value of the <code>calculator</code> property.
    *
-   * @param {function(Array.<google.maps.Marker>, number)} calculator The value
+   * @param {function(google.maps.Marker[], number)} calculator The value
    *  of the calculator property.
    */
   setCalculator(calculator) {
@@ -1211,7 +1217,7 @@ class MarkerClusterer {
   /**
    *  Returns the array of markers managed by the clusterer.
    *
-   *  @return {Array} The array of markers managed by the clusterer.
+   *  @return {google.maps.Marker[]} The array of markers managed by the clusterer.
    */
   getMarkers() {
     return this.markers_;
@@ -1231,7 +1237,7 @@ class MarkerClusterer {
   /**
    * Returns the current array of clusters formed by the clusterer.
    *
-   * @return {Array} The array of clusters formed by the clusterer.
+   * @return {Cluster[]} The array of clusters formed by the clusterer.
    */
   getClusters() {
     return this.clusters_;
@@ -1267,7 +1273,7 @@ class MarkerClusterer {
    * Adds an array of markers to the clusterer. The clusters are redrawn unless
    *  <code>opt_nodraw</code> is set to <code>true</code>.
    *
-   * @param {Array.<google.maps.Marker>} markers The markers to add.
+   * @param {google.maps.Marker[]} markers The markers to add.
    * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
    */
   addMarkers(markers, opt_nodraw) {
@@ -1329,7 +1335,7 @@ class MarkerClusterer {
    *  <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
    *  were removed from the clusterer.
    *
-   * @param {Array.<google.maps.Marker>} markers The markers to remove.
+   * @param {google.maps.Marker[]} markers The markers to remove.
    * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
    * @return {boolean} True if markers were removed from the clusterer.
    */
@@ -1644,7 +1650,7 @@ class MarkerClusterer {
    * The default function for determining the label text and style
    * for a cluster icon.
    *
-   * @param {Array.<google.maps.Marker>} markers The array of markers represented by the cluster.
+   * @param {google.maps.Marker[]} markers The array of markers represented by the cluster.
    * @param {number} numStyles The number of marker styles available.
    * @return {ClusterIconInfo} The information resource for the cluster.
    * @constant
