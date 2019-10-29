@@ -27,8 +27,9 @@
   "unpkg": "dist/markerclustererplus.min.js",
   "module": "dist/markerclustererplus.esm.js",
   "scripts": {
-    "prepare": "rollup --config",
-    "lint": "exit 0"
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c"
   },
   "publishConfig": {
     "access": "public",

@@ -1,4 +1,20 @@
 /**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
  * @name MarkerClusterer for Google Maps v3
  * @author Luke Mahe
  * @fileoverview
@@ -42,21 +58,10 @@
  * @extends google.maps.OverlayView
  */
 
-
-
 class MarkerClusterer {
   constructor(map, opt_markers, opt_options) {
     this.extend(MarkerClusterer, google.maps.OverlayView);
     this.map_ = map;
-    
-    /**
-     * The marker cluster image path.
-     *
-     * @type {string}
-     * @private
-     */
-    this.MARKER_CLUSTER_IMAGE_PATH_ = '../images/m';
-
 
     /**
      * The marker cluster image path.
@@ -64,11 +69,19 @@ class MarkerClusterer {
      * @type {string}
      * @private
      */
-    this.MARKER_CLUSTER_IMAGE_EXTENSION_ = 'png';
+    this.MARKER_CLUSTER_IMAGE_PATH_ = "../images/m";
+
     /**
-   * @type {Array.<google.maps.Marker>}
-   * @private
-   */
+     * The marker cluster image path.
+     *
+     * @type {string}
+     * @private
+     */
+    this.MARKER_CLUSTER_IMAGE_EXTENSION_ = "png";
+    /**
+     * @type {Array.<google.maps.Marker>}
+     * @private
+     */
     this.markers_ = [];
 
     /**
@@ -95,35 +108,33 @@ class MarkerClusterer {
      * @type {number}
      * @private
      */
-    this.gridSize_ = options['gridSize'] || 60;
+    this.gridSize_ = options["gridSize"] || 60;
 
     /**
      * @private
      */
-    this.minClusterSize_ = options['minimumClusterSize'] || 2;
-
+    this.minClusterSize_ = options["minimumClusterSize"] || 2;
 
     /**
      * @type {?number}
      * @private
      */
-    this.maxZoom_ = options['maxZoom'] || null;
+    this.maxZoom_ = options["maxZoom"] || null;
 
-    this.styles_ = options['styles'] || [];
-
-    /**
-     * @type {string}
-     * @private
-     */
-    this.imagePath_ = options['imagePath'] ||
-      this.MARKER_CLUSTER_IMAGE_PATH_;
+    this.styles_ = options["styles"] || [];
 
     /**
      * @type {string}
      * @private
      */
-    this.imageExtension_ = options['imageExtension'] ||
-      this.MARKER_CLUSTER_IMAGE_EXTENSION_;
+    this.imagePath_ = options["imagePath"] || this.MARKER_CLUSTER_IMAGE_PATH_;
+
+    /**
+     * @type {string}
+     * @private
+     */
+    this.imageExtension_ =
+      options["imageExtension"] || this.MARKER_CLUSTER_IMAGE_EXTENSION_;
 
     /**
      * @type {boolean}
@@ -131,8 +142,8 @@ class MarkerClusterer {
      */
     this.zoomOnClick_ = true;
 
-    if (options['zoomOnClick'] != undefined) {
-      this.zoomOnClick_ = options['zoomOnClick'];
+    if (options["zoomOnClick"] != undefined) {
+      this.zoomOnClick_ = options["zoomOnClick"];
     }
 
     /**
@@ -141,8 +152,8 @@ class MarkerClusterer {
      */
     this.averageCenter_ = false;
 
-    if (options['averageCenter'] != undefined) {
-      this.averageCenter_ = options['averageCenter'];
+    if (options["averageCenter"] != undefined) {
+      this.averageCenter_ = options["averageCenter"];
     }
 
     this.setupStyles_();
@@ -157,12 +168,14 @@ class MarkerClusterer {
 
     // Add the map event listeners
     var that = this;
-    google.maps.event.addListener(this.map_, 'zoom_changed', function () {
+    google.maps.event.addListener(this.map_, "zoom_changed", function() {
       // Determines map type and prevent illegal zoom levels
       var zoom = that.map_.getZoom();
       var minZoom = that.map_.minZoom || 0;
-      var maxZoom = Math.min(that.map_.maxZoom || 100,
-        that.map_.mapTypes[that.map_.getMapTypeId()].maxZoom);
+      var maxZoom = Math.min(
+        that.map_.maxZoom || 100,
+        that.map_.mapTypes[that.map_.getMapTypeId()].maxZoom
+      );
       zoom = Math.min(Math.max(zoom, minZoom), maxZoom);
 
       if (that.prevZoom_ != zoom) {
@@ -171,17 +184,18 @@ class MarkerClusterer {
       }
     });
 
-    google.maps.event.addListener(this.map_, 'idle', function () {
+    google.maps.event.addListener(this.map_, "idle", function() {
       that.redraw();
     });
 
     // Finally, add the markers
-    if (opt_markers && (opt_markers.length || Object.keys(opt_markers).length)) {
+    if (
+      opt_markers &&
+      (opt_markers.length || Object.keys(opt_markers).length)
+    ) {
       this.addMarkers(opt_markers, false);
     }
   }
-
-
 
   /**
    * Extends a objects prototype by anothers.
@@ -192,15 +206,13 @@ class MarkerClusterer {
    * @ignore
    */
   extend(obj1, obj2) {
-    return (function (object) {
+    return function(object) {
       for (var property in object.prototype) {
         this.prototype[property] = object.prototype[property];
       }
       return this;
-    }).apply(obj1, [obj2]);
+    }.apply(obj1, [obj2]);
   }
-
-
 
   /**
    * Implementaion of the interface method.
@@ -208,13 +220,13 @@ class MarkerClusterer {
    */
   onAdd() {
     this.setReady_(true);
-  };
+  }
 
   /**
    * Implementaion of the interface method.
    * @ignore
    */
-  draw() { };
+  draw() {}
 
   /**
    * Sets up the styles object.
@@ -226,9 +238,9 @@ class MarkerClusterer {
       return;
     }
 
-    for (var i = 0, size; size = this.sizes[i]; i++) {
+    for (var i = 0, size; (size = this.sizes[i]); i++) {
       this.styles_.push({
-        url: this.imagePath_ + (i + 1) + '.' + this.imageExtension_,
+        url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
         height: size,
         width: size
       });
@@ -241,13 +253,12 @@ class MarkerClusterer {
   fitMapToMarkers() {
     var markers = this.getMarkers();
     var bounds = new google.maps.LatLngBounds();
-    for (var i = 0, marker; marker = markers[i]; i++) {
+    for (var i = 0, marker; (marker = markers[i]); i++) {
       bounds.extend(marker.getPosition());
     }
 
     this.map_.fitBounds(bounds);
   }
-
 
   /**
    *  Sets the styles.
@@ -258,7 +269,6 @@ class MarkerClusterer {
     this.styles_ = styles;
   }
 
-
   /**
    *  Gets the styles.
    *
@@ -267,7 +277,6 @@ class MarkerClusterer {
   getStyles() {
     return this.styles_;
   }
-
 
   /**
    * Whether zoom on click is set.
@@ -287,7 +296,6 @@ class MarkerClusterer {
     return this.averageCenter_;
   }
 
-
   /**
    *  Returns the array of markers in the clusterer.
    *
@@ -296,7 +304,6 @@ class MarkerClusterer {
   getMarkers() {
     return this.markers_;
   }
-
 
   /**
    *  Returns the number of markers in the clusterer
@@ -307,7 +314,6 @@ class MarkerClusterer {
     return this.markers_.length;
   }
 
-
   /**
    *  Sets the max zoom for the clusterer.
    *
@@ -317,7 +323,6 @@ class MarkerClusterer {
     this.maxZoom_ = maxZoom;
   }
 
-
   /**
    *  Gets the max zoom for the clusterer.
    *
@@ -326,7 +331,6 @@ class MarkerClusterer {
   getMaxZoom() {
     return this.maxZoom_;
   }
-
 
   /**
    *  The function for calculating the cluster icon image.
@@ -352,7 +356,6 @@ class MarkerClusterer {
     };
   }
 
-
   /**
    * Set the calculator function.
    *
@@ -365,7 +368,6 @@ class MarkerClusterer {
     this.calculator_ = calculator;
   }
 
-
   /**
    * Get the calculator function.
    *
@@ -375,7 +377,6 @@ class MarkerClusterer {
     return this.calculator_;
   }
 
-
   /**
    * Add an array of markers to the clusterer.
    *
@@ -384,11 +385,11 @@ class MarkerClusterer {
    */
   addMarkers(markers, opt_nodraw) {
     if (markers.length) {
-      for (var i = 0, marker; marker = markers[i]; i++) {
+      for (let i = 0, marker; (marker = markers[i]); i++) {
         this.pushMarkerTo_(marker);
       }
     } else if (Object.keys(markers).length) {
-      for (var marker in markers) {
+      for (let marker in markers) {
         this.pushMarkerTo_(markers[marker]);
       }
     }
@@ -396,7 +397,6 @@ class MarkerClusterer {
       this.redraw();
     }
   }
-
 
   /**
    * Pushes a marker to the clusterer.
@@ -406,18 +406,17 @@ class MarkerClusterer {
    */
   pushMarkerTo_(marker) {
     marker.isAdded = false;
-    if (marker['draggable']) {
+    if (marker["draggable"]) {
       // If the marker is draggable add a listener so we update the clusters on
       // the drag end.
       var that = this;
-      google.maps.event.addListener(marker, 'dragend', function () {
+      google.maps.event.addListener(marker, "dragend", function() {
         marker.isAdded = false;
         that.repaint();
       });
     }
     this.markers_.push(marker);
   }
-
 
   /**
    * Adds a marker to the clusterer and redraws if needed.
@@ -432,7 +431,6 @@ class MarkerClusterer {
     }
   }
 
-
   /**
    * Removes a marker and returns true if removed, false if not
    *
@@ -445,7 +443,7 @@ class MarkerClusterer {
     if (this.markers_.indexOf) {
       index = this.markers_.indexOf(marker);
     } else {
-      for (var i = 0, m; m = this.markers_[i]; i++) {
+      for (var i = 0, m; (m = this.markers_[i]); i++) {
         if (m == marker) {
           index = i;
           break;
@@ -464,7 +462,6 @@ class MarkerClusterer {
 
     return true;
   }
-
 
   /**
    * Remove a marker from the cluster.
@@ -485,7 +482,6 @@ class MarkerClusterer {
     }
   }
 
-
   /**
    * Removes an array of markers from the cluster.
    *
@@ -498,7 +494,7 @@ class MarkerClusterer {
     var markersCopy = markers === this.getMarkers() ? markers.slice() : markers;
     var removed = false;
 
-    for (var i = 0, marker; marker = markersCopy[i]; i++) {
+    for (var i = 0, marker; (marker = markersCopy[i]); i++) {
       var r = this.removeMarker_(marker);
       removed = removed || r;
     }
@@ -509,7 +505,6 @@ class MarkerClusterer {
       return true;
     }
   }
-
 
   /**
    * Sets the clusterer's ready state.
@@ -524,7 +519,6 @@ class MarkerClusterer {
     }
   }
 
-
   /**
    * Returns the number of clusters in the clusterer.
    *
@@ -533,7 +527,6 @@ class MarkerClusterer {
   getTotalClusters() {
     return this.clusters_.length;
   }
-
 
   /**
    * Returns the google map that the clusterer is associated with.
@@ -544,7 +537,6 @@ class MarkerClusterer {
     return this.map_;
   }
 
-
   /**
    * Sets the google map that the clusterer is associated with.
    *
@@ -553,7 +545,6 @@ class MarkerClusterer {
   setMap(map) {
     this.map_ = map;
   }
-
 
   /**
    * Returns the size of the grid.
@@ -564,7 +555,6 @@ class MarkerClusterer {
     return this.gridSize_;
   }
 
-
   /**
    * Sets the size of the grid.
    *
@@ -573,7 +563,6 @@ class MarkerClusterer {
   setGridSize(size) {
     this.gridSize_ = size;
   }
-
 
   /**
    * Returns the min cluster size.
@@ -593,7 +582,6 @@ class MarkerClusterer {
     this.minClusterSize_ = size;
   }
 
-
   /**
    * Extends a bounds object by the grid size.
    *
@@ -604,10 +592,14 @@ class MarkerClusterer {
     var projection = this.getProjection();
 
     // Turn the bounds into latlng.
-    var tr = new google.maps.LatLng(bounds.getNorthEast().lat(),
-      bounds.getNorthEast().lng());
-    var bl = new google.maps.LatLng(bounds.getSouthWest().lat(),
-      bounds.getSouthWest().lng());
+    var tr = new google.maps.LatLng(
+      bounds.getNorthEast().lat(),
+      bounds.getNorthEast().lng()
+    );
+    var bl = new google.maps.LatLng(
+      bounds.getSouthWest().lat(),
+      bounds.getSouthWest().lng()
+    );
 
     // Convert the points to pixels and the extend out by the grid size.
     var trPix = projection.fromLatLngToDivPixel(tr);
@@ -629,7 +621,6 @@ class MarkerClusterer {
     return bounds;
   }
 
-
   /**
    * Determins if a marker is contained in a bounds.
    *
@@ -642,7 +633,6 @@ class MarkerClusterer {
     return bounds.contains(marker.getPosition());
   }
 
-
   /**
    * Clears all clusters and markers from the clusterer.
    */
@@ -653,19 +643,18 @@ class MarkerClusterer {
     this.markers_ = [];
   }
 
-
   /**
    * Clears all existing clusters and recreates them.
    * @param {boolean} opt_hide To also hide the marker.
    */
   resetViewport(opt_hide) {
     // Remove all the clusters
-    for (var i = 0, cluster; cluster = this.clusters_[i]; i++) {
+    for (let i = 0, cluster; (cluster = this.clusters_[i]); i++) {
       cluster.remove();
     }
 
     // Reset the markers to not be added and to be invisible.
-    for (var i = 0, marker; marker = this.markers_[i]; i++) {
+    for (let i = 0, marker; (marker = this.markers_[i]); i++) {
       marker.isAdded = false;
       if (opt_hide) {
         marker.setMap(null);
@@ -686,13 +675,12 @@ class MarkerClusterer {
 
     // Remove the old clusters.
     // Do it in a timeout so the other clusters have been drawn first.
-    setTimeout(function () {
-      for (var i = 0, cluster; cluster = oldClusters[i]; i++) {
+    setTimeout(function() {
+      for (var i = 0, cluster; (cluster = oldClusters[i]); i++) {
         cluster.remove();
       }
     }, 0);
   }
-
 
   /**
    * Redraws the clusters.
@@ -700,7 +688,6 @@ class MarkerClusterer {
   redraw() {
     this.createClusters_();
   }
-
 
   /**
    * Calculates the distance between two latlng locations in km.
@@ -710,23 +697,25 @@ class MarkerClusterer {
    * @param {google.maps.LatLng} p2 The second lat lng point.
    * @return {number} The distance between the two points in km.
    * @private
-  */
+   */
   distanceBetweenPoints_(p1, p2) {
     if (!p1 || !p2) {
       return 0;
     }
 
     var R = 6371; // Radius of the Earth in km
-    var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
-    var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var dLat = ((p2.lat() - p1.lat()) * Math.PI) / 180;
+    var dLon = ((p2.lng() - p1.lng()) * Math.PI) / 180;
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((p1.lat() * Math.PI) / 180) *
+        Math.cos((p2.lat() * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     return d;
   }
-
 
   /**
    * Add a marker to a cluster, or creates a new cluster.
@@ -737,8 +726,7 @@ class MarkerClusterer {
   addToClosestCluster_(marker) {
     var distance = 40000; // Some large number
     var clusterToAddTo = null;
-    var pos = marker.getPosition();
-    for (var i = 0, cluster; cluster = this.clusters_[i]; i++) {
+    for (var i = 0, cluster; (cluster = this.clusters_[i]); i++) {
       var center = cluster.getCenter();
       if (center) {
         var d = this.distanceBetweenPoints_(center, marker.getPosition());
@@ -752,12 +740,11 @@ class MarkerClusterer {
     if (clusterToAddTo && clusterToAddTo.isMarkerInClusterBounds(marker)) {
       clusterToAddTo.addMarker(marker);
     } else {
-      var cluster = new Cluster(this);
-      cluster.addMarker(marker);
-      this.clusters_.push(cluster);
+      var newCluster = new Cluster(this);
+      newCluster.addMarker(marker);
+      this.clusters_.push(newCluster);
     }
   }
-
 
   /**
    * Creates the clusters.
@@ -771,11 +758,13 @@ class MarkerClusterer {
 
     // Get our current map view bounds.
     // Create a new bounds object so we don't affect the map.
-    var mapBounds = new google.maps.LatLngBounds(this.map_.getBounds().getSouthWest(),
-      this.map_.getBounds().getNorthEast());
+    var mapBounds = new google.maps.LatLngBounds(
+      this.map_.getBounds().getSouthWest(),
+      this.map_.getBounds().getNorthEast()
+    );
     var bounds = this.getExtendedBounds(mapBounds);
 
-    for (var i = 0, marker; marker = this.markers_[i]; i++) {
+    for (var i = 0, marker; (marker = this.markers_[i]); i++) {
       if (!marker.isAdded && this.isMarkerInBounds_(marker, bounds)) {
         this.addToClosestCluster_(marker);
       }
@@ -801,8 +790,11 @@ class Cluster {
     this.center_ = null;
     this.markers_ = [];
     this.bounds_ = null;
-    this.clusterIcon_ = new ClusterIcon(this, markerClusterer.getStyles(),
-      markerClusterer.getGridSize());
+    this.clusterIcon_ = new ClusterIcon(
+      this,
+      markerClusterer.getStyles(),
+      markerClusterer.getGridSize()
+    );
   }
 
   /**
@@ -815,7 +807,7 @@ class Cluster {
     if (this.markers_.indexOf) {
       return this.markers_.indexOf(marker) != -1;
     } else {
-      for (var i = 0, m; m = this.markers_[i]; i++) {
+      for (var i = 0, m; (m = this.markers_[i]); i++) {
         if (m == marker) {
           return true;
         }
@@ -823,7 +815,6 @@ class Cluster {
     }
     return false;
   }
-
 
   /**
    * Add a marker the cluster.
@@ -842,8 +833,10 @@ class Cluster {
     } else {
       if (this.averageCenter_) {
         var l = this.markers_.length + 1;
-        var lat = (this.center_.lat() * (l - 1) + marker.getPosition().lat()) / l;
-        var lng = (this.center_.lng() * (l - 1) + marker.getPosition().lng()) / l;
+        var lat =
+          (this.center_.lat() * (l - 1) + marker.getPosition().lat()) / l;
+        var lng =
+          (this.center_.lng() * (l - 1) + marker.getPosition().lng()) / l;
         this.center_ = new google.maps.LatLng(lat, lng);
         this.calculateBounds_();
       }
@@ -873,7 +866,6 @@ class Cluster {
     return true;
   }
 
-
   /**
    * Returns the marker clusterer that the cluster is associated with.
    *
@@ -883,7 +875,6 @@ class Cluster {
     return this.markerClusterer_;
   }
 
-
   /**
    * Returns the bounds of the cluster.
    *
@@ -892,12 +883,11 @@ class Cluster {
   getBounds() {
     var bounds = new google.maps.LatLngBounds(this.center_, this.center_);
     var markers = this.getMarkers();
-    for (var i = 0, marker; marker = markers[i]; i++) {
+    for (var i = 0, marker; (marker = markers[i]); i++) {
       bounds.extend(marker.getPosition());
     }
     return bounds;
   }
-
 
   /**
    * Removes the cluster
@@ -908,7 +898,6 @@ class Cluster {
     delete this.markers_;
   }
 
-
   /**
    * Returns the number of markers in the cluster.
    *
@@ -917,7 +906,6 @@ class Cluster {
   getSize() {
     return this.markers_.length;
   }
-
 
   /**
    * Returns a list of the markers in the cluster.
@@ -928,7 +916,6 @@ class Cluster {
     return this.markers_;
   }
 
-
   /**
    * Returns the center of the cluster.
    *
@@ -937,7 +924,6 @@ class Cluster {
   getCenter() {
     return this.center_;
   }
-
 
   /**
    * Calculated the extended bounds of the cluster with the grid.
@@ -949,7 +935,6 @@ class Cluster {
     this.bounds_ = this.markerClusterer_.getExtendedBounds(bounds);
   }
 
-
   /**
    * Determines if a marker lies in the clusters bounds.
    *
@@ -960,7 +945,6 @@ class Cluster {
     return this.bounds_.contains(marker.getPosition());
   }
 
-
   /**
    * Returns the map that the cluster is associated with.
    *
@@ -969,7 +953,6 @@ class Cluster {
   getMap() {
     return this.map_;
   }
-
 
   /**
    * Updates the cluster icon
@@ -980,7 +963,7 @@ class Cluster {
 
     if (mz && zoom > mz) {
       // The zoom is greater than our max zoom so show all the markers in cluster.
-      for (var i = 0, marker; marker = this.markers_[i]; i++) {
+      for (var i = 0, marker; (marker = this.markers_[i]); i++) {
         marker.setMap(this.map_);
       }
       return;
@@ -1033,7 +1016,6 @@ class ClusterIcon {
     this.setMap(this.map_);
   }
 
-
   /**
    * Triggers the clusterclick event and zoom's if the option is set.
    */
@@ -1042,22 +1024,25 @@ class ClusterIcon {
     var markerClusterer = this.cluster_.getMarkerClusterer();
 
     // Trigger the clusterclick event.
-    google.maps.event.trigger(markerClusterer.map_, 'clusterclick', this.cluster_);
+    google.maps.event.trigger(
+      markerClusterer.map_,
+      "clusterclick",
+      this.cluster_
+    );
 
     if (markerClusterer.isZoomOnClick()) {
       // Zoom into the cluster.
       this.map_.fitBounds(clusterBounds);
       this.map_.setCenter(clusterBounds.getCenter());
     }
-  };
-
+  }
 
   /**
    * Adding the cluster icon to the dom.
    * @ignore
    */
   onAdd() {
-    this.div_ = document.createElement('DIV');
+    this.div_ = document.createElement("DIV");
     if (this.visible_) {
       var pos = this.getPosFromLatLng_(this.center_);
       this.div_.style.cssText = this.createCss(pos);
@@ -1068,11 +1053,10 @@ class ClusterIcon {
     panes.overlayMouseTarget.appendChild(this.div_);
 
     var that = this;
-    google.maps.event.addDomListener(this.div_, 'click', function () {
+    google.maps.event.addDomListener(this.div_, "click", function() {
       that.triggerClusterClick();
     });
-  };
-
+  }
 
   /**
    * Returns the position to place the div dending on the latlng.
@@ -1086,8 +1070,7 @@ class ClusterIcon {
     pos.x -= parseInt(this.width_ / 2, 10);
     pos.y -= parseInt(this.height_ / 2, 10);
     return pos;
-  };
-
+  }
 
   /**
    * Draw the icon.
@@ -1096,23 +1079,21 @@ class ClusterIcon {
   draw() {
     if (this.visible_) {
       var pos = this.getPosFromLatLng_(this.center_);
-      this.div_.style.top = pos.y + 'px';
-      this.div_.style.left = pos.x + 'px';
+      this.div_.style.top = pos.y + "px";
+      this.div_.style.left = pos.x + "px";
       this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1;
     }
-  };
-
+  }
 
   /**
    * Hide the icon.
    */
   hide() {
     if (this.div_) {
-      this.div_.style.display = 'none';
+      this.div_.style.display = "none";
     }
     this.visible_ = false;
-  };
-
+  }
 
   /**
    * Position and show the icon.
@@ -1121,19 +1102,17 @@ class ClusterIcon {
     if (this.div_) {
       var pos = this.getPosFromLatLng_(this.center_);
       this.div_.style.cssText = this.createCss(pos);
-      this.div_.style.display = '';
+      this.div_.style.display = "";
     }
     this.visible_ = true;
-  };
-
+  }
 
   /**
    * Remove the icon from the map
    */
   remove() {
     this.setMap(null);
-  };
-
+  }
 
   /**
    * Implementation of the onRemove interface.
@@ -1145,8 +1124,7 @@ class ClusterIcon {
       this.div_.parentNode.removeChild(this.div_);
       this.div_ = null;
     }
-  };
-
+  }
 
   /**
    * Set the sums of the icon.
@@ -1164,8 +1142,7 @@ class ClusterIcon {
     }
 
     this.useStyle();
-  };
-
+  }
 
   /**
    * Sets the icon to the the styles.
@@ -1174,15 +1151,14 @@ class ClusterIcon {
     var index = Math.max(0, this.sums_.index - 1);
     index = Math.min(this.styles_.length - 1, index);
     var style = this.styles_[index];
-    this.url_ = style['url'];
-    this.height_ = style['height'];
-    this.width_ = style['width'];
-    this.textColor_ = style['textColor'];
-    this.anchor_ = style['anchor'];
-    this.textSize_ = style['textSize'];
-    this.backgroundPosition_ = style['backgroundPosition'];
-  };
-
+    this.url_ = style["url"];
+    this.height_ = style["height"];
+    this.width_ = style["width"];
+    this.textColor_ = style["textColor"];
+    this.anchor_ = style["anchor"];
+    this.textSize_ = style["textSize"];
+    this.backgroundPosition_ = style["backgroundPosition"];
+  }
 
   /**
    * Sets the center of the icon.
@@ -1191,8 +1167,7 @@ class ClusterIcon {
    */
   setCenter(center) {
     this.center_ = center;
-  };
-
+  }
 
   /**
    * Create the css text based on the position of the icon.
@@ -1202,38 +1177,72 @@ class ClusterIcon {
    */
   createCss(pos) {
     var style = [];
-    style.push('background-image:url(' + this.url_ + ');');
-    var backgroundPosition = this.backgroundPosition_ ? this.backgroundPosition_ : '0 0';
-    style.push('background-position:' + backgroundPosition + ';');
+    style.push("background-image:url(" + this.url_ + ");");
+    var backgroundPosition = this.backgroundPosition_
+      ? this.backgroundPosition_
+      : "0 0";
+    style.push("background-position:" + backgroundPosition + ";");
 
-    if (typeof this.anchor_ === 'object') {
-      if (typeof this.anchor_[0] === 'number' && this.anchor_[0] > 0 &&
-        this.anchor_[0] < this.height_) {
-        style.push('height:' + (this.height_ - this.anchor_[0]) +
-          'px; padding-top:' + this.anchor_[0] + 'px;');
+    if (typeof this.anchor_ === "object") {
+      if (
+        typeof this.anchor_[0] === "number" &&
+        this.anchor_[0] > 0 &&
+        this.anchor_[0] < this.height_
+      ) {
+        style.push(
+          "height:" +
+            (this.height_ - this.anchor_[0]) +
+            "px; padding-top:" +
+            this.anchor_[0] +
+            "px;"
+        );
       } else {
-        style.push('height:' + this.height_ + 'px; line-height:' + this.height_ +
-          'px;');
+        style.push(
+          "height:" + this.height_ + "px; line-height:" + this.height_ + "px;"
+        );
       }
-      if (typeof this.anchor_[1] === 'number' && this.anchor_[1] > 0 &&
-        this.anchor_[1] < this.width_) {
-        style.push('width:' + (this.width_ - this.anchor_[1]) +
-          'px; padding-left:' + this.anchor_[1] + 'px;');
+      if (
+        typeof this.anchor_[1] === "number" &&
+        this.anchor_[1] > 0 &&
+        this.anchor_[1] < this.width_
+      ) {
+        style.push(
+          "width:" +
+            (this.width_ - this.anchor_[1]) +
+            "px; padding-left:" +
+            this.anchor_[1] +
+            "px;"
+        );
       } else {
-        style.push('width:' + this.width_ + 'px; text-align:center;');
+        style.push("width:" + this.width_ + "px; text-align:center;");
       }
     } else {
-      style.push('height:' + this.height_ + 'px; line-height:' +
-        this.height_ + 'px; width:' + this.width_ + 'px; text-align:center;');
+      style.push(
+        "height:" +
+          this.height_ +
+          "px; line-height:" +
+          this.height_ +
+          "px; width:" +
+          this.width_ +
+          "px; text-align:center;"
+      );
     }
 
-    var txtColor = this.textColor_ ? this.textColor_ : 'black';
+    var txtColor = this.textColor_ ? this.textColor_ : "black";
     var txtSize = this.textSize_ ? this.textSize_ : 11;
 
-    style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
-      pos.x + 'px; color:' + txtColor + '; position:absolute; font-size:' +
-      txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
-    return style.join('');
+    style.push(
+      "cursor:pointer; top:" +
+        pos.y +
+        "px; left:" +
+        pos.x +
+        "px; color:" +
+        txtColor +
+        "; position:absolute; font-size:" +
+        txtSize +
+        "px; font-family:Arial,sans-serif; font-weight:bold"
+    );
+    return style.join("");
   }
 }
 
