@@ -8,6 +8,14 @@
       "allowBranch": [
         "master"
       ]
+    },
+    "version": {
+      "allowBranch": [
+        "master"
+      ],
+      "conventionalCommits": true,
+      "message": "chore(release)"
+
     }
   },
   "ignoreChanges": [
