@@ -1,6 +1,6 @@
 /// <reference types="@types/jest" />
 /// <reference types="@types/googlemaps" />
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { initialize } from "@googlemaps/jest-mocks";
 import {
   xyzToBounds,
@@ -10,8 +10,6 @@ import {
   DEFAULT_WMS_PARAMS
 } from "./wmslayer";
 import { parse } from "query-string";
-
-const ImageMapType = jest.fn();
 
 beforeEach(() => {
   initialize();

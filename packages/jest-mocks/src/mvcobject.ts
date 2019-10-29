@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export class MVCObject implements google.maps.MVCObject {
   addListener = jest
     .fn()

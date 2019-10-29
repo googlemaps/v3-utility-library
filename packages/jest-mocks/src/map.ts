@@ -1,6 +1,7 @@
 import { LatLng } from "./latlng";
 import { MVCObject } from "./mvcobject";
 
+// eslint-disable-next-line @typescript-eslint/class-name-casing
 export class Map_ extends MVCObject implements google.maps.Map {
   controls: Array<google.maps.MVCArray<Node>>;
   data: google.maps.Data;

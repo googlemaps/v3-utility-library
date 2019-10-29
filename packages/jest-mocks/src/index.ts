@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { LatLng, LatLngBounds } from "./latlng";
 import { Map_ } from "./map";
 import { Marker } from "./marker";
@@ -5,7 +7,7 @@ import { MVCObject } from "./mvcobject";
 import { Point } from "./point";
 import { Size } from "./size";
 
-const initialize = function() {
+const initialize = function(): void {
   (global as any).google = {
     maps: {
       ImageMapType: jest.fn(),
