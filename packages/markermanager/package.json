@@ -1,0 +1,34 @@
+{
+  "name": "@googlemaps/markermanager",
+  "version": "0.0.0",
+  "description": "Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes.",
+  "keywords": [
+    "google",
+    "manager",
+    "maps",
+    "markers"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/markermanager",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Justin Poehnelt",
+  "main": "dist/markermanager.umd.js",
+  "unpkg": "dist/markermanager.min.js",
+  "module": "dist/markermanager.esm.js",
+  "types": "dist/markermanager.d.ts",
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@googlemaps/jest-mocks": "^0.0.0"
+  }
+}
