@@ -1,0 +1,31 @@
+{
+  "name": "@googlemaps/jest-mocks",
+  "version": "0.0.0",
+  "description": "Mocks for jest and Google Maps.",
+  "keywords": [
+    "google",
+    "manager",
+    "maps",
+    "markers"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/jest-mocks",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Justin Poehnelt",
+  "main": "dist/jest-mocks.umd.js",
+  "unpkg": "dist/jest-mocks.min.js",
+  "module": "dist/jest-mocks.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c",
+    "test": "jest"
+  }
+}
