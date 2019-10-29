@@ -26,6 +26,9 @@
     "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
     "lint": "eslint src/*",
     "prepare": "rollup -c",
-    "test": "exit 0"
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@googlemaps/jest-mocks": "^0.0.0"
   }
 }
