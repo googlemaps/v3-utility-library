@@ -1,7 +1,7 @@
 /// <reference types="@types/jest" />
 /// <reference types="@types/googlemaps" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { initialize } from "@googlemaps/jest-mocks";
 import {
   xyzToBounds,
   EPSG_3857_EXTENT,
@@ -13,18 +13,8 @@ import { parse } from "query-string";
 
 const ImageMapType = jest.fn();
 
-beforeAll(() => {
-  (global as any).google = {
-    maps: {
-      ImageMapType: ImageMapType,
-      Size: jest.fn((width, height) => ({ width, height })),
-      Point: jest.fn((x, y) => ({ x, y }))
-    }
-  };
-});
-
-afterAll(() => {
-  (global as any).google = {};
+beforeEach(() => {
+  initialize();
 });
 
 test("xyzToBounds is correct", () => {
@@ -65,9 +55,12 @@ test.each([
   WMSLayer(options);
 
   // need to get the mock in order of each
-  const tileUrl = ImageMapType.mock.calls[
-    ImageMapType.mock.calls.length - 1
-  ][0].getTileUrl(new google.maps.Point(0, 0), 1, null);
+  const mock = (google.maps.ImageMapType as jest.Mock).mock;
+  const tileUrl = mock.calls[mock.calls.length - 1][0].getTileUrl(
+    new google.maps.Point(0, 0),
+    1,
+    null
+  );
 
   const [base, queryString] = tileUrl.split("?");
 
