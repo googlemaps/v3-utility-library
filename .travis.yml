@@ -3,6 +3,7 @@ node_js:
 - stable
 script:
 - lerna bootstrap
+- lerna run prepare  # this isn't running in bootstrap
 - lerna run lint
 - lerna run test
 - lerna exec "codecov"
