@@ -31,5 +31,13 @@
     "@google/markerwithlabel": "file:packages/markerwithlabel",
     "@googlemaps/ogc": "file:packages/ogc",
     "@googlemaps/jest-mocks": "file:packages/jest-mocks"
+  },
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js --write",
+    "lint": "lerna run lint",
+    "prepare": "lerna run prepare",
+    "test": "lerna run test",
+    "bootstrap": "lerna bootstrap",
+    "ci": "npm run bootstrap && npm run prepare && npm run lint && npm run test"
   }
 }
