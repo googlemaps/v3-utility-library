@@ -130,9 +130,9 @@ class ClusterIcon {
 
     var panes = this.getPanes();
 
-    panes.overlayLayer.appendChild(this.div_)
+    panes.overlayLayer.appendChild(this.div_);
     panes.overlayMouseTarget.appendChild(this.eventDiv_);
-  
+
     // Fix for Issue 157
     this.boundsChangedListener_ = google.maps.event.addListener(
       this.getMap(),
@@ -142,20 +142,23 @@ class ClusterIcon {
       }
     );
 
-    google.maps.event.addDomListener(this.eventDiv_, "mousedown", function () {
+    google.maps.event.addDomListener(this.eventDiv_, "mousedown", function() {
       cMouseDownInCluster = true;
       cDraggingMapByCluster = false;
     });
 
     // March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
     // But it doesn't work with earlier releases so do a version check.
-    if (gmVersion >= 332) { // Ugly version-dependent code
-      google.maps.event.addDomListener(this.eventDiv_, "touchstart", function (e) {
+    if (gmVersion >= 332) {
+      // Ugly version-dependent code
+      google.maps.event.addDomListener(this.eventDiv_, "touchstart", function(
+        e
+      ) {
         e.stopPropagation();
       });
     }
 
-    google.maps.event.addDomListener(this.eventDiv_, "click", function (e) {
+    google.maps.event.addDomListener(this.eventDiv_, "click", function(e) {
       cMouseDownInCluster = false;
       if (!cDraggingMapByCluster) {
         var theBounds;
@@ -195,7 +198,7 @@ class ClusterIcon {
       }
     });
 
-    google.maps.event.addDomListener(this.eventDiv_, "mouseover", function () {
+    google.maps.event.addDomListener(this.eventDiv_, "mouseover", function() {
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
        * This event is fired when the mouse moves over a cluster marker.
@@ -206,7 +209,7 @@ class ClusterIcon {
       google.maps.event.trigger(mc, "mouseover", cClusterIcon.cluster_);
     });
 
-    google.maps.event.addDomListener(this.eventDiv_, "mouseout", function () {
+    google.maps.event.addDomListener(this.eventDiv_, "mouseout", function() {
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
        * This event is fired when the mouse moves out of a cluster marker.
@@ -242,7 +245,7 @@ class ClusterIcon {
       this.div_.style.top = pos.y + "px";
       this.div_.style.left = pos.x + "px";
       this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1; // Put above all unclustered markers
-    
+
       this.syncDivStyle();
     }
   }
@@ -349,7 +352,7 @@ class ClusterIcon {
 
       this.syncDivStyle({
         title: this.div_.title,
-        innerHTML: this.div_.innerHTML,
+        innerHTML: this.div_.innerHTML
       });
     }
     this.visible_ = true;
