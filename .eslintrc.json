@@ -12,6 +12,19 @@
       "error",
       "../../header.js"
     ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "globals": {
+    "google": "writable"
+  },
+  "env": {
+    "browser": true
   }
- 
 }
