@@ -1,6 +1,22 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "ci": "npm run bootstrap && npm run prepare && npm run lint && npm run test",
+    "format": "sort-package-json && prettier *.json *.js --write && lerna run format",
+    "lint": "lerna run lint",
+    "prepare": "lerna run prepare",
+    "test": "lerna run test"
+  },
+  "dependencies": {
+    "@google/markerclusterer": "file:packages/markerclusterer",
+    "@google/markerclustererplus": "file:packages/markerclustererplus",
+    "@google/markerwithlabel": "file:packages/markerwithlabel",
+    "@googlemaps/jest-mocks": "file:packages/jest-mocks",
+    "@googlemaps/loader": "file:packages/loader",
+    "@googlemaps/ogc": "file:packages/ogc"
+  },
   "devDependencies": {
     "@types/googlemaps": "^3.37.7",
     "@types/jest": "^24.0.19",
@@ -23,21 +39,5 @@
     "sort-package-json": "^1.22.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
-  },
-  "dependencies": {
-    "@googlemaps/loader": "file:packages/loader",
-    "@google/markerclusterer": "file:packages/markerclusterer",
-    "@google/markerclustererplus": "file:packages/markerclustererplus",
-    "@google/markerwithlabel": "file:packages/markerwithlabel",
-    "@googlemaps/ogc": "file:packages/ogc",
-    "@googlemaps/jest-mocks": "file:packages/jest-mocks"
-  },
-  "scripts": {
-    "format": "sort-package-json && prettier *.json *.js --write",
-    "lint": "lerna run lint",
-    "prepare": "lerna run prepare",
-    "test": "lerna run test",
-    "bootstrap": "lerna bootstrap",
-    "ci": "npm run bootstrap && npm run prepare && npm run lint && npm run test"
   }
 }
