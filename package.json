@@ -15,9 +15,11 @@
     "@google/markerwithlabel": "file:packages/markerwithlabel",
     "@googlemaps/jest-mocks": "file:packages/jest-mocks",
     "@googlemaps/loader": "file:packages/loader",
+    "@googlemaps/markermanager": "file:packages/markermanager",
     "@googlemaps/ogc": "file:packages/ogc"
   },
   "devDependencies": {
+    "@googlemaps/jest-mocks": "file:../jest-mocks",
     "@types/googlemaps": "^3.37.7",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
@@ -31,6 +33,7 @@
     "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",
+    "query-string": "^6.8.3",
     "rollup": "^1.24.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
@@ -38,6 +41,8 @@
     "rollup-plugin-typescript2": "^0.24.3",
     "sort-package-json": "^1.22.1",
     "ts-jest": "^24.1.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-lerna-packages": "^0.2.1",
     "typescript": "^3.6.4"
   }
 }
