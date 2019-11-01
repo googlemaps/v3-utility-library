@@ -16,8 +16,7 @@
 
 /**
  * Helper class to create a bounds of INT ranges.
- * @param bounds Array.<Object.<string, number>> Bounds object.
- * @constructor
+ * @ignore
  */
 export class GridBounds {
   public z: number;
@@ -26,6 +25,11 @@ export class GridBounds {
   public minY: number;
   public maxY: number;
 
+  /**
+   *
+   * @param bounds
+   * @param z
+   */
   constructor(bounds: google.maps.Point[], z: number) {
     // [sw, ne]
     this.z = z;
