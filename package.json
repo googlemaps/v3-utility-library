@@ -4,6 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "ci": "npm run bootstrap && npm run prepare && npm run lint && npm run test",
+    "docs": "rm -rf docs/ && typedoc .",
     "format": "sort-package-json && prettier *.json *.js --write && lerna run format",
     "lint": "lerna run lint",
     "prepare": "lerna run prepare",

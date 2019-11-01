@@ -1,27 +1,37 @@
 [![Build Status](https://travis-ci.org/googlemaps/v3-utility-library.svg?branch=master)](https://travis-ci.org/googlemaps/v3-utility-library)
 [![codecov](https://codecov.io/gh/googlemaps/v3-utility-library/branch/master/graph/badge.svg)](https://codecov.io/gh/googlemaps/v3-utility-library)
 ![GitHub contributors](https://img.shields.io/github/contributors/googlemaps/v3-utility-library)
+![TypeScript](https://badgen.net/badge/icon/Typed?icon=typescript&label&labelColor=blue&color=555555)
+![Apache-2.0](https://img.shields.io/badge/license-Apache-blue)
 
-Plugins for Google Maps JavaScript API v3
+Google Maps JavaScript API v3 Utilities
 ===================================================
 
 ## Description
 
-In this project you can find a set of utility libraries developed for Google Maps JavaScript API v3:
+In this project you can find a set packages developed for Google Maps JavaScript API v3.
 
-- ArcGIS Server Link for Google Maps JavaScript API V3
+## Packages
+- @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript
+- @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns
+- @googlemaps/ogc - WMS Layers and more(tbd)
+- @google/markerclusterer - Cluster nearby markers
+- @google/markerclustererplus - Extended version of @google/markerclusterer
+- @googlemaps/markermanager - Show and hide markers based on zoom and bounds to improve performance
+- @google/markerwithlabel - Markers with labels and matching events
+
+## Archive
+
+The following packages have never been officially published and are not maintained. Please open an issue to prioritize their inclusion.
+- ArcGIS Server Link
 - CanvasLayer
-- ExtOverviewMapControl for V3
-- Geolocation Marker for Google Maps v3
+- ExtOverviewMapControl
+- Geolocation Marker
 - InfoBox
 - InfoBubble
-- KeyDragZoom for V3
-- MapLabel for Google Maps V3
-- MarkerClusterer for Google Maps v3
-- MarkerClustererPlus for Google Maps V3
-- MarkerManager v3
-- MarkerWithLabel for V3
-- RichMarker for Google Maps v3
+- KeyDragZoom
+- MapLabel
+- RichMarker
 - RouteBoxer
 - StyledMarker
  

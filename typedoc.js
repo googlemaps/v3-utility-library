@@ -4,10 +4,12 @@ module.exports = {
   out: "docs",
   exclude: ["**/node_modules/**", "**/*.spec.ts", "**/*.test.ts"],
   lernaExclude: [],
-  name: "@googlemaps",
+  name: "Google Maps JavaScript API v3 Utilities",
   pathExclude: ["**/canvaslayer/**"],
   excludePrivate: true,
   skipInternal: true,
   ignoreCompilerErrors: true,
-  module: "commonjs"
+  module: "commonjs",
+  categorizeByGroup: true,
+  readme: "./README.md"
 };
