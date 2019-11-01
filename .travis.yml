@@ -5,6 +5,8 @@ script:
 - npm run ci
 - npm run docs
 - lerna exec "codecov"
+before_deploy:
+- touch docs/.nojekyll
 deploy:
   provider: pages
   skip_cleanup: true
