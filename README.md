@@ -9,7 +9,11 @@ Google Maps JavaScript API v3 Utilities
 
 ## Description
 
-In this project you can find a set packages developed for Google Maps JavaScript API v3.
+In this project you can find a utility packages developed for the Google Maps JavaScript API V3.
+
+## Documentation
+
+Documentation for the utility packages below can be found at https://googlemaps.github.io/v3-utility-library/.
 
 ## Packages
 - @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript
@@ -35,6 +39,12 @@ The following packages have never been officially published and are not maintain
 - RouteBoxer
 - StyledMarker
  
+## Other Resources
+- [Google Maps VS Documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
+- [Google Maps V3 Reference Documenations](https://developers.google.com/maps/documentation/javascript/reference/)
+- [Google Maps Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/googlemaps) - Community supported `npm i -D @types/googlemaps`
+- [Google Maps V3 Samples](https://github.com/googlemaps/js-samples)
+
 ## Support
 
 These libraries are community supported. We're comfortable enough with the stability and features of
