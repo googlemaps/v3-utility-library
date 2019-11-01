@@ -17,16 +17,39 @@
 /// <reference types="@types/googlemaps" />
 import { stringify } from "query-string";
 
+/**
+ * @ignore
+ */
 const DEFAULT_WMS_PARAMS = {
   request: "GetMap",
   service: "WMS",
   srs: "EPSG:3857"
 };
+
+/**
+ * @ignore
+ */
 const EPSG_3857_EXTENT = 20037508.34789244;
+
+/**
+ * @ignore
+ */
 const ORIG_X = -EPSG_3857_EXTENT; // x starts from right
+
+/**
+ * @ignore
+ */
 const ORIG_Y = EPSG_3857_EXTENT; // y starts from top
 
-function xyzToBounds(x: number, y: number, zoom: number): Array<number> {
+/**
+ * Convert xyz tile coordinates to mercator bounds.
+ *
+ * @param x
+ * @param y
+ * @param zoom
+ * @returns {number[]} minx, miny, maxx, maxy
+ */
+function xyzToBounds(x: number, y: number, zoom: number): number[] {
   const tileSize = (EPSG_3857_EXTENT * 2) / Math.pow(2, zoom);
   const minx = ORIG_X + x * tileSize;
   const maxx = ORIG_X + (x + 1) * tileSize;
@@ -50,6 +73,11 @@ interface WMSLayerOptions {
   minZoom?: number;
   opacity?: number;
 }
+
+/**
+ *
+ * @param {WMSLayerOptions} params
+ */
 const WMSLayer = function({
   url,
   layers,

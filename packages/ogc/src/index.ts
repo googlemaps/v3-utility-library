@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { WMSLayer } from "./wmslayer";
+export { WMSLayer, WMSLayerOptions, xyzToBounds } from "./wmslayer";

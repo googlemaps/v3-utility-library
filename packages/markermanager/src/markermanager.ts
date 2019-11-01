@@ -25,21 +25,9 @@ interface Options {
   trackMarkers?: boolean;
   borderPadding?: number;
 }
+
 /**
  * Creates a new MarkerManager that will show/hide markers on a map.
- *
- * Events:
- * @event changed (Parameters: shown bounds, shown markers) Notify listeners when the state of what is displayed changes.
- * @event loaded MarkerManager has succesfully been initialized.
- *
- * @constructor
- * @param map The map to manage.
- * @param options A container for optional arguments:
- *   maxZoom The maximum zoom level for which to create tiles.
- *   borderPadding The width in pixels beyond the map border,
- *                   where markers should be display.
- *   trackMarkers Whether or not this manager should track marker
- *                   movements.
  */
 class MarkerManager {
   public shown: boolean;
@@ -57,6 +45,11 @@ class MarkerManager {
   private _numMarkers: { [k: string]: number };
   private _shownBounds: GridBounds;
 
+  /**
+   * @constructor
+   * @param map The map to manage.
+   * @param {Options} options
+   */
   constructor(
     map: google.maps.Map,
     { maxZoom = 19, trackMarkers, shown = true, borderPadding = 100 }: Options

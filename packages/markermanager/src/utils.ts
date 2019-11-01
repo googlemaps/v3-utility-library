@@ -14,15 +14,31 @@
  * limitations under the License.
  */
 
+/**
+ * @ignore
+ *
+ * @param lng
+ */
 function lngToX(lng: number): number {
   return 1 + lng / 180;
 }
-
+/**
+ * @ignore
+ *
+ * @param {number} lat
+ * @returns {number}
+ */
 function latToY(lat: number): number {
   const sinofphi = Math.sin((lat * Math.PI) / 180);
   return 1 - (0.5 / Math.PI) * Math.log((1 + sinofphi) / (1 - sinofphi));
 }
 
+/**
+ * @ignore
+ *
+ * @param latlng
+ * @param zoom
+ */
 export function latLngToPixel(
   latlng: google.maps.LatLng,
   zoom: number
