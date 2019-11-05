@@ -74,7 +74,7 @@
 					<a href="#description" id="description" style="color: inherit; text-decoration: none;">
 						<h2>Description</h2>
 					</a>
-					<p>Add a WMSLayer to Google Maps.</p>
+					<p>Add a WmsMapType to Google Maps.</p>
 					<a href="#npm" id="npm" style="color: inherit; text-decoration: none;">
 						<h2>NPM</h2>
 					</a>
@@ -82,11 +82,11 @@
 					<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 						<h2>Example</h2>
 					</a>
-					<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WMSLayer } <span class="hljs-keyword">from</span> <span class="hljs-string">'@googlemaps/ogc'</span>;
+					<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WmsMapType } <span class="hljs-keyword">from</span> <span class="hljs-string">'@googlemaps/ogc'</span>;
 
 map = <span class="hljs-keyword">new</span> google.maps.Map(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"map"</span>), mapOptions);
 
-landCoverMapType = WMSLayer({
+landCoverMapType = WmsMapType({
     <span class="hljs-attr">url</span>: <span class="hljs-string">"https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms?"</span>,
     <span class="hljs-attr">layers</span>: <span class="hljs-string">"mrlc_display:NLCD_2016_Land_Cover_L48"</span>,
     <span class="hljs-attr">name</span>: <span class="hljs-string">"Land Cover"</span>,
@@ -115,13 +115,13 @@ map.overlayMapTypes.push(landCoverMapType);</code></pre>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported"><a href="../interfaces/_googlemaps_ogc.wmslayeroptions.html" class="tsd-kind-icon">WMSLayer<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported"><a href="../interfaces/_googlemaps_ogc.wmsmaptypeoptions.html" class="tsd-kind-icon">Wms<wbr>Map<wbr>Type<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="_googlemaps_ogc.html#wmslayer" class="tsd-kind-icon">WMSLayer</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="_googlemaps_ogc.html#wmsmaptype" class="tsd-kind-icon">Wms<wbr>Map<wbr>Type</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="_googlemaps_ogc.html#xyztobounds" class="tsd-kind-icon">xyz<wbr>ToBounds</a></li>
 							</ul>
 						</section>
@@ -131,16 +131,16 @@ map.overlayMapTypes.push(landCoverMapType);</code></pre>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-					<a name="wmslayer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> WMSLayer</h3>
+					<a name="wmsmaptype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Wms<wbr>Map<wbr>Type</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">WMSLayer<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ImageMapType</span></li>
+						<li class="tsd-signature tsd-kind-icon">Wms<wbr>Map<wbr>Type<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ImageMapType</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/39d2e1c/packages/ogc/src/wmslayer.ts#L81">ogc/src/wmslayer.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/6a1ab7a/packages/ogc/src/wmsmaptype.ts#L81">ogc/src/wmsmaptype.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -204,7 +204,7 @@ map.overlayMapTypes.push(landCoverMapType);</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/39d2e1c/packages/ogc/src/wmslayer.ts#L52">ogc/src/wmslayer.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/6a1ab7a/packages/ogc/src/wmsmaptype.ts#L52">ogc/src/wmsmaptype.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,10 +254,10 @@ map.overlayMapTypes.push(landCoverMapType);</code></pre>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../interfaces/_googlemaps_ogc.wmslayeroptions.html" class="tsd-kind-icon">WMSLayer<wbr>Options</a>
+						<a href="../interfaces/_googlemaps_ogc.wmsmaptypeoptions.html" class="tsd-kind-icon">Wms<wbr>Map<wbr>Type<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_googlemaps_ogc.html#wmslayer" class="tsd-kind-icon">WMSLayer</a>
+						<a href="_googlemaps_ogc.html#wmsmaptype" class="tsd-kind-icon">Wms<wbr>Map<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_googlemaps_ogc.html#xyztobounds" class="tsd-kind-icon">xyz<wbr>ToBounds</a>
