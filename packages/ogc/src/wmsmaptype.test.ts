@@ -24,7 +24,7 @@ import {
   WmsMapType,
   WmsMapTypeOptions,
   DEFAULT_WMS_PARAMS
-} from "./WmsMapType";
+} from "./wmsmaptype";
 import { parse } from "query-string";
 
 beforeEach(() => {
