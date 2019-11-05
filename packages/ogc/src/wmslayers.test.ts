@@ -21,10 +21,10 @@ import { initialize } from "@googlemaps/jest-mocks";
 import {
   xyzToBounds,
   EPSG_3857_EXTENT,
-  WMSLayer,
-  WMSLayerOptions,
+  WmsMapType,
+  WmsMapTypeOptions,
   DEFAULT_WMS_PARAMS
-} from "./wmslayer";
+} from "./WmsMapType";
 import { parse } from "query-string";
 
 beforeEach(() => {
@@ -65,8 +65,8 @@ test.each([
       maxZoom: 18
     }
   ]
-])("WMSLayer can be called with getTIleUrl", (options: WMSLayerOptions) => {
-  WMSLayer(options);
+])("WmsMapType can be called with getTIleUrl", (options: WmsMapTypeOptions) => {
+  WmsMapType(options);
 
   // need to get the mock in order of each
   const mock = (google.maps.ImageMapType as jest.Mock).mock;
