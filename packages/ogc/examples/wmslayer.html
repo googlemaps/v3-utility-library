@@ -34,7 +34,7 @@
 
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-        landCoverMapType = google.maps.plugins.ogc.WMSLayer({
+        landCoverMapType = google.maps.plugins.ogc.WmsMapType({
           url: "https://www.mrlc.gov/geoserver/NLCD_Land_Cover/wms?",
           layers: "mrlc_display:NLCD_2016_Land_Cover_L48",
           name: "Land Cover",

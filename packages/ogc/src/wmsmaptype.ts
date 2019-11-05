@@ -58,7 +58,7 @@ function xyzToBounds(x: number, y: number, zoom: number): number[] {
   return [minx, miny, maxx, maxy];
 }
 
-interface WMSLayerOptions {
+interface WmsMapTypeOptions {
   url: string;
   layers: string;
   maxZoom: number;
@@ -76,9 +76,9 @@ interface WMSLayerOptions {
 
 /**
  *
- * @param {WMSLayerOptions} params
+ * @param {WmsMapTypeOptions} params
  */
-const WMSLayer = function({
+const WmsMapType = function({
   url,
   layers,
   styles = "",
@@ -93,7 +93,7 @@ const WMSLayer = function({
   maxZoom,
   minZoom,
   opacity
-}: WMSLayerOptions): google.maps.ImageMapType {
+}: WmsMapTypeOptions): google.maps.ImageMapType {
   // currently only support tileSize of 256
   const tileSize = new google.maps.Size(256, 256);
 
@@ -139,6 +139,6 @@ export {
   EPSG_3857_EXTENT,
   DEFAULT_WMS_PARAMS,
   xyzToBounds,
-  WMSLayer,
-  WMSLayerOptions
+  WmsMapType,
+  WmsMapTypeOptions
 };
