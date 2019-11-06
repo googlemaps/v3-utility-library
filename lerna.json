@@ -7,8 +7,7 @@
     },
     "version": {
       "allowBranch": ["master"],
-      "conventionalCommits": true,
-      "message": "chore(release)"
+      "message": "chore: release"
     }
   },
   "ignoreChanges": ["**/examples/**", "**/tests/**", "**/docs/**", "**/*.md"]
