@@ -1,0 +1,12 @@
+{
+  "include": [
+    "src/markerclusterer.js"
+  ],
+  "compilerOptions": {
+    "noEmit": false,
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "typings",
+    "emitDeclarationOnly": true
+  }
+}
