@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/jest-mocks",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Mocks for jest and Google Maps.",
   "keywords": [
     "google",
