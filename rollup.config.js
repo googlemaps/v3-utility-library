@@ -1,4 +1,5 @@
 import { terser } from "rollup-plugin-terser";
+import typescript from "rollup-plugin-typescript2";
 
 export default [
   {
@@ -21,6 +22,10 @@ export default [
   },
   {
     input: "src/markerclusterer.js",
+    // Adding in a TS definition file. Should not impact the generation of the ESM package
+    plugins: [typescript({
+      tsconfig: "tsconfig.json",
+    })],
     output: {
       file: "dist/markerclustererplus.esm.js",
       format: "esm"
