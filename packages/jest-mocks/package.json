@@ -27,5 +27,9 @@
     "lint": "eslint src/*",
     "prepare": "rollup -c",
     "test": "jest"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
   }
 }
