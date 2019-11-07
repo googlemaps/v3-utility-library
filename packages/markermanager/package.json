@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/markermanager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes.",
   "keywords": [
     "google",
@@ -29,7 +29,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@googlemaps/jest-mocks": "^0.0.1"
+    "@googlemaps/jest-mocks": "^0.0.2"
   },
   "publishConfig": {
     "access": "public",

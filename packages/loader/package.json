@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/loader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Wrapper for the loading of Google Maps script in the browser",
   "keywords": [
     "google",
