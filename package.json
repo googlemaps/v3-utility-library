@@ -43,6 +43,6 @@
     "ts-jest": "^24.1.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-lerna-packages": "^0.2.1",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   }
 }
