@@ -102,6 +102,7 @@ class ClusterIcon {
     this.styles_ = styles;
     this.center_ = null;
     this.div_ = null;
+    this.eventDiv_ = null;
     this.sums_ = null;
     this.visible_ = false;
 
@@ -121,11 +122,16 @@ class ClusterIcon {
 
     this.div_ = document.createElement("div");
     this.div_.className = this.className_;
+    this.eventDiv_ = this.div_.cloneNode();
+
     if (this.visible_) {
       this.show();
     }
 
-    this.getPanes().overlayMouseTarget.appendChild(this.div_);
+    var panes = this.getPanes();
+
+    panes.overlayLayer.appendChild(this.div_);
+    panes.overlayMouseTarget.appendChild(this.eventDiv_);
 
     // Fix for Issue 157
     this.boundsChangedListener_ = google.maps.event.addListener(
@@ -136,7 +142,7 @@ class ClusterIcon {
       }
     );
 
-    google.maps.event.addDomListener(this.div_, "mousedown", function() {
+    google.maps.event.addDomListener(this.eventDiv_, "mousedown", function() {
       cMouseDownInCluster = true;
       cDraggingMapByCluster = false;
     });
@@ -145,12 +151,14 @@ class ClusterIcon {
     // But it doesn't work with earlier releases so do a version check.
     if (gmVersion >= 332) {
       // Ugly version-dependent code
-      google.maps.event.addDomListener(this.div_, "touchstart", function(e) {
+      google.maps.event.addDomListener(this.eventDiv_, "touchstart", function(
+        e
+      ) {
         e.stopPropagation();
       });
     }
 
-    google.maps.event.addDomListener(this.div_, "click", function(e) {
+    google.maps.event.addDomListener(this.eventDiv_, "click", function(e) {
       cMouseDownInCluster = false;
       if (!cDraggingMapByCluster) {
         var theBounds;
@@ -190,7 +198,7 @@ class ClusterIcon {
       }
     });
 
-    google.maps.event.addDomListener(this.div_, "mouseover", function() {
+    google.maps.event.addDomListener(this.eventDiv_, "mouseover", function() {
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
        * This event is fired when the mouse moves over a cluster marker.
@@ -201,7 +209,7 @@ class ClusterIcon {
       google.maps.event.trigger(mc, "mouseover", cClusterIcon.cluster_);
     });
 
-    google.maps.event.addDomListener(this.div_, "mouseout", function() {
+    google.maps.event.addDomListener(this.eventDiv_, "mouseout", function() {
       var mc = cClusterIcon.cluster_.getMarkerClusterer();
       /**
        * This event is fired when the mouse moves out of a cluster marker.
@@ -220,9 +228,11 @@ class ClusterIcon {
     if (this.div_ && this.div_.parentNode) {
       this.hide();
       google.maps.event.removeListener(this.boundsChangedListener_);
-      google.maps.event.clearInstanceListeners(this.div_);
+      google.maps.event.clearInstanceListeners(this.eventDiv_);
       this.div_.parentNode.removeChild(this.div_);
+      this.eventDiv_.parentNode.removeChild(this.eventDiv_);
       this.div_ = null;
+      this.eventDiv_ = null;
     }
   }
 
@@ -235,6 +245,8 @@ class ClusterIcon {
       this.div_.style.top = pos.y + "px";
       this.div_.style.left = pos.x + "px";
       this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1; // Put above all unclustered markers
+
+      this.syncDivStyle();
     }
   }
 
@@ -244,6 +256,7 @@ class ClusterIcon {
   hide() {
     if (this.div_) {
       this.div_.style.display = "none";
+      this.syncDivStyle();
     }
     this.visible_ = false;
   }
@@ -336,8 +349,23 @@ class ClusterIcon {
         this.div_.title = this.sums_.title;
       }
       this.div_.style.display = "";
+
+      this.syncDivStyle({
+        title: this.div_.title,
+        innerHTML: this.div_.innerHTML
+      });
     }
     this.visible_ = true;
+  }
+
+  syncDivStyle(vars) {
+    if (vars) {
+      Object.assign(this.eventDiv_, vars);
+    }
+    if (this.eventDiv_ && this.div_) {
+      this.eventDiv_.style.cssText = this.div_.style.cssText;
+      this.eventDiv_.style.opacity = 0;
+    }
   }
 
   /**
