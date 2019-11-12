@@ -46,6 +46,8 @@
  *     'minimumClusterSize': (number) The minimum number of markers to be in a
  *                           cluster before the markers are hidden and a count
  *                           is shown.
+ *     'zIndex': (number) the z-index of a cluster.
+ *               Default: google.maps.Marker.MAX_ZINDEX + 1
  *     'styles': (object) An object that has style properties:
  *       'url': (string) The image url.
  *       'height': (number) The image height.
@@ -103,6 +105,11 @@ class MarkerClusterer {
     this.ready_ = false;
 
     var options = opt_options || {};
+
+    /**
+     * @type {number}
+     */
+    this.zIndex_ = options["zIndex"] || google.maps.Marker.MAX_ZINDEX + 1;
 
     /**
      * @type {number}
@@ -258,6 +265,20 @@ class MarkerClusterer {
     }
 
     this.map_.fitBounds(bounds);
+  }
+
+  /**
+   * @param {number} zIndex 
+   */
+  setZIndex(zIndex) {
+    this.zIndex_ = zIndex;
+  }
+
+  /**
+   * @return {number}
+   */
+  getZIndex(){
+    return this.zIndex_;
   }
 
   /**
@@ -1081,7 +1102,6 @@ class ClusterIcon {
       var pos = this.getPosFromLatLng_(this.center_);
       this.div_.style.top = pos.y + "px";
       this.div_.style.left = pos.x + "px";
-      this.div_.style.zIndex = google.maps.Marker.MAX_ZINDEX + 1;
     }
   }
 
@@ -1177,6 +1197,7 @@ class ClusterIcon {
    */
   createCss(pos) {
     var style = [];
+    style.push("z-index:" + this.markerClusterer_.getZIndex() + ";");
     style.push("background-image:url(" + this.url_ + ");");
     var backgroundPosition = this.backgroundPosition_
       ? this.backgroundPosition_
