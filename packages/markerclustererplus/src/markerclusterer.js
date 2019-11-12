@@ -1014,7 +1014,7 @@ class MarkerClusterer {
   }
 
   /**
-   * @param {number} zIndex 
+   * @param {number} zIndex
    */
   setZIndex(zIndex) {
     this.zIndex_ = zIndex;
