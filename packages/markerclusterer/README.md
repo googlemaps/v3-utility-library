@@ -9,8 +9,6 @@ Creates and manages per-zoom-level clusters for large amounts of markers.
 
 Available via NPM as the package `@google/markerclusterer`
 
-[Read more][more]
-
 ## Support
 
 This library is community supported. We're comfortable enough with the stability and features of
@@ -21,4 +19,3 @@ contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
 [contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerclusterer/CONTRIB.md
-[more]: https://googlemaps.github.io/js-marker-clusterer/docs/reference.html

@@ -12,7 +12,6 @@ If you drag a marker by its label, you can cancel the drag and return the marker
 
 Available via NPM as the package `@google/markerwithlabel`
 
-[Read more][more]
 
 ## Support
 
@@ -24,4 +23,3 @@ contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
 [contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerwithlabel/CONTRIB.md
-[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerwithlabel/docs/reference.html
