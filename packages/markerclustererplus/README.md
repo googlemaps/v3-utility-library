@@ -11,8 +11,6 @@ It is based on the V3 MarkerClusterer port by Luke Mahe. MarkerClustererPlus was
 
 Available via NPM as the package `@google/markerclustererplus`
 
-[Read more][more]
-
 ## Support
 
 This library is community supported. We're comfortable enough with the stability and features of
@@ -23,4 +21,3 @@ contribute, please read [How to Contribute][contrib].
 
 [issues]: https://github.com/googlemaps/v3-utility-library/issues
 [contrib]: https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerclustererplus/CONTRIB.md
-[more]: http://htmlpreview.github.io/?https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerclustererplus/docs/reference.html
