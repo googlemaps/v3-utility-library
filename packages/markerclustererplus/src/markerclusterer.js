@@ -658,7 +658,7 @@ class Cluster {
  *  cluster marker is positioned at the location of the first marker added to the cluster.
  * @property {number} [minimumClusterSize=2] The minimum number of markers needed in a cluster
  *  before the markers are hidden and a cluster marker appears.
- * @property {nubmer} [zIndex=google.map.Marker.MAX_ZINDEX + 1] the z-index of a cluster.
+ * @property {nubmer} [zIndex=google.maps.Marker.MAX_ZINDEX + 1] the z-index of a cluster.
  * @property {boolean} [ignoreHidden=false] Whether to ignore hidden markers in clusters. You
  *  may want to set this to <code>true</code> to ensure that hidden markers are not included
  *  in the marker count that appears on a cluster marker (this count is the value of the
@@ -795,7 +795,7 @@ class MarkerClusterer {
         return "";
       };
 
-    this.zIndex_ = opt_options.zIndex || google.map.Marker.MAX_ZINDEX + 1;
+    this.zIndex_ = opt_options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
     this.gridSize_ = opt_options.gridSize || 60;
     this.minClusterSize_ = opt_options.minimumClusterSize || 2;
     this.maxZoom_ = opt_options.maxZoom || null;
