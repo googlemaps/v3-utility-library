@@ -1197,7 +1197,7 @@ class ClusterIcon {
    */
   createCss(pos) {
     var style = [];
-    style.push("z-index:" + this.markerClusterer_.getZIndex() + ";");
+    style.push("z-index:" + this.cluster_.markerClusterer_.getZIndex() + ";");
     style.push("background-image:url(" + this.url_ + ");");
     var backgroundPosition = this.backgroundPosition_
       ? this.backgroundPosition_

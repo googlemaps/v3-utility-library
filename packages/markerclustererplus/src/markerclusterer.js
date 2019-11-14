@@ -383,7 +383,7 @@ class ClusterIcon {
    */
   createCss(pos) {
     var style = [];
-    style.push("z-index: " + this.markerClusterer_.getZIndex() + ";");
+    style.push("z-index: " + this.cluster_.markerClusterer_.getZIndex() + ";");
     style.push("cursor: pointer;");
     style.push(
       "position: absolute; top: " + pos.y + "px; left: " + pos.x + "px;"
