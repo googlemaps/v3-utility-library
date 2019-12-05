@@ -7,6 +7,7 @@
     },
     "version": {
       "allowBranch": ["master"],
+      "conventionalCommits": true,
       "message": "chore: release"
     }
   },
