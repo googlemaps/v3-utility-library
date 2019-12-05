@@ -50,5 +50,5 @@ The following packages have never been officially published and are not maintain
 These libraries are community supported. We're comfortable enough with the stability and features of
 the libraries that we want you to build real production applications on it.
 
-If you find a bug, or have a feature suggestion, please [log an issue][issues]. If you'd like to
-contribute, please read [How to Contribute][contrib].
+If you find a bug, or have a feature suggestion, please [log an issue](https://github.com/googlemaps/v3-utility-library/issues). If you'd like to
+contribute, please read [How to Contribute](CONTRIB.md).
