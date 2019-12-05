@@ -25,5 +25,9 @@
   "main": "src/markerwithlabel.js",
   "scripts": {
     "lint": "exit 0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
   }
 }
