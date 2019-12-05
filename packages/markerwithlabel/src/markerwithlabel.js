@@ -468,8 +468,10 @@ MarkerLabel_.prototype.setAnchor = function () {
  */
 MarkerLabel_.prototype.setPosition = function () {
   var position = this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());
-  this.labelDiv_.style.left = Math.round(position.x) + "px";
-  this.labelDiv_.style.top = Math.round(position.y) + "px";
+  if (position) {
+    this.labelDiv_.style.left = Math.round(position.x) + "px";
+    this.labelDiv_.style.top = Math.round(position.y) + "px";
+  }
   this.eventDiv_.style.left = this.labelDiv_.style.left;
   this.eventDiv_.style.top = this.labelDiv_.style.top;
 };
