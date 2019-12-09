@@ -20,6 +20,7 @@
     "@googlemaps/ogc": "file:packages/ogc"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.7.6",
     "@types/googlemaps": "^3.37.7",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
@@ -35,6 +36,7 @@
     "prettier": "^1.18.2",
     "query-string": "^6.8.3",
     "rollup": "^1.24.0",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",

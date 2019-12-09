@@ -1,8 +1,16 @@
 import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 import commonjs from "rollup-plugin-commonjs";
+import babel from "rollup-plugin-babel";
 
-var terserOptions = {
+const babelOptions = {
+  extensions: [".js", ".ts"],
+  exclude: "node_modules/**",
+  rootMode: "upward",
+  presets: ["@babel/preset-env"]
+};
+
+const terserOptions = {
   mangle: {
     properties: {
       regex: /^_/
@@ -19,7 +27,12 @@ var terserOptions = {
 export default [
   {
     input: "src/index.ts",
-    plugins: [typescript(), commonjs(), terser(terserOptions)],
+    plugins: [
+      typescript(),
+      commonjs(),
+      babel(babelOptions),
+      terser(terserOptions)
+    ],
     output: {
       file: "dist/markermanager.umd.js",
       format: "umd",
@@ -29,7 +42,12 @@ export default [
   },
   {
     input: "src/index.ts",
-    plugins: [typescript(), terser(terserOptions), commonjs()],
+    plugins: [
+      typescript(),
+      commonjs(),
+      babel(babelOptions),
+      terser(terserOptions)
+    ],
     output: {
       file: "dist/markermanager.min.js",
       format: "iife",
@@ -38,7 +56,7 @@ export default [
   },
   {
     input: "src/index.ts",
-    plugins: [typescript(), commonjs()],
+    plugins: [typescript(), commonjs(), babel(babelOptions)],
     output: {
       file: "dist/markermanager.dev.js",
       format: "iife",

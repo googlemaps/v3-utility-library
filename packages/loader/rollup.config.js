@@ -1,13 +1,25 @@
 import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 import commonjs from "rollup-plugin-commonjs";
+import babel from "rollup-plugin-babel";
 
-var terserOptions = { output: { comments: "" } };
+const babelOptions = {
+  extensions: [".js", ".ts"],
+  rootMode: "upward",
+  presets: ["@babel/env"]
+};
+
+const terserOptions = { output: { comments: "" } };
 
 export default [
   {
     input: "src/index.ts",
-    plugins: [typescript(), commonjs(), terser(terserOptions)],
+    plugins: [
+      typescript(),
+      commonjs(),
+      babel(babelOptions),
+      terser(terserOptions)
+    ],
     output: {
       file: "dist/loader.umd.js",
       format: "umd",
@@ -17,7 +29,12 @@ export default [
   },
   {
     input: "src/index.ts",
-    plugins: [typescript(), commonjs(), terser(terserOptions)],
+    plugins: [
+      typescript(),
+      commonjs(),
+      babel(babelOptions),
+      terser(terserOptions)
+    ],
     output: {
       file: "dist/loader.min.js",
       format: "iife",
@@ -26,7 +43,7 @@ export default [
   },
   {
     input: "src/index.ts",
-    plugins: [typescript(), commonjs()],
+    plugins: [typescript(), commonjs(), babel(babelOptions)],
     output: {
       file: "dist/loader.dev.js",
       format: "iife",

@@ -1,9 +1,16 @@
 import { terser } from "rollup-plugin-terser";
+import babel from "rollup-plugin-babel";
+
+const babelOptions = {
+  extensions: [".js", ".ts"],
+  rootMode: "upward",
+  presets: ["@babel/env"]
+};
 
 export default [
   {
     input: "src/markerclusterer.js",
-    plugins: [terser()],
+    plugins: [babel(babelOptions), terser()],
     output: {
       file: "dist/markerclusterer.umd.js",
       format: "umd",
@@ -12,7 +19,7 @@ export default [
   },
   {
     input: "src/markerclusterer.js",
-    plugins: [terser()],
+    plugins: [babel(babelOptions), terser()],
     output: {
       file: "dist/markerclusterer.min.js",
       format: "iife",
