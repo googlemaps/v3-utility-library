@@ -5,7 +5,7 @@ import babel from "rollup-plugin-babel";
 
 const babelOptions = {
   extensions: [".js", ".ts"],
-  rootMode: "upward",
+  
   presets: ["@babel/env"]
 };
 
