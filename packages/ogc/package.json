@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/ogc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Provides OGC plugin to Google Maps with features such as WmsMapType.",
   "keywords": [
     "cluster",
