@@ -2,6 +2,13 @@ import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
+import babel from "rollup-plugin-babel";
+
+const babelOptions = {
+  extensions: [".js", ".ts"],
+  
+  presets: ["@babel/env"]
+};
 
 export default [
   {
@@ -10,7 +17,8 @@ export default [
       typescript(),
       commonjs(),
       resolve(),
-      terser({ output: { comments: "" } })
+      terser({ output: { comments: "" } }),
+      babel(babelOptions)
     ],
     output: {
       file: "dist/ogc.umd.js",
@@ -25,7 +33,8 @@ export default [
       typescript(),
       commonjs(),
       resolve(),
-      terser({ output: { comments: "" } })
+      terser({ output: { comments: "" } }),
+      babel(babelOptions)
     ],
     output: {
       file: "dist/ogc.min.js",
