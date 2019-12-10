@@ -48,7 +48,7 @@
  *                           is shown.
  *     'zIndex': (number) the z-index of a cluster.
  *               Default: google.maps.Marker.MAX_ZINDEX + 1
- *     'styles': (object) An object that has style properties:
+ *     'styles': (Array.<Object>) An Array of single object that has style properties for all cluster:
  *       'url': (string) The image url.
  *       'height': (number) The image height.
  *       'width': (number) The image width.
@@ -94,6 +94,7 @@ class MarkerClusterer {
     this.sizes = [53, 56, 66, 78, 90];
 
     /**
+     * @type {Array.<Object>}
      * @private
      */
     this.styles_ = [];
