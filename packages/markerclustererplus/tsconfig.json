@@ -1,12 +1,14 @@
 {
-  "include": [
-    "src/markerclusterer.js"
-  ],
   "compilerOptions": {
-    "noEmit": false,
-    "allowJs": true,
     "declaration": true,
-    "declarationDir": "typings",
-    "emitDeclarationOnly": true
-  }
+    "declarationDir": "./dist",
+    "module": "es6",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "target": "es6",
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.test.*"],
+  "esModuleInterop": true
 }
