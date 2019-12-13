@@ -1,4 +1,18 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 export interface OverlayViewSafe extends google.maps.OverlayView {}
+
+/**
+ * Extends an object's prototype by another's.
+ *
+ * @param {Object} type1 The Type to be extended.
+ * @param {Object} type2 The Type to extend with.
+ * @ignore
+ */
+function extend(type1: any, type2: any): void { // eslint-disable-line @typescript-eslint/no-explicit-any
+  for (const property in type2.prototype) {
+    type1.prototype[property] = type2.prototype[property];
+  }
+}
 
 export class OverlayViewSafe {
   constructor() {
@@ -7,23 +21,7 @@ export class OverlayViewSafe {
     // because it might not always be available when the code is defined so we
     // look for it at the last possible moment. If it doesn't exist now then
     // there is no point going ahead :)
-    this.extend(OverlayViewSafe, google.maps.OverlayView);
-  }
-
-  /**
-   * Extends an object's prototype by another's.
-   *
-   * @param {Object} obj1 The object to be extended.
-   * @param {Object} obj2 The object to extend with.
-   * @return {Object} The new extended object.
-   * @ignore
-   */
-  extend(obj1: any, obj2: any) {
-    return function(object: any) {
-      for (const property in object.prototype) {
-        this.prototype[property] = object.prototype[property];
-      }
-      return this;
-    }.apply(obj1, [obj2]);
+    extend(OverlayViewSafe, google.maps.OverlayView);
   }
 }
+
