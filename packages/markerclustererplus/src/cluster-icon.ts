@@ -340,8 +340,8 @@ export class ClusterIcon extends OverlayViewSafe {
     this.width_ = style.width;
     this.anchorText_ = style.anchorText || [0, 0];
     this.anchorIcon_ = style.anchorIcon || [
-      parseInt(this.height_ / 2 as any, 10),
-      parseInt(this.width_ / 2 as any, 10)
+      Math.floor(this.height_ / 2),
+      Math.floor(this.width_ / 2)
     ];
     this.textColor_ = style.textColor || "black";
     this.textSize_ = style.textSize || 11;
@@ -389,11 +389,8 @@ export class ClusterIcon extends OverlayViewSafe {
    */
   getPosFromLatLng_(latlng: google.maps.LatLng): google.maps.Point {
     const pos = this.getProjection().fromLatLngToDivPixel(latlng);
-    pos.x -= this.anchorIcon_[1];
-    pos.y -= this.anchorIcon_[0];
-
-    pos.x = parseInt(pos.x as any, 10);
-    pos.y = parseInt(pos.y as any, 10);
+    pos.x = Math.floor(pos.x - this.anchorIcon_[1]);
+    pos.y = Math.floor(pos.y - this.anchorIcon_[0]);
     return pos;
   }
 }
