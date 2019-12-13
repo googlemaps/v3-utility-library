@@ -50,6 +50,33 @@ export interface ClusterAugmentedMarker extends  google.maps.Marker {
 }
 
 /**
+ * This event is fired on the {@link MarkerClusterer} instance when the `MarkerClusterer` stops clustering markers.
+ *
+ * Example:
+ * ```typescript
+ *  mc.addListener('clusteringend', (mc: MarkerClusterer) => {})
+ * ```
+ *
+ * @param mc The MarkerClusterer whose markers are being clustered.
+ * @event clusteringend
+ */
+export declare function clusteringend(mc: MarkerClusterer): void;
+
+/**
+ * This event is fired on the {@link MarkerClusterer} instance when the `MarkerClusterer` begins clustering markers.
+ *
+ * Example:
+ * ```typescript
+ *  mc.addListener('clusteringbegin', (mc: MarkerClusterer) => {})
+ * ```
+ *
+ * @param mc The MarkerClusterer whose markers are being clustered.
+ * @event clusteringbegin
+ */
+export declare function clusteringbegin(mc: MarkerClusterer): void;
+
+
+/**
  * Optional parameter passed to the {@link MarkerClusterer} constructor.
  */
 export interface MarkerClustererOptions {
@@ -224,7 +251,6 @@ const getOption = <T, K extends keyof  T>(options: T, prop: K, def: T[K]): T[K] 
   }
 };
 
-
 export class MarkerClusterer extends OverlayViewSafe {
   /**
    * The number of markers to process in one batch.
@@ -283,6 +309,7 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   private prevZoom_: number;
   private timerRefStatic: number;
+
 
   /**
    * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
@@ -1029,11 +1056,6 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     // Cancel previous batch processing if we're working on the first batch:
     if (iFirst === 0) {
-      /**
-       * This event is fired when the `MarkerClusterer` begins clustering markers.
-       * @event clusteringbegin
-       * @param {MarkerClusterer} mc The MarkerClusterer whose markers are being clustered.
-       */
       google.maps.event.trigger(this, 'clusteringbegin', this);
 
       if (typeof this.timerRefStatic !== 'undefined') {
@@ -1085,14 +1107,6 @@ export class MarkerClusterer extends OverlayViewSafe {
       }, 0);
     } else {
       delete this.timerRefStatic;
-
-      /**
-       * This event is fired when the `MarkerClusterer` stops
-       *  clustering markers.
-       * @name MarkerClusterer#clusteringend
-       * @param mc The MarkerClusterer whose markers are being clustered.
-       * @event
-       */
       google.maps.event.trigger(this, 'clusteringend', this);
     }
   }
