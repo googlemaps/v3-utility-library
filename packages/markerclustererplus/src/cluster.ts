@@ -16,18 +16,16 @@ export class Cluster {
 
   /**
    *
-   * @param {MarkerClusterer} markerClusterer_ The <code>MarkerClusterer</code> object with which this
+   * @param markerClusterer_ The `MarkerClusterer` object with which this
    *  cluster is associated.
    */
-  constructor(private markerClusterer_: MarkerClusterer) {
-  }
+  constructor(private markerClusterer_: MarkerClusterer) {}
 
   /**
    * Returns the number of markers managed by the cluster. You can call this from
-   * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
-   * for the <code>MarkerClusterer</code> object.
+   * a `click`, `mouseover`, or `mouseout` event handler for the `MarkerClusterer` object.
    *
-   * @return {number} The number of markers in the cluster.
+   * @return The number of markers in the cluster.
    */
   public getSize(): number {
     return this.markers_.length;
@@ -35,10 +33,9 @@ export class Cluster {
 
   /**
    * Returns the array of markers managed by the cluster. You can call this from
-   * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
-   * for the <code>MarkerClusterer</code> object.
+   * a `click`, `mouseover`, or `mouseout` event handler for the `MarkerClusterer` object.
    *
-   * @return {google.maps.Marker[]} The array of markers in the cluster.
+   * @return The array of markers in the cluster.
    */
   public getMarkers(): google.maps.Marker[] {
     return this.markers_;
@@ -46,10 +43,10 @@ export class Cluster {
 
   /**
    * Returns the center of the cluster. You can call this from
-   * a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
-   * for the <code>MarkerClusterer</code> object.
+   * a `click`, `mouseover`, or `mouseout` event handler
+   * for the `MarkerClusterer` object.
    *
-   * @return {google.maps.LatLng} The center of the cluster.
+   * @return The center of the cluster.
    */
   public getCenter(): google.maps.LatLng {
     return this.center_;
@@ -58,7 +55,7 @@ export class Cluster {
   /**
    * Returns the map with which the cluster is associated.
    *
-   * @return {google.maps.Map} The map.
+   * @return The map.
    * @ignore
    */
   public getMap(): google.maps.Map {
@@ -66,9 +63,9 @@ export class Cluster {
   }
 
   /**
-   * Returns the <code>MarkerClusterer</code> object with which the cluster is associated.
+   * Returns the `MarkerClusterer` object with which the cluster is associated.
    *
-   * @return {MarkerClusterer} The associated marker clusterer.
+   * @return The associated marker clusterer.
    * @ignore
    */
   public getMarkerClusterer(): MarkerClusterer {
@@ -78,7 +75,7 @@ export class Cluster {
   /**
    * Returns the bounds of the cluster.
    *
-   * @return {google.maps.LatLngBounds} the cluster bounds.
+   * @return the cluster bounds.
    * @ignore
    */
   public getBounds(): google.maps.LatLngBounds {
@@ -104,8 +101,8 @@ export class Cluster {
   /**
    * Adds a marker to the cluster.
    *
-   * @param {google.maps.Marker} marker The marker to be added.
-   * @return {boolean} True if the marker was added.
+   * @param marker The marker to be added.
+   * @return True if the marker was added.
    * @ignore
    */
   public addMarker(marker: google.maps.Marker & { isAdded?: boolean }): boolean {
@@ -159,8 +156,8 @@ export class Cluster {
   /**
    * Determines if a marker lies within the cluster's bounds.
    *
-   * @param {google.maps.Marker} marker The marker to check.
-   * @return {boolean} True if the marker lies in the bounds.
+   * @param marker The marker to check.
+   * @return True if the marker lies in the bounds.
    * @ignore
    */
   public isMarkerInClusterBounds(marker: google.maps.Marker): boolean {
@@ -203,8 +200,8 @@ export class Cluster {
   /**
    * Determines if a marker has already been added to the cluster.
    *
-   * @param {google.maps.Marker} marker The marker to check.
-   * @return {boolean} True if the marker has already been added.
+   * @param marker The marker to check.
+   * @return True if the marker has already been added.
    */
   private isMarkerAlreadyAdded_(marker: google.maps.Marker): boolean {
     if (this.markers_.indexOf) {

@@ -25,13 +25,13 @@
  * by Gary Little.
  * <p>
  * v2.0 release: MarkerClustererPlus v2.0 is backward compatible with MarkerClusterer v1.0. It
- *  adds support for the <code>ignoreHidden</code>, <code>title</code>, <code>batchSizeIE</code>,
- *  and <code>calculator</code> properties as well as support for four more events. It also allows
+ *  adds support for the `ignoreHidden`, `title`, `batchSizeIE`,
+ *  and `calculator` properties as well as support for four more events. It also allows
  *  greater control over the styling of the text that appears on the cluster marker. The
  *  documentation has been significantly improved and the overall code has been simplified and
  *  polished. Very large numbers of markers can now be managed without causing Javascript timeout
- *  errors on Internet Explorer. Note that the name of the <code>clusterclick</code> event has been
- *  deprecated. The new name is <code>click</code>, so please change your application code now.
+ *  errors on Internet Explorer. Note that the name of the `clusterclick` event has been
+ *  deprecated. The new name is `click`, so please change your application code now.
  */
 
 import { Cluster } from './cluster';
@@ -39,14 +39,11 @@ import { ClusterIconInfo, ClusterIconStyle } from './cluster-icon';
 import { OverlayViewSafe } from './overlay-view-safe';
 
 /**
- * @callback {Function} ariaLabelFnType
- * @param {string} text The text attribute of the cluster
- * @returns {string}
+ * @param text The text attribute of the cluster
  */
 type AriaLabelFn = (text: string) => string;
 
-
-type Calculator = (markers: google.maps.Marker[], clusterIconStylesCount: number) => ClusterIconInfo;
+export type Calculator = (markers: google.maps.Marker[], clusterIconStylesCount: number) => ClusterIconInfo;
 
 export interface ClusterAugmentedMarker extends  google.maps.Marker {
   isAdded?: boolean;
@@ -56,135 +53,169 @@ export interface ClusterAugmentedMarker extends  google.maps.Marker {
  * Optional parameter passed to the {@link MarkerClusterer} constructor.
  */
 export interface MarkerClustererOptions {
-  /** [gridSize=60] The grid size of a cluster in pixels. The grid is a square. */
+  /**
+   * The grid size of a cluster in pixels. The grid is a square.
+   *
+   * @default `60`
+   */
   gridSize?: number;
   /**
-   * [maxZoom=null] The maximum zoom level at which clustering is enabled or
-   * <code>null</code> if clustering is to be enabled at all zoom levels.
+   * The maximum zoom level at which clustering is enabled or
+   * `null` if clustering is to be enabled at all zoom levels.
+   *
+   * @default `null`
    */
   maxZoom?: number;
+
   /**
-  /**
-   * [zoomOnClick=true] Whether to zoom the map when a cluster marker is
-   * clicked. You may want to set this to <code>false</code> if you have installed a handler
-   * for the <code>click</code> event and it deals with zooming on its own.
+   * Whether to zoom the map when a cluster marker is
+   * clicked. You may want to set this to `false` if you have installed a handler
+   * for the `click` event and it deals with zooming on its own.
+   *
+   * @default `true`
    */
   zoomOnClick?: boolean;
-  /**
-   * [averageCenter=false] Whether the position of a cluster marker should be
-   * the average position of all markers in the cluster. If set to <code>false</code>, the
+  /***
+   * Whether the position of a cluster marker should be
+   * the average position of all markers in the cluster. If set to `false`, the
    * cluster marker is positioned at the location of the first marker added to the cluster.
+   *
+   * @default `false`
    */
   averageCenter?: boolean;
   /**
-   * [minimumClusterSize=2] The minimum number of markers needed in a cluster
+   * The minimum number of markers needed in a cluster
    * before the markers are hidden and a cluster marker appears.
+   *
+   * @default `2`
    */
   minimumClusterSize?: number;
 
   /**
-   *  [zIndex=google.maps.Marker.MAX_ZINDEX + 1] the z-index of a cluster.
+   *  the z-index of a cluster.
+   *
+   *  @default `google.maps.Marker.MAX_ZINDEX + 1`
    */
   zIndex?: number;
 
   /**
-   * [ignoreHidden=false] Whether to ignore hidden markers in clusters. You
-   * may want to set this to <code>true</code> to ensure that hidden markers are not included
+   * Whether to ignore hidden markers in clusters. You
+   * may want to set this to `true` to ensure that hidden markers are not included
    * in the marker count that appears on a cluster marker (this count is the value of the
-   * <code>text</code> property of the result returned by the default <code>calculator</code>).
-   * If set to <code>true</code> and you change the visibility of a marker being clustered, be
-   * sure to also call <code>MarkerClusterer.repaint()</code>.
+   * `text` property of the result returned by the default  {@link calculator}).
+   * If set to `true` and you change the visibility of a marker being clustered, be
+   * sure to also call {@link MarkerClusterer#repaint()}.
+   *
+   * @default `false`
    */
   ignoreHidden?: boolean;
   /**
-   * [title=""] The tooltip to display when the mouse moves over a cluster
-   * marker. (Alternatively, you can use a custom <code>calculator</code> function to specify a
+   * The tooltip to display when the mouse moves over a cluster
+   * marker. (Alternatively, you can use a custom `calculator` function to specify a
    * different tooltip for each cluster marker.)
+   *
+   * @default `""`
    */
   title?: string;
   /**
-   * [calculator=MarkerClusterer.CALCULATOR] The function used to determine
+   * The function used to determine
    * the text to be displayed on a cluster marker and the index indicating which style to use
    * for the cluster marker. The input parameters for the function are (1) the array of markers
    * represented by a cluster marker and (2) the number of cluster icon styles. It returns a
-   * {@link ClusterIconInfo} object. The default <code>calculator</code> returns a
-   * <code>text</code> property which is the number of markers in the cluster and an
-   * <code>index</code> property which is one higher than the lowest integer such that
-   * <code>10^i</code> exceeds the number of markers in the cluster, or the size of the styles
-   * array, whichever is less. The <code>styles</code> array element used has an index of
-   * <code>index</code> minus 1. For example, the default <code>calculator</code> returns a
-   * <code>text</code> value of <code>"125"</code> and an <code>index</code> of <code>3</code>
-   * for a cluster icon representing 125 markers so the element used in the <code>styles</code>
-   * array is <code>2</code>. A <code>calculator</code> may also return a <code>title</code>
+   * {@link ClusterIconInfo} object. The default `calculator` returns a
+   * `text` property which is the number of markers in the cluster and an
+   * `index` property which is one higher than the lowest integer such that
+   * `10^i` exceeds the number of markers in the cluster, or the size of the styles
+   * array, whichever is less. The `styles` array element used has an index of
+   * `index` minus 1. For example, the default `calculator` returns a
+   * `text` value of `"125"` and an `index` of `3`
+   * for a cluster icon representing 125 markers so the element used in the `styles`
+   * array is `2`. A `calculator` may also return a `title`
    * property that contains the text of the tooltip to be used for the cluster marker. If
-   * <code>title</code> is not defined, the tooltip is set to the value of the <code>title</code>
+   * `title` is not defined, the tooltip is set to the value of the `title`
    * property for the MarkerClusterer.
+   *
+   * @default {@link MarkerClusterer.CALCULATOR}
    */
   calculator?: Calculator;
   /**
-   * [clusterClass="cluster"] The name of the CSS class defining general styles
+   * The name of the CSS class defining general styles
    * for the cluster markers. Use this class to define CSS styles that are not set up by the code
-   * that processes the <code>styles</code> array.
+   * that processes the `styles` array.
+   *
+   * @default `"cluster"`
    */
   clusterClass?: string;
   /**
-   * [styles] An array of {@link ClusterIconStyle} elements defining the styles
+   * An array of {@link ClusterIconStyle} elements defining the styles
    * of the cluster markers to be used. The element to be used to style a given cluster marker
-   * is determined by the function defined by the <code>calculator</code> property.
+   * is determined by the function defined by the `calculator` property.
    * The default is an array of {@link ClusterIconStyle} elements whose properties are derived
-   * from the values for <code>imagePath</code>, <code>imageExtension</code>, and
-   * <code>imageSizes</code>.
+   * from the values for `imagePath`, `imageExtension`, and `imageSizes`.
+   *
+   * @default `styles`
    */
   styles?: ClusterIconStyle[];
   /**
-   * [enableRetinaIcons=false] Whether to allow the use of cluster icons that
+   * Whether to allow the use of cluster icons that
    * have sizes that are some multiple (typically double) of their actual display size. Icons such
    * as these look better when viewed on high-resolution monitors such as Apple's Retina displays.
-   * Note: if this property is <code>true</code>, sprites cannot be used as cluster icons.
+   * Note: if this property is `true`, sprites cannot be used as cluster icons.
+   *
+   * @default `false`
    */
   enableRetinaIcons?: boolean;
   /**
-   * [batchSize=MarkerClusterer.BATCH_SIZE] Set this property to the
-   * number of markers to be processed in a single batch when using a browser other than
-   * Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).
+   * Set this property to the number of markers to be processed in a single batch when using
+   * a browser other than Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).
+   *
+   * @default `MarkerClusterer.BATCH_SIZE`
    */
   batchSize?: number;
   /**
-   * [batchSizeIE=MarkerClusterer.BATCH_SIZE_IE] When Internet Explorer is
+   * When Internet Explorer is
    * being used, markers are processed in several batches with a small delay inserted between
    * each batch in an attempt to avoid Javascript timeout errors. Set this property to the
    * number of markers to be processed in a single batch; select as high a number as you can
    * without causing a timeout error in the browser. This number might need to be as low as 100
    * if 15,000 markers are being managed, for example.
+   *
+   * @default `MarkerClusterer.BATCH_SIZE_IE`
    */
   batchSizeIE?: number;
   /**
-   * [imagePath=MarkerClusterer.IMAGE_PATH]
    * The full URL of the root name of the group of image files to use for cluster icons.
-   * The complete file name is of the form <code>imagePath</code>n.<code>imageExtension</code>
+   * The complete file name is of the form `imagePath`n.`imageExtension`
    * where n is the image file number (1, 2, etc.).
+   *
+   * @default `MarkerClusterer.IMAGE_PATH`
    */
   imagePath?: string;
   /**
-   * [imageExtension=MarkerClusterer.IMAGE_EXTENSION]
-   * The extension name for the cluster icon image files (e.g., <code>"png"</code> or
-   * <code>"jpg"</code>).
+   * The extension name for the cluster icon image files (e.g., `"png"` or
+   * `"jpg"`).
+   *
+   * @default `MarkerClusterer.IMAGE_EXTENSION`
    */
   imageExtension?: string;
   /**
-   * [imageSizes=MarkerClusterer.IMAGE_SIZES]
    * An array of numbers containing the widths of the group of
-   * <code>imagePath</code>n.<code>imageExtension</code> image files.
+   * `imagePath`n.`imageExtension` image files.
    * (The images are assumed to be square.)
+   *
+   * @default `MarkerClusterer.IMAGE_SIZES`
    */
   imageSizes?: number[];
   /**
    * A function to take the text attribute associated with the cluster and output a string to attach an
-   * ariaLabel to the cluter
+   * ariaLabel to the cluster
    */
   ariaLabelFn?: AriaLabelFn;
 }
 
+/**
+ * @ignore
+ */
 const getOption = <T, K extends keyof  T>(options: T, prop: K, def: T[K]): T[K] => {
   if (options[prop] !== undefined) {
     return options[prop];
@@ -197,43 +228,28 @@ const getOption = <T, K extends keyof  T>(options: T, prop: K, def: T[K]): T[K] 
 export class MarkerClusterer extends OverlayViewSafe {
   /**
    * The number of markers to process in one batch.
-   *
-   * @type {number}
-   * @constant
    */
   static BATCH_SIZE = 2000;
 
   /**
    * The number of markers to process in one batch (IE only).
-   *
-   * @type {number}
-   * @constant
    */
   static BATCH_SIZE_IE = 500;
 
   /**
    * The default root name for the marker cluster images.
-   *
-   * @type {string}
-   * @constant
    */
   static IMAGE_PATH = '../images/m';
 
   /**
    * The default extension name for the marker cluster images.
-   *
-   * @type {string}
-   * @constant
    */
   static IMAGE_EXTENSION = 'png';
 
   /**
    * The default array of sizes for the marker cluster images.
-   *
-   * @type {number[]}
-   * @constant
    */
-  static IMAGE_SIZES = [53, 56, 66, 78, 90];
+  static IMAGE_SIZES: number[] = [53, 56, 66, 78, 90];
 
   private markers_: ClusterAugmentedMarker[] = [];
   private clusters_: Cluster[] = [];
@@ -270,10 +286,9 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
-   * @constructor
-   * @param {google.maps.Map} map The Google map to attach to.
-   * @param {google.maps.Marker[]} [markers] The markers to be added to the cluster.
-   * @param {MarkerClustererOptions} [options] The optional parameters.
+   * @param map The Google map to attach to.
+   * @param markers The markers to be added to the cluster.
+   * @param options The optional parameters.
    */
   constructor(map: google.maps.Map, markers: google.maps.Marker[] = [], private options: MarkerClustererOptions = {}) {
     super();
@@ -405,285 +420,278 @@ export class MarkerClusterer extends OverlayViewSafe {
   }
 
   /**
-   * Returns the value of the <code>gridSize</code> property.
+   * Returns the value of the `gridSize` property.
    *
-   * @return {number} The grid size.
+   * @return The grid size.
    */
   getGridSize(): number {
     return this.gridSize_;
   }
 
   /**
-   * Sets the value of the <code>gridSize</code> property.
+   * Sets the value of the `gridSize` property.
    *
-   * @param {number} gridSize The grid size.
+   * @param gridSize The grid size.
    */
   setGridSize(gridSize: number): void {
     this.gridSize_ = gridSize;
   }
 
   /**
-   * Returns the value of the <code>minimumClusterSize</code> property.
+   * Returns the value of the `minimumClusterSize` property.
    *
-   * @return {number} The minimum cluster size.
+   * @return The minimum cluster size.
    */
   getMinimumClusterSize(): number {
     return this.minClusterSize_;
   }
 
   /**
-   * Sets the value of the <code>minimumClusterSize</code> property.
+   * Sets the value of the `minimumClusterSize` property.
    *
-   * @param {number} minimumClusterSize The minimum cluster size.
+   * @param minimumClusterSize The minimum cluster size.
    */
   setMinimumClusterSize(minimumClusterSize: number): void {
     this.minClusterSize_ = minimumClusterSize;
   }
 
   /**
-   *  Returns the value of the <code>maxZoom</code> property.
+   *  Returns the value of the `maxZoom` property.
    *
-   *  @return {number} The maximum zoom level.
+   *  @return The maximum zoom level.
    */
   getMaxZoom(): number {
     return this.maxZoom_;
   }
 
   /**
-   *  Sets the value of the <code>maxZoom</code> property.
+   *  Sets the value of the `maxZoom` property.
    *
-   *  @param {number} maxZoom The maximum zoom level.
+   *  @param maxZoom The maximum zoom level.
    */
   setMaxZoom(maxZoom: number): void {
     this.maxZoom_ = maxZoom;
   }
 
-  /**
-   * @return {number}
-   */
   getZIndex(): number {
     return this.zIndex_;
   }
 
-  /**
-   * @param {number} zIndex
-   */
   setZIndex(zIndex: number): void {
     this.zIndex_ = zIndex;
   }
 
   /**
-   *  Returns the value of the <code>styles</code> property.
+   *  Returns the value of the `styles` property.
    *
-   *  @return {ClusterIconStyle[]} The array of styles defining the cluster markers to be used.
+   *  @return The array of styles defining the cluster markers to be used.
    */
   getStyles(): ClusterIconStyle[] {
     return this.styles_;
   }
 
   /**
-   *  Sets the value of the <code>styles</code> property.
+   *  Sets the value of the `styles` property.
    *
-   *  @param {ClusterIconStyle[]} styles The array of styles to use.
+   *  @param styles The array of styles to use.
    */
   setStyles(styles: ClusterIconStyle[]): void {
     this.styles_ = styles;
   }
 
   /**
-   * Returns the value of the <code>title</code> property.
+   * Returns the value of the `title` property.
    *
-   * @return {string} The content of the title text.
+   * @return The content of the title text.
    */
   getTitle(): string {
     return this.title_;
   }
 
   /**
-   *  Sets the value of the <code>title</code> property.
+   *  Sets the value of the `title` property.
    *
-   *  @param {string} title The value of the title property.
+   *  @param title The value of the title property.
    */
   setTitle(title: string): void {
     this.title_ = title;
   }
 
   /**
-   * Returns the value of the <code>zoomOnClick</code> property.
+   * Returns the value of the `zoomOnClick` property.
    *
-   * @return {boolean} True if zoomOnClick property is set.
+   * @return True if zoomOnClick property is set.
    */
   getZoomOnClick(): boolean {
     return this.zoomOnClick_;
   }
 
   /**
-   *  Sets the value of the <code>zoomOnClick</code> property.
+   *  Sets the value of the `zoomOnClick` property.
    *
-   *  @param {boolean} zoomOnClick The value of the zoomOnClick property.
+   *  @param zoomOnClick The value of the zoomOnClick property.
    */
   setZoomOnClick(zoomOnClick: boolean): void {
     this.zoomOnClick_ = zoomOnClick;
   }
 
   /**
-   * Returns the value of the <code>averageCenter</code> property.
+   * Returns the value of the `averageCenter` property.
    *
-   * @return {boolean} True if averageCenter property is set.
+   * @return True if averageCenter property is set.
    */
   getAverageCenter(): boolean {
     return this.averageCenter_;
   }
 
   /**
-   *  Sets the value of the <code>averageCenter</code> property.
+   *  Sets the value of the `averageCenter` property.
    *
-   *  @param {boolean} averageCenter The value of the averageCenter property.
+   *  @param averageCenter The value of the averageCenter property.
    */
   setAverageCenter(averageCenter: boolean): void {
     this.averageCenter_ = averageCenter;
   }
 
   /**
-   * Returns the value of the <code>ignoreHidden</code> property.
+   * Returns the value of the `ignoreHidden` property.
    *
-   * @return {boolean} True if ignoreHidden property is set.
+   * @return True if ignoreHidden property is set.
    */
   getIgnoreHidden(): boolean {
     return this.ignoreHidden_;
   }
 
   /**
-   *  Sets the value of the <code>ignoreHidden</code> property.
+   *  Sets the value of the `ignoreHidden` property.
    *
-   *  @param {boolean} ignoreHidden The value of the ignoreHidden property.
+   *  @param ignoreHidden The value of the ignoreHidden property.
    */
   setIgnoreHidden(ignoreHidden: boolean): void {
     this.ignoreHidden_ = ignoreHidden;
   }
 
   /**
-   * Returns the value of the <code>enableRetinaIcons</code> property.
+   * Returns the value of the `enableRetinaIcons` property.
    *
-   * @return {boolean} True if enableRetinaIcons property is set.
+   * @return True if enableRetinaIcons property is set.
    */
   getEnableRetinaIcons(): boolean {
     return this.enableRetinaIcons_;
   }
 
   /**
-   *  Sets the value of the <code>enableRetinaIcons</code> property.
+   *  Sets the value of the `enableRetinaIcons` property.
    *
-   *  @param {boolean} enableRetinaIcons The value of the enableRetinaIcons property.
+   *  @param enableRetinaIcons The value of the enableRetinaIcons property.
    */
   setEnableRetinaIcons(enableRetinaIcons: boolean): void {
     this.enableRetinaIcons_ = enableRetinaIcons;
   }
 
   /**
-   * Returns the value of the <code>imageExtension</code> property.
+   * Returns the value of the `imageExtension` property.
    *
-   * @return {string} The value of the imageExtension property.
+   * @return The value of the imageExtension property.
    */
   getImageExtension(): string {
     return this.imageExtension_;
   }
 
   /**
-   *  Sets the value of the <code>imageExtension</code> property.
+   *  Sets the value of the `imageExtension` property.
    *
-   *  @param {string} imageExtension The value of the imageExtension property.
+   *  @param imageExtension The value of the imageExtension property.
    */
   setImageExtension(imageExtension: string): void {
     this.imageExtension_ = imageExtension;
   }
 
   /**
-   * Returns the value of the <code>imagePath</code> property.
+   * Returns the value of the `imagePath` property.
    *
-   * @return {string} The value of the imagePath property.
+   * @return The value of the imagePath property.
    */
   getImagePath(): string {
     return this.imagePath_;
   }
 
   /**
-   *  Sets the value of the <code>imagePath</code> property.
+   *  Sets the value of the `imagePath` property.
    *
-   *  @param {string} imagePath The value of the imagePath property.
+   *  @param imagePath The value of the imagePath property.
    */
   setImagePath(imagePath: string): void {
     this.imagePath_ = imagePath;
   }
 
   /**
-   * Returns the value of the <code>imageSizes</code> property.
+   * Returns the value of the `imageSizes` property.
    *
-   * @return {number[]} The value of the imageSizes property.
+   * @return The value of the imageSizes property.
    */
   getImageSizes(): number[] {
     return this.imageSizes_;
   }
 
   /**
-   *  Sets the value of the <code>imageSizes</code> property.
+   *  Sets the value of the `imageSizes` property.
    *
-   *  @param {number[]} imageSizes The value of the imageSizes property.
+   *  @param imageSizes The value of the imageSizes property.
    */
   setImageSizes(imageSizes: number[]): void {
     this.imageSizes_ = imageSizes;
   }
 
   /**
-   * Returns the value of the <code>calculator</code> property.
+   * Returns the value of the `calculator` property.
    *
-   * @return {function} the value of the calculator property.
+   * @return the value of the calculator property.
    */
   getCalculator(): Calculator {
     return this.calculator_;
   }
 
   /**
-   * Sets the value of the <code>calculator</code> property.
+   * Sets the value of the `calculator` property.
    *
-   * @param {function(google.maps.Marker[], number)} calculator The value
-   *  of the calculator property.
+   * @param calculator The value of the calculator property.
    */
   setCalculator(calculator: Calculator): void {
     this.calculator_ = calculator;
   }
 
   /**
-   * Returns the value of the <code>batchSizeIE</code> property.
+   * Returns the value of the `batchSizeIE` property.
    *
-   * @return {number} the value of the batchSizeIE property.
+   * @return the value of the batchSizeIE property.
    */
   getBatchSizeIE(): number {
     return this.batchSizeIE_;
   }
 
   /**
-   * Sets the value of the <code>batchSizeIE</code> property.
+   * Sets the value of the `batchSizeIE` property.
    *
-   *  @param {number} batchSizeIE The value of the batchSizeIE property.
+   *  @param batchSizeIE The value of the batchSizeIE property.
    */
   setBatchSizeIE(batchSizeIE: number): void {
     this.batchSizeIE_ = batchSizeIE;
   }
 
   /**
-   * Returns the value of the <code>clusterClass</code> property.
+   * Returns the value of the `clusterClass` property.
    *
-   * @return {string} the value of the clusterClass property.
+   * @return the value of the clusterClass property.
    */
   getClusterClass(): string {
     return this.clusterClass_;
   }
 
   /**
-   * Sets the value of the <code>clusterClass</code> property.
+   * Sets the value of the `clusterClass` property.
    *
-   *  @param {string} clusterClass The value of the clusterClass property.
+   *  @param clusterClass The value of the clusterClass property.
    */
   setClusterClass(clusterClass: string): void {
     this.clusterClass_ = clusterClass;
@@ -692,7 +700,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    *  Returns the array of markers managed by the clusterer.
    *
-   *  @return {google.maps.Marker[]} The array of markers managed by the clusterer.
+   *  @return The array of markers managed by the clusterer.
    */
   getMarkers(): google.maps.Marker[] {
     return this.markers_;
@@ -701,7 +709,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    *  Returns the number of markers managed by the clusterer.
    *
-   *  @return {number} The number of markers.
+   *  @return The number of markers.
    */
   getTotalMarkers(): number {
     return this.markers_.length;
@@ -710,7 +718,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Returns the current array of clusters formed by the clusterer.
    *
-   * @return {Cluster[]} The array of clusters formed by the clusterer.
+   * @return The array of clusters formed by the clusterer.
    */
   getClusters(): Cluster[] {
     return this.clusters_;
@@ -719,7 +727,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Returns the number of clusters formed by the clusterer.
    *
-   * @return {number} The number of clusters formed by the clusterer.
+   * @return The number of clusters formed by the clusterer.
    */
   getTotalClusters(): number {
     return this.clusters_.length;
@@ -727,10 +735,10 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Adds a marker to the clusterer. The clusters are redrawn unless
-   *  <code>opt_nodraw</code> is set to <code>true</code>.
+   *  `nodraw` is set to `true`.
    *
-   * @param {google.maps.Marker} marker The marker to add.
-   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param marker The marker to add.
+   * @param nodraw Set to `true` to prevent redrawing.
    */
   addMarker(marker: google.maps.Marker, nodraw?: boolean): void {
     this.pushMarkerTo_(marker);
@@ -741,10 +749,10 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Adds an array of markers to the clusterer. The clusters are redrawn unless
-   *  <code>nodraw</code> is set to <code>true</code>.
+   *  `nodraw` is set to `true`.
    *
-   * @param {google.maps.Marker[]} markers The markers to add.
-   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param markers The markers to add.
+   * @param nodraw Set to `true` to prevent redrawing.
    */
   addMarkers(markers: google.maps.Marker[], nodraw?: boolean): void {
     for (const key in markers) {
@@ -760,7 +768,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Pushes a marker to the clusterer.
    *
-   * @param {google.maps.Marker} marker The marker to add.
+   * @param marker The marker to add.
    */
   private pushMarkerTo_(marker: google.maps.Marker & {isAdded?: boolean}): void {
     // If the marker is draggable add a listener so we can update the clusters on the dragend:
@@ -778,12 +786,12 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Removes a marker from the cluster.  The clusters are redrawn unless
-   *  <code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
+   *  `nodraw` is set to `true`. Returns `true` if the
    *  marker was removed from the clusterer.
    *
-   * @param {google.maps.Marker} marker The marker to remove.
-   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
-   * @return {boolean} True if the marker was removed from the clusterer.
+   * @param marker The marker to remove.
+   * @param nodraw Set to `true` to prevent redrawing.
+   * @return True if the marker was removed from the clusterer.
    */
   removeMarker(marker: google.maps.Marker, nodraw?: boolean): boolean {
     const removed = this.removeMarker_(marker);
@@ -797,12 +805,11 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Removes an array of markers from the cluster. The clusters are redrawn unless
-   *  <code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
-   *  were removed from the clusterer.
+   *  `nodraw` is set to `true`. Returns `true` if markers were removed from the clusterer.
    *
-   * @param {google.maps.Marker[]} markers The markers to remove.
-   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
-   * @return {boolean} True if markers were removed from the clusterer.
+   * @param markers The markers to remove.
+   * @param nodraw Set to `true` to prevent redrawing.
+   * @return True if markers were removed from the clusterer.
    */
   removeMarkers(markers: google.maps.Marker[], nodraw?: boolean): boolean {
     let removed = false;
@@ -822,8 +829,8 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Removes a marker and returns true if removed, false if not.
    *
-   * @param {google.maps.Marker} marker The marker to remove
-   * @return {boolean} Whether the marker was removed or not
+   * @param marker The marker to remove
+   * @return Whether the marker was removed or not
    */
   private removeMarker_(marker: google.maps.Marker): boolean {
     let index = -1;
@@ -879,8 +886,8 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Returns the current bounds extended by the grid size.
    *
-   * @param {google.maps.LatLngBounds} bounds The bounds to extend.
-   * @return {google.maps.LatLngBounds} The extended bounds.
+   * @param bounds The bounds to extend.
+   * @return The extended bounds.
    * @ignore
    */
   getExtendedBounds(bounds: google.maps.LatLngBounds): google.maps.LatLngBounds {
@@ -925,10 +932,9 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Removes all clusters from the map. The markers are also removed from the map
-   *  if <code>hide</code> is set to <code>true</code>.
+   *  if `hide` is set to `true`.
    *
-   * @param {boolean} [hide] Set to <code>true</code> to also remove the markers
-   *  from the map.
+   * @param hide Set to `true` to also remove the markers from the map.
    */
   private resetViewport_(hide?: boolean): void {
     // Remove all the clusters
@@ -950,10 +956,10 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Calculates the distance between two latlng locations in km.
    *
-   * @param {google.maps.LatLng} p1 The first lat lng point.
-   * @param {google.maps.LatLng} p2 The second lat lng point.
-   * @return {number} The distance between the two points in km.
-   * @see http://www.movable-type.co.uk/scripts/latlong.html
+   * @param p1 The first lat lng point.
+   * @param p2 The second lat lng point.
+   * @return The distance between the two points in km.
+   * @link http://www.movable-type.co.uk/scripts/latlong.html
    */
   private distanceBetweenPoints_(p1: google.maps.LatLng, p2: google.maps.LatLng): number {
     const R = 6371; // Radius of the Earth in km
@@ -972,9 +978,9 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Determines if a marker is contained in a bounds.
    *
-   * @param {google.maps.Marker} marker The marker to check.
-   * @param {google.maps.LatLngBounds} bounds The bounds to check against.
-   * @return {boolean} True if the marker is in the bounds.
+   * @param marker The marker to check.
+   * @param bounds The bounds to check against.
+   * @return True if the marker is in the bounds.
    */
   private isMarkerInBounds_(marker: google.maps.Marker, bounds: google.maps.LatLngBounds): boolean {
     return bounds.contains(marker.getPosition());
@@ -983,7 +989,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Adds a marker to a cluster, or creates a new cluster.
    *
-   * @param {google.maps.Marker} marker The marker to add.
+   * @param marker The marker to add.
    */
   private addToClosestCluster_(marker: google.maps.Marker): void {
     let distance = 40000; // Some large number
@@ -1013,7 +1019,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Creates the clusters. This is done in batches to avoid timeout errors
    *  in some browsers when there is a huge number of markers.
    *
-   * @param {number} iFirst The index of the first marker in the batch of
+   * @param iFirst The index of the first marker in the batch of
    *  markers to be added to clusters.
    */
   private createClusters_(iFirst: number): void {
@@ -1024,11 +1030,9 @@ export class MarkerClusterer extends OverlayViewSafe {
     // Cancel previous batch processing if we're working on the first batch:
     if (iFirst === 0) {
       /**
-       * This event is fired when the <code>MarkerClusterer</code> begins
-       *  clustering markers.
-       * @name MarkerClusterer#clusteringbegin
+       * This event is fired when the `MarkerClusterer` begins clustering markers.
+       * @event clusteringbegin
        * @param {MarkerClusterer} mc The MarkerClusterer whose markers are being clustered.
-       * @event
        */
       google.maps.event.trigger(this, 'clusteringbegin', this);
 
@@ -1083,10 +1087,10 @@ export class MarkerClusterer extends OverlayViewSafe {
       delete this.timerRefStatic;
 
       /**
-       * This event is fired when the <code>MarkerClusterer</code> stops
+       * This event is fired when the `MarkerClusterer` stops
        *  clustering markers.
        * @name MarkerClusterer#clusteringend
-       * @param {MarkerClusterer} mc The MarkerClusterer whose markers are being clustered.
+       * @param mc The MarkerClusterer whose markers are being clustered.
        * @event
        */
       google.maps.event.trigger(this, 'clusteringend', this);
@@ -1097,11 +1101,9 @@ export class MarkerClusterer extends OverlayViewSafe {
    * The default function for determining the label text and style
    * for a cluster icon.
    *
-   * @param {google.maps.Marker[]} markers The array of markers represented by the cluster.
-   * @param {number} numStyles The number of marker styles available.
-   * @return {ClusterIconInfo} The information resource for the cluster.
-   * @constant
-   * @ignore
+   * @param markers The array of markers represented by the cluster.
+   * @param numStyles The number of marker styles available.
+   * @return The information resource for the cluster.
    */
   static CALCULATOR(markers: google.maps.Marker[], numStyles: number): ClusterIconInfo {
     let index = 0;
