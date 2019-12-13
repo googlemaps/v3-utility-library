@@ -126,9 +126,11 @@ export class ClusterIcon extends OverlayViewSafe {
    * Adds the icon to the DOM.
    */
   onAdd(): void {
-    const cClusterIcon = this;
     let cMouseDownInCluster: boolean;
     let cDraggingMapByCluster: boolean;
+
+    const mc = this.cluster_.getMarkerClusterer();
+
     const [major, minor] = google.maps.version.split(".");
 
     const gmVersion = (parseInt(major, 10) * 100) + parseInt(minor, 10);
@@ -150,7 +152,7 @@ export class ClusterIcon extends OverlayViewSafe {
       }
     );
 
-    google.maps.event.addDomListener(this.div_, "mousedown", function() {
+    google.maps.event.addDomListener(this.div_, "mousedown", () => {
       cMouseDownInCluster = true;
       cDraggingMapByCluster = false;
     });
@@ -159,30 +161,29 @@ export class ClusterIcon extends OverlayViewSafe {
     // But it doesn't work with earlier releases so do a version check.
     if (gmVersion >= 332) {
       // Ugly version-dependent code
-      google.maps.event.addDomListener(this.div_, "touchstart", function(e) {
+      google.maps.event.addDomListener(this.div_, "touchstart", (e) => {
         e.stopPropagation();
       });
     }
 
-    google.maps.event.addDomListener(this.div_, "click", function(e) {
+    google.maps.event.addDomListener(this.div_, "click", (e) => {
       cMouseDownInCluster = false;
       if (!cDraggingMapByCluster) {
-        const mc = cClusterIcon.cluster_.getMarkerClusterer();
         /**
          * This event is fired when a cluster marker is clicked.
          * @name MarkerClusterer#click
          * @param {Cluster} c The cluster that was clicked.
          * @event
          */
-        google.maps.event.trigger(mc, "click", cClusterIcon.cluster_);
-        google.maps.event.trigger(mc, "clusterclick", cClusterIcon.cluster_); // deprecated name
+        google.maps.event.trigger(mc, "click", this.cluster_);
+        google.maps.event.trigger(mc, "clusterclick", this.cluster_); // deprecated name
 
         // The default click handler follows. Disable it by setting
         // the zoomOnClick property to false.
         if (mc.getZoomOnClick()) {
           // Zoom into the cluster.
           const mz = mc.getMaxZoom();
-          const theBounds = cClusterIcon.cluster_.getBounds();
+          const theBounds = this.cluster_.getBounds();
           (mc.getMap() as google.maps.Map).fitBounds(theBounds);
           // There is a fix for Issue 170 here:
           setTimeout(function() {
@@ -202,26 +203,24 @@ export class ClusterIcon extends OverlayViewSafe {
       }
     });
 
-    google.maps.event.addDomListener(this.div_, "mouseover", function() {
-      const mc = cClusterIcon.cluster_.getMarkerClusterer();
+    google.maps.event.addDomListener(this.div_, "mouseover", () => {
       /**
        * This event is fired when the mouse moves over a cluster marker.
        * @name MarkerClusterer#mouseover
        * @param {Cluster} c The cluster that the mouse moved over.
        * @event
        */
-      google.maps.event.trigger(mc, "mouseover", cClusterIcon.cluster_);
+      google.maps.event.trigger(mc, "mouseover", this.cluster_);
     });
 
-    google.maps.event.addDomListener(this.div_, "mouseout", function() {
-      const mc = cClusterIcon.cluster_.getMarkerClusterer();
+    google.maps.event.addDomListener(this.div_, "mouseout", () => {
       /**
        * This event is fired when the mouse moves out of a cluster marker.
        * @name MarkerClusterer#mouseout
        * @param {Cluster} c The cluster that the mouse moved out of.
        * @event
        */
-      google.maps.event.trigger(mc, "mouseout", cClusterIcon.cluster_);
+      google.maps.event.trigger(mc, "mouseout", this.cluster_);
     });
   }
 
