@@ -55,7 +55,7 @@ export interface ClusterAugmentedMarker extends  google.maps.Marker {
 /**
  * Optional parameter passed to the {@link MarkerClusterer} constructor.
  */
-interface MarkerClustererOptions {
+export interface MarkerClustererOptions {
   /** [gridSize=60] The grid size of a cluster in pixels. The grid is a square. */
   gridSize?: number;
   /**
@@ -242,28 +242,28 @@ export class MarkerClusterer extends OverlayViewSafe {
   private activeMap_: google.maps.Map = null;
   private ready_ = false;
 
-  public ariaLabelFn = this.opt_options.ariaLabelFn || (() => '');
+  public ariaLabelFn = this.options.ariaLabelFn || ((): string => '');
 
-  private zIndex_ = this.opt_options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
-  private gridSize_ = this.opt_options.gridSize || 60;
-  private minClusterSize_ = this.opt_options.minimumClusterSize || 2;
-  private maxZoom_ = this.opt_options.maxZoom || null;
-  private styles_: ClusterIconStyle[] = this.opt_options.styles || [];
-  private title_ = this.opt_options.title || '';
+  private zIndex_ = this.options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
+  private gridSize_ = this.options.gridSize || 60;
+  private minClusterSize_ = this.options.minimumClusterSize || 2;
+  private maxZoom_ = this.options.maxZoom || null;
+  private styles_: ClusterIconStyle[] = this.options.styles || [];
+  private title_ = this.options.title || '';
 
-  private zoomOnClick_ = getOption(this.opt_options, 'zoomOnClick', true);
-  private averageCenter_ = getOption(this.opt_options, 'averageCenter', false);
+  private zoomOnClick_ = getOption(this.options, 'zoomOnClick', true);
+  private averageCenter_ = getOption(this.options, 'averageCenter', false);
 
-  private ignoreHidden_ = getOption(this.opt_options, 'ignoreHidden', false);
-  private enableRetinaIcons_ = getOption(this.opt_options, 'enableRetinaIcons', false);
+  private ignoreHidden_ = getOption(this.options, 'ignoreHidden', false);
+  private enableRetinaIcons_ = getOption(this.options, 'enableRetinaIcons', false);
 
-  private imagePath_ = this.opt_options.imagePath || MarkerClusterer.IMAGE_PATH;
-  private imageExtension_ = this.opt_options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
-  private imageSizes_ = this.opt_options.imageSizes || MarkerClusterer.IMAGE_SIZES;
-  private calculator_ = this.opt_options.calculator || MarkerClusterer.CALCULATOR;
-  private batchSize_ = this.opt_options.batchSize || MarkerClusterer.BATCH_SIZE;
-  private batchSizeIE_ = this.opt_options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
-  private clusterClass_ = this.opt_options.clusterClass || 'cluster';
+  private imagePath_ = this.options.imagePath || MarkerClusterer.IMAGE_PATH;
+  private imageExtension_ = this.options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
+  private imageSizes_ = this.options.imageSizes || MarkerClusterer.IMAGE_SIZES;
+  private calculator_ = this.options.calculator || MarkerClusterer.CALCULATOR;
+  private batchSize_ = this.options.batchSize || MarkerClusterer.BATCH_SIZE;
+  private batchSizeIE_ = this.options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
+  private clusterClass_ = this.options.clusterClass || 'cluster';
 
   private prevZoom_: number;
   private timerRefStatic: number;
@@ -272,10 +272,10 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
    * @constructor
    * @param {google.maps.Map} map The Google map to attach to.
-   * @param {google.maps.Marker[]} [opt_markers] The markers to be added to the cluster.
-   * @param {MarkerClustererOptions} [opt_options] The optional parameters.
+   * @param {google.maps.Marker[]} [markers] The markers to be added to the cluster.
+   * @param {MarkerClustererOptions} [options] The optional parameters.
    */
-  constructor(map: google.maps.Map, opt_markers: google.maps.Marker[] = [], private opt_options: MarkerClustererOptions = {}) {
+  constructor(map: google.maps.Map, markers: google.maps.Marker[] = [], private options: MarkerClustererOptions = {}) {
     super();
 
     if (navigator.userAgent.toLowerCase().indexOf('msie') !== -1) {
@@ -285,7 +285,7 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     this.setupStyles_();
 
-    this.addMarkers(opt_markers, true);
+    this.addMarkers(markers, true);
     this.setMap(map); // Note: this causes onAdd to be called
   }
 
@@ -293,7 +293,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Implementation of the onAdd interface method.
    * @ignore
    */
-  onAdd() {
+  onAdd(): void {
     this.activeMap_ = this.getMap() as google.maps.Map;
     this.ready_ = true;
 
@@ -340,7 +340,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * All managed markers are also put back on the map.
    * @ignore
    */
-  onRemove() {
+  onRemove(): void {
     // Put all the managed markers back on the map:
     for (let i = 0; i < this.markers_.length; i++) {
       if (this.markers_[i].getMap() !== this.activeMap_) {
@@ -368,12 +368,12 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Implementation of the draw interface method.
    * @ignore
    */
-  draw() {}
+  draw(): void {}
 
   /**
    * Sets up the styles object.
    */
-  private setupStyles_() {
+  private setupStyles_(): void {
     if (this.styles_.length > 0) {
       return;
     }
@@ -391,7 +391,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    *  Fits the map to the bounds of the markers managed by the clusterer.
    */
-  fitMapToMarkers() {
+  fitMapToMarkers(): void {
     const markers = this.getMarkers();
     const bounds = new google.maps.LatLngBounds();
     for (let i = 0; i < markers.length; i++) {
@@ -418,7 +418,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @param {number} gridSize The grid size.
    */
-  setGridSize(gridSize: number) {
+  setGridSize(gridSize: number): void {
     this.gridSize_ = gridSize;
   }
 
@@ -436,7 +436,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @param {number} minimumClusterSize The minimum cluster size.
    */
-  setMinimumClusterSize(minimumClusterSize: number) {
+  setMinimumClusterSize(minimumClusterSize: number): void {
     this.minClusterSize_ = minimumClusterSize;
   }
 
@@ -454,7 +454,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {number} maxZoom The maximum zoom level.
    */
-  setMaxZoom(maxZoom: number) {
+  setMaxZoom(maxZoom: number): void {
     this.maxZoom_ = maxZoom;
   }
 
@@ -468,7 +468,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * @param {number} zIndex
    */
-  setZIndex(zIndex: number) {
+  setZIndex(zIndex: number): void {
     this.zIndex_ = zIndex;
   }
 
@@ -486,7 +486,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {ClusterIconStyle[]} styles The array of styles to use.
    */
-  setStyles(styles: ClusterIconStyle[]) {
+  setStyles(styles: ClusterIconStyle[]): void {
     this.styles_ = styles;
   }
 
@@ -504,7 +504,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {string} title The value of the title property.
    */
-  setTitle(title: string) {
+  setTitle(title: string): void {
     this.title_ = title;
   }
 
@@ -522,7 +522,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {boolean} zoomOnClick The value of the zoomOnClick property.
    */
-  setZoomOnClick(zoomOnClick: boolean) {
+  setZoomOnClick(zoomOnClick: boolean): void {
     this.zoomOnClick_ = zoomOnClick;
   }
 
@@ -540,7 +540,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {boolean} averageCenter The value of the averageCenter property.
    */
-  setAverageCenter(averageCenter: boolean) {
+  setAverageCenter(averageCenter: boolean): void {
     this.averageCenter_ = averageCenter;
   }
 
@@ -558,7 +558,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {boolean} ignoreHidden The value of the ignoreHidden property.
    */
-  setIgnoreHidden(ignoreHidden: boolean) {
+  setIgnoreHidden(ignoreHidden: boolean): void {
     this.ignoreHidden_ = ignoreHidden;
   }
 
@@ -576,7 +576,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {boolean} enableRetinaIcons The value of the enableRetinaIcons property.
    */
-  setEnableRetinaIcons(enableRetinaIcons: boolean) {
+  setEnableRetinaIcons(enableRetinaIcons: boolean): void {
     this.enableRetinaIcons_ = enableRetinaIcons;
   }
 
@@ -594,7 +594,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {string} imageExtension The value of the imageExtension property.
    */
-  setImageExtension(imageExtension: string) {
+  setImageExtension(imageExtension: string): void {
     this.imageExtension_ = imageExtension;
   }
 
@@ -612,7 +612,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {string} imagePath The value of the imagePath property.
    */
-  setImagePath(imagePath: string) {
+  setImagePath(imagePath: string): void {
     this.imagePath_ = imagePath;
   }
 
@@ -630,7 +630,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {number[]} imageSizes The value of the imageSizes property.
    */
-  setImageSizes(imageSizes: number[]) {
+  setImageSizes(imageSizes: number[]): void {
     this.imageSizes_ = imageSizes;
   }
 
@@ -649,7 +649,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param {function(google.maps.Marker[], number)} calculator The value
    *  of the calculator property.
    */
-  setCalculator(calculator: Calculator) {
+  setCalculator(calculator: Calculator): void {
     this.calculator_ = calculator;
   }
 
@@ -667,7 +667,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {number} batchSizeIE The value of the batchSizeIE property.
    */
-  setBatchSizeIE(batchSizeIE: number)  {
+  setBatchSizeIE(batchSizeIE: number): void {
     this.batchSizeIE_ = batchSizeIE;
   }
 
@@ -685,7 +685,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    *  @param {string} clusterClass The value of the clusterClass property.
    */
-  setClusterClass(clusterClass: string) {
+  setClusterClass(clusterClass: string): void {
     this.clusterClass_ = clusterClass;
   }
 
@@ -721,7 +721,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @return {number} The number of clusters formed by the clusterer.
    */
-  getTotalClusters() {
+  getTotalClusters(): number {
     return this.clusters_.length;
   }
 
@@ -730,29 +730,29 @@ export class MarkerClusterer extends OverlayViewSafe {
    *  <code>opt_nodraw</code> is set to <code>true</code>.
    *
    * @param {google.maps.Marker} marker The marker to add.
-   * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
    */
-  addMarker(marker: google.maps.Marker, opt_nodraw?: boolean) {
+  addMarker(marker: google.maps.Marker, nodraw?: boolean): void {
     this.pushMarkerTo_(marker);
-    if (!opt_nodraw) {
+    if (!nodraw) {
       this.redraw_();
     }
   }
 
   /**
    * Adds an array of markers to the clusterer. The clusters are redrawn unless
-   *  <code>opt_nodraw</code> is set to <code>true</code>.
+   *  <code>nodraw</code> is set to <code>true</code>.
    *
    * @param {google.maps.Marker[]} markers The markers to add.
-   * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
    */
-  addMarkers(markers: google.maps.Marker[], opt_nodraw?: boolean) {
+  addMarkers(markers: google.maps.Marker[], nodraw?: boolean): void {
     for (const key in markers) {
       if (Object.prototype.hasOwnProperty.call(markers, key)) {
         this.pushMarkerTo_(markers[key]);
       }
     }
-    if (!opt_nodraw) {
+    if (!nodraw) {
       this.redraw_();
     }
   }
@@ -762,7 +762,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @param {google.maps.Marker} marker The marker to add.
    */
-  private pushMarkerTo_(marker: google.maps.Marker & {isAdded?: boolean}) {
+  private pushMarkerTo_(marker: google.maps.Marker & {isAdded?: boolean}): void {
     // If the marker is draggable add a listener so we can update the clusters on the dragend:
     if (marker.getDraggable()) {
       google.maps.event.addListener(marker, 'dragend', () => {
@@ -778,17 +778,17 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Removes a marker from the cluster.  The clusters are redrawn unless
-   *  <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
+   *  <code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
    *  marker was removed from the clusterer.
    *
    * @param {google.maps.Marker} marker The marker to remove.
-   * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
    * @return {boolean} True if the marker was removed from the clusterer.
    */
-  removeMarker(marker: google.maps.Marker, opt_nodraw?: boolean): boolean {
+  removeMarker(marker: google.maps.Marker, nodraw?: boolean): boolean {
     const removed = this.removeMarker_(marker);
 
-    if (!opt_nodraw && removed) {
+    if (!nodraw && removed) {
       this.repaint();
     }
 
@@ -797,14 +797,14 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   /**
    * Removes an array of markers from the cluster. The clusters are redrawn unless
-   *  <code>opt_nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
+   *  <code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers
    *  were removed from the clusterer.
    *
    * @param {google.maps.Marker[]} markers The markers to remove.
-   * @param {boolean} [opt_nodraw] Set to <code>true</code> to prevent redrawing.
+   * @param {boolean} [nodraw] Set to <code>true</code> to prevent redrawing.
    * @return {boolean} True if markers were removed from the clusterer.
    */
-  removeMarkers(markers: google.maps.Marker[], opt_nodraw?: boolean): boolean {
+  removeMarkers(markers: google.maps.Marker[], nodraw?: boolean): boolean {
     let removed = false;
 
     for (let i = 0; i < markers.length; i++) {
@@ -812,7 +812,7 @@ export class MarkerClusterer extends OverlayViewSafe {
       removed = removed || r;
     }
 
-    if (!opt_nodraw && removed) {
+    if (!nodraw && removed) {
       this.repaint();
     }
 
@@ -852,7 +852,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Removes all clusters and markers from the map and also removes all markers
    *  managed by the clusterer.
    */
-  clearMarkers() {
+  clearMarkers(): void {
     this.resetViewport_(true);
     this.markers_ = [];
   }
@@ -861,7 +861,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * Recalculates and redraws all the marker clusters from scratch.
    *  Call this after changing any properties.
    */
-  repaint() {
+  repaint(): void {
     const oldClusters = this.clusters_.slice();
     this.clusters_ = [];
     this.resetViewport_(false);
@@ -919,18 +919,18 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * Redraws all the clusters.
    */
-  private redraw_() {
+  private redraw_(): void {
     this.createClusters_(0);
   }
 
   /**
    * Removes all clusters from the map. The markers are also removed from the map
-   *  if <code>opt_hide</code> is set to <code>true</code>.
+   *  if <code>hide</code> is set to <code>true</code>.
    *
-   * @param {boolean} [opt_hide] Set to <code>true</code> to also remove the markers
+   * @param {boolean} [hide] Set to <code>true</code> to also remove the markers
    *  from the map.
    */
-  private resetViewport_(opt_hide?: boolean) {
+  private resetViewport_(hide?: boolean): void {
     // Remove all the clusters
     for (let i = 0; i < this.clusters_.length; i++) {
       this.clusters_[i].remove();
@@ -941,7 +941,7 @@ export class MarkerClusterer extends OverlayViewSafe {
     for (let i = 0; i < this.markers_.length; i++) {
       const marker = this.markers_[i];
       marker.isAdded = false;
-      if (opt_hide) {
+      if (hide) {
         marker.setMap(null);
       }
     }
@@ -955,7 +955,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @return {number} The distance between the two points in km.
    * @see http://www.movable-type.co.uk/scripts/latlong.html
    */
-  private distanceBetweenPoints_(p1: google.maps.LatLng, p2: google.maps.LatLng) {
+  private distanceBetweenPoints_(p1: google.maps.LatLng, p2: google.maps.LatLng): number {
     const R = 6371; // Radius of the Earth in km
     const dLat = ((p2.lat() - p1.lat()) * Math.PI) / 180;
     const dLon = ((p2.lng() - p1.lng()) * Math.PI) / 180;
@@ -976,7 +976,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param {google.maps.LatLngBounds} bounds The bounds to check against.
    * @return {boolean} True if the marker is in the bounds.
    */
-  private isMarkerInBounds_(marker: google.maps.Marker, bounds: google.maps.LatLngBounds) {
+  private isMarkerInBounds_(marker: google.maps.Marker, bounds: google.maps.LatLngBounds): boolean {
     return bounds.contains(marker.getPosition());
   }
 
@@ -985,7 +985,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @param {google.maps.Marker} marker The marker to add.
    */
-  private addToClosestCluster_(marker: google.maps.Marker) {
+  private addToClosestCluster_(marker: google.maps.Marker): void {
     let distance = 40000; // Some large number
     let clusterToAddTo = null;
     for (let i = 0; i < this.clusters_.length; i++) {
@@ -1016,7 +1016,7 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param {number} iFirst The index of the first marker in the batch of
    *  markers to be added to clusters.
    */
-  private createClusters_(iFirst: number) {
+  private createClusters_(iFirst: number): void {
     if (!this.ready_) {
       return;
     }
@@ -1105,11 +1105,11 @@ export class MarkerClusterer extends OverlayViewSafe {
    */
   static CALCULATOR(markers: google.maps.Marker[], numStyles: number): ClusterIconInfo {
     let index = 0;
-    let count: number = markers.length;
+    const count: number = markers.length;
 
     let dv = count;
     while (dv !== 0) {
-      dv =  Math.floor(dv / 10);
+      dv = Math.floor(dv / 10);
       index++;
     }
 

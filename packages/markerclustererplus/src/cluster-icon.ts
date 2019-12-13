@@ -125,7 +125,7 @@ export class ClusterIcon extends OverlayViewSafe {
   /**
    * Adds the icon to the DOM.
    */
-  onAdd() {
+  onAdd(): void {
     const cClusterIcon = this;
     let cMouseDownInCluster: boolean;
     let cDraggingMapByCluster: boolean;
@@ -228,7 +228,7 @@ export class ClusterIcon extends OverlayViewSafe {
   /**
    * Removes the icon from the DOM.
    */
-  onRemove() {
+  onRemove(): void {
     if (this.div_ && this.div_.parentNode) {
       this.hide();
       google.maps.event.removeListener(this.boundsChangedListener_);
@@ -241,7 +241,7 @@ export class ClusterIcon extends OverlayViewSafe {
   /**
    * Draws the icon.
    */
-  draw() {
+  draw(): void {
     if (this.visible_) {
       const pos = this.getPosFromLatLng_(this.center_);
       this.div_.style.top = pos.y + "px";
@@ -252,7 +252,7 @@ export class ClusterIcon extends OverlayViewSafe {
   /**
    * Hides the icon.
    */
-  hide() {
+  hide(): void {
     if (this.div_) {
       this.div_.style.display = "none";
     }
@@ -262,7 +262,7 @@ export class ClusterIcon extends OverlayViewSafe {
   /**
    * Positions and shows the icon.
    */
-  show() {
+  show(): void {
     if (this.div_) {
       const mc = this.cluster_.getMarkerClusterer();
       const ariaLabel = mc.ariaLabelFn(this.sums_.text);
@@ -330,7 +330,7 @@ export class ClusterIcon extends OverlayViewSafe {
    *
    * @param {ClusterIconInfo} sums The icon label text and styles index.
    */
-  useStyle(sums: ClusterIconInfo) {
+  useStyle(sums: ClusterIconInfo): void {
     this.sums_ = sums;
     let index = Math.max(0, sums.index - 1);
     index = Math.min(this.styles_.length - 1, index);
@@ -357,7 +357,7 @@ export class ClusterIcon extends OverlayViewSafe {
    *
    * @param {google.maps.LatLng} center The latlng to set as the center.
    */
-  setCenter(center: google.maps.LatLng) {
+  setCenter(center: google.maps.LatLng): void {
     this.center_ = center;
   }
 
@@ -387,7 +387,7 @@ export class ClusterIcon extends OverlayViewSafe {
    * @param {google.maps.LatLng} latlng The position in latlng.
    * @return {google.maps.Point} The position in pixels.
    */
-  getPosFromLatLng_(latlng: google.maps.LatLng): google.maps.Point  {
+  getPosFromLatLng_(latlng: google.maps.LatLng): google.maps.Point {
     const pos = this.getProjection().fromLatLngToDivPixel(latlng);
     pos.x -= this.anchorIcon_[1];
     pos.y -= this.anchorIcon_[0];

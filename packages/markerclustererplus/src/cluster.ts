@@ -95,7 +95,7 @@ export class Cluster {
    *
    * @ignore
    */
-  public remove() {
+  public remove(): void {
     this.clusterIcon_.setMap(null);
     this.markers_ = [];
     delete this.markers_;
@@ -163,14 +163,14 @@ export class Cluster {
    * @return {boolean} True if the marker lies in the bounds.
    * @ignore
    */
-  public isMarkerInClusterBounds(marker: google.maps.Marker) {
+  public isMarkerInClusterBounds(marker: google.maps.Marker): boolean {
     return this.bounds_.contains(marker.getPosition());
   }
 
   /**
    * Calculates the extended bounds of the cluster with the grid.
    */
-  private calculateBounds_() {
+  private calculateBounds_(): void {
     const bounds = new google.maps.LatLngBounds(this.center_, this.center_);
     this.bounds_ = this.markerClusterer_.getExtendedBounds(bounds);
   }
@@ -178,7 +178,7 @@ export class Cluster {
   /**
    * Updates the cluster icon.
    */
-  private updateIcon_() {
+  private updateIcon_(): void {
     const mCount = this.markers_.length;
     const mz = this.markerClusterer_.getMaxZoom();
 
@@ -206,7 +206,7 @@ export class Cluster {
    * @param {google.maps.Marker} marker The marker to check.
    * @return {boolean} True if the marker has already been added.
    */
-  private isMarkerAlreadyAdded_(marker: google.maps.Marker) {
+  private isMarkerAlreadyAdded_(marker: google.maps.Marker): boolean {
     if (this.markers_.indexOf) {
       return this.markers_.indexOf(marker) !== -1;
     } else {
