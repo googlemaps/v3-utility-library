@@ -1,5 +1,21 @@
-import { MarkerClusterer, ClusterAugmentedMarker } from './markerclusterer';
-import { ClusterIcon } from './cluster-icon';
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { MarkerClusterer, ClusterAugmentedMarker } from "./markerclusterer";
+import { ClusterIcon } from "./cluster-icon";
 
 /**
  * Creates a single cluster that manages a group of proximate markers.
@@ -12,7 +28,10 @@ export class Cluster {
   private markers_: ClusterAugmentedMarker[] = []; // TODO: type;
   private center_: google.maps.LatLng = null;
   private bounds_: google.maps.LatLngBounds = null;
-  private clusterIcon_ = new ClusterIcon(this, this.markerClusterer_.getStyles());
+  private clusterIcon_ = new ClusterIcon(
+    this,
+    this.markerClusterer_.getStyles()
+  );
 
   /**
    *
@@ -105,7 +124,9 @@ export class Cluster {
    * @return True if the marker was added.
    * @ignore
    */
-  public addMarker(marker: google.maps.Marker & { isAdded?: boolean }): boolean {
+  public addMarker(
+    marker: google.maps.Marker & { isAdded?: boolean }
+  ): boolean {
     if (this.isMarkerAlreadyAdded_(marker)) {
       return false;
     }
@@ -191,7 +212,10 @@ export class Cluster {
     }
 
     const numStyles = this.markerClusterer_.getStyles().length;
-    const sums = this.markerClusterer_.getCalculator()(this.markers_, numStyles);
+    const sums = this.markerClusterer_.getCalculator()(
+      this.markers_,
+      numStyles
+    );
     this.clusterIcon_.setCenter(this.center_);
     this.clusterIcon_.useStyle(sums);
     this.clusterIcon_.show();

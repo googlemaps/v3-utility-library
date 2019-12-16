@@ -34,18 +34,21 @@
  *  deprecated. The new name is `click`, so please change your application code now.
  */
 
-import { Cluster } from './cluster';
-import { ClusterIconInfo, ClusterIconStyle } from './cluster-icon';
-import { OverlayViewSafe } from './overlay-view-safe';
+import { Cluster } from "./cluster";
+import { ClusterIconInfo, ClusterIconStyle } from "./cluster-icon";
+import { OverlayViewSafe } from "./overlay-view-safe";
 
 /**
  * @param text The text attribute of the cluster
  */
 type AriaLabelFn = (text: string) => string;
 
-export type Calculator = (markers: google.maps.Marker[], clusterIconStylesCount: number) => ClusterIconInfo;
+export type Calculator = (
+  markers: google.maps.Marker[],
+  clusterIconStylesCount: number
+) => ClusterIconInfo;
 
-export interface ClusterAugmentedMarker extends  google.maps.Marker {
+export interface ClusterAugmentedMarker extends google.maps.Marker {
   isAdded?: boolean;
 }
 
@@ -74,7 +77,6 @@ export declare function clusteringend(mc: MarkerClusterer): void;
  * @event clusteringbegin
  */
 export declare function clusteringbegin(mc: MarkerClusterer): void;
-
 
 /**
  * Optional parameter passed to the {@link MarkerClusterer} constructor.
@@ -243,7 +245,11 @@ export interface MarkerClustererOptions {
 /**
  * @ignore
  */
-const getOption = <T, K extends keyof  T>(options: T, prop: K, def: T[K]): T[K] => {
+const getOption = <T, K extends keyof T>(
+  options: T,
+  prop: K,
+  def: T[K]
+): T[K] => {
   if (options[prop] !== undefined) {
     return options[prop];
   } else {
@@ -265,12 +271,12 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    * The default root name for the marker cluster images.
    */
-  static IMAGE_PATH = '../images/m';
+  static IMAGE_PATH = "../images/m";
 
   /**
    * The default extension name for the marker cluster images.
    */
-  static IMAGE_EXTENSION = 'png';
+  static IMAGE_EXTENSION = "png";
 
   /**
    * The default array of sizes for the marker cluster images.
@@ -284,32 +290,37 @@ export class MarkerClusterer extends OverlayViewSafe {
   private activeMap_: google.maps.Map = null;
   private ready_ = false;
 
-  public ariaLabelFn = this.options.ariaLabelFn || ((): string => '');
+  public ariaLabelFn = this.options.ariaLabelFn || ((): string => "");
 
   private zIndex_ = this.options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
   private gridSize_ = this.options.gridSize || 60;
   private minClusterSize_ = this.options.minimumClusterSize || 2;
   private maxZoom_ = this.options.maxZoom || null;
   private styles_: ClusterIconStyle[] = this.options.styles || [];
-  private title_ = this.options.title || '';
+  private title_ = this.options.title || "";
 
-  private zoomOnClick_ = getOption(this.options, 'zoomOnClick', true);
-  private averageCenter_ = getOption(this.options, 'averageCenter', false);
+  private zoomOnClick_ = getOption(this.options, "zoomOnClick", true);
+  private averageCenter_ = getOption(this.options, "averageCenter", false);
 
-  private ignoreHidden_ = getOption(this.options, 'ignoreHidden', false);
-  private enableRetinaIcons_ = getOption(this.options, 'enableRetinaIcons', false);
+  private ignoreHidden_ = getOption(this.options, "ignoreHidden", false);
+  private enableRetinaIcons_ = getOption(
+    this.options,
+    "enableRetinaIcons",
+    false
+  );
 
   private imagePath_ = this.options.imagePath || MarkerClusterer.IMAGE_PATH;
-  private imageExtension_ = this.options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
+  private imageExtension_ =
+    this.options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
   private imageSizes_ = this.options.imageSizes || MarkerClusterer.IMAGE_SIZES;
   private calculator_ = this.options.calculator || MarkerClusterer.CALCULATOR;
   private batchSize_ = this.options.batchSize || MarkerClusterer.BATCH_SIZE;
-  private batchSizeIE_ = this.options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
-  private clusterClass_ = this.options.clusterClass || 'cluster';
+  private batchSizeIE_ =
+    this.options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
+  private clusterClass_ = this.options.clusterClass || "cluster";
 
   private prevZoom_: number;
   private timerRefStatic: number;
-
 
   /**
    * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
@@ -317,10 +328,14 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param markers The markers to be added to the cluster.
    * @param options The optional parameters.
    */
-  constructor(map: google.maps.Map, markers: google.maps.Marker[] = [], private options: MarkerClustererOptions = {}) {
+  constructor(
+    map: google.maps.Map,
+    markers: google.maps.Marker[] = [],
+    private options: MarkerClustererOptions = {}
+  ) {
     super();
 
-    if (navigator.userAgent.toLowerCase().indexOf('msie') !== -1) {
+    if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
       // Try to avoid IE timeout when processing a huge number of markers:
       this.batchSize_ = this.batchSizeIE_;
     }
@@ -345,34 +360,33 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     // Add the map event listeners
     this.listeners_ = [
-      google.maps.event.addListener(
-        this.getMap(),
-        'zoom_changed',
-        () => {
-          const map: google.maps.Map & {
-            minZoom: number,
-            maxZoom: number,
-            mapTypes: {[type: string]: google.maps.MapType}
-          } = this.getMap() as any;
+      google.maps.event.addListener(this.getMap(), "zoom_changed", () => {
+        const map: google.maps.Map & {
+          minZoom: number;
+          maxZoom: number;
+          mapTypes: { [type: string]: google.maps.MapType };
+        } = this.getMap() as any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-          // Fix for bug #407
-          // Determines map type and prevents illegal zoom levels
-          const minZoom = map.minZoom || 0;
-          const maxZoom = Math.min(
-            map.maxZoom || 100,
-            map.mapTypes[map.getMapTypeId()].maxZoom,
-          );
-          const zoom = Math.min(Math.max(this.getMap().getZoom(), minZoom), maxZoom);
+        // Fix for bug #407
+        // Determines map type and prevents illegal zoom levels
+        const minZoom = map.minZoom || 0;
+        const maxZoom = Math.min(
+          map.maxZoom || 100,
+          map.mapTypes[map.getMapTypeId()].maxZoom
+        );
+        const zoom = Math.min(
+          Math.max(this.getMap().getZoom(), minZoom),
+          maxZoom
+        );
 
-          if (this.prevZoom_ != zoom) {
-            this.prevZoom_ = zoom;
-            this.resetViewport_(false);
-          }
-        },
-      ),
-      google.maps.event.addListener(this.getMap(), 'idle', () => {
-        this.redraw_();
+        if (this.prevZoom_ != zoom) {
+          this.prevZoom_ = zoom;
+          this.resetViewport_(false);
+        }
       }),
+      google.maps.event.addListener(this.getMap(), "idle", () => {
+        this.redraw_();
+      })
     ];
   }
 
@@ -423,9 +437,9 @@ export class MarkerClusterer extends OverlayViewSafe {
     for (let i = 0; i < this.imageSizes_.length; i++) {
       const size = this.imageSizes_[i];
       this.styles_.push({
-        url: this.imagePath_ + (i + 1) + '.' + this.imageExtension_,
+        url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
         height: size,
-        width: size,
+        width: size
       });
     }
   }
@@ -797,10 +811,12 @@ export class MarkerClusterer extends OverlayViewSafe {
    *
    * @param marker The marker to add.
    */
-  private pushMarkerTo_(marker: google.maps.Marker & {isAdded?: boolean}): void {
+  private pushMarkerTo_(
+    marker: google.maps.Marker & { isAdded?: boolean }
+  ): void {
     // If the marker is draggable add a listener so we can update the clusters on the dragend:
     if (marker.getDraggable()) {
-      google.maps.event.addListener(marker, 'dragend', () => {
+      google.maps.event.addListener(marker, "dragend", () => {
         if (this.ready_) {
           marker.isAdded = false;
           this.repaint();
@@ -917,17 +933,19 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @return The extended bounds.
    * @ignore
    */
-  getExtendedBounds(bounds: google.maps.LatLngBounds): google.maps.LatLngBounds {
+  getExtendedBounds(
+    bounds: google.maps.LatLngBounds
+  ): google.maps.LatLngBounds {
     const projection = this.getProjection();
 
     // Turn the bounds into latlng.
     const tr = new google.maps.LatLng(
       bounds.getNorthEast().lat(),
-      bounds.getNorthEast().lng(),
+      bounds.getNorthEast().lng()
     );
     const bl = new google.maps.LatLng(
       bounds.getSouthWest().lat(),
-      bounds.getSouthWest().lng(),
+      bounds.getSouthWest().lng()
     );
 
     // Convert the points to pixels and the extend out by the grid size.
@@ -988,16 +1006,19 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @return The distance between the two points in km.
    * @link http://www.movable-type.co.uk/scripts/latlong.html
    */
-  private distanceBetweenPoints_(p1: google.maps.LatLng, p2: google.maps.LatLng): number {
+  private distanceBetweenPoints_(
+    p1: google.maps.LatLng,
+    p2: google.maps.LatLng
+  ): number {
     const R = 6371; // Radius of the Earth in km
     const dLat = ((p2.lat() - p1.lat()) * Math.PI) / 180;
     const dLon = ((p2.lng() - p1.lng()) * Math.PI) / 180;
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos((p1.lat() * Math.PI) / 180) *
-      Math.cos((p2.lat() * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+        Math.cos((p2.lat() * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -1009,7 +1030,10 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param bounds The bounds to check against.
    * @return True if the marker is in the bounds.
    */
-  private isMarkerInBounds_(marker: google.maps.Marker, bounds: google.maps.LatLngBounds): boolean {
+  private isMarkerInBounds_(
+    marker: google.maps.Marker,
+    bounds: google.maps.LatLngBounds
+  ): boolean {
     return bounds.contains(marker.getPosition());
   }
 
@@ -1056,9 +1080,9 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     // Cancel previous batch processing if we're working on the first batch:
     if (iFirst === 0) {
-      google.maps.event.trigger(this, 'clusteringbegin', this);
+      google.maps.event.trigger(this, "clusteringbegin", this);
 
-      if (typeof this.timerRefStatic !== 'undefined') {
+      if (typeof this.timerRefStatic !== "undefined") {
         clearTimeout(this.timerRefStatic);
         delete this.timerRefStatic;
       }
@@ -1072,17 +1096,13 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     if (this.getMap().getZoom() > 3) {
       mapBounds = new google.maps.LatLngBounds(
-        (this.getMap() as google.maps.Map)
-          .getBounds()
-          .getSouthWest(),
-        (this.getMap() as google.maps.Map)
-          .getBounds()
-          .getNorthEast(),
+        (this.getMap() as google.maps.Map).getBounds().getSouthWest(),
+        (this.getMap() as google.maps.Map).getBounds().getNorthEast()
       );
     } else {
       mapBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(85.02070771743472, -178.48388434375),
-        new google.maps.LatLng(-85.08136444384544, 178.00048865625),
+        new google.maps.LatLng(-85.08136444384544, 178.00048865625)
       );
     }
     const bounds = this.getExtendedBounds(mapBounds);
@@ -1107,7 +1127,7 @@ export class MarkerClusterer extends OverlayViewSafe {
       }, 0);
     } else {
       delete this.timerRefStatic;
-      google.maps.event.trigger(this, 'clusteringend', this);
+      google.maps.event.trigger(this, "clusteringend", this);
     }
   }
 
@@ -1119,7 +1139,10 @@ export class MarkerClusterer extends OverlayViewSafe {
    * @param numStyles The number of marker styles available.
    * @return The information resource for the cluster.
    */
-  static CALCULATOR(markers: google.maps.Marker[], numStyles: number): ClusterIconInfo {
+  static CALCULATOR(
+    markers: google.maps.Marker[],
+    numStyles: number
+  ): ClusterIconInfo {
     let index = 0;
     const count: number = markers.length;
 
@@ -1133,7 +1156,7 @@ export class MarkerClusterer extends OverlayViewSafe {
     return {
       text: count.toString(),
       index: index,
-      title: '',
+      title: ""
     };
   }
 }

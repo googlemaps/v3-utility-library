@@ -1,10 +1,26 @@
 /**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
  * This class represents the object for values in the `styles` array passed
  * to the {@link MarkerClusterer} constructor. The element in this array that is used to
  * style the cluster icon is determined by calling the `calculator` function.
  */
-import { Cluster } from './cluster';
-import { OverlayViewSafe } from './overlay-view-safe';
+import { Cluster } from "./cluster";
+import { OverlayViewSafe } from "./overlay-view-safe";
 
 export interface ClusterIconStyle {
   /** The URL of the cluster icon image file. Required. */
@@ -144,7 +160,7 @@ export class ClusterIcon extends OverlayViewSafe {
 
     const [major, minor] = google.maps.version.split(".");
 
-    const gmVersion = (parseInt(major, 10) * 100) + parseInt(minor, 10);
+    const gmVersion = parseInt(major, 10) * 100 + parseInt(minor, 10);
 
     this.div_ = document.createElement("div");
     this.div_.className = this.className_;
@@ -172,12 +188,12 @@ export class ClusterIcon extends OverlayViewSafe {
     // But it doesn't work with earlier releases so do a version check.
     if (gmVersion >= 332) {
       // Ugly version-dependent code
-      google.maps.event.addDomListener(this.div_, "touchstart", (e) => {
+      google.maps.event.addDomListener(this.div_, "touchstart", e => {
         e.stopPropagation();
       });
     }
 
-    google.maps.event.addDomListener(this.div_, "click", (e) => {
+    google.maps.event.addDomListener(this.div_, "click", e => {
       cMouseDownInCluster = false;
       if (!cDraggingMapByCluster) {
         /**
@@ -280,10 +296,11 @@ export class ClusterIcon extends OverlayViewSafe {
       const bp = this.backgroundPosition_.split(" ");
       const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
       const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
-      this.div_.style.cssText = this.createCss_(this.getPosFromLatLng_(this.center_));
+      this.div_.style.cssText = this.createCss_(
+        this.getPosFromLatLng_(this.center_)
+      );
 
-
-      let imgDimensions = '';
+      let imgDimensions = "";
       if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
         imgDimensions = `width: ${this.width_}px; height: ${this.height_}px`;
       } else {
@@ -291,7 +308,7 @@ export class ClusterIcon extends OverlayViewSafe {
           -1 * spriteV,
           -1 * spriteH + this.width_,
           -1 * spriteV + this.height_,
-          -1 * spriteH,
+          -1 * spriteH
         ];
 
         imgDimensions = `clip: rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`;
@@ -301,7 +318,7 @@ export class ClusterIcon extends OverlayViewSafe {
         `position: absolute`,
         `top: ${spriteV}px`,
         `left: ${spriteH}px`,
-        imgDimensions,
+        imgDimensions
       ].join(";");
 
       const divStyle = [
@@ -316,7 +333,7 @@ export class ClusterIcon extends OverlayViewSafe {
         `text-decoration: ${this.textDecoration_}`,
         `text-align: center`,
         `width: ${this.width_}px`,
-        `line-height: ${this.height_}px`,
+        `line-height: ${this.height_}px`
       ].join(";");
 
       this.div_.innerHTML = `
@@ -325,7 +342,7 @@ export class ClusterIcon extends OverlayViewSafe {
   <span aria-hidden="true">${this.sums_.text}</span>
 </div>
 `;
-      if (typeof this.sums_.title === 'undefined' || this.sums_.title === '') {
+      if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
         this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
       } else {
         this.div_.title = this.sums_.title;
@@ -380,15 +397,15 @@ export class ClusterIcon extends OverlayViewSafe {
    */
   private createCss_(pos: google.maps.Point): string {
     return [
-     `z-index: ${this.cluster_.getMarkerClusterer().getZIndex()}`,
-     "cursor: pointer",
-     `position: absolute; top: ${pos.y}px; left: ${pos.x}px`,
-     `width: ${this.width_}px; height: ${this.height_}px`,
-     "-webkit-user-select: none",
-     "-khtml-user-select: none",
-     "-moz-user-select: none",
-     "-o-user-select: none",
-     "user-select: none",
+      `z-index: ${this.cluster_.getMarkerClusterer().getZIndex()}`,
+      "cursor: pointer",
+      `position: absolute; top: ${pos.y}px; left: ${pos.x}px`,
+      `width: ${this.width_}px; height: ${this.height_}px`,
+      "-webkit-user-select: none",
+      "-khtml-user-select: none",
+      "-moz-user-select: none",
+      "-o-user-select: none",
+      "user-select: none"
     ].join(";");
   }
 
