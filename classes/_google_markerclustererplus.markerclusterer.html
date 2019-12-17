@@ -1,0 +1,2214 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MarkerClusterer | Google Maps JavaScript API v3 Utilities</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Google Maps JavaScript API v3 Utilities</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
+				</li>
+				<li>
+					<a href="_google_markerclustererplus.markerclusterer.html">MarkerClusterer</a>
+				</li>
+			</ul>
+			<h1>Class MarkerClusterer</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="tsd-signature-type">OverlayViewSafe</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">MarkerClusterer</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_google_markerclustererplus.markerclusterer.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#arialabelfn" class="tsd-kind-icon">aria<wbr>Label<wbr>Fn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#batch_size" class="tsd-kind-icon">BATCH_<wbr>SIZE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#batch_size_ie" class="tsd-kind-icon">BATCH_<wbr>SIZE_<wbr>IE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#image_extension" class="tsd-kind-icon">IMAGE_<wbr>EXTENSION</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#image_path" class="tsd-kind-icon">IMAGE_<wbr>PATH</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#image_sizes" class="tsd-kind-icon">IMAGE_<wbr>SIZES</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#addmarker" class="tsd-kind-icon">add<wbr>Marker</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#addmarkers" class="tsd-kind-icon">add<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#bindto" class="tsd-kind-icon">bind<wbr>To</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#changed" class="tsd-kind-icon">changed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#clearmarkers" class="tsd-kind-icon">clear<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#fitmaptomarkers" class="tsd-kind-icon">fit<wbr>Map<wbr>ToMarkers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getaveragecenter" class="tsd-kind-icon">get<wbr>Average<wbr>Center</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getbatchsizeie" class="tsd-kind-icon">get<wbr>Batch<wbr>SizeIE</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getcalculator" class="tsd-kind-icon">get<wbr>Calculator</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getclusterclass" class="tsd-kind-icon">get<wbr>Cluster<wbr>Class</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getclusters" class="tsd-kind-icon">get<wbr>Clusters</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getenableretinaicons" class="tsd-kind-icon">get<wbr>Enable<wbr>Retina<wbr>Icons</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getgridsize" class="tsd-kind-icon">get<wbr>Grid<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getignorehidden" class="tsd-kind-icon">get<wbr>Ignore<wbr>Hidden</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getimageextension" class="tsd-kind-icon">get<wbr>Image<wbr>Extension</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getimagepath" class="tsd-kind-icon">get<wbr>Image<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getimagesizes" class="tsd-kind-icon">get<wbr>Image<wbr>Sizes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#getmap" class="tsd-kind-icon">get<wbr>Map</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getmarkers" class="tsd-kind-icon">get<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getmaxzoom" class="tsd-kind-icon">get<wbr>Max<wbr>Zoom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getminimumclustersize" class="tsd-kind-icon">get<wbr>Minimum<wbr>Cluster<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#getpanes" class="tsd-kind-icon">get<wbr>Panes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#getprojection" class="tsd-kind-icon">get<wbr>Projection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getstyles" class="tsd-kind-icon">get<wbr>Styles</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#gettitle" class="tsd-kind-icon">get<wbr>Title</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#gettotalclusters" class="tsd-kind-icon">get<wbr>Total<wbr>Clusters</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#gettotalmarkers" class="tsd-kind-icon">get<wbr>Total<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getzindex" class="tsd-kind-icon">getZIndex</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#getzoomonclick" class="tsd-kind-icon">get<wbr>Zoom<wbr>OnClick</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#notify" class="tsd-kind-icon">notify</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#removemarker" class="tsd-kind-icon">remove<wbr>Marker</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#removemarkers" class="tsd-kind-icon">remove<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#repaint" class="tsd-kind-icon">repaint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setaveragecenter" class="tsd-kind-icon">set<wbr>Average<wbr>Center</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setbatchsizeie" class="tsd-kind-icon">set<wbr>Batch<wbr>SizeIE</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setcalculator" class="tsd-kind-icon">set<wbr>Calculator</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setclusterclass" class="tsd-kind-icon">set<wbr>Cluster<wbr>Class</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setenableretinaicons" class="tsd-kind-icon">set<wbr>Enable<wbr>Retina<wbr>Icons</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setgridsize" class="tsd-kind-icon">set<wbr>Grid<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setignorehidden" class="tsd-kind-icon">set<wbr>Ignore<wbr>Hidden</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setimageextension" class="tsd-kind-icon">set<wbr>Image<wbr>Extension</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setimagepath" class="tsd-kind-icon">set<wbr>Image<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setimagesizes" class="tsd-kind-icon">set<wbr>Image<wbr>Sizes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#setmap" class="tsd-kind-icon">set<wbr>Map</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setmaxzoom" class="tsd-kind-icon">set<wbr>Max<wbr>Zoom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setminimumclustersize" class="tsd-kind-icon">set<wbr>Minimum<wbr>Cluster<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setstyles" class="tsd-kind-icon">set<wbr>Styles</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#settitle" class="tsd-kind-icon">set<wbr>Title</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#setvalues" class="tsd-kind-icon">set<wbr>Values</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setzindex" class="tsd-kind-icon">setZIndex</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.markerclusterer.html#setzoomonclick" class="tsd-kind-icon">set<wbr>Zoom<wbr>OnClick</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#unbind" class="tsd-kind-icon">unbind</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_google_markerclustererplus.markerclusterer.html#unbindall" class="tsd-kind-icon">unbind<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_google_markerclustererplus.markerclusterer.html#calculator" class="tsd-kind-icon">CALCULATOR</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Marker<wbr>Clusterer<span class="tsd-signature-symbol">(</span>map<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span>, markers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_google_markerclustererplus.markerclustereroptions.html" class="tsd-signature-type">MarkerClustererOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.markerclusterer.html" class="tsd-signature-type">MarkerClusterer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides MVCObject.__constructor</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L323">markerclustererplus/src/markerclusterer.ts:323</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a MarkerClusterer object with the options specified in <a href="../interfaces/_google_markerclustererplus.markerclustereroptions.html">MarkerClustererOptions</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>map: <span class="tsd-signature-type">Map</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The Google map to attach to.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> markers: <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The markers to be added to the cluster.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_google_markerclustererplus.markerclustereroptions.html" class="tsd-signature-type">MarkerClustererOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The optional parameters.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_google_markerclustererplus.markerclusterer.html" class="tsd-signature-type">MarkerClusterer</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="arialabelfn" class="tsd-anchor"></a>
+					<h3>aria<wbr>Label<wbr>Fn</h3>
+					<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;this.options.ariaLabelFn || ((): string &#x3D;&gt; &quot;&quot;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L293">markerclustererplus/src/markerclusterer.ts:293</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>text: <span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="batch_size" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> BATCH_<wbr>SIZE</h3>
+					<div class="tsd-signature tsd-kind-icon">BATCH_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;2000</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L264">markerclustererplus/src/markerclusterer.ts:264</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The number of markers to process in one batch.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="batch_size_ie" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> BATCH_<wbr>SIZE_<wbr>IE</h3>
+					<div class="tsd-signature tsd-kind-icon">BATCH_<wbr>SIZE_<wbr>IE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;500</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L269">markerclustererplus/src/markerclusterer.ts:269</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The number of markers to process in one batch (IE only).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="image_extension" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> IMAGE_<wbr>EXTENSION</h3>
+					<div class="tsd-signature tsd-kind-icon">IMAGE_<wbr>EXTENSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;png&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L279">markerclustererplus/src/markerclusterer.ts:279</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The default extension name for the marker cluster images.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="image_path" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> IMAGE_<wbr>PATH</h3>
+					<div class="tsd-signature tsd-kind-icon">IMAGE_<wbr>PATH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;../images/m&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L274">markerclustererplus/src/markerclusterer.ts:274</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The default root name for the marker cluster images.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="image_sizes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> IMAGE_<wbr>SIZES</h3>
+					<div class="tsd-signature tsd-kind-icon">IMAGE_<wbr>SIZES<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[53, 56, 66, 78, 90]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L284">markerclustererplus/src/markerclusterer.ts:284</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The default array of sizes for the marker cluster images.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="addlistener" class="tsd-anchor"></a>
+					<h3>add<wbr>Listener</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MapsEventListener</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.addListener</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2935</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds the given listener function to the given event name. Returns an
+										identifier for this listener that can be used with
+									google.maps.event.removeListener.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>handler: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MapsEventListener</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addmarker" class="tsd-anchor"></a>
+					<h3>add<wbr>Marker</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Marker<span class="tsd-signature-symbol">(</span>marker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span>, nodraw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L784">markerclustererplus/src/markerclusterer.ts:784</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds a marker to the clusterer. The clusters are redrawn unless
+									<code>nodraw</code> is set to <code>true</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>marker: <span class="tsd-signature-type">Marker</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The marker to add.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> nodraw: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Set to <code>true</code> to prevent redrawing.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addmarkers" class="tsd-anchor"></a>
+					<h3>add<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Markers<span class="tsd-signature-symbol">(</span>markers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span>, nodraw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L798">markerclustererplus/src/markerclusterer.ts:798</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds an array of markers to the clusterer. The clusters are redrawn unless
+									<code>nodraw</code> is set to <code>true</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>markers: <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The markers to add.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> nodraw: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Set to <code>true</code> to prevent redrawing.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="bindto" class="tsd-anchor"></a>
+					<h3>bind<wbr>To</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">bind<wbr>To<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MVCObject</span>, targetKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, noNotify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.bindTo</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2937</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Binds a View to a Model.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>target: <span class="tsd-signature-type">MVCObject</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> targetKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> noNotify: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="changed" class="tsd-anchor"></a>
+					<h3>changed</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">changed<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.changed</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2938</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clearmarkers" class="tsd-anchor"></a>
+					<h3>clear<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Markers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L905">markerclustererplus/src/markerclusterer.ts:905</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all clusters and markers from the map and also removes all markers
+									managed by the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="fitmaptomarkers" class="tsd-anchor"></a>
+					<h3>fit<wbr>Map<wbr>ToMarkers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">fit<wbr>Map<wbr>ToMarkers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L450">markerclustererplus/src/markerclusterer.ts:450</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Fits the map to the bounds of the markers managed by the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="get" class="tsd-anchor"></a>
+					<h3>get</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.get</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2940</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getaveragecenter" class="tsd-anchor"></a>
+					<h3>get<wbr>Average<wbr>Center</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Average<wbr>Center<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L584">markerclustererplus/src/markerclusterer.ts:584</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>averageCenter</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if averageCenter property is set.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getbatchsizeie" class="tsd-anchor"></a>
+					<h3>get<wbr>Batch<wbr>SizeIE</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Batch<wbr>SizeIE<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L710">markerclustererplus/src/markerclusterer.ts:710</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>batchSizeIE</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>the value of the batchSizeIE property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getcalculator" class="tsd-anchor"></a>
+					<h3>get<wbr>Calculator</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Calculator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-signature-type">Calculator</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L692">markerclustererplus/src/markerclusterer.ts:692</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>calculator</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-signature-type">Calculator</a></h4>
+							<p>the value of the calculator property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getclusterclass" class="tsd-anchor"></a>
+					<h3>get<wbr>Cluster<wbr>Class</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Cluster<wbr>Class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L728">markerclustererplus/src/markerclusterer.ts:728</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>clusterClass</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>the value of the clusterClass property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getclusters" class="tsd-anchor"></a>
+					<h3>get<wbr>Clusters</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Clusters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.cluster.html" class="tsd-signature-type">Cluster</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L764">markerclustererplus/src/markerclusterer.ts:764</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the current array of clusters formed by the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_google_markerclustererplus.cluster.html" class="tsd-signature-type">Cluster</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>The array of clusters formed by the clusterer.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getenableretinaicons" class="tsd-anchor"></a>
+					<h3>get<wbr>Enable<wbr>Retina<wbr>Icons</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Enable<wbr>Retina<wbr>Icons<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L620">markerclustererplus/src/markerclusterer.ts:620</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>enableRetinaIcons</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if enableRetinaIcons property is set.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getgridsize" class="tsd-anchor"></a>
+					<h3>get<wbr>Grid<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Grid<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L468">markerclustererplus/src/markerclusterer.ts:468</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>gridSize</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The grid size.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getignorehidden" class="tsd-anchor"></a>
+					<h3>get<wbr>Ignore<wbr>Hidden</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ignore<wbr>Hidden<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L602">markerclustererplus/src/markerclusterer.ts:602</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>ignoreHidden</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if ignoreHidden property is set.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getimageextension" class="tsd-anchor"></a>
+					<h3>get<wbr>Image<wbr>Extension</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Image<wbr>Extension<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L638">markerclustererplus/src/markerclusterer.ts:638</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>imageExtension</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The value of the imageExtension property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getimagepath" class="tsd-anchor"></a>
+					<h3>get<wbr>Image<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Image<wbr>Path<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L656">markerclustererplus/src/markerclusterer.ts:656</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>imagePath</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The value of the imagePath property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getimagesizes" class="tsd-anchor"></a>
+					<h3>get<wbr>Image<wbr>Sizes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Image<wbr>Sizes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L674">markerclustererplus/src/markerclusterer.ts:674</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>imageSizes</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>The value of the imageSizes property.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getmap" class="tsd-anchor"></a>
+					<h3>get<wbr>Map</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Map<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">StreetViewPanorama</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from OverlayView.getMap</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:1603</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">StreetViewPanorama</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getmarkers" class="tsd-anchor"></a>
+					<h3>get<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Markers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L746">markerclustererplus/src/markerclusterer.ts:746</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Returns the array of markers managed by the clusterer.</p>
+								</div>
+								<p> @return The array of markers managed by the clusterer.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getmaxzoom" class="tsd-anchor"></a>
+					<h3>get<wbr>Max<wbr>Zoom</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Max<wbr>Zoom<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L504">markerclustererplus/src/markerclusterer.ts:504</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Returns the value of the <code>maxZoom</code> property.</p>
+								</div>
+								<p> @return The maximum zoom level.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getminimumclustersize" class="tsd-anchor"></a>
+					<h3>get<wbr>Minimum<wbr>Cluster<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Minimum<wbr>Cluster<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L486">markerclustererplus/src/markerclusterer.ts:486</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>minimumClusterSize</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The minimum cluster size.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getpanes" class="tsd-anchor"></a>
+					<h3>get<wbr>Panes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Panes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MapPanes</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from OverlayView.getPanes</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:1604</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MapPanes</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getprojection" class="tsd-anchor"></a>
+					<h3>get<wbr>Projection</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Projection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MapCanvasProjection</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from OverlayView.getProjection</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:1605</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MapCanvasProjection</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getstyles" class="tsd-anchor"></a>
+					<h3>get<wbr>Styles</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Styles<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-signature-type">ClusterIconStyle</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L530">markerclustererplus/src/markerclusterer.ts:530</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Returns the value of the <code>styles</code> property.</p>
+								</div>
+								<p> @return The array of styles defining the cluster markers to be used.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-signature-type">ClusterIconStyle</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettitle" class="tsd-anchor"></a>
+					<h3>get<wbr>Title</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Title<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L548">markerclustererplus/src/markerclusterer.ts:548</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>title</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The content of the title text.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettotalclusters" class="tsd-anchor"></a>
+					<h3>get<wbr>Total<wbr>Clusters</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Total<wbr>Clusters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L773">markerclustererplus/src/markerclusterer.ts:773</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the number of clusters formed by the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The number of clusters formed by the clusterer.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettotalmarkers" class="tsd-anchor"></a>
+					<h3>get<wbr>Total<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Total<wbr>Markers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L755">markerclustererplus/src/markerclusterer.ts:755</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Returns the number of markers managed by the clusterer.</p>
+								</div>
+								<p> @return The number of markers.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getzindex" class="tsd-anchor"></a>
+					<h3>getZIndex</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">getZIndex<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L517">markerclustererplus/src/markerclusterer.ts:517</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getzoomonclick" class="tsd-anchor"></a>
+					<h3>get<wbr>Zoom<wbr>OnClick</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Zoom<wbr>OnClick<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L566">markerclustererplus/src/markerclusterer.ts:566</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value of the <code>zoomOnClick</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if zoomOnClick property is set.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="notify" class="tsd-anchor"></a>
+					<h3>notify</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.notify</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2946</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Notify all observers of a change on this property. This notifies both
+										objects that are bound to the object&#39;s property as well as the object
+									that it is bound to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removemarker" class="tsd-anchor"></a>
+					<h3>remove<wbr>Marker</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Marker<span class="tsd-signature-symbol">(</span>marker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span>, nodraw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L839">markerclustererplus/src/markerclusterer.ts:839</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes a marker from the cluster.  The clusters are redrawn unless
+										<code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if the
+									marker was removed from the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>marker: <span class="tsd-signature-type">Marker</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The marker to remove.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> nodraw: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Set to <code>true</code> to prevent redrawing.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if the marker was removed from the clusterer.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removemarkers" class="tsd-anchor"></a>
+					<h3>remove<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Markers<span class="tsd-signature-symbol">(</span>markers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span>, nodraw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L857">markerclustererplus/src/markerclusterer.ts:857</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes an array of markers from the cluster. The clusters are redrawn unless
+									<code>nodraw</code> is set to <code>true</code>. Returns <code>true</code> if markers were removed from the clusterer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>markers: <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The markers to remove.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> nodraw: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Set to <code>true</code> to prevent redrawing.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if markers were removed from the clusterer.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="repaint" class="tsd-anchor"></a>
+					<h3>repaint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">repaint<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L914">markerclustererplus/src/markerclusterer.ts:914</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recalculates and redraws all the marker clusters from scratch.
+									Call this after changing any properties.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="set" class="tsd-anchor"></a>
+					<h3>set</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">set<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.set</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2948</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets a value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setaveragecenter" class="tsd-anchor"></a>
+					<h3>set<wbr>Average<wbr>Center</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Average<wbr>Center<span class="tsd-signature-symbol">(</span>averageCenter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L593">markerclustererplus/src/markerclusterer.ts:593</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>averageCenter</code> property.</p>
+								</div>
+								<p> @param averageCenter The value of the averageCenter property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>averageCenter: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setbatchsizeie" class="tsd-anchor"></a>
+					<h3>set<wbr>Batch<wbr>SizeIE</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Batch<wbr>SizeIE<span class="tsd-signature-symbol">(</span>batchSizeIE<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L719">markerclustererplus/src/markerclusterer.ts:719</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the value of the <code>batchSizeIE</code> property.</p>
+								</div>
+								<p> @param batchSizeIE The value of the batchSizeIE property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>batchSizeIE: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setcalculator" class="tsd-anchor"></a>
+					<h3>set<wbr>Calculator</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Calculator<span class="tsd-signature-symbol">(</span>calculator<span class="tsd-signature-symbol">: </span><a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-signature-type">Calculator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L701">markerclustererplus/src/markerclusterer.ts:701</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the value of the <code>calculator</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>calculator: <a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-signature-type">Calculator</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The value of the calculator property.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setclusterclass" class="tsd-anchor"></a>
+					<h3>set<wbr>Cluster<wbr>Class</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Cluster<wbr>Class<span class="tsd-signature-symbol">(</span>clusterClass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L737">markerclustererplus/src/markerclusterer.ts:737</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the value of the <code>clusterClass</code> property.</p>
+								</div>
+								<p> @param clusterClass The value of the clusterClass property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>clusterClass: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setenableretinaicons" class="tsd-anchor"></a>
+					<h3>set<wbr>Enable<wbr>Retina<wbr>Icons</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Enable<wbr>Retina<wbr>Icons<span class="tsd-signature-symbol">(</span>enableRetinaIcons<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L629">markerclustererplus/src/markerclusterer.ts:629</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>enableRetinaIcons</code> property.</p>
+								</div>
+								<p> @param enableRetinaIcons The value of the enableRetinaIcons property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enableRetinaIcons: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setgridsize" class="tsd-anchor"></a>
+					<h3>set<wbr>Grid<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Grid<wbr>Size<span class="tsd-signature-symbol">(</span>gridSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L477">markerclustererplus/src/markerclusterer.ts:477</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the value of the <code>gridSize</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gridSize: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The grid size.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setignorehidden" class="tsd-anchor"></a>
+					<h3>set<wbr>Ignore<wbr>Hidden</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Ignore<wbr>Hidden<span class="tsd-signature-symbol">(</span>ignoreHidden<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L611">markerclustererplus/src/markerclusterer.ts:611</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>ignoreHidden</code> property.</p>
+								</div>
+								<p> @param ignoreHidden The value of the ignoreHidden property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ignoreHidden: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setimageextension" class="tsd-anchor"></a>
+					<h3>set<wbr>Image<wbr>Extension</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Image<wbr>Extension<span class="tsd-signature-symbol">(</span>imageExtension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L647">markerclustererplus/src/markerclusterer.ts:647</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>imageExtension</code> property.</p>
+								</div>
+								<p> @param imageExtension The value of the imageExtension property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>imageExtension: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setimagepath" class="tsd-anchor"></a>
+					<h3>set<wbr>Image<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Image<wbr>Path<span class="tsd-signature-symbol">(</span>imagePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L665">markerclustererplus/src/markerclusterer.ts:665</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>imagePath</code> property.</p>
+								</div>
+								<p> @param imagePath The value of the imagePath property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>imagePath: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setimagesizes" class="tsd-anchor"></a>
+					<h3>set<wbr>Image<wbr>Sizes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Image<wbr>Sizes<span class="tsd-signature-symbol">(</span>imageSizes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L683">markerclustererplus/src/markerclusterer.ts:683</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>imageSizes</code> property.</p>
+								</div>
+								<p> @param imageSizes The value of the imageSizes property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>imageSizes: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="setmap" class="tsd-anchor"></a>
+					<h3>set<wbr>Map</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Map<span class="tsd-signature-symbol">(</span>map<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">StreetViewPanorama</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from OverlayView.setMap</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:1608</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>map: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">StreetViewPanorama</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setmaxzoom" class="tsd-anchor"></a>
+					<h3>set<wbr>Max<wbr>Zoom</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Max<wbr>Zoom<span class="tsd-signature-symbol">(</span>maxZoom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L513">markerclustererplus/src/markerclusterer.ts:513</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>maxZoom</code> property.</p>
+								</div>
+								<p> @param maxZoom The maximum zoom level.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>maxZoom: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setminimumclustersize" class="tsd-anchor"></a>
+					<h3>set<wbr>Minimum<wbr>Cluster<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Minimum<wbr>Cluster<wbr>Size<span class="tsd-signature-symbol">(</span>minimumClusterSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L495">markerclustererplus/src/markerclusterer.ts:495</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the value of the <code>minimumClusterSize</code> property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>minimumClusterSize: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The minimum cluster size.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setstyles" class="tsd-anchor"></a>
+					<h3>set<wbr>Styles</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Styles<span class="tsd-signature-symbol">(</span>styles<span class="tsd-signature-symbol">: </span><a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-signature-type">ClusterIconStyle</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L539">markerclustererplus/src/markerclusterer.ts:539</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>styles</code> property.</p>
+								</div>
+								<p> @param styles The array of styles to use.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>styles: <a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-signature-type">ClusterIconStyle</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="settitle" class="tsd-anchor"></a>
+					<h3>set<wbr>Title</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Title<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L557">markerclustererplus/src/markerclusterer.ts:557</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>title</code> property.</p>
+								</div>
+								<p> @param title The value of the title property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>title: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="setvalues" class="tsd-anchor"></a>
+					<h3>set<wbr>Values</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Values<span class="tsd-signature-symbol">(</span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.setValues</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2950</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets a collection of key-value pairs.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>values: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setzindex" class="tsd-anchor"></a>
+					<h3>setZIndex</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">setZIndex<span class="tsd-signature-symbol">(</span>zIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L521">markerclustererplus/src/markerclusterer.ts:521</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>zIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setzoomonclick" class="tsd-anchor"></a>
+					<h3>set<wbr>Zoom<wbr>OnClick</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Zoom<wbr>OnClick<span class="tsd-signature-symbol">(</span>zoomOnClick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L575">markerclustererplus/src/markerclusterer.ts:575</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> Sets the value of the <code>zoomOnClick</code> property.</p>
+								</div>
+								<p> @param zoomOnClick The value of the zoomOnClick property.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>zoomOnClick: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="unbind" class="tsd-anchor"></a>
+					<h3>unbind</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">unbind<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.unbind</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2955</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes a binding. Unbinding will set the unbound property to the current
+									value. The object will not be notified, as the value has not changed.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="unbindall" class="tsd-anchor"></a>
+					<h3>unbind<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">unbind<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from MVCObject.unbindAll</p>
+								<ul>
+									<li>Defined in /home/travis/build/googlemaps/v3-utility-library/node_modules/@types/googlemaps/index.d.ts:2957</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all bindings.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="calculator" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> CALCULATOR</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">CALCULATOR<span class="tsd-signature-symbol">(</span>markers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span>, numStyles<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_google_markerclustererplus.clustericoninfo.html" class="tsd-signature-type">ClusterIconInfo</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/markerclusterer.ts#L1142">markerclustererplus/src/markerclusterer.ts:1142</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The default function for determining the label text and style
+									for a cluster icon.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>markers: <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The array of markers represented by the cluster.</p>
+									</div>
+								</li>
+								<li>
+									<h5>numStyles: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The number of marker styles available.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_google_markerclustererplus.clustericoninfo.html" class="tsd-signature-type">ClusterIconInfo</a></h4>
+							<p>The information resource for the cluster.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_jest_mocks.html">@googlemaps/jest-<wbr>mocks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_loader.html">@googlemaps/loader</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_markermanager.html">@googlemaps/markermanager</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_ogc.html">@googlemaps/ogc</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.cluster.html" class="tsd-kind-icon">Cluster</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.clustericon.html" class="tsd-kind-icon">Cluster<wbr>Icon</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.markerclusterer.html" class="tsd-kind-icon">Marker<wbr>Clusterer</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_google_markerclustererplus.markerclusterer.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#arialabelfn" class="tsd-kind-icon">aria<wbr>Label<wbr>Fn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#batch_size" class="tsd-kind-icon">BATCH_<wbr>SIZE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#batch_size_ie" class="tsd-kind-icon">BATCH_<wbr>SIZE_<wbr>IE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#image_extension" class="tsd-kind-icon">IMAGE_<wbr>EXTENSION</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#image_path" class="tsd-kind-icon">IMAGE_<wbr>PATH</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#image_sizes" class="tsd-kind-icon">IMAGE_<wbr>SIZES</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#addmarker" class="tsd-kind-icon">add<wbr>Marker</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#addmarkers" class="tsd-kind-icon">add<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#bindto" class="tsd-kind-icon">bind<wbr>To</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#changed" class="tsd-kind-icon">changed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#clearmarkers" class="tsd-kind-icon">clear<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#fitmaptomarkers" class="tsd-kind-icon">fit<wbr>Map<wbr>ToMarkers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#get" class="tsd-kind-icon">get</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getaveragecenter" class="tsd-kind-icon">get<wbr>Average<wbr>Center</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getbatchsizeie" class="tsd-kind-icon">get<wbr>Batch<wbr>SizeIE</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getcalculator" class="tsd-kind-icon">get<wbr>Calculator</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getclusterclass" class="tsd-kind-icon">get<wbr>Cluster<wbr>Class</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getclusters" class="tsd-kind-icon">get<wbr>Clusters</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getenableretinaicons" class="tsd-kind-icon">get<wbr>Enable<wbr>Retina<wbr>Icons</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getgridsize" class="tsd-kind-icon">get<wbr>Grid<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getignorehidden" class="tsd-kind-icon">get<wbr>Ignore<wbr>Hidden</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getimageextension" class="tsd-kind-icon">get<wbr>Image<wbr>Extension</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getimagepath" class="tsd-kind-icon">get<wbr>Image<wbr>Path</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getimagesizes" class="tsd-kind-icon">get<wbr>Image<wbr>Sizes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#getmap" class="tsd-kind-icon">get<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getmarkers" class="tsd-kind-icon">get<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getmaxzoom" class="tsd-kind-icon">get<wbr>Max<wbr>Zoom</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getminimumclustersize" class="tsd-kind-icon">get<wbr>Minimum<wbr>Cluster<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#getpanes" class="tsd-kind-icon">get<wbr>Panes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#getprojection" class="tsd-kind-icon">get<wbr>Projection</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getstyles" class="tsd-kind-icon">get<wbr>Styles</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#gettitle" class="tsd-kind-icon">get<wbr>Title</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#gettotalclusters" class="tsd-kind-icon">get<wbr>Total<wbr>Clusters</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#gettotalmarkers" class="tsd-kind-icon">get<wbr>Total<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getzindex" class="tsd-kind-icon">getZIndex</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#getzoomonclick" class="tsd-kind-icon">get<wbr>Zoom<wbr>OnClick</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#notify" class="tsd-kind-icon">notify</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#removemarker" class="tsd-kind-icon">remove<wbr>Marker</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#removemarkers" class="tsd-kind-icon">remove<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#repaint" class="tsd-kind-icon">repaint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#set" class="tsd-kind-icon">set</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setaveragecenter" class="tsd-kind-icon">set<wbr>Average<wbr>Center</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setbatchsizeie" class="tsd-kind-icon">set<wbr>Batch<wbr>SizeIE</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setcalculator" class="tsd-kind-icon">set<wbr>Calculator</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setclusterclass" class="tsd-kind-icon">set<wbr>Cluster<wbr>Class</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setenableretinaicons" class="tsd-kind-icon">set<wbr>Enable<wbr>Retina<wbr>Icons</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setgridsize" class="tsd-kind-icon">set<wbr>Grid<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setignorehidden" class="tsd-kind-icon">set<wbr>Ignore<wbr>Hidden</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setimageextension" class="tsd-kind-icon">set<wbr>Image<wbr>Extension</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setimagepath" class="tsd-kind-icon">set<wbr>Image<wbr>Path</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setimagesizes" class="tsd-kind-icon">set<wbr>Image<wbr>Sizes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#setmap" class="tsd-kind-icon">set<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setmaxzoom" class="tsd-kind-icon">set<wbr>Max<wbr>Zoom</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setminimumclustersize" class="tsd-kind-icon">set<wbr>Minimum<wbr>Cluster<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setstyles" class="tsd-kind-icon">set<wbr>Styles</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#settitle" class="tsd-kind-icon">set<wbr>Title</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#setvalues" class="tsd-kind-icon">set<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setzindex" class="tsd-kind-icon">setZIndex</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.markerclusterer.html#setzoomonclick" class="tsd-kind-icon">set<wbr>Zoom<wbr>OnClick</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#unbind" class="tsd-kind-icon">unbind</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_google_markerclustererplus.markerclusterer.html#unbindall" class="tsd-kind-icon">unbind<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_google_markerclustererplus.markerclusterer.html#calculator" class="tsd-kind-icon">CALCULATOR</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clusteraugmentedmarker.html" class="tsd-kind-icon">Cluster<wbr>Augmented<wbr>Marker</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clustericoninfo.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.markerclustereroptions.html" class="tsd-kind-icon">Marker<wbr>Clusterer<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_google_markerclustererplus.html#arialabelfn" class="tsd-kind-icon">Aria<wbr>Label<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-kind-icon">Calculator</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringbegin" class="tsd-kind-icon">clusteringbegin</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringend" class="tsd-kind-icon">clusteringend</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

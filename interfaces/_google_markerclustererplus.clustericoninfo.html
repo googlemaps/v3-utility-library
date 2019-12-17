@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@googlemaps/markermanager | Google Maps JavaScript API v3 Utilities</title>
+	<title>ClusterIconInfo | Google Maps JavaScript API v3 Utilities</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_googlemaps_markermanager.html">@googlemaps/markermanager</a>
+					<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
+				</li>
+				<li>
+					<a href="_google_markerclustererplus.clustericoninfo.html">ClusterIconInfo</a>
 				</li>
 			</ul>
-			<h1>Module @googlemaps/markermanager</h1>
+			<h1>Interface ClusterIconInfo</h1>
 		</div>
 	</div>
 </header>
@@ -68,42 +71,84 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<a href="#markermanager-v3" id="markermanager-v3" style="color: inherit; text-decoration: none;">
-						<h1>MarkerManager v3</h1>
-					</a>
-					<a href="#description" id="description" style="color: inherit; text-decoration: none;">
-						<h2>Description</h2>
-					</a>
-					<p>Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes. </p>
-					<a href="#how-it-works" id="how-it-works" style="color: inherit; text-decoration: none;">
-						<h3>How it Works:</h3>
-					</a>
-					<p>The MarkerManager places its markers onto a grid, similar to the map tiles. When the user moves the viewport, it computes which grid cells have entered or left the viewport, and shows or hides all the markers in those cells. (If the users scrolls the viewport beyond the markers that are loaded, no markers will be visible until the EVENT_moveend triggers an update.) In practical consequences, this allows 10,000 markers to be distributed over a large area, and as long as only 100-200 are visible in any given viewport, the user will see good performance corresponding to the 100 visible markers, rather than poor performance corresponding to the total 10,000 markers. Note that some code is optimized for speed over space, with the goal of accommodating thousands of markers.</p>
-					<a href="#support" id="support" style="color: inherit; text-decoration: none;">
-						<h2>Support</h2>
-					</a>
-					<p>This library is community supported. We&#39;re comfortable enough with the stability and features of
-					the library that we want you to build real production applications on it.</p>
-					<p>If you find a bug, or have a feature suggestion, please <a href="https://github.com/googlemaps/v3-utility-library/issues">log an issue</a>. If you&#39;d like to
-					contribute, please read <a href="https://github.com/googlemaps/v3-utility-library/blob/master/packages/markermanager/CONTRIB.md">How to Contribute</a>.</p>
+					<dl class="tsd-comment-tags">
+						<dt>description</dt>
+						<dd><p>This is an object containing general information about a cluster icon. This is
+							the object that a <code>calculator</code> function returns.</p>
+						</dd>
+					</dl>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ClusterIconInfo</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Classes</h3>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-module tsd-is-not-exported"><a href="../classes/_googlemaps_markermanager.markermanager.html" class="tsd-kind-icon">Marker<wbr>Manager</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_google_markerclustererplus.clustericoninfo.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_google_markerclustererplus.clustericoninfo.html#text" class="tsd-kind-icon">text</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_google_markerclustererplus.clustericoninfo.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported"><a href="../interfaces/_googlemaps_markermanager.options.html" class="tsd-kind-icon">Options</a></li>
-							</ul>
-						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster-icon.ts#L107">markerclustererplus/src/cluster-icon.ts:107</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The index plus 1 of the element in the <code>styles</code></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="text" class="tsd-anchor"></a>
+					<h3>text</h3>
+					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster-icon.ts#L103">markerclustererplus/src/cluster-icon.ts:103</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The text of the label to be shown on the cluster icon.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="title" class="tsd-anchor"></a>
+					<h3>title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster-icon.ts#L113">markerclustererplus/src/cluster-icon.ts:113</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The tooltip to display when the mouse moves over the cluster icon.
+								If this value is <code>undefined</code> or <code>&quot;&quot;</code>, <code>title</code> is set to the
+							value of the <code>title</code> property passed to the MarkerClusterer.</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -114,30 +159,72 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="_google_markerclustererplus.html">@google/markerclustererplus</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_googlemaps_jest_mocks.html">@googlemaps/jest-<wbr>mocks</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_googlemaps_loader.html">@googlemaps/loader</a>
-					</li>
 					<li class="current tsd-kind-module">
-						<a href="_googlemaps_markermanager.html">@googlemaps/markermanager</a>
+						<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="_googlemaps_ogc.html">@googlemaps/ogc</a>
+						<a href="../modules/_googlemaps_jest_mocks.html">@googlemaps/jest-<wbr>mocks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_loader.html">@googlemaps/loader</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_markermanager.html">@googlemaps/markermanager</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_googlemaps_ogc.html">@googlemaps/ogc</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../classes/_googlemaps_markermanager.markermanager.html" class="tsd-kind-icon">Marker<wbr>Manager</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_google_markerclustererplus.cluster.html" class="tsd-kind-icon">Cluster</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../interfaces/_googlemaps_markermanager.options.html" class="tsd-kind-icon">Options</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_google_markerclustererplus.clustericon.html" class="tsd-kind-icon">Cluster<wbr>Icon</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_google_markerclustererplus.markerclusterer.html" class="tsd-kind-icon">Marker<wbr>Clusterer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.clusteraugmentedmarker.html" class="tsd-kind-icon">Cluster<wbr>Augmented<wbr>Marker</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.clustericoninfo.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Info</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_google_markerclustererplus.clustericoninfo.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_google_markerclustererplus.clustericoninfo.html#text" class="tsd-kind-icon">text</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_google_markerclustererplus.clustericoninfo.html#title" class="tsd-kind-icon">title</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.clustericonstyle.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.markerclustereroptions.html" class="tsd-kind-icon">Marker<wbr>Clusterer<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_google_markerclustererplus.html#arialabelfn" class="tsd-kind-icon">Aria<wbr>Label<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-kind-icon">Calculator</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringbegin" class="tsd-kind-icon">clusteringbegin</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringend" class="tsd-kind-icon">clusteringend</a>
 					</li>
 				</ul>
 			</nav>

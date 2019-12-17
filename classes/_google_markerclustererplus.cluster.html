@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Size | Google Maps JavaScript API v3 Utilities</title>
+	<title>Cluster | Google Maps JavaScript API v3 Utilities</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_googlemaps_jest_mocks.html">@googlemaps/jest-mocks</a>
+					<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
 				</li>
 				<li>
-					<a href="_googlemaps_jest_mocks.size.html">Size</a>
+					<a href="_google_markerclustererplus.cluster.html">Cluster</a>
 				</li>
 			</ul>
-			<h1>Class Size</h1>
+			<h1>Class Cluster</h1>
 		</div>
 	</div>
 </header>
@@ -72,30 +72,17 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Copyright 2019 Google LLC. All Rights Reserved.</p>
+						<p>Creates a single cluster that manages a group of proximate markers.
+						Used internally, do not call this constructor directly.</p>
 					</div>
-					<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-						you may not use this file except in compliance with the License.
-					You may obtain a copy of the License at</p>
-					<pre><code> http:<span class="hljs-regexp">//</span>www.apache.org<span class="hljs-regexp">/licenses/</span>LICENSE-<span class="hljs-number">2.0</span></code></pre><p>Unless required by applicable law or agreed to in writing, software
-						distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-						WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-						See the License for the specific language governing permissions and
-					limitations under the License.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Size</span>
+						<span class="target">Cluster</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">Size</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -105,21 +92,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_googlemaps_jest_mocks.size.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_googlemaps_jest_mocks.size.html#height" class="tsd-kind-icon">height</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_googlemaps_jest_mocks.size.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_googlemaps_jest_mocks.size.html#width" class="tsd-kind-icon">width</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_google_markerclustererplus.cluster.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_googlemaps_jest_mocks.size.html#equals" class="tsd-kind-icon">equals</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.cluster.html#getcenter" class="tsd-kind-icon">get<wbr>Center</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.cluster.html#getmarkers" class="tsd-kind-icon">get<wbr>Markers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_google_markerclustererplus.cluster.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
 							</ul>
 						</section>
 					</div>
@@ -131,90 +112,106 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Size<span class="tsd-signature-symbol">(</span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, widthUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, heightUnit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_googlemaps_jest_mocks.size.html" class="tsd-signature-type">Size</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Cluster<span class="tsd-signature-symbol">(</span>markerClusterer_<span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.markerclusterer.html" class="tsd-signature-type">MarkerClusterer</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.cluster.html" class="tsd-signature-type">Cluster</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/jest-mocks/src/size.ts#L19">jest-mocks/src/size.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster.ts#L34">markerclustererplus/src/cluster.ts:34</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>width: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>height: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> widthUnit: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> heightUnit: <span class="tsd-signature-type">string</span></h5>
+									<h5>markerClusterer_: <a href="_google_markerclustererplus.markerclusterer.html" class="tsd-signature-type">MarkerClusterer</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The <code>MarkerClusterer</code> object with which this
+											cluster is associated.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_googlemaps_jest_mocks.size.html" class="tsd-signature-type">Size</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_google_markerclustererplus.cluster.html" class="tsd-signature-type">Cluster</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="height" class="tsd-anchor"></a>
-					<h3>height</h3>
-					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/jest-mocks/src/size.ts#L18">jest-mocks/src/size.ts:18</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="tostring" class="tsd-anchor"></a>
-					<h3>to<wbr>String</h3>
-					<div class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Mock</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;jest.fn().mockImplementation((): string &#x3D;&gt; {return &quot;&quot;;})</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/jest-mocks/src/size.ts#L32">jest-mocks/src/size.ts:32</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="width" class="tsd-anchor"></a>
-					<h3>width</h3>
-					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/jest-mocks/src/size.ts#L19">jest-mocks/src/size.ts:19</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="equals" class="tsd-anchor"></a>
-					<h3>equals</h3>
+					<a name="getcenter" class="tsd-anchor"></a>
+					<h3>get<wbr>Center</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">equals<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_googlemaps_jest_mocks.size.html" class="tsd-signature-type">Size</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Center<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LatLng</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/jest-mocks/src/size.ts#L29">jest-mocks/src/size.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster.ts#L70">markerclustererplus/src/cluster.ts:70</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>other: <a href="_googlemaps_jest_mocks.size.html" class="tsd-signature-type">Size</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the center of the cluster. You can call this from
+										a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler
+									for the <code>MarkerClusterer</code> object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">LatLng</span></h4>
+							<p>The center of the cluster.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getmarkers" class="tsd-anchor"></a>
+					<h3>get<wbr>Markers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Markers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster.ts#L59">markerclustererplus/src/cluster.ts:59</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the array of markers managed by the cluster. You can call this from
+									a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler for the <code>MarkerClusterer</code> object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Marker</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>The array of markers in the cluster.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsize" class="tsd-anchor"></a>
+					<h3>get<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0d2b57d/packages/markerclustererplus/src/cluster.ts#L49">markerclustererplus/src/cluster.ts:49</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the number of markers managed by the cluster. You can call this from
+									a <code>click</code>, <code>mouseover</code>, or <code>mouseout</code> event handler for the <code>MarkerClusterer</code> object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The number of markers in the cluster.</p>
 						</li>
 					</ul>
 				</section>
@@ -226,10 +223,10 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_google_markerclustererplus.html">@google/markerclustererplus</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_googlemaps_jest_mocks.html">@googlemaps/jest-<wbr>mocks</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -245,50 +242,56 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.latlng.html" class="tsd-kind-icon">Lat<wbr>Lng</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.latlngbounds.html" class="tsd-kind-icon">Lat<wbr>Lng<wbr>Bounds</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.mvcobject.html" class="tsd-kind-icon">MVCObject</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.map_.html" class="tsd-kind-icon">Map_</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.marker.html" class="tsd-kind-icon">Marker</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.point.html" class="tsd-kind-icon">Point</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="_googlemaps_jest_mocks.size.html" class="tsd-kind-icon">Size</a>
+						<a href="_google_markerclustererplus.cluster.html" class="tsd-kind-icon">Cluster</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_googlemaps_jest_mocks.size.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_googlemaps_jest_mocks.size.html#height" class="tsd-kind-icon">height</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_googlemaps_jest_mocks.size.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_googlemaps_jest_mocks.size.html#width" class="tsd-kind-icon">width</a>
+								<a href="_google_markerclustererplus.cluster.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_googlemaps_jest_mocks.size.html#equals" class="tsd-kind-icon">equals</a>
+								<a href="_google_markerclustererplus.cluster.html#getcenter" class="tsd-kind-icon">get<wbr>Center</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.cluster.html#getmarkers" class="tsd-kind-icon">get<wbr>Markers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_google_markerclustererplus.cluster.html#getsize" class="tsd-kind-icon">get<wbr>Size</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_googlemaps_jest_mocks.html#initialize" class="tsd-kind-icon">initialize</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.clustericon.html" class="tsd-kind-icon">Cluster<wbr>Icon</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="_google_markerclustererplus.markerclusterer.html" class="tsd-kind-icon">Marker<wbr>Clusterer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clusteraugmentedmarker.html" class="tsd-kind-icon">Cluster<wbr>Augmented<wbr>Marker</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clustericoninfo.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.clustericonstyle.html" class="tsd-kind-icon">Cluster<wbr>Icon<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_google_markerclustererplus.markerclustereroptions.html" class="tsd-kind-icon">Marker<wbr>Clusterer<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_google_markerclustererplus.html#arialabelfn" class="tsd-kind-icon">Aria<wbr>Label<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-kind-icon">Calculator</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringbegin" class="tsd-kind-icon">clusteringbegin</a>
+					</li>
+					<li class=" tsd-kind-event tsd-parent-kind-module">
+						<a href="../modules/_google_markerclustererplus.html#clusteringend" class="tsd-kind-icon">clusteringend</a>
 					</li>
 				</ul>
 			</nav>
