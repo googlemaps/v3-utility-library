@@ -16,8 +16,7 @@
 
 import { MarkerClusterer } from "./markerclusterer";
 
-export * from "./cluster-icon";
-export * from "./cluster";
-export * from "./markerclusterer";
+export { ClusterIconInfo, ClusterIconStyle } from "./cluster-icon";
+export { MarkerClustererOptions } from "./markerclusterer";
 
 export default MarkerClusterer;
