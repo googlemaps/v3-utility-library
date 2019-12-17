@@ -1,52 +1,50 @@
-import { terser } from "rollup-plugin-terser";
-import typescript from "rollup-plugin-typescript2";
-import babel from "rollup-plugin-babel";
+import {terser} from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
+import babel from 'rollup-plugin-babel';
 
 const babelOptions = {
-  extensions: [".js", ".ts"],
-  
-  presets: ["@babel/env"]
+  extensions: ['.js', '.ts'],
+
+  presets: ['@babel/env'],
 };
+
+const terserOptions = {output: {comments: ''}};
 
 export default [
   {
-    input: "src/markerclusterer.js",
-    plugins: [babel(babelOptions), terser()],
-    output: {
-      file: "dist/markerclustererplus.umd.js",
-      format: "umd",
-      name: "MarkerClusterer"
-    }
-  },
-  {
-    input: "src/markerclusterer.js",
-    plugins: [babel(babelOptions), terser()],
-    output: {
-      file: "dist/markerclustererplus.min.js",
-      format: "iife",
-      name: "MarkerClusterer"
-    }
-  },
-  {
-    input: "src/markerclusterer.js",
-    plugins: [babel(babelOptions)],
-    output: {
-      file: "dist/markerclustererplus.dev.js",
-      format: "iife",
-      name: "MarkerClusterer"
-    }
-  },
-  {
-    input: "src/markerclusterer.js",
-    // Adding in a TS definition file. Should not impact the generation of the ESM package
+    input: 'src/index.ts',
     plugins: [
-      typescript({
-        tsconfig: "tsconfig.json"
-      })
+      typescript(),
+      babel(babelOptions),
+      terser(terserOptions)
+    ],
+    output: [
+      {
+        file: 'dist/markerclustererplus.umd.js',
+        format: 'umd',
+        sourcemap: true,
+        exports: 'default',
+        name: 'MarkerClusterer',
+      },
+      {
+        file: 'dist/markerclustererplus.min.js',
+        format: 'iife',
+        sourcemap: true,
+        exports: 'default',
+        name: 'MarkerClusterer',
+      },
+    ],
+  },
+  {
+    input: 'src/index.ts',
+    plugins: [
+      typescript(),
     ],
     output: {
-      file: "dist/markerclustererplus.esm.js",
-      format: "esm"
-    }
-  }
+      file: 'dist/markerclustererplus.esm.js',
+      format: 'esm',
+      sourcemap: true,
+      name: 'MarkerClusterer',
+    },
+  },
 ];
