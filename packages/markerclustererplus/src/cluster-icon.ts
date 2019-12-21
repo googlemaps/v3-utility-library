@@ -25,6 +25,8 @@ import { OverlayViewSafe } from "./overlay-view-safe";
 export interface ClusterIconStyle {
   /** The URL of the cluster icon image file. Required. */
   url: string;
+  /** The name of the CSS class defining styles for the cluster markers. */
+  className?: string;
   /** Height The display height (in pixels) of the cluster icon. Required. */
   height: number;
   /** Width The display width (in pixels) of the cluster icon. Required. */
@@ -117,7 +119,7 @@ export interface ClusterIconInfo {
  * A cluster icon.
  */
 export class ClusterIcon extends OverlayViewSafe {
-  private className_ = this.cluster_.getMarkerClusterer().getClusterClass();
+  private className_: string;
   private center_: google.maps.LatLng = null;
   private div_: HTMLDivElement = null;
   private sums_: ClusterIconInfo = null;
@@ -163,7 +165,6 @@ export class ClusterIcon extends OverlayViewSafe {
     const gmVersion = parseInt(major, 10) * 100 + parseInt(minor, 10);
 
     this.div_ = document.createElement("div");
-    this.div_.className = this.className_;
     if (this.visible_) {
       this.show();
     }
@@ -296,6 +297,8 @@ export class ClusterIcon extends OverlayViewSafe {
       const bp = this.backgroundPosition_.split(" ");
       const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
       const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+
+      this.div_.className = this.className_;
       this.div_.style.cssText = this.createCss_(
         this.getPosFromLatLng_(this.center_)
       );
@@ -378,6 +381,7 @@ export class ClusterIcon extends OverlayViewSafe {
     this.fontStyle_ = style.fontStyle || "normal";
     this.fontFamily_ = style.fontFamily || "Arial,sans-serif";
     this.backgroundPosition_ = style.backgroundPosition || "0 0";
+    this.className_ = this.cluster_.getMarkerClusterer().getClusterClass() + ' ' + (style.className || 'cluster-' + index);
   }
 
   /**
