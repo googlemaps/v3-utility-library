@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@4.0.0...@google/markerclustererplus@4.0.1) (2019-12-23)
+
+**Note:** Version bump only for package @google/markerclustererplus
+
+
+
+
+
 # [4.0.0](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@3.0.6...@google/markerclustererplus@4.0.0) (2019-12-17)
 
 
