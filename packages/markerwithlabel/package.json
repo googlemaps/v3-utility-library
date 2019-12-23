@@ -1,0 +1,33 @@
+{
+  "name": "@google/markerwithlabel",
+  "version": "1.2.11",
+  "description": "Extends the Google Maps JavaScript API to provide markers with associated labels.",
+  "keywords": [
+    "google",
+    "label",
+    "maps",
+    "marker"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "main": "src/markerwithlabel.js",
+  "scripts": {
+    "lint": "exit 0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
+  }
+}

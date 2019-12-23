@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1577121111493" clover="3.2.0">
+  <project timestamp="1577121111494" name="All files">
+    <metrics statements="60" coveredstatements="60" conditionals="21" coveredconditionals="21" methods="13" coveredmethods="13" elements="94" coveredelements="94" complexity="0" loc="60" ncloc="60" packages="1" files="1" classes="1"/>
+    <file name="loader.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/loader/src/loader.ts">
+      <metrics statements="60" coveredstatements="60" conditionals="21" coveredconditionals="21" methods="13" coveredmethods="13"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="39" count="10" type="stmt"/>
+      <line num="40" count="10" type="stmt"/>
+      <line num="41" count="10" type="stmt"/>
+      <line num="42" count="10" type="stmt"/>
+      <line num="43" count="10" type="stmt"/>
+      <line num="55" count="10" type="stmt"/>
+      <line num="56" count="10" type="stmt"/>
+      <line num="57" count="10" type="stmt"/>
+      <line num="58" count="10" type="stmt"/>
+      <line num="59" count="10" type="stmt"/>
+      <line num="60" count="10" type="stmt"/>
+      <line num="61" count="10" type="stmt"/>
+      <line num="65" count="8" type="stmt"/>
+      <line num="67" count="8" type="stmt"/>
+      <line num="69" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="70" count="2" type="stmt"/>
+      <line num="73" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="77" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="78" count="1" type="stmt"/>
+      <line num="81" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="82" count="1" type="stmt"/>
+      <line num="85" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="86" count="1" type="stmt"/>
+      <line num="89" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="90" count="1" type="stmt"/>
+      <line num="93" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="94" count="1" type="stmt"/>
+      <line num="97" count="8" type="stmt"/>
+      <line num="101" count="4" type="stmt"/>
+      <line num="105" count="6" type="stmt"/>
+      <line num="106" count="6" type="stmt"/>
+      <line num="107" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="108" count="3" type="stmt"/>
+      <line num="110" count="2" type="stmt"/>
+      <line num="117" count="7" type="stmt"/>
+      <line num="118" count="7" type="stmt"/>
+      <line num="122" count="4" type="stmt"/>
+      <line num="123" count="4" type="stmt"/>
+      <line num="125" count="4" type="stmt"/>
+      <line num="126" count="4" type="stmt"/>
+      <line num="127" count="4" type="stmt"/>
+      <line num="128" count="4" type="stmt"/>
+      <line num="129" count="4" type="stmt"/>
+      <line num="130" count="4" type="stmt"/>
+      <line num="134" count="1" type="stmt"/>
+      <line num="135" count="1" type="stmt"/>
+      <line num="139" count="3" type="stmt"/>
+      <line num="143" count="5" type="stmt"/>
+      <line num="144" count="5" type="stmt"/>
+      <line num="146" count="5" type="stmt"/>
+      <line num="147" count="6" type="stmt"/>
+      <line num="150" count="5" type="stmt"/>
+      <line num="154" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="155" count="2" type="stmt"/>
+      <line num="157" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="160" count="3" type="stmt"/>
+      <line num="161" count="3" type="stmt"/>
+      <line num="162" count="3" type="stmt"/>
+    </file>
+  </project>
+</coverage>

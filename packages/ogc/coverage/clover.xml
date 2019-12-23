@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1577121119026" clover="3.2.0">
+  <project timestamp="1577121119026" name="All files">
+    <metrics statements="23" coveredstatements="23" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3" elements="34" coveredelements="34" complexity="0" loc="23" ncloc="23" packages="1" files="1" classes="1"/>
+    <file name="wmsmaptype.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/ogc/src/wmsmaptype.ts">
+      <metrics statements="23" coveredstatements="23" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
+      <line num="42" count="1" type="stmt"/>
+      <line num="53" count="3" type="stmt"/>
+      <line num="54" count="3" type="stmt"/>
+      <line num="55" count="3" type="stmt"/>
+      <line num="56" count="3" type="stmt"/>
+      <line num="57" count="3" type="stmt"/>
+      <line num="58" count="3" type="stmt"/>
+      <line num="81" count="1" type="stmt"/>
+      <line num="98" count="2" type="stmt"/>
+      <line num="100" count="2" type="stmt"/>
+      <line num="113" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="114" count="1" type="stmt"/>
+      <line num="117" count="2" type="stmt"/>
+      <line num="118" count="2" type="stmt"/>
+      <line num="127" count="2" type="stmt"/>
+      <line num="139" count="1" type="stmt"/>
+      <line num="140" count="1" type="stmt"/>
+      <line num="141" count="1" type="stmt"/>
+      <line num="142" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

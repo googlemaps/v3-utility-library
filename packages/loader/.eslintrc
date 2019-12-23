@@ -1,0 +1,16 @@
+{
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off"
+    },
+    "extends": [
+     "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+
+    ],
+    "parserOptions": {
+      "project": "tsconfig.lint.json",
+      "noWatch": true  // https://github.com/typescript-eslint/typescript-eslint/issues/1080
+    },
+    "parser": "@typescript-eslint/parser"
+  }

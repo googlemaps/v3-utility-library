@@ -1,0 +1,33 @@
+{
+  "name": "@googlemaps/loader",
+  "version": "0.0.4",
+  "description": "Wrapper for the loading of Google Maps script in the browser",
+  "keywords": [
+    "google",
+    "maps"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/packages/loader",
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Justin Poehnelt",
+  "main": "dist/loader.umd.js",
+  "unpkg": "dist/loader.min.js",
+  "module": "dist/loader.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c",
+    "test": "jest"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
+  }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Loader Example</title>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="../dist/loader.dev.js"></script>
+
+    <script type="text/javascript">
+      const mapOptions = {
+        center: {
+          lat: 0,
+          lng: 0
+        },
+        zoom: 4
+      };
+
+      const loader = new google.maps.plugins.loader.Loader({
+        apiKey: "",
+        version: "weekly",
+        libraries: ["places"]
+      });
+
+      // Promise
+      loader
+        .load()
+        .then(() => {
+          new google.maps.Map(document.getElementById("map"), mapOptions);
+        })
+        .catch(e => {
+          // do something
+        });
+
+      // Callback
+      loader.loadCallback(e => {
+        if (e) {
+          console.log(e);
+        } else {
+          // new google.maps.Map(document.getElementById("map"), mapOptions);
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="map" class="map"></div>
+    <div id="map2" class="map"></div>
+  </body>
+</html>
