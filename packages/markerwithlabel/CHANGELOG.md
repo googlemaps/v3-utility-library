@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.12](https://github.com/googlemaps/v3-utility-library/compare/@google/markerwithlabel@1.2.11...@google/markerwithlabel@1.2.12) (2019-12-23)
+
+**Note:** Version bump only for package @google/markerwithlabel
+
+
+
+
+
 ## [1.2.11](https://github.com/googlemaps/v3-utility-library/compare/@google/markerwithlabel@1.2.10...@google/markerwithlabel@1.2.11) (2019-12-05)
 
 

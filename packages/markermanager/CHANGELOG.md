@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/markermanager@0.0.3...@googlemaps/markermanager@0.0.4) (2019-12-23)
+
+**Note:** Version bump only for package @googlemaps/markermanager
+
+
+
+
+
 ## [0.0.3](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/markermanager@0.0.2...@googlemaps/markermanager@0.0.3) (2019-12-09)
 
 
