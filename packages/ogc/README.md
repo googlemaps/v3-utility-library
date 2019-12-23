@@ -9,7 +9,14 @@ Add a WmsMapType to Google Maps.
 
 Available via NPM as the package `@googlemaps/ogc`
 
-## Example
+## Documentation
+
+The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_ogc.html). 
+
+## Examples
+
+See the [WMS](https://googlemaps.github.io/v3-utility-library/packages/ogc/examples/wmslayer.html) example in action.
+
 
 ``` javascript
 import { WmsMapType } from '@googlemaps/ogc';
