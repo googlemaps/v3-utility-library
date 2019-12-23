@@ -8,6 +8,7 @@ script:
 - lerna exec "codecov"
 before_deploy:
 - touch docs/.nojekyll
+- cp -r packages/ docs/packages/
 deploy:
   provider: pages
   skip_cleanup: true
