@@ -5,11 +5,20 @@ MarkerClustererPlus for Google Maps V3
 
 The library creates and manages per-zoom-level clusters for large amounts of markers.
 
-It is based on the V3 MarkerClusterer port by Luke Mahe. MarkerClustererPlus was created by Gary Little.
-
 ## NPM
 
 Available via NPM as the package `@google/markerclustererplus`
+
+## Documentation
+
+The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_google_markerclustererplus.html). 
+
+## Examples
+
+- [Simple Example](https://googlemaps.github.io/v3-utility-library/packages/markerclustererplus/examples/simple_example.html)
+- [Advanced Example](https://googlemaps.github.io/v3-utility-library/packages/markerclustererplus/examples/advanced_example.html)
+- [Events Example](https://googlemaps.github.io/v3-utility-library/packages/markerclustererplus/examples/events_example.html)
+
 
 ## Support
 

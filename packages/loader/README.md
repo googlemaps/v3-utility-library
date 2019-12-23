@@ -8,6 +8,11 @@ Load the Google Maps V3 script dynamically. This takes inspiration from the [goo
 
 Available via NPM as the package `@googlemaps/loader`
 
+## Documentation
+
+The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_loader.html). 
+
+
 ## Example
 
 ``` javascript
@@ -53,6 +58,9 @@ loader.loadCallback(e => {
 });
 
 ```
+
+View the package in action [here](https://googlemaps.github.io/v3-utility-library/packages/loader/examples/index.html).
+
 
 ## Support
 
