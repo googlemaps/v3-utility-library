@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1577149413357" clover="3.2.0">
-  <project timestamp="1577149413357" name="All files">
+<coverage generated="1577996180436" clover="3.2.0">
+  <project timestamp="1577996180436" name="All files">
     <metrics statements="244" coveredstatements="108" conditionals="118" coveredconditionals="39" methods="45" coveredmethods="18" elements="407" coveredelements="165" complexity="0" loc="244" ncloc="244" packages="1" files="3" classes="3"/>
     <file name="gridbounds.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/markermanager/src/gridbounds.ts">
       <metrics statements="10" coveredstatements="6" conditionals="10" coveredconditionals="0" methods="3" coveredmethods="1"/>
