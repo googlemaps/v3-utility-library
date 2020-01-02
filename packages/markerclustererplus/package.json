@@ -20,7 +20,6 @@
   "author": "Google Inc.",
   "files": [
     "dist/*",
-    "src/*",
     "images/*"
   ],
   "main": "dist/markerclustererplus.umd.js",
