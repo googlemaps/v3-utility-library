@@ -22,9 +22,34 @@
 import { Cluster } from "./cluster";
 import { OverlayViewSafe } from "./overlay-view-safe";
 
+/**
+ *
+ * @hidden
+ */
+function toCssText(styles: { [key: string]: string }): string {
+  return Object.keys(styles)
+    .reduce((acc, key) => {
+      if (styles[key]) {
+        acc.push(key + ":" + styles[key]);
+      }
+      return acc;
+    }, [])
+    .join(";");
+}
+
+/**
+ *
+ * @hidden
+ */
+function coercePixels(pixels: number): string {
+  return pixels ? pixels + "px" : undefined;
+}
+
 export interface ClusterIconStyle {
-  /** The URL of the cluster icon image file. Required. */
-  url: string;
+  /** The URL of the cluster icon image file. If not set, img element will not be created */
+  url?: string;
+  /** The name of the CSS class defining styles for the cluster markers. */
+  className?: string;
   /** Height The display height (in pixels) of the cluster icon. Required. */
   height: number;
   /** Width The display width (in pixels) of the cluster icon. Required. */
@@ -53,6 +78,11 @@ export interface ClusterIconStyle {
    * @default `11`
    */
   textSize?: number;
+
+  /** The line height (in pixels) of the label text shown on the cluster icon.
+   * @default the same as cluster icon height
+   */
+  textLineHeight?: number;
   /**
    * The value of the CSS `text-decoration`
    * property for the label text shown on the cluster icon.
@@ -117,24 +147,16 @@ export interface ClusterIconInfo {
  * A cluster icon.
  */
 export class ClusterIcon extends OverlayViewSafe {
-  private className_ = this.cluster_.getMarkerClusterer().getClusterClass();
+  private className_: string;
   private center_: google.maps.LatLng = null;
   private div_: HTMLDivElement = null;
   private sums_: ClusterIconInfo = null;
   private visible_ = false;
 
-  private url_: string;
-  private height_: number;
-  private width_: number;
+  private style: ClusterIconStyle = null;
+
   private anchorText_: [number, number];
   private anchorIcon_: [number, number];
-  private textColor_: string;
-  private textSize_: number;
-  private textDecoration_: string;
-  private fontWeight_: string;
-  private fontStyle_: string;
-  private fontFamily_: string;
-  private backgroundPosition_: string;
 
   private boundsChangedListener_: google.maps.MapsEventListener;
 
@@ -163,7 +185,6 @@ export class ClusterIcon extends OverlayViewSafe {
     const gmVersion = parseInt(major, 10) * 100 + parseInt(minor, 10);
 
     this.div_ = document.createElement("div");
-    this.div_.className = this.className_;
     if (this.visible_) {
       this.show();
     }
@@ -290,58 +311,15 @@ export class ClusterIcon extends OverlayViewSafe {
    */
   show(): void {
     if (this.div_) {
-      const mc = this.cluster_.getMarkerClusterer();
-      const ariaLabel = mc.ariaLabelFn(this.sums_.text);
-      // NOTE: values must be specified in px units
-      const bp = this.backgroundPosition_.split(" ");
-      const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
-      const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+      this.div_.className = this.className_;
       this.div_.style.cssText = this.createCss_(
         this.getPosFromLatLng_(this.center_)
       );
 
-      let imgDimensions = "";
-      if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
-        imgDimensions = `width: ${this.width_}px; height: ${this.height_}px`;
-      } else {
-        const [Y1, X1, Y2, X2] = [
-          -1 * spriteV,
-          -1 * spriteH + this.width_,
-          -1 * spriteV + this.height_,
-          -1 * spriteH
-        ];
+      this.div_.innerHTML =
+        (this.style.url ? this.getImageElementHtml() : "") +
+        this.getLabelDivHtml();
 
-        imgDimensions = `clip: rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`;
-      }
-
-      const imgStyle = [
-        `position: absolute`,
-        `top: ${spriteV}px`,
-        `left: ${spriteH}px`,
-        imgDimensions
-      ].join(";");
-
-      const divStyle = [
-        `position: absolute`,
-        `top: ${this.anchorText_[0]}px`,
-        `left: ${this.anchorText_[1]}px`,
-        `color: ${this.textColor_}`,
-        `font-size: ${this.textSize_}px`,
-        `font-family: ${this.fontFamily_}`,
-        `font-weight: ${this.fontWeight_}`,
-        `font-style: ${this.fontStyle_}`,
-        `text-decoration: ${this.textDecoration_}`,
-        `text-align: center`,
-        `width: ${this.width_}px`,
-        `line-height: ${this.height_}px`
-      ].join(";");
-
-      this.div_.innerHTML = `
-<img alt='${this.sums_.text}' aria-hidden="true" src="${this.url_}" style="${imgStyle}"/>
-<div aria-label="${ariaLabel}" tabindex="0" style="${divStyle}">
-  <span aria-hidden="true">${this.sums_.text}</span>
-</div>
-`;
       if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
         this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
       } else {
@@ -350,6 +328,67 @@ export class ClusterIcon extends OverlayViewSafe {
       this.div_.style.display = "";
     }
     this.visible_ = true;
+  }
+
+  private getLabelDivHtml(): string {
+    const mc = this.cluster_.getMarkerClusterer();
+    const ariaLabel = mc.ariaLabelFn(this.sums_.text);
+
+    const divStyle: { [key: string]: string } = {
+      position: "absolute",
+      top: coercePixels(this.anchorText_[0]),
+      left: coercePixels(this.anchorText_[1]),
+      color: this.style.textColor,
+      "font-size": coercePixels(this.style.textSize),
+      "font-family": this.style.fontFamily,
+      "font-weight": this.style.fontWeight,
+      "font-style": this.style.fontStyle,
+      "text-decoration": this.style.textDecoration,
+      "text-align": "center",
+      width: coercePixels(this.style.width),
+      "line-height": coercePixels(this.style.textLineHeight)
+    };
+
+    return `
+<div aria-label="${ariaLabel}" style="${toCssText(divStyle)}" tabindex="0">
+  <span aria-hidden="true">${this.sums_.text}</span>
+</div>
+`;
+  }
+
+  private getImageElementHtml(): string {
+    // NOTE: values must be specified in px units
+    const bp = (this.style.backgroundPosition || "0 0").split(" ");
+    const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
+    const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+
+    let dimensions: { [key: string]: string } = {};
+
+    if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
+      dimensions = {
+        width: coercePixels(this.style.width),
+        height: coercePixels(this.style.height)
+      };
+    } else {
+      const [Y1, X1, Y2, X2] = [
+        -1 * spriteV,
+        -1 * spriteH + this.style.width,
+        -1 * spriteV + this.style.height,
+        -1 * spriteH
+      ];
+      dimensions = {
+        clip: `rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`
+      };
+    }
+
+    const cssText = toCssText({
+      position: "absolute",
+      top: coercePixels(spriteV),
+      left: coercePixels(spriteH),
+      ...dimensions
+    });
+
+    return `<img alt="${this.sums_.text}" aria-hidden="true" src="${this.style.url}" style="${cssText}"/>`;
   }
 
   /**
@@ -362,22 +401,18 @@ export class ClusterIcon extends OverlayViewSafe {
     this.sums_ = sums;
     let index = Math.max(0, sums.index - 1);
     index = Math.min(this.styles_.length - 1, index);
-    const style = this.styles_[index];
-    this.url_ = style.url;
-    this.height_ = style.height;
-    this.width_ = style.width;
-    this.anchorText_ = style.anchorText || [0, 0];
-    this.anchorIcon_ = style.anchorIcon || [
-      Math.floor(this.height_ / 2),
-      Math.floor(this.width_ / 2)
+    this.style = this.styles_[index];
+
+    this.anchorText_ = this.style.anchorText || [0, 0];
+    this.anchorIcon_ = this.style.anchorIcon || [
+      Math.floor(this.style.height / 2),
+      Math.floor(this.style.width / 2)
     ];
-    this.textColor_ = style.textColor || "black";
-    this.textSize_ = style.textSize || 11;
-    this.textDecoration_ = style.textDecoration || "none";
-    this.fontWeight_ = style.fontWeight || "bold";
-    this.fontStyle_ = style.fontStyle || "normal";
-    this.fontFamily_ = style.fontFamily || "Arial,sans-serif";
-    this.backgroundPosition_ = style.backgroundPosition || "0 0";
+
+    this.className_ =
+      this.cluster_.getMarkerClusterer().getClusterClass() +
+      " " +
+      (this.style.className || "cluster-" + index);
   }
 
   /**
@@ -396,17 +431,20 @@ export class ClusterIcon extends OverlayViewSafe {
    * @return The CSS style text.
    */
   private createCss_(pos: google.maps.Point): string {
-    return [
-      `z-index: ${this.cluster_.getMarkerClusterer().getZIndex()}`,
-      "cursor: pointer",
-      `position: absolute; top: ${pos.y}px; left: ${pos.x}px`,
-      `width: ${this.width_}px; height: ${this.height_}px`,
-      "-webkit-user-select: none",
-      "-khtml-user-select: none",
-      "-moz-user-select: none",
-      "-o-user-select: none",
-      "user-select: none"
-    ].join(";");
+    return toCssText({
+      "z-index": `${this.cluster_.getMarkerClusterer().getZIndex()}`,
+      top: coercePixels(pos.y),
+      left: coercePixels(pos.x),
+      width: coercePixels(this.style.width),
+      height: coercePixels(this.style.height),
+      cursor: "pointer",
+      position: "absolute",
+      "-webkit-user-select": "none",
+      "-khtml-user-select": "none",
+      "-moz-user-select": "none",
+      "-o-user-select": "none",
+      "user-select": "none"
+    });
   }
 
   /**

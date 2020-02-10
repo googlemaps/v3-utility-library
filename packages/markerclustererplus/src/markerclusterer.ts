@@ -436,11 +436,13 @@ export class MarkerClusterer extends OverlayViewSafe {
 
     for (let i = 0; i < this.imageSizes_.length; i++) {
       const size = this.imageSizes_[i];
-      this.styles_.push({
-        url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
-        height: size,
-        width: size
-      });
+      this.styles_.push(
+        MarkerClusterer.withDefaultStyle({
+          url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
+          height: size,
+          width: size
+        })
+      );
     }
   }
 
@@ -1157,6 +1159,26 @@ export class MarkerClusterer extends OverlayViewSafe {
       text: count.toString(),
       index: index,
       title: ""
+    };
+  }
+
+  /**
+   * Generates default styles augmented with user passed values.
+   * Useful when you want to override some default values but keep untouched
+   *
+   * @param overrides override default values
+   */
+  static withDefaultStyle(overrides: ClusterIconStyle): ClusterIconStyle {
+    return {
+      textColor: "black",
+      textSize: 11,
+      textDecoration: "none",
+      textLineHeight: overrides.height,
+      fontWeight: "bold",
+      fontStyle: "normal",
+      fontFamily: "Arial,sans-serif",
+      backgroundPosition: "0 0",
+      ...overrides
     };
   }
 }
