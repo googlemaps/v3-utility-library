@@ -22,8 +22,10 @@
 import { Cluster } from "./cluster";
 import { OverlayViewSafe } from "./overlay-view-safe";
 export interface ClusterIconStyle {
-    /** The URL of the cluster icon image file. Required. */
-    url: string;
+    /** The URL of the cluster icon image file. If not set, img element will not be created */
+    url?: string;
+    /** The name of the CSS class defining styles for the cluster markers. */
+    className?: string;
     /** Height The display height (in pixels) of the cluster icon. Required. */
     height: number;
     /** Width The display width (in pixels) of the cluster icon. Required. */
@@ -52,6 +54,10 @@ export interface ClusterIconStyle {
      * @default `11`
      */
     textSize?: number;
+    /** The line height (in pixels) of the label text shown on the cluster icon.
+     * @default the same as cluster icon height
+     */
+    textLineHeight?: number;
     /**
      * The value of the CSS `text-decoration`
      * property for the label text shown on the cluster icon.
@@ -121,18 +127,9 @@ export declare class ClusterIcon extends OverlayViewSafe {
     private div_;
     private sums_;
     private visible_;
-    private url_;
-    private height_;
-    private width_;
+    private style;
     private anchorText_;
     private anchorIcon_;
-    private textColor_;
-    private textSize_;
-    private textDecoration_;
-    private fontWeight_;
-    private fontStyle_;
-    private fontFamily_;
-    private backgroundPosition_;
     private boundsChangedListener_;
     /**
      * @param cluster_ The cluster with which the icon is to be associated.
@@ -160,6 +157,8 @@ export declare class ClusterIcon extends OverlayViewSafe {
      * Positions and shows the icon.
      */
     show(): void;
+    private getLabelDivHtml;
+    private getImageElementHtml;
     /**
      * Sets the icon styles to the appropriate element in the styles array.
      *

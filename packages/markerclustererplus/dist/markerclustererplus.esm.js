@@ -56,6 +56,27 @@ class OverlayViewSafe {
  * limitations under the License.
  */
 /**
+ *
+ * @hidden
+ */
+function toCssText(styles) {
+    return Object.keys(styles)
+        .reduce((acc, key) => {
+        if (styles[key]) {
+            acc.push(key + ":" + styles[key]);
+        }
+        return acc;
+    }, [])
+        .join(";");
+}
+/**
+ *
+ * @hidden
+ */
+function coercePixels(pixels) {
+    return pixels ? pixels + "px" : undefined;
+}
+/**
  * A cluster icon.
  */
 class ClusterIcon extends OverlayViewSafe {
@@ -68,11 +89,11 @@ class ClusterIcon extends OverlayViewSafe {
         super();
         this.cluster_ = cluster_;
         this.styles_ = styles_;
-        this.className_ = this.cluster_.getMarkerClusterer().getClusterClass();
         this.center_ = null;
         this.div_ = null;
         this.sums_ = null;
         this.visible_ = false;
+        this.style = null;
         this.setMap(cluster_.getMap()); // Note: this causes onAdd to be called
     }
     /**
@@ -85,7 +106,6 @@ class ClusterIcon extends OverlayViewSafe {
         const [major, minor] = google.maps.version.split(".");
         const gmVersion = parseInt(major, 10) * 100 + parseInt(minor, 10);
         this.div_ = document.createElement("div");
-        this.div_.className = this.className_;
         if (this.visible_) {
             this.show();
         }
@@ -195,52 +215,11 @@ class ClusterIcon extends OverlayViewSafe {
      */
     show() {
         if (this.div_) {
-            const mc = this.cluster_.getMarkerClusterer();
-            const ariaLabel = mc.ariaLabelFn(this.sums_.text);
-            // NOTE: values must be specified in px units
-            const bp = this.backgroundPosition_.split(" ");
-            const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
-            const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+            this.div_.className = this.className_;
             this.div_.style.cssText = this.createCss_(this.getPosFromLatLng_(this.center_));
-            let imgDimensions = "";
-            if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
-                imgDimensions = `width: ${this.width_}px; height: ${this.height_}px`;
-            }
-            else {
-                const [Y1, X1, Y2, X2] = [
-                    -1 * spriteV,
-                    -1 * spriteH + this.width_,
-                    -1 * spriteV + this.height_,
-                    -1 * spriteH
-                ];
-                imgDimensions = `clip: rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`;
-            }
-            const imgStyle = [
-                `position: absolute`,
-                `top: ${spriteV}px`,
-                `left: ${spriteH}px`,
-                imgDimensions
-            ].join(";");
-            const divStyle = [
-                `position: absolute`,
-                `top: ${this.anchorText_[0]}px`,
-                `left: ${this.anchorText_[1]}px`,
-                `color: ${this.textColor_}`,
-                `font-size: ${this.textSize_}px`,
-                `font-family: ${this.fontFamily_}`,
-                `font-weight: ${this.fontWeight_}`,
-                `font-style: ${this.fontStyle_}`,
-                `text-decoration: ${this.textDecoration_}`,
-                `text-align: center`,
-                `width: ${this.width_}px`,
-                `line-height: ${this.height_}px`
-            ].join(";");
-            this.div_.innerHTML = `
-<img alt='${this.sums_.text}' aria-hidden="true" src="${this.url_}" style="${imgStyle}"/>
-<div aria-label="${ariaLabel}" tabindex="0" style="${divStyle}">
-  <span aria-hidden="true">${this.sums_.text}</span>
-</div>
-`;
+            this.div_.innerHTML =
+                (this.style.url ? this.getImageElementHtml() : "") +
+                    this.getLabelDivHtml();
             if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
                 this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
             }
@@ -250,6 +229,55 @@ class ClusterIcon extends OverlayViewSafe {
             this.div_.style.display = "";
         }
         this.visible_ = true;
+    }
+    getLabelDivHtml() {
+        const mc = this.cluster_.getMarkerClusterer();
+        const ariaLabel = mc.ariaLabelFn(this.sums_.text);
+        const divStyle = {
+            position: "absolute",
+            top: coercePixels(this.anchorText_[0]),
+            left: coercePixels(this.anchorText_[1]),
+            color: this.style.textColor,
+            "font-size": coercePixels(this.style.textSize),
+            "font-family": this.style.fontFamily,
+            "font-weight": this.style.fontWeight,
+            "font-style": this.style.fontStyle,
+            "text-decoration": this.style.textDecoration,
+            "text-align": "center",
+            width: coercePixels(this.style.width),
+            "line-height": coercePixels(this.style.textLineHeight)
+        };
+        return `
+<div aria-label="${ariaLabel}" style="${toCssText(divStyle)}" tabindex="0">
+  <span aria-hidden="true">${this.sums_.text}</span>
+</div>
+`;
+    }
+    getImageElementHtml() {
+        // NOTE: values must be specified in px units
+        const bp = (this.style.backgroundPosition || "0 0").split(" ");
+        const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
+        const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+        let dimensions = {};
+        if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
+            dimensions = {
+                width: coercePixels(this.style.width),
+                height: coercePixels(this.style.height)
+            };
+        }
+        else {
+            const [Y1, X1, Y2, X2] = [
+                -1 * spriteV,
+                -1 * spriteH + this.style.width,
+                -1 * spriteV + this.style.height,
+                -1 * spriteH
+            ];
+            dimensions = {
+                clip: `rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`
+            };
+        }
+        const cssText = toCssText(Object.assign({ position: "absolute", top: coercePixels(spriteV), left: coercePixels(spriteH) }, dimensions));
+        return `<img alt="${this.sums_.text}" aria-hidden="true" src="${this.style.url}" style="${cssText}"/>`;
     }
     /**
      * Sets the icon styles to the appropriate element in the styles array.
@@ -261,22 +289,16 @@ class ClusterIcon extends OverlayViewSafe {
         this.sums_ = sums;
         let index = Math.max(0, sums.index - 1);
         index = Math.min(this.styles_.length - 1, index);
-        const style = this.styles_[index];
-        this.url_ = style.url;
-        this.height_ = style.height;
-        this.width_ = style.width;
-        this.anchorText_ = style.anchorText || [0, 0];
-        this.anchorIcon_ = style.anchorIcon || [
-            Math.floor(this.height_ / 2),
-            Math.floor(this.width_ / 2)
+        this.style = this.styles_[index];
+        this.anchorText_ = this.style.anchorText || [0, 0];
+        this.anchorIcon_ = this.style.anchorIcon || [
+            Math.floor(this.style.height / 2),
+            Math.floor(this.style.width / 2)
         ];
-        this.textColor_ = style.textColor || "black";
-        this.textSize_ = style.textSize || 11;
-        this.textDecoration_ = style.textDecoration || "none";
-        this.fontWeight_ = style.fontWeight || "bold";
-        this.fontStyle_ = style.fontStyle || "normal";
-        this.fontFamily_ = style.fontFamily || "Arial,sans-serif";
-        this.backgroundPosition_ = style.backgroundPosition || "0 0";
+        this.className_ =
+            this.cluster_.getMarkerClusterer().getClusterClass() +
+                " " +
+                (this.style.className || "cluster-" + index);
     }
     /**
      * Sets the position at which to center the icon.
@@ -293,17 +315,20 @@ class ClusterIcon extends OverlayViewSafe {
      * @return The CSS style text.
      */
     createCss_(pos) {
-        return [
-            `z-index: ${this.cluster_.getMarkerClusterer().getZIndex()}`,
-            "cursor: pointer",
-            `position: absolute; top: ${pos.y}px; left: ${pos.x}px`,
-            `width: ${this.width_}px; height: ${this.height_}px`,
-            "-webkit-user-select: none",
-            "-khtml-user-select: none",
-            "-moz-user-select: none",
-            "-o-user-select: none",
-            "user-select: none"
-        ].join(";");
+        return toCssText({
+            "z-index": `${this.cluster_.getMarkerClusterer().getZIndex()}`,
+            top: coercePixels(pos.y),
+            left: coercePixels(pos.x),
+            width: coercePixels(this.style.width),
+            height: coercePixels(this.style.height),
+            cursor: "pointer",
+            position: "absolute",
+            "-webkit-user-select": "none",
+            "-khtml-user-select": "none",
+            "-moz-user-select": "none",
+            "-o-user-select": "none",
+            "user-select": "none"
+        });
     }
     /**
      * Returns the position at which to place the DIV depending on the latlng.
@@ -670,11 +695,11 @@ class MarkerClusterer extends OverlayViewSafe {
         }
         for (let i = 0; i < this.imageSizes_.length; i++) {
             const size = this.imageSizes_[i];
-            this.styles_.push({
+            this.styles_.push(MarkerClusterer.withDefaultStyle({
                 url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
                 height: size,
                 width: size
-            });
+            }));
         }
     }
     /**
@@ -1289,6 +1314,15 @@ class MarkerClusterer extends OverlayViewSafe {
             index: index,
             title: ""
         };
+    }
+    /**
+     * Generates default styles augmented with user passed values.
+     * Useful when you want to override some default values but keep untouched
+     *
+     * @param overrides override default values
+     */
+    static withDefaultStyle(overrides) {
+        return Object.assign({ textColor: "black", textSize: 11, textDecoration: "none", textLineHeight: overrides.height, fontWeight: "bold", fontStyle: "normal", fontFamily: "Arial,sans-serif", backgroundPosition: "0 0" }, overrides);
     }
 }
 /**

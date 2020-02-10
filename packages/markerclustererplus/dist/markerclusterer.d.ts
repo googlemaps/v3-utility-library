@@ -630,5 +630,12 @@ export declare class MarkerClusterer extends OverlayViewSafe {
      * @return The information resource for the cluster.
      */
     static CALCULATOR(markers: google.maps.Marker[], numStyles: number): ClusterIconInfo;
+    /**
+     * Generates default styles augmented with user passed values.
+     * Useful when you want to override some default values but keep untouched
+     *
+     * @param overrides override default values
+     */
+    static withDefaultStyle(overrides: ClusterIconStyle): ClusterIconStyle;
 }
 export {};

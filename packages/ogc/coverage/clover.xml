@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1580424713056" clover="3.2.0">
-  <project timestamp="1580424713057" name="All files">
+<coverage generated="1581347762859" clover="3.2.0">
+  <project timestamp="1581347762859" name="All files">
     <metrics statements="23" coveredstatements="23" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3" elements="34" coveredelements="34" complexity="0" loc="23" ncloc="23" packages="1" files="1" classes="1"/>
     <file name="wmsmaptype.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/ogc/src/wmsmaptype.ts">
       <metrics statements="23" coveredstatements="23" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>
