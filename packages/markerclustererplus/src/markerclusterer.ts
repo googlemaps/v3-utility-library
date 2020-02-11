@@ -1130,6 +1130,10 @@ export class MarkerClusterer extends OverlayViewSafe {
     } else {
       delete this.timerRefStatic;
       google.maps.event.trigger(this, "clusteringend", this);
+
+      for (let i = 0; i < this.clusters_.length; i++) {
+        this.clusters_[i].updateIcon();
+      }
     }
   }
 

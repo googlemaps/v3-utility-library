@@ -498,7 +498,6 @@ class Cluster {
         else {
             marker.setMap(null);
         }
-        this.updateIcon_();
         return true;
     }
     /**
@@ -521,7 +520,7 @@ class Cluster {
     /**
      * Updates the cluster icon.
      */
-    updateIcon_() {
+    updateIcon() {
         const mCount = this.markers_.length;
         const mz = this.markerClusterer_.getMaxZoom();
         if (mz !== null && this.map_.getZoom() > mz) {
@@ -1290,6 +1289,9 @@ class MarkerClusterer extends OverlayViewSafe {
         else {
             delete this.timerRefStatic;
             google.maps.event.trigger(this, "clusteringend", this);
+            for (let i = 0; i < this.clusters_.length; i++) {
+                this.clusters_[i].updateIcon();
+            }
         }
     }
     /**

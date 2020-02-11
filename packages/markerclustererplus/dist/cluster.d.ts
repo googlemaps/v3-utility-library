@@ -108,7 +108,7 @@ export declare class Cluster {
     /**
      * Updates the cluster icon.
      */
-    private updateIcon_;
+    updateIcon(): void;
     /**
      * Determines if a marker has already been added to the cluster.
      *
