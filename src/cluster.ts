@@ -170,7 +170,6 @@ export class Cluster {
       marker.setMap(null);
     }
 
-    this.updateIcon_();
     return true;
   }
 
@@ -196,7 +195,7 @@ export class Cluster {
   /**
    * Updates the cluster icon.
    */
-  private updateIcon_(): void {
+  public updateIcon(): void {
     const mCount = this.markers_.length;
     const mz = this.markerClusterer_.getMaxZoom();
 
