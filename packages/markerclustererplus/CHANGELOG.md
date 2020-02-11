@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.0...@google/markerclustererplus@5.0.1) (2020-02-11)
+
+
+### Bug Fixes
+
+* **markerclustererplus:** re-render icons on end of clustering cycle ([#613](https://github.com/googlemaps/v3-utility-library/issues/613)) ([6e73676](https://github.com/googlemaps/v3-utility-library/commit/6e736768cb7dd2f645cdaa8cb5684967b6bc78f8))
+
+
+
+
+
 # [5.0.0](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@4.0.1...@google/markerclustererplus@5.0.0) (2020-02-10)
 
 
