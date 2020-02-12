@@ -32,10 +32,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **markerclustererplus:** When `MarkerClustererOptions.style` is passed to constructor,
 it completely replaces defaults and does not extend defaults as before.
 
-If you want to override only some values, but not replace whole styles use `MarkerClusterer.withDefaultStyle()` function (see `examples/events_example.html` for usage examples).
+  If you want to override only some values, but not replace whole styles use `MarkerClusterer.withDefaultStyle()` function (see [`examples/events_example.html`](https://github.com/googlemaps/v3-utility-library/blob/master/packages/markerclustererplus/examples/events_example.html) for usage examples).
 
-Overriding whole styles is useful when `ClusterIconStyle.className` is used and styling
-is performed using external CSS styles (which is recommended way).
+  Overriding whole styles is useful when `ClusterIconStyle.className` is used and styling
+  is performed using external CSS styles (which is recommended way).
 
 
 
