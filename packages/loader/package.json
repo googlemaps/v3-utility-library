@@ -29,5 +29,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://wombat-dressing-room.appspot.com"
-  }
+  },
+  "browserslist": "> 0.25%, not dead"
 }
