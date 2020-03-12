@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/markermanager",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes.",
   "keywords": [
     "google",
