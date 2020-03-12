@@ -1,5 +1,5 @@
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/index.ts
+SF:src/index.ts
 FN:26,(anonymous_0)
 FNF:1
 FNH:1
@@ -25,7 +25,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/latlng.ts
+SF:src/latlng.ts
 FN:18,(anonymous_0)
 FN:22,(anonymous_1)
 FN:23,(anonymous_2)
@@ -109,7 +109,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/map.ts
+SF:src/map.ts
 FN:27,(anonymous_0)
 FN:33,(anonymous_1)
 FN:41,(anonymous_2)
@@ -193,7 +193,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/marker.ts
+SF:src/marker.ts
 FN:22,(anonymous_0)
 FN:27,(anonymous_1)
 FN:28,(anonymous_2)
@@ -304,7 +304,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/mvcobject.ts
+SF:src/mvcobject.ts
 FN:19,(anonymous_0)
 FN:23,(anonymous_1)
 FN:28,(anonymous_2)
@@ -343,7 +343,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/point.ts
+SF:src/point.ts
 FN:20,(anonymous_0)
 FN:27,(anonymous_1)
 FN:24,(anonymous_2)
@@ -366,7 +366,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/size.ts
+SF:src/size.ts
 FN:20,(anonymous_0)
 FN:32,(anonymous_1)
 FN:29,(anonymous_2)

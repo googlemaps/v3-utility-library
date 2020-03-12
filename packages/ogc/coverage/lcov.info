@@ -1,5 +1,5 @@
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/ogc/src/wmsmaptype.ts
+SF:src/wmsmaptype.ts
 FN:52,xyzToBounds
 FN:81,(anonymous_1)
 FN:117,(anonymous_2)

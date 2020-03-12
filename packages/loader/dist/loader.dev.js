@@ -42,9 +42,7 @@ this.google.maps.plugins.loader = (function (exports) {
    * limitations under the License.
    */
   /// <reference types="@types/googlemaps" />
-  var Loader =
-  /*#__PURE__*/
-  function () {
+  var Loader = /*#__PURE__*/function () {
     function Loader(_ref) {
       var apiKey = _ref.apiKey,
           _ref$libraries = _ref.libraries,

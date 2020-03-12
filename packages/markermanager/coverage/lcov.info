@@ -1,5 +1,5 @@
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/markermanager/src/gridbounds.ts
+SF:src/gridbounds.ts
 FN:33,(anonymous_0)
 FN:47,(anonymous_1)
 FN:65,(anonymous_2)
@@ -34,7 +34,7 @@ BRF:10
 BRH:0
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/markermanager/src/markermanager.ts
+SF:src/markermanager.ts
 FN:53,(anonymous_0)
 FN:75,(anonymous_1)
 FN:80,(anonymous_2)
@@ -458,7 +458,7 @@ BRF:108
 BRH:39
 end_of_record
 TN:
-SF:/home/travis/build/googlemaps/v3-utility-library/packages/markermanager/src/utils.ts
+SF:src/utils.ts
 FN:22,lngToX
 FN:31,latToY
 FN:42,latLngToPixel

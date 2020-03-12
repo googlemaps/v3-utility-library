@@ -94,9 +94,7 @@ this.google.maps.plugins.markermanager = (function (exports) {
    * Helper class to create a bounds of INT ranges.
    * @ignore
    */
-  var GridBounds =
-  /*#__PURE__*/
-  function () {
+  var GridBounds = /*#__PURE__*/function () {
     /**
      *
      * @param bounds
@@ -148,9 +146,7 @@ this.google.maps.plugins.markermanager = (function (exports) {
    * Creates a new MarkerManager that will show/hide markers on a map.
    */
 
-  var MarkerManager =
-  /*#__PURE__*/
-  function () {
+  var MarkerManager = /*#__PURE__*/function () {
     /**
      * @constructor
      * @param map The map to manage.
