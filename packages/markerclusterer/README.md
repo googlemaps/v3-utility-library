@@ -1,6 +1,8 @@
 MarkerClusterer for Google Maps v3
 ==================================
 
+>**Note**: It is recommended to use [@google/markerclustererplus](https://github.com/googlemaps/v3-utility-library/tree/master/packages/markerclustererplus) instead of this package.
+
 ## Description
 
 Creates and manages per-zoom-level clusters for large amounts of markers.
