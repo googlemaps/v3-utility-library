@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclusterer@2.0.6...@google/markerclusterer@2.0.7) (2020-03-12)
+
+
+### Bug Fixes
+
+* set browserslist setting for babel ([#632](https://github.com/googlemaps/v3-utility-library/issues/632)) ([a57b68e](https://github.com/googlemaps/v3-utility-library/commit/a57b68e86bef5bea54e35c9fc4cd66b10ef8dafe))
+
+
+
+
+
 ## [2.0.6](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclusterer@2.0.5...@google/markerclusterer@2.0.6) (2019-12-23)
 
 **Note:** Version bump only for package @google/markerclusterer

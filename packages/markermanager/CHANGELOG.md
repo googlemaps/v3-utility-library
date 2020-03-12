@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.5](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/markermanager@0.0.4...@googlemaps/markermanager@0.0.5) (2020-03-12)
+
+
+### Bug Fixes
+
+* set browserslist setting for babel ([#632](https://github.com/googlemaps/v3-utility-library/issues/632)) ([a57b68e](https://github.com/googlemaps/v3-utility-library/commit/a57b68e86bef5bea54e35c9fc4cd66b10ef8dafe))
+
+
+
+
+
 ## [0.0.4](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/markermanager@0.0.3...@googlemaps/markermanager@0.0.4) (2019-12-23)
 
 **Note:** Version bump only for package @googlemaps/markermanager
