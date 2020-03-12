@@ -1,11 +1,10 @@
 import {terser} from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 
 const babelOptions = {
-  extensions: ['.js', '.ts'],
-
-  presets: ['@babel/env'],
+  extensions: ['.js', '.ts']
 };
 
 const terserOptions = {output: {comments: ''}};
@@ -16,6 +15,7 @@ export default [
     plugins: [
       typescript(),
       babel(babelOptions),
+      commonjs(),
       terser(terserOptions)
     ],
     output: [
