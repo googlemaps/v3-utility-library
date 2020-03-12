@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.3](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.2...@google/markerclustererplus@5.0.3) (2020-03-12)
+
+
+### Bug Fixes
+
+* add polyfills via core-js ([#634](https://github.com/googlemaps/v3-utility-library/issues/634)) ([4699c9a](https://github.com/googlemaps/v3-utility-library/commit/4699c9abf69307829a8782c917f1eb0108ac941b))
+
+
+
+
+
 ## [5.0.2](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.1...@google/markerclustererplus@5.0.2) (2020-03-12)
 
 
