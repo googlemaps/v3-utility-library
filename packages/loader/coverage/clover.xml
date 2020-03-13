@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1584057763155" clover="3.2.0">
-  <project timestamp="1584057763155" name="All files">
+<coverage generated="1584057874307" clover="3.2.0">
+  <project timestamp="1584057874307" name="All files">
     <metrics statements="60" coveredstatements="60" conditionals="21" coveredconditionals="21" methods="13" coveredmethods="13" elements="94" coveredelements="94" complexity="0" loc="60" ncloc="60" packages="1" files="1" classes="1"/>
     <file name="loader.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/loader/src/loader.ts">
       <metrics statements="60" coveredstatements="60" conditionals="21" coveredconditionals="21" methods="13" coveredmethods="13"/>
