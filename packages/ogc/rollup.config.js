@@ -5,9 +5,7 @@ import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 
 const babelOptions = {
-  extensions: [".js", ".ts"],
-  
-  presets: ["@babel/env"]
+  extensions: [".js", ".ts"]
 };
 
 export default [
@@ -15,10 +13,10 @@ export default [
     input: "src/index.ts",
     plugins: [
       typescript(),
-      commonjs(),
       resolve(),
-      terser({ output: { comments: "" } }),
-      babel(babelOptions)
+      babel(babelOptions),
+      commonjs(),
+      terser({ output: { comments: "" } })
     ],
     output: {
       file: "dist/ogc.umd.js",
@@ -31,10 +29,10 @@ export default [
     input: "src/index.ts",
     plugins: [
       typescript(),
-      commonjs(),
       resolve(),
-      terser({ output: { comments: "" } }),
-      babel(babelOptions)
+      babel(babelOptions),
+      commonjs(),
+      terser({ output: { comments: "" } })
     ],
     output: {
       file: "dist/ogc.min.js",

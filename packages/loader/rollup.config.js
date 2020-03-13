@@ -4,9 +4,7 @@ import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 
 const babelOptions = {
-  extensions: [".js", ".ts"],
-  
-  presets: ["@babel/env"]
+  extensions: [".js", ".ts"]
 };
 
 const terserOptions = { output: { comments: "" } };
