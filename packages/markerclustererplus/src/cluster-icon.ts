@@ -123,7 +123,7 @@ export interface ClusterIconStyle {
   /**
    * The background color for the cluster marker
    *
-   * @default `"#00A2D3"`
+   * @default `"transparent"`
    */
   backgroundColor?: string;
 }
