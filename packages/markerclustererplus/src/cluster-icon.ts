@@ -120,6 +120,12 @@ export interface ClusterIconStyle {
    * @default `"0 0"`
    */
   backgroundPosition?: string;
+    /**
+   * The background color for the cluster marker
+   *
+   * @default `"#00A2D3"`
+   */
+  backgroundColor?: string;
 }
 
 /**
@@ -437,6 +443,8 @@ export class ClusterIcon extends OverlayViewSafe {
       left: coercePixels(pos.x),
       width: coercePixels(this.style.width),
       height: coercePixels(this.style.height),
+      'background-color': this.style.backgroundColor,
+      '--background-color': this.style.backgroundColor,
       cursor: "pointer",
       position: "absolute",
       "-webkit-user-select": "none",
