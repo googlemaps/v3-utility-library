@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.7](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.6...@googlemaps/loader@0.0.7) (2020-03-12)
+
+
+### Bug Fixes
+
+* add polyfills via core-js ([#634](https://github.com/googlemaps/v3-utility-library/issues/634)) ([4699c9a](https://github.com/googlemaps/v3-utility-library/commit/4699c9abf69307829a8782c917f1eb0108ac941b))
+
+
+
+
+
 ## [0.0.6](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.5...@googlemaps/loader@0.0.6) (2020-03-12)
 
 
