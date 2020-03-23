@@ -3,17 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.0.8](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.7...@googlemaps/loader@0.0.8) (2020-03-23)
-
-
-### Bug Fixes
-
-* adds LoaderOptions export ([#640](https://github.com/googlemaps/v3-utility-library/issues/640)) ([9127b08](https://github.com/googlemaps/v3-utility-library/commit/9127b0882e876d8189cf626d4e1347c08ef33b91))
-
-
-
-
-
 ## [0.0.7](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.6...@googlemaps/loader@0.0.7) (2020-03-12)
 
 
