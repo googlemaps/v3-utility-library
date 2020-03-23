@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { Loader } from "./loader";
+export { Loader, LoaderOptions } from "./loader";
