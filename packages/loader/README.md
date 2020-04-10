@@ -1,6 +1,8 @@
 Loader for Google Maps v3
 ==================================
 
+> **NOTE**: This package has been deprecated in favor of [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader). The interface remains the same.
+
 ## Description
 Load the Google Maps V3 script dynamically. This takes inspiration from the [google-maps](https://www.npmjs.com/package/google-maps) npm package but updates it with ES6, Promises, and TypeScript.
 
