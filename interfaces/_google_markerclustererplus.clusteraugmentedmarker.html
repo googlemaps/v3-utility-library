@@ -149,7 +149,7 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Cluster<wbr>Augmented<wbr>Marker<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReadonlyMarkerOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.clusteraugmentedmarker.html" class="tsd-signature-type">ClusterAugmentedMarker</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Cluster<wbr>Augmented<wbr>Marker<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyMarkerOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_google_markerclustererplus.clusteraugmentedmarker.html" class="tsd-signature-type">ClusterAugmentedMarker</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -160,18 +160,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:642</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Creates a marker with the options specified. If a map is specified, the
-										marker is added to the map upon construction. Note that the position must
-									be set for the marker to display.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.constructor" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -191,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Added<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L52">packages/markerclustererplus/src/markerclusterer.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L52">packages/markerclustererplus/src/markerclusterer.ts:52</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -205,17 +193,6 @@
 							<li>Defined in node_modules/@types/googlemaps/index.d.ts:642</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The maximum default <code>z-index</code> that the API will assign to a marker. You
-							may set a higher <code>z-index</code> to bring a marker to the front.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.MAX_ZINDEX" class="external">Maps JavaScript API</a></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
@@ -314,12 +291,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:722</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd></dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -330,7 +301,7 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Marker</span>, args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
@@ -340,7 +311,7 @@
 															<h5>this: <span class="tsd-signature-type">Marker</span></h5>
 														</li>
 														<li>
-															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -358,7 +329,7 @@
 					<a name="bindto" class="tsd-anchor"></a>
 					<h3>bind<wbr>To</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">bind<wbr>To<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MVCObject</span>, targetKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, noNotify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">bind<wbr>To<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MVCObject</span>, targetKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, noNotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -368,11 +339,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2937</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Binds a View to a Model.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -430,11 +396,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2940</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets a value.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -459,13 +420,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:653</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getAnimation" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Animation</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -489,13 +443,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:655</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getClickable" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -514,13 +461,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:657</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getCursor" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -544,13 +484,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:659</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getDraggable" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -574,13 +507,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:661</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getIcon" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">ReadonlyIcon</span>
@@ -608,13 +534,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:663</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getLabel" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlyMarkerLabel</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -638,13 +557,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:665</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getMap" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">StreetViewPanorama</span>
@@ -670,13 +582,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:667</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getOpacity" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -700,13 +605,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:669</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getPosition" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">LatLng</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -730,13 +628,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:671</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getShape" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MarkerShape</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -760,13 +651,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:673</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getTitle" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -790,13 +674,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:675</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getVisible" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -815,13 +692,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:677</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.getZIndex" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
@@ -845,13 +715,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2946</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Notify all observers of a change on this property. This notifies both
-										objects that are bound to the object&#39;s property as well as the object
-									that it is bound to.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -876,11 +739,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2948</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets a value.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -908,19 +766,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:685</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Start an animation. Any ongoing animation will be cancelled. Currently
-										supported animations are: {@link Animation.BOUNCE BOUNCE},
-										{@link Animation.DROP DROP}. Passing in <code>null</code> will cause any animation
-									to stop.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setAnimation" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -945,13 +790,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:687</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setClickable" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -976,13 +814,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:689</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setCursor" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1007,13 +838,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:691</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setDraggable" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1038,13 +862,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:693</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setIcon" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1069,13 +886,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:695</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setLabel" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1100,17 +910,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:701</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Renders the marker on the specified map or panorama. If map is set to
-									<code>null</code>, the marker will be removed.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setMap" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1135,13 +934,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:703</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setOpacity" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1166,13 +958,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:705</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setOptions" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1197,13 +982,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:707</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setPosition" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1228,13 +1006,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:709</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setShape" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1259,13 +1030,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:711</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setTitle" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1290,11 +1054,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2950</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets a collection of key-value pairs.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1319,13 +1078,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:713</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setVisible" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1350,13 +1102,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:715</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>see</dt>
-									<dd><p><a href="https://developers.google.com/maps/documentation/javascript/reference/marker#Marker.setZIndex" class="external">Maps JavaScript API</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1381,12 +1126,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2955</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Removes a binding. Unbinding will set the unbound property to the current
-									value. The object will not be notified, as the value has not changed.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1411,11 +1150,6 @@
 									<li>Defined in node_modules/@types/googlemaps/index.d.ts:2957</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Removes all bindings.</p>
-								</div>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>

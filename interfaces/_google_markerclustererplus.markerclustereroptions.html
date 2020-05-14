@@ -69,13 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Optional parameter passed to the <a href="../classes/_google_markerclustererplus.markerclusterer.html">MarkerClusterer</a> constructor.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -122,15 +115,9 @@
 					<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<wbr>Fn<span class="tsd-signature-symbol">:</span> <a href="../modules/_google_markerclustererplus.html#arialabelfn" class="tsd-signature-type">AriaLabelFn</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L242">packages/markerclustererplus/src/markerclusterer.ts:242</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L242">packages/markerclustererplus/src/markerclusterer.ts:242</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A function to take the text attribute associated with the cluster and output a string to attach an
-							ariaLabel to the cluster</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="averagecenter" class="tsd-anchor"></a>
@@ -138,21 +125,9 @@
 					<div class="tsd-signature tsd-kind-icon">average<wbr>Center<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L114">packages/markerclustererplus/src/markerclusterer.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L114">packages/markerclustererplus/src/markerclusterer.ts:114</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether the position of a cluster marker should be
-								the average position of all markers in the cluster. If set to <code>false</code>, the
-							cluster marker is positioned at the location of the first marker added to the cluster.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>false</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="batchsize" class="tsd-anchor"></a>
@@ -160,20 +135,9 @@
 					<div class="tsd-signature tsd-kind-icon">batch<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L203">packages/markerclustererplus/src/markerclusterer.ts:203</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L203">packages/markerclustererplus/src/markerclusterer.ts:203</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Set this property to the number of markers to be processed in a single batch when using
-							a browser other than Internet Explorer (for Internet Explorer, use the batchSizeIE property instead).</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>MarkerClusterer.BATCH_SIZE</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="batchsizeie" class="tsd-anchor"></a>
@@ -181,24 +145,9 @@
 					<div class="tsd-signature tsd-kind-icon">batch<wbr>SizeIE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L214">packages/markerclustererplus/src/markerclusterer.ts:214</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L214">packages/markerclustererplus/src/markerclusterer.ts:214</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When Internet Explorer is
-								being used, markers are processed in several batches with a small delay inserted between
-								each batch in an attempt to avoid Javascript timeout errors. Set this property to the
-								number of markers to be processed in a single batch; select as high a number as you can
-								without causing a timeout error in the browser. This number might need to be as low as 100
-							if 15,000 markers are being managed, for example.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>MarkerClusterer.BATCH_SIZE_IE</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="calculator" class="tsd-anchor"></a>
@@ -206,34 +155,9 @@
 					<div class="tsd-signature tsd-kind-icon">calculator<span class="tsd-signature-symbol">:</span> <a href="../modules/_google_markerclustererplus.html#calculator" class="tsd-signature-type">Calculator</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L169">packages/markerclustererplus/src/markerclusterer.ts:169</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L169">packages/markerclustererplus/src/markerclusterer.ts:169</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The function used to determine
-								the text to be displayed on a cluster marker and the index indicating which style to use
-								for the cluster marker. The input parameters for the function are (1) the array of markers
-								represented by a cluster marker and (2) the number of cluster icon styles. It returns a
-								<a href="_google_markerclustererplus.clustericoninfo.html">ClusterIconInfo</a> object. The default <code>calculator</code> returns a
-								<code>text</code> property which is the number of markers in the cluster and an
-								<code>index</code> property which is one higher than the lowest integer such that
-								<code>10^i</code> exceeds the number of markers in the cluster, or the size of the styles
-								array, whichever is less. The <code>styles</code> array element used has an index of
-								<code>index</code> minus 1. For example, the default <code>calculator</code> returns a
-								<code>text</code> value of <code>&quot;125&quot;</code> and an <code>index</code> of <code>3</code>
-								for a cluster icon representing 125 markers so the element used in the <code>styles</code>
-								array is <code>2</code>. A <code>calculator</code> may also return a <code>title</code>
-								property that contains the text of the tooltip to be used for the cluster marker. If
-								<code>title</code> is not defined, the tooltip is set to the value of the <code>title</code>
-							property for the MarkerClusterer.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><a href="../classes/_google_markerclustererplus.markerclusterer.html#calculator">MarkerClusterer.CALCULATOR</a></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="clusterclass" class="tsd-anchor"></a>
@@ -241,21 +165,9 @@
 					<div class="tsd-signature tsd-kind-icon">cluster<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L177">packages/markerclustererplus/src/markerclusterer.ts:177</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L177">packages/markerclustererplus/src/markerclusterer.ts:177</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the CSS class defining general styles
-								for the cluster markers. Use this class to define CSS styles that are not set up by the code
-							that processes the <code>styles</code> array.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>&quot;cluster&quot;</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="enableretinaicons" class="tsd-anchor"></a>
@@ -263,22 +175,9 @@
 					<div class="tsd-signature tsd-kind-icon">enable<wbr>Retina<wbr>Icons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L196">packages/markerclustererplus/src/markerclusterer.ts:196</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L196">packages/markerclustererplus/src/markerclusterer.ts:196</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether to allow the use of cluster icons that
-								have sizes that are some multiple (typically double) of their actual display size. Icons such
-								as these look better when viewed on high-resolution monitors such as Apple&#39;s Retina displays.
-							Note: if this property is <code>true</code>, sprites cannot be used as cluster icons.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>false</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="gridsize" class="tsd-anchor"></a>
@@ -286,19 +185,9 @@
 					<div class="tsd-signature tsd-kind-icon">grid<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L90">packages/markerclustererplus/src/markerclusterer.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L90">packages/markerclustererplus/src/markerclusterer.ts:90</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The grid size of a cluster in pixels. The grid is a square.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>60</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="ignorehidden" class="tsd-anchor"></a>
@@ -306,24 +195,9 @@
 					<div class="tsd-signature tsd-kind-icon">ignore<wbr>Hidden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L140">packages/markerclustererplus/src/markerclusterer.ts:140</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L140">packages/markerclustererplus/src/markerclusterer.ts:140</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether to ignore hidden markers in clusters. You
-								may want to set this to <code>true</code> to ensure that hidden markers are not included
-								in the marker count that appears on a cluster marker (this count is the value of the
-								<code>text</code> property of the result returned by the default  <a href="_google_markerclustererplus.markerclustereroptions.html#calculator">calculator</a>).
-								If set to <code>true</code> and you change the visibility of a marker being clustered, be
-							sure to also call {@link MarkerClusterer#repaint()}.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>false</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="imageextension" class="tsd-anchor"></a>
@@ -331,20 +205,9 @@
 					<div class="tsd-signature tsd-kind-icon">image<wbr>Extension<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L229">packages/markerclustererplus/src/markerclusterer.ts:229</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L229">packages/markerclustererplus/src/markerclusterer.ts:229</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The extension name for the cluster icon image files (e.g., <code>&quot;png&quot;</code> or
-							<code>&quot;jpg&quot;</code>).</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>MarkerClusterer.IMAGE_EXTENSION</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="imagepath" class="tsd-anchor"></a>
@@ -352,21 +215,9 @@
 					<div class="tsd-signature tsd-kind-icon">image<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L222">packages/markerclustererplus/src/markerclusterer.ts:222</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L222">packages/markerclustererplus/src/markerclusterer.ts:222</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The full URL of the root name of the group of image files to use for cluster icons.
-								The complete file name is of the form <code>imagePath</code>n.<code>imageExtension</code>
-							where n is the image file number (1, 2, etc.).</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>MarkerClusterer.IMAGE_PATH</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="imagesizes" class="tsd-anchor"></a>
@@ -374,21 +225,9 @@
 					<div class="tsd-signature tsd-kind-icon">image<wbr>Sizes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L237">packages/markerclustererplus/src/markerclusterer.ts:237</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L237">packages/markerclustererplus/src/markerclusterer.ts:237</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An array of numbers containing the widths of the group of
-								<code>imagePath</code>n.<code>imageExtension</code> image files.
-							(The images are assumed to be square.)</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>MarkerClusterer.IMAGE_SIZES</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="maxzoom" class="tsd-anchor"></a>
@@ -396,20 +235,9 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Zoom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L97">packages/markerclustererplus/src/markerclusterer.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L97">packages/markerclustererplus/src/markerclusterer.ts:97</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The maximum zoom level at which clustering is enabled or
-							<code>null</code> if clustering is to be enabled at all zoom levels.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>null</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="minimumclustersize" class="tsd-anchor"></a>
@@ -417,20 +245,9 @@
 					<div class="tsd-signature tsd-kind-icon">minimum<wbr>Cluster<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L121">packages/markerclustererplus/src/markerclusterer.ts:121</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L121">packages/markerclustererplus/src/markerclusterer.ts:121</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The minimum number of markers needed in a cluster
-							before the markers are hidden and a cluster marker appears.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>2</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="styles" class="tsd-anchor"></a>
@@ -438,23 +255,9 @@
 					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <a href="_google_markerclustererplus.clustericonstyle.html" class="tsd-signature-type">ClusterIconStyle</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L187">packages/markerclustererplus/src/markerclusterer.ts:187</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L187">packages/markerclustererplus/src/markerclusterer.ts:187</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An array of <a href="_google_markerclustererplus.clustericonstyle.html">ClusterIconStyle</a> elements defining the styles
-								of the cluster markers to be used. The element to be used to style a given cluster marker
-								is determined by the function defined by the <code>calculator</code> property.
-								The default is an array of <a href="_google_markerclustererplus.clustericonstyle.html">ClusterIconStyle</a> elements whose properties are derived
-							from the values for <code>imagePath</code>, <code>imageExtension</code>, and <code>imageSizes</code>.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>styles</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="title" class="tsd-anchor"></a>
@@ -462,21 +265,9 @@
 					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L148">packages/markerclustererplus/src/markerclusterer.ts:148</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L148">packages/markerclustererplus/src/markerclusterer.ts:148</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The tooltip to display when the mouse moves over a cluster
-								marker. (Alternatively, you can use a custom <code>calculator</code> function to specify a
-							different tooltip for each cluster marker.)</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>&quot;&quot;</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="zindex" class="tsd-anchor"></a>
@@ -484,15 +275,9 @@
 					<div class="tsd-signature tsd-kind-icon">z<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L128">packages/markerclustererplus/src/markerclusterer.ts:128</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L128">packages/markerclustererplus/src/markerclusterer.ts:128</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p> the z-index of a cluster.</p>
-						</div>
-						<p> @default <code>google.maps.Marker.MAX_ZINDEX + 1</code></p>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="zoomonclick" class="tsd-anchor"></a>
@@ -500,21 +285,9 @@
 					<div class="tsd-signature tsd-kind-icon">zoom<wbr>OnClick<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/0b86f4e/packages/markerclustererplus/src/markerclusterer.ts#L106">packages/markerclustererplus/src/markerclusterer.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/googlemaps/v3-utility-library/blob/db209f3/packages/markerclustererplus/src/markerclusterer.ts#L106">packages/markerclustererplus/src/markerclusterer.ts:106</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Whether to zoom the map when a cluster marker is
-								clicked. You may want to set this to <code>false</code> if you have installed a handler
-							for the <code>click</code> event and it deals with zooming on its own.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><code>true</code></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 		</div>
