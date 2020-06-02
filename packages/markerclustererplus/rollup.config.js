@@ -4,7 +4,25 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 
 const babelOptions = {
-  extensions: ['.js', '.ts']
+  extensions: ['.js', '.ts'],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          browsers: '> 0.5%, ie >= 11',
+        },
+        modules: false,
+        spec: true,
+        useBuiltIns: "usage",
+        forceAllTransforms: true,
+        corejs: {
+          version: 3,
+          proposals: false,
+        },
+      },
+    ],
+  ],
 };
 
 const terserOptions = {output: {comments: ''}};
@@ -39,6 +57,8 @@ export default [
     input: 'src/index.ts',
     plugins: [
       typescript(),
+      babel(babelOptions),
+      terser(terserOptions)
     ],
     output: {
       file: 'dist/markerclustererplus.esm.js',
