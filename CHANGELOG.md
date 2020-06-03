@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.4](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.3...@google/markerclustererplus@5.0.4) (2020-06-03)
+
+
+### Bug Fixes
+
+* use let instead of const in for loop ([#658](https://github.com/googlemaps/v3-utility-library/issues/658)) ([3194a2b](https://github.com/googlemaps/v3-utility-library/commit/3194a2b2cda15fb1d4c1aaddfd957384c9043742))
+
+
+
+
+
 ## [5.0.3](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.2...@google/markerclustererplus@5.0.3) (2020-03-12)
 
 
