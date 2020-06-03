@@ -26,7 +26,8 @@ export interface OverlayViewSafe extends google.maps.OverlayView {}
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extend(type1: any, type2: any): void {
-  for (const property in type2.prototype) {
+  // eslint-disable-next-line prefer-const
+  for (let property in type2.prototype) {
     type1.prototype[property] = type2.prototype[property];
   }
 }
