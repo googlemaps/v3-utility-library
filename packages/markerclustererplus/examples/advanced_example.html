@@ -43,7 +43,6 @@
 
 
       .custom-clustericon {
-        background: var(--cluster-color);
         color: #FFF;
         border-radius: 100%;
         font-weight: bold;
@@ -62,7 +61,7 @@
         transform: translate(-50%, -50%);
         top: 50%;
         left: 50%;
-        background: var(--cluster-color);
+        background: var(--background-color);
         opacity: 0.2;
         border-radius: 100%;
       }
@@ -76,16 +75,13 @@
       }
 
       .custom-clustericon-1 {
-        --cluster-color: #00A2D3;
+        --background-color: #00A2D3;
       }
 
       .custom-clustericon-2 {
-        --cluster-color: #FF9B00;
+        --background-color: #FF9B00;
       }
 
-      .custom-clustericon-3 {
-        --cluster-color: #FF6969;
-      }
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
@@ -188,7 +184,7 @@
           {
             width: 50,
             height: 50,
-            className: 'custom-clustericon-3'
+            backgroundColor: '#FF6969'
           }
         ],
       ];

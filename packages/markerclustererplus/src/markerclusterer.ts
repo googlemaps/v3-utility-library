@@ -1182,6 +1182,7 @@ export class MarkerClusterer extends OverlayViewSafe {
       fontStyle: "normal",
       fontFamily: "Arial,sans-serif",
       backgroundPosition: "0 0",
+      backgroundColor: "transparent",
       ...overrides
     };
   }
