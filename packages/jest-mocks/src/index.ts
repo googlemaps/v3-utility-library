@@ -19,9 +19,18 @@
 import { LatLng, LatLngBounds } from "./latlng";
 import { Map_ } from "./map";
 import { Marker } from "./marker";
+import { MVCArray } from "./mvcarray";
 import { MVCObject } from "./mvcobject";
 import { Point } from "./point";
 import { Size } from "./size";
+import { Polyline } from "./polyline";
+
+enum MapTypeId {
+  HYBRID = "hybrid",
+  ROADMAP = "roadmap",
+  SATELLITE = "satellite",
+  TERRAIN = "terrain"
+}
 
 const initialize = function(): void {
   (global as any).google = {
@@ -32,6 +41,8 @@ const initialize = function(): void {
       Point: Point,
       Size: Size,
       MVCObject: MVCObject,
+      MVCArray: MVCArray,
+      MapTypeId: MapTypeId,
       LatLng: LatLng,
       LatLngBounds: LatLngBounds,
       event: {
@@ -43,7 +54,8 @@ const initialize = function(): void {
         clearListeners: jest.fn(),
         removeListener: jest.fn(),
         trigger: jest.fn()
-      }
+      },
+      Polyline: Polyline
     }
   };
 };
@@ -52,7 +64,9 @@ export {
   Marker,
   Map_ as Map,
   Size,
+  MVCArray,
   MVCObject,
+  Polyline,
   LatLng,
   LatLngBounds,
   initialize
