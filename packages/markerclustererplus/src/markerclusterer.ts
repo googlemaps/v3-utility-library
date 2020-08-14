@@ -34,8 +34,9 @@
  *  deprecated. The new name is `click`, so please change your application code now.
  */
 
-import { Cluster } from "./cluster";
 import { ClusterIconInfo, ClusterIconStyle } from "./cluster-icon";
+
+import { Cluster } from "./cluster";
 import { OverlayViewSafe } from "./overlay-view-safe";
 
 /**
@@ -449,7 +450,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    *  Fits the map to the bounds of the markers managed by the clusterer.
    */
-  fitMapToMarkers(): void {
+  fitMapToMarkers(padding: number| google.maps.Padding): void {
     const markers = this.getMarkers();
     const bounds = new google.maps.LatLngBounds();
     for (let i = 0; i < markers.length; i++) {
@@ -459,7 +460,7 @@ export class MarkerClusterer extends OverlayViewSafe {
       }
     }
 
-    (this.getMap() as google.maps.Map).fitBounds(bounds);
+    (this.getMap() as google.maps.Map).fitBounds(bounds, padding);
   }
 
   /**
