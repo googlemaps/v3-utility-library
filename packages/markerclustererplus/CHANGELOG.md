@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.4...@google/markerclustererplus@5.1.0) (2020-08-14)
+
+
+### Features
+
+* add padding for fitMapToMarkers ([#667](https://github.com/googlemaps/v3-utility-library/issues/667)) ([2a88472](https://github.com/googlemaps/v3-utility-library/commit/2a884720ed30ab947266639ba383926c1ddc6081))
+
+
+
+
+
 ## [5.0.4](https://github.com/googlemaps/v3-utility-library/compare/@google/markerclustererplus@5.0.3...@google/markerclustererplus@5.0.4) (2020-06-03)
 
 
