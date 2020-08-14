@@ -450,7 +450,7 @@ export class MarkerClusterer extends OverlayViewSafe {
   /**
    *  Fits the map to the bounds of the markers managed by the clusterer.
    */
-  fitMapToMarkers(padding: number| google.maps.Padding): void {
+  fitMapToMarkers(padding: number | google.maps.Padding): void {
     const markers = this.getMarkers();
     const bounds = new google.maps.LatLngBounds();
     for (let i = 0; i < markers.length; i++) {
