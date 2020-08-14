@@ -33,8 +33,8 @@
  *  errors on Internet Explorer. Note that the name of the `clusterclick` event has been
  *  deprecated. The new name is `click`, so please change your application code now.
  */
-import { Cluster } from "./cluster";
 import { ClusterIconInfo, ClusterIconStyle } from "./cluster-icon";
+import { Cluster } from "./cluster";
 import { OverlayViewSafe } from "./overlay-view-safe";
 /**
  * @param text The text attribute of the cluster
@@ -306,7 +306,7 @@ export declare class MarkerClusterer extends OverlayViewSafe {
     /**
      *  Fits the map to the bounds of the markers managed by the clusterer.
      */
-    fitMapToMarkers(): void;
+    fitMapToMarkers(padding: number | google.maps.Padding): void;
     /**
      * Returns the value of the `gridSize` property.
      *

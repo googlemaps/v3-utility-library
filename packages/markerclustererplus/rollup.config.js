@@ -1,17 +1,17 @@
-import {terser} from 'rollup-plugin-terser';
-import typescript from 'rollup-plugin-typescript2';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import { terser } from "rollup-plugin-terser";
+import typescript from "rollup-plugin-typescript2";
+import babel from "rollup-plugin-babel";
+import commonjs from "rollup-plugin-commonjs";
 
 const babelOptions = {
-  extensions: ['.js', '.ts']
+  extensions: [".js", ".ts"]
 };
 
-const terserOptions = {output: {comments: ''}};
+const terserOptions = { output: { comments: "" } };
 
 export default [
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     plugins: [
       typescript(),
       babel(babelOptions),
@@ -20,31 +20,29 @@ export default [
     ],
     output: [
       {
-        file: 'dist/markerclustererplus.umd.js',
-        format: 'umd',
+        file: "dist/markerclustererplus.umd.js",
+        format: "umd",
         sourcemap: true,
-        exports: 'default',
-        name: 'MarkerClusterer',
+        exports: "default",
+        name: "MarkerClusterer"
       },
       {
-        file: 'dist/markerclustererplus.min.js',
-        format: 'iife',
+        file: "dist/markerclustererplus.min.js",
+        format: "iife",
         sourcemap: true,
-        exports: 'default',
-        name: 'MarkerClusterer',
-      },
-    ],
+        exports: "default",
+        name: "MarkerClusterer"
+      }
+    ]
   },
   {
-    input: 'src/index.ts',
-    plugins: [
-      typescript(),
-    ],
+    input: "src/index.ts",
+    plugins: [typescript()],
     output: {
-      file: 'dist/markerclustererplus.esm.js',
-      format: 'esm',
+      file: "dist/markerclustererplus.esm.js",
+      format: "esm",
       sourcemap: true,
-      name: 'MarkerClusterer',
-    },
-  },
+      name: "MarkerClusterer"
+    }
+  }
 ];
