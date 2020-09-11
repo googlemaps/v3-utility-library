@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/ogc",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Provides OGC plugin to Google Maps with features such as WmsMapType.",
   "keywords": [
     "cluster",
@@ -37,7 +37,7 @@
     "query-string": "^6.8.3"
   },
   "devDependencies": {
-    "@googlemaps/jest-mocks": "^0.0.3"
+    "@googlemaps/jest-mocks": "^0.1.0"
   },
   "publishConfig": {
     "access": "public",
