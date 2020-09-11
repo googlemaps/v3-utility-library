@@ -276,6 +276,39 @@ class Marker extends MVCObject {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+class MVCArray extends MVCObject {
+    constructor(array) {
+        super();
+        this.clear = jest.fn().mockImplementation(() => { });
+        this.forEach = jest
+            .fn()
+            .mockImplementation((callback) => { });
+        this.getArray = jest.fn().mockImplementation(() => []);
+        this.getAt = jest.fn().mockImplementation((i) => ({}));
+        this.getLength = jest.fn().mockImplementation(() => 0);
+        this.insertAt = jest.fn().mockImplementation((i, elem) => { });
+        this.pop = jest.fn().mockImplementation(() => ({}));
+        this.push = jest.fn().mockImplementation((elem) => 0);
+        this.removeAt = jest.fn().mockImplementation((i) => ({}));
+        this.setAt = jest.fn().mockImplementation((i, elem) => { });
+    }
+}
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 class Point {
     constructor(x, y) {
         this.toString = jest.fn().mockImplementation(() => {
@@ -332,6 +365,53 @@ class Size {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+class Polyline extends MVCObject {
+    constructor(opts) {
+        super();
+        this.getDraggable = jest.fn().mockImplementation(() => false);
+        this.getEditable = jest.fn().mockImplementation(() => false);
+        this.getMap = jest
+            .fn()
+            .mockImplementation(() => ({}));
+        this.getPath = jest
+            .fn()
+            .mockImplementation(() => ({}));
+        this.getVisible = jest.fn().mockImplementation(() => false);
+        this.setDraggable = jest.fn().mockImplementation((draggable) => { });
+        this.setEditable = jest.fn().mockImplementation((editable) => { });
+        this.setMap = jest.fn().mockImplementation((map) => { });
+        this.setOptions = jest
+            .fn()
+            .mockImplementation((options) => { });
+        this.setPath = jest
+            .fn()
+            .mockImplementation((path) => { });
+        this.setVisible = jest.fn().mockImplementation((visible) => { });
+    }
+}
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var MapTypeId;
+(function (MapTypeId) {
+    MapTypeId["HYBRID"] = "hybrid";
+    MapTypeId["ROADMAP"] = "roadmap";
+    MapTypeId["SATELLITE"] = "satellite";
+    MapTypeId["TERRAIN"] = "terrain";
+})(MapTypeId || (MapTypeId = {}));
 const initialize = function () {
     global.google = {
         maps: {
@@ -341,6 +421,8 @@ const initialize = function () {
             Point: Point,
             Size: Size,
             MVCObject: MVCObject,
+            MVCArray: MVCArray,
+            MapTypeId: MapTypeId,
             LatLng: LatLng,
             LatLngBounds: LatLngBounds,
             event: {
@@ -352,10 +434,11 @@ const initialize = function () {
                 clearListeners: jest.fn(),
                 removeListener: jest.fn(),
                 trigger: jest.fn()
-            }
+            },
+            Polyline: Polyline
         }
     };
 };
 
-export { LatLng, LatLngBounds, MVCObject, Map_ as Map, Marker, Size, initialize };
+export { LatLng, LatLngBounds, MVCArray, MVCObject, Map_ as Map, Marker, Polyline, Size, initialize };
 //# sourceMappingURL=jest-mocks.esm.js.map

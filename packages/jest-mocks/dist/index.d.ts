@@ -16,7 +16,9 @@
 import { LatLng, LatLngBounds } from "./latlng";
 import { Map_ } from "./map";
 import { Marker } from "./marker";
+import { MVCArray } from "./mvcarray";
 import { MVCObject } from "./mvcobject";
 import { Size } from "./size";
+import { Polyline } from "./polyline";
 declare const initialize: () => void;
-export { Marker, Map_ as Map, Size, MVCObject, LatLng, LatLngBounds, initialize };
+export { Marker, Map_ as Map, Size, MVCArray, MVCObject, Polyline, LatLng, LatLngBounds, initialize };
