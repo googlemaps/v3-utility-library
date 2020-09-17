@@ -1,7 +1,7 @@
 MarkerClustererPlus for Google Maps V3
 ======================================
 
-> **Note**: This package has moved to [@googlemaps/markerclusterplus](https://www.npmjs.com/package/@googlemaps/markerclustererplus) and the source is now at https://github.com/googlemaps/js-markerclustererplus. `@googlemaps/markerclusterplus@1.0.0` is equivalent to `@google/markerclustererplus@6.0.0`. All future development will be limited to [@googlemaps/markerclusterplus](https://www.npmjs.com/package/@googlemaps/markerclustererplus).
+> **Note**: This package has moved to [@googlemaps/markerclusterplus](https://www.npmjs.com/package/@googlemaps/markerclustererplus) and the source is now at https://github.com/googlemaps/js-markerclustererplus. `@googlemaps/markerclusterplus@1.0.0` is equivalent to `@google/markerclustererplus@6.0.0`. All future development will be limited to [@googlemaps/markerclustererplus](https://www.npmjs.com/package/@googlemaps/markerclustererplus).
 
 ## Description
 
