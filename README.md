@@ -16,11 +16,13 @@ In this project you can find a utility packages developed for the Google Maps Ja
 Documentation for the utility packages below can be found at https://googlemaps.github.io/v3-utility-library/.
 
 ## Packages
+> **Note**: Many packages are being moved to individual repositories and placed in the @googlemaps NPM scope!
+
 - @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript
-- @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns
+- @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns. **Moved to https://github.com/googlemaps/js-api-loader and published to @googlemaps/js-api-loader.**
 - @googlemaps/ogc - WMS Layers and more(tbd)
-- @google/markerclusterer - Cluster nearby markers
-- @google/markerclustererplus - Extended version of @google/markerclusterer
+- @google/markerclusterer - Cluster nearby markers. **Please use @googlemaps/markerclustererplus.**
+- @google/markerclustererplus - Extended version of @google/markerclusterer. **Moved to https://github.com/googlemaps/js-markerclustererplus and published to @googlemaps/markerclustererplus.**
 - @googlemaps/markermanager - Show and hide markers based on zoom and bounds to improve performance
 - @google/markerwithlabel - Markers with labels and matching events
 
@@ -40,10 +42,10 @@ The following packages have never been officially published and are not maintain
 - StyledMarker
  
 ## Other Resources
-- [Google Maps VS Documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
-- [Google Maps V3 Reference Documenations](https://developers.google.com/maps/documentation/javascript/reference/)
+- [Google Maps JS Documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
+- [Google Maps JS Reference Documenations](https://developers.google.com/maps/documentation/javascript/reference/)
 - [Google Maps Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/googlemaps) - Community supported `npm i -D @types/googlemaps`
-- [Google Maps V3 Samples](https://github.com/googlemaps/js-samples)
+- [Google Maps JS Samples](https://github.com/googlemaps/js-samples)
 
 ## Support
 
