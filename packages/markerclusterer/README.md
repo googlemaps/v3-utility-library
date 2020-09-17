@@ -1,7 +1,7 @@
 MarkerClusterer for Google Maps v3
 ==================================
 
->**Note**: It is recommended to use [@google/markerclustererplus](https://github.com/googlemaps/v3-utility-library/tree/master/packages/markerclustererplus) instead of this package.
+>**Note**: It is recommended to use [@googlemaps/markerclustererplus](https://github.com/googlemaps/js-markerclustererplus) instead of this package.
 
 ## Description
 
