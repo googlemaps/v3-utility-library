@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1599839181590" clover="3.2.0">
-  <project timestamp="1599839181590" name="All files">
+<coverage generated="1600356647321" clover="3.2.0">
+  <project timestamp="1600356647322" name="All files">
     <metrics statements="183" coveredstatements="70" conditionals="6" coveredconditionals="2" methods="113" coveredmethods="4" elements="302" coveredelements="76" complexity="0" loc="183" ncloc="183" packages="1" files="9" classes="9"/>
     <file name="index.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/index.ts">
       <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
