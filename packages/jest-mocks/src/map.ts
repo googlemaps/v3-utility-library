@@ -45,6 +45,7 @@ export class Map_ extends MVCObject implements google.maps.Map {
     .mockImplementation(
       (): google.maps.LatLng => new LatLng({ lat: 0, lng: 0 })
     );
+  getClickableIcons = jest.fn().mockImplementation((): boolean => false);
   getDiv = jest.fn().mockImplementation(
     (): Element => {
       return (jest.fn() as unknown) as Element;
