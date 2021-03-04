@@ -133,6 +133,7 @@ this.google.maps.plugins['jest-mocks'] = (function (exports) {
           this.getCenter = jest
               .fn()
               .mockImplementation(() => new LatLng({ lat: 0, lng: 0 }));
+          this.getClickableIcons = jest.fn().mockImplementation(() => false);
           this.getDiv = jest.fn().mockImplementation(() => {
               return jest.fn();
           });

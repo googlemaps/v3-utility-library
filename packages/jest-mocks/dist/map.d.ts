@@ -25,6 +25,7 @@ export declare class Map_ extends MVCObject implements google.maps.Map {
     fitBounds: jest.Mock<any, any>;
     getBounds: jest.Mock<any, any>;
     getCenter: jest.Mock<any, any>;
+    getClickableIcons: jest.Mock<any, any>;
     getDiv: jest.Mock<any, any>;
     getHeading: jest.Mock<any, any>;
     getMapTypeId: jest.Mock<any, any>;

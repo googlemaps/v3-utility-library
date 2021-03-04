@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1600359235184" clover="3.2.0">
-  <project timestamp="1600359235184" name="All files">
-    <metrics statements="183" coveredstatements="70" conditionals="6" coveredconditionals="2" methods="113" coveredmethods="4" elements="302" coveredelements="76" complexity="0" loc="183" ncloc="183" packages="1" files="9" classes="9"/>
+<coverage generated="1614872671824" clover="3.2.0">
+  <project timestamp="1614872671824" name="All files">
+    <metrics statements="184" coveredstatements="71" conditionals="6" coveredconditionals="2" methods="114" coveredmethods="4" elements="304" coveredelements="77" complexity="0" loc="184" ncloc="184" packages="1" files="9" classes="9"/>
     <file name="index.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/index.ts">
       <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <line num="19" count="1" type="stmt"/>
@@ -66,7 +66,7 @@
       <line num="98" count="0" type="stmt"/>
     </file>
     <file name="map.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/map.ts">
-      <metrics statements="31" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="1"/>
+      <metrics statements="32" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="23" coveredmethods="1"/>
       <line num="17" count="1" type="stmt"/>
       <line num="18" count="1" type="stmt"/>
       <line num="21" count="1" type="stmt"/>
@@ -77,27 +77,28 @@
       <line num="43" count="1" type="stmt"/>
       <line num="46" count="0" type="stmt"/>
       <line num="48" count="1" type="stmt"/>
-      <line num="50" count="0" type="stmt"/>
-      <line num="53" count="1" type="stmt"/>
+      <line num="49" count="1" type="stmt"/>
+      <line num="51" count="0" type="stmt"/>
       <line num="54" count="1" type="stmt"/>
-      <line num="57" count="0" type="stmt"/>
-      <line num="59" count="1" type="stmt"/>
-      <line num="61" count="0" type="stmt"/>
-      <line num="62" count="1" type="stmt"/>
-      <line num="66" count="0" type="stmt"/>
-      <line num="68" count="1" type="stmt"/>
+      <line num="55" count="1" type="stmt"/>
+      <line num="58" count="0" type="stmt"/>
+      <line num="60" count="1" type="stmt"/>
+      <line num="62" count="0" type="stmt"/>
+      <line num="63" count="1" type="stmt"/>
+      <line num="67" count="0" type="stmt"/>
       <line num="69" count="1" type="stmt"/>
       <line num="70" count="1" type="stmt"/>
       <line num="71" count="1" type="stmt"/>
-      <line num="76" count="1" type="stmt"/>
-      <line num="86" count="1" type="stmt"/>
-      <line num="91" count="1" type="stmt"/>
+      <line num="72" count="1" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="87" count="1" type="stmt"/>
       <line num="92" count="1" type="stmt"/>
-      <line num="97" count="1" type="stmt"/>
-      <line num="100" count="1" type="stmt"/>
-      <line num="103" count="1" type="stmt"/>
+      <line num="93" count="1" type="stmt"/>
+      <line num="98" count="1" type="stmt"/>
+      <line num="101" count="1" type="stmt"/>
       <line num="104" count="1" type="stmt"/>
       <line num="105" count="1" type="stmt"/>
+      <line num="106" count="1" type="stmt"/>
     </file>
     <file name="marker.ts" path="/home/travis/build/googlemaps/v3-utility-library/packages/jest-mocks/src/marker.ts">
       <metrics statements="44" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="29" coveredmethods="0"/>
