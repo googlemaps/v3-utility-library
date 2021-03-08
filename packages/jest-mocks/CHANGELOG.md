@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/jest-mocks@0.1.0...@googlemaps/jest-mocks@0.1.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* missing `getClickableIcons` in class `_Map` ([#681](https://github.com/googlemaps/v3-utility-library/issues/681)) ([b7217ac](https://github.com/googlemaps/v3-utility-library/commit/b7217ac80ac6c4ff3116125c646a783b687d17e6))
+
+
+
+
+
 # [0.1.0](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/jest-mocks@0.0.3...@googlemaps/jest-mocks@0.1.0) (2020-09-11)
 
 
