@@ -293,7 +293,7 @@ export class MarkerClusterer extends OverlayViewSafe {
 
   public ariaLabelFn = this.options.ariaLabelFn || ((): string => "");
 
-  private zIndex_ = this.options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
+  private zIndex_ = this.options.zIndex || +google.maps.Marker.MAX_ZINDEX + 1;
   private gridSize_ = this.options.gridSize || 60;
   private minClusterSize_ = this.options.minimumClusterSize || 2;
   private maxZoom_ = this.options.maxZoom || null;

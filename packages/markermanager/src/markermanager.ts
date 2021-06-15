@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/// <reference types="@types/googlemaps" />
+/// <reference types="@types/google.maps" />
 
 import { latLngToPixel } from "./utils";
 import { GridBounds } from "./gridbounds";
@@ -210,9 +210,17 @@ class MarkerManager {
     // Tracking markers is expensive, so we do this only if the
     // user explicitly requested it when creating marker manager.
     if (this._trackMarkers) {
-      google.maps.event.addListener(marker, "changed", function(a, b, c) {
-        this._onMarkerMoved(a, b, c);
-      });
+      google.maps.event.addListener(
+        marker,
+        "changed",
+        (
+          marker: google.maps.Marker,
+          oldPoint: google.maps.LatLng,
+          newPoint: google.maps.LatLng
+        ) => {
+          this._onMarkerMoved(marker, oldPoint, newPoint);
+        }
+      );
     }
 
     const gridPoint = this._getTilePoint(

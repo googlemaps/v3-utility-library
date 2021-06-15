@@ -15,7 +15,7 @@
  */
 
 /// <reference types="@types/jest" />
-/// <reference types="@types/googlemaps" />
+/// <reference types="@types/google.maps" />
 
 import { initialize } from "@googlemaps/jest-mocks";
 import {

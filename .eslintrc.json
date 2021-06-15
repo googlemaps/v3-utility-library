@@ -4,14 +4,9 @@
     "plugin:jest/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "license-header"
-  ],
+  "plugins": ["license-header"],
   "rules": {
-    "license-header/header": [
-      "error",
-      "../../header.js"
-    ]
+    "license-header/header": ["error", "../../header.js"]
   },
   "parserOptions": {
     "ecmaVersion": 6,

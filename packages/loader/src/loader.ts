@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/// <reference types="@types/googlemaps" />
+/// <reference types="@types/google.maps" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export interface LoaderOptions {
