@@ -19,7 +19,7 @@ import { LatLng } from "./index";
 
 export class Marker extends MVCObject implements google.maps.Marker {
   static readonly MAX_ZINDEX: number;
-  constructor(opts?: google.maps.ReadonlyMarkerOptions) {
+  constructor(opts?: google.maps.MarkerOptions | null) {
     super();
   }
   getAnimation = jest
@@ -35,18 +35,12 @@ export class Marker extends MVCObject implements google.maps.Marker {
   getIcon = jest
     .fn()
     .mockImplementation(
-      ():
-        | string
-        | google.maps.ReadonlyIcon
-        | google.maps.ReadonlySymbol
-        | null
-        | undefined => null
+      (): string | google.maps.Icon | google.maps.Symbol | null | undefined =>
+        null
     );
   getLabel = jest
     .fn()
-    .mockImplementation(
-      (): google.maps.ReadonlyMarkerLabel | null | undefined => null
-    );
+    .mockImplementation((): google.maps.MarkerLabel | null | undefined => null);
   getMap = jest
     .fn()
     .mockImplementation(
@@ -83,18 +77,12 @@ export class Marker extends MVCObject implements google.maps.Marker {
   setIcon = jest
     .fn()
     .mockImplementation(
-      (
-        icon:
-          | string
-          | google.maps.ReadonlyIcon
-          | google.maps.ReadonlySymbol
-          | null
-      ): void => {}
+      (icon: string | google.maps.Icon | google.maps.Symbol | null): void => {}
     );
   setLabel = jest
     .fn()
     .mockImplementation(
-      (label: string | google.maps.ReadonlyMarkerLabel | null): void => {}
+      (label: string | google.maps.MarkerLabel | null): void => {}
     );
   setMap = jest
     .fn()
@@ -106,14 +94,12 @@ export class Marker extends MVCObject implements google.maps.Marker {
     .mockImplementation((opacity: number | null): void => {});
   setOptions = jest
     .fn()
-    .mockImplementation(
-      (options: google.maps.ReadonlyMarkerOptions): void => {}
-    );
+    .mockImplementation((options: google.maps.MarkerOptions): void => {});
   setPosition = jest
     .fn()
     .mockImplementation(
       (
-        latlng: google.maps.LatLng | google.maps.ReadonlyLatLngLiteral | null
+        latlng: google.maps.LatLng | google.maps.LatLngLiteral | null
       ): void => {}
     );
   setShape = jest
@@ -126,9 +112,7 @@ export class Marker extends MVCObject implements google.maps.Marker {
     .fn()
     .mockImplementation(
       (
-        eventName:
-          | google.maps.MarkerChangeOptionEventNames
-          | google.maps.MarkerMouseEventNames,
+        eventName: string,
         handler: (this: Marker, event: MouseEvent) => void
       ): google.maps.MapsEventListener =>
         (jest.fn() as unknown) as google.maps.MapsEventListener

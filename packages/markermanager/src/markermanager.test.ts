@@ -15,7 +15,7 @@
  */
 
 /// <reference types="@types/jest" />
-/// <reference types="@types/googlemaps" />
+/// <reference types="@types/google.maps" />
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { MarkerManager } from "./markermanager";

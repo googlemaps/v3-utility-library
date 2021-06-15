@@ -209,12 +209,16 @@ export class ClusterIcon extends OverlayViewSafe {
     // But it doesn't work with earlier releases so do a version check.
     if (gmVersion >= 332) {
       // Ugly version-dependent code
-      google.maps.event.addDomListener(this.div_, "touchstart", e => {
-        e.stopPropagation();
-      });
+      google.maps.event.addDomListener(
+        this.div_,
+        "touchstart",
+        (e: TouchEvent) => {
+          e.stopPropagation();
+        }
+      );
     }
 
-    google.maps.event.addDomListener(this.div_, "click", e => {
+    google.maps.event.addDomListener(this.div_, "click", (e: MouseEvent) => {
       cMouseDownInCluster = false;
       if (!cDraggingMapByCluster) {
         /**

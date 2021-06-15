@@ -60,6 +60,11 @@ export class Map_ extends MVCObject implements google.maps.Map {
   getProjection = jest
     .fn()
     .mockImplementation((): google.maps.Projection | null => jest.fn() as null);
+  getRenderingType = jest
+    .fn()
+    .mockImplementation(
+      (): google.maps.RenderingType => google.maps.RenderingType.RASTER
+    );
   getStreetView = jest
     .fn()
     .mockImplementation(
@@ -68,6 +73,9 @@ export class Map_ extends MVCObject implements google.maps.Map {
     );
   getTilt = jest.fn().mockImplementation((): number => 0);
   getZoom = jest.fn().mockImplementation((): number => 0);
+  moveCamera = jest
+    .fn()
+    .mockImplementation((cameraOptions: google.maps.CameraOptions): void => {});
   panBy = jest.fn().mockImplementation((x: number, y: number): void => {});
   panTo = jest
     .fn()

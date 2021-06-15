@@ -44,7 +44,7 @@ The following packages have never been officially published and are not maintain
 ## Other Resources
 - [Google Maps JS Documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
 - [Google Maps JS Reference Documenations](https://developers.google.com/maps/documentation/javascript/reference/)
-- [Google Maps Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/googlemaps) - Community supported `npm i -D @types/googlemaps`
+- [Google Maps Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/google.maps) - Community supported `npm i -D @types/google.maps`
 - [Google Maps JS Samples](https://github.com/googlemaps/js-samples)
 
 ## Support

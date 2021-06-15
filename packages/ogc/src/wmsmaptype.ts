@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/// <reference types="@types/googlemaps" />
+/// <reference types="@types/google.maps" />
 import { stringify } from "query-string";
 
 /**
