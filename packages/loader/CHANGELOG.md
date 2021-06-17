@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.10...@googlemaps/loader@0.1.0) (2021-06-17)
+
+
+### Features
+
+* Support for @types/google.maps ([#694](https://github.com/googlemaps/v3-utility-library/issues/694)) ([e78e58c](https://github.com/googlemaps/v3-utility-library/commit/e78e58c0c5a0dcf6675e671e2d54dcc46779744d)), closes [#690](https://github.com/googlemaps/v3-utility-library/issues/690)
+
+
+
+
+
 ## [0.0.10](https://github.com/googlemaps/v3-utility-library/compare/@googlemaps/loader@0.0.9...@googlemaps/loader@0.0.10) (2020-06-03)
 
 **Note:** Version bump only for package @googlemaps/loader
