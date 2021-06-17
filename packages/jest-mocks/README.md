@@ -1,3 +1,7 @@
+**This package has been moved to: https://github.com/googlemaps/js-jest-mocks.**
+
+---
+
 Jest Mocks for Google Maps v3
 =============================
 

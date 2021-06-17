@@ -18,7 +18,7 @@ Documentation for the utility packages below can be found at https://googlemaps.
 ## Packages
 > **Note**: Many packages are being moved to individual repositories and placed in the @googlemaps NPM scope!
 
-- @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript
+- @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript **Moved to https://github.com/googlemaps/js-jest-mocks.**
 - @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns. **Moved to https://github.com/googlemaps/js-api-loader and published to @googlemaps/js-api-loader.**
 - @googlemaps/ogc - WMS Layers and more(tbd)
 - @google/markerclusterer - Cluster nearby markers. **Please use @googlemaps/markerclustererplus.**
