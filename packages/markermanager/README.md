@@ -1,9 +1,11 @@
 MarkerManager v3
 ================
 
+**Moved to https://github.com/googlemaps/js-markermanager.**
+
 ## Description
 
-Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes. 
+Marker manager is an interface between the map and the user, designed to manage adding and removing many points when the viewport changes.
 
 ### How it Works:
 
@@ -12,7 +14,7 @@ The MarkerManager places its markers onto a grid, similar to the map tiles. When
 
 ## Documentation
 
-The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_markermanager.html). 
+The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_markermanager.html).
 
 ## Examples
 

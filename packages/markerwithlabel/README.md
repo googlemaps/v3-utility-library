@@ -1,6 +1,8 @@
 MarkerWithLabel for V3
 ======================
 
+**Moved to https://github.com/googlemaps/js-markerwithlabel.**
+
 ## Description
 
 MarkerWithLabel extends the Google Maps JavaScript API V3 google.maps.Marker class.

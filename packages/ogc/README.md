@@ -1,6 +1,8 @@
 OGC Plugin for Google Maps v3
 =============================
 
+**Moved to https://github.com/googlemaps/js-ogc.**
+
 ## Description
 
 Add a WmsMapType to Google Maps.
@@ -11,7 +13,7 @@ Available via NPM as the package `@googlemaps/ogc`
 
 ## Documentation
 
-The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_ogc.html). 
+The reference documentation can be found at this [link](https://googlemaps.github.io/v3-utility-library/modules/_googlemaps_ogc.html).
 
 ## Examples
 

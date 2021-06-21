@@ -7,7 +7,18 @@
 Google Maps JavaScript API v3 Utilities
 ===================================================
 
+> **Note**: All packages are have been moved to individual repositories and placed in the @googlemaps NPM scope!
+
+- @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript **Moved to https://github.com/googlemaps/js-jest-mocks.**
+- @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns. **Moved to https://github.com/googlemaps/js-api-loader and published to @googlemaps/js-api-loader.**
+- @googlemaps/ogc - WMS Layers and more(tbd) **Moved to https://github.com/googlemaps/js-ogc.**
+- @google/markerclusterer - Cluster nearby markers. **Please use @googlemaps/markerclustererplus and visit https://github.com/googlemaps/js-markerclustererplus.**
+- @google/markerclustererplus - Extended version of @google/markerclusterer. **Moved to https://github.com/googlemaps/js-markerclustererplus and published to @googlemaps/markerclustererplus.**
+- @googlemaps/markermanager - Show and hide markers based on zoom and bounds to improve performance **Moved to https://github.com/googlemaps/js-markermanager.**
+- @google/markerwithlabel - Markers with labels and matching events **Moved to https://github.com/googlemaps/js-markerwithlabela published to @googlemaps/markerwithlabel.**
+
 ## Description
+
 
 In this project you can find a utility packages developed for the Google Maps JavaScript API V3.
 
@@ -15,16 +26,6 @@ In this project you can find a utility packages developed for the Google Maps Ja
 
 Documentation for the utility packages below can be found at https://googlemaps.github.io/v3-utility-library/.
 
-## Packages
-> **Note**: Many packages are being moved to individual repositories and placed in the @googlemaps NPM scope!
-
-- @googlemaps/jest-mocks Jest mocks for Google Maps in TypeScript **Moved to https://github.com/googlemaps/js-jest-mocks.**
-- @googlemaps/loader - Dynamic loader for Google Maps script using Promise or callback patterns. **Moved to https://github.com/googlemaps/js-api-loader and published to @googlemaps/js-api-loader.**
-- @googlemaps/ogc - WMS Layers and more(tbd)
-- @google/markerclusterer - Cluster nearby markers. **Please use @googlemaps/markerclustererplus.**
-- @google/markerclustererplus - Extended version of @google/markerclusterer. **Moved to https://github.com/googlemaps/js-markerclustererplus and published to @googlemaps/markerclustererplus.**
-- @googlemaps/markermanager - Show and hide markers based on zoom and bounds to improve performance
-- @google/markerwithlabel - Markers with labels and matching events
 
 ## Archive
 
@@ -40,7 +41,7 @@ The following packages have never been officially published and are not maintain
 - RichMarker
 - RouteBoxer
 - StyledMarker
- 
+
 ## Other Resources
 - [Google Maps JS Documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
 - [Google Maps JS Reference Documenations](https://developers.google.com/maps/documentation/javascript/reference/)
